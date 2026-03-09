@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "last_updated": "2026-03-06",
+    "definition": "See constitution/GOALS.md",
+    "schema_version": 1
+  },
+  "brands": {
+    "BYD": {
+      "website": "https://www.byd.com",
+      "countries": {
+        "CHN": { "name": "China", "present": true, "source": "https://www.byd.com/cn", "uncertain": false },
+        "GBR": { "name": "United Kingdom", "present": true, "source": "https://www.byd.com/uk", "uncertain": false },
+        "DEU": { "name": "Germany", "present": true, "source": "https://www.byd.com/de", "uncertain": false },
+        "NOR": { "name": "Norway", "present": true, "source": "https://www.byd.com/no", "uncertain": false },
+        "AUS": { "name": "Australia", "present": true, "source": "https://www.byd.com/au", "uncertain": false },
+        "THA": { "name": "Thailand", "present": true, "source": "https://www.byd.com/th", "uncertain": false },
+        "BRA": { "name": "Brazil", "present": true, "source": "https://www.byd.com/br", "uncertain": false }
+      }
+    },
+    "Xiaomi": {
+      "website": "https://www.mi.com",
+      "countries": {
+        "CHN": { "name": "China", "present": true, "source": "https://www.mi.com/su7", "uncertain": false }
+      }
+    },
+    "NIO": {
+      "website": "https://www.nio.com",
+      "countries": {
+        "CHN": { "name": "China", "present": true, "source": "https://www.nio.com/cn", "uncertain": false },
+        "NOR": { "name": "Norway", "present": true, "source": "https://www.nio.com/no", "uncertain": false },
+        "DEU": { "name": "Germany", "present": true, "source": "https://www.nio.com/de", "uncertain": false },
+        "NLD": { "name": "Netherlands", "present": true, "source": "https://www.nio.com/nl", "uncertain": false }
+      }
+    },
+    "MG (SAIC)": {
+      "website": "https://www.mgmotor.com",
+      "countries": {
+        "CHN": { "name": "China", "present": true, "source": "https://www.mgmotor.com.cn", "uncertain": false },
+        "GBR": { "name": "United Kingdom", "present": true, "source": "https://www.mg.co.uk", "uncertain": false },
+        "AUS": { "name": "Australia", "present": true, "source": "https://www.mgmotor.com.au", "uncertain": false },
+        "IND": { "name": "India", "present": true, "source": "https://www.mgmotor.co.in", "uncertain": false },
+        "THA": { "name": "Thailand", "present": true, "source": "https://www.mgcars.com/th", "uncertain": false }
+      }
+    }
+  }
+}

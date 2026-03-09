@@ -1,0 +1,74 @@
+name: Daily evolution
+
+on:
+  schedule:
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  evolve:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install project dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot
+
+      - name: Install Playwright MCP + browsers
+        run: |
+          npm install -g @playwright/mcp
+          npx playwright install chromium
+
+      - name: Lock immutable files
+        run: chmod 444 constitution/*
+
+      - name: Configure git
+        run: |
+          git config user.name "evolver[bot]"
+          git config user.email "evolver@users.noreply.github.com"
+
+      - name: Run evolution session
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          copilot \
+            --model claude-sonnet-4.6 \
+            --allow-all \
+            --no-ask-user \
+            --autopilot \
+            --max-autopilot-continues 5 \
+            --deny-tool 'shell(git push)' \
+            --additional-mcp-config @.github/hooks/mcp-config.json \
+            -p "$(cat constitution/AGENTS.md)" \
+            2>&1 | tee session.log
+
+      - name: Push if agent committed
+        run: |
+          if git diff HEAD~1 HEAD --quiet 2>/dev/null; then
+            echo "No new commits from agent. Nothing to push."
+          else
+            git push
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
