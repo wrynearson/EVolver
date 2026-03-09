@@ -57,18 +57,18 @@ jobs:
             --allow-all \
             --no-ask-user \
             --autopilot \
-            --max-autopilot-continues 5 \
+            --max-autopilot-continues 3 \
             --deny-tool 'shell(git push)' \
             --additional-mcp-config @.github/hooks/mcp-config.json \
-            -p "$(cat constitution/AGENTS.md)" \
+            -p "$(cat constitution/AGENTS.md constitution/IDENTITY.md constitution/GOALS.md constitution/CONCEPTION.md JOURNAL.md data/ev-presence.json)" \
             2>&1 | tee session.log
 
       - name: Push if agent committed
         run: |
-          if git diff HEAD~1 HEAD --quiet 2>/dev/null; then
-            echo "No new commits from agent. Nothing to push."
-          else
+          if git log origin/main..HEAD --oneline | grep -q .; then
             git push
+          else
+            echo "No new commits from agent. Nothing to push."
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
