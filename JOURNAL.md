@@ -13,3 +13,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Re-verified XPENG France and upgraded the data schema to store multiple official source URLs for confirmed entries.
 **Result**: pass
 **TODO**: Verify XPENG Belgium from official XPENG market and dealer pages.
+## 2026-03-09
+**Did**: Verified XPENG official presence in Belgium and added BEL using official market, dealer, and service pages.
+**Result**: pass

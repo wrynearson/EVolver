@@ -41,6 +41,17 @@
         "SWE": { "name": "Sweden", "present": true, "source": "https://www.xpeng.com/se", "uncertain": false },
         "DEU": { "name": "Germany", "present": true, "source": "https://www.xpeng.com/de", "uncertain": false },
         "DNK": { "name": "Denmark", "present": true, "source": "https://www.xpeng.com/dk", "uncertain": false },
+        "BEL": {
+          "name": "Belgium",
+          "present": true,
+          "source": "https://www.xpeng.com/be/find-us",
+          "sources": [
+            "https://www.xpeng.com/be",
+            "https://www.xpeng.com/be/find-us",
+            "https://www.xpeng.com/be/service"
+          ],
+          "uncertain": false
+        },
         "FRA": {
           "name": "France",
           "present": true,
