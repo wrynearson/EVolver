@@ -30,7 +30,7 @@ describe("ev-presence.json", () => {
 
   it("has schema_version", () => {
     data = JSON.parse(raw);
-    expect(data.metadata.schema_version).toBe(1);
+    expect(data.metadata.schema_version).toBe(2);
   });
 
   it("has at least 1 brand", () => {
@@ -77,6 +77,12 @@ describe("ev-presence.json", () => {
           entry.source === null || typeof entry.source === "string",
           `${prefix}.source should be string or null`,
         ).toBe(true);
+        expect(
+          entry.sources === undefined ||
+            (Array.isArray(entry.sources) &&
+              entry.sources.every((source) => typeof source === "string")),
+          `${prefix}.sources should be an array of strings when present`,
+        ).toBe(true);
       }
     }
   });
@@ -97,14 +103,33 @@ describe("ev-presence.json", () => {
     data = JSON.parse(raw);
     for (const [brandName, brand] of Object.entries(data.brands)) {
       for (const [isoCode, entry] of Object.entries(brand.countries)) {
+        const prefix = `${brandName}.${isoCode}`;
+
+        if (entry.source !== null) {
+          expect(() => new URL(entry.source), `${prefix}.source should be a valid URL`).not.toThrow();
+        }
+
+        if (entry.sources) {
+          expect(entry.sources.length, `${prefix}.sources should not be empty`).toBeGreaterThan(0);
+          for (const source of entry.sources) {
+            expect(() => new URL(source), `${prefix}.sources entries should be valid URLs`).not.toThrow();
+          }
+          if (entry.source) {
+            expect(
+              entry.sources,
+              `${prefix}.sources should include the primary source URL`,
+            ).toContain(entry.source);
+          }
+        }
+
         if (entry.present && !entry.uncertain) {
           expect(
             entry.source,
-            `${brandName}.${isoCode} is present+certain but has no source`,
+            `${prefix} is present+certain but has no source`,
           ).not.toBeNull();
           expect(
             typeof entry.source,
-            `${brandName}.${isoCode} source should be a string`,
+            `${prefix}.source should be a string`,
           ).toBe("string");
         }
       }

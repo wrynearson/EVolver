@@ -2,6 +2,7 @@ export interface CountryEntry {
   name: string;
   present: boolean;
   source: string | null;
+  sources?: string[];
   uncertain: boolean;
 }
 
