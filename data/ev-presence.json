@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-06",
+    "last_updated": "2026-03-09",
     "definition": "See constitution/GOALS.md",
     "schema_version": 1
   },
@@ -30,6 +30,18 @@
         "NOR": { "name": "Norway", "present": true, "source": "https://www.nio.com/no", "uncertain": false },
         "DEU": { "name": "Germany", "present": true, "source": "https://www.nio.com/de", "uncertain": false },
         "NLD": { "name": "Netherlands", "present": true, "source": "https://www.nio.com/nl", "uncertain": false }
+      }
+    },
+    "XPeng": {
+      "website": "https://www.xpeng.com",
+      "countries": {
+        "CHN": { "name": "China", "present": true, "source": "https://www.xpeng.com", "uncertain": false },
+        "NOR": { "name": "Norway", "present": true, "source": "https://www.xpeng.com/no", "uncertain": false },
+        "NLD": { "name": "Netherlands", "present": true, "source": "https://www.xpeng.com/nl", "uncertain": false },
+        "SWE": { "name": "Sweden", "present": true, "source": "https://www.xpeng.com/se", "uncertain": false },
+        "DEU": { "name": "Germany", "present": true, "source": "https://www.xpeng.com/de", "uncertain": false },
+        "DNK": { "name": "Denmark", "present": true, "source": "https://www.xpeng.com/dk", "uncertain": false },
+        "FRA": { "name": "France", "present": true, "source": "https://www.xpeng.com/fr", "uncertain": false }
       }
     },
     "MG (SAIC)": {
