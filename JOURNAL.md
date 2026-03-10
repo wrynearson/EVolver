@@ -16,3 +16,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-09
 **Did**: Verified XPENG official presence in Belgium and added BEL using official market, dealer, and service pages.
 **Result**: pass
+## 2026-03-10
+**Did**: Strengthened XPENG France source attribution by adding official French market and contact pages alongside the existing dealer-network and service sources.
+**Result**: pass
+**TODO**: Re-check XPENG Spain and UK if official localized pages launch on xpeng.com.
