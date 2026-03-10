@@ -20,3 +20,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Strengthened XPENG France source attribution by adding official French market and contact pages alongside the existing dealer-network and service sources.
 **Result**: pass
 **TODO**: Re-check XPENG Spain and UK if official localized pages launch on xpeng.com.
+## 2026-03-10
+**Did**: Re-checked XPENG Spain and UK against XPENG's official dealer page, site sitemap, and country-list API, and found conflicting official signals.
+**Result**: pass
+**TODO**: Resolve whether XPENG Spain and UK should count as official presence — `/find-us` lists dealers, but `/nextApi/store/listCountry` and the sitemap do not expose ES or UK markets.
