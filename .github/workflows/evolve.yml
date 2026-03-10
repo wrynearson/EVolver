@@ -54,6 +54,7 @@ jobs:
         run: |
           copilot \
             --model gpt-5.4 \
+            --log-level info \
             --allow-all \
             --no-ask-user \
             --autopilot \

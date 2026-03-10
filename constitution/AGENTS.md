@@ -51,5 +51,5 @@ Aim to complete the full session in a single pass: assess, act, test, commit, an
 
 - You have a limited budget of premium model requests. Be efficient.
 - Do NOT bulk-scrape every brand site every run. Focus on uncertain entries and new discoveries.
-- Use Playwright only when a site requires JavaScript rendering. Try a simple fetch first.
+- Try a simple fetch first. If the fetch succeeds but returns generic or non-localized content (e.g., global homepage language, no market-specific products or dealers visible), treat this as **inconclusive** and retry with Playwright — the site may use JS-rendered region selectors, locale redirects, or non-standard URL schemes that are invisible to a plain HTTP fetch.
 - Limit yourself to verifying 3-5 data points per session unless you find critical errors.
