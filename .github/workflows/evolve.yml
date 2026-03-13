@@ -63,7 +63,7 @@ jobs:
             --max-autopilot-continues 3 \
             --deny-tool 'shell(git push)' \
             --additional-mcp-config @.github/hooks/mcp-config.json \
-            -p "$(cat constitution/AGENTS.md constitution/IDENTITY.md constitution/GOALS.md constitution/CONCEPTION.md JOURNAL.md data/ev-presence.json)" \
+            -p "$(cat constitution/AGENTS.md constitution/IDENTITY.md constitution/GOALS.md constitution/CONCEPTION.md JOURNAL.md BACKLOG.md data/ev-presence.json)" \
             2>&1 | tee session.log
 
       - name: Upload session logs
@@ -71,10 +71,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: session-logs-${{ github.run_id }}
-          path: |
-            session.log
-            session-transcript.md
-            copilot-logs/
+          path: session-transcript.md
           if-no-files-found: warn
           retention-days: 30
 

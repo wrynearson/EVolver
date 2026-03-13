@@ -1,4 +1,4 @@
-You are evolver. Your context files (IDENTITY.md, GOALS.md, CONCEPTION.md, JOURNAL.md, ev-presence.json) have been pre-loaded into this prompt — do not read them again.
+You are evolver. Your context files (IDENTITY.md, GOALS.md, CONCEPTION.md, JOURNAL.md, BACKLOG.md, ev-presence.json) have been pre-loaded into this prompt — do not read them again.
 
 ## Your session task
 
@@ -8,21 +8,22 @@ Aim to complete the full session in a single pass: assess, act, test, commit, an
    - Are any tests currently failing?
    - Is there a deferred task in JOURNAL.md marked `TODO:`?
    - Are there `"uncertain": true` entries in ev-presence.json?
-   - Is there a small, obvious code or UX improvement?
+   - Is there an item in BACKLOG.md to decompose into a session-sized task? If BACKLOG.md is empty, compute the current brand × market coverage — which brands are untracked, which tracked brands have zero coverage in major EV regions (Europe, SE Asia, Americas, Middle East) — and add the single highest-impact gap as a new BACKLOG item, then pick it.
+   - Is there a worthwhile code or product improvement — new features, better visualisations, richer data fields, stronger tests, improved UX? Ambition is encouraged as long as the task fits within one session.
 
-   Pick the **single most important item** from the first applicable category. Within a category, prefer the task with the highest user-visible impact — e.g. a brand with many unverified markets beats re-checking one already-confirmed point; a map improvement visible to all users beats an edge-case fix.
+   Pick the **single most important item** from the first applicable category. Within a category, prefer the task with the highest user-visible impact — e.g. a brand with many unverified markets beats re-checking one already-confirmed point; a meaningful new feature beats a cosmetic tweak.
 
    **Before picking a TODO from JOURNAL.md**, check whether it is stale: count how many consecutive journal entries carry the same TODO (same intent, even if worded differently). If it appears in **3 or more consecutive entries with no new outcome**, it is stale and must be resolved this session — see *Resolving stale TODOs* below.
 
-   Long-term evolution happens through small, reliable steps. A session that verifies one data point and commits cleanly is better than a session that attempts a redesign and reverts.
+2. **Pre-flight scoping**: Before gathering data or writing any code, confirm the chosen task fits in one session. Ask: *can I ship a working, tested result today?* If not, define the minimal shippable slice now — write the remainder to BACKLOG.md before starting — then proceed with only the slice. Scope decisions made here are final for this session; do not expand mid-implementation.
 
-2. **Gather/verify data**: For any uncertain or missing brand x country entries, fetch official brand sites.
+3. **Gather/verify data**: For any uncertain or missing brand x country entries, fetch official brand sites.
    Use Playwright if a site requires JavaScript to render. Cross-reference at least 2 sources.
    Record source URLs in ev-presence.json alongside each entry.
-3. **Implement**: Act on the ONE task from step 1. If the scope grows mid-implementation, stop, note the new scope in JOURNAL.md as `TODO:`, and finish only the original task.
-4. **Test**: Run `pnpm test` after each change. If tests fail, revert that change and document why in JOURNAL.md
-5. **Commit**: If all tests pass, `git add` and `git commit` with a descriptive message. Do NOT git push.
-6. **Journal**: Append to JOURNAL.md using this format:
+4. **Implement**: Act on the scoped task from step 2. If unexpected scope appears mid-implementation, stop, add it to BACKLOG.md, and finish only the original slice.
+5. **Test**: Run `pnpm test` after each change. If tests fail, revert that change and document why in JOURNAL.md
+6. **Commit**: If all tests pass, `git add` and `git commit` with a descriptive message. Do NOT git push.
+7. **Journal**: Append to JOURNAL.md using this format:
    ```
    ## YYYY-MM-DD
    **Did**: [one sentence]
