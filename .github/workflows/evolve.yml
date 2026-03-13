@@ -14,12 +14,12 @@ jobs:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: "22"
 
@@ -68,12 +68,13 @@ jobs:
 
       - name: Upload session logs
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: session-logs-${{ github.run_id }}
           path: session-transcript.md
           if-no-files-found: warn
           retention-days: 30
+          archive: false
 
       - name: Push if agent committed
         run: |
