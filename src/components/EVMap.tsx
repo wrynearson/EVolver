@@ -15,7 +15,7 @@ import type { FeatureCollection } from "geojson";
  * (popups, sidebar, brand selector, etc.) over its daily evolution runs.
  */
 export default function EVMap() {
-  const { countryBrandCount, loading } = useEVData();
+  const { countryBrandCount, summary, loading } = useEVData();
   const [countries, setCountries] = useState<FeatureCollection | null>(null);
 
   useEffect(() => {
@@ -59,7 +59,32 @@ export default function EVMap() {
         </Source>
       </Map>
 
-      {/* Legend */}
+      {summary ? (
+        <div className="absolute top-6 left-6 bg-white/90 rounded-lg shadow-md px-4 py-3 max-w-xs">
+          <h2 className="text-sm font-semibold text-gray-800">
+            Dataset summary
+          </h2>
+          <dl className="mt-2 space-y-1 text-sm text-gray-600">
+            <div className="flex items-center justify-between gap-4">
+              <dt>Brands tracked</dt>
+              <dd className="font-medium text-gray-800">{summary.brandCount}</dd>
+            </div>
+            <div className="flex items-center justify-between gap-4">
+              <dt>Countries with confirmed presence</dt>
+              <dd className="font-medium text-gray-800">
+                {summary.confirmedCountryCount}
+              </dd>
+            </div>
+            <div className="flex items-center justify-between gap-4">
+              <dt>Last updated</dt>
+              <dd className="font-medium text-gray-800">
+                {summary.lastUpdated}
+              </dd>
+            </div>
+          </dl>
+        </div>
+      ) : null}
+
       <div className="absolute bottom-6 left-6 bg-white/90 rounded-lg shadow-md px-4 py-3">
         <h3 className="text-sm font-semibold mb-2 text-gray-700">
           Chinese EV Brands Present

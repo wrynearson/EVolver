@@ -1,6 +1,9 @@
 import { describe, it, expect } from "vitest";
 import { buildColorExpression } from "../src/lib/mapUtils";
-import { computeCountryBrandCounts } from "../src/hooks/useEVData";
+import {
+  computeCountryBrandCounts,
+  computeDatasetSummary,
+} from "../src/hooks/useEVData";
 import type { EVPresenceData } from "../src/types";
 
 describe("buildColorExpression", () => {
@@ -103,5 +106,59 @@ describe("computeCountryBrandCounts", () => {
 
     const counts = computeCountryBrandCounts(data);
     expect(Object.keys(counts)).toHaveLength(0);
+  });
+});
+
+describe("computeDatasetSummary", () => {
+  it("returns tracked brand count, confirmed country coverage, and last update", () => {
+    const data: EVPresenceData = {
+      metadata: {
+        last_updated: "2026-03-13",
+        definition: "test",
+        schema_version: 2,
+      },
+      brands: {
+        BrandA: {
+          website: "https://a.com",
+          countries: {
+            NOR: {
+              name: "Norway",
+              present: true,
+              source: "https://a.com/no",
+              uncertain: false,
+            },
+            DEU: {
+              name: "Germany",
+              present: true,
+              source: "https://a.com/de",
+              uncertain: true,
+            },
+          },
+        },
+        BrandB: {
+          website: "https://b.com",
+          countries: {
+            NOR: {
+              name: "Norway",
+              present: true,
+              source: "https://b.com/no",
+              uncertain: false,
+            },
+            SWE: {
+              name: "Sweden",
+              present: true,
+              source: "https://b.com/se",
+              uncertain: false,
+            },
+          },
+        },
+      },
+    };
+
+    expect(computeDatasetSummary(data)).toEqual({
+      brandCount: 2,
+      confirmedCountryCount: 2,
+      lastUpdated: "2026-03-13",
+    });
   });
 });
