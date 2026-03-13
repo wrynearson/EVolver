@@ -9,23 +9,20 @@ Aim to complete the full session in a single pass: assess, act, test, commit, an
    - Is there a deferred task in JOURNAL.md marked `TODO:`?
    - Are there `"uncertain": true` entries in ev-presence.json?
    - Is there a small, obvious code or UX improvement?
-2. **Self-assess & pick ONE task**: Check (in this order of priority):
-   - Are any tests currently failing?
-   - Is there a deferred task in JOURNAL.md marked `TODO:`?
-   - Are there `"uncertain": true` entries in ev-presence.json?
-   - Is there a small, obvious code or UX improvement?
 
-   Pick the **single most important item** from the first applicable category. Do not attempt more than one task per session.
+   Pick the **single most important item** from the first applicable category. Within a category, prefer the task with the highest user-visible impact — e.g. a brand with many unverified markets beats re-checking one already-confirmed point; a map improvement visible to all users beats an edge-case fix.
+
+   **Before picking a TODO from JOURNAL.md**, check whether it is stale: count how many consecutive journal entries carry the same TODO (same intent, even if worded differently). If it appears in **3 or more consecutive entries with no new outcome**, it is stale and must be resolved this session — see *Resolving stale TODOs* below.
 
    Long-term evolution happens through small, reliable steps. A session that verifies one data point and commits cleanly is better than a session that attempts a redesign and reverts.
 
-3. **Gather/verify data**: For any uncertain or missing brand x country entries, fetch official brand sites.
+2. **Gather/verify data**: For any uncertain or missing brand x country entries, fetch official brand sites.
    Use Playwright if a site requires JavaScript to render. Cross-reference at least 2 sources.
    Record source URLs in ev-presence.json alongside each entry.
-4. **Implement**: Act on the ONE task from step 2. If the scope grows mid-implementation, stop, note the new scope in JOURNAL.md as `TODO:`, and finish only the original task.
-5. **Test**: Run `pnpm test` after each change. If tests fail, revert that change and document why in JOURNAL.md
-6. **Commit**: If all tests pass, `git add` and `git commit` with a descriptive message. Do NOT git push.
-7. **Journal**: Append to JOURNAL.md using this format:
+3. **Implement**: Act on the ONE task from step 1. If the scope grows mid-implementation, stop, note the new scope in JOURNAL.md as `TODO:`, and finish only the original task.
+4. **Test**: Run `pnpm test` after each change. If tests fail, revert that change and document why in JOURNAL.md
+5. **Commit**: If all tests pass, `git add` and `git commit` with a descriptive message. Do NOT git push.
+6. **Journal**: Append to JOURNAL.md using this format:
    ```
    ## YYYY-MM-DD
    **Did**: [one sentence]
@@ -37,6 +34,16 @@ Aim to complete the full session in a single pass: assess, act, test, commit, an
 
 - If a task takes more than 3 attempts to get tests passing, revert, document the blocker in JOURNAL.md as `TODO: [description] — blocked by [reason]`, and pick another task.
 - If you are uncertain whether a change is correct, do not make it. Mark it `TODO:` instead.
+
+## Resolving stale TODOs
+
+A TODO is **stale** when it has appeared in 3 or more consecutive journal entries with no new information or changed outcome. Stale TODOs must be closed, not carried forward. Choose exactly one resolution:
+
+- **Close it** — Write a brief rationale in the journal explaining why further action adds no value (e.g. external signal is static, data already reflects ground truth). Do not add another TODO.
+- **Decide and commit** — Make the call the TODO was deferring. Mark the data point `"uncertain": false` or remove it if it is unresolvable. Commit the decision.
+- **Document as a known limitation** — If the discrepancy is real but outside your control (e.g. a brand's internal API disagrees with its public UI), add a comment in CONCEPTION.md under a "Known limitations" section and close the TODO without a replacement.
+
+Never replace a stale TODO with a reworded version of the same TODO.
 
 ## Rules
 
