@@ -7,11 +7,15 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
   evolve:
     runs-on: ubuntu-latest
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    outputs:
+      pushed: ${{ steps.push.outputs.pushed }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -77,11 +81,19 @@ jobs:
           archive: false
 
       - name: Push if agent committed
+        id: push
         run: |
           if git log origin/main..HEAD --oneline | grep -q .; then
             git push
+            echo "pushed=true" >> $GITHUB_OUTPUT
           else
             echo "No new commits from agent. Nothing to push."
+            echo "pushed=false" >> $GITHUB_OUTPUT
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy:
+    needs: evolve
+    if: needs.evolve.outputs.pushed == 'true'
+    uses: ./.github/workflows/deploy.yml
