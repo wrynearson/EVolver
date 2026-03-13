@@ -50,3 +50,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-13
 **Did**: Added a dataset summary overlay to the map so users can immediately see the number of tracked brands, countries with confirmed presence, and the last update date.
 **Result**: pass
+
+## 2026-03-13
+**Did**: Added Zeekr as a tracked brand with 4 verified official markets (China, Australia, Sweden, and the Netherlands) and recorded Zeekr expansion as a continuing backlog theme.
+**Result**: pass
+**TODO**: Verify additional Zeekr sovereign markets beyond the initial China, Australia, Sweden, and Netherlands slice using official localized pages or dealer/service flows.

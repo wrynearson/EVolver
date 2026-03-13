@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-11",
+    "last_updated": "2026-03-13",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -83,6 +83,53 @@
             "https://www.xpeng.com/region/uk",
             "https://xpengcars.co.uk/",
             "https://www.xpeng.com/find-us"
+          ],
+          "uncertain": false
+        }
+      }
+    },
+    "Zeekr": {
+      "website": "https://www.zeekrlife.com",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.zeekrlife.com/",
+          "sources": [
+            "https://www.zeekrlife.com/",
+            "https://www.zeekrlife.com/test-drive"
+          ],
+          "uncertain": false
+        },
+        "AUS": {
+          "name": "Australia",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-au/",
+          "sources": [
+            "https://www.zeekrlife.com/en-au/",
+            "https://www.zeekrlife.com/en-au/test-drive"
+          ],
+          "uncertain": false
+        },
+        "SWE": {
+          "name": "Sweden",
+          "present": true,
+          "source": "https://www.zeekr.eu/en-se",
+          "sources": [
+            "https://www.zeekr.eu/en-se",
+            "https://www.zeekr.eu/en-se/test-drive",
+            "https://www.zeekr.eu/en-se/care"
+          ],
+          "uncertain": false
+        },
+        "NLD": {
+          "name": "Netherlands",
+          "present": true,
+          "source": "https://www.zeekr.eu/en-nl",
+          "sources": [
+            "https://www.zeekr.eu/en-nl",
+            "https://www.zeekr.eu/en-nl/test-drive",
+            "https://www.zeekr.eu/en-nl/care"
           ],
           "uncertain": false
         }
