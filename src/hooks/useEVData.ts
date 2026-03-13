@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 import type { EVPresenceData } from "../types";
 
+export interface EVDataSummary {
+  brandCount: number;
+  confirmedCountryCount: number;
+  lastUpdated: string;
+}
+
 /**
  * Loads ev-presence.json and computes per-country brand counts.
  * Returns the raw data plus a map of ISO_A3 -> number of brands present.
@@ -10,6 +16,7 @@ export function useEVData() {
   const [countryBrandCount, setCountryBrandCount] = useState<
     Record<string, number>
   >({});
+  const [summary, setSummary] = useState<EVDataSummary | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,6 +25,7 @@ export function useEVData() {
       .then((json: EVPresenceData) => {
         setData(json);
         setCountryBrandCount(computeCountryBrandCounts(json));
+        setSummary(computeDatasetSummary(json));
         setLoading(false);
       })
       .catch((err) => {
@@ -26,7 +34,7 @@ export function useEVData() {
       });
   }, []);
 
-  return { data, countryBrandCount, loading };
+  return { data, countryBrandCount, summary, loading };
 }
 
 /**
@@ -47,4 +55,22 @@ export function computeCountryBrandCounts(
   }
 
   return counts;
+}
+
+export function computeDatasetSummary(data: EVPresenceData): EVDataSummary {
+  const confirmedCountries = new Set<string>();
+
+  for (const brand of Object.values(data.brands)) {
+    for (const [isoCode, entry] of Object.entries(brand.countries)) {
+      if (entry.present && !entry.uncertain) {
+        confirmedCountries.add(isoCode);
+      }
+    }
+  }
+
+  return {
+    brandCount: Object.keys(data.brands).length,
+    confirmedCountryCount: confirmedCountries.size,
+    lastUpdated: data.metadata.last_updated,
+  };
 }
