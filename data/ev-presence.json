@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-13",
+    "last_updated": "2026-03-14",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -130,6 +130,39 @@
             "https://www.zeekr.eu/en-nl",
             "https://www.zeekr.eu/en-nl/test-drive",
             "https://www.zeekr.eu/en-nl/care"
+          ],
+          "uncertain": false
+        },
+        "BEL": {
+          "name": "Belgium",
+          "present": true,
+          "source": "https://www.zeekr.eu/nl-be/",
+          "sources": [
+            "https://www.zeekr.eu/nl-be/",
+            "https://www.zeekr.eu/fr-be/",
+            "https://www.zeekr.eu/nl-be/test-drive",
+            "https://www.zeekr.eu/nl-be/care"
+          ],
+          "uncertain": false
+        },
+        "FRA": {
+          "name": "France",
+          "present": true,
+          "source": "https://www.zeekr.eu/fr-fr/",
+          "sources": [
+            "https://www.zeekr.eu/fr-fr/",
+            "https://www.zeekr.eu/fr-fr/care"
+          ],
+          "uncertain": false
+        },
+        "DEU": {
+          "name": "Germany",
+          "present": true,
+          "source": "https://www.zeekr.eu/de-de/",
+          "sources": [
+            "https://www.zeekr.eu/de-de/",
+            "https://www.zeekr.eu/de-de/test-drive",
+            "https://www.zeekr.eu/de-de/care"
           ],
           "uncertain": false
         }
