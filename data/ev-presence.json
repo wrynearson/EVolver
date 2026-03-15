@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-14",
+    "last_updated": "2026-03-15",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -163,6 +163,39 @@
             "https://www.zeekr.eu/de-de/",
             "https://www.zeekr.eu/de-de/test-drive",
             "https://www.zeekr.eu/de-de/care"
+          ],
+          "uncertain": false
+        },
+        "DNK": {
+          "name": "Denmark",
+          "present": true,
+          "source": "https://www.zeekr.eu/da-dk/",
+          "sources": [
+            "https://www.zeekr.eu/da-dk/",
+            "https://www.zeekr.eu/da-dk/test-drive",
+            "https://www.zeekr.eu/da-dk/care"
+          ],
+          "uncertain": false
+        },
+        "NOR": {
+          "name": "Norway",
+          "present": true,
+          "source": "https://www.zeekr.eu/nb-no/",
+          "sources": [
+            "https://www.zeekr.eu/nb-no/",
+            "https://www.zeekr.eu/nb-no/test-drive",
+            "https://www.zeekr.eu/nb-no/care"
+          ],
+          "uncertain": false
+        },
+        "CHE": {
+          "name": "Switzerland",
+          "present": true,
+          "source": "https://www.zeekr.ch/de",
+          "sources": [
+            "https://www.zeekr.ch/de",
+            "https://www.zeekr.ch/de/probefahren",
+            "https://www.zeekr.ch/de/service"
           ],
           "uncertain": false
         }
