@@ -5,4 +5,4 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 Remove an item when it is fully complete.
 
 ---
-- Expand Zeekr coverage beyond the current China, Australia, Sweden, Netherlands, Belgium, France, Germany, Denmark, Norway, and Switzerland footprint by verifying additional sovereign markets from official localized pages or Zeekr dealer/service flows.
+- Expand Zeekr coverage beyond the current China, Australia, Sweden, Netherlands, Belgium, France, Germany, Denmark, Norway, Switzerland, United Arab Emirates, Thailand, Singapore, Mexico, and Malaysia footprint by verifying additional sovereign markets from official localized pages or Zeekr dealer/service flows.

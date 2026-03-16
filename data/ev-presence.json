@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-15",
+    "last_updated": "2026-03-16",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -8,39 +8,129 @@
     "BYD": {
       "website": "https://www.byd.com",
       "countries": {
-        "CHN": { "name": "China", "present": true, "source": "https://www.byd.com/cn", "uncertain": false },
-        "GBR": { "name": "United Kingdom", "present": true, "source": "https://www.byd.com/uk", "uncertain": false },
-        "DEU": { "name": "Germany", "present": true, "source": "https://www.byd.com/de", "uncertain": false },
-        "NOR": { "name": "Norway", "present": true, "source": "https://www.byd.com/no", "uncertain": false },
-        "AUS": { "name": "Australia", "present": true, "source": "https://www.byd.com/au", "uncertain": false },
-        "THA": { "name": "Thailand", "present": true, "source": "https://www.byd.com/th", "uncertain": false },
-        "BRA": { "name": "Brazil", "present": true, "source": "https://www.byd.com/br", "uncertain": false }
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.byd.com/cn",
+          "uncertain": false
+        },
+        "GBR": {
+          "name": "United Kingdom",
+          "present": true,
+          "source": "https://www.byd.com/uk",
+          "uncertain": false
+        },
+        "DEU": {
+          "name": "Germany",
+          "present": true,
+          "source": "https://www.byd.com/de",
+          "uncertain": false
+        },
+        "NOR": {
+          "name": "Norway",
+          "present": true,
+          "source": "https://www.byd.com/no",
+          "uncertain": false
+        },
+        "AUS": {
+          "name": "Australia",
+          "present": true,
+          "source": "https://www.byd.com/au",
+          "uncertain": false
+        },
+        "THA": {
+          "name": "Thailand",
+          "present": true,
+          "source": "https://www.byd.com/th",
+          "uncertain": false
+        },
+        "BRA": {
+          "name": "Brazil",
+          "present": true,
+          "source": "https://www.byd.com/br",
+          "uncertain": false
+        }
       }
     },
     "Xiaomi": {
       "website": "https://www.mi.com",
       "countries": {
-        "CHN": { "name": "China", "present": true, "source": "https://www.mi.com/su7", "uncertain": false }
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.mi.com/su7",
+          "uncertain": false
+        }
       }
     },
     "NIO": {
       "website": "https://www.nio.com",
       "countries": {
-        "CHN": { "name": "China", "present": true, "source": "https://www.nio.com/cn", "uncertain": false },
-        "NOR": { "name": "Norway", "present": true, "source": "https://www.nio.com/no", "uncertain": false },
-        "DEU": { "name": "Germany", "present": true, "source": "https://www.nio.com/de", "uncertain": false },
-        "NLD": { "name": "Netherlands", "present": true, "source": "https://www.nio.com/nl", "uncertain": false }
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.nio.com/cn",
+          "uncertain": false
+        },
+        "NOR": {
+          "name": "Norway",
+          "present": true,
+          "source": "https://www.nio.com/no",
+          "uncertain": false
+        },
+        "DEU": {
+          "name": "Germany",
+          "present": true,
+          "source": "https://www.nio.com/de",
+          "uncertain": false
+        },
+        "NLD": {
+          "name": "Netherlands",
+          "present": true,
+          "source": "https://www.nio.com/nl",
+          "uncertain": false
+        }
       }
     },
     "XPeng": {
       "website": "https://www.xpeng.com",
       "countries": {
-        "CHN": { "name": "China", "present": true, "source": "https://www.xpeng.com", "uncertain": false },
-        "NOR": { "name": "Norway", "present": true, "source": "https://www.xpeng.com/no", "uncertain": false },
-        "NLD": { "name": "Netherlands", "present": true, "source": "https://www.xpeng.com/nl", "uncertain": false },
-        "SWE": { "name": "Sweden", "present": true, "source": "https://www.xpeng.com/se", "uncertain": false },
-        "DEU": { "name": "Germany", "present": true, "source": "https://www.xpeng.com/de", "uncertain": false },
-        "DNK": { "name": "Denmark", "present": true, "source": "https://www.xpeng.com/dk", "uncertain": false },
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.xpeng.com",
+          "uncertain": false
+        },
+        "NOR": {
+          "name": "Norway",
+          "present": true,
+          "source": "https://www.xpeng.com/no",
+          "uncertain": false
+        },
+        "NLD": {
+          "name": "Netherlands",
+          "present": true,
+          "source": "https://www.xpeng.com/nl",
+          "uncertain": false
+        },
+        "SWE": {
+          "name": "Sweden",
+          "present": true,
+          "source": "https://www.xpeng.com/se",
+          "uncertain": false
+        },
+        "DEU": {
+          "name": "Germany",
+          "present": true,
+          "source": "https://www.xpeng.com/de",
+          "uncertain": false
+        },
+        "DNK": {
+          "name": "Denmark",
+          "present": true,
+          "source": "https://www.xpeng.com/dk",
+          "uncertain": false
+        },
         "BEL": {
           "name": "Belgium",
           "present": true,
@@ -198,17 +288,92 @@
             "https://www.zeekr.ch/de/service"
           ],
           "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-ae/",
+          "sources": [
+            "https://www.zeekrlife.com/en-ae/",
+            "https://www.zeekrlife.com/en-ae/test-drive"
+          ],
+          "uncertain": false
+        },
+        "THA": {
+          "name": "Thailand",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-th/",
+          "sources": [
+            "https://www.zeekrlife.com/en-th/",
+            "https://www.zeekrlife.com/en-th/test-drive"
+          ],
+          "uncertain": false
+        },
+        "SGP": {
+          "name": "Singapore",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-sg/",
+          "sources": [
+            "https://www.zeekrlife.com/en-sg/",
+            "https://www.zeekrlife.com/en-sg/test-drive"
+          ],
+          "uncertain": false
+        },
+        "MEX": {
+          "name": "Mexico",
+          "present": true,
+          "source": "https://www.zeekrlife.com/es-mx/",
+          "sources": [
+            "https://www.zeekrlife.com/es-mx/",
+            "https://www.zeekrlife.com/es-mx/test-drive"
+          ],
+          "uncertain": false
+        },
+        "MYS": {
+          "name": "Malaysia",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-my/",
+          "sources": [
+            "https://www.zeekrlife.com/en-my/",
+            "https://www.zeekrlife.com/en-my/test-drive"
+          ],
+          "uncertain": false
         }
       }
     },
     "MG (SAIC)": {
       "website": "https://www.mgmotor.com",
       "countries": {
-        "CHN": { "name": "China", "present": true, "source": "https://www.mgmotor.com.cn", "uncertain": false },
-        "GBR": { "name": "United Kingdom", "present": true, "source": "https://www.mg.co.uk", "uncertain": false },
-        "AUS": { "name": "Australia", "present": true, "source": "https://www.mgmotor.com.au", "uncertain": false },
-        "IND": { "name": "India", "present": true, "source": "https://www.mgmotor.co.in", "uncertain": false },
-        "THA": { "name": "Thailand", "present": true, "source": "https://www.mgcars.com/th", "uncertain": false }
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.mgmotor.com.cn",
+          "uncertain": false
+        },
+        "GBR": {
+          "name": "United Kingdom",
+          "present": true,
+          "source": "https://www.mg.co.uk",
+          "uncertain": false
+        },
+        "AUS": {
+          "name": "Australia",
+          "present": true,
+          "source": "https://www.mgmotor.com.au",
+          "uncertain": false
+        },
+        "IND": {
+          "name": "India",
+          "present": true,
+          "source": "https://www.mgmotor.co.in",
+          "uncertain": false
+        },
+        "THA": {
+          "name": "Thailand",
+          "present": true,
+          "source": "https://www.mgcars.com/th",
+          "uncertain": false
+        }
       }
     }
   }
