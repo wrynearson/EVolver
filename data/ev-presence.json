@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-16",
+    "last_updated": "2026-03-17",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -336,6 +336,46 @@
           "sources": [
             "https://www.zeekrlife.com/en-my/",
             "https://www.zeekrlife.com/en-my/test-drive"
+          ],
+          "uncertain": false
+        },
+        "BRA": {
+          "name": "Brazil",
+          "present": true,
+          "source": "https://www.zeekrlife.com/pt-br/",
+          "sources": [
+            "https://www.zeekrlife.com/pt-br/",
+            "https://www.zeekrlife.com/pt-br/test-drive"
+          ],
+          "uncertain": false
+        },
+        "ISR": {
+          "name": "Israel",
+          "present": true,
+          "source": "https://www.zeekrlife.com/he-il/",
+          "sources": [
+            "https://www.zeekrlife.com/he-il/",
+            "https://www.zeekrlife.com/he-il/service"
+          ],
+          "uncertain": false
+        },
+        "JOR": {
+          "name": "Jordan",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-jo/",
+          "sources": [
+            "https://www.zeekrlife.com/en-jo/",
+            "https://www.zeekrlife.com/en-jo/test-drive"
+          ],
+          "uncertain": false
+        },
+        "PHL": {
+          "name": "Philippines",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-ph/",
+          "sources": [
+            "https://www.zeekrlife.com/en-ph/",
+            "https://www.zeekrlife.com/en-ph/test-drive"
           ],
           "uncertain": false
         }
