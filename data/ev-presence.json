@@ -400,6 +400,47 @@
             "https://www.zeekrlife.com/en-nz/posts/premium-electric-brand-zeekr-launches-in-new-zealand"
           ],
           "uncertain": false
+        },
+        "KAZ": {
+          "name": "Kazakhstan",
+          "present": true,
+          "source": "https://www.zeekrlife.com/ru-kz/",
+          "sources": [
+            "https://www.zeekrlife.com/ru-kz/",
+            "https://www.zeekrlife.com/ru-kz/blogs"
+          ],
+          "uncertain": false
+        },
+        "ARM": {
+          "name": "Armenia",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-am/",
+          "sources": [
+            "https://www.zeekrlife.com/en-am/",
+            "https://www.zeekrlife.com/en-am/service",
+            "https://www.zeekrlife.com/en-am/test-drive"
+          ],
+          "uncertain": false
+        },
+        "GEO": {
+          "name": "Georgia",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-ge/",
+          "sources": [
+            "https://www.zeekrlife.com/en-ge/",
+            "https://www.zeekrlife.com/en-ge/test-drive"
+          ],
+          "uncertain": false
+        },
+        "QAT": {
+          "name": "Qatar",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-qa/",
+          "sources": [
+            "https://www.zeekrlife.com/en-qa/",
+            "https://www.zeekrlife.com/en-qa/test-drive"
+          ],
+          "uncertain": false
         }
       }
     },
