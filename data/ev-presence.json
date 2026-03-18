@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-17",
+    "last_updated": "2026-03-18",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -376,6 +376,28 @@
           "sources": [
             "https://www.zeekrlife.com/en-ph/",
             "https://www.zeekrlife.com/en-ph/test-drive"
+          ],
+          "uncertain": false
+        },
+        "SAU": {
+          "name": "Saudi Arabia",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-sa/",
+          "sources": [
+            "https://www.zeekrlife.com/en-sa/",
+            "https://www.zeekrlife.com/en-sa/test-drive",
+            "https://www.zeekrlife.com/en-sa/posts/wallan-trading-company-introduces-zeekr-s-luxurious-range-of-electric-vehicles-to"
+          ],
+          "uncertain": false
+        },
+        "NZL": {
+          "name": "New Zealand",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-nz/",
+          "sources": [
+            "https://www.zeekrlife.com/en-nz/",
+            "https://www.zeekrlife.com/en-nz/test-drive",
+            "https://www.zeekrlife.com/en-nz/posts/premium-electric-brand-zeekr-launches-in-new-zealand"
           ],
           "uncertain": false
         }
