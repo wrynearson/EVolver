@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-18",
+    "last_updated": "2026-03-19",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -439,6 +439,36 @@
           "sources": [
             "https://www.zeekrlife.com/en-qa/",
             "https://www.zeekrlife.com/en-qa/test-drive"
+          ],
+          "uncertain": false
+        },
+        "KWT": {
+          "name": "Kuwait",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-kw/",
+          "sources": [
+            "https://www.zeekrlife.com/en-kw/",
+            "https://www.zeekrlife.com/en-kw/test-drive"
+          ],
+          "uncertain": false
+        },
+        "BHR": {
+          "name": "Bahrain",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-bh/",
+          "sources": [
+            "https://www.zeekrlife.com/en-bh/",
+            "https://www.zeekrlife.com/en-bh/test-drive"
+          ],
+          "uncertain": false
+        },
+        "MAR": {
+          "name": "Morocco",
+          "present": true,
+          "source": "https://www.zeekrlife.com/fr-ma/",
+          "sources": [
+            "https://www.zeekrlife.com/fr-ma/",
+            "https://www.zeekrlife.com/fr-ma/test-drive"
           ],
           "uncertain": false
         }
