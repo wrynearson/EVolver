@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-19",
+    "last_updated": "2026-03-20",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -469,6 +469,16 @@
           "sources": [
             "https://www.zeekrlife.com/fr-ma/",
             "https://www.zeekrlife.com/fr-ma/test-drive"
+          ],
+          "uncertain": false
+        },
+        "IDN": {
+          "name": "Indonesia",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-id/contact",
+          "sources": [
+            "https://www.zeekrlife.com/en-id/contact",
+            "https://www.zeekrlife.com/en-id/book-test-drive"
           ],
           "uncertain": false
         }
