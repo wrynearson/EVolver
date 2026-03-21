@@ -535,6 +535,16 @@
             "https://www.zeekrlife.com/es-uy/test-drive"
           ],
           "uncertain": false
+        },
+        "VNM": {
+          "name": "Vietnam",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-vn/",
+          "sources": [
+            "https://www.zeekrlife.com/en-vn/",
+            "https://www.zeekrlife.com/en-vn/about"
+          ],
+          "uncertain": false
         }
       }
     },
