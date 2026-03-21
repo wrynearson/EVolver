@@ -93,3 +93,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Verified Zeekr's Cambodia and Uzbekistan locale surfaces against official site routes and found both inconclusive for official presence, then narrowed the backlog away from those weak signals.
 **Result**: pass
 **TODO**: Verify the next strongest Zeekr sovereign locales, prioritizing markets with localized dealer, service, or test-drive flows; Cambodia still only shows a bare contact stub and Uzbekistan still falls back to the mainland China site.
+
+## 2026-03-21
+**Did**: Expanded Zeekr coverage by adding Egypt, Colombia, Costa Rica, Lebanon, and Uruguay from official localized market pages plus official contact or test-drive flows.
+**Result**: pass
+**TODO**: Verify the next strongest Zeekr sovereign locales from the official locale sitemap, prioritizing Vietnam and other remaining locale-only markets where localized homepages exist but consumer flows are still unclear.

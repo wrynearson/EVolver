@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-20",
+    "last_updated": "2026-03-21",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -479,6 +479,60 @@
           "sources": [
             "https://www.zeekrlife.com/en-id/contact",
             "https://www.zeekrlife.com/en-id/book-test-drive"
+          ],
+          "uncertain": false
+        },
+        "EGY": {
+          "name": "Egypt",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-eg/",
+          "sources": [
+            "https://www.zeekrlife.com/en-eg/",
+            "https://www.zeekrlife.com/en-eg/contact",
+            "https://www.zeekrlife.com/en-eg/test-drive"
+          ],
+          "uncertain": false
+        },
+        "COL": {
+          "name": "Colombia",
+          "present": true,
+          "source": "https://www.zeekrlife.com/es-co/",
+          "sources": [
+            "https://www.zeekrlife.com/es-co/",
+            "https://www.zeekrlife.com/es-co/contact",
+            "https://www.zeekrlife.com/es-co/test-drive"
+          ],
+          "uncertain": false
+        },
+        "CRI": {
+          "name": "Costa Rica",
+          "present": true,
+          "source": "https://www.zeekrlife.com/es-cr/",
+          "sources": [
+            "https://www.zeekrlife.com/es-cr/",
+            "https://www.zeekrlife.com/es-cr/contact",
+            "https://www.zeekrlife.com/es-cr/test-drive"
+          ],
+          "uncertain": false
+        },
+        "LBN": {
+          "name": "Lebanon",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-lb/",
+          "sources": [
+            "https://www.zeekrlife.com/en-lb/",
+            "https://www.zeekrlife.com/en-lb/contact",
+            "https://www.zeekrlife.com/en-lb/test-drive"
+          ],
+          "uncertain": false
+        },
+        "URY": {
+          "name": "Uruguay",
+          "present": true,
+          "source": "https://www.zeekrlife.com/es-uy/",
+          "sources": [
+            "https://www.zeekrlife.com/es-uy/",
+            "https://www.zeekrlife.com/es-uy/test-drive"
           ],
           "uncertain": false
         }
