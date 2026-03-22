@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-21",
+    "last_updated": "2026-03-22",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -543,6 +543,38 @@
           "sources": [
             "https://www.zeekrlife.com/en-vn/",
             "https://www.zeekrlife.com/en-vn/about"
+          ],
+          "uncertain": false
+        },
+        "LAO": {
+          "name": "Laos",
+          "present": true,
+          "source": "https://www.zeekrlife.com/en-la/",
+          "sources": [
+            "https://www.zeekrlife.com/en-la/",
+            "https://www.zeekrlife.com/en-la/article/article-19"
+          ],
+          "uncertain": false
+        },
+        "MDA": {
+          "name": "Moldova",
+          "present": true,
+          "source": "https://www.zeekrlife.com/ro-md/",
+          "sources": [
+            "https://www.zeekrlife.com/ro-md/",
+            "https://www.zeekrlife.com/ro-md/contact",
+            "https://www.zeekrlife.com/ro-md/test-drive"
+          ],
+          "uncertain": false
+        },
+        "ECU": {
+          "name": "Ecuador",
+          "present": true,
+          "source": "https://www.zeekrlife.com/es-ec/",
+          "sources": [
+            "https://www.zeekrlife.com/es-ec/",
+            "https://www.zeekrlife.com/es-ec/contact",
+            "https://www.zeekrlife.com/es-ec/test-drive"
           ],
           "uncertain": false
         }

@@ -102,3 +102,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-21
 **Did**: Added Zeekr Vietnam after confirming the official Vietnam locale, its localized about page, and the live homepage footer naming PREMIUM EV Co., Ltd. with a Hanoi address, hotline, and `zeekr.com.vn` email, which closes the stale Vietnam follow-up.
 **Result**: pass
+
+## 2026-03-22
+**Did**: Expanded Zeekr coverage by adding Laos, Moldova, and Ecuador from official localized market pages plus official contact, test-drive, or distributor evidence, and narrowed the remaining backlog away from those markets.
+**Result**: pass
+**TODO**: Verify Azerbaijan from official Zeekr pages or dealer/service flows; the current `/en-az` routes still appear to fall back to the mainland China site.
