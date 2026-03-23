@@ -130,3 +130,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Leapmotor coverage by adding Austria and Belgium from official localized market pages plus official dealer pages.
 **Result**: pass
 **TODO**: Verify the next strongest Leapmotor sovereign locales already exposed through official localized pages and dealer flows, starting with Denmark, Greece, Ireland, and Portugal.
+## 2026-03-23
+**Did**: Expanded Leapmotor coverage by adding Ireland and Portugal from official localized market pages plus official dealer pages, and stopped short of Denmark and Greece because their localized homepages resolve but the expected `/dealer` pages currently return 404.
+**Result**: pass
+**TODO**: Resolve whether Leapmotor Denmark and Greece should count as official presence — localized market homepages exist, but the expected official dealer confirmation pages currently return 404.

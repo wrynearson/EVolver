@@ -774,6 +774,26 @@
             "https://www.leapmotor.net/be-nl"
           ],
           "uncertain": false
+        },
+        "IRL": {
+          "name": "Ireland",
+          "present": true,
+          "source": "https://www.leapmotor.net/ie",
+          "sources": [
+            "https://www.leapmotor.net/ie",
+            "https://www.leapmotor.net/ie/dealer"
+          ],
+          "uncertain": false
+        },
+        "PRT": {
+          "name": "Portugal",
+          "present": true,
+          "source": "https://www.leapmotor.net/pt",
+          "sources": [
+            "https://www.leapmotor.net/pt",
+            "https://www.leapmotor.net/pt/dealer"
+          ],
+          "uncertain": false
         }
       }
     }
