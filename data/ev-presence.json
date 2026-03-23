@@ -900,6 +900,46 @@
             "https://www.leapmotor.net"
           ],
           "uncertain": false
+        },
+        "ISL": {
+          "name": "Iceland",
+          "present": true,
+          "source": "https://www.leapmotor.net/is",
+          "sources": [
+            "https://www.leapmotor.net/is",
+            "https://www.leapmotor.net/is/dealer"
+          ],
+          "uncertain": false
+        },
+        "LUX": {
+          "name": "Luxembourg",
+          "present": true,
+          "source": "https://www.leapmotor.net/lu",
+          "sources": [
+            "https://www.leapmotor.net/lu",
+            "https://www.leapmotor.net/lu/dealer"
+          ],
+          "uncertain": false
+        },
+        "MLT": {
+          "name": "Malta",
+          "present": true,
+          "source": "https://www.leapmotor.net/mt",
+          "sources": [
+            "https://www.leapmotor.net/mt",
+            "https://www.leapmotor.net/mt/dealer?zipcode=qrm"
+          ],
+          "uncertain": false
+        },
+        "SRB": {
+          "name": "Serbia",
+          "present": true,
+          "source": "https://www.leapmotor.net/rs",
+          "sources": [
+            "https://www.leapmotor.net/rs",
+            "https://www.leapmotor.net/rs/page?key=pronadji-prodajno-servisni-centar"
+          ],
+          "uncertain": false
         }
       }
     }
