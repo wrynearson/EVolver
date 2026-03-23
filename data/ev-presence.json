@@ -680,6 +680,81 @@
           "uncertain": false
         }
       }
+    },
+    "Leapmotor": {
+      "website": "https://www.leapmotor.net",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.leapmotor.cn/",
+          "sources": [
+            "https://www.leapmotor.cn/",
+            "https://www.leapmotor.com/"
+          ],
+          "uncertain": false
+        },
+        "GBR": {
+          "name": "United Kingdom",
+          "present": true,
+          "source": "https://www.leapmotor.net/uk",
+          "sources": [
+            "https://www.leapmotor.net/uk",
+            "https://www.leapmotor.net/uk/dealer"
+          ],
+          "uncertain": false
+        },
+        "DEU": {
+          "name": "Germany",
+          "present": true,
+          "source": "https://www.leapmotor.net/de",
+          "sources": [
+            "https://www.leapmotor.net/de",
+            "https://www.leapmotor.net/de/dealer"
+          ],
+          "uncertain": false
+        },
+        "FRA": {
+          "name": "France",
+          "present": true,
+          "source": "https://www.leapmotor.net/fr",
+          "sources": [
+            "https://www.leapmotor.net/fr",
+            "https://www.leapmotor.net/fr/dealer"
+          ],
+          "uncertain": false
+        },
+        "ESP": {
+          "name": "Spain",
+          "present": true,
+          "source": "https://www.leapmotor.net/es",
+          "sources": [
+            "https://www.leapmotor.net/es",
+            "https://www.leapmotor.net/es/dealer"
+          ],
+          "uncertain": false
+        },
+        "ITA": {
+          "name": "Italy",
+          "present": true,
+          "source": "https://www.leapmotor.net/it",
+          "sources": [
+            "https://www.leapmotor.net/it",
+            "https://www.leapmotor.net/it/dealer"
+          ],
+          "uncertain": false
+        },
+        "NLD": {
+          "name": "Netherlands",
+          "present": true,
+          "source": "https://www.leapmotor.net/nl",
+          "sources": [
+            "https://www.leapmotor.net/nl",
+            "https://www.leapmotor.net/nl/dealer"
+          ],
+          "uncertain": false
+        }
+      }
     }
   }
 }
