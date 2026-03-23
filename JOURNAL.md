@@ -107,3 +107,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Zeekr coverage by adding Laos, Moldova, and Ecuador from official localized market pages plus official contact, test-drive, or distributor evidence, and narrowed the remaining backlog away from those markets.
 **Result**: pass
 **TODO**: Verify Azerbaijan from official Zeekr pages or dealer/service flows; the current `/en-az` routes still appear to fall back to the mainland China site.
+
+## 2026-03-23
+**Did**: Closed the Zeekr Azerbaijan follow-up after re-checking official Zeekr sources and confirming the global sitemap omits `en-az` while the live `/en-az/` route resolves to Zeekr's own 404 page instead of a localized market or dealer flow.
+**Result**: pass
