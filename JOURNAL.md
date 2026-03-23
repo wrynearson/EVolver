@@ -126,3 +126,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added Leapmotor as a tracked brand with 7 verified official markets (China, United Kingdom, Germany, France, Spain, Italy, and the Netherlands) using Leapmotor's localized market pages plus official dealer pages.
 **Result**: pass
 **TODO**: Verify additional Leapmotor sovereign markets already exposed via official localized pages and dealer flows, starting with Belgium and Austria.
+## 2026-03-23
+**Did**: Expanded Leapmotor coverage by adding Austria and Belgium from official localized market pages plus official dealer pages.
+**Result**: pass
+**TODO**: Verify the next strongest Leapmotor sovereign locales already exposed through official localized pages and dealer flows, starting with Denmark, Greece, Ireland, and Portugal.

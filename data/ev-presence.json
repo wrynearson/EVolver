@@ -753,6 +753,27 @@
             "https://www.leapmotor.net/nl/dealer"
           ],
           "uncertain": false
+        },
+        "AUT": {
+          "name": "Austria",
+          "present": true,
+          "source": "https://www.leapmotor.net/at",
+          "sources": [
+            "https://www.leapmotor.net/at",
+            "https://www.leapmotor.net/at/dealer"
+          ],
+          "uncertain": false
+        },
+        "BEL": {
+          "name": "Belgium",
+          "present": true,
+          "source": "https://www.leapmotor.net/be-fr",
+          "sources": [
+            "https://www.leapmotor.net/be-fr",
+            "https://www.leapmotor.net/be-fr/dealer",
+            "https://www.leapmotor.net/be-nl"
+          ],
+          "uncertain": false
         }
       }
     }
