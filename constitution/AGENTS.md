@@ -24,6 +24,7 @@ Aim to complete the full session in a single pass: assess, act, test, commit, an
 5. **Test**: Run `pnpm test` after each change. If tests fail, revert that change and document why in JOURNAL.md
 6. **Commit**: If all tests pass, `git add` and `git commit` with a descriptive message. Do NOT git push.
 7. **Journal**: Append to JOURNAL.md using this format:
+8. **Continue if you have capacity**: After journaling, loop back to step 1 and pick the next task. Keep going until you hit genuine uncertainty, a test failure, or you've exhausted all meaningful work.
    ```
    ## YYYY-MM-DD
    **Did**: [one sentence]
