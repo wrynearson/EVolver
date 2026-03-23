@@ -845,6 +845,61 @@
             "https://www.leapmotor.net/pl/page?key=dealer"
           ],
           "uncertain": false
+        },
+        "BGR": {
+          "name": "Bulgaria",
+          "present": true,
+          "source": "https://www.leapmotor.net/bg",
+          "sources": [
+            "https://www.leapmotor.net/bg",
+            "https://www.leapmotor.net/bg/page?key=dealer",
+            "https://www.leapmotor.net"
+          ],
+          "uncertain": false
+        },
+        "HRV": {
+          "name": "Croatia",
+          "present": true,
+          "source": "https://www.leapmotor.net/hr",
+          "sources": [
+            "https://www.leapmotor.net/hr",
+            "https://www.leapmotor.net/hr/page?key=dealer",
+            "https://www.leapmotor.net"
+          ],
+          "uncertain": false
+        },
+        "ROU": {
+          "name": "Romania",
+          "present": true,
+          "source": "https://www.leapmotor.net/ro",
+          "sources": [
+            "https://www.leapmotor.net/ro",
+            "https://www.leapmotor.net/ro/page?key=dealer",
+            "https://www.leapmotor.net"
+          ],
+          "uncertain": false
+        },
+        "SVK": {
+          "name": "Slovakia",
+          "present": true,
+          "source": "https://www.leapmotor.net/sk",
+          "sources": [
+            "https://www.leapmotor.net/sk",
+            "https://www.leapmotor.net/sk/page?key=dealer",
+            "https://www.leapmotor.net"
+          ],
+          "uncertain": false
+        },
+        "SVN": {
+          "name": "Slovenia",
+          "present": true,
+          "source": "https://www.leapmotor.net/si",
+          "sources": [
+            "https://www.leapmotor.net/si",
+            "https://www.leapmotor.net/si/page?key=dealer",
+            "https://www.leapmotor.net"
+          ],
+          "uncertain": false
         }
       }
     }

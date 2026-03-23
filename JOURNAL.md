@@ -140,3 +140,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-23
 **Did**: Expanded Leapmotor coverage by adding the Czech Republic, Hungary, and Poland from live localized Leapmotor market pages plus their official dealer-route surfaces.
 **Result**: pass
+## 2026-03-23
+**Did**: Expanded Leapmotor coverage by adding Bulgaria, Croatia, Romania, Slovakia, and Slovenia from Leapmotor's global locale manifest plus live localized market and dealer pages.
+**Result**: pass
+**TODO**: Verify the next strongest Leapmotor sovereign locales whose official market and support surfaces already appear to be live, prioritizing Iceland, Luxembourg, Malta, North Macedonia, and Serbia.
