@@ -775,6 +775,27 @@
           ],
           "uncertain": false
         },
+        "DNK": {
+          "name": "Denmark",
+          "present": true,
+          "source": "https://leapmotor.dk/",
+          "sources": [
+            "https://leapmotor.dk/",
+            "https://leapmotor.dk/forhandlere",
+            "https://www.leapmotor.net/danmark/page?key=Leapmotor"
+          ],
+          "uncertain": false
+        },
+        "GRC": {
+          "name": "Greece",
+          "present": true,
+          "source": "https://www.leapmotor.net/gr",
+          "sources": [
+            "https://www.leapmotor.net/gr",
+            "https://www.leapmotor.net/gr/Dealers"
+          ],
+          "uncertain": false
+        },
         "IRL": {
           "name": "Ireland",
           "present": true,
