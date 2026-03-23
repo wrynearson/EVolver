@@ -115,3 +115,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-23
 **Did**: Added Zeekr Greece after confirming Zeekr's official Europe region manifest, localized Greek market site, Greek test-drive flow, and country domain.
 **Result**: pass
+
+## 2026-03-23
+**Did**: Added Zeekr Italy after confirming Zeekr's official Europe region manifest routes Italy to `zeekr.it` and the live localized Italy site presents a Zeekr consumer signup flow operated by Jameel Motors Italy.
+**Result**: pass

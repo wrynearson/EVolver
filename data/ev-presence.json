@@ -589,6 +589,16 @@
             "https://assets.zeekr.eu/region/region-country.json"
           ],
           "uncertain": false
+        },
+        "ITA": {
+          "name": "Italy",
+          "present": true,
+          "source": "https://zeekr.it",
+          "sources": [
+            "https://zeekr.it",
+            "https://assets.zeekr.eu/region/region-country.json"
+          ],
+          "uncertain": false
         }
       }
     },
