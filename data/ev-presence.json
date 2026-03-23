@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-22",
+    "last_updated": "2026-03-23",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -575,6 +575,18 @@
             "https://www.zeekrlife.com/es-ec/",
             "https://www.zeekrlife.com/es-ec/contact",
             "https://www.zeekrlife.com/es-ec/test-drive"
+          ],
+          "uncertain": false
+        },
+        "GRC": {
+          "name": "Greece",
+          "present": true,
+          "source": "https://www.zeekr.eu/el-gr/",
+          "sources": [
+            "https://www.zeekr.eu/el-gr/",
+            "https://www.zeekr.eu/el-gr/test-drive?c=001",
+            "https://zeekr.gr",
+            "https://assets.zeekr.eu/region/region-country.json"
           ],
           "uncertain": false
         }

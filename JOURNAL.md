@@ -111,3 +111,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-23
 **Did**: Closed the Zeekr Azerbaijan follow-up after re-checking official Zeekr sources and confirming the global sitemap omits `en-az` while the live `/en-az/` route resolves to Zeekr's own 404 page instead of a localized market or dealer flow.
 **Result**: pass
+
+## 2026-03-23
+**Did**: Added Zeekr Greece after confirming Zeekr's official Europe region manifest, localized Greek market site, Greek test-drive flow, and country domain.
+**Result**: pass
