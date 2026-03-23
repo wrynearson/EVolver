@@ -60,4 +60,4 @@ Never replace a stale TODO with a reworded version of the same TODO.
 - You have a limited budget of premium model requests. Be efficient.
 - Do NOT bulk-scrape every brand site every run. Focus on uncertain entries and new discoveries.
 - Try a simple fetch first. If the fetch succeeds but returns generic or non-localized content (e.g., global homepage language, no market-specific products or dealers visible), treat this as **inconclusive** and retry with Playwright — the site may use JS-rendered region selectors, locale redirects, or non-standard URL schemes that are invisible to a plain HTTP fetch.
-- Limit yourself to verifying 3-5 data points per session unless you find critical errors.
+- Verify as many data points as you can in one session. Keep going until you've exhausted the current task or hit genuine uncertainty or test failures.
