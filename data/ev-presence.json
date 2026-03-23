@@ -599,6 +599,50 @@
             "https://assets.zeekr.eu/region/region-country.json"
           ],
           "uncertain": false
+        },
+        "BGR": {
+          "name": "Bulgaria",
+          "present": true,
+          "source": "https://www.zeekr-see.eu/bg/",
+          "sources": [
+            "https://www.zeekr-see.eu/bg/",
+            "https://assets.zeekr.eu/region/region-country.json",
+            "https://www.zeekr.eu/"
+          ],
+          "uncertain": false
+        },
+        "HRV": {
+          "name": "Croatia",
+          "present": true,
+          "source": "https://www.zeekr-see.eu/hr/",
+          "sources": [
+            "https://www.zeekr-see.eu/hr/",
+            "https://assets.zeekr.eu/region/region-country.json",
+            "https://www.zeekr.eu/"
+          ],
+          "uncertain": false
+        },
+        "ROU": {
+          "name": "Romania",
+          "present": true,
+          "source": "https://www.zeekr-see.eu/ro/",
+          "sources": [
+            "https://www.zeekr-see.eu/ro/",
+            "https://assets.zeekr.eu/region/region-country.json",
+            "https://www.zeekr.eu/"
+          ],
+          "uncertain": false
+        },
+        "SVN": {
+          "name": "Slovenia",
+          "present": true,
+          "source": "https://www.zeekr-see.eu/si/",
+          "sources": [
+            "https://www.zeekr-see.eu/si/",
+            "https://assets.zeekr.eu/region/region-country.json",
+            "https://www.zeekr.eu/"
+          ],
+          "uncertain": false
         }
       }
     },
