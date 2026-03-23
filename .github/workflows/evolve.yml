@@ -2,7 +2,7 @@ name: Daily evolution
 
 on:
   schedule:
-    - cron: "0 5 * * *"
+    - cron: "20 */6 * * *"
   workflow_dispatch:
 
 permissions:
