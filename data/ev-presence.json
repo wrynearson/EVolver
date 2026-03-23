@@ -775,6 +775,16 @@
           ],
           "uncertain": false
         },
+        "CZE": {
+          "name": "Czech Republic",
+          "present": true,
+          "source": "https://www.leapmotor.net/cz",
+          "sources": [
+            "https://www.leapmotor.net/cz",
+            "https://www.leapmotor.net/cz/page?key=dealer"
+          ],
+          "uncertain": false
+        },
         "DNK": {
           "name": "Denmark",
           "present": true,
@@ -796,6 +806,16 @@
           ],
           "uncertain": false
         },
+        "HUN": {
+          "name": "Hungary",
+          "present": true,
+          "source": "https://www.leapmotor.net/hu",
+          "sources": [
+            "https://www.leapmotor.net/hu",
+            "https://www.leapmotor.net/hu/page?key=dealer"
+          ],
+          "uncertain": false
+        },
         "IRL": {
           "name": "Ireland",
           "present": true,
@@ -813,6 +833,16 @@
           "sources": [
             "https://www.leapmotor.net/pt",
             "https://www.leapmotor.net/pt/dealer"
+          ],
+          "uncertain": false
+        },
+        "POL": {
+          "name": "Poland",
+          "present": true,
+          "source": "https://www.leapmotor.net/pl",
+          "sources": [
+            "https://www.leapmotor.net/pl",
+            "https://www.leapmotor.net/pl/page?key=dealer"
           ],
           "uncertain": false
         }

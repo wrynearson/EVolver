@@ -137,3 +137,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-23
 **Did**: Added Leapmotor Denmark and Greece after confirming Greece's live localized market and dealer routes on `leapmotor.net`, and Denmark's official handoff from Leapmotor's market manifest to `leapmotor.dk`, where the local site exposes consumer flows and describes a nationwide dealer/service network.
 **Result**: pass
+## 2026-03-23
+**Did**: Expanded Leapmotor coverage by adding the Czech Republic, Hungary, and Poland from live localized Leapmotor market pages plus their official dealer-route surfaces.
+**Result**: pass
