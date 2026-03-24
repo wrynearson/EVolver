@@ -149,3 +149,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Leapmotor coverage by adding Iceland, Luxembourg, Malta, and Serbia from official localized Leapmotor market pages plus official dealer, importer, or sales-and-service-center surfaces, and left North Macedonia deferred because its current `mk` routes still do not expose a working localized market flow.
 **Result**: pass
 **TODO**: Verify whether Leapmotor North Macedonia should count as official presence — the `mk` market route still returns 404 while the current dealer page remains blank.
+## 2026-03-24
+**Did**: Closed the Leapmotor North Macedonia follow-up after re-checking Leapmotor's official `mk` locale surfaces and confirming the public market route still returns 404, the dealer page renders a blank shell, and the live Leapmotor country-list API does not expose MK as an available market.
+**Result**: pass
