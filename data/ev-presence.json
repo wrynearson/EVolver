@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-23",
+    "last_updated": "2026-03-24",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -938,6 +938,36 @@
           "sources": [
             "https://www.leapmotor.net/rs",
             "https://www.leapmotor.net/rs/page?key=pronadji-prodajno-servisni-centar"
+          ],
+          "uncertain": false
+        },
+        "CHE": {
+          "name": "Switzerland",
+          "present": true,
+          "source": "https://www.leapmotor.net/ch-de",
+          "sources": [
+            "https://www.leapmotor.net/ch-de",
+            "https://www.leapmotor.net/ch-de/dealer"
+          ],
+          "uncertain": false
+        },
+        "NZL": {
+          "name": "New Zealand",
+          "present": true,
+          "source": "https://www.leapmotor.net/nz",
+          "sources": [
+            "https://www.leapmotor.net/nz",
+            "https://www.leapmotor.net/nz/page?key=Leapmotor"
+          ],
+          "uncertain": false
+        },
+        "ZAF": {
+          "name": "South Africa",
+          "present": true,
+          "source": "https://www.leapmotor.net/za",
+          "sources": [
+            "https://www.leapmotor.net/za",
+            "https://www.leapmotor.net/za/page?key=Leapmotor"
           ],
           "uncertain": false
         }

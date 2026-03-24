@@ -152,3 +152,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-24
 **Did**: Closed the Leapmotor North Macedonia follow-up after re-checking Leapmotor's official `mk` locale surfaces and confirming the public market route still returns 404, the dealer page renders a blank shell, and the live Leapmotor country-list API does not expose MK as an available market.
 **Result**: pass
+## 2026-03-24
+**Did**: Expanded Leapmotor coverage by adding New Zealand, South Africa, and Switzerland from live localized Leapmotor market sites plus official register-interest, test-drive, or dealer flows.
+**Result**: pass
+**TODO**: Verify the next strongest Leapmotor sovereign locales beyond the current footprint, prioritizing Australia, the United Arab Emirates, and Malaysia.
