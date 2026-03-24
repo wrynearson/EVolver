@@ -176,3 +176,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added Leapmotor Morocco and Mauritius after confirming official localized market pages; Morocco's official C10 and T03 pages expose test-drive flows, and Mauritius' localized pages show local pricing plus trusted sales and services by Stellantis.
 **Result**: pass
 **TODO**: Verify whether Leapmotor Thailand should count as official presence — the official `th` locale is live, but it still needs stronger public dealer or support confirmation than the current page shell.
+
+## 2026-03-24
+**Did**: Added Leapmotor Thailand after confirming Leapmotor's official global market manifest now hands Thailand to a live local Leapmotor Thailand site whose homepage exposes Thai customer-service contact details, while its C10 product page and dealer-finder flow provide live local consumer surfaces.
+**Result**: pass
+**TODO**: Verify whether Leapmotor Nepal, Sweden, and Israel should count as official presence — their current official locale routes or linked local pages still render as empty shells or server errors.

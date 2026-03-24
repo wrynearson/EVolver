@@ -1016,6 +1016,18 @@
           ],
           "uncertain": false
         },
+        "THA": {
+          "name": "Thailand",
+          "present": true,
+          "source": "https://www.leapmotor-international.co/th/th/",
+          "sources": [
+            "https://www.leapmotor.net/",
+            "https://www.leapmotor-international.co/th/th/",
+            "https://www.leapmotor-international.co/th/th/c10",
+            "https://www.leapmotor-international.co/th/th/findmydealer"
+          ],
+          "uncertain": false
+        },
         "JOR": {
           "name": "Jordan",
           "present": true,
