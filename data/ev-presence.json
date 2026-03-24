@@ -1015,6 +1015,16 @@
             "https://www.leapmotor-international.co/sg/en/c10"
           ],
           "uncertain": false
+        },
+        "JOR": {
+          "name": "Jordan",
+          "present": true,
+          "source": "https://www.leapmotor.net/jo-en",
+          "sources": [
+            "https://www.leapmotor.net/jo-en",
+            "https://www.leapmotor.net/jo-en/page?key=dealer"
+          ],
+          "uncertain": false
         }
       }
     }
