@@ -165,3 +165,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added Leapmotor Singapore after confirming Leapmotor's official market selector links Singapore to a dedicated local site, and that live Singapore site exposes a local showroom plus consumer vehicle pages.
 **Result**: pass
 **TODO**: Verify whether Leapmotor Bahrain, Oman, Qatar, and Saudi Arabia should count as official presence — Leapmotor's official market manifest and locale routes exist, but the current public localized pages still render as weak or incomplete signals compared with Singapore's live local site.
+## 2026-03-24
+**Did**: Closed the Leapmotor Bahrain, Oman, Qatar, and Saudi Arabia follow-up after re-checking Leapmotor's official locale manifest and public GCC routes, which still expose only broken `page?key=Leapmotor` shells while the locale roots and dealer routes return 404.
+**Result**: pass
