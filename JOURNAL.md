@@ -172,3 +172,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added Leapmotor Jordan after confirming the official `jo-en` locale plus the live dealer page naming trusted sales and services by Stellantis and Leapmotor JO Abu Khader Automotive.
 **Result**: pass
 **TODO**: Verify the next strongest Leapmotor sovereign locales with live locale roots, prioritizing Morocco and Mauritius; Thailand still looks like a page-shell-only locale.
+## 2026-03-24
+**Did**: Added Leapmotor Morocco and Mauritius after confirming official localized market pages; Morocco's official C10 and T03 pages expose test-drive flows, and Mauritius' localized pages show local pricing plus trusted sales and services by Stellantis.
+**Result**: pass
+**TODO**: Verify whether Leapmotor Thailand should count as official presence — the official `th` locale is live, but it still needs stronger public dealer or support confirmation than the current page shell.

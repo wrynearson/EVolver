@@ -1025,6 +1025,29 @@
             "https://www.leapmotor.net/jo-en/page?key=dealer"
           ],
           "uncertain": false
+        },
+        "MAR": {
+          "name": "Morocco",
+          "present": true,
+          "source": "https://www.leapmotor.net/ma",
+          "sources": [
+            "https://www.leapmotor.net/",
+            "https://www.leapmotor.net/ma",
+            "https://www.leapmotor.net/ma/c10",
+            "https://www.leapmotor.net/ma/t03"
+          ],
+          "uncertain": false
+        },
+        "MUS": {
+          "name": "Mauritius",
+          "present": true,
+          "source": "https://www.leapmotor.net/mu-en",
+          "sources": [
+            "https://www.leapmotor.net/",
+            "https://www.leapmotor.net/mu-en",
+            "https://www.leapmotor.net/mu-fr"
+          ],
+          "uncertain": false
         }
       }
     }
