@@ -1004,6 +1004,17 @@
             "https://www.leapmotor-international.com.my/findmydealer"
           ],
           "uncertain": false
+        },
+        "SGP": {
+          "name": "Singapore",
+          "present": true,
+          "source": "https://www.leapmotor-international.co/sg/en/",
+          "sources": [
+            "https://www.leapmotor.net/",
+            "https://www.leapmotor-international.co/sg/en/",
+            "https://www.leapmotor-international.co/sg/en/c10"
+          ],
+          "uncertain": false
         }
       }
     }
