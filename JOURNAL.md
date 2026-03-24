@@ -181,3 +181,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added Leapmotor Thailand after confirming Leapmotor's official global market manifest now hands Thailand to a live local Leapmotor Thailand site whose homepage exposes Thai customer-service contact details, while its C10 product page and dealer-finder flow provide live local consumer surfaces.
 **Result**: pass
 **TODO**: Verify whether Leapmotor Nepal, Sweden, and Israel should count as official presence — their current official locale routes or linked local pages still render as empty shells or server errors.
+## 2026-03-24
+**Did**: Closed the Leapmotor Sweden follow-up after re-checking Leapmotor's official locale selector and Swedish routes, which still show only a locale link plus empty `page?key=` shells while the localized root itself returns Leapmotor's own 404 page.
+**Result**: pass
+**TODO**: Verify whether Leapmotor Nepal and Israel should count as official presence — their current official locale routes or linked local pages still render as empty shells or server errors.
