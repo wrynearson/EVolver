@@ -156,3 +156,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Leapmotor coverage by adding New Zealand, South Africa, and Switzerland from live localized Leapmotor market sites plus official register-interest, test-drive, or dealer flows.
 **Result**: pass
 **TODO**: Verify the next strongest Leapmotor sovereign locales beyond the current footprint, prioritizing Australia, the United Arab Emirates, and Malaysia.
+
+## 2026-03-24
+**Did**: Expanded Leapmotor coverage by adding Australia, the United Arab Emirates, and Malaysia from Leapmotor's official locale manifest plus live localized market and dealer/support flows.
+**Result**: pass
+**TODO**: Verify the next strongest Leapmotor sovereign locales beyond the current footprint, prioritizing Bahrain, Oman, Qatar, Saudi Arabia, and Singapore.

@@ -970,6 +970,40 @@
             "https://www.leapmotor.net/za/page?key=Leapmotor"
           ],
           "uncertain": false
+        },
+        "AUS": {
+          "name": "Australia",
+          "present": true,
+          "source": "https://www.leapmotor.net/au",
+          "sources": [
+            "https://www.leapmotor.net/",
+            "https://www.leapmotor.net/au",
+            "https://www.leapmotor.net/au/page?key=Leapmotor"
+          ],
+          "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://www.leapmotor.net/uae-en",
+          "sources": [
+            "https://www.leapmotor.net/",
+            "https://www.leapmotor.net/uae-en",
+            "https://www.leapmotor.net/uae-en/page?key=Leapmotor"
+          ],
+          "uncertain": false
+        },
+        "MYS": {
+          "name": "Malaysia",
+          "present": true,
+          "source": "https://www.leapmotor.net/my",
+          "sources": [
+            "https://www.leapmotor.net/",
+            "https://www.leapmotor.net/my",
+            "https://www.leapmotor-international.com.my/",
+            "https://www.leapmotor-international.com.my/findmydealer"
+          ],
+          "uncertain": false
         }
       }
     }
