@@ -11,6 +11,67 @@ import {
 import { buildColorExpression, LEGEND_ITEMS } from "../lib/mapUtils";
 import type { FeatureCollection } from "geojson";
 
+type SelectedCountry = {
+  isoCode: string;
+  countryName?: string;
+};
+
+type CopyLinkStatus = "idle" | "copied" | "failed";
+
+function normalizeIsoCode(value: string | null): string | null {
+  if (!value) {
+    return null;
+  }
+
+  const normalizedValue = value.trim().toUpperCase();
+  return /^[A-Z]{3}$/.test(normalizedValue) ? normalizedValue : null;
+}
+
+function getInitialSelectionState(): {
+  selectedBrand: string;
+  selectedCountry: SelectedCountry | null;
+} {
+  if (typeof window === "undefined") {
+    return {
+      selectedBrand: "",
+      selectedCountry: null,
+    };
+  }
+
+  const searchParams = new URLSearchParams(window.location.search);
+  const selectedBrand = searchParams.get("brand")?.trim() ?? "";
+  const selectedCountryIsoCode = normalizeIsoCode(searchParams.get("country"));
+
+  return {
+    selectedBrand,
+    selectedCountry: selectedCountryIsoCode
+      ? { isoCode: selectedCountryIsoCode }
+      : null,
+  };
+}
+
+function buildShareUrl(selectedBrand: string, selectedCountry: SelectedCountry | null) {
+  if (typeof window === "undefined") {
+    return "";
+  }
+
+  const url = new URL(window.location.href);
+
+  if (selectedBrand) {
+    url.searchParams.set("brand", selectedBrand);
+  } else {
+    url.searchParams.delete("brand");
+  }
+
+  if (selectedCountry?.isoCode) {
+    url.searchParams.set("country", selectedCountry.isoCode);
+  } else {
+    url.searchParams.delete("country");
+  }
+
+  return url.toString();
+}
+
 /**
  * Main map component. Renders a full-viewport MapLibre map with:
  * - OpenFreeMap tiles as the basemap
@@ -23,11 +84,15 @@ import type { FeatureCollection } from "geojson";
 export default function EVMap() {
   const { data, countryBrandCount, summary, loading } = useEVData();
   const [countries, setCountries] = useState<FeatureCollection | null>(null);
-  const [selectedBrand, setSelectedBrand] = useState<string>("");
-  const [selectedCountry, setSelectedCountry] = useState<{
-    isoCode: string;
-    countryName?: string;
-  } | null>(null);
+  const [selectedBrand, setSelectedBrand] = useState<string>(
+    () => getInitialSelectionState().selectedBrand,
+  );
+  const [selectedCountry, setSelectedCountry] = useState<SelectedCountry | null>(
+    () => getInitialSelectionState().selectedCountry,
+  );
+  const [copyLinkStatus, setCopyLinkStatus] = useState<CopyLinkStatus>("idle");
+  const activeSelectedBrand =
+    data && selectedBrand && !data.brands[selectedBrand] ? "" : selectedBrand;
 
   const brandOptions = useMemo(
     () => (data ? Object.keys(data.brands).sort((a, b) => a.localeCompare(b)) : []),
@@ -39,16 +104,16 @@ export default function EVMap() {
       return countryBrandCount;
     }
 
-    return computeCountryBrandCounts(data, selectedBrand || undefined);
-  }, [countryBrandCount, data, selectedBrand]);
+    return computeCountryBrandCounts(data, activeSelectedBrand || undefined);
+  }, [activeSelectedBrand, countryBrandCount, data]);
 
   const visibleSummary = useMemo(() => {
     if (!data) {
       return summary;
     }
 
-    return computeDatasetSummary(data, selectedBrand || undefined);
-  }, [data, selectedBrand, summary]);
+    return computeDatasetSummary(data, activeSelectedBrand || undefined);
+  }, [activeSelectedBrand, data, summary]);
 
   const countryOptions = useMemo(() => {
     if (!countries) {
@@ -77,32 +142,57 @@ export default function EVMap() {
       .sort((a, b) => a.countryName.localeCompare(b.countryName));
   }, [countries]);
 
+  const resolvedSelectedCountry = useMemo(() => {
+    if (!selectedCountry) {
+      return null;
+    }
+
+    const matchingCountry = countryOptions.find(
+      (country) => country.isoCode === selectedCountry.isoCode,
+    );
+
+    if (!matchingCountry) {
+      return selectedCountry;
+    }
+
+    return {
+      isoCode: matchingCountry.isoCode,
+      countryName: matchingCountry.countryName,
+    };
+  }, [countryOptions, selectedCountry]);
+
   const selectedCountryDetails = useMemo(() => {
-    if (!data || !selectedCountry) {
+    if (!data || !resolvedSelectedCountry) {
       return null;
     }
 
     return (
       getCountryPresenceDetails(
         data,
-        selectedCountry.isoCode,
-        selectedBrand || undefined,
-        selectedCountry.countryName,
+        resolvedSelectedCountry.isoCode,
+        activeSelectedBrand || undefined,
+        resolvedSelectedCountry.countryName,
       ) ?? {
-        isoCode: selectedCountry.isoCode,
-        countryName: selectedCountry.countryName ?? selectedCountry.isoCode,
+        isoCode: resolvedSelectedCountry.isoCode,
+        countryName:
+          resolvedSelectedCountry.countryName ?? resolvedSelectedCountry.isoCode,
         brands: [],
       }
     );
-  }, [data, selectedBrand, selectedCountry]);
+  }, [activeSelectedBrand, data, resolvedSelectedCountry]);
 
   const selectedBrandPresence = useMemo(() => {
-    if (!data || !selectedBrand) {
+    if (!data || !activeSelectedBrand) {
       return [];
     }
 
-    return getBrandPresenceCountries(data, selectedBrand);
-  }, [data, selectedBrand]);
+    return getBrandPresenceCountries(data, activeSelectedBrand);
+  }, [activeSelectedBrand, data]);
+
+  const shareUrl = useMemo(
+    () => buildShareUrl(activeSelectedBrand, resolvedSelectedCountry),
+    [activeSelectedBrand, resolvedSelectedCountry],
+  );
 
   useEffect(() => {
     fetch(import.meta.env.BASE_URL + "data/ne_110m_countries.geojson")
@@ -112,6 +202,38 @@ export default function EVMap() {
         console.error("Failed to load country boundaries:", err),
       );
   }, []);
+
+  useEffect(() => {
+    if (!data || !selectedBrand || data.brands[selectedBrand]) {
+      return;
+    }
+
+    setSelectedBrand("");
+  }, [data, selectedBrand]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const url = new URL(window.location.href);
+    const currentBrand = url.searchParams.get("brand")?.trim() ?? "";
+    const currentCountry = normalizeIsoCode(url.searchParams.get("country"));
+
+    if (
+      currentBrand === activeSelectedBrand &&
+      currentCountry === resolvedSelectedCountry?.isoCode
+    ) {
+      return;
+    }
+
+    const nextUrl = buildShareUrl(activeSelectedBrand, resolvedSelectedCountry);
+    window.history.replaceState({}, "", nextUrl);
+  }, [activeSelectedBrand, resolvedSelectedCountry]);
+
+  useEffect(() => {
+    setCopyLinkStatus("idle");
+  }, [activeSelectedBrand, resolvedSelectedCountry]);
 
   if (loading || !countries) {
     return (
@@ -181,7 +303,7 @@ export default function EVMap() {
             <select
               id="brand-filter"
               className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
-              value={selectedBrand}
+              value={activeSelectedBrand}
               onChange={(event) => setSelectedBrand(event.target.value)}
             >
               <option value="">All brands</option>
@@ -202,7 +324,7 @@ export default function EVMap() {
             <select
               id="country-filter"
               className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
-              value={selectedCountry?.isoCode ?? ""}
+              value={resolvedSelectedCountry?.isoCode ?? ""}
               onChange={(event) => {
                 const isoCode = event.target.value;
 
@@ -227,6 +349,29 @@ export default function EVMap() {
                 </option>
               ))}
             </select>
+          </div>
+          <div className="mt-3">
+            <button
+              type="button"
+              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              onClick={() => {
+                if (!shareUrl || !navigator.clipboard?.writeText) {
+                  setCopyLinkStatus("failed");
+                  return;
+                }
+
+                void navigator.clipboard.writeText(shareUrl).then(
+                  () => setCopyLinkStatus("copied"),
+                  () => setCopyLinkStatus("failed"),
+                );
+              }}
+            >
+              {copyLinkStatus === "copied"
+                ? "Copied share link"
+                : copyLinkStatus === "failed"
+                  ? "Copy failed"
+                  : "Copy share link"}
+            </button>
           </div>
           <dl className="mt-2 space-y-1 text-sm text-gray-600">
             <div className="flex items-center justify-between gap-4">
@@ -321,7 +466,7 @@ export default function EVMap() {
         </aside>
       ) : null}
 
-      {selectedBrand ? (
+      {activeSelectedBrand ? (
         <aside className="absolute right-6 bottom-6 max-h-80 w-80 overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md">
           <div className="flex items-start justify-between gap-4">
             <div>
@@ -329,7 +474,7 @@ export default function EVMap() {
                 Brand footprint
               </h2>
               <p className="text-xs text-gray-500">
-                {selectedBrand} · {selectedBrandPresence.length}{" "}
+                {activeSelectedBrand} · {selectedBrandPresence.length}{" "}
                 {selectedBrandPresence.length === 1 ? "market" : "markets"}
               </p>
             </div>

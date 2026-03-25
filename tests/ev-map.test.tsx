@@ -1,6 +1,6 @@
 import React, { type ReactNode } from "react";
-import { fireEvent, render, screen, within } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { EVPresenceData } from "../src/types";
 
 const mockMap = vi.fn(
@@ -98,14 +98,25 @@ const mockGeoJson = {
 };
 
 describe("EVMap", () => {
+  afterEach(() => {
+    cleanup();
+  });
+
   beforeEach(() => {
     mockMap.mockClear();
     mockSource.mockClear();
     mockLayer.mockClear();
     vi.restoreAllMocks();
+    window.history.replaceState({}, "", "/");
+    Object.defineProperty(window.navigator, "clipboard", {
+      configurable: true,
+      value: {
+        writeText: vi.fn().mockResolvedValue(undefined),
+      },
+    });
   });
 
-  it("renders the dataset summary overlay and country details once data loads", async () => {
+  it("renders the dataset summary overlay, country details, and shareable view state", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
       const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
@@ -114,6 +125,7 @@ describe("EVMap", () => {
         headers: { "Content-Type": "application/json" },
       });
     });
+    window.history.replaceState({}, "", "/?brand=XPeng&country=SWE");
 
     const { default: EVMap } = await import("../src/components/EVMap");
 
@@ -123,21 +135,21 @@ describe("EVMap", () => {
     expect(screen.getByLabelText("Brand filter")).toBeInTheDocument();
     expect(screen.getByLabelText("Country lookup")).toBeInTheDocument();
     expect(screen.getByText("Showing")).toBeInTheDocument();
-    expect(screen.getByDisplayValue("All brands")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("XPeng")).toBeInTheDocument();
     expect(screen.getByText("Brands tracked")).toBeInTheDocument();
     expect(screen.getByText("Countries in view")).toBeInTheDocument();
     expect(screen.getByText("2026-03-13")).toBeInTheDocument();
 
-    const allBrandsRow = screen.getByText("Countries in view").closest("div");
-    expect(allBrandsRow).toHaveTextContent("2");
-
-    fireEvent.change(screen.getByLabelText("Brand filter"), {
-      target: { value: "XPeng" },
-    });
-
-    expect(screen.getByDisplayValue("XPeng")).toBeInTheDocument();
     const xpengRow = screen.getByText("Countries in view").closest("div");
     expect(xpengRow).toHaveTextContent("1");
+    expect(window.location.search).toBe("?brand=XPeng&country=SWE");
+
+    const initialDetailsPanel = screen
+      .getByRole("heading", { name: "Sweden" })
+      .closest("aside");
+    expect(initialDetailsPanel).not.toBeNull();
+    expect(within(initialDetailsPanel!).getByText("SWE · 0 brands")).toBeInTheDocument();
+
     const footprintPanel = screen
       .getByRole("heading", { name: "Brand footprint" })
       .closest("aside");
@@ -163,6 +175,15 @@ describe("EVMap", () => {
     expect(
       within(detailsPanel!).getByRole("link", { name: "https://www.xpeng.com/no" }),
     ).toHaveAttribute("href", "https://www.xpeng.com/no");
+    expect(window.location.search).toBe("?brand=XPeng&country=NOR");
+
+    fireEvent.click(screen.getByRole("button", { name: "Copy share link" }));
+    expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
+      "http://localhost:3000/?brand=XPeng&country=NOR",
+    );
+    expect(
+      await screen.findByRole("button", { name: "Copied share link" }),
+    ).toBeInTheDocument();
 
     fireEvent.change(screen.getByLabelText("Country lookup"), {
       target: { value: "SWE" },
@@ -178,9 +199,31 @@ describe("EVMap", () => {
         "No tracked official brand presence for this country in the current view.",
       ),
     ).toBeInTheDocument();
+    expect(window.location.search).toBe("?brand=XPeng&country=SWE");
 
     fireEvent.click(screen.getByRole("button", { name: "Clear" }));
     expect(screen.getByDisplayValue("All brands")).toBeInTheDocument();
     expect(screen.queryByText("Brand footprint")).not.toBeInTheDocument();
+    expect(window.location.search).toBe("?country=SWE");
+  });
+
+  it("drops invalid brand query params after loading", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+    window.history.replaceState({}, "", "/?brand=Unknown&country=NOR");
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("All brands");
+    expect(window.location.search).toBe("?country=NOR");
   });
 });

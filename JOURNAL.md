@@ -214,3 +214,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-25
 **Did**: Added a brand-footprint panel for the active brand filter so users can browse that brand's confirmed markets, open official source links, and jump straight into country details.
 **Result**: pass
+
+## 2026-03-25
+**Did**: Added shareable map state so brand and country selections persist in the URL and users can copy a direct link to the current view.
+**Result**: pass
