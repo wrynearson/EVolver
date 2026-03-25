@@ -5,14 +5,11 @@ on:
     - cron: "20 */6 * * *"
   workflow_dispatch:
 
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
 jobs:
   evolve:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     outputs:
       pushed: ${{ steps.push.outputs.pushed }}
@@ -36,11 +33,11 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Install Copilot CLI
-        run: npm install -g @github/copilot
+        run: npm install -g @github/copilot@1.0.11
 
       - name: Install Playwright MCP + browsers
         run: |
-          npm install -g @playwright/mcp
+          npm install -g @playwright/mcp@0.0.68
           npx playwright install chromium
 
       - name: Lock immutable files
@@ -58,27 +55,13 @@ jobs:
         run: |
           copilot \
             --model gpt-5.4 \
-            --log-level debug \
-            --log-dir ./copilot-logs \
-            --share ./session-transcript.md \
             --allow-all \
             --no-ask-user \
             --autopilot \
             --max-autopilot-continues 3 \
             --deny-tool 'shell(git push)' \
             --additional-mcp-config @.github/hooks/mcp-config.json \
-            -p "$(cat constitution/AGENTS.md constitution/IDENTITY.md constitution/GOALS.md constitution/CONCEPTION.md JOURNAL.md BACKLOG.md data/ev-presence.json)" \
-            2>&1 | tee session.log
-
-      - name: Upload session logs
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: session-logs-${{ github.run_id }}
-          path: session-transcript.md
-          if-no-files-found: warn
-          retention-days: 30
-          archive: false
+            -p "$(cat constitution/AGENTS.md constitution/IDENTITY.md constitution/GOALS.md constitution/CONCEPTION.md JOURNAL.md BACKLOG.md data/ev-presence.json)"
 
       - name: Push if agent committed
         id: push
