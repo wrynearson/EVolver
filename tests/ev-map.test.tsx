@@ -201,6 +201,11 @@ describe("EVMap", () => {
     expect(within(previewPanel!).getByText("Norway")).toBeInTheDocument();
     expect(within(previewPanel!).getByText("NOR · 1 brand")).toBeInTheDocument();
     expect(within(previewPanel!).getByText("XPeng")).toBeInTheDocument();
+    expect(
+      within(previewPanel!).getByText(
+        "Showing 1 of 2 tracked brands for this country. Clear the brand filter to see the rest.",
+      ),
+    ).toBeInTheDocument();
 
     fireEvent.click(within(footprintPanel!).getByRole("button", { name: /Norway/i }));
 
@@ -213,6 +218,11 @@ describe("EVMap", () => {
     expect(
       within(detailsPanel!).getByRole("link", { name: "https://www.xpeng.com/no" }),
     ).toHaveAttribute("href", "https://www.xpeng.com/no");
+    expect(
+      within(detailsPanel!).getByText(
+        "Showing 1 of 2 tracked brands for this country. Clear the brand filter to inspect the rest.",
+      ),
+    ).toBeInTheDocument();
     expect(window.location.search).toBe("?brand=XPeng&country=NOR");
 
     fireEvent.click(screen.getByRole("button", { name: "Copy share link" }));

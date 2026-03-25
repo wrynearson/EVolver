@@ -205,6 +205,26 @@ export default function EVMap() {
     );
   }, [activeSelectedBrand, data, resolvedSelectedCountry]);
 
+  const allSelectedCountryDetails = useMemo(() => {
+    if (!data || !resolvedSelectedCountry) {
+      return null;
+    }
+
+    return (
+      getCountryPresenceDetails(
+        data,
+        resolvedSelectedCountry.isoCode,
+        undefined,
+        resolvedSelectedCountry.countryName,
+      ) ?? {
+        isoCode: resolvedSelectedCountry.isoCode,
+        countryName:
+          resolvedSelectedCountry.countryName ?? resolvedSelectedCountry.isoCode,
+        brands: [],
+      }
+    );
+  }, [data, resolvedSelectedCountry]);
+
   const hoveredCountryDetails = useMemo(() => {
     if (!data || !resolvedHoveredCountry) {
       return null;
@@ -223,6 +243,26 @@ export default function EVMap() {
       }
     );
   }, [activeSelectedBrand, data, resolvedHoveredCountry]);
+
+  const allHoveredCountryDetails = useMemo(() => {
+    if (!data || !resolvedHoveredCountry) {
+      return null;
+    }
+
+    return (
+      getCountryPresenceDetails(
+        data,
+        resolvedHoveredCountry.isoCode,
+        undefined,
+        resolvedHoveredCountry.countryName,
+      ) ?? {
+        isoCode: resolvedHoveredCountry.isoCode,
+        countryName:
+          resolvedHoveredCountry.countryName ?? resolvedHoveredCountry.isoCode,
+        brands: [],
+      }
+    );
+  }, [data, resolvedHoveredCountry]);
 
   const selectedBrandPresence = useMemo(() => {
     if (!data || !activeSelectedBrand) {
@@ -488,6 +528,15 @@ export default function EVMap() {
                     .join(", ")
                 : "No tracked official brand presence for this country in the current view."}
             </p>
+            {activeSelectedBrand &&
+            allHoveredCountryDetails &&
+            allHoveredCountryDetails.brands.length > hoveredCountryDetails.brands.length ? (
+              <p className="mt-2 text-xs text-gray-500">
+                Showing {hoveredCountryDetails.brands.length} of{" "}
+                {allHoveredCountryDetails.brands.length} tracked brands for this
+                country. Clear the brand filter to see the rest.
+              </p>
+            ) : null}
           </div>
         </div>
       ) : null}
@@ -553,6 +602,15 @@ export default function EVMap() {
               ))
             )}
           </ul>
+          {activeSelectedBrand &&
+          allSelectedCountryDetails &&
+          allSelectedCountryDetails.brands.length > selectedCountryDetails.brands.length ? (
+            <p className="mt-3 border-t border-gray-200 pt-3 text-xs text-gray-500">
+              Showing {selectedCountryDetails.brands.length} of{" "}
+              {allSelectedCountryDetails.brands.length} tracked brands for this
+              country. Clear the brand filter to inspect the rest.
+            </p>
+          ) : null}
         </aside>
       ) : null}
 

@@ -222,3 +222,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-25
 **Did**: Marked the remaining Leapmotor Gulf follow-up as `[monitoring]` after the same-day inconclusive checks, then added a hover preview panel so users can inspect a country's current filtered brand count before clicking.
 **Result**: pass
+
+## 2026-03-25
+**Did**: Added filtered-country context in the hover preview and country details so brand-filtered views now explain when additional tracked brands exist outside the active filter.
+**Result**: pass
