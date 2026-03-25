@@ -192,3 +192,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-24
 **Did**: Closed the Leapmotor Nepal follow-up after re-checking Leapmotor's official locale selector and Nepal routes, which still show only a locale link plus empty `page?key=` shells while the localized root itself returns Leapmotor's own 404 page.
 **Result**: pass
+## 2026-03-25
+**Did**: Added Leapmotor Mexico after confirming Leapmotor's live global market selector hands Mexico to `leapmotor.com.mx` and the official local site exposes a dedicated Spanish consumer launch page for Mexico, while updating the backlog to deprioritize Kuwait alongside the still shell-only Gulf locales.
+**Result**: pass

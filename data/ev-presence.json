@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-24",
+    "last_updated": "2026-03-25",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -1058,6 +1058,16 @@
             "https://www.leapmotor.net/",
             "https://www.leapmotor.net/mu-en",
             "https://www.leapmotor.net/mu-fr"
+          ],
+          "uncertain": false
+        },
+        "MEX": {
+          "name": "Mexico",
+          "present": true,
+          "source": "https://www.leapmotor.com.mx/",
+          "sources": [
+            "https://www.leapmotor.net/",
+            "https://www.leapmotor.com.mx/"
           ],
           "uncertain": false
         }
