@@ -5,4 +5,4 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 Remove an item when it is fully complete.
 
 ---
-- Monitor Leapmotor's remaining Gulf locales (Bahrain, Kuwait, Oman, Qatar, and Saudi Arabia) and only add them once Leapmotor's public locale roots plus dealer or support flows go live; North Macedonia stays excluded because its locale root still returns 404 while its `page?key=` shells render empty in-browser.
+- Monitor Leapmotor's remaining Gulf locales (Bahrain, Kuwait, Oman, Qatar, and Saudi Arabia) and only add them once Leapmotor exposes a real localized consumer market or dealer/support flow; Bahrain and Kuwait now reach official `page?key=` routes plus backend thank-you templates, but Saudi Arabia, Qatar, and Oman still return empty templates and none of the five yet show a public dealership or support network.

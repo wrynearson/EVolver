@@ -199,3 +199,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Re-checked Leapmotor North Macedonia and confirmed its official locale still falls back to a 404 root plus empty `page?key=` shells, then added a tested brand filter so the map can show a single brand's confirmed footprint at a time.
 **Result**: pass
 **TODO**: Re-check Leapmotor's Gulf locales only after their public locale roots and dealer or support flows go live.
+
+## 2026-03-25
+**Did**: Re-checked Leapmotor's remaining Gulf locales and confirmed Bahrain and Kuwait now expose official `page?key=` market routes plus backend thank-you templates, while Saudi Arabia, Qatar, and Oman still resolve only to empty official templates with no public dealer or support flow.
+**Result**: pass
