@@ -79,4 +79,8 @@ jobs:
   deploy:
     needs: evolve
     if: needs.evolve.outputs.pushed == 'true'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     uses: ./.github/workflows/deploy.yml
