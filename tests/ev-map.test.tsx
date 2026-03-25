@@ -1,9 +1,33 @@
 import React, { type ReactNode } from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { EVPresenceData } from "../src/types";
 
-const mockMap = vi.fn(() => <div data-testid="map" />);
+const mockMap = vi.fn(
+  ({
+    children,
+    onClick,
+  }: {
+    children?: ReactNode;
+    onClick?: (event: {
+      features?: Array<{ properties?: Record<string, unknown> }>;
+    }) => void;
+  }) => (
+    <div data-testid="map">
+      <button
+        type="button"
+        onClick={() =>
+          onClick?.({
+            features: [{ properties: { ISO_A3: "NOR", ADMIN: "Norway" } }],
+          })
+        }
+      >
+        Select Norway
+      </button>
+      {children}
+    </div>
+  ),
+);
 const mockSource = vi.fn(({ children }: { children?: ReactNode }) => (
   <div data-testid="source">{children}</div>
 ));
@@ -31,6 +55,13 @@ const mockData: EVPresenceData = {
           source: "https://www.byd.com/cn",
           uncertain: false,
         },
+        NOR: {
+          name: "Norway",
+          present: true,
+          source: "https://www.byd.com/no",
+          sources: ["https://www.byd.com/no", "https://www.byd.com/no/dealers"],
+          uncertain: false,
+        },
       },
     },
     XPeng: {
@@ -40,6 +71,7 @@ const mockData: EVPresenceData = {
           name: "Norway",
           present: true,
           source: "https://www.xpeng.com/no",
+          sources: ["https://www.xpeng.com/no"],
           uncertain: false,
         },
       },
@@ -60,7 +92,7 @@ describe("EVMap", () => {
     vi.restoreAllMocks();
   });
 
-  it("renders the dataset summary overlay once data loads", async () => {
+  it("renders the dataset summary overlay and country details once data loads", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
       const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
@@ -86,11 +118,21 @@ describe("EVMap", () => {
     expect(allBrandsRow).toHaveTextContent("2");
 
     fireEvent.change(screen.getByLabelText("Brand filter"), {
-      target: { value: "BYD" },
+      target: { value: "XPeng" },
     });
 
-    expect(screen.getByDisplayValue("BYD")).toBeInTheDocument();
-    const bydRow = screen.getByText("Countries in view").closest("div");
-    expect(bydRow).toHaveTextContent("1");
+    expect(screen.getByDisplayValue("XPeng")).toBeInTheDocument();
+    const xpengRow = screen.getByText("Countries in view").closest("div");
+    expect(xpengRow).toHaveTextContent("1");
+
+    fireEvent.click(screen.getByText("Select Norway"));
+
+    const detailsPanel = screen.getByText("Norway").closest("aside");
+    expect(detailsPanel).not.toBeNull();
+    expect(within(detailsPanel!).getByText("NOR · 1 brand")).toBeInTheDocument();
+    expect(within(detailsPanel!).getByText("XPeng")).toBeInTheDocument();
+    expect(
+      within(detailsPanel!).getByRole("link", { name: "https://www.xpeng.com/no" }),
+    ).toHaveAttribute("href", "https://www.xpeng.com/no");
   });
 });

@@ -4,6 +4,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import {
   computeCountryBrandCounts,
   computeDatasetSummary,
+  getCountryPresenceDetails,
   useEVData,
 } from "../hooks/useEVData";
 import { buildColorExpression, LEGEND_ITEMS } from "../lib/mapUtils";
@@ -22,6 +23,10 @@ export default function EVMap() {
   const { data, countryBrandCount, summary, loading } = useEVData();
   const [countries, setCountries] = useState<FeatureCollection | null>(null);
   const [selectedBrand, setSelectedBrand] = useState<string>("");
+  const [selectedCountry, setSelectedCountry] = useState<{
+    isoCode: string;
+    countryName?: string;
+  } | null>(null);
 
   const brandOptions = useMemo(
     () => (data ? Object.keys(data.brands).sort((a, b) => a.localeCompare(b)) : []),
@@ -43,6 +48,19 @@ export default function EVMap() {
 
     return computeDatasetSummary(data, selectedBrand || undefined);
   }, [data, selectedBrand, summary]);
+
+  const selectedCountryDetails = useMemo(() => {
+    if (!data || !selectedCountry) {
+      return null;
+    }
+
+    return getCountryPresenceDetails(
+      data,
+      selectedCountry.isoCode,
+      selectedBrand || undefined,
+      selectedCountry.countryName,
+    );
+  }, [data, selectedBrand, selectedCountry]);
 
   useEffect(() => {
     fetch(import.meta.env.BASE_URL + "data/ne_110m_countries.geojson")
@@ -70,6 +88,27 @@ export default function EVMap() {
         initialViewState={{ longitude: 20, latitude: 30, zoom: 1.5 }}
         style={{ width: "100%", height: "100%" }}
         mapStyle="https://tiles.openfreemap.org/styles/positron"
+        interactiveLayerIds={["country-fill"]}
+        onClick={(event) => {
+          const clickedFeature = event.features?.[0];
+          const properties = clickedFeature?.properties;
+          const isoCode =
+            typeof properties?.ISO_A3 === "string" ? properties.ISO_A3 : null;
+
+          if (!isoCode || isoCode === "-99") {
+            setSelectedCountry(null);
+            return;
+          }
+
+          const countryName =
+            typeof properties?.ADMIN === "string"
+              ? properties.ADMIN
+              : typeof properties?.NAME === "string"
+                ? properties.NAME
+                : undefined;
+
+          setSelectedCountry({ isoCode, countryName });
+        }}
       >
         <Source id="countries" type="geojson" data={countries}>
           <Layer
@@ -138,6 +177,63 @@ export default function EVMap() {
             </div>
           </dl>
         </div>
+      ) : null}
+
+      {selectedCountryDetails ? (
+        <aside className="absolute top-6 right-6 max-w-sm rounded-lg bg-white/95 px-4 py-3 shadow-md">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h2 className="text-sm font-semibold text-gray-800">
+                {selectedCountryDetails.countryName}
+              </h2>
+              <p className="text-xs uppercase tracking-wide text-gray-500">
+                {selectedCountryDetails.isoCode} · {selectedCountryDetails.brands.length}{" "}
+                {selectedCountryDetails.brands.length === 1 ? "brand" : "brands"}
+              </p>
+            </div>
+            <button
+              type="button"
+              className="text-sm text-gray-500 hover:text-gray-700"
+              onClick={() => setSelectedCountry(null)}
+            >
+              Close
+            </button>
+          </div>
+
+          <ul className="mt-3 space-y-3">
+            {selectedCountryDetails.brands.map((brand) => (
+              <li
+                key={brand.brandName}
+                className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-sm font-medium text-gray-800">
+                    {brand.brandName}
+                  </p>
+                  {brand.uncertain ? (
+                    <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">
+                      Uncertain
+                    </span>
+                  ) : null}
+                </div>
+                <ul className="mt-2 space-y-1 text-xs text-blue-700">
+                  {brand.sources.map((source) => (
+                    <li key={source}>
+                      <a
+                        href={source}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="break-all underline underline-offset-2"
+                      >
+                        {source}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </aside>
       ) : null}
 
       <div className="absolute bottom-6 left-6 bg-white/90 rounded-lg shadow-md px-4 py-3">

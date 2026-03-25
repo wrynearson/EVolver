@@ -3,6 +3,7 @@ import { buildColorExpression } from "../src/lib/mapUtils";
 import {
   computeCountryBrandCounts,
   computeDatasetSummary,
+  getCountryPresenceDetails,
 } from "../src/hooks/useEVData";
 import type { EVPresenceData } from "../src/types";
 
@@ -244,5 +245,87 @@ describe("computeDatasetSummary", () => {
       visibleCountryCount: 1,
       lastUpdated: "2026-03-13",
     });
+  });
+});
+
+describe("getCountryPresenceDetails", () => {
+  it("returns visible brands and deduplicated official sources for a country", () => {
+    const data: EVPresenceData = {
+      metadata: {
+        last_updated: "2026-03-25",
+        definition: "test",
+        schema_version: 2,
+      },
+      brands: {
+        BrandA: {
+          website: "https://a.com",
+          countries: {
+            NOR: {
+              name: "Norway",
+              present: true,
+              source: "https://a.com/no",
+              sources: ["https://a.com/no", "https://a.com/dealers/no"],
+              uncertain: false,
+            },
+          },
+        },
+        BrandB: {
+          website: "https://b.com",
+          countries: {
+            NOR: {
+              name: "Norway",
+              present: true,
+              source: "https://b.com/no",
+              sources: ["https://b.com/no", "https://b.com/no"],
+              uncertain: true,
+            },
+          },
+        },
+      },
+    };
+
+    expect(getCountryPresenceDetails(data, "NOR")).toEqual({
+      isoCode: "NOR",
+      countryName: "Norway",
+      brands: [
+        {
+          brandName: "BrandA",
+          source: "https://a.com/no",
+          sources: ["https://a.com/no", "https://a.com/dealers/no"],
+          uncertain: false,
+        },
+        {
+          brandName: "BrandB",
+          source: "https://b.com/no",
+          sources: ["https://b.com/no"],
+          uncertain: true,
+        },
+      ],
+    });
+  });
+
+  it("returns null when the selected brand is not present in that country", () => {
+    const data: EVPresenceData = {
+      metadata: {
+        last_updated: "2026-03-25",
+        definition: "test",
+        schema_version: 2,
+      },
+      brands: {
+        BrandA: {
+          website: "https://a.com",
+          countries: {
+            NOR: {
+              name: "Norway",
+              present: true,
+              source: "https://a.com/no",
+              uncertain: false,
+            },
+          },
+        },
+      },
+    };
+
+    expect(getCountryPresenceDetails(data, "SWE", "BrandA", "Sweden")).toBeNull();
   });
 });

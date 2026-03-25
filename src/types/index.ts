@@ -6,6 +6,19 @@ export interface CountryEntry {
   uncertain: boolean;
 }
 
+export interface CountryPresenceBrand {
+  brandName: string;
+  source: string | null;
+  sources: string[];
+  uncertain: boolean;
+}
+
+export interface CountryPresenceDetails {
+  isoCode: string;
+  countryName: string;
+  brands: CountryPresenceBrand[];
+}
+
 export interface BrandData {
   website: string;
   countries: Record<string, CountryEntry>;

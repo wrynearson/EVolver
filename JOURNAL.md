@@ -203,3 +203,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-25
 **Did**: Re-checked Leapmotor's remaining Gulf locales and confirmed Bahrain and Kuwait now expose official `page?key=` market routes plus backend thank-you templates, while Saudi Arabia, Qatar, and Oman still resolve only to empty official templates with no public dealer or support flow.
 **Result**: pass
+## 2026-03-25
+**Did**: Added clickable country details on the map so users can inspect a selected country's confirmed brand presence and jump to the official source URLs, backed by new derived-data tests and UI coverage.
+**Result**: pass
