@@ -49,16 +49,49 @@ export default function EVMap() {
     return computeDatasetSummary(data, selectedBrand || undefined);
   }, [data, selectedBrand, summary]);
 
+  const countryOptions = useMemo(() => {
+    if (!countries) {
+      return [];
+    }
+
+    return countries.features
+      .flatMap((feature) => {
+        const properties = feature.properties;
+        const isoCode =
+          typeof properties?.ISO_A3 === "string" ? properties.ISO_A3 : null;
+
+        if (!isoCode || isoCode === "-99") {
+          return [];
+        }
+
+        const countryName =
+          typeof properties?.ADMIN === "string"
+            ? properties.ADMIN
+            : typeof properties?.NAME === "string"
+              ? properties.NAME
+              : isoCode;
+
+        return [{ isoCode, countryName }];
+      })
+      .sort((a, b) => a.countryName.localeCompare(b.countryName));
+  }, [countries]);
+
   const selectedCountryDetails = useMemo(() => {
     if (!data || !selectedCountry) {
       return null;
     }
 
-    return getCountryPresenceDetails(
-      data,
-      selectedCountry.isoCode,
-      selectedBrand || undefined,
-      selectedCountry.countryName,
+    return (
+      getCountryPresenceDetails(
+        data,
+        selectedCountry.isoCode,
+        selectedBrand || undefined,
+        selectedCountry.countryName,
+      ) ?? {
+        isoCode: selectedCountry.isoCode,
+        countryName: selectedCountry.countryName ?? selectedCountry.isoCode,
+        brands: [],
+      }
     );
   }, [data, selectedBrand, selectedCountry]);
 
@@ -150,6 +183,42 @@ export default function EVMap() {
               ))}
             </select>
           </div>
+          <div className="mt-3">
+            <label
+              htmlFor="country-filter"
+              className="block text-xs font-medium uppercase tracking-wide text-gray-500"
+            >
+              Country lookup
+            </label>
+            <select
+              id="country-filter"
+              className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
+              value={selectedCountry?.isoCode ?? ""}
+              onChange={(event) => {
+                const isoCode = event.target.value;
+
+                if (!isoCode) {
+                  setSelectedCountry(null);
+                  return;
+                }
+
+                const option = countryOptions.find(
+                  (country) => country.isoCode === isoCode,
+                );
+                setSelectedCountry({
+                  isoCode,
+                  countryName: option?.countryName ?? isoCode,
+                });
+              }}
+            >
+              <option value="">Select a country</option>
+              {countryOptions.map((country) => (
+                <option key={country.isoCode} value={country.isoCode}>
+                  {country.countryName}
+                </option>
+              ))}
+            </select>
+          </div>
           <dl className="mt-2 space-y-1 text-sm text-gray-600">
             <div className="flex items-center justify-between gap-4">
               <dt>Showing</dt>
@@ -201,37 +270,44 @@ export default function EVMap() {
           </div>
 
           <ul className="mt-3 space-y-3">
-            {selectedCountryDetails.brands.map((brand) => (
-              <li
-                key={brand.brandName}
-                className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <p className="text-sm font-medium text-gray-800">
-                    {brand.brandName}
-                  </p>
-                  {brand.uncertain ? (
-                    <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">
-                      Uncertain
-                    </span>
-                  ) : null}
-                </div>
-                <ul className="mt-2 space-y-1 text-xs text-blue-700">
-                  {brand.sources.map((source) => (
-                    <li key={source}>
-                      <a
-                        href={source}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="break-all underline underline-offset-2"
-                      >
-                        {source}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+            {selectedCountryDetails.brands.length === 0 ? (
+              <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
+                No tracked official brand presence for this country in the current
+                view.
               </li>
-            ))}
+            ) : (
+              selectedCountryDetails.brands.map((brand) => (
+                <li
+                  key={brand.brandName}
+                  className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="text-sm font-medium text-gray-800">
+                      {brand.brandName}
+                    </p>
+                    {brand.uncertain ? (
+                      <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">
+                        Uncertain
+                      </span>
+                    ) : null}
+                  </div>
+                  <ul className="mt-2 space-y-1 text-xs text-blue-700">
+                    {brand.sources.map((source) => (
+                      <li key={source}>
+                        <a
+                          href={source}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="break-all underline underline-offset-2"
+                        >
+                          {source}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))
+            )}
           </ul>
         </aside>
       ) : null}

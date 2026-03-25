@@ -24,6 +24,16 @@ const mockMap = vi.fn(
       >
         Select Norway
       </button>
+      <button
+        type="button"
+        onClick={() =>
+          onClick?.({
+            features: [{ properties: { ISO_A3: "SWE", ADMIN: "Sweden" } }],
+          })
+        }
+      >
+        Select Sweden
+      </button>
       {children}
     </div>
   ),
@@ -81,7 +91,10 @@ const mockData: EVPresenceData = {
 
 const mockGeoJson = {
   type: "FeatureCollection",
-  features: [],
+  features: [
+    { properties: { ISO_A3: "NOR", ADMIN: "Norway" } },
+    { properties: { ISO_A3: "SWE", ADMIN: "Sweden" } },
+  ],
 };
 
 describe("EVMap", () => {
@@ -108,6 +121,7 @@ describe("EVMap", () => {
 
     expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
     expect(screen.getByLabelText("Brand filter")).toBeInTheDocument();
+    expect(screen.getByLabelText("Country lookup")).toBeInTheDocument();
     expect(screen.getByText("Showing")).toBeInTheDocument();
     expect(screen.getByDisplayValue("All brands")).toBeInTheDocument();
     expect(screen.getByText("Brands tracked")).toBeInTheDocument();
@@ -127,12 +141,29 @@ describe("EVMap", () => {
 
     fireEvent.click(screen.getByText("Select Norway"));
 
-    const detailsPanel = screen.getByText("Norway").closest("aside");
+    const detailsPanel = screen.getByRole("heading", { name: "Norway" }).closest(
+      "aside",
+    );
     expect(detailsPanel).not.toBeNull();
     expect(within(detailsPanel!).getByText("NOR · 1 brand")).toBeInTheDocument();
     expect(within(detailsPanel!).getByText("XPeng")).toBeInTheDocument();
     expect(
       within(detailsPanel!).getByRole("link", { name: "https://www.xpeng.com/no" }),
     ).toHaveAttribute("href", "https://www.xpeng.com/no");
+
+    fireEvent.change(screen.getByLabelText("Country lookup"), {
+      target: { value: "SWE" },
+    });
+
+    const emptyDetailsPanel = screen.getByRole("heading", { name: "Sweden" }).closest(
+      "aside",
+    );
+    expect(emptyDetailsPanel).not.toBeNull();
+    expect(within(emptyDetailsPanel!).getByText("SWE · 0 brands")).toBeInTheDocument();
+    expect(
+      within(emptyDetailsPanel!).getByText(
+        "No tracked official brand presence for this country in the current view.",
+      ),
+    ).toBeInTheDocument();
   });
 });
