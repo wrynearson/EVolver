@@ -210,3 +210,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-25
 **Did**: Added a country lookup control and explicit empty-state country details so users can inspect any country, even when the current brand filter has no tracked official presence there.
 **Result**: pass
+
+## 2026-03-25
+**Did**: Added a brand-footprint panel for the active brand filter so users can browse that brand's confirmed markets, open official source links, and jump straight into country details.
+**Result**: pass

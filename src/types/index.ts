@@ -19,6 +19,14 @@ export interface CountryPresenceDetails {
   brands: CountryPresenceBrand[];
 }
 
+export interface BrandPresenceCountry {
+  isoCode: string;
+  countryName: string;
+  source: string | null;
+  sources: string[];
+  uncertain: boolean;
+}
+
 export interface BrandData {
   website: string;
   countries: Record<string, CountryEntry>;

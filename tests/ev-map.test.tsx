@@ -138,8 +138,21 @@ describe("EVMap", () => {
     expect(screen.getByDisplayValue("XPeng")).toBeInTheDocument();
     const xpengRow = screen.getByText("Countries in view").closest("div");
     expect(xpengRow).toHaveTextContent("1");
+    const footprintPanel = screen
+      .getByRole("heading", { name: "Brand footprint" })
+      .closest("aside");
+    expect(footprintPanel).not.toBeNull();
+    expect(within(footprintPanel!).getByText("XPeng · 1 market")).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).getByRole("button", { name: /Norway/i }),
+    ).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).getByRole("link", {
+        name: "Open official source for Norway",
+      }),
+    ).toHaveAttribute("href", "https://www.xpeng.com/no");
 
-    fireEvent.click(screen.getByText("Select Norway"));
+    fireEvent.click(within(footprintPanel!).getByRole("button", { name: /Norway/i }));
 
     const detailsPanel = screen.getByRole("heading", { name: "Norway" }).closest(
       "aside",
@@ -165,5 +178,9 @@ describe("EVMap", () => {
         "No tracked official brand presence for this country in the current view.",
       ),
     ).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Clear" }));
+    expect(screen.getByDisplayValue("All brands")).toBeInTheDocument();
+    expect(screen.queryByText("Brand footprint")).not.toBeInTheDocument();
   });
 });

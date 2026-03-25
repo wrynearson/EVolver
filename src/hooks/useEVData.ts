@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import type { CountryPresenceDetails, EVPresenceData } from "../types";
+import type {
+  BrandPresenceCountry,
+  CountryPresenceDetails,
+  EVPresenceData,
+} from "../types";
 
 export interface EVDataSummary {
   visibleBrandLabel: string;
@@ -125,4 +129,28 @@ export function getCountryPresenceDetails(
     countryName,
     brands: visibleBrands.sort((a, b) => a.brandName.localeCompare(b.brandName)),
   };
+}
+
+export function getBrandPresenceCountries(
+  data: EVPresenceData,
+  brandName: string,
+): BrandPresenceCountry[] {
+  const brand = data.brands[brandName];
+
+  if (!brand) {
+    return [];
+  }
+
+  return Object.entries(brand.countries)
+    .filter(([, entry]) => entry.present)
+    .map(([isoCode, entry]) => ({
+      isoCode,
+      countryName: entry.name || isoCode,
+      source: entry.source,
+      sources: Array.from(
+        new Set(entry.sources ?? (entry.source ? [entry.source] : [])),
+      ),
+      uncertain: entry.uncertain,
+    }))
+    .sort((a, b) => a.countryName.localeCompare(b.countryName));
 }

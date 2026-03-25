@@ -4,6 +4,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import {
   computeCountryBrandCounts,
   computeDatasetSummary,
+  getBrandPresenceCountries,
   getCountryPresenceDetails,
   useEVData,
 } from "../hooks/useEVData";
@@ -94,6 +95,14 @@ export default function EVMap() {
       }
     );
   }, [data, selectedBrand, selectedCountry]);
+
+  const selectedBrandPresence = useMemo(() => {
+    if (!data || !selectedBrand) {
+      return [];
+    }
+
+    return getBrandPresenceCountries(data, selectedBrand);
+  }, [data, selectedBrand]);
 
   useEffect(() => {
     fetch(import.meta.env.BASE_URL + "data/ne_110m_countries.geojson")
@@ -308,6 +317,74 @@ export default function EVMap() {
                 </li>
               ))
             )}
+          </ul>
+        </aside>
+      ) : null}
+
+      {selectedBrand ? (
+        <aside className="absolute right-6 bottom-6 max-h-80 w-80 overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h2 className="text-sm font-semibold text-gray-800">
+                Brand footprint
+              </h2>
+              <p className="text-xs text-gray-500">
+                {selectedBrand} · {selectedBrandPresence.length}{" "}
+                {selectedBrandPresence.length === 1 ? "market" : "markets"}
+              </p>
+            </div>
+            <button
+              type="button"
+              className="text-sm text-gray-500 hover:text-gray-700"
+              onClick={() => setSelectedBrand("")}
+            >
+              Clear
+            </button>
+          </div>
+
+          <ul className="mt-3 max-h-60 space-y-3 overflow-y-auto pr-1">
+            {selectedBrandPresence.map((country) => (
+              <li
+                key={country.isoCode}
+                className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <button
+                    type="button"
+                    className="text-left"
+                    onClick={() =>
+                      setSelectedCountry({
+                        isoCode: country.isoCode,
+                        countryName: country.countryName,
+                      })
+                    }
+                  >
+                    <p className="text-sm font-medium text-gray-800">
+                      {country.countryName}
+                    </p>
+                    <p className="text-xs uppercase tracking-wide text-gray-500">
+                      {country.isoCode}
+                    </p>
+                  </button>
+                  {country.uncertain ? (
+                    <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">
+                      Uncertain
+                    </span>
+                  ) : null}
+                </div>
+                {country.source ? (
+                  <a
+                    href={country.source}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-2 block text-xs text-blue-700 underline underline-offset-2"
+                    aria-label={`Open official source for ${country.countryName}`}
+                  >
+                    Official source
+                  </a>
+                ) : null}
+              </li>
+            ))}
           </ul>
         </aside>
       ) : null}

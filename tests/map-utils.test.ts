@@ -3,6 +3,7 @@ import { buildColorExpression } from "../src/lib/mapUtils";
 import {
   computeCountryBrandCounts,
   computeDatasetSummary,
+  getBrandPresenceCountries,
   getCountryPresenceDetails,
 } from "../src/hooks/useEVData";
 import type { EVPresenceData } from "../src/types";
@@ -327,5 +328,74 @@ describe("getCountryPresenceDetails", () => {
     };
 
     expect(getCountryPresenceDetails(data, "SWE", "BrandA", "Sweden")).toBeNull();
+  });
+});
+
+describe("getBrandPresenceCountries", () => {
+  it("returns a sorted list of present countries for a brand with deduplicated sources", () => {
+    const data: EVPresenceData = {
+      metadata: {
+        last_updated: "2026-03-25",
+        definition: "test",
+        schema_version: 2,
+      },
+      brands: {
+        BrandA: {
+          website: "https://a.com",
+          countries: {
+            SWE: {
+              name: "Sweden",
+              present: true,
+              source: "https://a.com/se",
+              sources: ["https://a.com/se", "https://a.com/se"],
+              uncertain: true,
+            },
+            NOR: {
+              name: "Norway",
+              present: true,
+              source: "https://a.com/no",
+              sources: ["https://a.com/no", "https://a.com/dealers/no"],
+              uncertain: false,
+            },
+            DEU: {
+              name: "Germany",
+              present: false,
+              source: null,
+              uncertain: true,
+            },
+          },
+        },
+      },
+    };
+
+    expect(getBrandPresenceCountries(data, "BrandA")).toEqual([
+      {
+        isoCode: "NOR",
+        countryName: "Norway",
+        source: "https://a.com/no",
+        sources: ["https://a.com/no", "https://a.com/dealers/no"],
+        uncertain: false,
+      },
+      {
+        isoCode: "SWE",
+        countryName: "Sweden",
+        source: "https://a.com/se",
+        sources: ["https://a.com/se"],
+        uncertain: true,
+      },
+    ]);
+  });
+
+  it("returns an empty list for an unknown brand", () => {
+    const data: EVPresenceData = {
+      metadata: {
+        last_updated: "2026-03-25",
+        definition: "test",
+        schema_version: 2,
+      },
+      brands: {},
+    };
+
+    expect(getBrandPresenceCountries(data, "MissingBrand")).toEqual([]);
   });
 });
