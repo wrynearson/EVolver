@@ -62,3 +62,11 @@ Never replace a stale TODO with a reworded version of the same TODO.
 - Do NOT bulk-scrape every brand site every run. Focus on uncertain entries and new discoveries.
 - Try a simple fetch first. If the fetch succeeds but returns generic or non-localized content (e.g., global homepage language, no market-specific products or dealers visible), treat this as **inconclusive** and retry with Playwright — the site may use JS-rendered region selectors, locale redirects, or non-standard URL schemes that are invisible to a plain HTTP fetch.
 - Verify as many data points as you can in one session. Keep going until you've exhausted the current task or hit genuine uncertainty or test failures.
+- **Skip previously inconclusive markets**: If the JOURNAL.md shows that a market was already checked and found inconclusive (shell-only, empty template, 404, or no consumer flow) on 2 or more prior sessions, do NOT re-check it this session unless you have independent evidence that something has changed (e.g., a new locale URL appeared in the brand's sitemap, or the backlog note explicitly says re-check after a specific date). Log "previously inconclusive — skipping" in the journal and move on to higher-impact work.
+
+## Monitoring vs. actionable backlog
+
+When deferring a market to BACKLOG.md because it is a known shell or pre-launch locale with no live consumer flow yet, prefix the entry with `[monitoring]`. When picking tasks from BACKLOG.md:
+- Treat `[monitoring]` items as **lowest priority** — only act on them if all other backlog work is exhausted, or if more than 2 weeks have passed since the last check recorded in JOURNAL.md.
+- When you do check a `[monitoring]` item and still find no change, update the backlog entry's last-checked date and move on. Do not write a journal TODO that simply restates the monitoring need.
+- Promote a `[monitoring]` item to a normal backlog task only when you find concrete evidence that the market signals have improved (e.g., a real localized homepage, live dealer listings, or a consumer test-drive flow).
