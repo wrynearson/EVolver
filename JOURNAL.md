@@ -195,3 +195,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-25
 **Did**: Added Leapmotor Mexico after confirming Leapmotor's live global market selector hands Mexico to `leapmotor.com.mx` and the official local site exposes a dedicated Spanish consumer launch page for Mexico, while updating the backlog to deprioritize Kuwait alongside the still shell-only Gulf locales.
 **Result**: pass
+## 2026-03-25
+**Did**: Re-checked Leapmotor North Macedonia and confirmed its official locale still falls back to a 404 root plus empty `page?key=` shells, then added a tested brand filter so the map can show a single brand's confirmed footprint at a time.
+**Result**: pass
+**TODO**: Re-check Leapmotor's Gulf locales only after their public locale roots and dealer or support flows go live.

@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Map, { Source, Layer } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { useEVData } from "../hooks/useEVData";
+import {
+  computeCountryBrandCounts,
+  computeDatasetSummary,
+  useEVData,
+} from "../hooks/useEVData";
 import { buildColorExpression, LEGEND_ITEMS } from "../lib/mapUtils";
 import type { FeatureCollection } from "geojson";
 
@@ -15,8 +19,30 @@ import type { FeatureCollection } from "geojson";
  * (popups, sidebar, brand selector, etc.) over its daily evolution runs.
  */
 export default function EVMap() {
-  const { countryBrandCount, summary, loading } = useEVData();
+  const { data, countryBrandCount, summary, loading } = useEVData();
   const [countries, setCountries] = useState<FeatureCollection | null>(null);
+  const [selectedBrand, setSelectedBrand] = useState<string>("");
+
+  const brandOptions = useMemo(
+    () => (data ? Object.keys(data.brands).sort((a, b) => a.localeCompare(b)) : []),
+    [data],
+  );
+
+  const visibleCountryBrandCount = useMemo(() => {
+    if (!data) {
+      return countryBrandCount;
+    }
+
+    return computeCountryBrandCounts(data, selectedBrand || undefined);
+  }, [countryBrandCount, data, selectedBrand]);
+
+  const visibleSummary = useMemo(() => {
+    if (!data) {
+      return summary;
+    }
+
+    return computeDatasetSummary(data, selectedBrand || undefined);
+  }, [data, selectedBrand, summary]);
 
   useEffect(() => {
     fetch(import.meta.env.BASE_URL + "data/ne_110m_countries.geojson")
@@ -36,7 +62,7 @@ export default function EVMap() {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const fillColor = buildColorExpression(countryBrandCount) as any;
+  const fillColor = buildColorExpression(visibleCountryBrandCount) as any;
 
   return (
     <div className="w-screen h-screen relative">
@@ -59,26 +85,55 @@ export default function EVMap() {
         </Source>
       </Map>
 
-      {summary ? (
+      {visibleSummary ? (
         <div className="absolute top-6 left-6 bg-white/90 rounded-lg shadow-md px-4 py-3 max-w-xs">
           <h2 className="text-sm font-semibold text-gray-800">
             Dataset summary
           </h2>
+          <div className="mt-3">
+            <label
+              htmlFor="brand-filter"
+              className="block text-xs font-medium uppercase tracking-wide text-gray-500"
+            >
+              Brand filter
+            </label>
+            <select
+              id="brand-filter"
+              className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
+              value={selectedBrand}
+              onChange={(event) => setSelectedBrand(event.target.value)}
+            >
+              <option value="">All brands</option>
+              {brandOptions.map((brand) => (
+                <option key={brand} value={brand}>
+                  {brand}
+                </option>
+              ))}
+            </select>
+          </div>
           <dl className="mt-2 space-y-1 text-sm text-gray-600">
             <div className="flex items-center justify-between gap-4">
-              <dt>Brands tracked</dt>
-              <dd className="font-medium text-gray-800">{summary.brandCount}</dd>
+              <dt>Showing</dt>
+              <dd className="font-medium text-gray-800">
+                {visibleSummary.visibleBrandLabel}
+              </dd>
             </div>
             <div className="flex items-center justify-between gap-4">
-              <dt>Countries with confirmed presence</dt>
+              <dt>Brands tracked</dt>
               <dd className="font-medium text-gray-800">
-                {summary.confirmedCountryCount}
+                {visibleSummary.brandCount}
+              </dd>
+            </div>
+            <div className="flex items-center justify-between gap-4">
+              <dt>Countries in view</dt>
+              <dd className="font-medium text-gray-800">
+                {visibleSummary.visibleCountryCount}
               </dd>
             </div>
             <div className="flex items-center justify-between gap-4">
               <dt>Last updated</dt>
               <dd className="font-medium text-gray-800">
-                {summary.lastUpdated}
+                {visibleSummary.lastUpdated}
               </dd>
             </div>
           </dl>

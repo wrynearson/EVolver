@@ -5,4 +5,4 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 Remove an item when it is fully complete.
 
 ---
-- Expand Leapmotor beyond the current China + Australia/Mexico/United Arab Emirates/Malaysia/Singapore/Thailand/Jordan/Morocco/Mauritius/United Kingdom/Germany/France/Spain/Italy/Netherlands/Austria/Belgium/Bulgaria/Croatia/Czech Republic/Denmark/Greece/Hungary/Iceland/Ireland/Luxembourg/Malta/New Zealand/Poland/Portugal/Romania/Serbia/Slovakia/Slovenia/South Africa/Switzerland slice, prioritizing the next sovereign locales from Leapmotor's official locale manifest whose localized market and dealer or support surfaces already appear to be live; Bahrain, Kuwait, Oman, Qatar, and Saudi Arabia remain deprioritized until their public locale roots and dealer routes are live.
+- Monitor Leapmotor's remaining Gulf locales (Bahrain, Kuwait, Oman, Qatar, and Saudi Arabia) and only add them once Leapmotor's public locale roots plus dealer or support flows go live; North Macedonia stays excluded because its locale root still returns 404 while its `page?key=` shells render empty in-browser.

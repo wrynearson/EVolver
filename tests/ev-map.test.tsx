@@ -1,5 +1,5 @@
 import React, { type ReactNode } from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { EVPresenceData } from "../src/types";
 
@@ -75,11 +75,22 @@ describe("EVMap", () => {
     render(<EVMap />);
 
     expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(screen.getByLabelText("Brand filter")).toBeInTheDocument();
+    expect(screen.getByText("Showing")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("All brands")).toBeInTheDocument();
     expect(screen.getByText("Brands tracked")).toBeInTheDocument();
-    expect(screen.getAllByText("2")).toHaveLength(2);
-    expect(
-      screen.getByText("Countries with confirmed presence"),
-    ).toBeInTheDocument();
+    expect(screen.getByText("Countries in view")).toBeInTheDocument();
     expect(screen.getByText("2026-03-13")).toBeInTheDocument();
+
+    const allBrandsRow = screen.getByText("Countries in view").closest("div");
+    expect(allBrandsRow).toHaveTextContent("2");
+
+    fireEvent.change(screen.getByLabelText("Brand filter"), {
+      target: { value: "BYD" },
+    });
+
+    expect(screen.getByDisplayValue("BYD")).toBeInTheDocument();
+    const bydRow = screen.getByText("Countries in view").closest("div");
+    expect(bydRow).toHaveTextContent("1");
   });
 });

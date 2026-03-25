@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import type { EVPresenceData } from "../types";
 
 export interface EVDataSummary {
+  visibleBrandLabel: string;
   brandCount: number;
-  confirmedCountryCount: number;
+  visibleCountryCount: number;
   lastUpdated: string;
 }
 
@@ -43,10 +44,14 @@ export function useEVData() {
  */
 export function computeCountryBrandCounts(
   data: EVPresenceData,
+  brandName?: string,
 ): Record<string, number> {
   const counts: Record<string, number> = {};
+  const brands = brandName
+    ? Object.entries(data.brands).filter(([name]) => name === brandName)
+    : Object.entries(data.brands);
 
-  for (const brand of Object.values(data.brands)) {
+  for (const [, brand] of brands) {
     for (const [isoCode, entry] of Object.entries(brand.countries)) {
       if (entry.present) {
         counts[isoCode] = (counts[isoCode] || 0) + 1;
@@ -57,10 +62,16 @@ export function computeCountryBrandCounts(
   return counts;
 }
 
-export function computeDatasetSummary(data: EVPresenceData): EVDataSummary {
+export function computeDatasetSummary(
+  data: EVPresenceData,
+  brandName?: string,
+): EVDataSummary {
   const confirmedCountries = new Set<string>();
+  const brands = brandName
+    ? Object.entries(data.brands).filter(([name]) => name === brandName)
+    : Object.entries(data.brands);
 
-  for (const brand of Object.values(data.brands)) {
+  for (const [, brand] of brands) {
     for (const [isoCode, entry] of Object.entries(brand.countries)) {
       if (entry.present && !entry.uncertain) {
         confirmedCountries.add(isoCode);
@@ -69,8 +80,9 @@ export function computeDatasetSummary(data: EVPresenceData): EVDataSummary {
   }
 
   return {
+    visibleBrandLabel: brandName ?? "All brands",
     brandCount: Object.keys(data.brands).length,
-    confirmedCountryCount: confirmedCountries.size,
+    visibleCountryCount: confirmedCountries.size,
     lastUpdated: data.metadata.last_updated,
   };
 }

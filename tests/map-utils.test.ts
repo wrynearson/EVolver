@@ -107,10 +107,46 @@ describe("computeCountryBrandCounts", () => {
     const counts = computeCountryBrandCounts(data);
     expect(Object.keys(counts)).toHaveLength(0);
   });
+
+  it("filters counts to a single brand when requested", () => {
+    const data: EVPresenceData = {
+      metadata: {
+        last_updated: "2026-01-01",
+        definition: "test",
+        schema_version: 2,
+      },
+      brands: {
+        BrandA: {
+          website: "https://a.com",
+          countries: {
+            NOR: {
+              name: "Norway",
+              present: true,
+              source: "https://a.com/no",
+              uncertain: false,
+            },
+          },
+        },
+        BrandB: {
+          website: "https://b.com",
+          countries: {
+            SWE: {
+              name: "Sweden",
+              present: true,
+              source: "https://b.com/se",
+              uncertain: false,
+            },
+          },
+        },
+      },
+    };
+
+    expect(computeCountryBrandCounts(data, "BrandB")).toEqual({ SWE: 1 });
+  });
 });
 
 describe("computeDatasetSummary", () => {
-  it("returns tracked brand count, confirmed country coverage, and last update", () => {
+  it("returns tracked brand count, visible country coverage, and last update", () => {
     const data: EVPresenceData = {
       metadata: {
         last_updated: "2026-03-13",
@@ -156,8 +192,56 @@ describe("computeDatasetSummary", () => {
     };
 
     expect(computeDatasetSummary(data)).toEqual({
+      visibleBrandLabel: "All brands",
       brandCount: 2,
-      confirmedCountryCount: 2,
+      visibleCountryCount: 2,
+      lastUpdated: "2026-03-13",
+    });
+  });
+
+  it("summarizes a single brand scope when filtered", () => {
+    const data: EVPresenceData = {
+      metadata: {
+        last_updated: "2026-03-13",
+        definition: "test",
+        schema_version: 2,
+      },
+      brands: {
+        BrandA: {
+          website: "https://a.com",
+          countries: {
+            NOR: {
+              name: "Norway",
+              present: true,
+              source: "https://a.com/no",
+              uncertain: false,
+            },
+            DEU: {
+              name: "Germany",
+              present: true,
+              source: "https://a.com/de",
+              uncertain: true,
+            },
+          },
+        },
+        BrandB: {
+          website: "https://b.com",
+          countries: {
+            SWE: {
+              name: "Sweden",
+              present: true,
+              source: "https://b.com/se",
+              uncertain: false,
+            },
+          },
+        },
+      },
+    };
+
+    expect(computeDatasetSummary(data, "BrandA")).toEqual({
+      visibleBrandLabel: "BrandA",
+      brandCount: 2,
+      visibleCountryCount: 1,
       lastUpdated: "2026-03-13",
     });
   });
