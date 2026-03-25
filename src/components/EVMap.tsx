@@ -87,6 +87,7 @@ export default function EVMap() {
   const [selectedBrand, setSelectedBrand] = useState<string>(
     () => getInitialSelectionState().selectedBrand,
   );
+  const [hoveredCountry, setHoveredCountry] = useState<SelectedCountry | null>(null);
   const [selectedCountry, setSelectedCountry] = useState<SelectedCountry | null>(
     () => getInitialSelectionState().selectedCountry,
   );
@@ -143,23 +144,46 @@ export default function EVMap() {
   }, [countries]);
 
   const resolvedSelectedCountry = useMemo(() => {
-    if (!selectedCountry) {
+    const resolveCountrySelection = (country: SelectedCountry | null) => {
+      if (!country) {
+        return null;
+      }
+
+      const matchingCountry = countryOptions.find(
+        (option) => option.isoCode === country.isoCode,
+      );
+
+      if (!matchingCountry) {
+        return country;
+      }
+
+      return {
+        isoCode: matchingCountry.isoCode,
+        countryName: matchingCountry.countryName,
+      };
+    };
+
+    return resolveCountrySelection(selectedCountry);
+  }, [countryOptions, selectedCountry]);
+
+  const resolvedHoveredCountry = useMemo(() => {
+    if (!hoveredCountry) {
       return null;
     }
 
     const matchingCountry = countryOptions.find(
-      (country) => country.isoCode === selectedCountry.isoCode,
+      (country) => country.isoCode === hoveredCountry.isoCode,
     );
 
     if (!matchingCountry) {
-      return selectedCountry;
+      return hoveredCountry;
     }
 
     return {
       isoCode: matchingCountry.isoCode,
       countryName: matchingCountry.countryName,
     };
-  }, [countryOptions, selectedCountry]);
+  }, [countryOptions, hoveredCountry]);
 
   const selectedCountryDetails = useMemo(() => {
     if (!data || !resolvedSelectedCountry) {
@@ -180,6 +204,25 @@ export default function EVMap() {
       }
     );
   }, [activeSelectedBrand, data, resolvedSelectedCountry]);
+
+  const hoveredCountryDetails = useMemo(() => {
+    if (!data || !resolvedHoveredCountry) {
+      return null;
+    }
+
+    return (
+      getCountryPresenceDetails(
+        data,
+        resolvedHoveredCountry.isoCode,
+        activeSelectedBrand || undefined,
+        resolvedHoveredCountry.countryName,
+      ) ?? {
+        isoCode: resolvedHoveredCountry.isoCode,
+        countryName: resolvedHoveredCountry.countryName ?? resolvedHoveredCountry.isoCode,
+        brands: [],
+      }
+    );
+  }, [activeSelectedBrand, data, resolvedHoveredCountry]);
 
   const selectedBrandPresence = useMemo(() => {
     if (!data || !activeSelectedBrand) {
@@ -253,6 +296,27 @@ export default function EVMap() {
         style={{ width: "100%", height: "100%" }}
         mapStyle="https://tiles.openfreemap.org/styles/positron"
         interactiveLayerIds={["country-fill"]}
+        onMouseMove={(event) => {
+          const hoveredFeature = event.features?.[0];
+          const properties = hoveredFeature?.properties;
+          const isoCode =
+            typeof properties?.ISO_A3 === "string" ? properties.ISO_A3 : null;
+
+          if (!isoCode || isoCode === "-99") {
+            setHoveredCountry(null);
+            return;
+          }
+
+          const countryName =
+            typeof properties?.ADMIN === "string"
+              ? properties.ADMIN
+              : typeof properties?.NAME === "string"
+                ? properties.NAME
+                : undefined;
+
+          setHoveredCountry({ isoCode, countryName });
+        }}
+        onMouseLeave={() => setHoveredCountry(null)}
         onClick={(event) => {
           const clickedFeature = event.features?.[0];
           const properties = clickedFeature?.properties;
@@ -399,6 +463,32 @@ export default function EVMap() {
               </dd>
             </div>
           </dl>
+        </div>
+      ) : null}
+
+      {hoveredCountryDetails ? (
+        <div className="pointer-events-none absolute top-6 left-1/2 z-10 w-full max-w-xs -translate-x-1/2 px-4">
+          <div className="rounded-lg bg-white/95 px-4 py-3 shadow-md">
+            <h2 className="text-sm font-semibold text-gray-800">Map preview</h2>
+            <div className="mt-1 flex items-start justify-between gap-3">
+              <div>
+                <p className="text-sm font-medium text-gray-700">
+                  {hoveredCountryDetails.countryName}
+                </p>
+                <p className="text-xs uppercase tracking-wide text-gray-500">
+                  {hoveredCountryDetails.isoCode} · {hoveredCountryDetails.brands.length}{" "}
+                  {hoveredCountryDetails.brands.length === 1 ? "brand" : "brands"}
+                </p>
+              </div>
+            </div>
+            <p className="mt-2 text-xs text-gray-600">
+              {hoveredCountryDetails.brands.length > 0
+                ? hoveredCountryDetails.brands
+                    .map((brand) => brand.brandName)
+                    .join(", ")
+                : "No tracked official brand presence for this country in the current view."}
+            </p>
+          </div>
         </div>
       ) : null}
 

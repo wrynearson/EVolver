@@ -7,13 +7,42 @@ const mockMap = vi.fn(
   ({
     children,
     onClick,
+    onMouseMove,
+    onMouseLeave,
   }: {
     children?: ReactNode;
     onClick?: (event: {
       features?: Array<{ properties?: Record<string, unknown> }>;
     }) => void;
+    onMouseMove?: (event: {
+      features?: Array<{ properties?: Record<string, unknown> }>;
+    }) => void;
+    onMouseLeave?: () => void;
   }) => (
     <div data-testid="map">
+      <button
+        type="button"
+        onClick={() =>
+          onMouseMove?.({
+            features: [{ properties: { ISO_A3: "NOR", ADMIN: "Norway" } }],
+          })
+        }
+      >
+        Hover Norway
+      </button>
+      <button
+        type="button"
+        onClick={() =>
+          onMouseMove?.({
+            features: [{ properties: { ISO_A3: "SWE", ADMIN: "Sweden" } }],
+          })
+        }
+      >
+        Hover Sweden
+      </button>
+      <button type="button" onClick={() => onMouseLeave?.()}>
+        Leave Hover
+      </button>
       <button
         type="button"
         onClick={() =>
@@ -164,6 +193,15 @@ describe("EVMap", () => {
       }),
     ).toHaveAttribute("href", "https://www.xpeng.com/no");
 
+    fireEvent.click(screen.getByRole("button", { name: "Hover Norway" }));
+    const previewPanel = screen.getByRole("heading", { name: "Map preview" }).closest(
+      "div",
+    );
+    expect(previewPanel).not.toBeNull();
+    expect(within(previewPanel!).getByText("Norway")).toBeInTheDocument();
+    expect(within(previewPanel!).getByText("NOR · 1 brand")).toBeInTheDocument();
+    expect(within(previewPanel!).getByText("XPeng")).toBeInTheDocument();
+
     fireEvent.click(within(footprintPanel!).getByRole("button", { name: /Norway/i }));
 
     const detailsPanel = screen.getByRole("heading", { name: "Norway" }).closest(
@@ -200,6 +238,9 @@ describe("EVMap", () => {
       ),
     ).toBeInTheDocument();
     expect(window.location.search).toBe("?brand=XPeng&country=SWE");
+
+    fireEvent.click(screen.getByRole("button", { name: "Leave Hover" }));
+    expect(screen.queryByRole("heading", { name: "Map preview" })).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "Clear" }));
     expect(screen.getByDisplayValue("All brands")).toBeInTheDocument();

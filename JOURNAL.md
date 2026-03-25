@@ -218,3 +218,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-25
 **Did**: Added shareable map state so brand and country selections persist in the URL and users can copy a direct link to the current view.
 **Result**: pass
+
+## 2026-03-25
+**Did**: Marked the remaining Leapmotor Gulf follow-up as `[monitoring]` after the same-day inconclusive checks, then added a hover preview panel so users can inspect a country's current filtered brand count before clicking.
+**Result**: pass
