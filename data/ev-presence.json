@@ -1149,6 +1149,16 @@
             "https://www.gwm.co.za/dealership"
           ],
           "uncertain": false
+        },
+        "LKA": {
+          "name": "Sri Lanka",
+          "present": true,
+          "source": "https://www.gwmsrilanka.lk/",
+          "sources": [
+            "https://www.gwmsrilanka.lk/",
+            "https://www.davidpierisautomobiles.com/"
+          ],
+          "uncertain": false
         }
       }
     }

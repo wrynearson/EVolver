@@ -239,3 +239,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added ORA South Africa after confirming the live national ORA 03 market page and official GWM South Africa dealer locator, and tightened the ORA backlog around markets that still lack a second distinct ORA-specific official surface.
 **Result**: pass
 **TODO**: Verify whether ORA Sri Lanka should count as official presence — the official distributor homepage names the ORA range, but the live site still lacks a second distinct ORA-specific page or brochure URL.
+
+## 2026-03-26
+**Did**: Added ORA Sri Lanka after confirming the official GWM Sri Lanka site explicitly markets the ORA range and David Pieris Automobiles' official corporate site links directly to that localized market site.
+**Result**: pass
