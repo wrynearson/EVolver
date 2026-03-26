@@ -243,3 +243,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-26
 **Did**: Added ORA Sri Lanka after confirming the official GWM Sri Lanka site explicitly markets the ORA range and David Pieris Automobiles' official corporate site links directly to that localized market site.
 **Result**: pass
+## 2026-03-26
+**Did**: Added ORA Thailand after confirming GWM Thailand's official localized site exposes live ORA 5 EV consumer pages, a working official ORA test-drive flow, and the national GWM Partner Stores locator.
+**Result**: pass
+**TODO**: Verify whether ORA Brazil should count as official presence — the current official `gwm.com.br` surfaces failed with certificate errors in both fetch and browser checks, so no trustworthy consumer or dealer evidence was captured today.

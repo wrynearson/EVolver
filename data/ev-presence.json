@@ -1159,6 +1159,17 @@
             "https://www.davidpierisautomobiles.com/"
           ],
           "uncertain": false
+        },
+        "THA": {
+          "name": "Thailand",
+          "present": true,
+          "source": "https://www.gwm.co.th/en",
+          "sources": [
+            "https://www.gwm.co.th/en",
+            "https://www.gwm.co.th/en/dealership",
+            "https://mall.gwm.co.th/testDrive?brandCode=4926649eecbe4915c318e4ff41ccf84b&audiCode=3c7b9604260481da1ee600a3645260e9143ea166f61bdffe951c4d6ca884d0ed"
+          ],
+          "uncertain": false
         }
       }
     }
