@@ -230,3 +230,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-26
 **Did**: Added an all-brands coverage panel so users can compare confirmed tracked markets per brand, jump into a brand filter, and open each brand's official website directly from the map.
 **Result**: pass
+
+## 2026-03-26
+**Did**: Added ORA as a tracked brand with 6 verified official markets (China, United Kingdom, Australia, New Zealand, Malaysia, and Nepal) using official model, dealer, and test-drive surfaces, and recorded further ORA expansion in the backlog.
+**Result**: pass

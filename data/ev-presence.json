@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-25",
+    "last_updated": "2026-03-26",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -1068,6 +1068,75 @@
           "sources": [
             "https://www.leapmotor.net/",
             "https://www.leapmotor.com.mx/"
+          ],
+          "uncertain": false
+        }
+      }
+    },
+    "ORA": {
+      "website": "https://www.oraev.com",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.oraev.com/",
+          "sources": [
+            "https://www.oraev.com/",
+            "https://www.oraev.com/dealer",
+            "https://www.oraev.com/testdriver.html"
+          ],
+          "uncertain": false
+        },
+        "GBR": {
+          "name": "United Kingdom",
+          "present": true,
+          "source": "https://gwmcars.co.uk/",
+          "sources": [
+            "https://gwmcars.co.uk/",
+            "https://gwmcars.co.uk/models/",
+            "https://gwmcars.co.uk/find-a-retailer/"
+          ],
+          "uncertain": false
+        },
+        "AUS": {
+          "name": "Australia",
+          "present": true,
+          "source": "https://www.gwmanz.com/au/models/hatchback/ora/",
+          "sources": [
+            "https://www.gwmanz.com/au/models/hatchback/ora/",
+            "https://www.gwmanz.com/au/dealer-locator/"
+          ],
+          "uncertain": false
+        },
+        "NZL": {
+          "name": "New Zealand",
+          "present": true,
+          "source": "https://www.gwmanz.com/nz/models/hatchback/ora/",
+          "sources": [
+            "https://www.gwmanz.com/nz/models/hatchback/ora/",
+            "https://www.gwmanz.com/nz/dealer-locator/"
+          ],
+          "uncertain": false
+        },
+        "MYS": {
+          "name": "Malaysia",
+          "present": true,
+          "source": "https://www.gwm.com.my/en/models/ora-good-cat",
+          "sources": [
+            "https://www.gwm.com.my/en/models/ora-good-cat",
+            "https://www.gwm.com.my/en/dealer",
+            "https://www.gwm.com.my/en/contact-us"
+          ],
+          "uncertain": false
+        },
+        "NPL": {
+          "name": "Nepal",
+          "present": true,
+          "source": "https://gwm.com.np/car/ora",
+          "sources": [
+            "https://gwm.com.np/car/ora",
+            "https://gwm.com.np/book-a-test-drive/ora",
+            "https://gwm.com.np/dealer"
           ],
           "uncertain": false
         }
