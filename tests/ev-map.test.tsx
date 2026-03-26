@@ -255,7 +255,25 @@ describe("EVMap", () => {
     fireEvent.click(screen.getByRole("button", { name: "Clear" }));
     expect(screen.getByDisplayValue("All brands")).toBeInTheDocument();
     expect(screen.queryByText("Brand footprint")).not.toBeInTheDocument();
-    expect(window.location.search).toBe("?country=SWE");
+    const coveragePanel = screen
+      .getByRole("heading", { name: "Brand coverage" })
+      .closest("aside");
+    expect(coveragePanel).not.toBeNull();
+    expect(
+      within(coveragePanel!).getByText(
+        "Compare confirmed official markets across tracked brands.",
+      ),
+    ).toBeInTheDocument();
+    expect(within(coveragePanel!).getByText("BYD")).toBeInTheDocument();
+    expect(within(coveragePanel!).getByText("2 confirmed markets")).toBeInTheDocument();
+    expect(
+      within(coveragePanel!).getByRole("link", {
+        name: "Open official website for BYD",
+      }),
+    ).toHaveAttribute("href", "https://www.byd.com");
+    fireEvent.click(within(coveragePanel!).getByRole("button", { name: /BYD/i }));
+    expect(screen.getByDisplayValue("BYD")).toBeInTheDocument();
+    expect(window.location.search).toBe("?country=SWE&brand=BYD");
   });
 
   it("drops invalid brand query params after loading", async () => {
@@ -275,6 +293,7 @@ describe("EVMap", () => {
 
     expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
     expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("All brands");
+    expect(screen.getByRole("heading", { name: "Brand coverage" })).toBeInTheDocument();
     expect(window.location.search).toBe("?country=NOR");
   });
 });

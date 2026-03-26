@@ -4,6 +4,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import {
   computeCountryBrandCounts,
   computeDatasetSummary,
+  getBrandCoverageSummaries,
   getBrandPresenceCountries,
   getCountryPresenceDetails,
   useEVData,
@@ -270,6 +271,14 @@ export default function EVMap() {
     }
 
     return getBrandPresenceCountries(data, activeSelectedBrand);
+  }, [activeSelectedBrand, data]);
+
+  const brandCoverageSummaries = useMemo(() => {
+    if (!data || activeSelectedBrand) {
+      return [];
+    }
+
+    return getBrandCoverageSummaries(data);
   }, [activeSelectedBrand, data]);
 
   const shareUrl = useMemo(
@@ -676,6 +685,52 @@ export default function EVMap() {
                     Official source
                   </a>
                 ) : null}
+              </li>
+            ))}
+          </ul>
+        </aside>
+      ) : brandCoverageSummaries.length > 0 ? (
+        <aside className="absolute right-6 bottom-6 max-h-80 w-80 overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md">
+          <div>
+            <h2 className="text-sm font-semibold text-gray-800">Brand coverage</h2>
+            <p className="text-xs text-gray-500">
+              Compare confirmed official markets across tracked brands.
+            </p>
+          </div>
+
+          <ul className="mt-3 max-h-60 space-y-3 overflow-y-auto pr-1">
+            {brandCoverageSummaries.map((brand) => (
+              <li
+                key={brand.brandName}
+                className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <button
+                    type="button"
+                    className="text-left"
+                    onClick={() => setSelectedBrand(brand.brandName)}
+                  >
+                    <p className="text-sm font-medium text-gray-800">
+                      {brand.brandName}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {brand.confirmedCountryCount} confirmed{" "}
+                      {brand.confirmedCountryCount === 1 ? "market" : "markets"}
+                      {brand.uncertainCountryCount > 0
+                        ? ` · ${brand.uncertainCountryCount} uncertain`
+                        : ""}
+                    </p>
+                  </button>
+                  <a
+                    href={brand.website}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-xs text-blue-700 underline underline-offset-2"
+                    aria-label={`Open official website for ${brand.brandName}`}
+                  >
+                    Website
+                  </a>
+                </div>
               </li>
             ))}
           </ul>

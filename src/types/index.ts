@@ -27,6 +27,13 @@ export interface BrandPresenceCountry {
   uncertain: boolean;
 }
 
+export interface BrandCoverageSummary {
+  brandName: string;
+  website: string;
+  confirmedCountryCount: number;
+  uncertainCountryCount: number;
+}
+
 export interface BrandData {
   website: string;
   countries: Record<string, CountryEntry>;

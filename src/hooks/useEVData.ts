@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import type {
+  BrandCoverageSummary,
   BrandPresenceCountry,
   CountryPresenceDetails,
   EVPresenceData,
@@ -153,4 +154,44 @@ export function getBrandPresenceCountries(
       uncertain: entry.uncertain,
     }))
     .sort((a, b) => a.countryName.localeCompare(b.countryName));
+}
+
+export function getBrandCoverageSummaries(
+  data: EVPresenceData,
+): BrandCoverageSummary[] {
+  return Object.entries(data.brands)
+    .map(([brandName, brand]) => {
+      let confirmedCountryCount = 0;
+      let uncertainCountryCount = 0;
+
+      for (const entry of Object.values(brand.countries)) {
+        if (!entry.present) {
+          continue;
+        }
+
+        if (entry.uncertain) {
+          uncertainCountryCount += 1;
+        } else {
+          confirmedCountryCount += 1;
+        }
+      }
+
+      return {
+        brandName,
+        website: brand.website,
+        confirmedCountryCount,
+        uncertainCountryCount,
+      };
+    })
+    .sort((a, b) => {
+      if (b.confirmedCountryCount !== a.confirmedCountryCount) {
+        return b.confirmedCountryCount - a.confirmedCountryCount;
+      }
+
+      if (a.uncertainCountryCount !== b.uncertainCountryCount) {
+        return a.uncertainCountryCount - b.uncertainCountryCount;
+      }
+
+      return a.brandName.localeCompare(b.brandName);
+    });
 }

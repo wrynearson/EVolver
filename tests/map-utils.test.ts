@@ -3,6 +3,7 @@ import { buildColorExpression } from "../src/lib/mapUtils";
 import {
   computeCountryBrandCounts,
   computeDatasetSummary,
+  getBrandCoverageSummaries,
   getBrandPresenceCountries,
   getCountryPresenceDetails,
 } from "../src/hooks/useEVData";
@@ -397,5 +398,85 @@ describe("getBrandPresenceCountries", () => {
     };
 
     expect(getBrandPresenceCountries(data, "MissingBrand")).toEqual([]);
+  });
+});
+
+describe("getBrandCoverageSummaries", () => {
+  it("returns brands sorted by confirmed coverage with uncertain counts separated", () => {
+    const data: EVPresenceData = {
+      metadata: {
+        last_updated: "2026-03-26",
+        definition: "test",
+        schema_version: 2,
+      },
+      brands: {
+        BrandB: {
+          website: "https://b.com",
+          countries: {
+            SWE: {
+              name: "Sweden",
+              present: true,
+              source: "https://b.com/se",
+              uncertain: false,
+            },
+            NOR: {
+              name: "Norway",
+              present: true,
+              source: "https://b.com/no",
+              uncertain: false,
+            },
+          },
+        },
+        BrandA: {
+          website: "https://a.com",
+          countries: {
+            DEU: {
+              name: "Germany",
+              present: true,
+              source: "https://a.com/de",
+              uncertain: true,
+            },
+            FRA: {
+              name: "France",
+              present: true,
+              source: "https://a.com/fr",
+              uncertain: false,
+            },
+          },
+        },
+        BrandC: {
+          website: "https://c.com",
+          countries: {
+            ESP: {
+              name: "Spain",
+              present: false,
+              source: null,
+              uncertain: true,
+            },
+          },
+        },
+      },
+    };
+
+    expect(getBrandCoverageSummaries(data)).toEqual([
+      {
+        brandName: "BrandB",
+        website: "https://b.com",
+        confirmedCountryCount: 2,
+        uncertainCountryCount: 0,
+      },
+      {
+        brandName: "BrandA",
+        website: "https://a.com",
+        confirmedCountryCount: 1,
+        uncertainCountryCount: 1,
+      },
+      {
+        brandName: "BrandC",
+        website: "https://c.com",
+        confirmedCountryCount: 0,
+        uncertainCountryCount: 0,
+      },
+    ]);
   });
 });
