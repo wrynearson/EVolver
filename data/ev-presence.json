@@ -1139,6 +1139,16 @@
             "https://gwm.com.np/dealer"
           ],
           "uncertain": false
+        },
+        "ZAF": {
+          "name": "South Africa",
+          "present": true,
+          "source": "https://www.gwm.co.za/models/ora-03",
+          "sources": [
+            "https://www.gwm.co.za/models/ora-03",
+            "https://www.gwm.co.za/dealership"
+          ],
+          "uncertain": false
         }
       }
     }

@@ -234,3 +234,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-26
 **Did**: Added ORA as a tracked brand with 6 verified official markets (China, United Kingdom, Australia, New Zealand, Malaysia, and Nepal) using official model, dealer, and test-drive surfaces, and recorded further ORA expansion in the backlog.
 **Result**: pass
+
+## 2026-03-26
+**Did**: Added ORA South Africa after confirming the live national ORA 03 market page and official GWM South Africa dealer locator, and tightened the ORA backlog around markets that still lack a second distinct ORA-specific official surface.
+**Result**: pass
+**TODO**: Verify whether ORA Sri Lanka should count as official presence — the official distributor homepage names the ORA range, but the live site still lacks a second distinct ORA-specific page or brochure URL.
