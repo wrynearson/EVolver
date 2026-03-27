@@ -1234,6 +1234,16 @@
             "https://ora-israel.co.il/"
           ],
           "uncertain": false
+        },
+        "ARG": {
+          "name": "Argentina",
+          "present": true,
+          "source": "https://gwm.com.ar/modelos/ora",
+          "sources": [
+            "https://gwm.com.ar/modelos/ora",
+            "https://gwm.com.ar/concesionarios"
+          ],
+          "uncertain": false
         }
       }
     }

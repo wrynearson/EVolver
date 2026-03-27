@@ -267,3 +267,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-27
 **Did**: Added ORA Israel after confirming GWM Europe's official test-drive page still lists Israel and Colmobil for ORA 03, while the linked local `ora-israel.co.il` domain currently serves a broken page.
 **Result**: pass
+
+## 2026-03-27
+**Did**: Added ORA Argentina after confirming GWM Argentina's live ORA 03 product page and official nationwide concesionarios listing on the same first-party market site.
+**Result**: pass
