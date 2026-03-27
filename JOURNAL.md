@@ -255,3 +255,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-27
 **Did**: Added ORA Ireland after confirming the live official `ora-ev.ie` market site, its rendered authorized retailer network, and Ireland-specific ORA 03 product materials on the same first-party domain.
 **Result**: pass
+
+## 2026-03-27
+**Did**: Added ORA Jordan after confirming the official GWM Jordan ORA landing page, its linked showroom and test-drive flows, and the local ORA model-detail page operated by Nahj Al-Manar.
+**Result**: pass

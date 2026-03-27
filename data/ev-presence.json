@@ -1191,6 +1191,17 @@
             "https://www.gwm-global.com/news/3402874.html"
           ],
           "uncertain": false
+        },
+        "JOR": {
+          "name": "Jordan",
+          "present": true,
+          "source": "https://gwmjordan.com/en/ora",
+          "sources": [
+            "https://gwmjordan.com/en/ora",
+            "https://gwmjordan.com/en/ora/ora",
+            "https://gwmjordan.com/en/contact"
+          ],
+          "uncertain": false
         }
       }
     }
