@@ -1098,6 +1098,16 @@
           ],
           "uncertain": false
         },
+        "IRL": {
+          "name": "Ireland",
+          "present": true,
+          "source": "https://ora-ev.ie/",
+          "sources": [
+            "https://ora-ev.ie/",
+            "https://ora-ev.ie/wp-content/uploads/2024/09/ORA-Ireland_ProPlus_spec_sheet_ORA-03-300-PRO_Oct24.pdf"
+          ],
+          "uncertain": false
+        },
         "AUS": {
           "name": "Australia",
           "present": true,

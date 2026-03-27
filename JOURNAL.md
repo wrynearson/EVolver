@@ -251,3 +251,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-27
 **Did**: Added ORA Brazil after confirming GWM Brazil's live ORA 03 consumer page and official concessionária locator, resolving the prior certificate-related follow-up with updated official URLs.
 **Result**: pass
+
+## 2026-03-27
+**Did**: Added ORA Ireland after confirming the live official `ora-ev.ie` market site, its rendered authorized retailer network, and Ireland-specific ORA 03 product materials on the same first-party domain.
+**Result**: pass
