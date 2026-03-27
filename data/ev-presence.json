@@ -1224,6 +1224,16 @@
             "https://gwmjordan.com/en/contact"
           ],
           "uncertain": false
+        },
+        "ISR": {
+          "name": "Israel",
+          "present": true,
+          "source": "https://www.gwm-eu.com/eu/en/test-drive",
+          "sources": [
+            "https://www.gwm-eu.com/eu/en/test-drive",
+            "https://ora-israel.co.il/"
+          ],
+          "uncertain": false
         }
       }
     }

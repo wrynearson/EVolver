@@ -264,3 +264,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added ORA Germany and Sweden after confirming GWM Europe's official ORA test-drive market list plus each market's live local ORA consumer and test-drive pages.
 **Result**: pass
 **TODO**: Verify whether ORA Israel should count as official presence — GWM Europe's official test-drive page still lists Israel, but the linked `ora-israel.co.il` root currently fails with a 403/404 browser result instead of a usable consumer or dealer flow.
+## 2026-03-27
+**Did**: Added ORA Israel after confirming GWM Europe's official test-drive page still lists Israel and Colmobil for ORA 03, while the linked local `ora-israel.co.il` domain currently serves a broken page.
+**Result**: pass
