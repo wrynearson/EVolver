@@ -259,3 +259,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-27
 **Did**: Added ORA Jordan after confirming the official GWM Jordan ORA landing page, its linked showroom and test-drive flows, and the local ORA model-detail page operated by Nahj Al-Manar.
 **Result**: pass
+
+## 2026-03-27
+**Did**: Added ORA Germany and Sweden after confirming GWM Europe's official ORA test-drive market list plus each market's live local ORA consumer and test-drive pages.
+**Result**: pass
+**TODO**: Verify whether ORA Israel should count as official presence — GWM Europe's official test-drive page still lists Israel, but the linked `ora-israel.co.il` root currently fails with a 403/404 browser result instead of a usable consumer or dealer flow.

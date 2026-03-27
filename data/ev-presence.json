@@ -1108,6 +1108,28 @@
           ],
           "uncertain": false
         },
+        "DEU": {
+          "name": "Germany",
+          "present": true,
+          "source": "https://www.ora-motor.de/",
+          "sources": [
+            "https://www.ora-motor.de/",
+            "https://www.ora-motor.de/probefahrt",
+            "https://www.gwm-eu.com/eu/en/test-drive"
+          ],
+          "uncertain": false
+        },
+        "SWE": {
+          "name": "Sweden",
+          "present": true,
+          "source": "https://ora.se/",
+          "sources": [
+            "https://ora.se/",
+            "https://ora.se/kontakt#/request-test-drive",
+            "https://www.gwm-eu.com/eu/en/test-drive"
+          ],
+          "uncertain": false
+        },
         "AUS": {
           "name": "Australia",
           "present": true,
