@@ -274,3 +274,10 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-27
 **Did**: Added ORA Mexico after confirming GWM Global's country directory links Mexico to the official `gwm-mx.com` market site, whose live ORA 03 product page and distributor locator expose a real local consumer and dealer flow.
 **Result**: pass
+## 2026-03-27
+**Did**: Added ORA Uruguay after confirming the official `gwm.com.uy` market site exposes a dedicated ORA 03 product page with pricing plus a live national concesionarios page on the same first-party domain.
+**Result**: pass
+## 2026-03-27
+**Did**: Stopped after the Mexico and Uruguay ORA additions because the current Chile and Peru ORA routes still failed simple fetch checks, so I left those markets unverified instead of guessing.
+**Result**: pass
+**TODO**: Verify whether ORA Chile and Peru should count as official presence — their current local ORA routes need browser-based validation before they are safe to add.

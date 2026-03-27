@@ -1255,6 +1255,17 @@
             "https://www.gwm-mx.com/es/dealer-list"
           ],
           "uncertain": false
+        },
+        "URY": {
+          "name": "Uruguay",
+          "present": true,
+          "source": "https://gwm.com.uy/modelos/ora-03",
+          "sources": [
+            "https://gwm.com.uy/",
+            "https://gwm.com.uy/modelos/ora-03",
+            "https://gwm.com.uy/concesionarios"
+          ],
+          "uncertain": false
         }
       }
     }
