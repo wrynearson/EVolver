@@ -1244,6 +1244,17 @@
             "https://gwm.com.ar/concesionarios"
           ],
           "uncertain": false
+        },
+        "MEX": {
+          "name": "Mexico",
+          "present": true,
+          "source": "https://www.gwm-mx.com/es/models/ora-03",
+          "sources": [
+            "https://www.gwm-mx.com/es",
+            "https://www.gwm-mx.com/es/models/ora-03",
+            "https://www.gwm-mx.com/es/dealer-list"
+          ],
+          "uncertain": false
         }
       }
     }

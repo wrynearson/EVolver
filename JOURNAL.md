@@ -271,3 +271,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-27
 **Did**: Added ORA Argentina after confirming GWM Argentina's live ORA 03 product page and official nationwide concesionarios listing on the same first-party market site.
 **Result**: pass
+## 2026-03-27
+**Did**: Added ORA Mexico after confirming GWM Global's country directory links Mexico to the official `gwm-mx.com` market site, whose live ORA 03 product page and distributor locator expose a real local consumer and dealer flow.
+**Result**: pass
