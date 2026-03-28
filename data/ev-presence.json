@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-27",
+    "last_updated": "2026-03-28",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -1211,6 +1211,17 @@
             "https://www.gwmmotors.com.br/pt/modelos/ora-03-gt",
             "https://www.gwmmotors.com.br/pt/concessionarias",
             "https://www.gwm-global.com/news/3402874.html"
+          ],
+          "uncertain": false
+        },
+        "CHL": {
+          "name": "Chile",
+          "present": true,
+          "source": "https://www.gwm.cl/ora/",
+          "sources": [
+            "https://www.gwm.cl/ora/",
+            "https://www.gwm.cl/vehiculo/ora/ora-03/",
+            "https://www.gwm.cl/concesionarios/"
           ],
           "uncertain": false
         },

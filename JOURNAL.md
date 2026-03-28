@@ -281,3 +281,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Stopped after the Mexico and Uruguay ORA additions because the current Chile and Peru ORA routes still failed simple fetch checks, so I left those markets unverified instead of guessing.
 **Result**: pass
 **TODO**: Verify whether ORA Chile and Peru should count as official presence — their current local ORA routes need browser-based validation before they are safe to add.
+## 2026-03-28
+**Did**: Added ORA Chile after confirming GWM Chile's live ORA landing page, ORA 03 product page, and national official dealer network, and closed Peru without adding it because GWM Peru's official ORA page still labels ORA 03 and ORA 03 GT as "PRÓXIMAMENTE" with no live sale or dealer flow.
+**Result**: pass
