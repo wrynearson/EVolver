@@ -291,3 +291,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-28
 **Did**: Added ORA Qatar after confirming GWM Qatar's live ORA electric-car market page and its ORA-preselected official test-drive flow on the same first-party market site.
 **Result**: pass
+## 2026-03-28
+**Did**: Added ORA Lebanon after confirming GWM Lebanon's live ORA 03 model page plus its first-party showroom and test-drive flows on the same official market site.
+**Result**: pass
+**TODO**: Verify whether ORA Oman should count as official presence — the official Oman site exposes ORA pages and a test-drive flow, but today's fetches mixed in cross-market references that need a cleaner Oman-specific showroom confirmation before it is safe to add.

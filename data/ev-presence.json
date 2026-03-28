@@ -1246,6 +1246,17 @@
           ],
           "uncertain": false
         },
+        "LBN": {
+          "name": "Lebanon",
+          "present": true,
+          "source": "https://gwm-lebanon.com/model/ora/",
+          "sources": [
+            "https://gwm-lebanon.com/model/ora/",
+            "https://gwm-lebanon.com/find-our-showrooms/",
+            "https://gwm-lebanon.com/test-drive/"
+          ],
+          "uncertain": false
+        },
         "ISR": {
           "name": "Israel",
           "present": true,
