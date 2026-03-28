@@ -284,3 +284,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-28
 **Did**: Added ORA Chile after confirming GWM Chile's live ORA landing page, ORA 03 product page, and national official dealer network, and closed Peru without adding it because GWM Peru's official ORA page still labels ORA 03 and ORA 03 GT as "PRÓXIMAMENTE" with no live sale or dealer flow.
 **Result**: pass
+## 2026-03-28
+**Did**: Added ORA Colombia after confirming GWM Colombia's live ORA 03 product page with pricing and quote flow plus its nationwide first-party dealer and service locator.
+**Result**: pass

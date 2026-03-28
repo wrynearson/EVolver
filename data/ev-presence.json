@@ -1225,6 +1225,16 @@
           ],
           "uncertain": false
         },
+        "COL": {
+          "name": "Colombia",
+          "present": true,
+          "source": "https://www.gwm.com.co/vehiculo/ora/ora-03/",
+          "sources": [
+            "https://www.gwm.com.co/vehiculo/ora/ora-03/",
+            "https://www.gwm.com.co/concesionarios/"
+          ],
+          "uncertain": false
+        },
         "JOR": {
           "name": "Jordan",
           "present": true,
