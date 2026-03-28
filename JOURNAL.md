@@ -295,3 +295,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added ORA Lebanon after confirming GWM Lebanon's live ORA 03 model page plus its first-party showroom and test-drive flows on the same official market site.
 **Result**: pass
 **TODO**: Verify whether ORA Oman should count as official presence — the official Oman site exposes ORA pages and a test-drive flow, but today's fetches mixed in cross-market references that need a cleaner Oman-specific showroom confirmation before it is safe to add.
+
+## 2026-03-28
+**Did**: Closed the ORA Oman follow-up without adding Oman after confirming the official Oman ORA page is broken and the live Oman test-drive form excludes ORA, then added ORA Ecuador from GWM Ecuador's official ORA 03 GT page and nationwide branches page.
+**Result**: pass
+**TODO**: Verify the next strongest ORA sovereign market beyond the updated footprint, prioritizing Costa Rica if its first-party sales and support flows remain live.

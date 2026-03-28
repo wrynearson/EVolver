@@ -1308,6 +1308,17 @@
             "https://gwm.com.uy/concesionarios"
           ],
           "uncertain": false
+        },
+        "ECU": {
+          "name": "Ecuador",
+          "present": true,
+          "source": "https://www.gwm-ecuador.ec/ora-gt-03",
+          "sources": [
+            "https://www.gwm-ecuador.ec/",
+            "https://www.gwm-ecuador.ec/ora-gt-03",
+            "https://www.gwm-ecuador.ec/sucursales"
+          ],
+          "uncertain": false
         }
       }
     }
