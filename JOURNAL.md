@@ -287,3 +287,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-28
 **Did**: Added ORA Colombia after confirming GWM Colombia's live ORA 03 product page with pricing and quote flow plus its nationwide first-party dealer and service locator.
 **Result**: pass
+
+## 2026-03-28
+**Did**: Added ORA Qatar after confirming GWM Qatar's live ORA electric-car market page and its ORA-preselected official test-drive flow on the same first-party market site.
+**Result**: pass

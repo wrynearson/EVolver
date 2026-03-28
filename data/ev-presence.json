@@ -1256,6 +1256,16 @@
           ],
           "uncertain": false
         },
+        "QAT": {
+          "name": "Qatar",
+          "present": true,
+          "source": "https://gwmqatar.com/ora-electric-car/",
+          "sources": [
+            "https://gwmqatar.com/ora-electric-car/",
+            "https://gwmqatar.com/test-drive/?wpf1642_18=ora"
+          ],
+          "uncertain": false
+        },
         "ARG": {
           "name": "Argentina",
           "present": true,
