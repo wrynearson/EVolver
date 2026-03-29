@@ -303,3 +303,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-29
 **Did**: Added ORA Costa Rica after confirming Grupo Q's official ORA 03 market page plus its official Costa Rica quote and contact flows, while noting that the same first-party pages are currently shielded behind AWS human verification for unauthenticated fetches.
 **Result**: pass
+## 2026-03-29
+**Did**: Added ORA Jamaica after confirming GWM's official global market list links Jamaica to `gwmjamaica.com`, whose live first-party ORA 03 model page, test-drive flow, and local contact details establish a consumer market presence.
+**Result**: pass

@@ -1330,6 +1330,18 @@
             "https://www.gwm-ecuador.ec/sucursales"
           ],
           "uncertain": false
+        },
+        "JAM": {
+          "name": "Jamaica",
+          "present": true,
+          "source": "https://gwmjamaica.com/new-home-2025/vehicle-models/ora-03/",
+          "sources": [
+            "https://www.gwm-global.com/global.html",
+            "https://gwmjamaica.com/new-home-2025/vehicle-models/ora-03/",
+            "https://gwmjamaica.com/new-home-2025/book-a-test-drive/",
+            "https://gwmjamaica.com/newhome/new_contact/"
+          ],
+          "uncertain": false
         }
       }
     }
