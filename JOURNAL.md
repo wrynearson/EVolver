@@ -306,3 +306,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-29
 **Did**: Added ORA Jamaica after confirming GWM's official global market list links Jamaica to `gwmjamaica.com`, whose live first-party ORA 03 model page, test-drive flow, and local contact details establish a consumer market presence.
 **Result**: pass
+## 2026-03-29
+**Did**: Added ORA official presence for Antigua and Barbuda, the Bahamas, Barbados, Grenada, Haiti, Saint Kitts and Nevis, Saint Lucia, Saint Vincent and the Grenadines, and Trinidad and Tobago after confirming GWM's global market directory points to GWM Caribbean, whose live dealer network lists each market and whose ORA test-drive flow exposes those territories with Ora 03/GT selections.
+**Result**: pass
+**TODO**: Verify whether ORA Dominica and Guyana should count as official presence — GWM Caribbean lists local dealers for both, but today's live ORA test-drive territory list still omits them.
