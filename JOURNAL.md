@@ -310,3 +310,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added ORA official presence for Antigua and Barbuda, the Bahamas, Barbados, Grenada, Haiti, Saint Kitts and Nevis, Saint Lucia, Saint Vincent and the Grenadines, and Trinidad and Tobago after confirming GWM's global market directory points to GWM Caribbean, whose live dealer network lists each market and whose ORA test-drive flow exposes those territories with Ora 03/GT selections.
 **Result**: pass
 **TODO**: Verify whether ORA Dominica and Guyana should count as official presence — GWM Caribbean lists local dealers for both, but today's live ORA test-drive territory list still omits them.
+## 2026-03-29
+**Did**: Closed the ORA Dominica and Guyana follow-up after confirming GWM Caribbean's official dealer network still lists both markets, but the live ORA test-drive form omits them and the official Caribbean model payload assigns those territories only to Haval, Tank, or P-Series models rather than any ORA entry.
+**Result**: pass
