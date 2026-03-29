@@ -1203,6 +1203,18 @@
           ],
           "uncertain": false
         },
+        "SGP": {
+          "name": "Singapore",
+          "present": true,
+          "source": "https://www.cyclecarriage.com/sg/ora/good-cat-03",
+          "sources": [
+            "https://www.gwm-global.com/global.html",
+            "https://www.cyclecarriage.com/sg/ora/gwm-brand",
+            "https://www.cyclecarriage.com/sg/ora/good-cat-03",
+            "https://www.cyclecarriage.com/sg/ora/contact-us"
+          ],
+          "uncertain": false
+        },
         "BRA": {
           "name": "Brazil",
           "present": true,
