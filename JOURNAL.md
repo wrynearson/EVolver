@@ -316,3 +316,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-29
 **Did**: Added ORA Dominican Republic after confirming Great Wall Motor Dominican Republic's official ORA 03 GT consumer page plus its first-party authorized dealers page.
 **Result**: pass
+## 2026-03-29
+**Did**: Added ORA Bulgaria after confirming GWM Europe's official Bulgaria-localized homepage and live Bulgaria ORA 03 market page, while leaving Paraguay out because its current official GWM Paraguay site still exposes only non-ORA lines.
+**Result**: pass
+**TODO**: Verify the next strongest ORA sovereign market beyond the updated footprint, prioritizing first-party country locales that expose both a localized ORA consumer page and a distinct local support or dealer surface.

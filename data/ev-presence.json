@@ -1214,6 +1214,16 @@
           ],
           "uncertain": false
         },
+        "BGR": {
+          "name": "Bulgaria",
+          "present": true,
+          "source": "https://www.gwm-eu.com/bg/en/ora03.html",
+          "sources": [
+            "https://www.gwm-eu.com/bg/en/index.html",
+            "https://www.gwm-eu.com/bg/en/ora03.html"
+          ],
+          "uncertain": false
+        },
         "CHL": {
           "name": "Chile",
           "present": true,
