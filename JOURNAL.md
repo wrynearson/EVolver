@@ -313,3 +313,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-29
 **Did**: Closed the ORA Dominica and Guyana follow-up after confirming GWM Caribbean's official dealer network still lists both markets, but the live ORA test-drive form omits them and the official Caribbean model payload assigns those territories only to Haval, Tank, or P-Series models rather than any ORA entry.
 **Result**: pass
+## 2026-03-29
+**Did**: Added ORA Dominican Republic after confirming Great Wall Motor Dominican Republic's official ORA 03 GT consumer page plus its first-party authorized dealers page.
+**Result**: pass

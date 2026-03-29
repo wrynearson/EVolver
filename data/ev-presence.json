@@ -1331,6 +1331,16 @@
           ],
           "uncertain": false
         },
+        "DOM": {
+          "name": "Dominican Republic",
+          "present": true,
+          "source": "https://greatwallmotor.com.do/ora/ora-03-gt/",
+          "sources": [
+            "https://greatwallmotor.com.do/ora/ora-03-gt/",
+            "https://greatwallmotor.com.do/dealers/"
+          ],
+          "uncertain": false
+        },
         "JAM": {
           "name": "Jamaica",
           "present": true,
