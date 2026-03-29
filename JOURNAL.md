@@ -329,3 +329,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added ORA Estonia, Latvia, Lithuania, and Iceland after confirming live official local ORA market pages plus Baltic dealer or test-drive surfaces and Iceland's linked Hekla contact/test-drive flow.
 **Result**: pass
 **TODO**: Verify the next strongest ORA sovereign market beyond the updated footprint, prioritizing official local ORA sites in Europe or other uncovered regions that expose both a consumer page and a live dealer, showroom, or test-drive surface.
+
+## 2026-03-29
+**Did**: Re-checked ORA Saudi Arabia, Syria, Algeria, Tunisia, and Mauritius against GWM's official global directory plus each first-party local site, then closed those leads for now because none currently exposes a distinct ORA consumer page with matching local showroom, dealer, contact, or test-drive support.
+**Result**: pass
