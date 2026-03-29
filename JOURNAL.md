@@ -300,3 +300,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Closed the ORA Oman follow-up without adding Oman after confirming the official Oman ORA page is broken and the live Oman test-drive form excludes ORA, then added ORA Ecuador from GWM Ecuador's official ORA 03 GT page and nationwide branches page.
 **Result**: pass
 **TODO**: Verify the next strongest ORA sovereign market beyond the updated footprint, prioritizing Costa Rica if its first-party sales and support flows remain live.
+## 2026-03-29
+**Did**: Added ORA Costa Rica after confirming Grupo Q's official ORA 03 market page plus its official Costa Rica quote and contact flows, while noting that the same first-party pages are currently shielded behind AWS human verification for unauthenticated fetches.
+**Result**: pass

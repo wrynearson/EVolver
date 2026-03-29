@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-28",
+    "last_updated": "2026-03-29",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -1232,6 +1232,17 @@
           "sources": [
             "https://www.gwm.com.co/vehiculo/ora/ora-03/",
             "https://www.gwm.com.co/concesionarios/"
+          ],
+          "uncertain": false
+        },
+        "CRI": {
+          "name": "Costa Rica",
+          "present": true,
+          "source": "https://gwmgrupoq.com/ora03-gt",
+          "sources": [
+            "https://gwmgrupoq.com/ora03-gt",
+            "https://gwmgrupoq.com/cotizador",
+            "https://gwmgrupoq.com/contacto"
           ],
           "uncertain": false
         },
