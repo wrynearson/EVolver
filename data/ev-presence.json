@@ -1342,6 +1342,105 @@
             "https://gwmjamaica.com/newhome/new_contact/"
           ],
           "uncertain": false
+        },
+        "ATG": {
+          "name": "Antigua and Barbuda",
+          "present": true,
+          "source": "https://gwmcaribbean.com/dealership/",
+          "sources": [
+            "https://www.gwm-global.com/global.html",
+            "https://gwmcaribbean.com/dealership/",
+            "https://gwmcaribbean.com/book-a-test-drive/"
+          ],
+          "uncertain": false
+        },
+        "BHS": {
+          "name": "Bahamas",
+          "present": true,
+          "source": "https://gwmcaribbean.com/dealership/",
+          "sources": [
+            "https://www.gwm-global.com/global.html",
+            "https://gwmcaribbean.com/dealership/",
+            "https://gwmcaribbean.com/book-a-test-drive/"
+          ],
+          "uncertain": false
+        },
+        "BRB": {
+          "name": "Barbados",
+          "present": true,
+          "source": "https://gwmcaribbean.com/dealership/",
+          "sources": [
+            "https://www.gwm-global.com/global.html",
+            "https://gwmcaribbean.com/dealership/",
+            "https://gwmcaribbean.com/book-a-test-drive/"
+          ],
+          "uncertain": false
+        },
+        "GRD": {
+          "name": "Grenada",
+          "present": true,
+          "source": "https://gwmcaribbean.com/dealership/go-mobility-inc/",
+          "sources": [
+            "https://www.gwm-global.com/global.html",
+            "https://gwmcaribbean.com/dealership/go-mobility-inc/",
+            "https://gwmcaribbean.com/book-a-test-drive/"
+          ],
+          "uncertain": false
+        },
+        "HTI": {
+          "name": "Haiti",
+          "present": true,
+          "source": "https://gwmcaribbean.com/dealership/caribe-motors-s-a/",
+          "sources": [
+            "https://www.gwm-global.com/global.html",
+            "https://gwmcaribbean.com/dealership/caribe-motors-s-a/",
+            "https://gwmcaribbean.com/book-a-test-drive/"
+          ],
+          "uncertain": false
+        },
+        "KNA": {
+          "name": "Saint Kitts and Nevis",
+          "present": true,
+          "source": "https://gwmcaribbean.com/dealership/s-l-horsfords-company-ltd/",
+          "sources": [
+            "https://www.gwm-global.com/global.html",
+            "https://gwmcaribbean.com/dealership/s-l-horsfords-company-ltd/",
+            "https://gwmcaribbean.com/book-a-test-drive/"
+          ],
+          "uncertain": false
+        },
+        "LCA": {
+          "name": "Saint Lucia",
+          "present": true,
+          "source": "https://gwmcaribbean.com/dealership/jq-motors-ltd/",
+          "sources": [
+            "https://www.gwm-global.com/global.html",
+            "https://gwmcaribbean.com/dealership/jq-motors-ltd/",
+            "https://gwmcaribbean.com/book-a-test-drive/"
+          ],
+          "uncertain": false
+        },
+        "TTO": {
+          "name": "Trinidad and Tobago",
+          "present": true,
+          "source": "https://gwmcaribbean.com/dealership/car-trinidad-north/",
+          "sources": [
+            "https://www.gwm-global.com/global.html",
+            "https://gwmcaribbean.com/dealership/car-trinidad-north/",
+            "https://gwmcaribbean.com/book-a-test-drive/"
+          ],
+          "uncertain": false
+        },
+        "VCT": {
+          "name": "Saint Vincent and the Grenadines",
+          "present": true,
+          "source": "https://gwmcaribbean.com/dealership/advance-mobility-inc/",
+          "sources": [
+            "https://www.gwm-global.com/global.html",
+            "https://gwmcaribbean.com/dealership/advance-mobility-inc/",
+            "https://gwmcaribbean.com/book-a-test-drive/"
+          ],
+          "uncertain": false
         }
       }
     }
