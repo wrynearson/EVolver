@@ -324,3 +324,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added ORA Singapore after confirming GWM's official global market directory points Singapore to Cycle & Carriage and the live local ORA site exposes both a consumer Good Cat page and an authorised Singapore showroom/contact flow.
 **Result**: pass
 **TODO**: Verify the next strongest ORA sovereign market beyond the updated footprint, prioritizing official local distributor sites that expose both an ORA consumer page and a live showroom, dealer, or service surface.
+
+## 2026-03-29
+**Did**: Added ORA Estonia, Latvia, Lithuania, and Iceland after confirming live official local ORA market pages plus Baltic dealer or test-drive surfaces and Iceland's linked Hekla contact/test-drive flow.
+**Result**: pass
+**TODO**: Verify the next strongest ORA sovereign market beyond the updated footprint, prioritizing official local ORA sites in Europe or other uncovered regions that expose both a consumer page and a live dealer, showroom, or test-drive surface.

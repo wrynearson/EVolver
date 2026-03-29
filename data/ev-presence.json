@@ -1473,6 +1473,50 @@
             "https://gwmcaribbean.com/book-a-test-drive/"
           ],
           "uncertain": false
+        },
+        "EST": {
+          "name": "Estonia",
+          "present": true,
+          "source": "https://gwmcars.ee/ora",
+          "sources": [
+            "https://gwmcars.ee/ora",
+            "https://gwmcars.ee/ora/proovisoit",
+            "https://gwmcars.ee/edasimuuja"
+          ],
+          "uncertain": false
+        },
+        "LVA": {
+          "name": "Latvia",
+          "present": true,
+          "source": "https://gwmcars.lv/ora",
+          "sources": [
+            "https://gwmcars.lv/ora",
+            "https://gwmcars.lv/ora/testa-brauciens",
+            "https://adrem-auto.lv/ora/"
+          ],
+          "uncertain": false
+        },
+        "LTU": {
+          "name": "Lithuania",
+          "present": true,
+          "source": "https://gwmcars.lt/ora",
+          "sources": [
+            "https://gwmcars.lt/ora",
+            "https://gwmcars.lt/prekybos-atstovybes",
+            "https://gwmcars.lt/ora/bandomasis-vaziavimas"
+          ],
+          "uncertain": false
+        },
+        "ISL": {
+          "name": "Iceland",
+          "present": true,
+          "source": "https://www.gwmora.is/",
+          "sources": [
+            "https://www.gwmora.is/",
+            "https://www.gwmora.is/is/300-pro",
+            "https://www.hekla.is/is/bilar/reynsluakstur?filter-gerd=ora"
+          ],
+          "uncertain": false
         }
       }
     }
