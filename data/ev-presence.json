@@ -1584,6 +1584,18 @@
             "https://haval.com.bd/contact-us/"
           ],
           "uncertain": false
+        },
+        "AZE": {
+          "name": "Azerbaijan",
+          "present": true,
+          "source": "https://ora.gwm.az/models/ora/",
+          "sources": [
+            "https://gwm.az/",
+            "https://ora.gwm.az/models/ora/",
+            "https://gwm.az/test-drive/",
+            "https://gwm.az/contact/"
+          ],
+          "uncertain": false
         }
       }
     }
