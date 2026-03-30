@@ -230,6 +230,9 @@ describe("EVMap", () => {
       "http://localhost:3000/?brand=XPeng&country=NOR",
     );
     expect(
+      screen.getByRole("link", { name: "Open share link in a new tab" }),
+    ).toHaveAttribute("href", "http://localhost:3000/?brand=XPeng&country=NOR");
+    expect(
       await screen.findByRole("button", { name: "Copied share link" }),
     ).toBeInTheDocument();
 
@@ -274,6 +277,9 @@ describe("EVMap", () => {
     fireEvent.click(within(coveragePanel!).getByRole("button", { name: /BYD/i }));
     expect(screen.getByDisplayValue("BYD")).toBeInTheDocument();
     expect(window.location.search).toBe("?country=SWE&brand=BYD");
+    expect(
+      screen.getByRole("link", { name: "Open share link in a new tab" }),
+    ).toHaveAttribute("href", "http://localhost:3000/?country=SWE&brand=BYD");
   });
 
   it("drops invalid brand query params after loading", async () => {

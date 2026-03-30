@@ -485,6 +485,17 @@ export default function EVMap() {
                   ? "Copy failed"
                   : "Copy share link"}
             </button>
+            {shareUrl ? (
+              <a
+                className="mt-2 block text-center text-sm font-medium text-blue-700 underline decoration-blue-300 underline-offset-2 hover:text-blue-800"
+                href={shareUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Open share link in a new tab"
+              >
+                Open share link
+              </a>
+            ) : null}
           </div>
           <dl className="mt-2 space-y-1 text-sm text-gray-600">
             <div className="flex items-center justify-between gap-4">

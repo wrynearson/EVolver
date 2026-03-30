@@ -342,3 +342,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added ORA Indonesia after confirming GWM Indonesia's live ORA 03 BEV consumer page and official nationwide dealer-network page on the same first-party market site.
 **Result**: pass
 **TODO**: Verify the next strongest ORA sovereign market beyond the updated footprint, prioritizing first-party local sites that expose both a localized ORA consumer page and a distinct dealer, showroom, contact, or test-drive surface.
+## 2026-03-30
+**Did**: Closed the generic ORA next-market follow-up after re-checking Peru, Bolivia, and GWM Europe’s official ORA test-drive market list, then added an always-available open share link alongside the copy action so shareable map state stays usable even when clipboard access is unavailable.
+**Result**: pass
