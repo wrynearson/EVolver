@@ -384,3 +384,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-30
 **Did**: Added ORA Iraq after confirming GWM Iraq's live ORA market pages plus the official contact page that names Nahj Al-Iraq as the exclusive distributor and exposes local showroom and service flows.
 **Result**: pass
+## 2026-03-30
+**Did**: Re-checked ORA Serbia against Great Wall Serbia's official `greatwall.rs` site plus Centar S's first-party distributor page, then narrowed the active ORA backlog because Serbia still exposes only general GWM/distributor surfaces with no live ORA-specific consumer or dealer flow.
+**Result**: pass
