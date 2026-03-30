@@ -1529,6 +1529,17 @@
             "https://www.gwmbrunei.com/dealer-location.html"
           ],
           "uncertain": false
+        },
+        "IDN": {
+          "name": "Indonesia",
+          "present": true,
+          "source": "https://www.gwmauto.co.id/en/vehicles/gwm/ora-03-bev/",
+          "sources": [
+            "https://www.gwmauto.co.id/en/",
+            "https://www.gwmauto.co.id/en/vehicles/gwm/ora-03-bev/",
+            "https://www.gwmauto.co.id/en/about-us/find-a-dealer/"
+          ],
+          "uncertain": false
         }
       }
     }

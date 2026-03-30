@@ -337,3 +337,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-30
 **Did**: Added ORA Brunei after confirming GWM's official global market directory links Brunei to the live local GWM Brunei site, whose first-party ORA and ORA Good Cat pages plus dealer-location network establish a consumer market presence.
 **Result**: pass
+
+## 2026-03-30
+**Did**: Added ORA Indonesia after confirming GWM Indonesia's live ORA 03 BEV consumer page and official nationwide dealer-network page on the same first-party market site.
+**Result**: pass
+**TODO**: Verify the next strongest ORA sovereign market beyond the updated footprint, prioritizing first-party local sites that expose both a localized ORA consumer page and a distinct dealer, showroom, contact, or test-drive surface.
