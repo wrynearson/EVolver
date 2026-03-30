@@ -404,3 +404,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added ORA Azerbaijan after confirming GWM Azerbaijan's live first-party ORA model page plus local test-drive and contact flows establish a consumer market presence.
 **Result**: pass
 **TODO**: Verify whether ORA Kuwait should count as official presence if `haval.com.kw` becomes reliably reachable — GWM's official market directory still lists Kuwait, but both fetch and browser checks timed out today before any ORA consumer or dealer flow could be confirmed.
+## 2026-03-30
+**Did**: Re-checked ORA Kuwait against GWM's official global market directory plus the live `haval.com.kw` root and likely ORA routes, then narrowed the ORA backlog further because GWM Europe's official ORA test-drive page still lists current availability only in Germany, Ireland, Israel, Sweden, and the United Kingdom.
+**Result**: pass
