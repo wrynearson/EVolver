@@ -353,3 +353,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added ORA Pakistan after confirming GWM Sazgar Pakistan's live official ORA 03 model page and nationwide Find a Dealer flow on `gwm-pakistan.com`, which also lists ORA 03 and ORA 07 across the local model range.
 **Result**: pass
 **TODO**: Verify whether ORA Cambodia should count as official presence if `gwm-kh.com` becomes reachable again — search results point to official ORA and new-energy pages, but both direct fetches and browser checks returned connection refused today.
+## 2026-03-30
+**Did**: Re-checked ORA Cambodia against Oneroad Group's official Great Wall Cambodia launch post and Oneroad Cambodia's official contact page, while the official `gwm-kh.com` ORA route still returned connection refused in both fetch and browser checks, so I did not add Cambodia without a live ORA-specific consumer or dealer flow.
+**Result**: pass
+**TODO**: Verify whether ORA Cambodia should count as official presence if `gwm-kh.com` becomes reachable again — Oneroad's official pages confirm the Cambodia distributor relationship, but the official ORA market site still could not be reached today.
