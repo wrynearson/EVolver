@@ -387,3 +387,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-30
 **Did**: Re-checked ORA Serbia against Great Wall Serbia's official `greatwall.rs` site plus Centar S's first-party distributor page, then narrowed the active ORA backlog because Serbia still exposes only general GWM/distributor surfaces with no live ORA-specific consumer or dealer flow.
 **Result**: pass
+## 2026-03-30
+**Did**: Re-checked ORA Oman after GWM's official global directory and local Omani site surfaced a new ORA navigation link, then kept Oman out of the dataset because the first-party `/en/ora/ora.html` route still returns the site's own 404 page while the public Oman test-drive and contact flows remain generic rather than ORA-specific.
+**Result**: pass
