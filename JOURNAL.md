@@ -390,3 +390,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-30
 **Did**: Re-checked ORA Oman after GWM's official global directory and local Omani site surfaced a new ORA navigation link, then kept Oman out of the dataset because the first-party `/en/ora/ora.html` route still returns the site's own 404 page while the public Oman test-drive and contact flows remain generic rather than ORA-specific.
 **Result**: pass
+
+## 2026-03-30
+**Did**: Added ORA Bangladesh after confirming GWM's official global market directory links Bangladesh to the live local `haval.com.bd` site, whose first-party ORA EV market page and Bangladesh contact flow establish a consumer market presence.
+**Result**: pass

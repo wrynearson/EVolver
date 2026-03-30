@@ -1573,6 +1573,17 @@
             "https://www.gwm.iq/contact"
           ],
           "uncertain": false
+        },
+        "BGD": {
+          "name": "Bangladesh",
+          "present": true,
+          "source": "https://haval.com.bd/ora-ev/",
+          "sources": [
+            "https://www.gwm-global.com/global.html",
+            "https://haval.com.bd/ora-ev/",
+            "https://haval.com.bd/contact-us/"
+          ],
+          "uncertain": false
         }
       }
     }
