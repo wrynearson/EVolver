@@ -373,3 +373,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-30
 **Did**: Re-checked ORA Bahrain and the United Arab Emirates against GWM's official global market directory plus each live first-party local site, then moved both leads to monitoring because Bahrain still exposes only a Haval-only market site with no working ORA route while the UAE official site explicitly limits its local portfolio to Haval, Tank, and Poer.
 **Result**: pass
+
+## 2026-03-30
+**Did**: Re-checked ORA Canada and kept it out of the dataset because the live official `gwmcanada.ca` site is still only a generic "Launching Soon" shell with a contact form and no public ORA model, dealer, showroom, or test-drive flow, then moved the lead into monitoring.
+**Result**: pass
