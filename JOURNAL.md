@@ -333,3 +333,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-29
 **Did**: Re-checked ORA Saudi Arabia, Syria, Algeria, Tunisia, and Mauritius against GWM's official global directory plus each first-party local site, then closed those leads for now because none currently exposes a distinct ORA consumer page with matching local showroom, dealer, contact, or test-drive support.
 **Result**: pass
+
+## 2026-03-30
+**Did**: Added ORA Brunei after confirming GWM's official global market directory links Brunei to the live local GWM Brunei site, whose first-party ORA and ORA Good Cat pages plus dealer-location network establish a consumer market presence.
+**Result**: pass

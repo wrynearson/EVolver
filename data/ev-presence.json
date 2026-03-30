@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-29",
+    "last_updated": "2026-03-30",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -1515,6 +1515,18 @@
             "https://www.gwmora.is/",
             "https://www.gwmora.is/is/300-pro",
             "https://www.hekla.is/is/bilar/reynsluakstur?filter-gerd=ora"
+          ],
+          "uncertain": false
+        },
+        "BRN": {
+          "name": "Brunei",
+          "present": true,
+          "source": "https://www.gwmbrunei.com/ora-good-cat.html",
+          "sources": [
+            "https://www.gwm-global.com/global.html",
+            "https://www.gwmbrunei.com/ora.html",
+            "https://www.gwmbrunei.com/ora-good-cat.html",
+            "https://www.gwmbrunei.com/dealer-location.html"
           ],
           "uncertain": false
         }
