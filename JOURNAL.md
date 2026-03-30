@@ -367,3 +367,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-30
 **Did**: Re-checked ORA Philippines after current official search results surfaced a live `gwm.com.ph/models/ora` route, and confirmed GWM Philippines still does not meet the official-presence bar because the ORA detail page fails against the site's own model API while the live public model list still exposes only Haval H9, Cannon Pilot, and Cannon even though the dealership directory is now active.
 **Result**: pass
+## 2026-03-30
+**Did**: Re-checked ORA India and Oman from GWM's official global market directory, confirmed India's listed local domain is currently unreachable in browser and fetch checks, and found that Oman's live first-party site still exposes only Haval, Tank, and pickup content plus generic locations and test-drive flows with no ORA consumer surface, then narrowed the ORA backlog accordingly.
+**Result**: pass
