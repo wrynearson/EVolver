@@ -1540,6 +1540,17 @@
             "https://www.gwmauto.co.id/en/about-us/find-a-dealer/"
           ],
           "uncertain": false
+        },
+        "PAK": {
+          "name": "Pakistan",
+          "present": true,
+          "source": "https://www.gwm-pakistan.com/models/ora-03",
+          "sources": [
+            "https://www.gwm-pakistan.com/",
+            "https://www.gwm-pakistan.com/models/ora-03",
+            "https://www.gwm-pakistan.com/find-a-dealer"
+          ],
+          "uncertain": false
         }
       }
     }

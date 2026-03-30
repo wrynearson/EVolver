@@ -348,3 +348,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-30
 **Did**: Re-checked the strongest remaining ORA leads in Peru, Bolivia, Paraguay, Panama, and the Philippines against first-party sites and narrowed the backlog away from markets that still fail the official-presence bar.
 **Result**: pass
+
+## 2026-03-30
+**Did**: Added ORA Pakistan after confirming GWM Sazgar Pakistan's live official ORA 03 model page and nationwide Find a Dealer flow on `gwm-pakistan.com`, which also lists ORA 03 and ORA 07 across the local model range.
+**Result**: pass
+**TODO**: Verify whether ORA Cambodia should count as official presence if `gwm-kh.com` becomes reachable again — search results point to official ORA and new-energy pages, but both direct fetches and browser checks returned connection refused today.
