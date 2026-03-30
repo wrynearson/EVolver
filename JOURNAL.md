@@ -394,3 +394,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-30
 **Did**: Added ORA Bangladesh after confirming GWM's official global market directory links Bangladesh to the live local `haval.com.bd` site, whose first-party ORA EV market page and Bangladesh contact flow establish a consumer market presence.
 **Result**: pass
+## 2026-03-30
+**Did**: Re-checked ORA Austria, Italy, and Greece against GWM Europe's live ORA 03 and service/contact surfaces, then narrowed the backlog because all three markets still expose only centralized EU pages while guessed country roots return 404 and no local dealer, showroom, or market-specific handoff is live yet.
+**Result**: pass
