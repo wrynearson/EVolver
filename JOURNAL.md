@@ -397,3 +397,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-30
 **Did**: Re-checked ORA Austria, Italy, and Greece against GWM Europe's live ORA 03 and service/contact surfaces, then narrowed the backlog because all three markets still expose only centralized EU pages while guessed country roots return 404 and no local dealer, showroom, or market-specific handoff is live yet.
 **Result**: pass
+## 2026-03-30
+**Did**: Re-checked ORA Egypt, Mozambique, Moldova, Uzbekistan, and Tajikistan against GWM's official global market directory plus each linked first-party local site, then moved those leads to monitoring because the live sites still expose only Haval/GWM non-ORA lineups or fail to load.
+**Result**: pass
