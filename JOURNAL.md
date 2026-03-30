@@ -380,3 +380,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-30
 **Did**: Re-checked ORA Netherlands, Belgium, Portugal, and Spain against GWM Europe's live ORA 03, test-drive, and contact surfaces, then narrowed the backlog because those markets still expose only centralized EU marketing/contact pages rather than country-specific consumer or dealer flows.
 **Result**: pass
+
+## 2026-03-30
+**Did**: Added ORA Iraq after confirming GWM Iraq's live ORA market pages plus the official contact page that names Nahj Al-Iraq as the exclusive distributor and exposes local showroom and service flows.
+**Result**: pass
