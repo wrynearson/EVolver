@@ -1551,6 +1551,17 @@
             "https://www.gwm-pakistan.com/find-a-dealer"
           ],
           "uncertain": false
+        },
+        "MAR": {
+          "name": "Morocco",
+          "present": true,
+          "source": "https://www.greatwallmotors.ma/fr/vehicle/great-wall-motors/318/ora-03/show.html",
+          "sources": [
+            "https://www.greatwallmotors.ma/fr/",
+            "https://www.greatwallmotors.ma/fr/vehicle/great-wall-motors/318/ora-03/show.html",
+            "https://www.greatwallmotors.ma/fr/page/root/597/nos-points-de-vente.html"
+          ],
+          "uncertain": false
         }
       }
     }

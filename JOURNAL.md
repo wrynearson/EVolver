@@ -360,3 +360,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-30
 **Did**: Moved ORA Cambodia out of the active follow-up queue into monitoring-only backlog status after another no-change reachability check, and made the map legend switch to a single-brand footprint mode whenever a brand filter is active so the color key stays accurate.
 **Result**: pass
+
+## 2026-03-30
+**Did**: Added ORA Morocco after confirming Great Wall Motors Maroc's live ORA 03 consumer page and official Moroccan concessionnaire network on the same first-party market site.
+**Result**: pass
