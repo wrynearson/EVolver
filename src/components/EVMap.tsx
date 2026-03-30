@@ -9,7 +9,7 @@ import {
   getCountryPresenceDetails,
   useEVData,
 } from "../hooks/useEVData";
-import { buildColorExpression, LEGEND_ITEMS } from "../lib/mapUtils";
+import { buildColorExpression, getLegendItems } from "../lib/mapUtils";
 import type { FeatureCollection } from "geojson";
 
 type SelectedCountry = {
@@ -284,6 +284,10 @@ export default function EVMap() {
   const shareUrl = useMemo(
     () => buildShareUrl(activeSelectedBrand, resolvedSelectedCountry),
     [activeSelectedBrand, resolvedSelectedCountry],
+  );
+  const legendItems = useMemo(
+    () => getLegendItems(activeSelectedBrand || undefined),
+    [activeSelectedBrand],
   );
 
   useEffect(() => {
@@ -750,9 +754,15 @@ export default function EVMap() {
 
       <div className="absolute bottom-6 left-6 bg-white/90 rounded-lg shadow-md px-4 py-3">
         <h3 className="text-sm font-semibold mb-2 text-gray-700">
-          Chinese EV Brands Present
+          {activeSelectedBrand ? "Filtered brand presence" : "Chinese EV Brands Present"}
         </h3>
-        {LEGEND_ITEMS.map((item) => (
+        {activeSelectedBrand ? (
+          <p className="mb-2 max-w-[12rem] text-xs text-gray-500">
+            Highlighting the countries where {activeSelectedBrand} has confirmed official
+            presence.
+          </p>
+        ) : null}
+        {legendItems.map((item) => (
           <div key={item.label} className="flex items-center gap-2 text-sm">
             <span
               className="w-4 h-4 rounded-sm inline-block"

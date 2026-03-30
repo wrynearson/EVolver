@@ -165,6 +165,12 @@ describe("EVMap", () => {
     expect(screen.getByLabelText("Country lookup")).toBeInTheDocument();
     expect(screen.getByText("Showing")).toBeInTheDocument();
     expect(screen.getByDisplayValue("XPeng")).toBeInTheDocument();
+    expect(screen.getByText("Filtered brand presence")).toBeInTheDocument();
+    expect(
+      screen.getByText("Highlighting the countries where XPeng has confirmed official presence."),
+    ).toBeInTheDocument();
+    expect(screen.getByText("XPeng present")).toBeInTheDocument();
+    expect(screen.queryByText("2-3 brands")).not.toBeInTheDocument();
     expect(screen.getByText("Brands tracked")).toBeInTheDocument();
     expect(screen.getByText("Countries in view")).toBeInTheDocument();
     expect(screen.getByText("2026-03-13")).toBeInTheDocument();
@@ -258,6 +264,8 @@ describe("EVMap", () => {
     fireEvent.click(screen.getByRole("button", { name: "Clear" }));
     expect(screen.getByDisplayValue("All brands")).toBeInTheDocument();
     expect(screen.queryByText("Brand footprint")).not.toBeInTheDocument();
+    expect(screen.getByText("Chinese EV Brands Present")).toBeInTheDocument();
+    expect(screen.getByText("2-3 brands")).toBeInTheDocument();
     const coveragePanel = screen
       .getByRole("heading", { name: "Brand coverage" })
       .closest("aside");

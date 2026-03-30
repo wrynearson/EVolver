@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { buildColorExpression } from "../src/lib/mapUtils";
+import { buildColorExpression, getLegendItems } from "../src/lib/mapUtils";
 import {
   computeCountryBrandCounts,
   computeDatasetSummary,
@@ -37,6 +37,22 @@ describe("buildColorExpression", () => {
     expect(getColor("A")).toBe("#93c5fd"); // 1 = light blue
     expect(getColor("B")).toBe("#3b82f6"); // 2 = medium blue
     expect(getColor("C")).toBe("#1d4ed8"); // 4 = dark blue
+  });
+});
+
+describe("getLegendItems", () => {
+  it("returns multi-brand tiers when no brand filter is active", () => {
+    expect(getLegendItems()).toEqual([
+      { color: "#93c5fd", label: "1 brand" },
+      { color: "#3b82f6", label: "2-3 brands" },
+      { color: "#1d4ed8", label: "4+ brands" },
+    ]);
+  });
+
+  it("returns a binary legend for a single-brand view", () => {
+    expect(getLegendItems("ORA")).toEqual([
+      { color: "#93c5fd", label: "ORA present" },
+    ]);
   });
 });
 

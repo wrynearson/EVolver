@@ -35,11 +35,24 @@ function countToColor(count: number): string {
   return "rgba(0,0,0,0)";
 }
 
+export interface LegendItem {
+  color: string;
+  label: string;
+}
+
 /**
- * Returns a human-readable label for the brand count color scale.
+ * Returns human-readable legend labels for the current map scope.
+ * When a single brand is selected, the map becomes binary (present/absent),
+ * so the multi-brand tier legend would be misleading.
  */
-export const LEGEND_ITEMS = [
-  { color: "#93c5fd", label: "1 brand" },
-  { color: "#3b82f6", label: "2-3 brands" },
-  { color: "#1d4ed8", label: "4+ brands" },
-];
+export function getLegendItems(selectedBrand?: string): LegendItem[] {
+  if (selectedBrand) {
+    return [{ color: "#93c5fd", label: `${selectedBrand} present` }];
+  }
+
+  return [
+    { color: "#93c5fd", label: "1 brand" },
+    { color: "#3b82f6", label: "2-3 brands" },
+    { color: "#1d4ed8", label: "4+ brands" },
+  ];
+}

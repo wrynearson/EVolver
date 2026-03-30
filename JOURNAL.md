@@ -357,3 +357,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Re-checked ORA Cambodia against Oneroad Group's official Great Wall Cambodia launch post and Oneroad Cambodia's official contact page, while the official `gwm-kh.com` ORA route still returned connection refused in both fetch and browser checks, so I did not add Cambodia without a live ORA-specific consumer or dealer flow.
 **Result**: pass
 **TODO**: Verify whether ORA Cambodia should count as official presence if `gwm-kh.com` becomes reachable again — Oneroad's official pages confirm the Cambodia distributor relationship, but the official ORA market site still could not be reached today.
+## 2026-03-30
+**Did**: Moved ORA Cambodia out of the active follow-up queue into monitoring-only backlog status after another no-change reachability check, and made the map legend switch to a single-brand footprint mode whenever a brand filter is active so the color key stays accurate.
+**Result**: pass
