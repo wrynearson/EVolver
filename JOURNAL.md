@@ -370,3 +370,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-30
 **Did**: Re-checked ORA India and Oman from GWM's official global market directory, confirmed India's listed local domain is currently unreachable in browser and fetch checks, and found that Oman's live first-party site still exposes only Haval, Tank, and pickup content plus generic locations and test-drive flows with no ORA consumer surface, then narrowed the ORA backlog accordingly.
 **Result**: pass
+## 2026-03-30
+**Did**: Re-checked ORA Bahrain and the United Arab Emirates against GWM's official global market directory plus each live first-party local site, then moved both leads to monitoring because Bahrain still exposes only a Haval-only market site with no working ORA route while the UAE official site explicitly limits its local portfolio to Haval, Tank, and Poer.
+**Result**: pass
