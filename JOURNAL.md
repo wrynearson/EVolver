@@ -345,3 +345,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-30
 **Did**: Closed the generic ORA next-market follow-up after re-checking Peru, Bolivia, and GWM Europe’s official ORA test-drive market list, then added an always-available open share link alongside the copy action so shareable map state stays usable even when clipboard access is unavailable.
 **Result**: pass
+## 2026-03-30
+**Did**: Re-checked the strongest remaining ORA leads in Peru, Bolivia, Paraguay, Panama, and the Philippines against first-party sites and narrowed the backlog away from markets that still fail the official-presence bar.
+**Result**: pass
