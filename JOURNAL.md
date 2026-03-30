@@ -364,3 +364,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-30
 **Did**: Added ORA Morocco after confirming Great Wall Motors Maroc's live ORA 03 consumer page and official Moroccan concessionnaire network on the same first-party market site.
 **Result**: pass
+## 2026-03-30
+**Did**: Re-checked ORA Philippines after current official search results surfaced a live `gwm.com.ph/models/ora` route, and confirmed GWM Philippines still does not meet the official-presence bar because the ORA detail page fails against the site's own model API while the live public model list still exposes only Haval H9, Cannon Pilot, and Cannon even though the dealership directory is now active.
+**Result**: pass
