@@ -377,3 +377,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-30
 **Did**: Re-checked ORA Canada and kept it out of the dataset because the live official `gwmcanada.ca` site is still only a generic "Launching Soon" shell with a contact form and no public ORA model, dealer, showroom, or test-drive flow, then moved the lead into monitoring.
 **Result**: pass
+## 2026-03-30
+**Did**: Re-checked ORA Netherlands, Belgium, Portugal, and Spain against GWM Europe's live ORA 03, test-drive, and contact surfaces, then narrowed the backlog because those markets still expose only centralized EU marketing/contact pages rather than country-specific consumer or dealer flows.
+**Result**: pass
