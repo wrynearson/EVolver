@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   computeCountryBrandCounts,
   computeDatasetSummary,
+  filterPresenceDataToRegion,
   getCountryRegionLookup,
   getCountryCoverageSummaries,
   getRegionCoverageSummaries,
@@ -129,5 +130,26 @@ describe("useEVData helpers", () => {
         brandNames: ["BYD"],
       },
     ]);
+  });
+
+  it("filters dataset entries down to a single region", () => {
+    const countryRegionLookup = getCountryRegionLookup(mockCountries);
+    const filteredData = filterPresenceDataToRegion(
+      mockData,
+      countryRegionLookup,
+      "Europe",
+    );
+
+    expect(Object.keys(filteredData.brands.BYD.countries)).toEqual(["NOR"]);
+    expect(Object.keys(filteredData.brands.XPeng.countries)).toEqual([
+      "NOR",
+      "SWE",
+    ]);
+    expect(computeDatasetSummary(filteredData)).toEqual({
+      visibleBrandLabel: "All brands",
+      brandCount: 2,
+      visibleCountryCount: 1,
+      lastUpdated: "2026-03-31",
+    });
   });
 });

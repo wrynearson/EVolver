@@ -200,6 +200,7 @@ describe("EVMap", () => {
 
     expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
     expect(screen.getByLabelText("Brand filter")).toBeInTheDocument();
+    expect(screen.getByLabelText("Region filter")).toBeInTheDocument();
     expect(screen.getByLabelText("Country lookup")).toBeInTheDocument();
     expect(screen.getByRole("status")).toHaveTextContent("Loading interactive map");
     expect(
@@ -513,6 +514,64 @@ describe("EVMap", () => {
     expect(screen.getByLabelText("Country lookup")).toHaveDisplayValue("");
     expect(screen.queryByRole("heading", { name: "Sweden" })).not.toBeInTheDocument();
     expect(window.location.search).toBe("");
+  });
+
+  it("applies the region filter across the map summary, lookup, and brand footprint", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText("Region filter"), {
+      target: { value: "Europe" },
+    });
+
+    expect(window.location.search).toBe("?view=brands&region=Europe");
+    expect(
+      screen.getByText("Highlighting confirmed tracked brand presence within Europe."),
+    ).toBeInTheDocument();
+    expect(screen.getByText("All brands · Europe")).toBeInTheDocument();
+    const countriesInViewRow = screen.getByText("Countries in view").closest("div");
+    expect(countriesInViewRow).toHaveTextContent("1");
+
+    fireEvent.change(screen.getByLabelText("Country lookup"), {
+      target: { value: "chi" },
+    });
+    expect(screen.getByText("No countries match this search yet.")).toBeInTheDocument();
+
+    const coveragePanel = screen
+      .getByRole("heading", { name: "Brand coverage" })
+      .closest("aside");
+    expect(coveragePanel).not.toBeNull();
+    fireEvent.click(within(coveragePanel!).getByRole("button", { name: /BYD/i }));
+
+    expect(window.location.search).toBe("?view=brands&region=Europe&brand=BYD");
+    const footprintPanel = screen
+      .getByRole("heading", { name: "Brand footprint" })
+      .closest("aside");
+    expect(footprintPanel).not.toBeNull();
+    expect(
+      within(footprintPanel!).getByText("Filtering markets to Europe"),
+    ).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).getByText("Showing 1 of 1 market"),
+    ).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).getByRole("button", { name: /Norway/i }),
+    ).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).queryByRole("button", { name: /China/i }),
+    ).not.toBeInTheDocument();
   });
 
   it("adds a regional coverage view that can drill into country rankings", async () => {

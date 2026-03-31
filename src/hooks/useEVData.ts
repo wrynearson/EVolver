@@ -153,6 +153,33 @@ export function computeDatasetSummary(
   };
 }
 
+export function filterPresenceDataToRegion(
+  data: EVPresenceData,
+  countryRegionLookup: Record<string, string>,
+  regionName?: string,
+): EVPresenceData {
+  if (!regionName) {
+    return data;
+  }
+
+  return {
+    ...data,
+    brands: Object.fromEntries(
+      Object.entries(data.brands).map(([brandName, brand]) => [
+        brandName,
+        {
+          ...brand,
+          countries: Object.fromEntries(
+            Object.entries(brand.countries).filter(
+              ([isoCode]) => countryRegionLookup[isoCode] === regionName,
+            ),
+          ),
+        },
+      ]),
+    ),
+  };
+}
+
 export function getCountryPresenceDetails(
   data: EVPresenceData,
   isoCode: string,

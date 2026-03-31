@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect, useMemo, useState } from "react";
 import {
   computeCountryBrandCounts,
   computeDatasetSummary,
+  filterPresenceDataToRegion,
   getBrandCoverageSummaries,
   getBrandPresenceCountries,
   getCountryRegionLookup,
@@ -68,6 +69,32 @@ function getCountryLookupValue(country: MapCountrySelection | null) {
   }
 
   return country.countryName ?? country.isoCode;
+}
+
+function filterCountriesToRegion(
+  countries: FeatureCollection | null,
+  regionName?: string,
+): FeatureCollection | null {
+  if (!countries || !regionName) {
+    return countries;
+  }
+
+  return {
+    ...countries,
+    features: countries.features.filter((feature) => {
+      const properties = feature.properties;
+
+      return (
+        normalizeCoverageRegion(
+          typeof properties?.REGION_UN === "string"
+            ? properties.REGION_UN
+            : typeof properties?.CONTINENT === "string"
+              ? properties.CONTINENT
+              : null,
+        ) === regionName
+      );
+    }),
+  };
 }
 
 function findCountryLookupMatch(
@@ -148,7 +175,7 @@ function buildShareUrl(
     url.searchParams.delete("country");
   }
 
-  if (coveragePanelView !== "brands") {
+  if (coveragePanelView !== "brands" || selectedCoverageRegion) {
     url.searchParams.set("view", coveragePanelView);
   } else {
     url.searchParams.delete("view");
@@ -202,29 +229,61 @@ export default function EVMap() {
     () => (data ? Object.keys(data.brands).sort((a, b) => a.localeCompare(b)) : []),
     [data],
   );
+  const countryRegionLookup = useMemo(
+    () => (countries ? getCountryRegionLookup(countries) : {}),
+    [countries],
+  );
+  const availableRegions = useMemo(
+    () =>
+      Array.from(new Set(Object.values(countryRegionLookup))).sort((a, b) =>
+        a.localeCompare(b),
+      ),
+    [countryRegionLookup],
+  );
+  const visibleCountries = useMemo(
+    () => filterCountriesToRegion(countries, selectedCoverageRegion || undefined),
+    [countries, selectedCoverageRegion],
+  );
+  const regionScopedData = useMemo(() => {
+    if (!data || !countries || !selectedCoverageRegion) {
+      return data;
+    }
+
+    return filterPresenceDataToRegion(
+      data,
+      countryRegionLookup,
+      selectedCoverageRegion,
+    );
+  }, [countries, countryRegionLookup, data, selectedCoverageRegion]);
 
   const visibleCountryBrandCount = useMemo(() => {
-    if (!data) {
+    if (!regionScopedData) {
       return countryBrandCount;
     }
 
-    return computeCountryBrandCounts(data, activeSelectedBrand || undefined);
-  }, [activeSelectedBrand, countryBrandCount, data]);
+    return computeCountryBrandCounts(
+      regionScopedData,
+      activeSelectedBrand || undefined,
+    );
+  }, [activeSelectedBrand, countryBrandCount, regionScopedData]);
 
   const visibleSummary = useMemo(() => {
-    if (!data) {
+    if (!regionScopedData) {
       return summary;
     }
 
-    return computeDatasetSummary(data, activeSelectedBrand || undefined);
-  }, [activeSelectedBrand, data, summary]);
+    return computeDatasetSummary(
+      regionScopedData,
+      activeSelectedBrand || undefined,
+    );
+  }, [activeSelectedBrand, regionScopedData, summary]);
 
   const countryOptions = useMemo<CountryOption[]>(() => {
-    if (!countries) {
+    if (!visibleCountries) {
       return [];
     }
 
-    return countries.features
+    return visibleCountries.features
       .flatMap((feature) => {
         const properties = feature.properties;
         const isoCode =
@@ -251,12 +310,7 @@ export default function EVMap() {
         return [{ isoCode, countryName, regionName: regionName ?? undefined }];
       })
       .sort((a, b) => a.countryName.localeCompare(b.countryName));
-  }, [countries]);
-
-  const countryRegionLookup = useMemo(
-    () => (countries ? getCountryRegionLookup(countries) : {}),
-    [countries],
-  );
+  }, [visibleCountries]);
 
   const resolvedSelectedCountry = useMemo(() => {
     const resolveCountrySelection = (country: MapCountrySelection | null) => {
@@ -328,13 +382,13 @@ export default function EVMap() {
       exactCountryLookupMatch.isoCode !== resolvedSelectedCountry?.isoCode);
 
   const selectedCountryDetails = useMemo(() => {
-    if (!data || !resolvedSelectedCountry) {
+    if (!regionScopedData || !resolvedSelectedCountry) {
       return null;
     }
 
     return (
       getCountryPresenceDetails(
-        data,
+        regionScopedData,
         resolvedSelectedCountry.isoCode,
         activeSelectedBrand || undefined,
         resolvedSelectedCountry.countryName,
@@ -345,16 +399,16 @@ export default function EVMap() {
         brands: [],
       }
     );
-  }, [activeSelectedBrand, data, resolvedSelectedCountry]);
+  }, [activeSelectedBrand, regionScopedData, resolvedSelectedCountry]);
 
   const allSelectedCountryDetails = useMemo(() => {
-    if (!data || !resolvedSelectedCountry) {
+    if (!regionScopedData || !resolvedSelectedCountry) {
       return null;
     }
 
     return (
       getCountryPresenceDetails(
-        data,
+        regionScopedData,
         resolvedSelectedCountry.isoCode,
         undefined,
         resolvedSelectedCountry.countryName,
@@ -365,16 +419,16 @@ export default function EVMap() {
         brands: [],
       }
     );
-  }, [data, resolvedSelectedCountry]);
+  }, [regionScopedData, resolvedSelectedCountry]);
 
   const hoveredCountryDetails = useMemo(() => {
-    if (!data || !resolvedHoveredCountry) {
+    if (!regionScopedData || !resolvedHoveredCountry) {
       return null;
     }
 
     return (
       getCountryPresenceDetails(
-        data,
+        regionScopedData,
         resolvedHoveredCountry.isoCode,
         activeSelectedBrand || undefined,
         resolvedHoveredCountry.countryName,
@@ -384,16 +438,16 @@ export default function EVMap() {
         brands: [],
       }
     );
-  }, [activeSelectedBrand, data, resolvedHoveredCountry]);
+  }, [activeSelectedBrand, regionScopedData, resolvedHoveredCountry]);
 
   const allHoveredCountryDetails = useMemo(() => {
-    if (!data || !resolvedHoveredCountry) {
+    if (!regionScopedData || !resolvedHoveredCountry) {
       return null;
     }
 
     return (
       getCountryPresenceDetails(
-        data,
+        regionScopedData,
         resolvedHoveredCountry.isoCode,
         undefined,
         resolvedHoveredCountry.countryName,
@@ -404,15 +458,15 @@ export default function EVMap() {
         brands: [],
       }
     );
-  }, [data, resolvedHoveredCountry]);
+  }, [regionScopedData, resolvedHoveredCountry]);
 
   const selectedBrandPresence = useMemo(() => {
-    if (!data || !activeSelectedBrand) {
+    if (!regionScopedData || !activeSelectedBrand) {
       return [];
     }
 
-    return getBrandPresenceCountries(data, activeSelectedBrand);
-  }, [activeSelectedBrand, data]);
+    return getBrandPresenceCountries(regionScopedData, activeSelectedBrand);
+  }, [activeSelectedBrand, regionScopedData]);
 
   const filteredSelectedBrandPresence = useMemo(
     () =>
@@ -426,28 +480,31 @@ export default function EVMap() {
   );
 
   const brandCoverageSummaries = useMemo(() => {
-    if (!data || activeSelectedBrand) {
+    if (!regionScopedData || activeSelectedBrand) {
       return [];
     }
 
-    return getBrandCoverageSummaries(data);
-  }, [activeSelectedBrand, data]);
+    return getBrandCoverageSummaries(regionScopedData).filter(
+      (brand) =>
+        brand.confirmedCountryCount > 0 || brand.uncertainCountryCount > 0,
+    );
+  }, [activeSelectedBrand, regionScopedData]);
 
   const countryCoverageSummaries = useMemo(() => {
-    if (!data || activeSelectedBrand) {
+    if (!regionScopedData || activeSelectedBrand) {
       return [];
     }
 
-    return getCountryCoverageSummaries(data);
-  }, [activeSelectedBrand, data]);
+    return getCountryCoverageSummaries(regionScopedData);
+  }, [activeSelectedBrand, regionScopedData]);
 
   const regionCoverageSummaries = useMemo(() => {
-    if (!data || activeSelectedBrand) {
+    if (!regionScopedData || activeSelectedBrand) {
       return [];
     }
 
-    return getRegionCoverageSummaries(data, countryRegionLookup);
-  }, [activeSelectedBrand, countryRegionLookup, data]);
+    return getRegionCoverageSummaries(regionScopedData, countryRegionLookup);
+  }, [activeSelectedBrand, countryRegionLookup, regionScopedData]);
 
   const visibleCountryCoverageSummaries = useMemo(
     () =>
@@ -532,6 +589,33 @@ export default function EVMap() {
   }, [data, selectedBrand]);
 
   useEffect(() => {
+    if (!selectedCoverageRegion || Object.keys(countryRegionLookup).length === 0) {
+      return;
+    }
+
+    if (
+      selectedCountry &&
+      countryRegionLookup[selectedCountry.isoCode] &&
+      countryRegionLookup[selectedCountry.isoCode] !== selectedCoverageRegion
+    ) {
+      setSelectedCountry(null);
+    }
+
+    if (
+      hoveredCountry &&
+      countryRegionLookup[hoveredCountry.isoCode] &&
+      countryRegionLookup[hoveredCountry.isoCode] !== selectedCoverageRegion
+    ) {
+      setHoveredCountry(null);
+    }
+  }, [
+    countryRegionLookup,
+    hoveredCountry,
+    selectedCountry,
+    selectedCoverageRegion,
+  ]);
+
+  useEffect(() => {
     if (typeof window === "undefined") {
       return;
     }
@@ -584,11 +668,11 @@ export default function EVMap() {
 
   useEffect(() => {
     setCopyLinkStatus("idle");
-  }, [activeSelectedBrand, resolvedSelectedCountry]);
+  }, [activeSelectedBrand, resolvedSelectedCountry, selectedCoverageRegion]);
 
   useEffect(() => {
     setCoverageSearchQuery("");
-  }, [activeSelectedBrand, coveragePanelView]);
+  }, [activeSelectedBrand, coveragePanelView, selectedCoverageRegion]);
 
   useEffect(() => {
     setFootprintSearchQuery("");
@@ -601,25 +685,14 @@ export default function EVMap() {
   useEffect(() => {
     if (
       !selectedCoverageRegion ||
-      !data ||
       !countries ||
-      regionCoverageSummaries.some(
-        (region) => region.regionName === selectedCoverageRegion,
-      )
+      availableRegions.includes(selectedCoverageRegion)
     ) {
       return;
     }
 
     setSelectedCoverageRegion("");
-  }, [countries, data, regionCoverageSummaries, selectedCoverageRegion]);
-
-  useEffect(() => {
-    if (!selectedCoverageRegion || coveragePanelView === "countries") {
-      return;
-    }
-
-    setSelectedCoverageRegion("");
-  }, [coveragePanelView, selectedCoverageRegion]);
+  }, [availableRegions, countries, selectedCoverageRegion]);
 
   const fillColor = buildColorExpression(visibleCountryBrandCount);
   const mapStatus = loading
@@ -634,7 +707,7 @@ export default function EVMap() {
           description:
             "The verified EV presence dataset could not be loaded for this session.",
         }
-      : !countries
+      : !visibleCountries
         ? {
             title: "Loading country boundaries",
             description:
@@ -649,7 +722,7 @@ export default function EVMap() {
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-slate-100">
       <div className="absolute inset-0">
-        {data && countries ? (
+        {data && visibleCountries ? (
           <Suspense
             fallback={
               <MapViewportStatus
@@ -659,7 +732,7 @@ export default function EVMap() {
             }
           >
             <MapCanvas
-              countries={countries}
+              countries={visibleCountries}
               fillColor={fillColor}
               onHoveredCountryChange={setHoveredCountry}
               onSelectedCountryChange={setSelectedCountry}
@@ -698,6 +771,31 @@ export default function EVMap() {
                 </option>
               ))}
             </select>
+          </div>
+          <div className="mt-3">
+            <label
+              htmlFor="region-filter"
+              className="block text-xs font-medium uppercase tracking-wide text-gray-500"
+            >
+              Region filter
+            </label>
+            <select
+              id="region-filter"
+              className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
+              disabled={availableRegions.length === 0}
+              value={selectedCoverageRegion}
+              onChange={(event) => setSelectedCoverageRegion(event.target.value)}
+            >
+              <option value="">All regions</option>
+              {availableRegions.map((regionName) => (
+                <option key={regionName} value={regionName}>
+                  {regionName}
+                </option>
+              ))}
+            </select>
+            <p className="mt-2 text-xs text-gray-500">
+              Focus the map and panels on one world region at a time.
+            </p>
           </div>
           <div className="mt-3">
             <label
@@ -838,6 +936,7 @@ export default function EVMap() {
               <dt>Showing</dt>
               <dd className="font-medium text-gray-800">
                 {visibleSummary.visibleBrandLabel}
+                {selectedCoverageRegion ? ` · ${selectedCoverageRegion}` : ""}
               </dd>
             </div>
             <div className="flex items-center justify-between gap-4">
@@ -1003,6 +1102,11 @@ export default function EVMap() {
                 {activeSelectedBrand} · {selectedBrandPresence.length}{" "}
                 {selectedBrandPresence.length === 1 ? "market" : "markets"}
               </p>
+              {selectedCoverageRegion ? (
+                <p className="mt-1 text-xs text-gray-500">
+                  Filtering markets to {selectedCoverageRegion}
+                </p>
+              ) : null}
             </div>
             <button
               type="button"
@@ -1348,10 +1452,13 @@ export default function EVMap() {
         <h3 className="text-sm font-semibold mb-2 text-gray-700">
           {activeSelectedBrand ? "Filtered brand presence" : "Chinese EV Brands Present"}
         </h3>
-        {activeSelectedBrand ? (
+        {activeSelectedBrand || selectedCoverageRegion ? (
           <p className="mb-2 max-w-[12rem] text-xs text-gray-500">
-            Highlighting the countries where {activeSelectedBrand} has confirmed official
-            presence.
+            {activeSelectedBrand && selectedCoverageRegion
+              ? `Highlighting the countries in ${selectedCoverageRegion} where ${activeSelectedBrand} has confirmed official presence.`
+              : activeSelectedBrand
+                ? `Highlighting the countries where ${activeSelectedBrand} has confirmed official presence.`
+                : `Highlighting confirmed tracked brand presence within ${selectedCoverageRegion}.`}
           </p>
         ) : null}
         {legendItems.map((item) => (

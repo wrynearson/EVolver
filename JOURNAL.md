@@ -447,3 +447,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-31
 **Did**: Made the coverage analysis shareable by persisting the active coverage tab and regional drill-down in the URL, and added tests to verify restoration plus browser-history sync for those views.
 **Result**: pass
+## 2026-03-31
+**Did**: Added a first-class region filter so users can narrow the map, lookup, shareable URL state, and brand footprint to a single world region, backed by helper and UI coverage.
+**Result**: pass
