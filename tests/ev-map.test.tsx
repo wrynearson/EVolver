@@ -129,6 +129,9 @@ const mockGeoJson = {
 describe("EVMap", () => {
   afterEach(() => {
     cleanup();
+    vi.resetModules();
+    vi.clearAllMocks();
+    vi.doUnmock("../src/components/MapCanvas");
   });
 
   beforeEach(() => {
@@ -145,7 +148,40 @@ describe("EVMap", () => {
     });
   });
 
+  it("keeps the data panels available while the map canvas chunk is still loading", async () => {
+    vi.doMock(
+      "../src/components/MapCanvas",
+      () =>
+        new Promise(() => {
+          // Keep the lazy map canvas pending so EVMap renders its in-place loading shell.
+        }),
+    );
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(screen.getByLabelText("Brand filter")).toBeInTheDocument();
+    expect(screen.getByLabelText("Country lookup")).toBeInTheDocument();
+    expect(screen.getByRole("status")).toHaveTextContent("Loading interactive map");
+    expect(
+      screen.getByText(
+        "The data panels are ready while the interactive MapLibre canvas finishes loading.",
+      ),
+    ).toBeInTheDocument();
+  });
+
   it("renders the dataset summary overlay, country details, and shareable view state", async () => {
+    vi.doUnmock("../src/components/MapCanvas");
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
       const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
@@ -205,7 +241,7 @@ describe("EVMap", () => {
       }),
     ).toHaveAttribute("href", "https://www.xpeng.com/no");
 
-    fireEvent.click(screen.getByRole("button", { name: "Hover Norway" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Hover Norway" }));
     const previewPanel = screen.getByRole("heading", { name: "Map preview" }).closest(
       "div",
     );
@@ -264,7 +300,7 @@ describe("EVMap", () => {
     ).toBeInTheDocument();
     expect(window.location.search).toBe("?brand=XPeng&country=SWE");
 
-    fireEvent.click(screen.getByRole("button", { name: "Leave Hover" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Leave Hover" }));
     expect(screen.queryByRole("heading", { name: "Map preview" })).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "Clear" }));

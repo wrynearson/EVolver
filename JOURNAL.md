@@ -434,3 +434,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-31
 **Did**: Synced the map's brand and country selection with browser history navigation so shared URLs now stay in step with back/forward actions, backed by a focused interaction test.
 **Result**: pass
+
+## 2026-03-31
+**Did**: Split the heavy interactive map canvas out of `EVMap` so the data panels, filters, and country details render immediately while the MapLibre chunk loads, and added coverage for the new in-place loading shell.
+**Result**: pass

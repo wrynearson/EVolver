@@ -6,6 +6,11 @@ export interface CountryEntry {
   uncertain: boolean;
 }
 
+export interface MapCountrySelection {
+  isoCode: string;
+  countryName?: string;
+}
+
 export interface CountryPresenceBrand {
   brandName: string;
   website: string;

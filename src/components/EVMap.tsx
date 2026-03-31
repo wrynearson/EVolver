@@ -1,6 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
-import Map, { Source, Layer } from "react-map-gl/maplibre";
-import "maplibre-gl/dist/maplibre-gl.css";
+import { Suspense, lazy, useEffect, useMemo, useState } from "react";
 import {
   computeCountryBrandCounts,
   computeDatasetSummary,
@@ -12,18 +10,16 @@ import {
 } from "../hooks/useEVData";
 import { buildColorExpression, getLegendItems } from "../lib/mapUtils";
 import type { FeatureCollection } from "geojson";
-
-type SelectedCountry = {
-  isoCode: string;
-  countryName?: string;
-};
+import type { MapCountrySelection } from "../types";
 
 type CopyLinkStatus = "idle" | "copied" | "failed";
 type CoveragePanelView = "brands" | "countries";
 type SelectionState = {
   selectedBrand: string;
-  selectedCountry: SelectedCountry | null;
+  selectedCountry: MapCountrySelection | null;
 };
+
+const MapCanvas = lazy(() => import("./MapCanvas"));
 
 function matchesSearchQuery(values: Array<string | undefined>, query: string) {
   const normalizedQuery = query.trim().toLowerCase();
@@ -70,7 +66,10 @@ function getInitialSelectionState(): SelectionState {
   return getSelectionStateFromSearch(window.location.search);
 }
 
-function buildShareUrl(selectedBrand: string, selectedCountry: SelectedCountry | null) {
+function buildShareUrl(
+  selectedBrand: string,
+  selectedCountry: MapCountrySelection | null,
+) {
   if (typeof window === "undefined") {
     return "";
   }
@@ -107,8 +106,8 @@ export default function EVMap() {
   const [selectedBrand, setSelectedBrand] = useState<string>(
     () => getInitialSelectionState().selectedBrand,
   );
-  const [hoveredCountry, setHoveredCountry] = useState<SelectedCountry | null>(null);
-  const [selectedCountry, setSelectedCountry] = useState<SelectedCountry | null>(
+  const [hoveredCountry, setHoveredCountry] = useState<MapCountrySelection | null>(null);
+  const [selectedCountry, setSelectedCountry] = useState<MapCountrySelection | null>(
     () => getInitialSelectionState().selectedCountry,
   );
   const [copyLinkStatus, setCopyLinkStatus] = useState<CopyLinkStatus>("idle");
@@ -168,7 +167,7 @@ export default function EVMap() {
   }, [countries]);
 
   const resolvedSelectedCountry = useMemo(() => {
-    const resolveCountrySelection = (country: SelectedCountry | null) => {
+    const resolveCountrySelection = (country: MapCountrySelection | null) => {
       if (!country) {
         return null;
       }
@@ -416,79 +415,57 @@ export default function EVMap() {
     setFootprintSearchQuery("");
   }, [activeSelectedBrand]);
 
-  if (loading || !countries) {
-    return (
-      <div className="flex items-center justify-center h-screen bg-gray-100">
-        <p className="text-gray-500">Loading map...</p>
-      </div>
-    );
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const fillColor = buildColorExpression(visibleCountryBrandCount) as any;
+  const fillColor = buildColorExpression(visibleCountryBrandCount);
+  const mapStatus = loading
+    ? {
+        title: "Loading verified EV data",
+        description:
+          "Fetching the latest confirmed market presence before rendering the map.",
+      }
+    : !data
+      ? {
+          title: "Map data unavailable",
+          description:
+            "The verified EV presence dataset could not be loaded for this session.",
+        }
+      : !countries
+        ? {
+            title: "Loading country boundaries",
+            description:
+              "Preparing the world geometry so the verified dataset can be plotted on the map.",
+          }
+        : {
+            title: "Loading interactive map",
+            description:
+              "The data panels are ready while the interactive MapLibre canvas finishes loading.",
+          };
 
   return (
-    <div className="w-screen h-screen relative">
-      <Map
-        initialViewState={{ longitude: 20, latitude: 30, zoom: 1.5 }}
-        style={{ width: "100%", height: "100%" }}
-        mapStyle="https://tiles.openfreemap.org/styles/positron"
-        interactiveLayerIds={["country-fill"]}
-        onMouseMove={(event) => {
-          const hoveredFeature = event.features?.[0];
-          const properties = hoveredFeature?.properties;
-          const isoCode =
-            typeof properties?.ISO_A3 === "string" ? properties.ISO_A3 : null;
-
-          if (!isoCode || isoCode === "-99") {
-            setHoveredCountry(null);
-            return;
-          }
-
-          const countryName =
-            typeof properties?.ADMIN === "string"
-              ? properties.ADMIN
-              : typeof properties?.NAME === "string"
-                ? properties.NAME
-                : undefined;
-
-          setHoveredCountry({ isoCode, countryName });
-        }}
-        onMouseLeave={() => setHoveredCountry(null)}
-        onClick={(event) => {
-          const clickedFeature = event.features?.[0];
-          const properties = clickedFeature?.properties;
-          const isoCode =
-            typeof properties?.ISO_A3 === "string" ? properties.ISO_A3 : null;
-
-          if (!isoCode || isoCode === "-99") {
-            setSelectedCountry(null);
-            return;
-          }
-
-          const countryName =
-            typeof properties?.ADMIN === "string"
-              ? properties.ADMIN
-              : typeof properties?.NAME === "string"
-                ? properties.NAME
-                : undefined;
-
-          setSelectedCountry({ isoCode, countryName });
-        }}
-      >
-        <Source id="countries" type="geojson" data={countries}>
-          <Layer
-            id="country-fill"
-            type="fill"
-            paint={{ "fill-color": fillColor, "fill-opacity": 0.7 }}
+    <div className="relative h-screen w-screen overflow-hidden bg-slate-100">
+      <div className="absolute inset-0">
+        {data && countries ? (
+          <Suspense
+            fallback={
+              <MapViewportStatus
+                title={mapStatus.title}
+                description={mapStatus.description}
+              />
+            }
+          >
+            <MapCanvas
+              countries={countries}
+              fillColor={fillColor}
+              onHoveredCountryChange={setHoveredCountry}
+              onSelectedCountryChange={setSelectedCountry}
+            />
+          </Suspense>
+        ) : (
+          <MapViewportStatus
+            title={mapStatus.title}
+            description={mapStatus.description}
           />
-          <Layer
-            id="country-line"
-            type="line"
-            paint={{ "line-color": "#627BC1", "line-width": 0.5 }}
-          />
-        </Source>
-      </Map>
+        )}
+      </div>
 
       {visibleSummary ? (
         <div className="absolute top-6 left-6 bg-white/90 rounded-lg shadow-md px-4 py-3 max-w-xs">
@@ -526,6 +503,7 @@ export default function EVMap() {
             <select
               id="country-filter"
               className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
+              disabled={countryOptions.length === 0}
               value={resolvedSelectedCountry?.isoCode ?? ""}
               onChange={(event) => {
                 const isoCode = event.target.value;
@@ -1030,6 +1008,30 @@ export default function EVMap() {
             <span className="text-gray-600">{item.label}</span>
           </div>
         ))}
+      </div>
+    </div>
+  );
+}
+
+function MapViewportStatus({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="flex h-full w-full items-center justify-center bg-slate-100 px-6">
+      <div
+        className="w-full max-w-lg rounded-3xl border border-slate-200 bg-white/90 p-8 text-center shadow-lg shadow-slate-300/30"
+        role="status"
+        aria-live="polite"
+      >
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-sky-700">
+          EVolver map
+        </p>
+        <h2 className="mt-3 text-2xl font-semibold text-slate-900">{title}</h2>
+        <p className="mt-3 text-sm leading-6 text-slate-600">{description}</p>
       </div>
     </div>
   );
