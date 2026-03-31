@@ -48,6 +48,13 @@ export interface CountryCoverageSummary {
   brandNames: string[];
 }
 
+export interface RegionCoverageSummary {
+  regionName: string;
+  confirmedCountryCount: number;
+  uncertainCountryCount: number;
+  brandNames: string[];
+}
+
 export interface BrandData {
   website: string;
   countries: Record<string, CountryEntry>;

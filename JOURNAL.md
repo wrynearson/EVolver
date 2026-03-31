@@ -438,3 +438,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-31
 **Did**: Split the heavy interactive map canvas out of `EVMap` so the data panels, filters, and country details render immediately while the MapLibre chunk loads, and added coverage for the new in-place loading shell.
 **Result**: pass
+## 2026-03-31
+**Did**: Added a regional coverage view so users can compare confirmed presence by region and drill from a region into country rankings, backed by new region-summary helpers and UI coverage tests.
+**Result**: pass

@@ -4,8 +4,11 @@ import {
   computeDatasetSummary,
   getBrandCoverageSummaries,
   getBrandPresenceCountries,
+  getCountryRegionLookup,
   getCountryCoverageSummaries,
   getCountryPresenceDetails,
+  getRegionCoverageSummaries,
+  normalizeCoverageRegion,
   useEVData,
 } from "../hooks/useEVData";
 import { buildColorExpression, getLegendItems } from "../lib/mapUtils";
@@ -13,10 +16,13 @@ import type { FeatureCollection } from "geojson";
 import type { MapCountrySelection } from "../types";
 
 type CopyLinkStatus = "idle" | "copied" | "failed";
-type CoveragePanelView = "brands" | "countries";
+type CoveragePanelView = "brands" | "countries" | "regions";
 type SelectionState = {
   selectedBrand: string;
   selectedCountry: MapCountrySelection | null;
+};
+type CountryOption = MapCountrySelection & {
+  regionName?: string;
 };
 
 const MapCanvas = lazy(() => import("./MapCanvas"));
@@ -114,6 +120,7 @@ export default function EVMap() {
   const [coveragePanelView, setCoveragePanelView] =
     useState<CoveragePanelView>("brands");
   const [coverageSearchQuery, setCoverageSearchQuery] = useState("");
+  const [selectedCoverageRegion, setSelectedCoverageRegion] = useState("");
   const [footprintSearchQuery, setFootprintSearchQuery] = useState("");
   const activeSelectedBrand =
     data && selectedBrand && !data.brands[selectedBrand] ? "" : selectedBrand;
@@ -139,7 +146,7 @@ export default function EVMap() {
     return computeDatasetSummary(data, activeSelectedBrand || undefined);
   }, [activeSelectedBrand, data, summary]);
 
-  const countryOptions = useMemo(() => {
+  const countryOptions = useMemo<CountryOption[]>(() => {
     if (!countries) {
       return [];
     }
@@ -160,11 +167,23 @@ export default function EVMap() {
             : typeof properties?.NAME === "string"
               ? properties.NAME
               : isoCode;
+        const regionName = normalizeCoverageRegion(
+          typeof properties?.REGION_UN === "string"
+            ? properties.REGION_UN
+            : typeof properties?.CONTINENT === "string"
+              ? properties.CONTINENT
+              : null,
+        );
 
-        return [{ isoCode, countryName }];
+        return [{ isoCode, countryName, regionName: regionName ?? undefined }];
       })
       .sort((a, b) => a.countryName.localeCompare(b.countryName));
   }, [countries]);
+
+  const countryRegionLookup = useMemo(
+    () => (countries ? getCountryRegionLookup(countries) : {}),
+    [countries],
+  );
 
   const resolvedSelectedCountry = useMemo(() => {
     const resolveCountrySelection = (country: MapCountrySelection | null) => {
@@ -322,6 +341,24 @@ export default function EVMap() {
     return getCountryCoverageSummaries(data);
   }, [activeSelectedBrand, data]);
 
+  const regionCoverageSummaries = useMemo(() => {
+    if (!data || activeSelectedBrand) {
+      return [];
+    }
+
+    return getRegionCoverageSummaries(data, countryRegionLookup);
+  }, [activeSelectedBrand, countryRegionLookup, data]);
+
+  const visibleCountryCoverageSummaries = useMemo(
+    () =>
+      countryCoverageSummaries.filter(
+        (country) =>
+          !selectedCoverageRegion ||
+          countryRegionLookup[country.isoCode] === selectedCoverageRegion,
+      ),
+    [countryCoverageSummaries, countryRegionLookup, selectedCoverageRegion],
+  );
+
   const filteredBrandCoverageSummaries = useMemo(
     () =>
       brandCoverageSummaries.filter((brand) =>
@@ -332,13 +369,29 @@ export default function EVMap() {
 
   const filteredCountryCoverageSummaries = useMemo(
     () =>
-      countryCoverageSummaries.filter((country) =>
+      visibleCountryCoverageSummaries.filter((country) =>
         matchesSearchQuery(
-          [country.countryName, country.isoCode, country.brandNames.join(" ")],
+          [
+            country.countryName,
+            country.isoCode,
+            countryRegionLookup[country.isoCode],
+            country.brandNames.join(" "),
+          ],
           coverageSearchQuery,
         ),
       ),
-    [countryCoverageSummaries, coverageSearchQuery],
+    [coverageSearchQuery, countryRegionLookup, visibleCountryCoverageSummaries],
+  );
+
+  const filteredRegionCoverageSummaries = useMemo(
+    () =>
+      regionCoverageSummaries.filter((region) =>
+        matchesSearchQuery(
+          [region.regionName, region.brandNames.join(" ")],
+          coverageSearchQuery,
+        ),
+      ),
+    [coverageSearchQuery, regionCoverageSummaries],
   );
 
   const shareUrl = useMemo(
@@ -414,6 +467,27 @@ export default function EVMap() {
   useEffect(() => {
     setFootprintSearchQuery("");
   }, [activeSelectedBrand]);
+
+  useEffect(() => {
+    if (!activeSelectedBrand) {
+      return;
+    }
+
+    setSelectedCoverageRegion("");
+  }, [activeSelectedBrand]);
+
+  useEffect(() => {
+    if (
+      !selectedCoverageRegion ||
+      regionCoverageSummaries.some(
+        (region) => region.regionName === selectedCoverageRegion,
+      )
+    ) {
+      return;
+    }
+
+    setSelectedCoverageRegion("");
+  }, [regionCoverageSummaries, selectedCoverageRegion]);
 
   const fillColor = buildColorExpression(visibleCountryBrandCount);
   const mapStatus = loading
@@ -820,22 +894,28 @@ export default function EVMap() {
       ) : brandCoverageSummaries.length > 0 ? (
         <aside className="absolute right-6 bottom-6 max-h-80 w-80 overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md">
           <div>
-            <h2 className="text-sm font-semibold text-gray-800">
-              {coveragePanelView === "brands" ? "Brand coverage" : "Country coverage"}
-            </h2>
-            <p className="text-xs text-gray-500">
-              {coveragePanelView === "brands"
-                ? "Compare confirmed official markets across tracked brands."
-                : "See which countries have the widest confirmed tracked brand coverage."}
-            </p>
-          </div>
+              <h2 className="text-sm font-semibold text-gray-800">
+                {coveragePanelView === "brands"
+                  ? "Brand coverage"
+                  : coveragePanelView === "countries"
+                    ? "Country coverage"
+                    : "Regional coverage"}
+              </h2>
+              <p className="text-xs text-gray-500">
+                {coveragePanelView === "brands"
+                  ? "Compare confirmed official markets across tracked brands."
+                  : coveragePanelView === "countries"
+                    ? "See which countries have the widest confirmed tracked brand coverage."
+                    : "Compare confirmed coverage across regions and drill into the strongest clusters."}
+              </p>
+            </div>
 
           <div
             className="mt-3 inline-flex rounded-md border border-gray-200 bg-gray-50 p-1"
             role="tablist"
             aria-label="Coverage ranking view"
           >
-            {(["brands", "countries"] as const).map((view) => {
+            {(["brands", "countries", "regions"] as const).map((view) => {
               const isActive = coveragePanelView === view;
 
               return (
@@ -851,7 +931,11 @@ export default function EVMap() {
                   }`}
                   onClick={() => setCoveragePanelView(view)}
                 >
-                  {view === "brands" ? "Brands" : "Countries"}
+                  {view === "brands"
+                    ? "Brands"
+                    : view === "countries"
+                      ? "Countries"
+                      : "Regions"}
                 </button>
               );
             })}
@@ -864,7 +948,9 @@ export default function EVMap() {
             >
               {coveragePanelView === "brands"
                 ? "Search brand coverage"
-                : "Search country coverage"}
+                : coveragePanelView === "countries"
+                  ? "Search country coverage"
+                  : "Search regional coverage"}
             </label>
             <input
               id="coverage-search"
@@ -873,7 +959,9 @@ export default function EVMap() {
               placeholder={
                 coveragePanelView === "brands"
                   ? "Filter by brand name"
-                  : "Filter by country, ISO code, or brand"
+                  : coveragePanelView === "countries"
+                    ? "Filter by country, ISO code, region, or brand"
+                    : "Filter by region or active brand"
               }
               value={coverageSearchQuery}
               onChange={(event) => setCoverageSearchQuery(event.target.value)}
@@ -885,11 +973,19 @@ export default function EVMap() {
                   {brandCoverageSummaries.length}{" "}
                   {brandCoverageSummaries.length === 1 ? "brand" : "brands"}
                 </>
-              ) : (
+              ) : coveragePanelView === "countries" ? (
                 <>
                   Showing {filteredCountryCoverageSummaries.length} of{" "}
-                  {countryCoverageSummaries.length}{" "}
-                  {countryCoverageSummaries.length === 1 ? "country" : "countries"}
+                  {visibleCountryCoverageSummaries.length}{" "}
+                  {visibleCountryCoverageSummaries.length === 1
+                    ? "country"
+                    : "countries"}
+                </>
+              ) : (
+                <>
+                  Showing {filteredRegionCoverageSummaries.length} of{" "}
+                  {regionCoverageSummaries.length}{" "}
+                  {regionCoverageSummaries.length === 1 ? "region" : "regions"}
                 </>
               )}
             </p>
@@ -938,49 +1034,113 @@ export default function EVMap() {
                 ))
               )}
             </ul>
-          ) : (
-            <ul className="mt-3 max-h-48 space-y-3 overflow-y-auto pr-1">
-              {filteredCountryCoverageSummaries.length === 0 ? (
-                <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
-                  No countries match this filter.
-                </li>
-              ) : (
-                filteredCountryCoverageSummaries.map((country) => (
-                  <li
-                    key={country.isoCode}
-                    className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
+          ) : coveragePanelView === "countries" ? (
+            <>
+              {selectedCoverageRegion ? (
+                <div className="mt-3 flex items-center justify-between gap-3 rounded-md border border-sky-100 bg-sky-50 px-3 py-2 text-xs text-sky-900">
+                  <span>Filtering countries to {selectedCoverageRegion}</span>
+                  <button
+                    type="button"
+                    className="font-medium underline underline-offset-2"
+                    onClick={() => setSelectedCoverageRegion("")}
                   >
-                    <button
-                      type="button"
-                      className="w-full text-left"
-                      onClick={() =>
-                        setSelectedCountry({
-                          isoCode: country.isoCode,
-                          countryName: country.countryName,
-                        })
-                      }
+                    Clear region
+                  </button>
+                </div>
+              ) : null}
+
+              <ul className="mt-3 max-h-48 space-y-3 overflow-y-auto pr-1">
+                {filteredCountryCoverageSummaries.length === 0 ? (
+                  <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
+                    No countries match this filter.
+                  </li>
+                ) : (
+                  filteredCountryCoverageSummaries.map((country) => (
+                    <li
+                      key={country.isoCode}
+                      className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
                     >
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <p className="text-sm font-medium text-gray-800">
-                            {country.countryName}
-                          </p>
-                          <p className="text-xs uppercase tracking-wide text-gray-500">
-                            {country.isoCode}
+                      <button
+                        type="button"
+                        className="w-full text-left"
+                        onClick={() =>
+                          setSelectedCountry({
+                            isoCode: country.isoCode,
+                            countryName: country.countryName,
+                          })
+                        }
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          <div>
+                            <p className="text-sm font-medium text-gray-800">
+                              {country.countryName}
+                            </p>
+                            <p className="text-xs uppercase tracking-wide text-gray-500">
+                              {country.isoCode}
+                              {countryRegionLookup[country.isoCode]
+                                ? ` · ${countryRegionLookup[country.isoCode]}`
+                                : ""}
+                            </p>
+                          </div>
+                          <p className="text-right text-xs text-gray-500">
+                            {country.confirmedBrandCount} confirmed{" "}
+                            {country.confirmedBrandCount === 1 ? "brand" : "brands"}
+                            {country.uncertainBrandCount > 0
+                              ? ` · ${country.uncertainBrandCount} uncertain`
+                              : ""}
                           </p>
                         </div>
-                        <p className="text-right text-xs text-gray-500">
-                          {country.confirmedBrandCount} confirmed{" "}
-                          {country.confirmedBrandCount === 1 ? "brand" : "brands"}
-                          {country.uncertainBrandCount > 0
-                            ? ` · ${country.uncertainBrandCount} uncertain`
+                        <p className="mt-2 text-xs text-gray-500">
+                          {country.brandNames.join(", ")}
+                        </p>
+                      </button>
+                    </li>
+                  ))
+                )}
+              </ul>
+            </>
+          ) : (
+            <ul className="mt-3 max-h-48 space-y-3 overflow-y-auto pr-1">
+              {filteredRegionCoverageSummaries.length === 0 ? (
+                <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
+                  No regions match this filter.
+                </li>
+              ) : (
+                filteredRegionCoverageSummaries.map((region) => (
+                  <li
+                    key={region.regionName}
+                    className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <button
+                        type="button"
+                        className="text-left"
+                        onClick={() => {
+                          setSelectedCoverageRegion(region.regionName);
+                          setCoveragePanelView("countries");
+                        }}
+                      >
+                        <p className="text-sm font-medium text-gray-800">
+                          {region.regionName}
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          {region.confirmedCountryCount} confirmed{" "}
+                          {region.confirmedCountryCount === 1
+                            ? "country"
+                            : "countries"}
+                          {region.uncertainCountryCount > 0
+                            ? ` · ${region.uncertainCountryCount} uncertain-only`
                             : ""}
                         </p>
-                      </div>
-                      <p className="mt-2 text-xs text-gray-500">
-                        {country.brandNames.join(", ")}
+                      </button>
+                      <p className="text-right text-xs text-gray-500">
+                        {region.brandNames.length} tracked{" "}
+                        {region.brandNames.length === 1 ? "brand" : "brands"}
                       </p>
-                    </button>
+                    </div>
+                    <p className="mt-2 text-xs text-gray-500">
+                      {region.brandNames.join(", ")}
+                    </p>
                   </li>
                 ))
               )}

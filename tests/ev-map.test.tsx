@@ -1,5 +1,12 @@
 import React, { type ReactNode } from "react";
-import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { EVPresenceData } from "../src/types";
 
@@ -121,8 +128,30 @@ const mockData: EVPresenceData = {
 const mockGeoJson = {
   type: "FeatureCollection",
   features: [
-    { properties: { ISO_A3: "NOR", ADMIN: "Norway" } },
-    { properties: { ISO_A3: "SWE", ADMIN: "Sweden" } },
+    {
+      properties: {
+        ISO_A3: "SWE",
+        ADMIN: "Sweden",
+        REGION_UN: "Europe",
+        CONTINENT: "Europe",
+      },
+    },
+    {
+      properties: {
+        ISO_A3: "NOR",
+        ADMIN: "Norway",
+        REGION_UN: "Europe",
+        CONTINENT: "Europe",
+      },
+    },
+    {
+      properties: {
+        ISO_A3: "CHN",
+        ADMIN: "China",
+        REGION_UN: "Asia",
+        CONTINENT: "Asia",
+      },
+    },
   ],
 };
 
@@ -450,6 +479,109 @@ describe("EVMap", () => {
     expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
   });
 
+  it("adds a regional coverage view that can drill into country rankings", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const coveragePanel = screen
+      .getByRole("heading", { name: "Brand coverage" })
+      .closest("aside");
+    expect(coveragePanel).not.toBeNull();
+
+    fireEvent.click(within(coveragePanel!).getByRole("tab", { name: "Regions" }));
+
+    const regionalCoveragePanel = screen
+      .getByRole("heading", { name: "Regional coverage" })
+      .closest("aside");
+    expect(regionalCoveragePanel).not.toBeNull();
+    expect(
+      within(regionalCoveragePanel!).getByText(
+        "Compare confirmed coverage across regions and drill into the strongest clusters.",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      within(regionalCoveragePanel!).getByLabelText("Search regional coverage"),
+    ).toBeInTheDocument();
+    expect(
+      within(regionalCoveragePanel!).getByText("Showing 2 of 2 regions"),
+    ).toBeInTheDocument();
+    const europeRegionRow = within(regionalCoveragePanel!)
+      .getByText("Europe")
+      .closest("li");
+    expect(europeRegionRow).not.toBeNull();
+    expect(
+      within(europeRegionRow!).getByText("1 confirmed country"),
+    ).toBeInTheDocument();
+    expect(
+      within(europeRegionRow!).getByText("2 tracked brands"),
+    ).toBeInTheDocument();
+    expect(
+      within(europeRegionRow!).getByText("BYD, XPeng"),
+    ).toBeInTheDocument();
+
+    fireEvent.change(
+      within(regionalCoveragePanel!).getByLabelText("Search regional coverage"),
+      {
+        target: { value: "asia" },
+      },
+    );
+    expect(
+      within(regionalCoveragePanel!).getByText("Showing 1 of 2 regions"),
+    ).toBeInTheDocument();
+    expect(within(regionalCoveragePanel!).getByText("Asia")).toBeInTheDocument();
+    expect(within(regionalCoveragePanel!).queryByText("Europe")).not.toBeInTheDocument();
+
+    fireEvent.change(
+      within(regionalCoveragePanel!).getByLabelText("Search regional coverage"),
+      {
+        target: { value: "" },
+      },
+    );
+
+    fireEvent.click(
+      within(regionalCoveragePanel!).getByRole("button", { name: /Europe/i }),
+    );
+
+    const drilledCountryCoveragePanel = screen
+      .getByRole("heading", { name: "Country coverage" })
+      .closest("aside");
+    expect(drilledCountryCoveragePanel).not.toBeNull();
+    expect(
+      within(drilledCountryCoveragePanel!).getByText("Filtering countries to Europe"),
+    ).toBeInTheDocument();
+    expect(
+      within(drilledCountryCoveragePanel!).getByText("Showing 1 of 1 country"),
+    ).toBeInTheDocument();
+    expect(within(drilledCountryCoveragePanel!).getByText("Norway")).toBeInTheDocument();
+    expect(
+      within(drilledCountryCoveragePanel!).queryByText("Sweden"),
+    ).not.toBeInTheDocument();
+    expect(
+      within(drilledCountryCoveragePanel!).queryByText("China"),
+    ).not.toBeInTheDocument();
+    fireEvent.click(
+      within(drilledCountryCoveragePanel!).getByRole("button", {
+        name: "Clear region",
+      }),
+    );
+    expect(
+      within(drilledCountryCoveragePanel!).getByText("Showing 2 of 2 countries"),
+    ).toBeInTheDocument();
+    expect(within(drilledCountryCoveragePanel!).getByText("China")).toBeInTheDocument();
+  });
+
   it("drops invalid brand query params after loading", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
@@ -468,7 +600,9 @@ describe("EVMap", () => {
     expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
     expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("All brands");
     expect(screen.getByRole("heading", { name: "Brand coverage" })).toBeInTheDocument();
-    expect(window.location.search).toBe("?country=NOR");
+    await waitFor(() => {
+      expect(window.location.search).toBe("?country=NOR");
+    });
   });
 
   it("syncs brand and country selection with browser history navigation", async () => {

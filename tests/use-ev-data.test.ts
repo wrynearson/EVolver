@@ -2,7 +2,9 @@ import { describe, expect, it } from "vitest";
 import {
   computeCountryBrandCounts,
   computeDatasetSummary,
+  getCountryRegionLookup,
   getCountryCoverageSummaries,
+  getRegionCoverageSummaries,
 } from "../src/hooks/useEVData";
 import type { EVPresenceData } from "../src/types";
 
@@ -50,6 +52,21 @@ const mockData: EVPresenceData = {
   },
 };
 
+const mockCountries = {
+  type: "FeatureCollection",
+  features: [
+    {
+      properties: { ISO_A3: "NOR", REGION_UN: "Europe", CONTINENT: "Europe" },
+    },
+    {
+      properties: { ISO_A3: "CHN", REGION_UN: "Asia", CONTINENT: "Asia" },
+    },
+    {
+      properties: { ISO_A3: "SWE", REGION_UN: "Europe", CONTINENT: "Europe" },
+    },
+  ],
+} as const;
+
 describe("useEVData helpers", () => {
   it("computes country counts and dataset summaries for filtered views", () => {
     expect(computeCountryBrandCounts(mockData)).toEqual({
@@ -91,6 +108,25 @@ describe("useEVData helpers", () => {
         confirmedBrandCount: 0,
         uncertainBrandCount: 1,
         brandNames: ["XPeng"],
+      },
+    ]);
+  });
+
+  it("builds regional coverage summaries from country metadata", () => {
+    const countryRegionLookup = getCountryRegionLookup(mockCountries);
+
+    expect(getRegionCoverageSummaries(mockData, countryRegionLookup)).toEqual([
+      {
+        regionName: "Europe",
+        confirmedCountryCount: 1,
+        uncertainCountryCount: 1,
+        brandNames: ["BYD", "XPeng"],
+      },
+      {
+        regionName: "Asia",
+        confirmedCountryCount: 1,
+        uncertainCountryCount: 0,
+        brandNames: ["BYD"],
       },
     ]);
   });
