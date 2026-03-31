@@ -468,3 +468,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added BYD official presence for Saudi Arabia and the Philippines after confirming BYD's official global-to-local market handoffs plus live local showroom, dealer, service, or test-drive surfaces.
 **Result**: pass
 **TODO**: Verify the next strongest BYD markets beyond the updated footprint, prioritizing official Southeast Asia and Latin America local sites that expose localized consumer pages plus live dealer or service flows.
+
+## 2026-03-31
+**Did**: Added BYD official presence for Indonesia, Malaysia, Mexico, and Chile after confirming localized passenger-car sites plus official local contact, aftersales, or dealer-network surfaces.
+**Result**: pass
+**TODO**: Verify the next strongest BYD markets beyond the updated footprint, prioritizing official Southeast Asia and Latin America local sites that expose localized consumer pages plus live dealer, contact, or service flows.

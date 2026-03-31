@@ -93,6 +93,50 @@
             "https://bydcarsphilippines.com/test-drive"
           ],
           "uncertain": false
+        },
+        "IDN": {
+          "name": "Indonesia",
+          "present": true,
+          "source": "https://www.byd.com/id",
+          "sources": [
+            "https://www.byd.com/id",
+            "https://www.byd.com/id/find-store",
+            "https://www.byd.international/country/indonesia"
+          ],
+          "uncertain": false
+        },
+        "MYS": {
+          "name": "Malaysia",
+          "present": true,
+          "source": "https://byd.simemotors.my/about-byd",
+          "sources": [
+            "https://byd.simemotors.my/about-byd",
+            "https://byd.simemotors.my/contact-us",
+            "https://www.simemotors.com.my/media/latest-highlights/sime-darby-motors-officially-launches-byd-in-malaysia"
+          ],
+          "uncertain": false
+        },
+        "MEX": {
+          "name": "Mexico",
+          "present": true,
+          "source": "https://www.byd.com/mx",
+          "sources": [
+            "https://www.byd.com/mx",
+            "https://www.byd.com/mx/service-maintenance",
+            "https://www.byd.international/country/mexico"
+          ],
+          "uncertain": false
+        },
+        "CHL": {
+          "name": "Chile",
+          "present": true,
+          "source": "https://www.bydchile.com/vehiculos-pasajeros.php",
+          "sources": [
+            "https://www.bydchile.com/vehiculos-pasajeros.php",
+            "https://www.bydchile.com/contacto.php?page=cont",
+            "https://www.byd.international/country/chile"
+          ],
+          "uncertain": false
         }
       }
     },
