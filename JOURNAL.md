@@ -407,3 +407,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-30
 **Did**: Re-checked ORA Kuwait against GWM's official global market directory plus the live `haval.com.kw` root and likely ORA routes, then narrowed the ORA backlog further because GWM Europe's official ORA test-drive page still lists current availability only in Germany, Ireland, Israel, Sweden, and the United Kingdom.
 **Result**: pass
+## 2026-03-31
+**Did**: Added ORA Ukraine after confirming GWM's official global market selector links Ukraine to the live local `haval-ukraine.com` site and that same official site now exposes a dedicated ORA catalogue page for the Ukrainian market.
+**Result**: pass

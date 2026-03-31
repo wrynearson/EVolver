@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-30",
+    "last_updated": "2026-03-31",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -1594,6 +1594,17 @@
             "https://ora.gwm.az/models/ora/",
             "https://gwm.az/test-drive/",
             "https://gwm.az/contact/"
+          ],
+          "uncertain": false
+        },
+        "UKR": {
+          "name": "Ukraine",
+          "present": true,
+          "source": "https://www.haval-ukraine.com/w/katalog/ora/",
+          "sources": [
+            "https://www.gwm-global.com/global.html",
+            "https://www.haval-ukraine.com/",
+            "https://www.haval-ukraine.com/w/katalog/ora/"
           ],
           "uncertain": false
         }
