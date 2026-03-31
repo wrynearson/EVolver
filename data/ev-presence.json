@@ -524,6 +524,50 @@
             "https://www.byd.com/ro/find-store"
           ],
           "uncertain": false
+        },
+        "CZE": {
+          "name": "Czechia",
+          "present": true,
+          "source": "https://www.byd.com/cz",
+          "sources": [
+            "https://www.byd.com/cz",
+            "https://www.byd.com/cz/o-byd",
+            "https://www.byd.com/cz/vyhledat-prodejce"
+          ],
+          "uncertain": false
+        },
+        "HRV": {
+          "name": "Croatia",
+          "present": true,
+          "source": "https://www.byd.com/hr",
+          "sources": [
+            "https://www.byd.com/hr",
+            "https://www.byd.com/hr/about-byd",
+            "https://www.byd.com/hr/find-store"
+          ],
+          "uncertain": false
+        },
+        "FIN": {
+          "name": "Finland",
+          "present": true,
+          "source": "https://www.byd.com/en-fi",
+          "sources": [
+            "https://www.byd.com/en-fi",
+            "https://www.byd.com/en-fi/about-byd",
+            "https://www.byd.com/en-fi/find-store"
+          ],
+          "uncertain": false
+        },
+        "SVK": {
+          "name": "Slovakia",
+          "present": true,
+          "source": "https://www.byd.com/sk",
+          "sources": [
+            "https://www.byd.com/sk",
+            "https://www.byd.com/sk/O-spolocnosti-BYD",
+            "https://www.byd.com/sk/Vyhladajte-predajnu"
+          ],
+          "uncertain": false
         }
       }
     },
