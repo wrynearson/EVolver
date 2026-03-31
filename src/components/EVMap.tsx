@@ -338,6 +338,19 @@ export default function EVMap() {
     setSelectedBrand("");
     setBrandLookupQuery("");
   };
+  const resetView = () => {
+    clearBrandSelection();
+    setHoveredCountry(null);
+    setSelectedCountry(null);
+    setCoveragePanelView("brands");
+    setSelectedCoverageRegion("");
+    setCoverageSort(DEFAULT_COVERAGE_SORT);
+    setFootprintSort(DEFAULT_FOOTPRINT_SORT);
+    setCoverageSearchQuery("");
+    setFootprintSearchQuery("");
+    setCountryLookupQuery("");
+    setCopyLinkStatus("idle");
+  };
 
   const brandOptions = useMemo(
     () => (data ? Object.keys(data.brands).sort((a, b) => a.localeCompare(b)) : []),
@@ -793,6 +806,16 @@ export default function EVMap() {
       selectedCoverageRegion,
     ],
   );
+  const hasCustomView = Boolean(
+    activeSelectedBrand ||
+      resolvedSelectedCountry ||
+      selectedCoverageRegion ||
+      coveragePanelView !== "brands" ||
+      coverageSort !== DEFAULT_COVERAGE_SORT ||
+      footprintSort !== DEFAULT_FOOTPRINT_SORT ||
+      coverageSearchQuery ||
+      footprintSearchQuery,
+  );
   const legendItems = useMemo(
     () => getLegendItems(activeSelectedBrand || undefined),
     [activeSelectedBrand],
@@ -1238,27 +1261,37 @@ export default function EVMap() {
             </div>
           </div>
           <div className="mt-3">
-            <button
-              type="button"
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-              onClick={() => {
-                if (!shareUrl || !navigator.clipboard?.writeText) {
-                  setCopyLinkStatus("failed");
-                  return;
-                }
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                className="rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
+                disabled={!hasCustomView}
+                onClick={resetView}
+              >
+                Reset view
+              </button>
+              <button
+                type="button"
+                className="rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                onClick={() => {
+                  if (!shareUrl || !navigator.clipboard?.writeText) {
+                    setCopyLinkStatus("failed");
+                    return;
+                  }
 
-                void navigator.clipboard.writeText(shareUrl).then(
-                  () => setCopyLinkStatus("copied"),
-                  () => setCopyLinkStatus("failed"),
-                );
-              }}
-            >
-              {copyLinkStatus === "copied"
-                ? "Copied share link"
-                : copyLinkStatus === "failed"
-                  ? "Copy failed"
-                  : "Copy share link"}
-            </button>
+                  void navigator.clipboard.writeText(shareUrl).then(
+                    () => setCopyLinkStatus("copied"),
+                    () => setCopyLinkStatus("failed"),
+                  );
+                }}
+              >
+                {copyLinkStatus === "copied"
+                  ? "Copied share link"
+                  : copyLinkStatus === "failed"
+                    ? "Copy failed"
+                    : "Copy share link"}
+              </button>
+            </div>
             {shareUrl ? (
               <a
                 className="mt-2 block text-center text-sm font-medium text-blue-700 underline decoration-blue-300 underline-offset-2 hover:text-blue-800"

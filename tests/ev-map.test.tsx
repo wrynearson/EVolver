@@ -714,6 +714,86 @@ describe("EVMap", () => {
     expect(screen.queryByRole("heading", { name: "Sweden" })).not.toBeInTheDocument();
   });
 
+  it("resets the current view back to the default map state", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const resetButton = screen.getByRole("button", { name: "Reset view" });
+    expect(resetButton).toBeDisabled();
+
+    fireEvent.change(screen.getByLabelText("Brand filter"), {
+      target: { value: "XPeng" },
+    });
+    fireEvent.change(screen.getByLabelText("Region filter"), {
+      target: { value: "Europe" },
+    });
+    fireEvent.change(screen.getByLabelText("Country lookup"), {
+      target: { value: "SWE" },
+    });
+
+    const footprintPanel = screen
+      .getByRole("heading", { name: "Brand footprint" })
+      .closest("aside");
+    expect(footprintPanel).not.toBeNull();
+    fireEvent.change(within(footprintPanel!).getByLabelText("Sort footprint"), {
+      target: { value: "name-desc" },
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Clear brand filter" }));
+
+    const coveragePanel = screen
+      .getByRole("heading", { name: "Brand coverage" })
+      .closest("aside");
+    expect(coveragePanel).not.toBeNull();
+    fireEvent.click(
+      within(coveragePanel!).getByRole("tab", { name: "Countries" }),
+    );
+    const countryCoveragePanel = screen
+      .getByRole("heading", { name: "Country coverage" })
+      .closest("aside");
+    expect(countryCoveragePanel).not.toBeNull();
+    fireEvent.change(within(countryCoveragePanel!).getByLabelText("Search country coverage"), {
+      target: { value: "nor" },
+    });
+    fireEvent.change(within(countryCoveragePanel!).getByLabelText("Sort rankings"), {
+      target: { value: "name" },
+    });
+
+    expect(screen.getByRole("button", { name: "Reset view" })).toBeEnabled();
+    expect(
+      Object.fromEntries(new URLSearchParams(window.location.search).entries()),
+    ).toEqual({
+      country: "SWE",
+      view: "countries",
+      region: "Europe",
+      coverageSort: "name",
+      footprintSort: "name-desc",
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Reset view" }));
+
+    expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("");
+    expect(screen.getByLabelText("Region filter")).toHaveDisplayValue("All regions");
+    expect(screen.getByLabelText("Country lookup")).toHaveDisplayValue("");
+    expect(screen.queryByRole("heading", { name: "Sweden" })).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Brand coverage" })).toBeInTheDocument();
+    expect(screen.getByLabelText("Sort rankings")).toHaveDisplayValue("Coverage strength");
+    expect(screen.getByRole("button", { name: "Reset view" })).toBeDisabled();
+    expect(window.location.search).toBe("");
+  });
+
   it("applies the region filter across the map summary, lookup, and brand footprint", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);

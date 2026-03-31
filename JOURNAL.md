@@ -498,3 +498,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added BYD official presence for Nicaragua after confirming BYD's own country, city, and authorized-dealer pages for Managua on the official `byd.international` directory.
 **Result**: pass
 **TODO**: Verify the next strongest BYD markets beyond the updated footprint, prioritizing remaining official Central American and Caribbean BYD markets with localized consumer pages or BYD-hosted dealer-detail pages.
+## 2026-03-31
+**Did**: Added a one-click reset view control that clears the active brand, country, region, ranking state, and panel searches back to the default map view, with focused UI coverage.
+**Result**: pass
