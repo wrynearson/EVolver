@@ -332,6 +332,9 @@ describe("EVMap", () => {
       within(footprintPanel!).getByText("Showing 1 of 1 market"),
     ).toBeInTheDocument();
     expect(
+      within(footprintPanel!).getByLabelText("Sort footprint"),
+    ).toHaveDisplayValue("Country name (A-Z)");
+    expect(
       within(footprintPanel!).getByRole("button", { name: /Norway/i }),
     ).toBeInTheDocument();
     expect(
@@ -424,6 +427,9 @@ describe("EVMap", () => {
     expect(
       within(coveragePanel!).getByText("Showing 2 of 2 brands"),
     ).toBeInTheDocument();
+    expect(
+      within(coveragePanel!).getByLabelText("Sort rankings"),
+    ).toHaveDisplayValue("Coverage strength");
     fireEvent.change(within(coveragePanel!).getByLabelText("Search brand coverage"), {
       target: { value: "BY" },
     });
@@ -450,6 +456,20 @@ describe("EVMap", () => {
     expect(bydFootprintPanel).not.toBeNull();
     expect(
       within(bydFootprintPanel!).getByText("Showing 2 of 2 markets"),
+    ).toBeInTheDocument();
+    const footprintItems = within(bydFootprintPanel!).getAllByRole("listitem");
+    expect(within(footprintItems[0]).getByRole("button", { name: /China/i })).toBeInTheDocument();
+    expect(within(footprintItems[1]).getByRole("button", { name: /Norway/i })).toBeInTheDocument();
+    fireEvent.change(within(bydFootprintPanel!).getByLabelText("Sort footprint"), {
+      target: { value: "name-desc" },
+    });
+    expect(window.location.search).toBe("?country=SWE&brand=BYD&footprintSort=name-desc");
+    const reversedFootprintItems = within(bydFootprintPanel!).getAllByRole("listitem");
+    expect(
+      within(reversedFootprintItems[0]).getByRole("button", { name: /Norway/i }),
+    ).toBeInTheDocument();
+    expect(
+      within(reversedFootprintItems[1]).getByRole("button", { name: /China/i }),
     ).toBeInTheDocument();
     fireEvent.change(
       within(bydFootprintPanel!).getByLabelText("Search footprint markets"),
@@ -525,6 +545,19 @@ describe("EVMap", () => {
     expect(
       within(countryCoveragePanel!).getByText("BYD, XPeng"),
     ).toBeInTheDocument();
+    fireEvent.change(within(countryCoveragePanel!).getByLabelText("Sort rankings"), {
+      target: { value: "name" },
+    });
+    expect(window.location.search).toBe(
+      "?country=SWE&footprintSort=name-desc&view=countries&coverageSort=name",
+    );
+    const sortedCountryItems = within(countryCoveragePanel!).getAllByRole("listitem");
+    expect(
+      within(sortedCountryItems[0]).getByRole("button", { name: /China/i }),
+    ).toBeInTheDocument();
+    expect(
+      within(sortedCountryItems[1]).getByRole("button", { name: /Norway/i }),
+    ).toBeInTheDocument();
 
     fireEvent.click(within(countryCoveragePanel!).getByRole("button", { name: /Norway/i }));
 
@@ -537,7 +570,9 @@ describe("EVMap", () => {
         name: "Open official website for XPeng",
       }),
     ).toHaveAttribute("href", "https://www.xpeng.com");
-    expect(window.location.search).toBe("?country=NOR&view=countries");
+    expect(window.location.search).toBe(
+      "?country=NOR&footprintSort=name-desc&view=countries&coverageSort=name",
+    );
 
     fireEvent.click(
       within(allBrandsNorwayPanel!).getByRole("button", {
@@ -545,7 +580,9 @@ describe("EVMap", () => {
       }),
     );
     expect(screen.getByDisplayValue("XPeng")).toBeInTheDocument();
-    expect(window.location.search).toBe("?country=NOR&view=countries&brand=XPeng");
+    expect(window.location.search).toBe(
+      "?country=NOR&footprintSort=name-desc&view=countries&coverageSort=name&brand=XPeng",
+    );
     expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
   });
 
@@ -569,10 +606,12 @@ describe("EVMap", () => {
     fireEvent.change(countryLookup, { target: { value: "sw" } });
 
     expect(screen.getByText("Showing 1 matching country")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /Sweden/i })).toBeInTheDocument();
+    const countrySuggestions = screen.getByText("Showing 1 matching country").closest("div");
+    expect(countrySuggestions).not.toBeNull();
+    expect(within(countrySuggestions!).getByRole("button", { name: /Sweden/i })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Sweden" })).not.toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: /Sweden/i }));
+    fireEvent.click(within(countrySuggestions!).getByRole("button", { name: /Sweden/i }));
 
     expect(screen.getByLabelText("Country lookup")).toHaveDisplayValue("Sweden");
     expect(screen.getByRole("heading", { name: "Sweden" })).toBeInTheDocument();
@@ -732,6 +771,15 @@ describe("EVMap", () => {
     expect(
       within(europeRegionRow!).getByText("BYD, XPeng"),
     ).toBeInTheDocument();
+    fireEvent.change(within(regionalCoveragePanel!).getByLabelText("Sort rankings"), {
+      target: { value: "name" },
+    });
+    expect(window.location.search).toBe("?view=regions&coverageSort=name");
+    const sortedRegionItems = within(regionalCoveragePanel!).getAllByRole("listitem");
+    expect(within(sortedRegionItems[0]).getByRole("button", { name: /Asia/i })).toBeInTheDocument();
+    expect(
+      within(sortedRegionItems[1]).getByRole("button", { name: /Europe/i }),
+    ).toBeInTheDocument();
 
     fireEvent.change(
       within(regionalCoveragePanel!).getByLabelText("Search regional coverage"),
@@ -755,7 +803,7 @@ describe("EVMap", () => {
     fireEvent.click(
       within(regionalCoveragePanel!).getByRole("button", { name: /Europe/i }),
     );
-    expect(window.location.search).toBe("?view=countries&region=Europe");
+    expect(window.location.search).toBe("?view=countries&coverageSort=name&region=Europe");
 
     const drilledCountryCoveragePanel = screen
       .getByRole("heading", { name: "Country coverage" })
@@ -779,7 +827,7 @@ describe("EVMap", () => {
         name: "Clear region",
       }),
     );
-    expect(window.location.search).toBe("?view=countries");
+    expect(window.location.search).toBe("?view=countries&coverageSort=name");
     expect(
       within(drilledCountryCoveragePanel!).getByText("Showing 2 of 2 countries"),
     ).toBeInTheDocument();
@@ -795,7 +843,11 @@ describe("EVMap", () => {
         headers: { "Content-Type": "application/json" },
       });
     });
-    window.history.replaceState({}, "", "/?view=countries&region=Europe");
+    window.history.replaceState(
+      {},
+      "",
+      "/?view=countries&region=Europe&coverageSort=name&footprintSort=name-desc",
+    );
 
     const { default: EVMap } = await import("../src/components/EVMap");
 
@@ -814,7 +866,10 @@ describe("EVMap", () => {
       screen.getByRole("link", { name: "Open share link in a new tab" }),
     ).toHaveAttribute(
       "href",
-      "http://localhost:3000/?view=countries&region=Europe",
+      "http://localhost:3000/?view=countries&region=Europe&coverageSort=name&footprintSort=name-desc",
+    );
+    expect(within(countryCoveragePanel!).getByLabelText("Sort rankings")).toHaveDisplayValue(
+      "Alphabetical",
     );
   });
 

@@ -25,11 +25,15 @@ import type { MapCountrySelection } from "../types";
 
 type CopyLinkStatus = "idle" | "copied" | "failed";
 type CoveragePanelView = "brands" | "countries" | "regions";
+type CoverageSort = "coverage" | "name";
+type FootprintSort = "name" | "name-desc";
 type SelectionState = {
   selectedBrand: string;
   selectedCountry: MapCountrySelection | null;
   coveragePanelView: CoveragePanelView;
   selectedCoverageRegion: string;
+  coverageSort: CoverageSort;
+  footprintSort: FootprintSort;
 };
 type CountryOption = {
   isoCode: string;
@@ -45,9 +49,19 @@ const COVERAGE_PANEL_VIEWS: CoveragePanelView[] = [
   "countries",
   "regions",
 ];
+const DEFAULT_COVERAGE_SORT: CoverageSort = "coverage";
+const DEFAULT_FOOTPRINT_SORT: FootprintSort = "name";
 
 function isCoveragePanelView(value: string): value is CoveragePanelView {
   return value === "brands" || value === "countries" || value === "regions";
+}
+
+function isCoverageSort(value: string): value is CoverageSort {
+  return value === "coverage" || value === "name";
+}
+
+function isFootprintSort(value: string): value is FootprintSort {
+  return value === "name" || value === "name-desc";
 }
 
 function matchesSearchQuery(values: Array<string | undefined>, query: string) {
@@ -146,6 +160,8 @@ function getSelectionStateFromSearch(search: string): SelectionState {
   const selectedCountryIsoCode = normalizeIsoCode(searchParams.get("country"));
   const requestedCoveragePanelView = searchParams.get("view")?.trim() ?? "";
   const selectedCoverageRegion = searchParams.get("region")?.trim() ?? "";
+  const requestedCoverageSort = searchParams.get("coverageSort")?.trim() ?? "";
+  const requestedFootprintSort = searchParams.get("footprintSort")?.trim() ?? "";
   const coveragePanelView = isCoveragePanelView(requestedCoveragePanelView)
     ? requestedCoveragePanelView
     : selectedCoverageRegion
@@ -159,6 +175,12 @@ function getSelectionStateFromSearch(search: string): SelectionState {
       : null,
     coveragePanelView,
     selectedCoverageRegion,
+    coverageSort: isCoverageSort(requestedCoverageSort)
+      ? requestedCoverageSort
+      : DEFAULT_COVERAGE_SORT,
+    footprintSort: isFootprintSort(requestedFootprintSort)
+      ? requestedFootprintSort
+      : DEFAULT_FOOTPRINT_SORT,
   };
 }
 
@@ -169,6 +191,8 @@ function getInitialSelectionState(): SelectionState {
       selectedCountry: null,
       coveragePanelView: "brands",
       selectedCoverageRegion: "",
+      coverageSort: DEFAULT_COVERAGE_SORT,
+      footprintSort: DEFAULT_FOOTPRINT_SORT,
     };
   }
 
@@ -180,6 +204,8 @@ function buildShareUrl(
   selectedCountry: MapCountrySelection | null,
   coveragePanelView: CoveragePanelView,
   selectedCoverageRegion: string,
+  coverageSort: CoverageSort,
+  footprintSort: FootprintSort,
 ) {
   if (typeof window === "undefined") {
     return "";
@@ -209,6 +235,18 @@ function buildShareUrl(
     url.searchParams.set("region", selectedCoverageRegion);
   } else {
     url.searchParams.delete("region");
+  }
+
+  if (coverageSort !== DEFAULT_COVERAGE_SORT) {
+    url.searchParams.set("coverageSort", coverageSort);
+  } else {
+    url.searchParams.delete("coverageSort");
+  }
+
+  if (footprintSort !== DEFAULT_FOOTPRINT_SORT) {
+    url.searchParams.set("footprintSort", footprintSort);
+  } else {
+    url.searchParams.delete("footprintSort");
   }
 
   return url.toString();
@@ -241,6 +279,12 @@ export default function EVMap() {
   const [coverageSearchQuery, setCoverageSearchQuery] = useState("");
   const [selectedCoverageRegion, setSelectedCoverageRegion] = useState(
     () => initialSelectionState.selectedCoverageRegion,
+  );
+  const [coverageSort, setCoverageSort] = useState<CoverageSort>(
+    () => initialSelectionState.coverageSort,
+  );
+  const [footprintSort, setFootprintSort] = useState<FootprintSort>(
+    () => initialSelectionState.footprintSort,
   );
   const [footprintSearchQuery, setFootprintSearchQuery] = useState("");
   const [countryLookupQuery, setCountryLookupQuery] = useState(() =>
@@ -548,6 +592,25 @@ export default function EVMap() {
       ),
     [footprintSearchQuery, selectedBrandPresence],
   );
+  const sortedSelectedBrandPresence = useMemo(() => {
+    return [...filteredSelectedBrandPresence].sort((a, b) => {
+      const countryNameComparison = a.countryName.localeCompare(b.countryName);
+
+      if (footprintSort === "name-desc") {
+        if (countryNameComparison !== 0) {
+          return -countryNameComparison;
+        }
+
+        return b.isoCode.localeCompare(a.isoCode);
+      }
+
+      if (countryNameComparison !== 0) {
+        return countryNameComparison;
+      }
+
+      return a.isoCode.localeCompare(b.isoCode);
+    });
+  }, [filteredSelectedBrandPresence, footprintSort]);
 
   const brandCoverageSummaries = useMemo(() => {
     if (!regionScopedData || activeSelectedBrand) {
@@ -593,6 +656,23 @@ export default function EVMap() {
       ),
     [brandCoverageSummaries, coverageSearchQuery],
   );
+  const sortedBrandCoverageSummaries = useMemo(() => {
+    return [...filteredBrandCoverageSummaries].sort((a, b) => {
+      if (coverageSort === "name") {
+        return a.brandName.localeCompare(b.brandName);
+      }
+
+      if (b.confirmedCountryCount !== a.confirmedCountryCount) {
+        return b.confirmedCountryCount - a.confirmedCountryCount;
+      }
+
+      if (a.uncertainCountryCount !== b.uncertainCountryCount) {
+        return a.uncertainCountryCount - b.uncertainCountryCount;
+      }
+
+      return a.brandName.localeCompare(b.brandName);
+    });
+  }, [coverageSort, filteredBrandCoverageSummaries]);
 
   const filteredCountryCoverageSummaries = useMemo(
     () =>
@@ -609,6 +689,23 @@ export default function EVMap() {
       ),
     [coverageSearchQuery, countryRegionLookup, visibleCountryCoverageSummaries],
   );
+  const sortedCountryCoverageSummaries = useMemo(() => {
+    return [...filteredCountryCoverageSummaries].sort((a, b) => {
+      if (coverageSort === "name") {
+        return a.countryName.localeCompare(b.countryName);
+      }
+
+      if (b.confirmedBrandCount !== a.confirmedBrandCount) {
+        return b.confirmedBrandCount - a.confirmedBrandCount;
+      }
+
+      if (b.uncertainBrandCount !== a.uncertainBrandCount) {
+        return b.uncertainBrandCount - a.uncertainBrandCount;
+      }
+
+      return a.countryName.localeCompare(b.countryName);
+    });
+  }, [coverageSort, filteredCountryCoverageSummaries]);
 
   const filteredRegionCoverageSummaries = useMemo(
     () =>
@@ -620,6 +717,27 @@ export default function EVMap() {
       ),
     [coverageSearchQuery, regionCoverageSummaries],
   );
+  const sortedRegionCoverageSummaries = useMemo(() => {
+    return [...filteredRegionCoverageSummaries].sort((a, b) => {
+      if (coverageSort === "name") {
+        return a.regionName.localeCompare(b.regionName);
+      }
+
+      if (b.confirmedCountryCount !== a.confirmedCountryCount) {
+        return b.confirmedCountryCount - a.confirmedCountryCount;
+      }
+
+      if (b.brandNames.length !== a.brandNames.length) {
+        return b.brandNames.length - a.brandNames.length;
+      }
+
+      if (b.uncertainCountryCount !== a.uncertainCountryCount) {
+        return b.uncertainCountryCount - a.uncertainCountryCount;
+      }
+
+      return a.regionName.localeCompare(b.regionName);
+    });
+  }, [coverageSort, filteredRegionCoverageSummaries]);
 
   const shareUrl = useMemo(
     () =>
@@ -628,10 +746,14 @@ export default function EVMap() {
         resolvedSelectedCountry,
         coveragePanelView,
         selectedCoverageRegion,
+        coverageSort,
+        footprintSort,
       ),
     [
       activeSelectedBrand,
       coveragePanelView,
+      coverageSort,
+      footprintSort,
       resolvedSelectedCountry,
       selectedCoverageRegion,
     ],
@@ -698,6 +820,8 @@ export default function EVMap() {
       setSelectedCountry(nextState.selectedCountry);
       setCoveragePanelView(nextState.coveragePanelView);
       setSelectedCoverageRegion(nextState.selectedCoverageRegion);
+      setCoverageSort(nextState.coverageSort);
+      setFootprintSort(nextState.footprintSort);
     };
 
     window.addEventListener("popstate", handlePopState);
@@ -718,7 +842,9 @@ export default function EVMap() {
       currentBrand === activeSelectedBrand &&
       currentCountry === resolvedSelectedCountry?.isoCode &&
       currentState.coveragePanelView === coveragePanelView &&
-      currentState.selectedCoverageRegion === selectedCoverageRegion
+      currentState.selectedCoverageRegion === selectedCoverageRegion &&
+      currentState.coverageSort === coverageSort &&
+      currentState.footprintSort === footprintSort
     ) {
       return;
     }
@@ -728,11 +854,15 @@ export default function EVMap() {
       resolvedSelectedCountry,
       coveragePanelView,
       selectedCoverageRegion,
+      coverageSort,
+      footprintSort,
     );
     window.history.replaceState({}, "", nextUrl);
   }, [
     activeSelectedBrand,
     coveragePanelView,
+    coverageSort,
+    footprintSort,
     resolvedSelectedCountry,
     selectedCoverageRegion,
   ]);
@@ -1308,19 +1438,40 @@ export default function EVMap() {
               onChange={(event) => setFootprintSearchQuery(event.target.value)}
             />
             <p className="mt-2 text-xs text-gray-500">
-              Showing {filteredSelectedBrandPresence.length} of{" "}
+              Showing {sortedSelectedBrandPresence.length} of{" "}
               {selectedBrandPresence.length}{" "}
               {selectedBrandPresence.length === 1 ? "market" : "markets"}
             </p>
           </div>
+          <div className="mt-3">
+            <label
+              htmlFor="footprint-sort"
+              className="block text-xs font-medium uppercase tracking-wide text-gray-500"
+            >
+              Sort footprint
+            </label>
+            <select
+              id="footprint-sort"
+              className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
+              value={footprintSort}
+              onChange={(event) => {
+                if (isFootprintSort(event.target.value)) {
+                  setFootprintSort(event.target.value);
+                }
+              }}
+            >
+              <option value="name">Country name (A-Z)</option>
+              <option value="name-desc">Country name (Z-A)</option>
+            </select>
+          </div>
 
           <ul className="mt-3 max-h-48 space-y-3 overflow-y-auto pr-1">
-            {filteredSelectedBrandPresence.length === 0 ? (
+            {sortedSelectedBrandPresence.length === 0 ? (
               <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
                 No markets match this filter.
               </li>
             ) : (
-              filteredSelectedBrandPresence.map((country) => (
+              sortedSelectedBrandPresence.map((country) => (
                 <li
                   key={country.isoCode}
                   className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
@@ -1443,13 +1594,13 @@ export default function EVMap() {
             <p className="mt-2 text-xs text-gray-500">
               {coveragePanelView === "brands" ? (
                 <>
-                  Showing {filteredBrandCoverageSummaries.length} of{" "}
+                  Showing {sortedBrandCoverageSummaries.length} of{" "}
                   {brandCoverageSummaries.length}{" "}
                   {brandCoverageSummaries.length === 1 ? "brand" : "brands"}
                 </>
               ) : coveragePanelView === "countries" ? (
                 <>
-                  Showing {filteredCountryCoverageSummaries.length} of{" "}
+                  Showing {sortedCountryCoverageSummaries.length} of{" "}
                   {visibleCountryCoverageSummaries.length}{" "}
                   {visibleCountryCoverageSummaries.length === 1
                     ? "country"
@@ -1457,22 +1608,43 @@ export default function EVMap() {
                 </>
               ) : (
                 <>
-                  Showing {filteredRegionCoverageSummaries.length} of{" "}
+                  Showing {sortedRegionCoverageSummaries.length} of{" "}
                   {regionCoverageSummaries.length}{" "}
                   {regionCoverageSummaries.length === 1 ? "region" : "regions"}
                 </>
               )}
             </p>
           </div>
+          <div className="mt-3">
+            <label
+              htmlFor="coverage-sort"
+              className="block text-xs font-medium uppercase tracking-wide text-gray-500"
+            >
+              Sort rankings
+            </label>
+            <select
+              id="coverage-sort"
+              className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
+              value={coverageSort}
+              onChange={(event) => {
+                if (isCoverageSort(event.target.value)) {
+                  setCoverageSort(event.target.value);
+                }
+              }}
+            >
+              <option value="coverage">Coverage strength</option>
+              <option value="name">Alphabetical</option>
+            </select>
+          </div>
 
           {coveragePanelView === "brands" ? (
             <ul className="mt-3 max-h-48 space-y-3 overflow-y-auto pr-1">
-              {filteredBrandCoverageSummaries.length === 0 ? (
+              {sortedBrandCoverageSummaries.length === 0 ? (
                 <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
                   No brands match this filter.
                 </li>
               ) : (
-                filteredBrandCoverageSummaries.map((brand) => (
+                sortedBrandCoverageSummaries.map((brand) => (
                   <li
                     key={brand.brandName}
                     className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
@@ -1524,12 +1696,12 @@ export default function EVMap() {
               ) : null}
 
               <ul className="mt-3 max-h-48 space-y-3 overflow-y-auto pr-1">
-                {filteredCountryCoverageSummaries.length === 0 ? (
+                {sortedCountryCoverageSummaries.length === 0 ? (
                   <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
                     No countries match this filter.
                   </li>
                 ) : (
-                  filteredCountryCoverageSummaries.map((country) => (
+                  sortedCountryCoverageSummaries.map((country) => (
                     <li
                       key={country.isoCode}
                       className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
@@ -1575,12 +1747,12 @@ export default function EVMap() {
             </>
           ) : (
             <ul className="mt-3 max-h-48 space-y-3 overflow-y-auto pr-1">
-              {filteredRegionCoverageSummaries.length === 0 ? (
+              {sortedRegionCoverageSummaries.length === 0 ? (
                 <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
                   No regions match this filter.
                 </li>
               ) : (
-                filteredRegionCoverageSummaries.map((region) => (
+                sortedRegionCoverageSummaries.map((region) => (
                   <li
                     key={region.regionName}
                     className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
