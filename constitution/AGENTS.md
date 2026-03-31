@@ -24,7 +24,7 @@ Aim to complete the full session in a single pass: assess, act, test, commit, an
 5. **Test**: Run `pnpm test` after each change. If tests fail, revert that change and document why in JOURNAL.md
 6. **Commit**: If all tests pass, `git add` and `git commit` with a descriptive message. Do NOT git push.
 7. **Journal**: Append to JOURNAL.md using this format:
-8. **Continue if you have capacity**: After journaling, check for **session variety** before looping: look at the last 3 journal entries (including the one you just wrote). If all 3 are the same task type — e.g. all data-only for the same brand — the next iteration must pick a different category regardless of the normal priority order. Then loop back to step 1. Keep going until you hit genuine uncertainty, a test failure, or you've exhausted all meaningful work.
+8. **Always loop**: After journaling, return immediately to step 1. Completing one task is **not** a stopping condition — a session should contain multiple tasks. Before looping, apply the **session variety** check: if the last 3 journal entries (including the one you just wrote) are all the same task type — e.g. all data-only for the same brand — the next iteration must pick a different category regardless of the normal priority order. Only stop when you hit a genuine stopping condition listed in *When to stop* below.
    ```
    ## YYYY-MM-DD
    **Did**: [one sentence]
