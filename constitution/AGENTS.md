@@ -8,7 +8,7 @@ Aim to complete the full session in a single pass: assess, act, test, commit, an
    - Are any tests currently failing?
    - Is there a deferred task in JOURNAL.md marked `TODO:`?
    - Are there `"uncertain": true` entries in ev-presence.json?
-   - Is there an item in BACKLOG.md to decompose into a session-sized task? If BACKLOG.md is empty, compute the current brand × market coverage — which brands are untracked, which tracked brands have zero coverage in major EV regions (Europe, SE Asia, Americas, Middle East) — and add the single highest-impact gap as a new BACKLOG item, then pick it.
+   - Is there an item in BACKLOG.md to decompose into a session-sized task? **Before picking it**, apply the backlog saturation check: count recent journal entries for that item. If the last 3 sessions touching it produced no positive outcome (no new data added, no code shipped — only closures, narrowing, or inconclusive re-checks), the item is **saturated**. Treat it as `[monitoring]` for this session and pick the next category instead. If BACKLOG.md is empty or all items are saturated, proceed to the next bullet.
    - Is there a worthwhile code or product improvement — new features, better visualisations, richer data fields, stronger tests, improved UX? Ambition is encouraged as long as the task fits within one session.
 
    Pick the **single most important item** from the first applicable category. Within a category, prefer the task with the highest user-visible impact — e.g. a brand with many unverified markets beats re-checking one already-confirmed point; a meaningful new feature beats a cosmetic tweak.
@@ -24,7 +24,7 @@ Aim to complete the full session in a single pass: assess, act, test, commit, an
 5. **Test**: Run `pnpm test` after each change. If tests fail, revert that change and document why in JOURNAL.md
 6. **Commit**: If all tests pass, `git add` and `git commit` with a descriptive message. Do NOT git push.
 7. **Journal**: Append to JOURNAL.md using this format:
-8. **Continue if you have capacity**: After journaling, loop back to step 1 and pick the next task. Keep going until you hit genuine uncertainty, a test failure, or you've exhausted all meaningful work.
+8. **Continue if you have capacity**: After journaling, check for **session variety** before looping: look at the last 3 journal entries (including the one you just wrote). If all 3 are the same task type — e.g. all data-only for the same brand — the next iteration must pick a different category regardless of the normal priority order. Then loop back to step 1. Keep going until you hit genuine uncertainty, a test failure, or you've exhausted all meaningful work.
    ```
    ## YYYY-MM-DD
    **Did**: [one sentence]
@@ -36,6 +36,7 @@ Aim to complete the full session in a single pass: assess, act, test, commit, an
 
 - If a task takes more than 3 attempts to get tests passing, revert, document the blocker in JOURNAL.md as `TODO: [description] — blocked by [reason]`, and pick another task.
 - If you are uncertain whether a change is correct, do not make it. Mark it `TODO:` instead.
+- **No-op sessions**: If this session produced no changes to `ev-presence.json` and no changes to `src/` or `tests/`, the session is a no-op. Journal it explicitly with `**Result**: no-op`. In the next session, skip the current backlog item and pick a different category.
 
 ## Resolving stale TODOs
 
@@ -46,6 +47,12 @@ A TODO is **stale** when it has appeared in 3 or more consecutive journal entrie
 - **Document as a known limitation** — If the discrepancy is real but outside your control (e.g. a brand's internal API disagrees with its public UI), add a comment in CONCEPTION.md under a "Known limitations" section and close the TODO without a replacement.
 
 Never replace a stale TODO with a reworded version of the same TODO.
+
+## Backlog hygiene
+
+A backlog item must be a **single actionable sentence** describing the next concrete step. Do not append commentary about past inconclusive checks to a backlog item — that belongs in JOURNAL.md. If an item has grown beyond 2–3 sentences, prune it before picking it: keep only the forward-looking action, remove historical context.
+
+A backlog item is **stale** if it has been worked in 3 or more consecutive sessions with no positive outcome. Stale backlog items must be either pruned to remove exhausted leads, demoted to `[monitoring]`, or fully closed. They may not be picked again in their current form.
 
 ## Rules
 
