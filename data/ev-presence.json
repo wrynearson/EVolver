@@ -305,6 +305,73 @@
             "https://www.byd.international/car-dealer/divea-s-a"
           ],
           "uncertain": false
+        },
+        "BHS": {
+          "name": "Bahamas",
+          "present": true,
+          "source": "https://www.byd.com/bs/contact-us",
+          "sources": [
+            "https://www.byd.com/bs/contact-us",
+            "https://www.byd.com/bs/find-store",
+            "https://www.byd.com/bs/test-drive"
+          ],
+          "uncertain": false
+        },
+        "ATG": {
+          "name": "Antigua and Barbuda",
+          "present": true,
+          "source": "https://www.byd.com/caribbean/find-store",
+          "sources": [
+            "https://www.byd.com/caribbean/find-store",
+            "https://www.byd.com/caribbean/test-drive",
+            "https://us-site-api.byd.com/byd-api/us/dealer/getCrmUsDealer?country=Caribbean"
+          ],
+          "uncertain": false
+        },
+        "BRB": {
+          "name": "Barbados",
+          "present": true,
+          "source": "https://www.byd.com/caribbean/find-store",
+          "sources": [
+            "https://www.byd.com/caribbean/find-store",
+            "https://www.byd.com/caribbean/test-drive",
+            "https://us-site-api.byd.com/byd-api/us/dealer/getCrmUsDealer?country=Caribbean"
+          ],
+          "uncertain": false
+        },
+        "JAM": {
+          "name": "Jamaica",
+          "present": true,
+          "source": "https://byd.atlautomotive.com/contact-us/",
+          "sources": [
+            "https://byd.atlautomotive.com/",
+            "https://byd.atlautomotive.com/contact-us/",
+            "https://www.byd.com/caribbean/find-store",
+            "https://us-site-api.byd.com/byd-api/us/dealer/getCrmUsDealer?country=Caribbean"
+          ],
+          "uncertain": false
+        },
+        "SUR": {
+          "name": "Suriname",
+          "present": true,
+          "source": "https://www.byd.com/caribbean/find-store",
+          "sources": [
+            "https://www.byd.com/caribbean/find-store",
+            "https://www.byd.com/caribbean/test-drive",
+            "https://us-site-api.byd.com/byd-api/us/dealer/getCrmUsDealer?country=Caribbean"
+          ],
+          "uncertain": false
+        },
+        "TTO": {
+          "name": "Trinidad and Tobago",
+          "present": true,
+          "source": "https://www.byd.com/caribbean/find-store",
+          "sources": [
+            "https://www.byd.com/caribbean/find-store",
+            "https://www.byd.com/caribbean/test-drive",
+            "https://us-site-api.byd.com/byd-api/us/dealer/getCrmUsDealer?country=Caribbean"
+          ],
+          "uncertain": false
         }
       }
     },
