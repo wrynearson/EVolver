@@ -137,6 +137,17 @@
             "https://www.byd.international/country/chile"
           ],
           "uncertain": false
+        },
+        "COL": {
+          "name": "Colombia",
+          "present": true,
+          "source": "https://www.byd.international/country/colombia",
+          "sources": [
+            "https://www.byd.international/country/colombia",
+            "https://www.byd.com/caribbean/news-list/1200-Units-BYD-DM-i-PHEVs-Arrived-in-Colombia",
+            "https://en.byd.com/news/byd-to-introduce-electric-passenger-vehicles-to-colombia/"
+          ],
+          "uncertain": false
         }
       }
     },

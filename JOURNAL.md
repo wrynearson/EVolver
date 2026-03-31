@@ -477,3 +477,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-31
 **Did**: Added keyboard shortcuts so Ctrl/Cmd+K focuses the brand filter, Escape clears active searches and lookups, and arrow keys switch the coverage tabs, backed by a focused EVMap interaction test.
 **Result**: pass
+
+## 2026-03-31
+**Did**: Added BYD official presence for Colombia after confirming BYD's own Colombia dealer-network page plus BYD-hosted local distributor and passenger-vehicle launch coverage.
+**Result**: pass
+**TODO**: Verify the next strongest BYD markets beyond the updated footprint, prioritizing official Southeast Asia and Latin America local sites that expose localized consumer pages plus live dealer, contact, or service flows.
