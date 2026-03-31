@@ -464,3 +464,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added BYD official presence for the United Arab Emirates and Jordan after confirming live localized BYD market sites plus UAE showroom listings and Jordan contact/dealer surfaces on official local domains, and created a new actionable backlog item for the broader BYD coverage gap.
 **Result**: pass
 **TODO**: Verify the next strongest BYD markets beyond the updated footprint, prioritizing official local sites that expose both localized consumer pages and live showroom, dealer, or service flows.
+## 2026-03-31
+**Did**: Added BYD official presence for Saudi Arabia and the Philippines after confirming BYD's official global-to-local market handoffs plus live local showroom, dealer, service, or test-drive surfaces.
+**Result**: pass
+**TODO**: Verify the next strongest BYD markets beyond the updated footprint, prioritizing official Southeast Asia and Latin America local sites that expose localized consumer pages plus live dealer or service flows.

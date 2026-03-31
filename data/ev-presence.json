@@ -70,6 +70,29 @@
             "https://byd.com.jo/bustami-saheb"
           ],
           "uncertain": false
+        },
+        "SAU": {
+          "name": "Saudi Arabia",
+          "present": true,
+          "source": "https://www.byd.sa/en/locations/",
+          "sources": [
+            "https://www.byd.com/en-sa",
+            "https://www.byd.sa/en/",
+            "https://www.byd.sa/en/locations/"
+          ],
+          "uncertain": false
+        },
+        "PHL": {
+          "name": "Philippines",
+          "present": true,
+          "source": "https://bydcarsphilippines.com/dealership",
+          "sources": [
+            "https://www.byd.international/country/philippines",
+            "https://bydcarsphilippines.com/",
+            "https://bydcarsphilippines.com/dealership",
+            "https://bydcarsphilippines.com/test-drive"
+          ],
+          "uncertain": false
         }
       }
     },
