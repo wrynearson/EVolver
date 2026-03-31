@@ -49,6 +49,27 @@
           "present": true,
           "source": "https://www.byd.com/br",
           "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://www.byduae.ae/en/locations/",
+          "sources": [
+            "https://www.byduae.ae/en/",
+            "https://www.byduae.ae/en/locations/"
+          ],
+          "uncertain": false
+        },
+        "JOR": {
+          "name": "Jordan",
+          "present": true,
+          "source": "https://byd.com.jo/",
+          "sources": [
+            "https://byd.com.jo/",
+            "https://byd.com.jo/contact-us",
+            "https://byd.com.jo/bustami-saheb"
+          ],
+          "uncertain": false
         }
       }
     },

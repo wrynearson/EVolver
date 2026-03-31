@@ -460,3 +460,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-31
 **Did**: Added sort controls for the coverage rankings and brand-footprint lists, and persisted those sort choices in the shareable URL state with focused UI coverage.
 **Result**: pass
+## 2026-03-31
+**Did**: Added BYD official presence for the United Arab Emirates and Jordan after confirming live localized BYD market sites plus UAE showroom listings and Jordan contact/dealer surfaces on official local domains, and created a new actionable backlog item for the broader BYD coverage gap.
+**Result**: pass
+**TODO**: Verify the next strongest BYD markets beyond the updated footprint, prioritizing official local sites that expose both localized consumer pages and live showroom, dealer, or service flows.
