@@ -473,3 +473,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added BYD official presence for Indonesia, Malaysia, Mexico, and Chile after confirming localized passenger-car sites plus official local contact, aftersales, or dealer-network surfaces.
 **Result**: pass
 **TODO**: Verify the next strongest BYD markets beyond the updated footprint, prioritizing official Southeast Asia and Latin America local sites that expose localized consumer pages plus live dealer, contact, or service flows.
+
+## 2026-03-31
+**Did**: Added keyboard shortcuts so Ctrl/Cmd+K focuses the brand filter, Escape clears active searches and lookups, and arrow keys switch the coverage tabs, backed by a focused EVMap interaction test.
+**Result**: pass

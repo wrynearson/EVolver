@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useMemo, useState } from "react";
+import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import {
   computeCountryBrandCounts,
   computeDatasetSummary,
@@ -154,6 +154,40 @@ function findBrandLookupMatch(
   );
 }
 
+function getNextCoveragePanelView(
+  currentView: CoveragePanelView,
+  key: string,
+): CoveragePanelView | null {
+  const currentIndex = COVERAGE_PANEL_VIEWS.indexOf(currentView);
+
+  if (currentIndex === -1) {
+    return null;
+  }
+
+  if (key === "ArrowRight") {
+    return COVERAGE_PANEL_VIEWS[(currentIndex + 1) % COVERAGE_PANEL_VIEWS.length];
+  }
+
+  if (key === "ArrowLeft") {
+    return (
+      COVERAGE_PANEL_VIEWS[
+        (currentIndex - 1 + COVERAGE_PANEL_VIEWS.length) %
+          COVERAGE_PANEL_VIEWS.length
+      ]
+    );
+  }
+
+  if (key === "Home") {
+    return COVERAGE_PANEL_VIEWS[0];
+  }
+
+  if (key === "End") {
+    return COVERAGE_PANEL_VIEWS[COVERAGE_PANEL_VIEWS.length - 1];
+  }
+
+  return null;
+}
+
 function getSelectionStateFromSearch(search: string): SelectionState {
   const searchParams = new URLSearchParams(search);
   const selectedBrand = searchParams.get("brand")?.trim() ?? "";
@@ -264,6 +298,7 @@ function buildShareUrl(
 export default function EVMap() {
   const { data, countryBrandCount, summary, loading } = useEVData();
   const initialSelectionState = getInitialSelectionState();
+  const brandFilterInputRef = useRef<HTMLInputElement | null>(null);
   const [countries, setCountries] = useState<FeatureCollection | null>(null);
   const [selectedBrand, setSelectedBrand] = useState<string>(
     () => initialSelectionState.selectedBrand,
@@ -833,6 +868,23 @@ export default function EVMap() {
       return;
     }
 
+    const handleGlobalKeyDown = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        brandFilterInputRef.current?.focus();
+        brandFilterInputRef.current?.select();
+      }
+    };
+
+    window.addEventListener("keydown", handleGlobalKeyDown);
+    return () => window.removeEventListener("keydown", handleGlobalKeyDown);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
     const url = new URL(window.location.href);
     const currentBrand = url.searchParams.get("brand")?.trim() ?? "";
     const currentCountry = normalizeIsoCode(url.searchParams.get("country"));
@@ -962,6 +1014,7 @@ export default function EVMap() {
             <div className="mt-1">
               <div className="flex items-center gap-2">
                 <input
+                  ref={brandFilterInputRef}
                   id="brand-filter"
                   type="search"
                   className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
@@ -987,6 +1040,18 @@ export default function EVMap() {
                     if (activeSelectedBrand) {
                       setSelectedBrand("");
                     }
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key !== "Escape") {
+                      return;
+                    }
+
+                    if (!brandLookupQuery && !activeSelectedBrand) {
+                      return;
+                    }
+
+                    event.preventDefault();
+                    clearBrandSelection();
                   }}
                 />
                 {brandLookupQuery || activeSelectedBrand ? (
@@ -1100,6 +1165,19 @@ export default function EVMap() {
                     if (resolvedSelectedCountry) {
                       setSelectedCountry(null);
                     }
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key !== "Escape") {
+                      return;
+                    }
+
+                    if (!countryLookupQuery && !resolvedSelectedCountry) {
+                      return;
+                    }
+
+                    event.preventDefault();
+                    setCountryLookupQuery("");
+                    setSelectedCountry(null);
                   }}
                 />
                 {countryLookupQuery || resolvedSelectedCountry ? (
@@ -1436,6 +1514,14 @@ export default function EVMap() {
               placeholder="Filter by country or ISO code"
               value={footprintSearchQuery}
               onChange={(event) => setFootprintSearchQuery(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key !== "Escape" || !footprintSearchQuery) {
+                  return;
+                }
+
+                event.preventDefault();
+                setFootprintSearchQuery("");
+              }}
             />
             <p className="mt-2 text-xs text-gray-500">
               Showing {sortedSelectedBrandPresence.length} of{" "}
@@ -1549,12 +1635,23 @@ export default function EVMap() {
                   type="button"
                   role="tab"
                   aria-selected={isActive}
+                  tabIndex={isActive ? 0 : -1}
                   className={`rounded px-3 py-1.5 text-xs font-medium ${
                     isActive
                       ? "bg-white text-gray-800 shadow-sm"
                       : "text-gray-500 hover:text-gray-700"
                   }`}
                   onClick={() => setCoveragePanelView(view)}
+                  onKeyDown={(event) => {
+                    const nextView = getNextCoveragePanelView(view, event.key);
+
+                    if (!nextView) {
+                      return;
+                    }
+
+                    event.preventDefault();
+                    setCoveragePanelView(nextView);
+                  }}
                 >
                   {view === "brands"
                     ? "Brands"
@@ -1590,6 +1687,14 @@ export default function EVMap() {
               }
               value={coverageSearchQuery}
               onChange={(event) => setCoverageSearchQuery(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key !== "Escape" || !coverageSearchQuery) {
+                  return;
+                }
+
+                event.preventDefault();
+                setCoverageSearchQuery("");
+              }}
             />
             <p className="mt-2 text-xs text-gray-500">
               {coveragePanelView === "brands" ? (

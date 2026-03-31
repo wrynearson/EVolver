@@ -661,6 +661,59 @@ describe("EVMap", () => {
     expect(screen.getByText("No brands match this search yet.")).toBeInTheDocument();
   });
 
+  it("supports keyboard shortcuts for filter focus, clearing searches, and coverage tabs", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const brandFilter = screen.getByLabelText("Brand filter");
+    const countryLookup = screen.getByLabelText("Country lookup");
+    countryLookup.focus();
+    expect(countryLookup).toHaveFocus();
+
+    fireEvent.keyDown(window, { key: "k", ctrlKey: true });
+    expect(brandFilter).toHaveFocus();
+
+    fireEvent.change(brandFilter, { target: { value: "XPeng" } });
+    expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
+    fireEvent.keyDown(brandFilter, { key: "Escape" });
+    expect(brandFilter).toHaveDisplayValue("");
+    expect(screen.queryByRole("heading", { name: "Brand footprint" })).not.toBeInTheDocument();
+
+    const coveragePanel = screen
+      .getByRole("heading", { name: "Brand coverage" })
+      .closest("aside");
+    expect(coveragePanel).not.toBeNull();
+
+    fireEvent.keyDown(within(coveragePanel!).getByRole("tab", { name: "Brands" }), {
+      key: "ArrowRight",
+    });
+
+    expect(window.location.search).toBe("?view=countries");
+    const countryCoverageSearch = await screen.findByLabelText("Search country coverage");
+    fireEvent.change(countryCoverageSearch, { target: { value: "nor" } });
+    expect(countryCoverageSearch).toHaveDisplayValue("nor");
+    fireEvent.keyDown(countryCoverageSearch, { key: "Escape" });
+    expect(countryCoverageSearch).toHaveDisplayValue("");
+
+    fireEvent.change(countryLookup, { target: { value: "SWE" } });
+    expect(screen.getByRole("heading", { name: "Sweden" })).toBeInTheDocument();
+    fireEvent.keyDown(countryLookup, { key: "Escape" });
+    expect(countryLookup).toHaveDisplayValue("");
+    expect(screen.queryByRole("heading", { name: "Sweden" })).not.toBeInTheDocument();
+  });
+
   it("applies the region filter across the map summary, lookup, and brand footprint", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
