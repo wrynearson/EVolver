@@ -21,6 +21,18 @@ type SelectedCountry = {
 type CopyLinkStatus = "idle" | "copied" | "failed";
 type CoveragePanelView = "brands" | "countries";
 
+function matchesSearchQuery(values: Array<string | undefined>, query: string) {
+  const normalizedQuery = query.trim().toLowerCase();
+
+  if (!normalizedQuery) {
+    return true;
+  }
+
+  return values.some((value) =>
+    value?.toLowerCase().includes(normalizedQuery),
+  );
+}
+
 function normalizeIsoCode(value: string | null): string | null {
   if (!value) {
     return null;
@@ -97,6 +109,8 @@ export default function EVMap() {
   const [copyLinkStatus, setCopyLinkStatus] = useState<CopyLinkStatus>("idle");
   const [coveragePanelView, setCoveragePanelView] =
     useState<CoveragePanelView>("brands");
+  const [coverageSearchQuery, setCoverageSearchQuery] = useState("");
+  const [footprintSearchQuery, setFootprintSearchQuery] = useState("");
   const activeSelectedBrand =
     data && selectedBrand && !data.brands[selectedBrand] ? "" : selectedBrand;
 
@@ -277,6 +291,17 @@ export default function EVMap() {
     return getBrandPresenceCountries(data, activeSelectedBrand);
   }, [activeSelectedBrand, data]);
 
+  const filteredSelectedBrandPresence = useMemo(
+    () =>
+      selectedBrandPresence.filter((country) =>
+        matchesSearchQuery(
+          [country.countryName, country.isoCode],
+          footprintSearchQuery,
+        ),
+      ),
+    [footprintSearchQuery, selectedBrandPresence],
+  );
+
   const brandCoverageSummaries = useMemo(() => {
     if (!data || activeSelectedBrand) {
       return [];
@@ -292,6 +317,25 @@ export default function EVMap() {
 
     return getCountryCoverageSummaries(data);
   }, [activeSelectedBrand, data]);
+
+  const filteredBrandCoverageSummaries = useMemo(
+    () =>
+      brandCoverageSummaries.filter((brand) =>
+        matchesSearchQuery([brand.brandName], coverageSearchQuery),
+      ),
+    [brandCoverageSummaries, coverageSearchQuery],
+  );
+
+  const filteredCountryCoverageSummaries = useMemo(
+    () =>
+      countryCoverageSummaries.filter((country) =>
+        matchesSearchQuery(
+          [country.countryName, country.isoCode, country.brandNames.join(" ")],
+          coverageSearchQuery,
+        ),
+      ),
+    [countryCoverageSummaries, coverageSearchQuery],
+  );
 
   const shareUrl = useMemo(
     () => buildShareUrl(activeSelectedBrand, resolvedSelectedCountry),
@@ -342,6 +386,14 @@ export default function EVMap() {
   useEffect(() => {
     setCopyLinkStatus("idle");
   }, [activeSelectedBrand, resolvedSelectedCountry]);
+
+  useEffect(() => {
+    setCoverageSearchQuery("");
+  }, [activeSelectedBrand, coveragePanelView]);
+
+  useEffect(() => {
+    setFootprintSearchQuery("");
+  }, [activeSelectedBrand]);
 
   if (loading || !countries) {
     return (
@@ -693,49 +745,77 @@ export default function EVMap() {
             </button>
           </div>
 
-          <ul className="mt-3 max-h-60 space-y-3 overflow-y-auto pr-1">
-            {selectedBrandPresence.map((country) => (
-              <li
-                key={country.isoCode}
-                className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <button
-                    type="button"
-                    className="text-left"
-                    onClick={() =>
-                      setSelectedCountry({
-                        isoCode: country.isoCode,
-                        countryName: country.countryName,
-                      })
-                    }
-                  >
-                    <p className="text-sm font-medium text-gray-800">
-                      {country.countryName}
-                    </p>
-                    <p className="text-xs uppercase tracking-wide text-gray-500">
-                      {country.isoCode}
-                    </p>
-                  </button>
-                  {country.uncertain ? (
-                    <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">
-                      Uncertain
-                    </span>
-                  ) : null}
-                </div>
-                {country.source ? (
-                  <a
-                    href={country.source}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-2 block text-xs text-blue-700 underline underline-offset-2"
-                    aria-label={`Open official source for ${country.countryName}`}
-                  >
-                    Official source
-                  </a>
-                ) : null}
+          <div className="mt-3">
+            <label
+              htmlFor="brand-footprint-search"
+              className="block text-xs font-medium uppercase tracking-wide text-gray-500"
+            >
+              Search footprint markets
+            </label>
+            <input
+              id="brand-footprint-search"
+              type="search"
+              className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
+              placeholder="Filter by country or ISO code"
+              value={footprintSearchQuery}
+              onChange={(event) => setFootprintSearchQuery(event.target.value)}
+            />
+            <p className="mt-2 text-xs text-gray-500">
+              Showing {filteredSelectedBrandPresence.length} of{" "}
+              {selectedBrandPresence.length}{" "}
+              {selectedBrandPresence.length === 1 ? "market" : "markets"}
+            </p>
+          </div>
+
+          <ul className="mt-3 max-h-48 space-y-3 overflow-y-auto pr-1">
+            {filteredSelectedBrandPresence.length === 0 ? (
+              <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
+                No markets match this filter.
               </li>
-            ))}
+            ) : (
+              filteredSelectedBrandPresence.map((country) => (
+                <li
+                  key={country.isoCode}
+                  className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <button
+                      type="button"
+                      className="text-left"
+                      onClick={() =>
+                        setSelectedCountry({
+                          isoCode: country.isoCode,
+                          countryName: country.countryName,
+                        })
+                      }
+                    >
+                      <p className="text-sm font-medium text-gray-800">
+                        {country.countryName}
+                      </p>
+                      <p className="text-xs uppercase tracking-wide text-gray-500">
+                        {country.isoCode}
+                      </p>
+                    </button>
+                    {country.uncertain ? (
+                      <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">
+                        Uncertain
+                      </span>
+                    ) : null}
+                  </div>
+                  {country.source ? (
+                    <a
+                      href={country.source}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-2 block text-xs text-blue-700 underline underline-offset-2"
+                      aria-label={`Open official source for ${country.countryName}`}
+                    >
+                      Official source
+                    </a>
+                  ) : null}
+                </li>
+              ))
+            )}
           </ul>
         </aside>
       ) : brandCoverageSummaries.length > 0 ? (
@@ -778,83 +858,133 @@ export default function EVMap() {
             })}
           </div>
 
+          <div className="mt-3">
+            <label
+              htmlFor="coverage-search"
+              className="block text-xs font-medium uppercase tracking-wide text-gray-500"
+            >
+              {coveragePanelView === "brands"
+                ? "Search brand coverage"
+                : "Search country coverage"}
+            </label>
+            <input
+              id="coverage-search"
+              type="search"
+              className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
+              placeholder={
+                coveragePanelView === "brands"
+                  ? "Filter by brand name"
+                  : "Filter by country, ISO code, or brand"
+              }
+              value={coverageSearchQuery}
+              onChange={(event) => setCoverageSearchQuery(event.target.value)}
+            />
+            <p className="mt-2 text-xs text-gray-500">
+              {coveragePanelView === "brands" ? (
+                <>
+                  Showing {filteredBrandCoverageSummaries.length} of{" "}
+                  {brandCoverageSummaries.length}{" "}
+                  {brandCoverageSummaries.length === 1 ? "brand" : "brands"}
+                </>
+              ) : (
+                <>
+                  Showing {filteredCountryCoverageSummaries.length} of{" "}
+                  {countryCoverageSummaries.length}{" "}
+                  {countryCoverageSummaries.length === 1 ? "country" : "countries"}
+                </>
+              )}
+            </p>
+          </div>
+
           {coveragePanelView === "brands" ? (
-            <ul className="mt-3 max-h-60 space-y-3 overflow-y-auto pr-1">
-              {brandCoverageSummaries.map((brand) => (
-                <li
-                  key={brand.brandName}
-                  className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <button
-                      type="button"
-                      className="text-left"
-                      onClick={() => setSelectedBrand(brand.brandName)}
-                    >
-                      <p className="text-sm font-medium text-gray-800">
-                        {brand.brandName}
-                      </p>
-                      <p className="text-xs text-gray-500">
-                        {brand.confirmedCountryCount} confirmed{" "}
-                        {brand.confirmedCountryCount === 1 ? "market" : "markets"}
-                        {brand.uncertainCountryCount > 0
-                          ? ` · ${brand.uncertainCountryCount} uncertain`
-                          : ""}
-                      </p>
-                    </button>
-                    <a
-                      href={brand.website}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-xs text-blue-700 underline underline-offset-2"
-                      aria-label={`Open official website for ${brand.brandName}`}
-                    >
-                      Website
-                    </a>
-                  </div>
+            <ul className="mt-3 max-h-48 space-y-3 overflow-y-auto pr-1">
+              {filteredBrandCoverageSummaries.length === 0 ? (
+                <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
+                  No brands match this filter.
                 </li>
-              ))}
-            </ul>
-          ) : (
-            <ul className="mt-3 max-h-60 space-y-3 overflow-y-auto pr-1">
-              {countryCoverageSummaries.map((country) => (
-                <li
-                  key={country.isoCode}
-                  className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
-                >
-                  <button
-                    type="button"
-                    className="w-full text-left"
-                    onClick={() =>
-                      setSelectedCountry({
-                        isoCode: country.isoCode,
-                        countryName: country.countryName,
-                      })
-                    }
+              ) : (
+                filteredBrandCoverageSummaries.map((brand) => (
+                  <li
+                    key={brand.brandName}
+                    className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
                   >
                     <div className="flex items-start justify-between gap-3">
-                      <div>
+                      <button
+                        type="button"
+                        className="text-left"
+                        onClick={() => setSelectedBrand(brand.brandName)}
+                      >
                         <p className="text-sm font-medium text-gray-800">
-                          {country.countryName}
+                          {brand.brandName}
                         </p>
-                        <p className="text-xs uppercase tracking-wide text-gray-500">
-                          {country.isoCode}
+                        <p className="text-xs text-gray-500">
+                          {brand.confirmedCountryCount} confirmed{" "}
+                          {brand.confirmedCountryCount === 1 ? "market" : "markets"}
+                          {brand.uncertainCountryCount > 0
+                            ? ` · ${brand.uncertainCountryCount} uncertain`
+                            : ""}
+                        </p>
+                      </button>
+                      <a
+                        href={brand.website}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-xs text-blue-700 underline underline-offset-2"
+                        aria-label={`Open official website for ${brand.brandName}`}
+                      >
+                        Website
+                      </a>
+                    </div>
+                  </li>
+                ))
+              )}
+            </ul>
+          ) : (
+            <ul className="mt-3 max-h-48 space-y-3 overflow-y-auto pr-1">
+              {filteredCountryCoverageSummaries.length === 0 ? (
+                <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
+                  No countries match this filter.
+                </li>
+              ) : (
+                filteredCountryCoverageSummaries.map((country) => (
+                  <li
+                    key={country.isoCode}
+                    className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
+                  >
+                    <button
+                      type="button"
+                      className="w-full text-left"
+                      onClick={() =>
+                        setSelectedCountry({
+                          isoCode: country.isoCode,
+                          countryName: country.countryName,
+                        })
+                      }
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <p className="text-sm font-medium text-gray-800">
+                            {country.countryName}
+                          </p>
+                          <p className="text-xs uppercase tracking-wide text-gray-500">
+                            {country.isoCode}
+                          </p>
+                        </div>
+                        <p className="text-right text-xs text-gray-500">
+                          {country.confirmedBrandCount} confirmed{" "}
+                          {country.confirmedBrandCount === 1 ? "brand" : "brands"}
+                          {country.uncertainBrandCount > 0
+                            ? ` · ${country.uncertainBrandCount} uncertain`
+                            : ""}
                         </p>
                       </div>
-                      <p className="text-right text-xs text-gray-500">
-                        {country.confirmedBrandCount} confirmed{" "}
-                        {country.confirmedBrandCount === 1 ? "brand" : "brands"}
-                        {country.uncertainBrandCount > 0
-                          ? ` · ${country.uncertainBrandCount} uncertain`
-                          : ""}
+                      <p className="mt-2 text-xs text-gray-500">
+                        {country.brandNames.join(", ")}
                       </p>
-                    </div>
-                    <p className="mt-2 text-xs text-gray-500">
-                      {country.brandNames.join(", ")}
-                    </p>
-                  </button>
-                </li>
-              ))}
+                    </button>
+                  </li>
+                ))
+              )}
             </ul>
           )}
         </aside>

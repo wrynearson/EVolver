@@ -425,3 +425,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-31
 **Did**: Added a switchable all-brands coverage panel so users can compare either brand rankings or country rankings and jump from country coverage leaders straight into the country details view, while demoting the saturated ORA expansion backlog item into concise monitoring-only follow-up.
 **Result**: pass
+## 2026-03-31
+**Did**: Added searchable filters, result counts, and empty states to the brand-footprint and coverage panels so users can quickly narrow long brand and country lists as the dataset grows.
+**Result**: pass

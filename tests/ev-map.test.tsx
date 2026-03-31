@@ -191,6 +191,12 @@ describe("EVMap", () => {
     expect(footprintPanel).not.toBeNull();
     expect(within(footprintPanel!).getByText("XPeng · 1 market")).toBeInTheDocument();
     expect(
+      within(footprintPanel!).getByLabelText("Search footprint markets"),
+    ).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).getByText("Showing 1 of 1 market"),
+    ).toBeInTheDocument();
+    expect(
       within(footprintPanel!).getByRole("button", { name: /Norway/i }),
     ).toBeInTheDocument();
     expect(
@@ -278,6 +284,20 @@ describe("EVMap", () => {
     expect(within(coveragePanel!).getByText("BYD")).toBeInTheDocument();
     expect(within(coveragePanel!).getByText("2 confirmed markets")).toBeInTheDocument();
     expect(
+      within(coveragePanel!).getByLabelText("Search brand coverage"),
+    ).toBeInTheDocument();
+    expect(
+      within(coveragePanel!).getByText("Showing 2 of 2 brands"),
+    ).toBeInTheDocument();
+    fireEvent.change(within(coveragePanel!).getByLabelText("Search brand coverage"), {
+      target: { value: "BY" },
+    });
+    expect(
+      within(coveragePanel!).getByText("Showing 1 of 2 brands"),
+    ).toBeInTheDocument();
+    expect(within(coveragePanel!).getByText("BYD")).toBeInTheDocument();
+    expect(within(coveragePanel!).queryByText("XPeng")).not.toBeInTheDocument();
+    expect(
       within(coveragePanel!).getByRole("link", {
         name: "Open official website for BYD",
       }),
@@ -288,6 +308,29 @@ describe("EVMap", () => {
     expect(
       screen.getByRole("link", { name: "Open share link in a new tab" }),
     ).toHaveAttribute("href", "http://localhost:3000/?country=SWE&brand=BYD");
+
+    const bydFootprintPanel = screen
+      .getByRole("heading", { name: "Brand footprint" })
+      .closest("aside");
+    expect(bydFootprintPanel).not.toBeNull();
+    expect(
+      within(bydFootprintPanel!).getByText("Showing 2 of 2 markets"),
+    ).toBeInTheDocument();
+    fireEvent.change(
+      within(bydFootprintPanel!).getByLabelText("Search footprint markets"),
+      {
+        target: { value: "nor" },
+      },
+    );
+    expect(
+      within(bydFootprintPanel!).getByText("Showing 1 of 2 markets"),
+    ).toBeInTheDocument();
+    expect(
+      within(bydFootprintPanel!).getByRole("button", { name: /Norway/i }),
+    ).toBeInTheDocument();
+    expect(
+      within(bydFootprintPanel!).queryByRole("button", { name: /China/i }),
+    ).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "Clear" }));
 
@@ -309,6 +352,38 @@ describe("EVMap", () => {
       ),
     ).toBeInTheDocument();
     expect(within(countryCoveragePanel!).getByText("Norway")).toBeInTheDocument();
+    expect(
+      within(countryCoveragePanel!).getByLabelText("Search country coverage"),
+    ).toBeInTheDocument();
+    expect(
+      within(countryCoveragePanel!).getByText("Showing 2 of 2 countries"),
+    ).toBeInTheDocument();
+    fireEvent.change(
+      within(countryCoveragePanel!).getByLabelText("Search country coverage"),
+      {
+        target: { value: "CHI" },
+      },
+    );
+    expect(
+      within(countryCoveragePanel!).getByText("Showing 1 of 2 countries"),
+    ).toBeInTheDocument();
+    expect(within(countryCoveragePanel!).getByText("China")).toBeInTheDocument();
+    expect(within(countryCoveragePanel!).queryByText("Norway")).not.toBeInTheDocument();
+    expect(
+      within(countryCoveragePanel!).getByText("1 confirmed brand"),
+    ).toBeInTheDocument();
+    expect(
+      within(countryCoveragePanel!).getByText("BYD"),
+    ).toBeInTheDocument();
+    fireEvent.change(
+      within(countryCoveragePanel!).getByLabelText("Search country coverage"),
+      {
+        target: { value: "" },
+      },
+    );
+    expect(
+      within(countryCoveragePanel!).getByText("Norway"),
+    ).toBeInTheDocument();
     expect(
       within(countryCoveragePanel!).getByText("2 confirmed brands"),
     ).toBeInTheDocument();
