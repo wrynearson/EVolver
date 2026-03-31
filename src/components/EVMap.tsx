@@ -21,9 +21,12 @@ type SelectionState = {
   selectedBrand: string;
   selectedCountry: MapCountrySelection | null;
 };
-type CountryOption = MapCountrySelection & {
+type CountryOption = {
+  isoCode: string;
+  countryName: string;
   regionName?: string;
 };
+type CountryLookupMatch = CountryOption;
 
 const MapCanvas = lazy(() => import("./MapCanvas"));
 
@@ -46,6 +49,33 @@ function normalizeIsoCode(value: string | null): string | null {
 
   const normalizedValue = value.trim().toUpperCase();
   return /^[A-Z]{3}$/.test(normalizedValue) ? normalizedValue : null;
+}
+
+function getCountryLookupValue(country: MapCountrySelection | null) {
+  if (!country) {
+    return "";
+  }
+
+  return country.countryName ?? country.isoCode;
+}
+
+function findCountryLookupMatch(
+  countryOptions: CountryOption[],
+  query: string,
+): CountryLookupMatch | null {
+  const normalizedQuery = query.trim().toLowerCase();
+
+  if (!normalizedQuery) {
+    return null;
+  }
+
+  return (
+    countryOptions.find(
+      (country) =>
+        country.countryName.toLowerCase() === normalizedQuery ||
+        country.isoCode.toLowerCase() === normalizedQuery,
+    ) ?? null
+  );
 }
 
 function getSelectionStateFromSearch(search: string): SelectionState {
@@ -122,6 +152,9 @@ export default function EVMap() {
   const [coverageSearchQuery, setCoverageSearchQuery] = useState("");
   const [selectedCoverageRegion, setSelectedCoverageRegion] = useState("");
   const [footprintSearchQuery, setFootprintSearchQuery] = useState("");
+  const [countryLookupQuery, setCountryLookupQuery] = useState(() =>
+    getCountryLookupValue(getInitialSelectionState().selectedCountry),
+  );
   const activeSelectedBrand =
     data && selectedBrand && !data.brands[selectedBrand] ? "" : selectedBrand;
 
@@ -226,6 +259,33 @@ export default function EVMap() {
       countryName: matchingCountry.countryName,
     };
   }, [countryOptions, hoveredCountry]);
+
+  const exactCountryLookupMatch = useMemo(
+    () => findCountryLookupMatch(countryOptions, countryLookupQuery),
+    [countryLookupQuery, countryOptions],
+  );
+
+  const filteredCountryOptions = useMemo(() => {
+    const normalizedQuery = countryLookupQuery.trim();
+
+    if (!normalizedQuery) {
+      return [];
+    }
+
+    return countryOptions
+      .filter((country) =>
+        matchesSearchQuery(
+          [country.countryName, country.isoCode, country.regionName],
+          normalizedQuery,
+        ),
+      )
+      .slice(0, 8);
+  }, [countryLookupQuery, countryOptions]);
+
+  const shouldShowCountryLookupMatches =
+    countryLookupQuery.trim().length > 0 &&
+    (!exactCountryLookupMatch ||
+      exactCountryLookupMatch.isoCode !== resolvedSelectedCountry?.isoCode);
 
   const selectedCountryDetails = useMemo(() => {
     if (!data || !resolvedSelectedCountry) {
@@ -469,6 +529,10 @@ export default function EVMap() {
   }, [activeSelectedBrand]);
 
   useEffect(() => {
+    setCountryLookupQuery(getCountryLookupValue(resolvedSelectedCountry));
+  }, [resolvedSelectedCountry]);
+
+  useEffect(() => {
     if (!activeSelectedBrand) {
       return;
     }
@@ -574,35 +638,98 @@ export default function EVMap() {
             >
               Country lookup
             </label>
-            <select
-              id="country-filter"
-              className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
-              disabled={countryOptions.length === 0}
-              value={resolvedSelectedCountry?.isoCode ?? ""}
-              onChange={(event) => {
-                const isoCode = event.target.value;
+            <div className="mt-1">
+              <div className="flex items-center gap-2">
+                <input
+                  id="country-filter"
+                  type="search"
+                  className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
+                  placeholder="Search by country or ISO code"
+                  disabled={countryOptions.length === 0}
+                  value={countryLookupQuery}
+                  onChange={(event) => {
+                    const nextQuery = event.target.value;
+                    const exactMatch = findCountryLookupMatch(
+                      countryOptions,
+                      nextQuery,
+                    );
 
-                if (!isoCode) {
-                  setSelectedCountry(null);
-                  return;
-                }
+                    setCountryLookupQuery(nextQuery);
 
-                const option = countryOptions.find(
-                  (country) => country.isoCode === isoCode,
-                );
-                setSelectedCountry({
-                  isoCode,
-                  countryName: option?.countryName ?? isoCode,
-                });
-              }}
-            >
-              <option value="">Select a country</option>
-              {countryOptions.map((country) => (
-                <option key={country.isoCode} value={country.isoCode}>
-                  {country.countryName}
-                </option>
-              ))}
-            </select>
+                    if (!nextQuery.trim()) {
+                      setSelectedCountry(null);
+                      return;
+                    }
+
+                    if (exactMatch) {
+                      setSelectedCountry({
+                        isoCode: exactMatch.isoCode,
+                        countryName: exactMatch.countryName,
+                      });
+                      return;
+                    }
+
+                    if (resolvedSelectedCountry) {
+                      setSelectedCountry(null);
+                    }
+                  }}
+                />
+                {countryLookupQuery || resolvedSelectedCountry ? (
+                  <button
+                    type="button"
+                    className="shrink-0 rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                    onClick={() => {
+                      setCountryLookupQuery("");
+                      setSelectedCountry(null);
+                    }}
+                    aria-label="Clear country lookup"
+                  >
+                    Clear
+                  </button>
+                ) : null}
+              </div>
+              <p className="mt-2 text-xs text-gray-500">
+                Type a country name or ISO code to jump straight into its details.
+              </p>
+              {shouldShowCountryLookupMatches ? (
+                <div className="mt-2 rounded-md border border-gray-200 bg-white">
+                  <p className="border-b border-gray-200 px-3 py-2 text-xs text-gray-500">
+                    Showing {filteredCountryOptions.length} matching{" "}
+                    {filteredCountryOptions.length === 1 ? "country" : "countries"}
+                  </p>
+                  {filteredCountryOptions.length > 0 ? (
+                    <ul className="max-h-48 overflow-y-auto py-1">
+                      {filteredCountryOptions.map((country) => (
+                        <li key={country.isoCode}>
+                          <button
+                            type="button"
+                            className="w-full px-3 py-2 text-left hover:bg-gray-50"
+                            onClick={() => {
+                              setSelectedCountry({
+                                isoCode: country.isoCode,
+                                countryName: country.countryName,
+                              });
+                            }}
+                          >
+                            <p className="text-sm font-medium text-gray-800">
+                              {country.countryName}
+                            </p>
+                            <p className="text-xs uppercase tracking-wide text-gray-500">
+                              {country.isoCode}
+                              {country.regionName ? ` · ${country.regionName}` : ""}
+                            </p>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="px-3 py-3 text-sm text-gray-600">
+                      No countries match this search yet.
+                    </p>
+                  )}
+                </div>
+              ) : null}
+            </div>
           </div>
           <div className="mt-3">
             <button

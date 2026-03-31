@@ -479,6 +479,42 @@ describe("EVMap", () => {
     expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
   });
 
+  it("supports searchable country lookup suggestions", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    const countryLookup = await screen.findByLabelText("Country lookup");
+    expect(countryLookup).toBeInTheDocument();
+
+    fireEvent.change(countryLookup, { target: { value: "sw" } });
+
+    expect(screen.getByText("Showing 1 matching country")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Sweden/i })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Sweden" })).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: /Sweden/i }));
+
+    expect(screen.getByLabelText("Country lookup")).toHaveDisplayValue("Sweden");
+    expect(screen.getByRole("heading", { name: "Sweden" })).toBeInTheDocument();
+    expect(window.location.search).toBe("?country=SWE");
+
+    fireEvent.click(screen.getByRole("button", { name: "Clear country lookup" }));
+
+    expect(screen.getByLabelText("Country lookup")).toHaveDisplayValue("");
+    expect(screen.queryByRole("heading", { name: "Sweden" })).not.toBeInTheDocument();
+    expect(window.location.search).toBe("");
+  });
+
   it("adds a regional coverage view that can drill into country rankings", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);

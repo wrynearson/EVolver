@@ -441,3 +441,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-31
 **Did**: Added a regional coverage view so users can compare confirmed presence by region and drill from a region into country rankings, backed by new region-summary helpers and UI coverage tests.
 **Result**: pass
+## 2026-03-31
+**Did**: Replaced the long country lookup select with a searchable country-or-ISO lookup that shows live matches, supports quick clearing, and jumps directly into country details, backed by UI coverage.
+**Result**: pass
