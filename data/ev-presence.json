@@ -218,6 +218,82 @@
             "https://www.byd.international/city/montevideo"
           ],
           "uncertain": false
+        },
+        "SGP": {
+          "name": "Singapore",
+          "present": true,
+          "source": "https://sg.byd.com/contact-us",
+          "sources": [
+            "https://sg.byd.com/",
+            "https://sg.byd.com/contact-us"
+          ],
+          "uncertain": false
+        },
+        "DOM": {
+          "name": "Dominican Republic",
+          "present": true,
+          "source": "https://www.byd.com/do",
+          "sources": [
+            "https://www.byd.com/do",
+            "https://www.byd.international/city/santo-domingo",
+            "https://www.byd.international/car-dealer/quantum-auto-rd"
+          ],
+          "uncertain": false
+        },
+        "GTM": {
+          "name": "Guatemala",
+          "present": true,
+          "source": "https://www.byd.com/gt",
+          "sources": [
+            "https://www.byd.com/gt",
+            "https://www.byd.com/gt/contact-us",
+            "https://byd.com.gt/",
+            "https://byd.com.gt/contacto/"
+          ],
+          "uncertain": false
+        },
+        "SLV": {
+          "name": "El Salvador",
+          "present": true,
+          "source": "https://bydelsalvador.com/",
+          "sources": [
+            "https://bydelsalvador.com/",
+            "https://www.byd.com/sv/contact-us"
+          ],
+          "uncertain": false
+        },
+        "BOL": {
+          "name": "Bolivia",
+          "present": true,
+          "source": "https://www.bydbolivia.bo/",
+          "sources": [
+            "https://www.bydbolivia.bo/",
+            "https://www.bydbolivia.bo/sucursales",
+            "https://www.byd.com/bo/find-store"
+          ],
+          "uncertain": false
+        },
+        "KHM": {
+          "name": "Cambodia",
+          "present": true,
+          "source": "https://www.bydkh.com/",
+          "sources": [
+            "https://www.bydkh.com/",
+            "https://www.byd.international/car-dealer/byd-cambodia",
+            "https://www.byd.international/car-dealer/byd-denza-cambodia-flagship-center"
+          ],
+          "uncertain": false
+        },
+        "LAO": {
+          "name": "Laos",
+          "present": true,
+          "source": "https://bydlaos.com/",
+          "sources": [
+            "https://bydlaos.com/",
+            "https://www.byd.international/city/vientiane",
+            "https://www.byd.international/car-dealer/byd-laos"
+          ],
+          "uncertain": false
         }
       }
     },
