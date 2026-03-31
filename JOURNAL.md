@@ -510,3 +510,10 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added BYD official presence for Japan, South Korea, Serbia, and South Africa after confirming official local passenger-car sites plus live dealer, showroom, contact, or service surfaces on BYD-owned pages.
 **Result**: pass
 **TODO**: Verify the next strongest BYD locales beyond the updated footprint, prioritizing remaining official BYD market sites in Europe, Africa, and Asia-Pacific with live dealer, contact, or service flows.
+## 2026-03-31
+**Did**: Added BYD official presence for Spain, France, Italy, the Netherlands, and Sweden after confirming live localized BYD market sites plus official contact, service, or dealer-network surfaces on first-party BYD domains.
+**Result**: pass
+**TODO**: Verify the next strongest BYD locales beyond the updated footprint, prioritizing remaining official BYD Europe markets such as Austria, Portugal, Poland, Denmark, and Romania plus any Africa or Asia-Pacific locales with live first-party contact, dealer, or service flows.
+## 2026-03-31
+**Did**: Added explanatory tooltips to the map's existing Uncertain badges so users can understand the verification status directly in the country details and brand-footprint panels, backed by a focused UI test.
+**Result**: pass

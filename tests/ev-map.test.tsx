@@ -586,6 +586,59 @@ describe("EVMap", () => {
     expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
   });
 
+  it("explains uncertain badges in the footprint and country details panels", async () => {
+    vi.doUnmock("../src/components/MapCanvas");
+    const uncertainData: EVPresenceData = {
+      ...mockData,
+      brands: {
+        ...mockData.brands,
+        BYD: {
+          ...mockData.brands.BYD,
+          countries: {
+            ...mockData.brands.BYD.countries,
+            NOR: {
+              ...mockData.brands.BYD.countries.NOR,
+              uncertain: true,
+            },
+          },
+        },
+      },
+    };
+
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? uncertainData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+    window.history.replaceState({}, "", "/?brand=BYD&country=NOR");
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const detailsPanel = screen.getByRole("heading", { name: "Norway" }).closest("aside");
+    expect(detailsPanel).not.toBeNull();
+    const footprintPanel = screen
+      .getByRole("heading", { name: "Brand footprint" })
+      .closest("aside");
+    expect(footprintPanel).not.toBeNull();
+
+    const expectedTooltip =
+      "Official presence is tracked here, but the supporting evidence still needs direct verification or reconciliation.";
+
+    expect(
+      within(detailsPanel!).getByText("Uncertain", { selector: "span" }),
+    ).toHaveAttribute("title", expectedTooltip);
+    expect(
+      within(footprintPanel!).getByText("Uncertain", { selector: "span" }),
+    ).toHaveAttribute("title", expectedTooltip);
+  });
+
   it("supports searchable country lookup suggestions", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);

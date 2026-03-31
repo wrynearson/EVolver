@@ -414,6 +414,61 @@
             "https://www.byd.international/car-dealer/bb-byd-hatfield"
           ],
           "uncertain": false
+        },
+        "ESP": {
+          "name": "Spain",
+          "present": true,
+          "source": "https://www.byd.com/es-es/contact-us",
+          "sources": [
+            "https://www.byd.com/es-es",
+            "https://www.byd.com/es-es/contact-us",
+            "https://www.byd.com/es-es/sitemap.xml"
+          ],
+          "uncertain": false
+        },
+        "FRA": {
+          "name": "France",
+          "present": true,
+          "source": "https://www.byd.com/fr/contact-us",
+          "sources": [
+            "https://www.byd.com/fr",
+            "https://www.byd.com/fr/contact-us",
+            "https://www.byd.com/fr/sitemap.xml"
+          ],
+          "uncertain": false
+        },
+        "ITA": {
+          "name": "Italy",
+          "present": true,
+          "source": "https://www.byd.com/it/contact-us",
+          "sources": [
+            "https://www.byd.com/it",
+            "https://www.byd.com/it/contact-us",
+            "https://www.byd.com/it/sitemap.xml"
+          ],
+          "uncertain": false
+        },
+        "NLD": {
+          "name": "Netherlands",
+          "present": true,
+          "source": "https://www.byd.com/nl/Neem-contact-met-ons-op",
+          "sources": [
+            "https://www.byd.com/nl",
+            "https://www.byd.com/nl/Neem-contact-met-ons-op",
+            "https://www.byd.com/nl/service-onderhoud"
+          ],
+          "uncertain": false
+        },
+        "SWE": {
+          "name": "Sweden",
+          "present": true,
+          "source": "https://www.byd.com/se/contact-us",
+          "sources": [
+            "https://www.byd.com/se",
+            "https://www.byd.com/se/contact-us",
+            "https://www.byd.com/se/sitemap.xml"
+          ],
+          "uncertain": false
         }
       }
     },

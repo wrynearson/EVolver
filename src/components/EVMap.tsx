@@ -51,6 +51,8 @@ const COVERAGE_PANEL_VIEWS: CoveragePanelView[] = [
 ];
 const DEFAULT_COVERAGE_SORT: CoverageSort = "coverage";
 const DEFAULT_FOOTPRINT_SORT: FootprintSort = "name";
+const UNCERTAIN_BADGE_TOOLTIP =
+  "Official presence is tracked here, but the supporting evidence still needs direct verification or reconciliation.";
 
 function isCoveragePanelView(value: string): value is CoveragePanelView {
   return value === "brands" || value === "countries" || value === "regions";
@@ -1472,7 +1474,10 @@ export default function EVMap() {
                       </div>
                     </div>
                     {brand.uncertain ? (
-                      <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">
+                      <span
+                        className="cursor-help rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800"
+                        title={UNCERTAIN_BADGE_TOOLTIP}
+                      >
                         Uncertain
                       </span>
                     ) : null}
@@ -1614,7 +1619,10 @@ export default function EVMap() {
                       </p>
                     </button>
                     {country.uncertain ? (
-                      <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">
+                      <span
+                        className="cursor-help rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800"
+                        title={UNCERTAIN_BADGE_TOOLTIP}
+                      >
                         Uncertain
                       </span>
                     ) : null}
