@@ -494,3 +494,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added BYD official presence for Singapore, the Dominican Republic, Guatemala, El Salvador, Bolivia, Cambodia, and Laos after confirming official local BYD market sites plus BYD-hosted dealer-directory, contact, or showroom evidence.
 **Result**: pass
 **TODO**: Verify the next strongest BYD markets beyond the updated footprint, prioritizing official Central American and Caribbean BYD markets with localized consumer pages plus live dealer, contact, or service flows.
+## 2026-03-31
+**Did**: Added BYD official presence for Nicaragua after confirming BYD's own country, city, and authorized-dealer pages for Managua on the official `byd.international` directory.
+**Result**: pass
+**TODO**: Verify the next strongest BYD markets beyond the updated footprint, prioritizing remaining official Central American and Caribbean BYD markets with localized consumer pages or BYD-hosted dealer-detail pages.

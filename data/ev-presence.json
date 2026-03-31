@@ -294,6 +294,17 @@
             "https://www.byd.international/car-dealer/byd-laos"
           ],
           "uncertain": false
+        },
+        "NIC": {
+          "name": "Nicaragua",
+          "present": true,
+          "source": "https://www.byd.international/country/nicaragua",
+          "sources": [
+            "https://www.byd.international/country/nicaragua",
+            "https://www.byd.international/city/managua",
+            "https://www.byd.international/car-dealer/divea-s-a"
+          ],
+          "uncertain": false
         }
       }
     },
