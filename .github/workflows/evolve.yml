@@ -53,6 +53,7 @@ jobs:
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_PAT }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          cat constitution/AGENTS.md constitution/IDENTITY.md constitution/GOALS.md constitution/CONCEPTION.md JOURNAL.md BACKLOG.md data/ev-presence.json > /tmp/prompt.txt
           copilot \
             --model gpt-5.4 \
             --allow-all \
@@ -61,7 +62,7 @@ jobs:
             --max-autopilot-continues 3 \
             --deny-tool 'shell(git push)' \
             --additional-mcp-config @.github/hooks/mcp-config.json \
-            -p "$(cat constitution/AGENTS.md constitution/IDENTITY.md constitution/GOALS.md constitution/CONCEPTION.md JOURNAL.md BACKLOG.md data/ev-presence.json)"
+            -p "@/tmp/prompt.txt"
 
       - name: Push if agent committed
         id: push
