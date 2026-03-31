@@ -517,3 +517,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-31
 **Did**: Added explanatory tooltips to the map's existing Uncertain badges so users can understand the verification status directly in the country details and brand-footprint panels, backed by a focused UI test.
 **Result**: pass
+## 2026-03-31
+**Did**: Added BYD official presence for Austria, Portugal, Poland, Denmark, and Romania after confirming live localized BYD market pages plus first-party about/store or market-support routes on the same country domains.
+**Result**: pass
+**TODO**: Verify the next strongest BYD locales beyond the updated footprint, prioritizing remaining official BYD Europe markets such as Czechia, Croatia, Estonia, Finland, Greece, Hungary, Slovakia, and Turkey plus any Africa or Asia-Pacific locales with live first-party contact, dealer, or service flows.

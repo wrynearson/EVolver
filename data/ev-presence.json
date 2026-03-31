@@ -469,6 +469,61 @@
             "https://www.byd.com/se/sitemap.xml"
           ],
           "uncertain": false
+        },
+        "AUT": {
+          "name": "Austria",
+          "present": true,
+          "source": "https://www.byd.com/at",
+          "sources": [
+            "https://www.byd.com/at",
+            "https://www.byd.com/at/about-byd",
+            "https://www.byd.com/at/range-calculator"
+          ],
+          "uncertain": false
+        },
+        "PRT": {
+          "name": "Portugal",
+          "present": true,
+          "source": "https://www.byd.com/pt",
+          "sources": [
+            "https://www.byd.com/pt",
+            "https://www.byd.com/pt/about-byd",
+            "https://www.byd.com/pt/find-store"
+          ],
+          "uncertain": false
+        },
+        "POL": {
+          "name": "Poland",
+          "present": true,
+          "source": "https://www.byd.com/pl",
+          "sources": [
+            "https://www.byd.com/pl",
+            "https://www.byd.com/pl/about-byd",
+            "https://www.byd.com/pl/find-store"
+          ],
+          "uncertain": false
+        },
+        "DNK": {
+          "name": "Denmark",
+          "present": true,
+          "source": "https://www.byd.com/dk",
+          "sources": [
+            "https://www.byd.com/dk",
+            "https://www.byd.com/dk/about-byd",
+            "https://www.byd.com/dk/find-store"
+          ],
+          "uncertain": false
+        },
+        "ROU": {
+          "name": "Romania",
+          "present": true,
+          "source": "https://www.byd.com/ro",
+          "sources": [
+            "https://www.byd.com/ro",
+            "https://www.byd.com/ro/about-byd",
+            "https://www.byd.com/ro/find-store"
+          ],
+          "uncertain": false
         }
       }
     },
