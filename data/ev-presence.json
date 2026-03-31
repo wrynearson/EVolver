@@ -148,6 +148,46 @@
             "https://en.byd.com/news/byd-to-introduce-electric-passenger-vehicles-to-colombia/"
           ],
           "uncertain": false
+        },
+        "PER": {
+          "name": "Peru",
+          "present": true,
+          "source": "https://www.byd.international/country/peru",
+          "sources": [
+            "https://www.byd.international/country/peru",
+            "https://www.byd.international/city/san-miguel"
+          ],
+          "uncertain": false
+        },
+        "ECU": {
+          "name": "Ecuador",
+          "present": true,
+          "source": "https://www.byd.international/country/ecuador",
+          "sources": [
+            "https://www.byd.international/country/ecuador",
+            "https://www.byd.international/city/guayaquil"
+          ],
+          "uncertain": false
+        },
+        "CRI": {
+          "name": "Costa Rica",
+          "present": true,
+          "source": "https://www.byd.international/country/costa-rica",
+          "sources": [
+            "https://www.byd.international/country/costa-rica",
+            "https://www.byd.international/city/san-jose-costa-rica"
+          ],
+          "uncertain": false
+        },
+        "VNM": {
+          "name": "Vietnam",
+          "present": true,
+          "source": "https://www.byd.international/country/vietnam",
+          "sources": [
+            "https://www.byd.international/country/vietnam",
+            "https://www.byd.international/city/binh-tan"
+          ],
+          "uncertain": false
         }
       }
     },
