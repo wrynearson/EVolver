@@ -290,7 +290,33 @@ describe("EVMap", () => {
     ).toHaveAttribute("href", "http://localhost:3000/?country=SWE&brand=BYD");
 
     fireEvent.click(screen.getByRole("button", { name: "Clear" }));
-    fireEvent.click(screen.getByRole("button", { name: "Select Norway" }));
+
+    const refreshedCoveragePanel = screen
+      .getByRole("heading", { name: "Brand coverage" })
+      .closest("aside");
+    expect(refreshedCoveragePanel).not.toBeNull();
+    fireEvent.click(
+      within(refreshedCoveragePanel!).getByRole("tab", { name: "Countries" }),
+    );
+
+    const countryCoveragePanel = screen
+      .getByRole("heading", { name: "Country coverage" })
+      .closest("aside");
+    expect(countryCoveragePanel).not.toBeNull();
+    expect(
+      within(countryCoveragePanel!).getByText(
+        "See which countries have the widest confirmed tracked brand coverage.",
+      ),
+    ).toBeInTheDocument();
+    expect(within(countryCoveragePanel!).getByText("Norway")).toBeInTheDocument();
+    expect(
+      within(countryCoveragePanel!).getByText("2 confirmed brands"),
+    ).toBeInTheDocument();
+    expect(
+      within(countryCoveragePanel!).getByText("BYD, XPeng"),
+    ).toBeInTheDocument();
+
+    fireEvent.click(within(countryCoveragePanel!).getByRole("button", { name: /Norway/i }));
 
     const allBrandsNorwayPanel = screen
       .getByRole("heading", { name: "Norway" })
@@ -301,6 +327,7 @@ describe("EVMap", () => {
         name: "Open official website for XPeng",
       }),
     ).toHaveAttribute("href", "https://www.xpeng.com");
+    expect(window.location.search).toBe("?country=NOR");
 
     fireEvent.click(
       within(allBrandsNorwayPanel!).getByRole("button", {

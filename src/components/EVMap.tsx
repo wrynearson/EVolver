@@ -6,6 +6,7 @@ import {
   computeDatasetSummary,
   getBrandCoverageSummaries,
   getBrandPresenceCountries,
+  getCountryCoverageSummaries,
   getCountryPresenceDetails,
   useEVData,
 } from "../hooks/useEVData";
@@ -18,6 +19,7 @@ type SelectedCountry = {
 };
 
 type CopyLinkStatus = "idle" | "copied" | "failed";
+type CoveragePanelView = "brands" | "countries";
 
 function normalizeIsoCode(value: string | null): string | null {
   if (!value) {
@@ -93,6 +95,8 @@ export default function EVMap() {
     () => getInitialSelectionState().selectedCountry,
   );
   const [copyLinkStatus, setCopyLinkStatus] = useState<CopyLinkStatus>("idle");
+  const [coveragePanelView, setCoveragePanelView] =
+    useState<CoveragePanelView>("brands");
   const activeSelectedBrand =
     data && selectedBrand && !data.brands[selectedBrand] ? "" : selectedBrand;
 
@@ -279,6 +283,14 @@ export default function EVMap() {
     }
 
     return getBrandCoverageSummaries(data);
+  }, [activeSelectedBrand, data]);
+
+  const countryCoverageSummaries = useMemo(() => {
+    if (!data || activeSelectedBrand) {
+      return [];
+    }
+
+    return getCountryCoverageSummaries(data);
   }, [activeSelectedBrand, data]);
 
   const shareUrl = useMemo(
@@ -729,48 +741,122 @@ export default function EVMap() {
       ) : brandCoverageSummaries.length > 0 ? (
         <aside className="absolute right-6 bottom-6 max-h-80 w-80 overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md">
           <div>
-            <h2 className="text-sm font-semibold text-gray-800">Brand coverage</h2>
+            <h2 className="text-sm font-semibold text-gray-800">
+              {coveragePanelView === "brands" ? "Brand coverage" : "Country coverage"}
+            </h2>
             <p className="text-xs text-gray-500">
-              Compare confirmed official markets across tracked brands.
+              {coveragePanelView === "brands"
+                ? "Compare confirmed official markets across tracked brands."
+                : "See which countries have the widest confirmed tracked brand coverage."}
             </p>
           </div>
 
-          <ul className="mt-3 max-h-60 space-y-3 overflow-y-auto pr-1">
-            {brandCoverageSummaries.map((brand) => (
-              <li
-                key={brand.brandName}
-                className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
-              >
-                <div className="flex items-start justify-between gap-3">
+          <div
+            className="mt-3 inline-flex rounded-md border border-gray-200 bg-gray-50 p-1"
+            role="tablist"
+            aria-label="Coverage ranking view"
+          >
+            {(["brands", "countries"] as const).map((view) => {
+              const isActive = coveragePanelView === view;
+
+              return (
+                <button
+                  key={view}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`rounded px-3 py-1.5 text-xs font-medium ${
+                    isActive
+                      ? "bg-white text-gray-800 shadow-sm"
+                      : "text-gray-500 hover:text-gray-700"
+                  }`}
+                  onClick={() => setCoveragePanelView(view)}
+                >
+                  {view === "brands" ? "Brands" : "Countries"}
+                </button>
+              );
+            })}
+          </div>
+
+          {coveragePanelView === "brands" ? (
+            <ul className="mt-3 max-h-60 space-y-3 overflow-y-auto pr-1">
+              {brandCoverageSummaries.map((brand) => (
+                <li
+                  key={brand.brandName}
+                  className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <button
+                      type="button"
+                      className="text-left"
+                      onClick={() => setSelectedBrand(brand.brandName)}
+                    >
+                      <p className="text-sm font-medium text-gray-800">
+                        {brand.brandName}
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        {brand.confirmedCountryCount} confirmed{" "}
+                        {brand.confirmedCountryCount === 1 ? "market" : "markets"}
+                        {brand.uncertainCountryCount > 0
+                          ? ` · ${brand.uncertainCountryCount} uncertain`
+                          : ""}
+                      </p>
+                    </button>
+                    <a
+                      href={brand.website}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-xs text-blue-700 underline underline-offset-2"
+                      aria-label={`Open official website for ${brand.brandName}`}
+                    >
+                      Website
+                    </a>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <ul className="mt-3 max-h-60 space-y-3 overflow-y-auto pr-1">
+              {countryCoverageSummaries.map((country) => (
+                <li
+                  key={country.isoCode}
+                  className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
+                >
                   <button
                     type="button"
-                    className="text-left"
-                    onClick={() => setSelectedBrand(brand.brandName)}
+                    className="w-full text-left"
+                    onClick={() =>
+                      setSelectedCountry({
+                        isoCode: country.isoCode,
+                        countryName: country.countryName,
+                      })
+                    }
                   >
-                    <p className="text-sm font-medium text-gray-800">
-                      {brand.brandName}
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      {brand.confirmedCountryCount} confirmed{" "}
-                      {brand.confirmedCountryCount === 1 ? "market" : "markets"}
-                      {brand.uncertainCountryCount > 0
-                        ? ` · ${brand.uncertainCountryCount} uncertain`
-                        : ""}
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className="text-sm font-medium text-gray-800">
+                          {country.countryName}
+                        </p>
+                        <p className="text-xs uppercase tracking-wide text-gray-500">
+                          {country.isoCode}
+                        </p>
+                      </div>
+                      <p className="text-right text-xs text-gray-500">
+                        {country.confirmedBrandCount} confirmed{" "}
+                        {country.confirmedBrandCount === 1 ? "brand" : "brands"}
+                        {country.uncertainBrandCount > 0
+                          ? ` · ${country.uncertainBrandCount} uncertain`
+                          : ""}
+                      </p>
+                    </div>
+                    <p className="mt-2 text-xs text-gray-500">
+                      {country.brandNames.join(", ")}
                     </p>
                   </button>
-                  <a
-                    href={brand.website}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-xs text-blue-700 underline underline-offset-2"
-                    aria-label={`Open official website for ${brand.brandName}`}
-                  >
-                    Website
-                  </a>
-                </div>
-              </li>
-            ))}
-          </ul>
+                </li>
+              ))}
+            </ul>
+          )}
         </aside>
       ) : null}
 

@@ -3,6 +3,7 @@ import type {
   BrandCoverageSummary,
   BrandPresenceCountry,
   CountryPresenceDetails,
+  CountryCoverageSummary,
   EVPresenceData,
 } from "../types";
 
@@ -194,5 +195,55 @@ export function getBrandCoverageSummaries(
       }
 
       return a.brandName.localeCompare(b.brandName);
+    });
+}
+
+export function getCountryCoverageSummaries(
+  data: EVPresenceData,
+): CountryCoverageSummary[] {
+  const countries = new Map<string, CountryCoverageSummary>();
+
+  for (const [brandName, brand] of Object.entries(data.brands)) {
+    for (const [isoCode, entry] of Object.entries(brand.countries)) {
+      if (!entry.present) {
+        continue;
+      }
+
+      const existingCountry = countries.get(isoCode) ?? {
+        isoCode,
+        countryName: entry.name || isoCode,
+        confirmedBrandCount: 0,
+        uncertainBrandCount: 0,
+        brandNames: [],
+      };
+
+      existingCountry.countryName = entry.name || existingCountry.countryName;
+      existingCountry.brandNames.push(brandName);
+
+      if (entry.uncertain) {
+        existingCountry.uncertainBrandCount += 1;
+      } else {
+        existingCountry.confirmedBrandCount += 1;
+      }
+
+      countries.set(isoCode, existingCountry);
+    }
+  }
+
+  return Array.from(countries.values())
+    .map((country) => ({
+      ...country,
+      brandNames: country.brandNames.sort((a, b) => a.localeCompare(b)),
+    }))
+    .sort((a, b) => {
+      if (b.confirmedBrandCount !== a.confirmedBrandCount) {
+        return b.confirmedBrandCount - a.confirmedBrandCount;
+      }
+
+      if (b.uncertainBrandCount !== a.uncertainBrandCount) {
+        return b.uncertainBrandCount - a.uncertainBrandCount;
+      }
+
+      return a.countryName.localeCompare(b.countryName);
     });
 }

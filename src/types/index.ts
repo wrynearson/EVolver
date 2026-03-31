@@ -35,6 +35,14 @@ export interface BrandCoverageSummary {
   uncertainCountryCount: number;
 }
 
+export interface CountryCoverageSummary {
+  isoCode: string;
+  countryName: string;
+  confirmedBrandCount: number;
+  uncertainBrandCount: number;
+  brandNames: string[];
+}
+
 export interface BrandData {
   website: string;
   countries: Record<string, CountryEntry>;
