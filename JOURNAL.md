@@ -428,3 +428,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-31
 **Did**: Added searchable filters, result counts, and empty states to the brand-footprint and coverage panels so users can quickly narrow long brand and country lists as the dataset grows.
 **Result**: pass
+## 2026-03-31
+**Did**: Lazy-loaded the main EV map behind a tested loading shell so the app can show immediate feedback while deferring the heavy map bundle until it is needed.
+**Result**: pass
