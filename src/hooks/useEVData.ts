@@ -113,6 +113,7 @@ export function getCountryPresenceDetails(
     countryName = entry.name || countryName;
     visibleBrands.push({
       brandName: name,
+      website: brand.website,
       source: entry.source,
       sources: Array.from(
         new Set(entry.sources ?? (entry.source ? [entry.source] : [])),

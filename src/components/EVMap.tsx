@@ -598,10 +598,32 @@ export default function EVMap() {
                   key={brand.brandName}
                   className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
                 >
-                  <div className="flex items-center justify-between gap-3">
-                    <p className="text-sm font-medium text-gray-800">
-                      {brand.brandName}
-                    </p>
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-sm font-medium text-gray-800">
+                        {brand.brandName}
+                      </p>
+                      <div className="mt-2 flex flex-wrap items-center gap-3 text-xs">
+                        <button
+                          type="button"
+                          className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                          onClick={() => setSelectedBrand(brand.brandName)}
+                        >
+                          {activeSelectedBrand === brand.brandName
+                            ? "Showing footprint"
+                            : `Show ${brand.brandName} footprint`}
+                        </button>
+                        <a
+                          href={brand.website}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                          aria-label={`Open official website for ${brand.brandName}`}
+                        >
+                          Website
+                        </a>
+                      </div>
+                    </div>
                     {brand.uncertain ? (
                       <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800">
                         Uncertain

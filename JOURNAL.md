@@ -419,3 +419,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-31
 **Did**: Re-checked ORA France, the Netherlands, and Poland against GWM Europe's live homepage, official ORA test-drive list, and guessed country-specific roots, then narrowed the backlog because Europe still exposes only an EU-wide ORA site while those local roots return 404.
 **Result**: pass
+## 2026-03-31
+**Did**: Added country-details drilldown actions so users can open a listed brand's official website and jump straight from a selected country into that brand's filtered footprint, with test coverage for the new flow.
+**Result**: pass

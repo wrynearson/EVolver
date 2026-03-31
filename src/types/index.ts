@@ -8,6 +8,7 @@ export interface CountryEntry {
 
 export interface CountryPresenceBrand {
   brandName: string;
+  website: string;
   source: string | null;
   sources: string[];
   uncertain: boolean;

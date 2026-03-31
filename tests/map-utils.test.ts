@@ -308,12 +308,14 @@ describe("getCountryPresenceDetails", () => {
       brands: [
         {
           brandName: "BrandA",
+          website: "https://a.com",
           source: "https://a.com/no",
           sources: ["https://a.com/no", "https://a.com/dealers/no"],
           uncertain: false,
         },
         {
           brandName: "BrandB",
+          website: "https://b.com",
           source: "https://b.com/no",
           sources: ["https://b.com/no"],
           uncertain: true,

@@ -288,6 +288,28 @@ describe("EVMap", () => {
     expect(
       screen.getByRole("link", { name: "Open share link in a new tab" }),
     ).toHaveAttribute("href", "http://localhost:3000/?country=SWE&brand=BYD");
+
+    fireEvent.click(screen.getByRole("button", { name: "Clear" }));
+    fireEvent.click(screen.getByRole("button", { name: "Select Norway" }));
+
+    const allBrandsNorwayPanel = screen
+      .getByRole("heading", { name: "Norway" })
+      .closest("aside");
+    expect(allBrandsNorwayPanel).not.toBeNull();
+    expect(
+      within(allBrandsNorwayPanel!).getByRole("link", {
+        name: "Open official website for XPeng",
+      }),
+    ).toHaveAttribute("href", "https://www.xpeng.com");
+
+    fireEvent.click(
+      within(allBrandsNorwayPanel!).getByRole("button", {
+        name: "Show XPeng footprint",
+      }),
+    );
+    expect(screen.getByDisplayValue("XPeng")).toBeInTheDocument();
+    expect(window.location.search).toBe("?country=NOR&brand=XPeng");
+    expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
   });
 
   it("drops invalid brand query params after loading", async () => {
