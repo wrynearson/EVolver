@@ -416,3 +416,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-31
 **Did**: Re-checked ORA Italy, India, and Libya against GWM's official global market directory plus each current local site, confirmed Italy's listed `haval.it` domain is still a legacy Haval-only site with no ORA route while the official India and Libya leads remain unreachable, and tightened the ORA backlog away from those low-signal paths.
 **Result**: pass
+## 2026-03-31
+**Did**: Re-checked ORA France, the Netherlands, and Poland against GWM Europe's live homepage, official ORA test-drive list, and guessed country-specific roots, then narrowed the backlog because Europe still exposes only an EU-wide ORA site while those local roots return 404.
+**Result**: pass
