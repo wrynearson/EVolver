@@ -506,3 +506,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added BYD official presence for the Bahamas, Antigua and Barbuda, Barbados, Jamaica, Suriname, and Trinidad and Tobago after confirming BYD's own Bahamas locale plus the official BYD Caribbean dealer network and live regional test-drive flow.
 **Result**: pass
 **TODO**: Verify the next strongest BYD locales beyond the updated Americas footprint, prioritizing remaining official BYD market sites in Europe, Africa, and Asia-Pacific with live dealer, contact, or service flows.
+## 2026-03-31
+**Did**: Added BYD official presence for Japan, South Korea, Serbia, and South Africa after confirming official local passenger-car sites plus live dealer, showroom, contact, or service surfaces on BYD-owned pages.
+**Result**: pass
+**TODO**: Verify the next strongest BYD locales beyond the updated footprint, prioritizing remaining official BYD market sites in Europe, Africa, and Asia-Pacific with live dealer, contact, or service flows.

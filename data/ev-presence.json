@@ -372,6 +372,48 @@
             "https://us-site-api.byd.com/byd-api/us/dealer/getCrmUsDealer?country=Caribbean"
           ],
           "uncertain": false
+        },
+        "JPN": {
+          "name": "Japan",
+          "present": true,
+          "source": "https://byd.co.jp/e-life/dealer/",
+          "sources": [
+            "https://byd.co.jp/byd-auto/",
+            "https://byd.co.jp/e-life/dealer/"
+          ],
+          "uncertain": false
+        },
+        "KOR": {
+          "name": "South Korea",
+          "present": true,
+          "source": "https://www.bydauto.kr/network/find-showroom",
+          "sources": [
+            "https://www.bydauto.kr/index",
+            "https://www.bydauto.kr/network/find-showroom"
+          ],
+          "uncertain": false
+        },
+        "SRB": {
+          "name": "Serbia",
+          "present": true,
+          "source": "https://byd-auto.rs/kontakt/",
+          "sources": [
+            "https://byd-auto.rs/",
+            "https://byd-auto.rs/kontakt/"
+          ],
+          "uncertain": false
+        },
+        "ZAF": {
+          "name": "South Africa",
+          "present": true,
+          "source": "https://www.byd.com/za/support/service",
+          "sources": [
+            "https://www.byd.com/za",
+            "https://www.byd.com/za/support/service",
+            "https://www.byd.international/country/south-africa",
+            "https://www.byd.international/car-dealer/bb-byd-hatfield"
+          ],
+          "uncertain": false
         }
       }
     },
