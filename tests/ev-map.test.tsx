@@ -177,6 +177,75 @@ describe("EVMap", () => {
     });
   });
 
+  it("exports the currently filtered dataset as csv and json", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const downloadTextFile = vi.fn();
+    vi.doMock("../src/lib/dataExport", async () => {
+      const actual = await vi.importActual<typeof import("../src/lib/dataExport")>(
+        "../src/lib/dataExport",
+      );
+
+      return {
+        ...actual,
+        downloadTextFile,
+      };
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Download CSV" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Download JSON" })).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText("Brand filter"), {
+      target: { value: "XPeng" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Download CSV" }));
+
+    expect(downloadTextFile).toHaveBeenCalledTimes(1);
+    expect(downloadTextFile).toHaveBeenNthCalledWith(
+      1,
+      expect.any(String),
+      "ev-presence-xpeng-all-regions-2026-03-13.csv",
+      "text/csv;charset=utf-8",
+    );
+    expect(downloadTextFile.mock.calls[0][0]).toContain(
+      "XPeng,https://www.xpeng.com,NOR,Norway,Europe,true,false,https://www.xpeng.com/no,https://www.xpeng.com/no",
+    );
+    expect(downloadTextFile.mock.calls[0][0]).not.toContain("BYD");
+
+    fireEvent.change(screen.getByLabelText("Brand filter"), {
+      target: { value: "" },
+    });
+    fireEvent.change(screen.getByLabelText("Region filter"), {
+      target: { value: "Europe" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Download JSON" }));
+
+    expect(downloadTextFile).toHaveBeenCalledTimes(2);
+    expect(downloadTextFile).toHaveBeenNthCalledWith(
+      2,
+      expect.any(String),
+      "ev-presence-all-brands-europe-2026-03-13.json",
+      "application/json;charset=utf-8",
+    );
+
+    const exportedJson = JSON.parse(downloadTextFile.mock.calls[1][0]) as EVPresenceData;
+    expect(Object.keys(exportedJson.brands)).toEqual(["BYD", "XPeng"]);
+    expect(Object.keys(exportedJson.brands.BYD.countries)).toEqual(["NOR"]);
+    expect(Object.keys(exportedJson.brands.XPeng.countries)).toEqual(["NOR"]);
+  });
+
   it("keeps the data panels available while the map canvas chunk is still loading", async () => {
     vi.doMock(
       "../src/components/MapCanvas",

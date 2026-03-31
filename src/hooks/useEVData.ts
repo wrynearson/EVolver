@@ -180,6 +180,22 @@ export function filterPresenceDataToRegion(
   };
 }
 
+export function filterPresenceDataToBrand(
+  data: EVPresenceData,
+  brandName?: string,
+): EVPresenceData {
+  if (!brandName) {
+    return data;
+  }
+
+  const brand = data.brands[brandName];
+
+  return {
+    ...data,
+    brands: brand ? { [brandName]: brand } : {},
+  };
+}
+
 export function getCountryPresenceDetails(
   data: EVPresenceData,
   isoCode: string,

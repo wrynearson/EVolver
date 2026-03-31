@@ -450,3 +450,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-31
 **Did**: Added a first-class region filter so users can narrow the map, lookup, shareable URL state, and brand footprint to a single world region, backed by helper and UI coverage.
 **Result**: pass
+## 2026-03-31
+**Did**: Added filtered CSV and JSON dataset exports to the map summary so users can download the current brand- and region-scoped view for offline analysis, backed by new export helpers and UI coverage.
+**Result**: pass

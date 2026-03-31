@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect, useMemo, useState } from "react";
 import {
   computeCountryBrandCounts,
   computeDatasetSummary,
+  filterPresenceDataToBrand,
   filterPresenceDataToRegion,
   getBrandCoverageSummaries,
   getBrandPresenceCountries,
@@ -12,6 +13,12 @@ import {
   normalizeCoverageRegion,
   useEVData,
 } from "../hooks/useEVData";
+import {
+  buildPresenceExportFileBaseName,
+  downloadTextFile,
+  serializePresenceDataToCsv,
+  serializePresenceDataToJson,
+} from "../lib/dataExport";
 import { buildColorExpression, getLegendItems } from "../lib/mapUtils";
 import type { FeatureCollection } from "geojson";
 import type { MapCountrySelection } from "../types";
@@ -277,6 +284,23 @@ export default function EVMap() {
       activeSelectedBrand || undefined,
     );
   }, [activeSelectedBrand, regionScopedData, summary]);
+  const exportData = useMemo(() => {
+    if (!regionScopedData) {
+      return null;
+    }
+
+    return filterPresenceDataToBrand(regionScopedData, activeSelectedBrand || undefined);
+  }, [activeSelectedBrand, regionScopedData]);
+  const exportFileBaseName = useMemo(
+    () =>
+      buildPresenceExportFileBaseName({
+        brandName: activeSelectedBrand || undefined,
+        regionName: selectedCoverageRegion || undefined,
+        lastUpdated:
+          visibleSummary?.lastUpdated ?? data?.metadata.last_updated ?? "unknown-date",
+      }),
+    [activeSelectedBrand, data, selectedCoverageRegion, visibleSummary],
+  );
 
   const countryOptions = useMemo<CountryOption[]>(() => {
     if (!visibleCountries) {
@@ -930,6 +954,49 @@ export default function EVMap() {
                 Open share link
               </a>
             ) : null}
+          </div>
+          <div className="mt-3">
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                className="rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
+                disabled={!exportData}
+                onClick={() => {
+                  if (!exportData) {
+                    return;
+                  }
+
+                  downloadTextFile(
+                    serializePresenceDataToCsv(exportData, countryRegionLookup),
+                    `${exportFileBaseName}.csv`,
+                    "text/csv;charset=utf-8",
+                  );
+                }}
+              >
+                Download CSV
+              </button>
+              <button
+                type="button"
+                className="rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
+                disabled={!exportData}
+                onClick={() => {
+                  if (!exportData) {
+                    return;
+                  }
+
+                  downloadTextFile(
+                    serializePresenceDataToJson(exportData),
+                    `${exportFileBaseName}.json`,
+                    "application/json;charset=utf-8",
+                  );
+                }}
+              >
+                Download JSON
+              </button>
+            </div>
+            <p className="mt-2 text-xs text-gray-500">
+              Export the currently filtered dataset for offline analysis.
+            </p>
           </div>
           <dl className="mt-2 space-y-1 text-sm text-gray-600">
             <div className="flex items-center justify-between gap-4">

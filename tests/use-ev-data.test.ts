@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   computeCountryBrandCounts,
   computeDatasetSummary,
+  filterPresenceDataToBrand,
   filterPresenceDataToRegion,
   getCountryRegionLookup,
   getCountryCoverageSummaries,
@@ -151,5 +152,12 @@ describe("useEVData helpers", () => {
       visibleCountryCount: 1,
       lastUpdated: "2026-03-31",
     });
+  });
+
+  it("filters dataset entries down to a single brand for scoped exports", () => {
+    const filteredData = filterPresenceDataToBrand(mockData, "XPeng");
+
+    expect(Object.keys(filteredData.brands)).toEqual(["XPeng"]);
+    expect(filteredData.brands.XPeng.countries).toEqual(mockData.brands.XPeng.countries);
   });
 });
