@@ -20,6 +20,8 @@ type CoveragePanelView = "brands" | "countries" | "regions";
 type SelectionState = {
   selectedBrand: string;
   selectedCountry: MapCountrySelection | null;
+  coveragePanelView: CoveragePanelView;
+  selectedCoverageRegion: string;
 };
 type CountryOption = {
   isoCode: string;
@@ -29,6 +31,15 @@ type CountryOption = {
 type CountryLookupMatch = CountryOption;
 
 const MapCanvas = lazy(() => import("./MapCanvas"));
+const COVERAGE_PANEL_VIEWS: CoveragePanelView[] = [
+  "brands",
+  "countries",
+  "regions",
+];
+
+function isCoveragePanelView(value: string): value is CoveragePanelView {
+  return value === "brands" || value === "countries" || value === "regions";
+}
 
 function matchesSearchQuery(values: Array<string | undefined>, query: string) {
   const normalizedQuery = query.trim().toLowerCase();
@@ -82,12 +93,21 @@ function getSelectionStateFromSearch(search: string): SelectionState {
   const searchParams = new URLSearchParams(search);
   const selectedBrand = searchParams.get("brand")?.trim() ?? "";
   const selectedCountryIsoCode = normalizeIsoCode(searchParams.get("country"));
+  const requestedCoveragePanelView = searchParams.get("view")?.trim() ?? "";
+  const selectedCoverageRegion = searchParams.get("region")?.trim() ?? "";
+  const coveragePanelView = isCoveragePanelView(requestedCoveragePanelView)
+    ? requestedCoveragePanelView
+    : selectedCoverageRegion
+      ? "countries"
+      : "brands";
 
   return {
     selectedBrand,
     selectedCountry: selectedCountryIsoCode
       ? { isoCode: selectedCountryIsoCode }
       : null,
+    coveragePanelView,
+    selectedCoverageRegion,
   };
 }
 
@@ -96,6 +116,8 @@ function getInitialSelectionState(): SelectionState {
     return {
       selectedBrand: "",
       selectedCountry: null,
+      coveragePanelView: "brands",
+      selectedCoverageRegion: "",
     };
   }
 
@@ -105,6 +127,8 @@ function getInitialSelectionState(): SelectionState {
 function buildShareUrl(
   selectedBrand: string,
   selectedCountry: MapCountrySelection | null,
+  coveragePanelView: CoveragePanelView,
+  selectedCoverageRegion: string,
 ) {
   if (typeof window === "undefined") {
     return "";
@@ -124,6 +148,18 @@ function buildShareUrl(
     url.searchParams.delete("country");
   }
 
+  if (coveragePanelView !== "brands") {
+    url.searchParams.set("view", coveragePanelView);
+  } else {
+    url.searchParams.delete("view");
+  }
+
+  if (selectedCoverageRegion) {
+    url.searchParams.set("region", selectedCoverageRegion);
+  } else {
+    url.searchParams.delete("region");
+  }
+
   return url.toString();
 }
 
@@ -138,22 +174,26 @@ function buildShareUrl(
  */
 export default function EVMap() {
   const { data, countryBrandCount, summary, loading } = useEVData();
+  const initialSelectionState = getInitialSelectionState();
   const [countries, setCountries] = useState<FeatureCollection | null>(null);
   const [selectedBrand, setSelectedBrand] = useState<string>(
-    () => getInitialSelectionState().selectedBrand,
+    () => initialSelectionState.selectedBrand,
   );
   const [hoveredCountry, setHoveredCountry] = useState<MapCountrySelection | null>(null);
   const [selectedCountry, setSelectedCountry] = useState<MapCountrySelection | null>(
-    () => getInitialSelectionState().selectedCountry,
+    () => initialSelectionState.selectedCountry,
   );
   const [copyLinkStatus, setCopyLinkStatus] = useState<CopyLinkStatus>("idle");
-  const [coveragePanelView, setCoveragePanelView] =
-    useState<CoveragePanelView>("brands");
+  const [coveragePanelView, setCoveragePanelView] = useState<CoveragePanelView>(
+    () => initialSelectionState.coveragePanelView,
+  );
   const [coverageSearchQuery, setCoverageSearchQuery] = useState("");
-  const [selectedCoverageRegion, setSelectedCoverageRegion] = useState("");
+  const [selectedCoverageRegion, setSelectedCoverageRegion] = useState(
+    () => initialSelectionState.selectedCoverageRegion,
+  );
   const [footprintSearchQuery, setFootprintSearchQuery] = useState("");
   const [countryLookupQuery, setCountryLookupQuery] = useState(() =>
-    getCountryLookupValue(getInitialSelectionState().selectedCountry),
+    getCountryLookupValue(initialSelectionState.selectedCountry),
   );
   const activeSelectedBrand =
     data && selectedBrand && !data.brands[selectedBrand] ? "" : selectedBrand;
@@ -455,8 +495,19 @@ export default function EVMap() {
   );
 
   const shareUrl = useMemo(
-    () => buildShareUrl(activeSelectedBrand, resolvedSelectedCountry),
-    [activeSelectedBrand, resolvedSelectedCountry],
+    () =>
+      buildShareUrl(
+        activeSelectedBrand,
+        resolvedSelectedCountry,
+        coveragePanelView,
+        selectedCoverageRegion,
+      ),
+    [
+      activeSelectedBrand,
+      coveragePanelView,
+      resolvedSelectedCountry,
+      selectedCoverageRegion,
+    ],
   );
   const legendItems = useMemo(
     () => getLegendItems(activeSelectedBrand || undefined),
@@ -490,6 +541,8 @@ export default function EVMap() {
 
       setSelectedBrand(nextState.selectedBrand);
       setSelectedCountry(nextState.selectedCountry);
+      setCoveragePanelView(nextState.coveragePanelView);
+      setSelectedCoverageRegion(nextState.selectedCoverageRegion);
     };
 
     window.addEventListener("popstate", handlePopState);
@@ -504,17 +557,30 @@ export default function EVMap() {
     const url = new URL(window.location.href);
     const currentBrand = url.searchParams.get("brand")?.trim() ?? "";
     const currentCountry = normalizeIsoCode(url.searchParams.get("country"));
+    const currentState = getSelectionStateFromSearch(url.search);
 
     if (
       currentBrand === activeSelectedBrand &&
-      currentCountry === resolvedSelectedCountry?.isoCode
+      currentCountry === resolvedSelectedCountry?.isoCode &&
+      currentState.coveragePanelView === coveragePanelView &&
+      currentState.selectedCoverageRegion === selectedCoverageRegion
     ) {
       return;
     }
 
-    const nextUrl = buildShareUrl(activeSelectedBrand, resolvedSelectedCountry);
+    const nextUrl = buildShareUrl(
+      activeSelectedBrand,
+      resolvedSelectedCountry,
+      coveragePanelView,
+      selectedCoverageRegion,
+    );
     window.history.replaceState({}, "", nextUrl);
-  }, [activeSelectedBrand, resolvedSelectedCountry]);
+  }, [
+    activeSelectedBrand,
+    coveragePanelView,
+    resolvedSelectedCountry,
+    selectedCoverageRegion,
+  ]);
 
   useEffect(() => {
     setCopyLinkStatus("idle");
@@ -533,16 +599,10 @@ export default function EVMap() {
   }, [resolvedSelectedCountry]);
 
   useEffect(() => {
-    if (!activeSelectedBrand) {
-      return;
-    }
-
-    setSelectedCoverageRegion("");
-  }, [activeSelectedBrand]);
-
-  useEffect(() => {
     if (
       !selectedCoverageRegion ||
+      !data ||
+      !countries ||
       regionCoverageSummaries.some(
         (region) => region.regionName === selectedCoverageRegion,
       )
@@ -551,7 +611,15 @@ export default function EVMap() {
     }
 
     setSelectedCoverageRegion("");
-  }, [regionCoverageSummaries, selectedCoverageRegion]);
+  }, [countries, data, regionCoverageSummaries, selectedCoverageRegion]);
+
+  useEffect(() => {
+    if (!selectedCoverageRegion || coveragePanelView === "countries") {
+      return;
+    }
+
+    setSelectedCoverageRegion("");
+  }, [coveragePanelView, selectedCoverageRegion]);
 
   const fillColor = buildColorExpression(visibleCountryBrandCount);
   const mapStatus = loading
@@ -1042,7 +1110,7 @@ export default function EVMap() {
             role="tablist"
             aria-label="Coverage ranking view"
           >
-            {(["brands", "countries", "regions"] as const).map((view) => {
+            {COVERAGE_PANEL_VIEWS.map((view) => {
               const isActive = coveragePanelView === view;
 
               return (
