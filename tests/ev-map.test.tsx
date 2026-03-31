@@ -402,8 +402,8 @@ describe("EVMap", () => {
     fireEvent.click(await screen.findByRole("button", { name: "Leave Hover" }));
     expect(screen.queryByRole("heading", { name: "Map preview" })).not.toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: "Clear" }));
-    expect(screen.getByDisplayValue("All brands")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Clear brand filter" }));
+    expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("");
     expect(screen.queryByText("Brand footprint")).not.toBeInTheDocument();
     expect(screen.getByText("Chinese EV Brands Present")).toBeInTheDocument();
     expect(screen.getByText("2-3 brands")).toBeInTheDocument();
@@ -467,7 +467,7 @@ describe("EVMap", () => {
       within(bydFootprintPanel!).queryByRole("button", { name: /China/i }),
     ).not.toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: "Clear" }));
+    fireEvent.click(screen.getByRole("button", { name: "Clear brand filter" }));
 
     const refreshedCoveragePanel = screen
       .getByRole("heading", { name: "Brand coverage" })
@@ -583,6 +583,43 @@ describe("EVMap", () => {
     expect(screen.getByLabelText("Country lookup")).toHaveDisplayValue("");
     expect(screen.queryByRole("heading", { name: "Sweden" })).not.toBeInTheDocument();
     expect(window.location.search).toBe("");
+  });
+
+  it("supports searchable brand filter suggestions", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    const brandFilter = await screen.findByLabelText("Brand filter");
+    expect(brandFilter).toBeInTheDocument();
+
+    fireEvent.change(brandFilter, { target: { value: "xp" } });
+
+    expect(screen.getByText("Showing 1 matching brand")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "XPeng" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Brand footprint" })).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "XPeng" }));
+
+    expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("XPeng");
+    expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
+    expect(window.location.search).toBe("?brand=XPeng");
+
+    fireEvent.change(screen.getByLabelText("Brand filter"), {
+      target: { value: "tesla" },
+    });
+
+    expect(screen.getByText("Showing 0 matching brands")).toBeInTheDocument();
+    expect(screen.getByText("No brands match this search yet.")).toBeInTheDocument();
   });
 
   it("applies the region filter across the map summary, lookup, and brand footprint", async () => {
@@ -797,9 +834,9 @@ describe("EVMap", () => {
     render(<EVMap />);
 
     expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
-    expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("All brands");
     expect(screen.getByRole("heading", { name: "Brand coverage" })).toBeInTheDocument();
     await waitFor(() => {
+      expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("");
       expect(window.location.search).toBe("?country=NOR");
     });
   });
@@ -819,7 +856,7 @@ describe("EVMap", () => {
     render(<EVMap />);
 
     expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
-    expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("All brands");
+    expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("");
     expect(screen.queryByRole("heading", { name: "Norway" })).not.toBeInTheDocument();
 
     window.history.pushState({}, "", "/?brand=BYD&country=NOR");
@@ -834,7 +871,7 @@ describe("EVMap", () => {
     window.history.pushState({}, "", "/?country=SWE");
     fireEvent.popState(window);
 
-    expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("All brands");
+    expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("");
     expect(screen.getByLabelText("Country lookup")).toHaveDisplayValue("Sweden");
     expect(screen.getByRole("heading", { name: "Sweden" })).toBeInTheDocument();
     expect(screen.getByText("SWE · 0 brands")).toBeInTheDocument();

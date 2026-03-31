@@ -37,6 +37,7 @@ type CountryOption = {
   regionName?: string;
 };
 type CountryLookupMatch = CountryOption;
+type BrandLookupMatch = string;
 
 const MapCanvas = lazy(() => import("./MapCanvas"));
 const COVERAGE_PANEL_VIEWS: CoveragePanelView[] = [
@@ -120,6 +121,22 @@ function findCountryLookupMatch(
         country.countryName.toLowerCase() === normalizedQuery ||
         country.isoCode.toLowerCase() === normalizedQuery,
     ) ?? null
+  );
+}
+
+function findBrandLookupMatch(
+  brandOptions: string[],
+  query: string,
+): BrandLookupMatch | null {
+  const normalizedQuery = query.trim().toLowerCase();
+
+  if (!normalizedQuery) {
+    return null;
+  }
+
+  return (
+    brandOptions.find((brandName) => brandName.toLowerCase() === normalizedQuery) ??
+    null
   );
 }
 
@@ -229,8 +246,19 @@ export default function EVMap() {
   const [countryLookupQuery, setCountryLookupQuery] = useState(() =>
     getCountryLookupValue(initialSelectionState.selectedCountry),
   );
+  const [brandLookupQuery, setBrandLookupQuery] = useState(
+    () => initialSelectionState.selectedBrand,
+  );
   const activeSelectedBrand =
     data && selectedBrand && !data.brands[selectedBrand] ? "" : selectedBrand;
+  const applyBrandSelection = (brandName: string) => {
+    setSelectedBrand(brandName);
+    setBrandLookupQuery(brandName);
+  };
+  const clearBrandSelection = () => {
+    setSelectedBrand("");
+    setBrandLookupQuery("");
+  };
 
   const brandOptions = useMemo(
     () => (data ? Object.keys(data.brands).sort((a, b) => a.localeCompare(b)) : []),
@@ -382,6 +410,10 @@ export default function EVMap() {
     () => findCountryLookupMatch(countryOptions, countryLookupQuery),
     [countryLookupQuery, countryOptions],
   );
+  const exactBrandLookupMatch = useMemo(
+    () => findBrandLookupMatch(brandOptions, brandLookupQuery),
+    [brandLookupQuery, brandOptions],
+  );
 
   const filteredCountryOptions = useMemo(() => {
     const normalizedQuery = countryLookupQuery.trim();
@@ -399,11 +431,25 @@ export default function EVMap() {
       )
       .slice(0, 8);
   }, [countryLookupQuery, countryOptions]);
+  const filteredBrandOptions = useMemo(() => {
+    const normalizedQuery = brandLookupQuery.trim();
+
+    if (!normalizedQuery) {
+      return [];
+    }
+
+    return brandOptions
+      .filter((brandName) => matchesSearchQuery([brandName], normalizedQuery))
+      .slice(0, 8);
+  }, [brandLookupQuery, brandOptions]);
 
   const shouldShowCountryLookupMatches =
     countryLookupQuery.trim().length > 0 &&
     (!exactCountryLookupMatch ||
       exactCountryLookupMatch.isoCode !== resolvedSelectedCountry?.isoCode);
+  const shouldShowBrandLookupMatches =
+    brandLookupQuery.trim().length > 0 &&
+    (!exactBrandLookupMatch || exactBrandLookupMatch !== activeSelectedBrand);
 
   const selectedCountryDetails = useMemo(() => {
     if (!regionScopedData || !resolvedSelectedCountry) {
@@ -609,7 +655,7 @@ export default function EVMap() {
       return;
     }
 
-    setSelectedBrand("");
+    clearBrandSelection();
   }, [data, selectedBrand]);
 
   useEffect(() => {
@@ -648,6 +694,7 @@ export default function EVMap() {
       const nextState = getSelectionStateFromSearch(window.location.search);
 
       setSelectedBrand(nextState.selectedBrand);
+      setBrandLookupQuery(nextState.selectedBrand);
       setSelectedCountry(nextState.selectedCountry);
       setCoveragePanelView(nextState.coveragePanelView);
       setSelectedCoverageRegion(nextState.selectedCoverageRegion);
@@ -782,19 +829,80 @@ export default function EVMap() {
             >
               Brand filter
             </label>
-            <select
-              id="brand-filter"
-              className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
-              value={activeSelectedBrand}
-              onChange={(event) => setSelectedBrand(event.target.value)}
-            >
-              <option value="">All brands</option>
-              {brandOptions.map((brand) => (
-                <option key={brand} value={brand}>
-                  {brand}
-                </option>
-              ))}
-            </select>
+            <div className="mt-1">
+              <div className="flex items-center gap-2">
+                <input
+                  id="brand-filter"
+                  type="search"
+                  className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
+                  placeholder="Search by brand name"
+                  disabled={brandOptions.length === 0}
+                  value={brandLookupQuery}
+                  onChange={(event) => {
+                    const nextQuery = event.target.value;
+                    const exactMatch = findBrandLookupMatch(brandOptions, nextQuery);
+
+                    setBrandLookupQuery(nextQuery);
+
+                    if (!nextQuery.trim()) {
+                      clearBrandSelection();
+                      return;
+                    }
+
+                    if (exactMatch) {
+                      applyBrandSelection(exactMatch);
+                      return;
+                    }
+
+                    if (activeSelectedBrand) {
+                      setSelectedBrand("");
+                    }
+                  }}
+                />
+                {brandLookupQuery || activeSelectedBrand ? (
+                  <button
+                    type="button"
+                    className="shrink-0 rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                    onClick={clearBrandSelection}
+                    aria-label="Clear brand filter"
+                  >
+                    Clear
+                  </button>
+                ) : null}
+              </div>
+              <p className="mt-2 text-xs text-gray-500">
+                Type a brand name to focus the map on a single confirmed footprint.
+              </p>
+              {shouldShowBrandLookupMatches ? (
+                <div className="mt-2 rounded-md border border-gray-200 bg-white">
+                  <p className="border-b border-gray-200 px-3 py-2 text-xs text-gray-500">
+                    Showing {filteredBrandOptions.length} matching{" "}
+                    {filteredBrandOptions.length === 1 ? "brand" : "brands"}
+                  </p>
+                  {filteredBrandOptions.length > 0 ? (
+                    <ul className="max-h-48 overflow-y-auto py-1">
+                      {filteredBrandOptions.map((brandName) => (
+                        <li key={brandName}>
+                          <button
+                            type="button"
+                            className="w-full px-3 py-2 text-left hover:bg-gray-50"
+                            onClick={() => applyBrandSelection(brandName)}
+                          >
+                            <p className="text-sm font-medium text-gray-800">
+                              {brandName}
+                            </p>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="px-3 py-3 text-sm text-gray-600">
+                      No brands match this search yet.
+                    </p>
+                  )}
+                </div>
+              ) : null}
+            </div>
           </div>
           <div className="mt-3">
             <label
@@ -1105,7 +1213,7 @@ export default function EVMap() {
                         <button
                           type="button"
                           className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
-                          onClick={() => setSelectedBrand(brand.brandName)}
+                          onClick={() => applyBrandSelection(brand.brandName)}
                         >
                           {activeSelectedBrand === brand.brandName
                             ? "Showing footprint"
@@ -1178,7 +1286,7 @@ export default function EVMap() {
             <button
               type="button"
               className="text-sm text-gray-500 hover:text-gray-700"
-              onClick={() => setSelectedBrand("")}
+              onClick={clearBrandSelection}
             >
               Clear
             </button>
@@ -1370,11 +1478,11 @@ export default function EVMap() {
                     className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
                   >
                     <div className="flex items-start justify-between gap-3">
-                      <button
-                        type="button"
-                        className="text-left"
-                        onClick={() => setSelectedBrand(brand.brandName)}
-                      >
+                        <button
+                          type="button"
+                          className="text-left"
+                          onClick={() => applyBrandSelection(brand.brandName)}
+                        >
                         <p className="text-sm font-medium text-gray-800">
                           {brand.brandName}
                         </p>
