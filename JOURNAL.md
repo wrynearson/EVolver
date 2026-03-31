@@ -482,3 +482,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added BYD official presence for Colombia after confirming BYD's own Colombia dealer-network page plus BYD-hosted local distributor and passenger-vehicle launch coverage.
 **Result**: pass
 **TODO**: Verify the next strongest BYD markets beyond the updated footprint, prioritizing official Southeast Asia and Latin America local sites that expose localized consumer pages plus live dealer, contact, or service flows.
+## 2026-03-31
+**Did**: Added BYD official presence for Peru, Ecuador, Costa Rica, and Vietnam after confirming BYD's own dealer-directory country pages plus rendered city dealer pages on the official `byd.international` domain.
+**Result**: pass
+**TODO**: Verify the next strongest BYD markets beyond the updated footprint, prioritizing official Latin American dealer-directory markets with clear city-level dealer pages.
+## 2026-03-31
+**Did**: Added BYD official presence for Panama, Paraguay, and Uruguay after confirming BYD's own dealer-directory country pages plus city-level authorized dealer listings on the official `byd.international` domain.
+**Result**: pass
+**TODO**: Verify the next strongest BYD markets beyond the updated footprint, prioritizing remaining official Latin American or Southeast Asian BYD markets with country pages plus city-level dealer listings or local passenger-car sites.

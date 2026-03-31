@@ -188,6 +188,36 @@
             "https://www.byd.international/city/binh-tan"
           ],
           "uncertain": false
+        },
+        "PAN": {
+          "name": "Panama",
+          "present": true,
+          "source": "https://www.byd.international/country/panama",
+          "sources": [
+            "https://www.byd.international/country/panama",
+            "https://www.byd.international/city/panama-city"
+          ],
+          "uncertain": false
+        },
+        "PRY": {
+          "name": "Paraguay",
+          "present": true,
+          "source": "https://www.byd.international/country/paraguay",
+          "sources": [
+            "https://www.byd.international/country/paraguay",
+            "https://www.byd.international/city/ciudad-del-este"
+          ],
+          "uncertain": false
+        },
+        "URY": {
+          "name": "Uruguay",
+          "present": true,
+          "source": "https://www.byd.international/country/uruguay",
+          "sources": [
+            "https://www.byd.international/country/uruguay",
+            "https://www.byd.international/city/montevideo"
+          ],
+          "uncertain": false
         }
       }
     },
