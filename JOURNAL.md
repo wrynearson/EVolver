@@ -410,3 +410,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-31
 **Did**: Added ORA Ukraine after confirming GWM's official global market selector links Ukraine to the live local `haval-ukraine.com` site and that same official site now exposes a dedicated ORA catalogue page for the Ukrainian market.
 **Result**: pass
+## 2026-03-31
+**Did**: Re-checked ORA Bolivia against GWM's official global market directory and Autokorp's live Bolivia site, confirmed the official local site still exposes only Great Wall and Haval ranges plus branches/service pages with no ORA consumer flow, and narrowed the backlog away from that lead.
+**Result**: pass
