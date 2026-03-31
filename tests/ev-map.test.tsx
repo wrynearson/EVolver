@@ -434,4 +434,42 @@ describe("EVMap", () => {
     expect(screen.getByRole("heading", { name: "Brand coverage" })).toBeInTheDocument();
     expect(window.location.search).toBe("?country=NOR");
   });
+
+  it("syncs brand and country selection with browser history navigation", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("All brands");
+    expect(screen.queryByRole("heading", { name: "Norway" })).not.toBeInTheDocument();
+
+    window.history.pushState({}, "", "/?brand=BYD&country=NOR");
+    fireEvent.popState(window);
+
+    expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("BYD");
+    expect(screen.getByLabelText("Country lookup")).toHaveDisplayValue("Norway");
+    expect(screen.getByRole("heading", { name: "Norway" })).toBeInTheDocument();
+    expect(screen.getByText("BYD present")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
+
+    window.history.pushState({}, "", "/?country=SWE");
+    fireEvent.popState(window);
+
+    expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("All brands");
+    expect(screen.getByLabelText("Country lookup")).toHaveDisplayValue("Sweden");
+    expect(screen.getByRole("heading", { name: "Sweden" })).toBeInTheDocument();
+    expect(screen.getByText("SWE · 0 brands")).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Brand footprint" })).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Brand coverage" })).toBeInTheDocument();
+  });
 });

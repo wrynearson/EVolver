@@ -431,3 +431,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-03-31
 **Did**: Lazy-loaded the main EV map behind a tested loading shell so the app can show immediate feedback while deferring the heavy map bundle until it is needed.
 **Result**: pass
+## 2026-03-31
+**Did**: Synced the map's brand and country selection with browser history navigation so shared URLs now stay in step with back/forward actions, backed by a focused interaction test.
+**Result**: pass

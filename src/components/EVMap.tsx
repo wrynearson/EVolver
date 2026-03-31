@@ -20,6 +20,10 @@ type SelectedCountry = {
 
 type CopyLinkStatus = "idle" | "copied" | "failed";
 type CoveragePanelView = "brands" | "countries";
+type SelectionState = {
+  selectedBrand: string;
+  selectedCountry: SelectedCountry | null;
+};
 
 function matchesSearchQuery(values: Array<string | undefined>, query: string) {
   const normalizedQuery = query.trim().toLowerCase();
@@ -42,18 +46,8 @@ function normalizeIsoCode(value: string | null): string | null {
   return /^[A-Z]{3}$/.test(normalizedValue) ? normalizedValue : null;
 }
 
-function getInitialSelectionState(): {
-  selectedBrand: string;
-  selectedCountry: SelectedCountry | null;
-} {
-  if (typeof window === "undefined") {
-    return {
-      selectedBrand: "",
-      selectedCountry: null,
-    };
-  }
-
-  const searchParams = new URLSearchParams(window.location.search);
+function getSelectionStateFromSearch(search: string): SelectionState {
+  const searchParams = new URLSearchParams(search);
   const selectedBrand = searchParams.get("brand")?.trim() ?? "";
   const selectedCountryIsoCode = normalizeIsoCode(searchParams.get("country"));
 
@@ -63,6 +57,17 @@ function getInitialSelectionState(): {
       ? { isoCode: selectedCountryIsoCode }
       : null,
   };
+}
+
+function getInitialSelectionState(): SelectionState {
+  if (typeof window === "undefined") {
+    return {
+      selectedBrand: "",
+      selectedCountry: null,
+    };
+  }
+
+  return getSelectionStateFromSearch(window.location.search);
 }
 
 function buildShareUrl(selectedBrand: string, selectedCountry: SelectedCountry | null) {
@@ -362,6 +367,22 @@ export default function EVMap() {
 
     setSelectedBrand("");
   }, [data, selectedBrand]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const handlePopState = () => {
+      const nextState = getSelectionStateFromSearch(window.location.search);
+
+      setSelectedBrand(nextState.selectedBrand);
+      setSelectedCountry(nextState.selectedCountry);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") {
