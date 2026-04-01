@@ -612,6 +612,50 @@
             "https://www.byd.com/tr/contact-us"
           ],
           "uncertain": false
+        },
+        "NGA": {
+          "name": "Nigeria",
+          "present": true,
+          "source": "https://www.byd.com/ng/",
+          "sources": [
+            "https://www.byd.com/ng/",
+            "https://www.byd.com/ng/customer-care",
+            "https://www.byd.com/ng/sitemap.xml"
+          ],
+          "uncertain": false
+        },
+        "KEN": {
+          "name": "Kenya",
+          "present": true,
+          "source": "https://www.byd.com/ke/find-store",
+          "sources": [
+            "https://www.byd.com/ke/find-store",
+            "https://www.byd.com/ke/support/service-maintenance",
+            "https://www.byd.com/ke/sitemap.xml"
+          ],
+          "uncertain": false
+        },
+        "RWA": {
+          "name": "Rwanda",
+          "present": true,
+          "source": "https://www.byd.com/rw/contact-us",
+          "sources": [
+            "https://www.byd.com/rw/contact-us",
+            "https://www.byd.com/rw/support/service",
+            "https://www.byd.com/rw/sitemap.xml"
+          ],
+          "uncertain": false
+        },
+        "NZL": {
+          "name": "New Zealand",
+          "present": true,
+          "source": "https://www.byd.com/nz/contact-us",
+          "sources": [
+            "https://www.byd.com/nz/index",
+            "https://www.byd.com/nz/contact-us",
+            "https://www.byd.com/nz/sitemap.xml"
+          ],
+          "uncertain": false
         }
       }
     },
