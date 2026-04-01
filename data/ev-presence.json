@@ -656,6 +656,64 @@
             "https://www.byd.com/nz/sitemap.xml"
           ],
           "uncertain": false
+        },
+        "EGY": {
+          "name": "Egypt",
+          "present": true,
+          "source": "https://www.byd.com/en-eg",
+          "sources": [
+            "https://www.byd.com/en-eg",
+            "https://www.byd.com/en-eg/find-store",
+            "https://byd-egypt.com/",
+            "https://byd-egypt.com/visit-dealer"
+          ],
+          "uncertain": false
+        },
+        "MAR": {
+          "name": "Morocco",
+          "present": true,
+          "source": "https://byd-maroc.com/reseau",
+          "sources": [
+            "https://www.byd.com/en-ma",
+            "https://www.byd.com/en-ma/service-maintenance",
+            "https://byd-maroc.com/",
+            "https://byd-maroc.com/reseau"
+          ],
+          "uncertain": false
+        },
+        "MUS": {
+          "name": "Mauritius",
+          "present": true,
+          "source": "https://www.bydmauritius.mu/contact",
+          "sources": [
+            "https://www.byd.com/en-mu",
+            "https://www.bydmauritius.mu/",
+            "https://www.bydmauritius.mu/contact",
+            "https://www.bydmauritius.mu/book-a-test-drive"
+          ],
+          "uncertain": false
+        },
+        "TZA": {
+          "name": "Tanzania",
+          "present": true,
+          "source": "https://www.byd.com/en-tz/find-store",
+          "sources": [
+            "https://www.byd.com/en-tz",
+            "https://www.byd.com/en-tz/find-store",
+            "https://www.byd.com/en-tz/service-maintenance"
+          ],
+          "uncertain": false
+        },
+        "UZB": {
+          "name": "Uzbekistan",
+          "present": true,
+          "source": "https://byd-astanamotors.uz/ru/contacts/",
+          "sources": [
+            "https://www.byd.com/uz",
+            "https://byd-astanamotors.uz/",
+            "https://byd-astanamotors.uz/ru/contacts/"
+          ],
+          "uncertain": false
         }
       }
     },

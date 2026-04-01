@@ -536,3 +536,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added BYD official presence for Nigeria, Kenya, Rwanda, and New Zealand after confirming missing first-party local BYD market sites plus live customer-care, dealer-finder, service, or contact surfaces on official BYD domains.
 **Result**: pass
 **TODO**: Verify the next strongest BYD Africa and Asia-Pacific locales beyond the updated footprint, prioritizing sovereign markets such as Egypt, Morocco, Mauritius, Tanzania, and Uzbekistan if their official BYD local sites keep exposing live customer-care, dealer, or service flows.
+
+## 2026-04-01
+**Did**: Added BYD official presence for Egypt, Morocco, Mauritius, Tanzania, and Uzbekistan after confirming localized BYD market sites plus live dealer, contact, test-drive, or service-network surfaces on official first-party or authorized local distributor pages.
+**Result**: pass
