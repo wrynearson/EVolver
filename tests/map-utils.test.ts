@@ -38,6 +38,24 @@ describe("buildColorExpression", () => {
     expect(getColor("B")).toBe("#3b82f6"); // 2 = medium blue
     expect(getColor("C")).toBe("#1d4ed8"); // 4 = dark blue
   });
+
+  it("uses uncertainty-aware colors for a selected brand view", () => {
+    const result = buildColorExpression(
+      { NOR: 1, SWE: 1 },
+      {
+        selectedBrand: "BYD",
+        uncertainCountryCodes: ["SWE"],
+      },
+    ) as unknown[];
+
+    const getColor = (key: string) => {
+      const idx = result.indexOf(key);
+      return idx >= 0 ? result[idx + 1] : undefined;
+    };
+
+    expect(getColor("NOR")).toBe("#1d4ed8");
+    expect(getColor("SWE")).toBe("#93c5fd");
+  });
 });
 
 describe("getLegendItems", () => {
@@ -52,6 +70,13 @@ describe("getLegendItems", () => {
   it("returns a binary legend for a single-brand view", () => {
     expect(getLegendItems("ORA")).toEqual([
       { color: "#93c5fd", label: "ORA present" },
+    ]);
+  });
+
+  it("returns confirmed and uncertain legend tiers for a single-brand view with uncertainty", () => {
+    expect(getLegendItems("ORA", { hasUncertainEntries: true })).toEqual([
+      { color: "#1d4ed8", label: "ORA confirmed" },
+      { color: "#93c5fd", label: "ORA uncertain" },
     ]);
   });
 });

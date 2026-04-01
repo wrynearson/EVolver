@@ -637,6 +637,13 @@ describe("EVMap", () => {
     expect(
       within(footprintPanel!).getByText("Uncertain", { selector: "span" }),
     ).toHaveAttribute("title", expectedTooltip);
+    expect(screen.getByText("BYD confirmed")).toBeInTheDocument();
+    expect(screen.getByText("BYD uncertain")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Highlighting the countries where BYD has tracked official presence, with lighter fills for uncertain entries.",
+      ),
+    ).toBeInTheDocument();
   });
 
   it("supports searchable country lookup suggestions", async () => {

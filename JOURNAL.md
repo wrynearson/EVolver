@@ -540,3 +540,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-01
 **Did**: Added BYD official presence for Egypt, Morocco, Mauritius, Tanzania, and Uzbekistan after confirming localized BYD market sites plus live dealer, contact, test-drive, or service-network surfaces on official first-party or authorized local distributor pages.
 **Result**: pass
+
+## 2026-04-01
+**Did**: Added uncertainty-aware single-brand map styling so filtered views now distinguish confirmed and uncertain official presence with matching legend guidance, backed by focused map utility and EV map tests.
+**Result**: pass

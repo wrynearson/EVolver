@@ -631,6 +631,17 @@ export default function EVMap() {
 
     return getBrandPresenceCountries(regionScopedData, activeSelectedBrand);
   }, [activeSelectedBrand, regionScopedData]);
+  const selectedBrandUncertainCountryCodes = useMemo(
+    () =>
+      new Set(
+        selectedBrandPresence
+          .filter((country) => country.uncertain)
+          .map((country) => country.isoCode),
+      ),
+    [selectedBrandPresence],
+  );
+  const selectedBrandHasUncertainPresence =
+    selectedBrandUncertainCountryCodes.size > 0;
 
   const filteredSelectedBrandPresence = useMemo(
     () =>
@@ -819,8 +830,11 @@ export default function EVMap() {
       footprintSearchQuery,
   );
   const legendItems = useMemo(
-    () => getLegendItems(activeSelectedBrand || undefined),
-    [activeSelectedBrand],
+    () =>
+      getLegendItems(activeSelectedBrand || undefined, {
+        hasUncertainEntries: selectedBrandHasUncertainPresence,
+      }),
+    [activeSelectedBrand, selectedBrandHasUncertainPresence],
   );
 
   useEffect(() => {
@@ -972,7 +986,10 @@ export default function EVMap() {
     setSelectedCoverageRegion("");
   }, [availableRegions, countries, selectedCoverageRegion]);
 
-  const fillColor = buildColorExpression(visibleCountryBrandCount);
+  const fillColor = buildColorExpression(visibleCountryBrandCount, {
+    selectedBrand: activeSelectedBrand || undefined,
+    uncertainCountryCodes: selectedBrandUncertainCountryCodes,
+  });
   const mapStatus = loading
     ? {
         title: "Loading verified EV data",
@@ -1948,9 +1965,13 @@ export default function EVMap() {
         {activeSelectedBrand || selectedCoverageRegion ? (
           <p className="mb-2 max-w-[12rem] text-xs text-gray-500">
             {activeSelectedBrand && selectedCoverageRegion
-              ? `Highlighting the countries in ${selectedCoverageRegion} where ${activeSelectedBrand} has confirmed official presence.`
+              ? selectedBrandHasUncertainPresence
+                ? `Highlighting the countries in ${selectedCoverageRegion} where ${activeSelectedBrand} has tracked official presence, with lighter fills for uncertain entries.`
+                : `Highlighting the countries in ${selectedCoverageRegion} where ${activeSelectedBrand} has confirmed official presence.`
               : activeSelectedBrand
-                ? `Highlighting the countries where ${activeSelectedBrand} has confirmed official presence.`
+                ? selectedBrandHasUncertainPresence
+                  ? `Highlighting the countries where ${activeSelectedBrand} has tracked official presence, with lighter fills for uncertain entries.`
+                  : `Highlighting the countries where ${activeSelectedBrand} has confirmed official presence.`
                 : `Highlighting confirmed tracked brand presence within ${selectedCoverageRegion}.`}
           </p>
         ) : null}
