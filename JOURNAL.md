@@ -526,3 +526,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added BYD official presence for Czechia, Croatia, Finland, and Slovakia after confirming live localized BYD market sites plus first-party about/store routes on official BYD country domains.
 **Result**: pass
 **TODO**: Verify the next strongest BYD locales beyond the updated footprint, prioritizing remaining official BYD Europe markets such as Estonia, Greece, Hungary, and Turkey plus any Africa or Asia-Pacific locales with live first-party contact, dealer, or service flows.
+
+## 2026-04-01
+**Did**: Added BYD official presence for Estonia, Greece, Hungary, and Turkey after confirming live localized BYD market sites plus official contact, dealer-finder, or sitemap-backed support routes on BYD-owned country domains.
+**Result**: pass
+**TODO**: Verify the next strongest BYD locales beyond the updated footprint, prioritizing Africa and Asia-Pacific markets with live first-party contact, dealer, or service flows.

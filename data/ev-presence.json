@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-31",
+    "last_updated": "2026-04-01",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -566,6 +566,50 @@
             "https://www.byd.com/sk",
             "https://www.byd.com/sk/O-spolocnosti-BYD",
             "https://www.byd.com/sk/Vyhladajte-predajnu"
+          ],
+          "uncertain": false
+        },
+        "EST": {
+          "name": "Estonia",
+          "present": true,
+          "source": "https://www.byd.com/ee/contact-us",
+          "sources": [
+            "https://www.byd.com/ee",
+            "https://www.byd.com/ee/about-byd",
+            "https://www.byd.com/ee/contact-us"
+          ],
+          "uncertain": false
+        },
+        "GRC": {
+          "name": "Greece",
+          "present": true,
+          "source": "https://www.byd.com/gr/contact-us",
+          "sources": [
+            "https://www.byd.com/gr",
+            "https://www.byd.com/gr/contact-us",
+            "https://www.byd.com/gr/sitemap.xml"
+          ],
+          "uncertain": false
+        },
+        "HUN": {
+          "name": "Hungary",
+          "present": true,
+          "source": "https://www.byd.com/hu/find-store",
+          "sources": [
+            "https://www.byd.com/hu",
+            "https://www.byd.com/hu/about-byd",
+            "https://www.byd.com/hu/find-store"
+          ],
+          "uncertain": false
+        },
+        "TUR": {
+          "name": "Turkey",
+          "present": true,
+          "source": "https://www.byd.com/tr/contact-us",
+          "sources": [
+            "https://www.byd.com/tr",
+            "https://www.byd.com/tr/about-byd",
+            "https://www.byd.com/tr/contact-us"
           ],
           "uncertain": false
         }
