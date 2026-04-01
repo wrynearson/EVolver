@@ -714,6 +714,40 @@
             "https://byd-astanamotors.uz/ru/contacts/"
           ],
           "uncertain": false
+        },
+        "KAZ": {
+          "name": "Kazakhstan",
+          "present": true,
+          "source": "https://byd-auto.kz/contacts",
+          "sources": [
+            "https://www.byd.international/country/kazakhstan",
+            "https://byd-auto.kz/",
+            "https://byd-auto.kz/contacts",
+            "https://astana-motors.kz/en/distributors/byd-kazakhstan-14"
+          ],
+          "uncertain": false
+        },
+        "PAK": {
+          "name": "Pakistan",
+          "present": true,
+          "source": "https://byd-mega.com/byd-locations",
+          "sources": [
+            "https://www.byd.international/country/pakistan",
+            "https://byd-mega.com/",
+            "https://byd-mega.com/byd-locations"
+          ],
+          "uncertain": false
+        },
+        "NPL": {
+          "name": "Nepal",
+          "present": true,
+          "source": "https://cimex.com.np/",
+          "sources": [
+            "https://www.byd.international/country/nepal",
+            "https://cimex.com.np/",
+            "https://cimex.com.np/sitemap.xml"
+          ],
+          "uncertain": false
         }
       }
     },

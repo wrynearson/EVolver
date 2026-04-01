@@ -544,3 +544,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-01
 **Did**: Added uncertainty-aware single-brand map styling so filtered views now distinguish confirmed and uncertain official presence with matching legend guidance, backed by focused map utility and EV map tests.
 **Result**: pass
+
+## 2026-04-01
+**Did**: Added BYD official presence for Kazakhstan, Pakistan, and Nepal after confirming BYD's own dealer-directory country pages plus live local distributor, experience-center, or dealer-network surfaces on official market sites.
+**Result**: pass
