@@ -563,3 +563,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-02
 **Did**: Added MG (SAIC) official presence for Saudi Arabia and Chile after confirming live first-party MG market, service, contact, and MG Latam distributor pages, and narrowed the remaining MG backlog to the still fetch-hostile Americas markets.
 **Result**: pass
+
+## 2026-04-02
+**Did**: Added MG (SAIC) official presence for Guyana and Peru after confirming MG Latam lists both markets and matching local MG sites expose live consumer, contact, landing, or after-sales booking flows.
+**Result**: pass

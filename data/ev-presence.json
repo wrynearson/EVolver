@@ -1444,6 +1444,29 @@
             "https://www.mgmotor.cl/mg-care-servicios"
           ],
           "uncertain": false
+        },
+        "GUY": {
+          "name": "Guyana",
+          "present": true,
+          "source": "https://www.mgmotorguyana.com/",
+          "sources": [
+            "https://www.mgmotorlatam.com/en/mg-latam",
+            "https://www.mgmotorguyana.com/",
+            "https://www.mgmotorguyana.com/contact-us/"
+          ],
+          "uncertain": false
+        },
+        "PER": {
+          "name": "Peru",
+          "present": true,
+          "source": "https://www.mgmotor.pe/",
+          "sources": [
+            "https://www.mgmotorlatam.com/en/mg-latam",
+            "https://www.mgmotor.pe/",
+            "https://landings.mgmotor.pe/",
+            "https://astara.in-touch.com.pe/mg/"
+          ],
+          "uncertain": false
         }
       }
     },
