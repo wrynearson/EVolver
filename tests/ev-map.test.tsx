@@ -457,6 +457,11 @@ describe("EVMap", () => {
     expect(
       within(bydFootprintPanel!).getByText("Showing 2 of 2 markets"),
     ).toBeInTheDocument();
+    expect(
+      within(bydFootprintPanel!).getByRole("link", {
+        name: "Open official website for BYD",
+      }),
+    ).toHaveAttribute("href", "https://www.byd.com");
     const footprintItems = within(bydFootprintPanel!).getAllByRole("listitem");
     expect(within(footprintItems[0]).getByRole("button", { name: /China/i })).toBeInTheDocument();
     expect(within(footprintItems[1]).getByRole("button", { name: /Norway/i })).toBeInTheDocument();

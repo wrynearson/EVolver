@@ -631,6 +631,13 @@ export default function EVMap() {
 
     return getBrandPresenceCountries(regionScopedData, activeSelectedBrand);
   }, [activeSelectedBrand, regionScopedData]);
+  const selectedBrandWebsite = useMemo(() => {
+    if (!data || !activeSelectedBrand) {
+      return "";
+    }
+
+    return data.brands[activeSelectedBrand]?.website ?? "";
+  }, [activeSelectedBrand, data]);
   const selectedBrandUncertainCountryCodes = useMemo(
     () =>
       new Set(
@@ -1540,6 +1547,17 @@ export default function EVMap() {
                 {activeSelectedBrand} · {selectedBrandPresence.length}{" "}
                 {selectedBrandPresence.length === 1 ? "market" : "markets"}
               </p>
+              {selectedBrandWebsite ? (
+                <a
+                  href={selectedBrandWebsite}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-1 inline-flex text-xs text-blue-700 underline underline-offset-2"
+                  aria-label={`Open official website for ${activeSelectedBrand}`}
+                >
+                  Official website
+                </a>
+              ) : null}
               {selectedCoverageRegion ? (
                 <p className="mt-1 text-xs text-gray-500">
                   Filtering markets to {selectedCoverageRegion}

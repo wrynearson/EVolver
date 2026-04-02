@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-01",
+    "last_updated": "2026-04-02",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -748,6 +748,28 @@
             "https://cimex.com.np/sitemap.xml"
           ],
           "uncertain": false
+        },
+        "BGD": {
+          "name": "Bangladesh",
+          "present": true,
+          "source": "https://www.byd.international/city/chattogram",
+          "sources": [
+            "https://www.bydauto.com.bd/",
+            "https://www.byd.international/country/bangladesh",
+            "https://www.byd.international/city/chattogram"
+          ],
+          "uncertain": false
+        },
+        "LKA": {
+          "name": "Sri Lanka",
+          "present": true,
+          "source": "https://bydlk.com/",
+          "sources": [
+            "https://bydlk.com/",
+            "https://www.byd.international/country/sri-lanka",
+            "https://www.byd.international/city/colombo"
+          ],
+          "uncertain": false
         }
       }
     },
@@ -1376,6 +1398,28 @@
           "name": "Thailand",
           "present": true,
           "source": "https://www.mgcars.com/th",
+          "uncertain": false
+        },
+        "MEX": {
+          "name": "Mexico",
+          "present": true,
+          "source": "https://www.mgmotor.com.mx/distribuidores",
+          "sources": [
+            "https://www.mgmotor.com.mx/contactanos",
+            "https://www.mgmotor.com.mx/servicios",
+            "https://www.mgmotor.com.mx/distribuidores"
+          ],
+          "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://www.mg-uae.com/",
+          "sources": [
+            "https://www.mg-uae.com/",
+            "https://www.mg-uae.com/contact-us/",
+            "https://www.mgmotor.me/contact-us/"
+          ],
           "uncertain": false
         }
       }

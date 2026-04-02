@@ -548,3 +548,15 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-01
 **Did**: Added BYD official presence for Kazakhstan, Pakistan, and Nepal after confirming BYD's own dealer-directory country pages plus live local distributor, experience-center, or dealer-network surfaces on official market sites.
 **Result**: pass
+
+## 2026-04-02
+**Did**: Added BYD official presence for Bangladesh and Sri Lanka after confirming BYD's official country and city dealer-directory pages plus live local BYD market sites with consumer and after-sales messaging.
+**Result**: pass
+
+## 2026-04-02
+**Did**: Added MG (SAIC) official presence for Mexico and the United Arab Emirates after confirming MG's official local service, distributor, and country contact pages across the Americas and Middle East.
+**Result**: pass
+
+## 2026-04-02
+**Did**: Added an official website shortcut to the filtered brand footprint panel so users can jump straight from a brand's market list to its homepage, backed by EV map test coverage.
+**Result**: pass
