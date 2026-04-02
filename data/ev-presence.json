@@ -1421,6 +1421,29 @@
             "https://www.mgmotor.me/contact-us/"
           ],
           "uncertain": false
+        },
+        "SAU": {
+          "name": "Saudi Arabia",
+          "present": true,
+          "source": "https://www.mg-sa.com/",
+          "sources": [
+            "https://www.mg-sa.com/",
+            "https://www.mg-sa.com/contact-us/",
+            "https://www.mg-sa.com/owners/care-beyond"
+          ],
+          "uncertain": false
+        },
+        "CHL": {
+          "name": "Chile",
+          "present": true,
+          "source": "https://www.mgmotor.cl/mg-red",
+          "sources": [
+            "https://www.mgmotorlatam.com/en/mg-latam",
+            "https://www.mgmotor.cl/",
+            "https://www.mgmotor.cl/mg-red",
+            "https://www.mgmotor.cl/mg-care-servicios"
+          ],
+          "uncertain": false
         }
       }
     },
