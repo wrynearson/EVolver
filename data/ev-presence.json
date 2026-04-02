@@ -1467,6 +1467,69 @@
             "https://astara.in-touch.com.pe/mg/"
           ],
           "uncertain": false
+        },
+        "ARG": {
+          "name": "Argentina",
+          "present": true,
+          "source": "https://www.mgargentina.ar/dealership",
+          "sources": [
+            "https://www.mgmotorlatam.com/en/mg-latam",
+            "https://www.mgargentina.ar/",
+            "https://www.mgargentina.ar/dealership"
+          ],
+          "uncertain": false
+        },
+        "BOL": {
+          "name": "Bolivia",
+          "present": true,
+          "source": "https://mgmotor.com.bo/",
+          "sources": [
+            "https://www.mgmotorlatam.com/en/mg-latam",
+            "https://mgmotor.com.bo/",
+            "https://mgmotor.com.bo/mg-care/"
+          ],
+          "uncertain": false
+        },
+        "ECU": {
+          "name": "Ecuador",
+          "present": true,
+          "source": "https://www.mgmotor.com.ec/contact",
+          "sources": [
+            "https://www.mgmotorlatam.com/en/mg-latam",
+            "https://www.mgmotor.com.ec/",
+            "https://www.mgmotor.com.ec/contact"
+          ],
+          "uncertain": false
+        },
+        "PRY": {
+          "name": "Paraguay",
+          "present": true,
+          "source": "https://mgmotor.com.py/",
+          "sources": [
+            "https://www.mgmotorlatam.com/en/mg-latam",
+            "https://mgmotor.com.py/"
+          ],
+          "uncertain": false
+        },
+        "URY": {
+          "name": "Uruguay",
+          "present": true,
+          "source": "https://mguruguay.com.uy/",
+          "sources": [
+            "https://www.mgmotorlatam.com/en/mg-latam",
+            "https://mguruguay.com.uy/"
+          ],
+          "uncertain": false
+        },
+        "VEN": {
+          "name": "Venezuela",
+          "present": true,
+          "source": "https://mgvzla.com/",
+          "sources": [
+            "https://www.mgmotorlatam.com/en/mg-latam",
+            "https://mgvzla.com/"
+          ],
+          "uncertain": false
         }
       }
     },
