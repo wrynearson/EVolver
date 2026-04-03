@@ -579,3 +579,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-03
 **Did**: Improved keyboard accessibility by adding combobox-style lookup suggestion navigation plus Escape-to-close support for the floating country-details and brand-footprint panels, backed by focused EV map tests.
 **Result**: pass
+
+## 2026-04-03
+**Did**: Confirmed Chery's official consumer-market presence in Saudi Arabia and Qatar using first-party local sites, test-drive flows, and service or branch pages, then added both markets to the dataset.
+**Result**: pass

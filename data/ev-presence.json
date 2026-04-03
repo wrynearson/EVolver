@@ -2522,6 +2522,29 @@
             "https://www.chery.my/roadside-assist"
           ],
           "uncertain": false
+        },
+        "SAU": {
+          "name": "Saudi Arabia",
+          "present": true,
+          "source": "https://chery-ksa.com/live",
+          "sources": [
+            "https://chery-ksa.com/live",
+            "https://chery-ksa.com/live/test-drive/",
+            "https://chery-ksa.com/live/address/"
+          ],
+          "uncertain": false
+        },
+        "QAT": {
+          "name": "Qatar",
+          "present": true,
+          "source": "https://cheryqatar.com/",
+          "sources": [
+            "https://cheryqatar.com/",
+            "https://cheryqatar.com/about-us",
+            "https://cheryqatar.com/form/test-drive-chery",
+            "https://cheryqatar.com/request-service-appointment"
+          ],
+          "uncertain": false
         }
       }
     }
