@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-02",
+    "last_updated": "2026-04-03",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -2457,6 +2457,69 @@
             "https://www.gwm-global.com/global.html",
             "https://www.haval-ukraine.com/",
             "https://www.haval-ukraine.com/w/katalog/ora/"
+          ],
+          "uncertain": false
+        }
+      }
+    },
+    "Chery": {
+      "website": "https://www.cheryinternational.com/",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.chery.cn/homePage",
+          "uncertain": false
+        },
+        "BRA": {
+          "name": "Brazil",
+          "present": true,
+          "source": "https://caoachery.com.br/",
+          "sources": [
+            "https://caoachery.com.br/",
+            "https://caoa.com.br/caoa-chery/"
+          ],
+          "uncertain": false
+        },
+        "CHL": {
+          "name": "Chile",
+          "present": true,
+          "source": "https://chery.cl/concesionarios/",
+          "sources": [
+            "https://chery.cl/",
+            "https://chery.cl/concesionarios/"
+          ],
+          "uncertain": false
+        },
+        "ZAF": {
+          "name": "South Africa",
+          "present": true,
+          "source": "https://www.chery.co.za/dealers",
+          "sources": [
+            "https://www.chery.co.za/",
+            "https://www.chery.co.za/dealers"
+          ],
+          "uncertain": false
+        },
+        "AUS": {
+          "name": "Australia",
+          "present": true,
+          "source": "https://cherymotor.com.au/find-dealer",
+          "sources": [
+            "https://cherymotor.com.au/",
+            "https://cherymotor.com.au/find-dealer",
+            "https://cherymotor.com.au/owners/roadside-assistance"
+          ],
+          "uncertain": false
+        },
+        "MYS": {
+          "name": "Malaysia",
+          "present": true,
+          "source": "https://www.chery.my/after-sales",
+          "sources": [
+            "https://www.chery.my/",
+            "https://www.chery.my/after-sales",
+            "https://www.chery.my/roadside-assist"
           ],
           "uncertain": false
         }

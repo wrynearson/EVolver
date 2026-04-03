@@ -673,10 +673,10 @@ describe("EVMap", () => {
     expect(screen.getByText("Showing 1 matching country")).toBeInTheDocument();
     const countrySuggestions = screen.getByText("Showing 1 matching country").closest("div");
     expect(countrySuggestions).not.toBeNull();
-    expect(within(countrySuggestions!).getByRole("button", { name: /Sweden/i })).toBeInTheDocument();
+    expect(within(countrySuggestions!).getByRole("option", { name: /Sweden/i })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Sweden" })).not.toBeInTheDocument();
 
-    fireEvent.click(within(countrySuggestions!).getByRole("button", { name: /Sweden/i }));
+    fireEvent.click(within(countrySuggestions!).getByRole("option", { name: /Sweden/i }));
 
     expect(screen.getByLabelText("Country lookup")).toHaveDisplayValue("Sweden");
     expect(screen.getByRole("heading", { name: "Sweden" })).toBeInTheDocument();
@@ -687,6 +687,35 @@ describe("EVMap", () => {
     expect(screen.getByLabelText("Country lookup")).toHaveDisplayValue("");
     expect(screen.queryByRole("heading", { name: "Sweden" })).not.toBeInTheDocument();
     expect(window.location.search).toBe("");
+  });
+
+  it("supports keyboard navigation for country lookup suggestions", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    const countryLookup = await screen.findByLabelText("Country lookup");
+    fireEvent.change(countryLookup, { target: { value: "sw" } });
+
+    const swedenOption = screen.getByRole("option", { name: /Sweden/i });
+    expect(swedenOption).toHaveAttribute("aria-selected", "false");
+
+    fireEvent.keyDown(countryLookup, { key: "ArrowDown" });
+    expect(swedenOption).toHaveAttribute("aria-selected", "true");
+
+    fireEvent.keyDown(countryLookup, { key: "Enter" });
+    expect(screen.getByLabelText("Country lookup")).toHaveDisplayValue("Sweden");
+    expect(screen.getByRole("heading", { name: "Sweden" })).toBeInTheDocument();
+    expect(window.location.search).toBe("?country=SWE");
   });
 
   it("supports searchable brand filter suggestions", async () => {
@@ -709,10 +738,10 @@ describe("EVMap", () => {
     fireEvent.change(brandFilter, { target: { value: "xp" } });
 
     expect(screen.getByText("Showing 1 matching brand")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "XPeng" })).toBeInTheDocument();
+    expect(screen.getByRole("option", { name: "XPeng" })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Brand footprint" })).not.toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: "XPeng" }));
+    fireEvent.click(screen.getByRole("option", { name: "XPeng" }));
 
     expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("XPeng");
     expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
@@ -724,6 +753,73 @@ describe("EVMap", () => {
 
     expect(screen.getByText("Showing 0 matching brands")).toBeInTheDocument();
     expect(screen.getByText("No brands match this search yet.")).toBeInTheDocument();
+  });
+
+  it("supports keyboard navigation for brand filter suggestions", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    const brandFilter = await screen.findByLabelText("Brand filter");
+    fireEvent.change(brandFilter, { target: { value: "xp" } });
+
+    const xpengOption = screen.getByRole("option", { name: "XPeng" });
+    expect(xpengOption).toHaveAttribute("aria-selected", "false");
+
+    fireEvent.keyDown(brandFilter, { key: "ArrowDown" });
+    expect(xpengOption).toHaveAttribute("aria-selected", "true");
+
+    fireEvent.keyDown(brandFilter, { key: "Enter" });
+    expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("XPeng");
+    expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
+    expect(window.location.search).toBe("?brand=XPeng");
+  });
+
+  it("closes the floating detail panels with Escape", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    fireEvent.click(await screen.findByRole("button", { name: "Select Norway" }));
+    const detailsPanel = screen.getByRole("heading", { name: "Norway" }).closest("aside");
+    expect(detailsPanel).not.toBeNull();
+    expect(detailsPanel).toHaveAttribute("aria-labelledby", "selected-country-heading");
+    detailsPanel!.focus();
+    fireEvent.keyDown(detailsPanel!, { key: "Escape" });
+    expect(screen.queryByRole("heading", { name: "Norway" })).not.toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText("Brand filter"), {
+      target: { value: "XPeng" },
+    });
+    const footprintPanel = screen
+      .getByRole("heading", { name: "Brand footprint" })
+      .closest("aside");
+    expect(footprintPanel).not.toBeNull();
+    expect(footprintPanel).toHaveAttribute("aria-labelledby", "brand-footprint-heading");
+    footprintPanel!.focus();
+    fireEvent.keyDown(footprintPanel!, { key: "Escape" });
+    expect(screen.queryByRole("heading", { name: "Brand footprint" })).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("");
   });
 
   it("supports keyboard shortcuts for filter focus, clearing searches, and coverage tabs", async () => {

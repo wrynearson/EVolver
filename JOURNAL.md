@@ -571,3 +571,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-02
 **Did**: Added MG (SAIC) official presence for Argentina, Bolivia, Ecuador, Paraguay, Uruguay, and Venezuela after confirming MG Latam distributor listings plus live local MG consumer, dealer, contact, or MG Care surfaces across the remaining Americas backlog slice.
 **Result**: pass
+
+## 2026-04-03
+**Did**: Added Chery as a tracked brand and confirmed official presence in China, Brazil, Chile, South Africa, Australia, and Malaysia using first-party market, dealer, roadside-assistance, and after-sales pages.
+**Result**: pass
+
+## 2026-04-03
+**Did**: Improved keyboard accessibility by adding combobox-style lookup suggestion navigation plus Escape-to-close support for the floating country-details and brand-footprint panels, backed by focused EV map tests.
+**Result**: pass

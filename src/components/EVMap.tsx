@@ -190,6 +190,34 @@ function getNextCoveragePanelView(
   return null;
 }
 
+function getNextLookupIndex(
+  currentIndex: number,
+  optionCount: number,
+  key: string,
+) {
+  if (optionCount === 0) {
+    return -1;
+  }
+
+  if (key === "ArrowDown") {
+    return currentIndex < optionCount - 1 ? currentIndex + 1 : 0;
+  }
+
+  if (key === "ArrowUp") {
+    return currentIndex > 0 ? currentIndex - 1 : optionCount - 1;
+  }
+
+  if (key === "Home") {
+    return 0;
+  }
+
+  if (key === "End") {
+    return optionCount - 1;
+  }
+
+  return currentIndex;
+}
+
 function getSelectionStateFromSearch(search: string): SelectionState {
   const searchParams = new URLSearchParams(search);
   const selectedBrand = searchParams.get("brand")?.trim() ?? "";
@@ -330,6 +358,8 @@ export default function EVMap() {
   const [brandLookupQuery, setBrandLookupQuery] = useState(
     () => initialSelectionState.selectedBrand,
   );
+  const [activeCountryLookupIndex, setActiveCountryLookupIndex] = useState(-1);
+  const [activeBrandLookupIndex, setActiveBrandLookupIndex] = useState(-1);
   const activeSelectedBrand =
     data && selectedBrand && !data.brands[selectedBrand] ? "" : selectedBrand;
   const applyBrandSelection = (brandName: string) => {
@@ -978,6 +1008,14 @@ export default function EVMap() {
   }, [activeSelectedBrand]);
 
   useEffect(() => {
+    setActiveBrandLookupIndex(-1);
+  }, [brandLookupQuery, shouldShowBrandLookupMatches]);
+
+  useEffect(() => {
+    setActiveCountryLookupIndex(-1);
+  }, [countryLookupQuery, shouldShowCountryLookupMatches]);
+
+  useEffect(() => {
     setCountryLookupQuery(getCountryLookupValue(resolvedSelectedCountry));
   }, [resolvedSelectedCountry]);
 
@@ -1066,6 +1104,19 @@ export default function EVMap() {
                   ref={brandFilterInputRef}
                   id="brand-filter"
                   type="search"
+                  role="combobox"
+                  aria-autocomplete="list"
+                  aria-controls={
+                    shouldShowBrandLookupMatches
+                      ? "brand-filter-suggestions"
+                      : undefined
+                  }
+                  aria-expanded={shouldShowBrandLookupMatches}
+                  aria-activedescendant={
+                    shouldShowBrandLookupMatches && activeBrandLookupIndex >= 0
+                      ? `brand-filter-suggestion-${activeBrandLookupIndex}`
+                      : undefined
+                  }
                   className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
                   placeholder="Search by brand name"
                   disabled={brandOptions.length === 0}
@@ -1091,6 +1142,35 @@ export default function EVMap() {
                     }
                   }}
                   onKeyDown={(event) => {
+                    if (
+                      shouldShowBrandLookupMatches &&
+                      filteredBrandOptions.length > 0 &&
+                      ["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)
+                    ) {
+                      event.preventDefault();
+                      setActiveBrandLookupIndex((currentIndex) =>
+                        getNextLookupIndex(
+                          currentIndex,
+                          filteredBrandOptions.length,
+                          event.key,
+                        ),
+                      );
+                      return;
+                    }
+
+                    if (
+                      event.key === "Enter" &&
+                      shouldShowBrandLookupMatches &&
+                      activeBrandLookupIndex >= 0 &&
+                      filteredBrandOptions[activeBrandLookupIndex]
+                    ) {
+                      event.preventDefault();
+                      applyBrandSelection(
+                        filteredBrandOptions[activeBrandLookupIndex],
+                      );
+                      return;
+                    }
+
                     if (event.key !== "Escape") {
                       return;
                     }
@@ -1124,13 +1204,25 @@ export default function EVMap() {
                     {filteredBrandOptions.length === 1 ? "brand" : "brands"}
                   </p>
                   {filteredBrandOptions.length > 0 ? (
-                    <ul className="max-h-48 overflow-y-auto py-1">
-                      {filteredBrandOptions.map((brandName) => (
+                    <ul
+                      id="brand-filter-suggestions"
+                      role="listbox"
+                      className="max-h-48 overflow-y-auto py-1"
+                    >
+                      {filteredBrandOptions.map((brandName, index) => (
                         <li key={brandName}>
                           <button
                             type="button"
-                            className="w-full px-3 py-2 text-left hover:bg-gray-50"
+                            id={`brand-filter-suggestion-${index}`}
+                            role="option"
+                            aria-selected={index === activeBrandLookupIndex}
+                            className={`w-full px-3 py-2 text-left ${
+                              index === activeBrandLookupIndex
+                                ? "bg-blue-50"
+                                : "hover:bg-gray-50"
+                            }`}
                             onClick={() => applyBrandSelection(brandName)}
+                            onMouseEnter={() => setActiveBrandLookupIndex(index)}
                           >
                             <p className="text-sm font-medium text-gray-800">
                               {brandName}
@@ -1185,6 +1277,19 @@ export default function EVMap() {
                 <input
                   id="country-filter"
                   type="search"
+                  role="combobox"
+                  aria-autocomplete="list"
+                  aria-controls={
+                    shouldShowCountryLookupMatches
+                      ? "country-filter-suggestions"
+                      : undefined
+                  }
+                  aria-expanded={shouldShowCountryLookupMatches}
+                  aria-activedescendant={
+                    shouldShowCountryLookupMatches && activeCountryLookupIndex >= 0
+                      ? `country-filter-suggestion-${activeCountryLookupIndex}`
+                      : undefined
+                  }
                   className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
                   placeholder="Search by country or ISO code"
                   disabled={countryOptions.length === 0}
@@ -1216,6 +1321,37 @@ export default function EVMap() {
                     }
                   }}
                   onKeyDown={(event) => {
+                    if (
+                      shouldShowCountryLookupMatches &&
+                      filteredCountryOptions.length > 0 &&
+                      ["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)
+                    ) {
+                      event.preventDefault();
+                      setActiveCountryLookupIndex((currentIndex) =>
+                        getNextLookupIndex(
+                          currentIndex,
+                          filteredCountryOptions.length,
+                          event.key,
+                        ),
+                      );
+                      return;
+                    }
+
+                    if (
+                      event.key === "Enter" &&
+                      shouldShowCountryLookupMatches &&
+                      activeCountryLookupIndex >= 0 &&
+                      filteredCountryOptions[activeCountryLookupIndex]
+                    ) {
+                      event.preventDefault();
+                      setSelectedCountry({
+                        isoCode: filteredCountryOptions[activeCountryLookupIndex].isoCode,
+                        countryName:
+                          filteredCountryOptions[activeCountryLookupIndex].countryName,
+                      });
+                      return;
+                    }
+
                     if (event.key !== "Escape") {
                       return;
                     }
@@ -1253,18 +1389,30 @@ export default function EVMap() {
                     {filteredCountryOptions.length === 1 ? "country" : "countries"}
                   </p>
                   {filteredCountryOptions.length > 0 ? (
-                    <ul className="max-h-48 overflow-y-auto py-1">
-                      {filteredCountryOptions.map((country) => (
+                    <ul
+                      id="country-filter-suggestions"
+                      role="listbox"
+                      className="max-h-48 overflow-y-auto py-1"
+                    >
+                      {filteredCountryOptions.map((country, index) => (
                         <li key={country.isoCode}>
                           <button
                             type="button"
-                            className="w-full px-3 py-2 text-left hover:bg-gray-50"
+                            id={`country-filter-suggestion-${index}`}
+                            role="option"
+                            aria-selected={index === activeCountryLookupIndex}
+                            className={`w-full px-3 py-2 text-left ${
+                              index === activeCountryLookupIndex
+                                ? "bg-blue-50"
+                                : "hover:bg-gray-50"
+                            }`}
                             onClick={() => {
                               setSelectedCountry({
                                 isoCode: country.isoCode,
                                 countryName: country.countryName,
                               });
                             }}
+                            onMouseEnter={() => setActiveCountryLookupIndex(index)}
                           >
                             <p className="text-sm font-medium text-gray-800">
                               {country.countryName}
@@ -1439,10 +1587,25 @@ export default function EVMap() {
       ) : null}
 
       {selectedCountryDetails ? (
-        <aside className="absolute top-6 right-6 max-w-sm rounded-lg bg-white/95 px-4 py-3 shadow-md">
+        <aside
+          className="absolute top-6 right-6 max-w-sm rounded-lg bg-white/95 px-4 py-3 shadow-md"
+          aria-labelledby="selected-country-heading"
+          tabIndex={-1}
+          onKeyDown={(event) => {
+            if (event.key !== "Escape") {
+              return;
+            }
+
+            event.preventDefault();
+            setSelectedCountry(null);
+          }}
+        >
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h2 className="text-sm font-semibold text-gray-800">
+              <h2
+                id="selected-country-heading"
+                className="text-sm font-semibold text-gray-800"
+              >
                 {selectedCountryDetails.countryName}
               </h2>
               <p className="text-xs uppercase tracking-wide text-gray-500">
@@ -1537,10 +1700,25 @@ export default function EVMap() {
       ) : null}
 
       {activeSelectedBrand ? (
-        <aside className="absolute right-6 bottom-6 max-h-80 w-80 overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md">
+        <aside
+          className="absolute right-6 bottom-6 max-h-80 w-80 overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md"
+          aria-labelledby="brand-footprint-heading"
+          tabIndex={-1}
+          onKeyDown={(event) => {
+            if (event.key !== "Escape") {
+              return;
+            }
+
+            event.preventDefault();
+            clearBrandSelection();
+          }}
+        >
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h2 className="text-sm font-semibold text-gray-800">
+              <h2
+                id="brand-footprint-heading"
+                className="text-sm font-semibold text-gray-800"
+              >
                 Brand footprint
               </h2>
               <p className="text-xs text-gray-500">
@@ -1593,6 +1771,7 @@ export default function EVMap() {
                 }
 
                 event.preventDefault();
+                event.stopPropagation();
                 setFootprintSearchQuery("");
               }}
             />
