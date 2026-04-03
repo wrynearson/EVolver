@@ -2465,10 +2465,15 @@
     "Chery": {
       "website": "https://www.cheryinternational.com/",
       "countries": {
-        "CHN": {
-          "name": "China",
+        "AUS": {
+          "name": "Australia",
           "present": true,
-          "source": "https://www.chery.cn/homePage",
+          "source": "https://cherymotor.com.au/find-dealer",
+          "sources": [
+            "https://cherymotor.com.au/",
+            "https://cherymotor.com.au/find-dealer",
+            "https://cherymotor.com.au/owners/roadside-assistance"
+          ],
           "uncertain": false
         },
         "BRA": {
@@ -2491,24 +2496,22 @@
           ],
           "uncertain": false
         },
-        "ZAF": {
-          "name": "South Africa",
+        "CHN": {
+          "name": "China",
           "present": true,
-          "source": "https://www.chery.co.za/dealers",
-          "sources": [
-            "https://www.chery.co.za/",
-            "https://www.chery.co.za/dealers"
-          ],
+          "source": "https://www.chery.cn/homePage",
           "uncertain": false
         },
-        "AUS": {
-          "name": "Australia",
+        "GBR": {
+          "name": "United Kingdom",
           "present": true,
-          "source": "https://cherymotor.com.au/find-dealer",
+          "source": "https://www.cherycar.co.uk/find-dealer",
           "sources": [
-            "https://cherymotor.com.au/",
-            "https://cherymotor.com.au/find-dealer",
-            "https://cherymotor.com.au/owners/roadside-assistance"
+            "https://www.cherycar.co.uk/",
+            "https://www.cherycar.co.uk/find-dealer",
+            "https://www.cherycar.co.uk/warranty",
+            "https://www.cherycar.co.uk/roadside-assistance",
+            "https://www.cherycar.co.uk/contact"
           ],
           "uncertain": false
         },
@@ -2523,6 +2526,18 @@
           ],
           "uncertain": false
         },
+        "QAT": {
+          "name": "Qatar",
+          "present": true,
+          "source": "https://cheryqatar.com/",
+          "sources": [
+            "https://cheryqatar.com/",
+            "https://cheryqatar.com/about-us",
+            "https://cheryqatar.com/form/test-drive-chery",
+            "https://cheryqatar.com/request-service-appointment"
+          ],
+          "uncertain": false
+        },
         "SAU": {
           "name": "Saudi Arabia",
           "present": true,
@@ -2534,15 +2549,13 @@
           ],
           "uncertain": false
         },
-        "QAT": {
-          "name": "Qatar",
+        "ZAF": {
+          "name": "South Africa",
           "present": true,
-          "source": "https://cheryqatar.com/",
+          "source": "https://www.chery.co.za/dealers",
           "sources": [
-            "https://cheryqatar.com/",
-            "https://cheryqatar.com/about-us",
-            "https://cheryqatar.com/form/test-drive-chery",
-            "https://cheryqatar.com/request-service-appointment"
+            "https://www.chery.co.za/",
+            "https://www.chery.co.za/dealers"
           ],
           "uncertain": false
         }
