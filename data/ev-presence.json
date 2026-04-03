@@ -810,6 +810,29 @@
           "present": true,
           "source": "https://www.nio.com/nl",
           "uncertain": false
+        },
+        "SWE": {
+          "name": "Sweden",
+          "present": true,
+          "source": "https://www.nio.com/sv_SE/",
+          "sources": [
+            "https://www.nio.com/sv_SE/",
+            "https://www.nio.com/sv_SE/nio-service",
+            "https://www.nio.com/sv_SE/store-drive"
+          ],
+          "uncertain": false
+        },
+        "DNK": {
+          "name": "Denmark",
+          "present": true,
+          "source": "https://www.nio.dk/",
+          "sources": [
+            "https://www.nio.com/da_DK/sitemap.xml",
+            "https://www.nio.dk/",
+            "https://www.nio.dk/min-bil/service",
+            "https://www.nio.dk/min-bil/garanti"
+          ],
+          "uncertain": false
         }
       }
     },

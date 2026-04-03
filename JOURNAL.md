@@ -587,3 +587,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-03
 **Did**: Added Chery official presence for the United Kingdom after confirming the live localized Chery UK market site plus first-party retailer, warranty, roadside-assistance, and customer-care pages.
 **Result**: pass
+
+## 2026-04-03
+**Did**: Added NIO official presence for Sweden and Denmark after confirming live localized market pages plus first-party service, test-drive, and warranty/support surfaces, and narrowed the remaining NIO expansion follow-up to the bot-gated UAE site.
+**Result**: pass
