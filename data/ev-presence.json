@@ -2511,6 +2511,18 @@
           ],
           "uncertain": false
         },
+        "BGD": {
+          "name": "Bangladesh",
+          "present": true,
+          "source": "https://www.cherybd.com/contact",
+          "sources": [
+            "https://www.cherybd.com/",
+            "https://www.cherybd.com/contact",
+            "https://www.cherybd.com/service",
+            "https://www.cherybd.com/testdrive"
+          ],
+          "uncertain": false
+        },
         "BRA": {
           "name": "Brazil",
           "present": true,

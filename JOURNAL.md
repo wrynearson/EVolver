@@ -603,3 +603,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-04
 **Did**: Added Chery official presence for Indonesia and the Philippines after confirming live local Chery sites plus first-party dealer, after-sales, booking-service, and test-drive flows across both markets, and promoted the next Chery Southeast Asia verification slice into the backlog.
 **Result**: pass
+
+## 2026-04-04
+**Did**: Added Chery official presence for Bangladesh after confirming the official local Chery site plus first-party contact, service, and test-drive flows, and narrowed the remaining Chery Southeast Asia backlog to Vietnam.
+**Result**: pass
