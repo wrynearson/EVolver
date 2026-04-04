@@ -2550,6 +2550,18 @@
           ],
           "uncertain": false
         },
+        "IDN": {
+          "name": "Indonesia",
+          "present": true,
+          "source": "https://www.chery.co.id/en/dealers",
+          "sources": [
+            "https://www.chery.co.id/",
+            "https://www.chery.co.id/en/dealers",
+            "https://www.chery.co.id/en/booking-service",
+            "https://www.chery.co.id/en/submissions?submission_type=test-drive"
+          ],
+          "uncertain": false
+        },
         "MYS": {
           "name": "Malaysia",
           "present": true,
@@ -2558,6 +2570,18 @@
             "https://www.chery.my/",
             "https://www.chery.my/after-sales",
             "https://www.chery.my/roadside-assist"
+          ],
+          "uncertain": false
+        },
+        "PHL": {
+          "name": "Philippines",
+          "present": true,
+          "source": "https://cheryauto.ph/find-a-dealer",
+          "sources": [
+            "https://cheryauto.ph/",
+            "https://cheryauto.ph/find-a-dealer",
+            "https://cheryauto.ph/aftersales",
+            "https://cheryauto.ph/testdrive"
           ],
           "uncertain": false
         },

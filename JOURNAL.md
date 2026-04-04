@@ -599,3 +599,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-04
 **Did**: Added explicit EV dataset and country-boundary load error states so the map surfaces failed fetches instead of hanging on loading, backed by focused EV map tests for both failure paths.
 **Result**: pass
+
+## 2026-04-04
+**Did**: Added Chery official presence for Indonesia and the Philippines after confirming live local Chery sites plus first-party dealer, after-sales, booking-service, and test-drive flows across both markets, and promoted the next Chery Southeast Asia verification slice into the backlog.
+**Result**: pass
