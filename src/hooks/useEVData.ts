@@ -32,23 +32,32 @@ export function useEVData() {
   >({});
   const [summary, setSummary] = useState<EVDataSummary | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch(import.meta.env.BASE_URL + "data/ev-presence.json")
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}`);
+        }
+
+        return res.json();
+      })
       .then((json: EVPresenceData) => {
         setData(json);
         setCountryBrandCount(computeCountryBrandCounts(json));
         setSummary(computeDatasetSummary(json));
+        setError(null);
         setLoading(false);
       })
       .catch((err) => {
         console.error("Failed to load EV presence data:", err);
+        setError("The verified EV presence dataset could not be loaded.");
         setLoading(false);
       });
   }, []);
 
-  return { data, countryBrandCount, summary, loading };
+  return { data, countryBrandCount, summary, loading, error };
 }
 
 /**

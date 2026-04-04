@@ -1245,4 +1245,66 @@ describe("EVMap", () => {
     ).toBeInTheDocument();
     expect(window.location.search).toBe("?view=countries&region=Europe");
   });
+
+  it("shows a dataset error state when the EV presence data request fails", async () => {
+    const consoleError = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+
+      if (url.includes("ev-presence.json")) {
+        return new Response("dataset unavailable", { status: 503 });
+      }
+
+      return new Response(JSON.stringify(mockGeoJson), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset load failed")).toBeInTheDocument();
+    expect(
+      screen.getByText("The verified EV presence dataset could not be loaded."),
+    ).toBeInTheDocument();
+    expect(screen.queryByText("Dataset summary")).not.toBeInTheDocument();
+    expect(consoleError).toHaveBeenCalledWith(
+      "Failed to load EV presence data:",
+      expect.any(Error),
+    );
+  });
+
+  it("shows a map boundary error state when the country geometry request fails", async () => {
+    const consoleError = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+
+      if (url.includes("ev-presence.json")) {
+        return new Response(JSON.stringify(mockData), {
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+
+      return new Response("geojson unavailable", { status: 503 });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(await screen.findByText("Map boundaries unavailable")).toBeInTheDocument();
+    expect(
+      screen.getByText("The world boundary dataset could not be loaded for this session."),
+    ).toBeInTheDocument();
+    expect(consoleError).toHaveBeenCalledWith(
+      "Failed to load country boundaries:",
+      expect.any(Error),
+    );
+  });
 });

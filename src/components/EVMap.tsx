@@ -326,10 +326,11 @@ function buildShareUrl(
  * (popups, sidebar, brand selector, etc.) over its daily evolution runs.
  */
 export default function EVMap() {
-  const { data, countryBrandCount, summary, loading } = useEVData();
+  const { data, countryBrandCount, summary, loading, error } = useEVData();
   const initialSelectionState = getInitialSelectionState();
   const brandFilterInputRef = useRef<HTMLInputElement | null>(null);
   const [countries, setCountries] = useState<FeatureCollection | null>(null);
+  const [countriesError, setCountriesError] = useState<string | null>(null);
   const [selectedBrand, setSelectedBrand] = useState<string>(
     () => initialSelectionState.selectedBrand,
   );
@@ -876,11 +877,23 @@ export default function EVMap() {
 
   useEffect(() => {
     fetch(import.meta.env.BASE_URL + "data/ne_110m_countries.geojson")
-      .then((res) => res.json())
-      .then(setCountries)
-      .catch((err) =>
-        console.error("Failed to load country boundaries:", err),
-      );
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}`);
+        }
+
+        return res.json();
+      })
+      .then((geojson: FeatureCollection) => {
+        setCountries(geojson);
+        setCountriesError(null);
+      })
+      .catch((err) => {
+        console.error("Failed to load country boundaries:", err);
+        setCountriesError(
+          "The world boundary dataset could not be loaded for this session.",
+        );
+      });
   }, []);
 
   useEffect(() => {
@@ -1041,12 +1054,22 @@ export default function EVMap() {
         description:
           "Fetching the latest confirmed market presence before rendering the map.",
       }
-    : !data
+    : error
+      ? {
+          title: "Dataset load failed",
+          description: error,
+        }
+      : !data
       ? {
           title: "Map data unavailable",
           description:
             "The verified EV presence dataset could not be loaded for this session.",
         }
+      : countriesError
+        ? {
+            title: "Map boundaries unavailable",
+            description: countriesError,
+          }
       : !visibleCountries
         ? {
             title: "Loading country boundaries",

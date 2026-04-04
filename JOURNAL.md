@@ -591,3 +591,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-03
 **Did**: Added NIO official presence for Sweden and Denmark after confirming live localized market pages plus first-party service, test-drive, and warranty/support surfaces, and narrowed the remaining NIO expansion follow-up to the bot-gated UAE site.
 **Result**: pass
+
+## 2026-04-04
+**Did**: Added NIO official presence for the United Arab Emirates after confirming NIO's dedicated UAE locale via the official `en_AE` sitemap and global news posts announcing NIO MENA's UAE launch plus live UAE sales and service networks.
+**Result**: pass
+
+## 2026-04-04
+**Did**: Added explicit EV dataset and country-boundary load error states so the map surfaces failed fetches instead of hanging on loading, backed by focused EV map tests for both failure paths.
+**Result**: pass

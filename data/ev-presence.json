@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-03",
+    "last_updated": "2026-04-04",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -831,6 +831,18 @@
             "https://www.nio.dk/",
             "https://www.nio.dk/min-bil/service",
             "https://www.nio.dk/min-bil/garanti"
+          ],
+          "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://www.nio.ae/en",
+          "sources": [
+            "https://www.nio.ae/en",
+            "https://www.nio.com/en_AE/sitemap.xml",
+            "https://www.nio.com/news/20241005001",
+            "https://www.nio.com/news/20241129002"
           ],
           "uncertain": false
         }
