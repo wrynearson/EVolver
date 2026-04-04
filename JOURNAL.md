@@ -607,3 +607,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-04
 **Did**: Added Chery official presence for Bangladesh after confirming the official local Chery site plus first-party contact, service, and test-drive flows, and narrowed the remaining Chery Southeast Asia backlog to Vietnam.
 **Result**: pass
+
+## 2026-04-04
+**Did**: Added MG (SAIC) official presence for Germany, France, Ireland, Italy, and the Netherlands after confirming official local MG sites plus first-party contact, service, or dealer-network pages across the European footprint.
+**Result**: pass

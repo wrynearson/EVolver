@@ -1417,6 +1417,58 @@
           "source": "https://www.mg.co.uk",
           "uncertain": false
         },
+        "DEU": {
+          "name": "Germany",
+          "present": true,
+          "source": "https://www.mgmotor.de/",
+          "sources": [
+            "https://www.mgmotor.de/",
+            "https://www.mgmotor.de/contact",
+            "https://www.mgmotor.de/owners/serviceintervalle"
+          ],
+          "uncertain": false
+        },
+        "FRA": {
+          "name": "France",
+          "present": true,
+          "source": "https://www.mgmotor.fr/",
+          "sources": [
+            "https://www.mgmotor.fr/",
+            "https://www.mgmotor.fr/services/notre-assistance-mg"
+          ],
+          "uncertain": false
+        },
+        "IRL": {
+          "name": "Ireland",
+          "present": true,
+          "source": "https://www.mg.ie/contact-us/",
+          "sources": [
+            "https://www.mg.ie/",
+            "https://www.mg.ie/contact-us/",
+            "https://www.mg.ie/owners/book-a-service/"
+          ],
+          "uncertain": false
+        },
+        "ITA": {
+          "name": "Italy",
+          "present": true,
+          "source": "https://www.mgmotor.it/",
+          "sources": [
+            "https://www.mgmotor.it/",
+            "https://www.mgmotor.it/contact"
+          ],
+          "uncertain": false
+        },
+        "NLD": {
+          "name": "Netherlands",
+          "present": true,
+          "source": "https://www.mgmotor.eu/nl-NL/",
+          "sources": [
+            "https://www.mgmotor.eu/nl-NL/",
+            "https://www.mgmotor.eu/nl-NL/contact"
+          ],
+          "uncertain": false
+        },
         "AUS": {
           "name": "Australia",
           "present": true,
