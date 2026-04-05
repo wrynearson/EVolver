@@ -1516,6 +1516,60 @@
           ],
           "uncertain": false
         },
+        "AUT": {
+          "name": "Austria",
+          "present": true,
+          "source": "https://www.mgmotor.eu/de-AT/",
+          "sources": [
+            "https://www.mgmotor.eu/de-AT/",
+            "https://www.mgmotor.eu/de-AT/contact",
+            "https://www.mgmotor.eu/de-AT/owners"
+          ],
+          "uncertain": false
+        },
+        "DNK": {
+          "name": "Denmark",
+          "present": true,
+          "source": "https://mgmotors.dk/service/",
+          "sources": [
+            "https://mgmotors.dk/",
+            "https://mgmotors.dk/service/"
+          ],
+          "uncertain": false
+        },
+        "FIN": {
+          "name": "Finland",
+          "present": true,
+          "source": "https://www.mgmotor.eu/fi-FI/",
+          "sources": [
+            "https://www.mgmotor.eu/fi-FI/",
+            "https://www.mgmotor.eu/fi-FI/contact",
+            "https://www.mgmotor.eu/fi-FI/owners"
+          ],
+          "uncertain": false
+        },
+        "ISL": {
+          "name": "Iceland",
+          "present": true,
+          "source": "https://www.mgmotor.eu/is-IS/owners",
+          "sources": [
+            "https://www.mgmotor.eu/is-IS/",
+            "https://www.mgmotor.eu/is-IS/contact",
+            "https://www.mgmotor.eu/is-IS/owners"
+          ],
+          "uncertain": false
+        },
+        "SWE": {
+          "name": "Sweden",
+          "present": true,
+          "source": "https://www.mgmotor.eu/sv-SE/",
+          "sources": [
+            "https://www.mgmotor.eu/sv-SE/",
+            "https://www.mgmotor.eu/sv-SE/contact",
+            "https://www.mgmotor.eu/sv-SE/owners"
+          ],
+          "uncertain": false
+        },
         "AUS": {
           "name": "Australia",
           "present": true,
