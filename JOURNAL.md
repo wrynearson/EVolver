@@ -618,3 +618,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-05
 **Did**: Added MG (SAIC) official presence for Austria, Denmark, Finland, Iceland, and Sweden after confirming live localized MG market sites plus first-party contact, owners, or service-network surfaces across each market.
 **Result**: pass
+## 2026-04-05
+**Did**: Added a one-click country copy action in the country-details panel so users can copy the selected country name and ISO code for reuse outside the map, backed by EV map coverage.
+**Result**: pass

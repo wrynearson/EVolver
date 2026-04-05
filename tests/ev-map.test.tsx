@@ -375,6 +375,14 @@ describe("EVMap", () => {
     ).toBeInTheDocument();
     expect(window.location.search).toBe("?brand=XPeng&country=NOR");
 
+    fireEvent.click(
+      within(detailsPanel!).getByRole("button", { name: "Copy country + ISO" }),
+    );
+    expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith("Norway (NOR)");
+    expect(
+      await within(detailsPanel!).findByRole("button", { name: "Copied country + ISO" }),
+    ).toBeInTheDocument();
+
     fireEvent.click(screen.getByRole("button", { name: "Copy share link" }));
     expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
       "http://localhost:3000/?brand=XPeng&country=NOR",

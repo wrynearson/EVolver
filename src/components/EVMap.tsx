@@ -23,7 +23,7 @@ import { buildColorExpression, getLegendItems } from "../lib/mapUtils";
 import type { FeatureCollection } from "geojson";
 import type { MapCountrySelection } from "../types";
 
-type CopyLinkStatus = "idle" | "copied" | "failed";
+type CopyStatus = "idle" | "copied" | "failed";
 type CoveragePanelView = "brands" | "countries" | "regions";
 type CoverageSort = "coverage" | "name";
 type FootprintSort = "name" | "name-desc";
@@ -338,7 +338,8 @@ export default function EVMap() {
   const [selectedCountry, setSelectedCountry] = useState<MapCountrySelection | null>(
     () => initialSelectionState.selectedCountry,
   );
-  const [copyLinkStatus, setCopyLinkStatus] = useState<CopyLinkStatus>("idle");
+  const [copyLinkStatus, setCopyLinkStatus] = useState<CopyStatus>("idle");
+  const [copyCountryStatus, setCopyCountryStatus] = useState<CopyStatus>("idle");
   const [coveragePanelView, setCoveragePanelView] = useState<CoveragePanelView>(
     () => initialSelectionState.coveragePanelView,
   );
@@ -383,6 +384,7 @@ export default function EVMap() {
     setFootprintSearchQuery("");
     setCountryLookupQuery("");
     setCopyLinkStatus("idle");
+    setCopyCountryStatus("idle");
   };
 
   const brandOptions = useMemo(
@@ -1013,6 +1015,10 @@ export default function EVMap() {
   }, [activeSelectedBrand, resolvedSelectedCountry, selectedCoverageRegion]);
 
   useEffect(() => {
+    setCopyCountryStatus("idle");
+  }, [resolvedSelectedCountry]);
+
+  useEffect(() => {
     setCoverageSearchQuery("");
   }, [activeSelectedBrand, coveragePanelView, selectedCoverageRegion]);
 
@@ -1635,6 +1641,31 @@ export default function EVMap() {
                 {selectedCountryDetails.isoCode} · {selectedCountryDetails.brands.length}{" "}
                 {selectedCountryDetails.brands.length === 1 ? "brand" : "brands"}
               </p>
+              <button
+                type="button"
+                className="mt-2 text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                onClick={() => {
+                  if (!navigator.clipboard?.writeText) {
+                    setCopyCountryStatus("failed");
+                    return;
+                  }
+
+                  void navigator.clipboard
+                    .writeText(
+                      `${selectedCountryDetails.countryName} (${selectedCountryDetails.isoCode})`,
+                    )
+                    .then(
+                      () => setCopyCountryStatus("copied"),
+                      () => setCopyCountryStatus("failed"),
+                    );
+                }}
+              >
+                {copyCountryStatus === "copied"
+                  ? "Copied country + ISO"
+                  : copyCountryStatus === "failed"
+                    ? "Country copy failed"
+                    : "Copy country + ISO"}
+              </button>
             </div>
             <button
               type="button"
