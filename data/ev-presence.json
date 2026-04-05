@@ -1635,6 +1635,96 @@
           ],
           "uncertain": false
         },
+        "ALB": {
+          "name": "Albania",
+          "present": true,
+          "source": "https://www.mgmotor.al/",
+          "sources": [
+            "https://www.mgmotor.al/",
+            "https://www.mgmotor.al/contact"
+          ],
+          "uncertain": false
+        },
+        "BIH": {
+          "name": "Bosnia and Herzegovina",
+          "present": true,
+          "source": "https://www.mgmotor.ba/",
+          "sources": [
+            "https://www.mgmotor.ba/",
+            "https://www.mgmotor.ba/contact"
+          ],
+          "uncertain": false
+        },
+        "BGR": {
+          "name": "Bulgaria",
+          "present": true,
+          "source": "https://www.mgmotor.bg/",
+          "sources": [
+            "https://www.mgmotor.bg/",
+            "https://www.mgmotor.bg/contact"
+          ],
+          "uncertain": false
+        },
+        "CHE": {
+          "name": "Switzerland",
+          "present": true,
+          "source": "https://www.mgmotor.ch/de/",
+          "sources": [
+            "https://www.mgmotor.ch/de/",
+            "https://www.mgmotor.ch/de/owners"
+          ],
+          "uncertain": false
+        },
+        "LTU": {
+          "name": "Lithuania",
+          "present": true,
+          "source": "https://www.mgmotor.lt/",
+          "sources": [
+            "https://www.mgmotor.lt/",
+            "https://www.mgmotor.lt/contact"
+          ],
+          "uncertain": false
+        },
+        "LUX": {
+          "name": "Luxembourg",
+          "present": true,
+          "source": "https://www.mgmotor.lu/",
+          "sources": [
+            "https://www.mgmotor.lu/",
+            "https://www.mgmotor.lu/contact"
+          ],
+          "uncertain": false
+        },
+        "LVA": {
+          "name": "Latvia",
+          "present": true,
+          "source": "https://www.mgmotor.lv/",
+          "sources": [
+            "https://www.mgmotor.lv/",
+            "https://www.mgmotor.lv/contact"
+          ],
+          "uncertain": false
+        },
+        "MKD": {
+          "name": "North Macedonia",
+          "present": true,
+          "source": "https://www.mgmotor.mk/",
+          "sources": [
+            "https://www.mgmotor.mk/",
+            "https://www.mgmotor.mk/contact"
+          ],
+          "uncertain": false
+        },
+        "SRB": {
+          "name": "Serbia",
+          "present": true,
+          "source": "https://www.mgmotor.rs/",
+          "sources": [
+            "https://www.mgmotor.rs/",
+            "https://www.mgmotor.rs/contact"
+          ],
+          "uncertain": false
+        },
         "AUS": {
           "name": "Australia",
           "present": true,
