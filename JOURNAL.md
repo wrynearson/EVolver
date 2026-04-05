@@ -611,3 +611,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-04
 **Did**: Added MG (SAIC) official presence for Germany, France, Ireland, Italy, and the Netherlands after confirming official local MG sites plus first-party contact, service, or dealer-network pages across the European footprint.
 **Result**: pass
+
+## 2026-04-05
+**Did**: Added MG (SAIC) official presence for Belgium, Norway, Spain, and Portugal after confirming live local MG homepages plus first-party contact and owner-support pages across each market.
+**Result**: pass

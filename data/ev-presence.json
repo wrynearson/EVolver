@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-04",
+    "last_updated": "2026-04-05",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -1466,6 +1466,53 @@
           "sources": [
             "https://www.mgmotor.eu/nl-NL/",
             "https://www.mgmotor.eu/nl-NL/contact"
+          ],
+          "uncertain": false
+        },
+        "BEL": {
+          "name": "Belgium",
+          "present": true,
+          "source": "https://www.mgmotor.be/fr",
+          "sources": [
+            "https://www.mgmotor.be/fr",
+            "https://www.mgmotor.be/fr/contact",
+            "https://www.mgmotor.be/fr/owners",
+            "https://www.mgmotor.be/nl",
+            "https://www.mgmotor.be/nl/contact",
+            "https://www.mgmotor.be/nl/owners"
+          ],
+          "uncertain": false
+        },
+        "NOR": {
+          "name": "Norway",
+          "present": true,
+          "source": "https://www.mgmotor.eu/nn-NO/",
+          "sources": [
+            "https://www.mgmotor.eu/nn-NO/",
+            "https://www.mgmotor.eu/nn-NO/contact",
+            "https://www.mgmotor.eu/nn-NO/owners"
+          ],
+          "uncertain": false
+        },
+        "ESP": {
+          "name": "Spain",
+          "present": true,
+          "source": "https://www.mgmotor.eu/es-ES/",
+          "sources": [
+            "https://www.mgmotor.eu/es-ES/",
+            "https://www.mgmotor.eu/es-ES/contact",
+            "https://www.mgmotor.eu/es-ES/owners"
+          ],
+          "uncertain": false
+        },
+        "PRT": {
+          "name": "Portugal",
+          "present": true,
+          "source": "https://www.mgmotor.eu/pt-PT/",
+          "sources": [
+            "https://www.mgmotor.eu/pt-PT/",
+            "https://www.mgmotor.eu/pt-PT/contact",
+            "https://www.mgmotor.eu/pt-PT/owners"
           ],
           "uncertain": false
         },
