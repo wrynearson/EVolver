@@ -1537,6 +1537,17 @@
           ],
           "uncertain": false
         },
+        "EST": {
+          "name": "Estonia",
+          "present": true,
+          "source": "https://www.mgmotor.ee/",
+          "sources": [
+            "https://www.mgmotor.ee/",
+            "https://www.mgmotor.ee/contact",
+            "https://www.mgmotor.ee/owners"
+          ],
+          "uncertain": false
+        },
         "FIN": {
           "name": "Finland",
           "present": true,
@@ -1548,6 +1559,38 @@
           ],
           "uncertain": false
         },
+        "GRC": {
+          "name": "Greece",
+          "present": true,
+          "source": "https://mgmotor.gr/",
+          "sources": [
+            "https://mgmotor.gr/",
+            "https://mgmotor.gr/contact/",
+            "https://mgmotor.gr/owners/"
+          ],
+          "uncertain": false
+        },
+        "HRV": {
+          "name": "Croatia",
+          "present": true,
+          "source": "https://www.mgmotor.hr/",
+          "sources": [
+            "https://www.mgmotor.hr/",
+            "https://www.mgmotor.hr/contact",
+            "https://www.mgmotor.hr/owners"
+          ],
+          "uncertain": false
+        },
+        "HUN": {
+          "name": "Hungary",
+          "present": true,
+          "source": "https://www.mgmotor.hu/",
+          "sources": [
+            "https://www.mgmotor.hu/",
+            "https://www.mgmotor.hu/contact"
+          ],
+          "uncertain": false
+        },
         "ISL": {
           "name": "Iceland",
           "present": true,
@@ -1556,6 +1599,28 @@
             "https://www.mgmotor.eu/is-IS/",
             "https://www.mgmotor.eu/is-IS/contact",
             "https://www.mgmotor.eu/is-IS/owners"
+          ],
+          "uncertain": false
+        },
+        "POL": {
+          "name": "Poland",
+          "present": true,
+          "source": "https://www.mgmotor.pl/",
+          "sources": [
+            "https://www.mgmotor.pl/",
+            "https://www.mgmotor.pl/contact",
+            "https://www.mgmotor.pl/owners"
+          ],
+          "uncertain": false
+        },
+        "SVN": {
+          "name": "Slovenia",
+          "present": true,
+          "source": "https://www.mgmotor.si/",
+          "sources": [
+            "https://www.mgmotor.si/",
+            "https://www.mgmotor.si/contact",
+            "https://www.mgmotor.si/owners"
           ],
           "uncertain": false
         },
