@@ -931,6 +931,19 @@
             "https://www.xpeng.com/find-us"
           ],
           "uncertain": false
+        },
+        "THA": {
+          "name": "Thailand",
+          "present": true,
+          "source": "https://xpeng.co.th/",
+          "sources": [
+            "https://xpeng.co.th/",
+            "https://xpeng.co.th/service/",
+            "https://xpeng.co.th/service/roadside-assistance/",
+            "https://www.xpeng.com/news/01905897b7b9905872c72c9e8e700012",
+            "https://www.xpeng.com/news/019537743c4a9467d5db8a02872c0099"
+          ],
+          "uncertain": false
         }
       }
     },

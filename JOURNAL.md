@@ -627,3 +627,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-05
 **Did**: Added MG (SAIC) official presence for Albania, Bosnia and Herzegovina, Bulgaria, Latvia, Lithuania, Luxembourg, North Macedonia, Serbia, and Switzerland after confirming live localized MG country sites plus first-party contact or owner-support pages, then removed the completed MG Europe backlog slice.
 **Result**: pass
+
+## 2026-04-05
+**Did**: Added XPENG official presence for Thailand after coverage analysis flagged its empty Southeast Asia footprint, using XPENG Thailand's live market and after-sales pages plus XPENG's official Thailand dealer-network and shipment announcements, and added the broader Southeast Asia follow-up to the backlog.
+**Result**: pass
+
+## 2026-04-05
+**Did**: Added copy-sources actions to the country-details and brand-footprint panels so users can reuse multi-link verification evidence directly from the map, backed by EV map coverage.
+**Result**: pass

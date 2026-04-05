@@ -117,7 +117,7 @@ const mockData: EVPresenceData = {
           name: "Norway",
           present: true,
           source: "https://www.xpeng.com/no",
-          sources: ["https://www.xpeng.com/no"],
+          sources: ["https://www.xpeng.com/no", "https://www.xpeng.com/no/service"],
           uncertain: false,
         },
       },
@@ -342,6 +342,13 @@ describe("EVMap", () => {
         name: "Open official source for Norway",
       }),
     ).toHaveAttribute("href", "https://www.xpeng.com/no");
+    fireEvent.click(within(footprintPanel!).getByRole("button", { name: "Copy sources" }));
+    expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
+      "https://www.xpeng.com/no\nhttps://www.xpeng.com/no/service",
+    );
+    expect(
+      await within(footprintPanel!).findByRole("button", { name: "Copied sources" }),
+    ).toBeInTheDocument();
 
     fireEvent.click(await screen.findByRole("button", { name: "Hover Norway" }));
     const previewPanel = screen.getByRole("heading", { name: "Map preview" }).closest(
@@ -368,6 +375,13 @@ describe("EVMap", () => {
     expect(
       within(detailsPanel!).getByRole("link", { name: "https://www.xpeng.com/no" }),
     ).toHaveAttribute("href", "https://www.xpeng.com/no");
+    fireEvent.click(within(detailsPanel!).getByRole("button", { name: "Copy sources" }));
+    expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
+      "https://www.xpeng.com/no\nhttps://www.xpeng.com/no/service",
+    );
+    expect(
+      await within(detailsPanel!).findByRole("button", { name: "Copied sources" }),
+    ).toBeInTheDocument();
     expect(
       within(detailsPanel!).getByText(
         "Showing 1 of 2 tracked brands for this country. Clear the brand filter to inspect the rest.",

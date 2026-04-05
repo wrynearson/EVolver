@@ -24,6 +24,10 @@ import type { FeatureCollection } from "geojson";
 import type { MapCountrySelection } from "../types";
 
 type CopyStatus = "idle" | "copied" | "failed";
+type CopySourcesState = {
+  key: string | null;
+  status: CopyStatus;
+};
 type CoveragePanelView = "brands" | "countries" | "regions";
 type CoverageSort = "coverage" | "name";
 type FootprintSort = "name" | "name-desc";
@@ -93,6 +97,21 @@ function getCountryLookupValue(country: MapCountrySelection | null) {
   }
 
   return country.countryName ?? country.isoCode;
+}
+
+function getCopySourcesButtonLabel(
+  copySourcesState: CopySourcesState,
+  targetKey: string,
+) {
+  if (copySourcesState.key !== targetKey) {
+    return "Copy sources";
+  }
+
+  return copySourcesState.status === "copied"
+    ? "Copied sources"
+    : copySourcesState.status === "failed"
+      ? "Sources copy failed"
+      : "Copy sources";
 }
 
 function filterCountriesToRegion(
@@ -340,6 +359,10 @@ export default function EVMap() {
   );
   const [copyLinkStatus, setCopyLinkStatus] = useState<CopyStatus>("idle");
   const [copyCountryStatus, setCopyCountryStatus] = useState<CopyStatus>("idle");
+  const [copySourcesState, setCopySourcesState] = useState<CopySourcesState>({
+    key: null,
+    status: "idle",
+  });
   const [coveragePanelView, setCoveragePanelView] = useState<CoveragePanelView>(
     () => initialSelectionState.coveragePanelView,
   );
@@ -385,6 +408,7 @@ export default function EVMap() {
     setCountryLookupQuery("");
     setCopyLinkStatus("idle");
     setCopyCountryStatus("idle");
+    setCopySourcesState({ key: null, status: "idle" });
   };
 
   const brandOptions = useMemo(
@@ -859,6 +883,17 @@ export default function EVMap() {
       selectedCoverageRegion,
     ],
   );
+  const copySources = (targetKey: string, sources: string[]) => {
+    if (!navigator.clipboard?.writeText) {
+      setCopySourcesState({ key: targetKey, status: "failed" });
+      return;
+    }
+
+    void navigator.clipboard.writeText(sources.join("\n")).then(
+      () => setCopySourcesState({ key: targetKey, status: "copied" }),
+      () => setCopySourcesState({ key: targetKey, status: "failed" }),
+    );
+  };
   const hasCustomView = Boolean(
     activeSelectedBrand ||
       resolvedSelectedCountry ||
@@ -1017,6 +1052,10 @@ export default function EVMap() {
   useEffect(() => {
     setCopyCountryStatus("idle");
   }, [resolvedSelectedCountry]);
+
+  useEffect(() => {
+    setCopySourcesState({ key: null, status: "idle" });
+  }, [activeSelectedBrand, resolvedSelectedCountry]);
 
   useEffect(() => {
     setCoverageSearchQuery("");
@@ -1712,6 +1751,21 @@ export default function EVMap() {
                         >
                           Website
                         </a>
+                        <button
+                          type="button"
+                          className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                          onClick={() =>
+                            copySources(
+                              `${selectedCountryDetails.isoCode}:${brand.brandName}`,
+                              brand.sources,
+                            )
+                          }
+                        >
+                          {getCopySourcesButtonLabel(
+                            copySourcesState,
+                            `${selectedCountryDetails.isoCode}:${brand.brandName}`,
+                          )}
+                        </button>
                       </div>
                     </div>
                     {brand.uncertain ? (
@@ -1896,15 +1950,29 @@ export default function EVMap() {
                     ) : null}
                   </div>
                   {country.source ? (
-                    <a
-                      href={country.source}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="mt-2 block text-xs text-blue-700 underline underline-offset-2"
-                      aria-label={`Open official source for ${country.countryName}`}
-                    >
-                      Official source
-                    </a>
+                    <div className="mt-2 flex flex-wrap items-center gap-3 text-xs">
+                      <a
+                        href={country.source}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-blue-700 underline underline-offset-2"
+                        aria-label={`Open official source for ${country.countryName}`}
+                      >
+                        Official source
+                      </a>
+                      <button
+                        type="button"
+                        className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                        onClick={() =>
+                          copySources(`${activeSelectedBrand}:${country.isoCode}`, country.sources)
+                        }
+                      >
+                        {getCopySourcesButtonLabel(
+                          copySourcesState,
+                          `${activeSelectedBrand}:${country.isoCode}`,
+                        )}
+                      </button>
+                    </div>
                   ) : null}
                 </li>
               ))
