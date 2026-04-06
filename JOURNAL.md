@@ -650,3 +650,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-06
 **Did**: Added XPeng official presence for the United Arab Emirates after confirming XPENG's dedicated UAE market site, XPENG's own UAE launch announcement, and the Ali & Sons / Gulf Star Motors distributor page, then promoted the broader XPENG Middle East follow-up into the backlog.
 **Result**: pass
+## 2026-04-06
+**Did**: Added XPeng official presence for Jordan, Lebanon, and Egypt after confirming XPENG's own Middle East partnership announcement plus live local Jordan and Lebanon market/support sites and XPENG Egypt service surfaces with Raya Auto's exclusive-agent launch page, which closes the current XPENG Middle East backlog slice.
+**Result**: pass

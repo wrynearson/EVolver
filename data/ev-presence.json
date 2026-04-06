@@ -978,6 +978,42 @@
             "https://www.ali-sons.com/en-automotive/xpeng"
           ],
           "uncertain": false
+        },
+        "JOR": {
+          "name": "Jordan",
+          "present": true,
+          "source": "https://xpengjo.com/contact-us/",
+          "sources": [
+            "https://www.xpeng.com/news/018dcf00ee9c8dc66fae2c9e8e280031",
+            "https://xpengjo.com/",
+            "https://xpengjo.com/contact-us/",
+            "https://xpengjo.com/services/"
+          ],
+          "uncertain": false
+        },
+        "LBN": {
+          "name": "Lebanon",
+          "present": true,
+          "source": "https://xpeng.com.lb/contact-us/",
+          "sources": [
+            "https://www.xpeng.com/news/018dcf00ee9c8dc66fae2c9e8e280031",
+            "https://xpeng.com.lb/",
+            "https://xpeng.com.lb/contact-us/",
+            "https://xpeng.com.lb/services/"
+          ],
+          "uncertain": false
+        },
+        "EGY": {
+          "name": "Egypt",
+          "present": true,
+          "source": "https://www.xpeng.com/eg/service",
+          "sources": [
+            "https://www.xpeng.com/news/018dcf00ee9c8dc66fae2c9e8e280031",
+            "https://www.xpeng.com/region/eg",
+            "https://www.xpeng.com/eg/service",
+            "https://rayacorp.com/raya-auto-brings-the-latest-xpeng-evs-with-european-specifications-to-egypt-2/"
+          ],
+          "uncertain": false
         }
       }
     },
