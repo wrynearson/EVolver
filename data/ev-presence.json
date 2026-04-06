@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-05",
+    "last_updated": "2026-04-06",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -942,6 +942,18 @@
             "https://xpeng.co.th/service/roadside-assistance/",
             "https://www.xpeng.com/news/01905897b7b9905872c72c9e8e700012",
             "https://www.xpeng.com/news/019537743c4a9467d5db8a02872c0099"
+          ],
+          "uncertain": false
+        },
+        "MYS": {
+          "name": "Malaysia",
+          "present": true,
+          "source": "https://www.xpeng.com.my/xpengmap/mastermap.html",
+          "sources": [
+            "https://www.xpeng.com.my/index.php",
+            "https://www.xpeng.com.my/contact.php",
+            "https://www.xpeng.com.my/xpengmap/mastermap.html",
+            "https://www.xpeng.com/news/0191b6a9f111918dc1e58a02828e0036"
           ],
           "uncertain": false
         }

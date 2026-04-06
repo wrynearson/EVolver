@@ -635,3 +635,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-05
 **Did**: Added copy-sources actions to the country-details and brand-footprint panels so users can reuse multi-link verification evidence directly from the map, backed by EV map coverage.
 **Result**: pass
+
+## 2026-04-06
+**Did**: Added XPeng official presence for Malaysia after confirming XPENG's live Malaysia site, head-office contact surface, branch locator, and XPENG's own Malaysia launch announcement, then advanced the XPENG Southeast Asia backlog to Singapore.
+**Result**: pass
