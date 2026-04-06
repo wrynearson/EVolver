@@ -967,6 +967,17 @@
             "https://xpeng.com.sg/servicing-and-warranty"
           ],
           "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://www.xpeng.com/ae",
+          "sources": [
+            "https://www.xpeng.com/ae",
+            "https://www.xpeng.com/news/0192b7ec78a492323ad58a02821f027b",
+            "https://www.ali-sons.com/en-automotive/xpeng"
+          ],
+          "uncertain": false
         }
       }
     },
