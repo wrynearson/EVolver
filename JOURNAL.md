@@ -639,3 +639,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-06
 **Did**: Added XPeng official presence for Malaysia after confirming XPENG's live Malaysia site, head-office contact surface, branch locator, and XPENG's own Malaysia launch announcement, then advanced the XPENG Southeast Asia backlog to Singapore.
 **Result**: pass
+
+## 2026-04-06
+**Did**: Added XPeng official presence for Singapore after confirming XPENG Singapore's live market site, showroom page, and servicing-and-warranty support surface, which closes the current XPENG Southeast Asia backlog slice.
+**Result**: pass
+
+## 2026-04-06
+**Did**: Added automatic map fit-to-selection behavior so the canvas zooms to the active country or region filter instead of staying at the world view, backed by new bounds helpers and focused EV map coverage.
+**Result**: pass

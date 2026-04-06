@@ -956,6 +956,17 @@
             "https://www.xpeng.com/news/0191b6a9f111918dc1e58a02828e0036"
           ],
           "uncertain": false
+        },
+        "SGP": {
+          "name": "Singapore",
+          "present": true,
+          "source": "https://xpeng.com.sg/find-us",
+          "sources": [
+            "https://xpeng.com.sg/",
+            "https://xpeng.com.sg/find-us",
+            "https://xpeng.com.sg/servicing-and-warranty"
+          ],
+          "uncertain": false
         }
       }
     },

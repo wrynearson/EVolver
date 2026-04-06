@@ -10,69 +10,87 @@ import {
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { EVPresenceData } from "../src/types";
 
-const mockMap = vi.fn(
-  ({
-    children,
-    onClick,
-    onMouseMove,
-    onMouseLeave,
-  }: {
-    children?: ReactNode;
-    onClick?: (event: {
-      features?: Array<{ properties?: Record<string, unknown> }>;
-    }) => void;
-    onMouseMove?: (event: {
-      features?: Array<{ properties?: Record<string, unknown> }>;
-    }) => void;
-    onMouseLeave?: () => void;
-  }) => (
-    <div data-testid="map">
-      <button
-        type="button"
-        onClick={() =>
-          onMouseMove?.({
-            features: [{ properties: { ISO_A3: "NOR", ADMIN: "Norway" } }],
-          })
-        }
-      >
-        Hover Norway
-      </button>
-      <button
-        type="button"
-        onClick={() =>
-          onMouseMove?.({
-            features: [{ properties: { ISO_A3: "SWE", ADMIN: "Sweden" } }],
-          })
-        }
-      >
-        Hover Sweden
-      </button>
-      <button type="button" onClick={() => onMouseLeave?.()}>
-        Leave Hover
-      </button>
-      <button
-        type="button"
-        onClick={() =>
-          onClick?.({
-            features: [{ properties: { ISO_A3: "NOR", ADMIN: "Norway" } }],
-          })
-        }
-      >
-        Select Norway
-      </button>
-      <button
-        type="button"
-        onClick={() =>
-          onClick?.({
-            features: [{ properties: { ISO_A3: "SWE", ADMIN: "Sweden" } }],
-          })
-        }
-      >
-        Select Sweden
-      </button>
-      {children}
-    </div>
-  ),
+const mockMap = vi.fn();
+const mockFitBounds = vi.fn();
+const mockEaseTo = vi.fn();
+const MockMapComponent = React.forwardRef(
+  (
+    {
+      children,
+      onClick,
+      onMouseMove,
+      onMouseLeave,
+    }: {
+      children?: ReactNode;
+      onClick?: (event: {
+        features?: Array<{ properties?: Record<string, unknown> }>;
+      }) => void;
+      onMouseMove?: (event: {
+        features?: Array<{ properties?: Record<string, unknown> }>;
+      }) => void;
+      onMouseLeave?: () => void;
+    },
+    ref: React.ForwardedRef<{
+      getMap: () => { fitBounds: typeof mockFitBounds; easeTo: typeof mockEaseTo };
+    }>,
+  ) => {
+    React.useImperativeHandle(ref, () => ({
+      getMap: () => ({
+        fitBounds: mockFitBounds,
+        easeTo: mockEaseTo,
+      }),
+    }));
+    mockMap({ children, onClick, onMouseMove, onMouseLeave });
+
+    return (
+      <div data-testid="map">
+        <button
+          type="button"
+          onClick={() =>
+            onMouseMove?.({
+              features: [{ properties: { ISO_A3: "NOR", ADMIN: "Norway" } }],
+            })
+          }
+        >
+          Hover Norway
+        </button>
+        <button
+          type="button"
+          onClick={() =>
+            onMouseMove?.({
+              features: [{ properties: { ISO_A3: "SWE", ADMIN: "Sweden" } }],
+            })
+          }
+        >
+          Hover Sweden
+        </button>
+        <button type="button" onClick={() => onMouseLeave?.()}>
+          Leave Hover
+        </button>
+        <button
+          type="button"
+          onClick={() =>
+            onClick?.({
+              features: [{ properties: { ISO_A3: "NOR", ADMIN: "Norway" } }],
+            })
+          }
+        >
+          Select Norway
+        </button>
+        <button
+          type="button"
+          onClick={() =>
+            onClick?.({
+              features: [{ properties: { ISO_A3: "SWE", ADMIN: "Sweden" } }],
+            })
+          }
+        >
+          Select Sweden
+        </button>
+        {children}
+      </div>
+    );
+  },
 );
 const mockSource = vi.fn(({ children }: { children?: ReactNode }) => (
   <div data-testid="source">{children}</div>
@@ -80,7 +98,7 @@ const mockSource = vi.fn(({ children }: { children?: ReactNode }) => (
 const mockLayer = vi.fn(() => <div data-testid="layer" />);
 
 vi.mock("react-map-gl/maplibre", () => ({
-  default: mockMap,
+  default: MockMapComponent,
   Source: mockSource,
   Layer: mockLayer,
 }));
@@ -129,27 +147,66 @@ const mockGeoJson = {
   type: "FeatureCollection",
   features: [
     {
+      type: "Feature",
       properties: {
         ISO_A3: "SWE",
         ADMIN: "Sweden",
         REGION_UN: "Europe",
         CONTINENT: "Europe",
       },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [11, 55],
+            [24, 55],
+            [24, 69],
+            [11, 69],
+            [11, 55],
+          ],
+        ],
+      },
     },
     {
+      type: "Feature",
       properties: {
         ISO_A3: "NOR",
         ADMIN: "Norway",
         REGION_UN: "Europe",
         CONTINENT: "Europe",
       },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [5, 58],
+            [11, 58],
+            [11, 71],
+            [5, 71],
+            [5, 58],
+          ],
+        ],
+      },
     },
     {
+      type: "Feature",
       properties: {
         ISO_A3: "CHN",
         ADMIN: "China",
         REGION_UN: "Asia",
         CONTINENT: "Asia",
+      },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [73, 18],
+            [135, 18],
+            [135, 53],
+            [73, 53],
+            [73, 18],
+          ],
+        ],
       },
     },
   ],
@@ -167,6 +224,8 @@ describe("EVMap", () => {
     mockMap.mockClear();
     mockSource.mockClear();
     mockLayer.mockClear();
+    mockFitBounds.mockClear();
+    mockEaseTo.mockClear();
     vi.restoreAllMocks();
     window.history.replaceState({}, "", "/");
     Object.defineProperty(window.navigator, "clipboard", {
@@ -279,6 +338,80 @@ describe("EVMap", () => {
     ).toBeInTheDocument();
   });
 
+  it("fits the map to a selected country", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(await screen.findByTestId("map")).toBeInTheDocument();
+    mockFitBounds.mockClear();
+    mockEaseTo.mockClear();
+
+    fireEvent.click(screen.getByRole("button", { name: "Select Norway" }));
+
+    await waitFor(() =>
+      expect(mockFitBounds).toHaveBeenCalledWith(
+        [
+          [5, 58],
+          [11, 71],
+        ],
+        expect.objectContaining({
+          duration: 600,
+          maxZoom: 5,
+          padding: 64,
+        }),
+      ),
+    );
+  });
+
+  it("fits the map to the active region filter", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(await screen.findByTestId("map")).toBeInTheDocument();
+    mockFitBounds.mockClear();
+    mockEaseTo.mockClear();
+
+    fireEvent.change(screen.getByLabelText("Region filter"), {
+      target: { value: "Europe" },
+    });
+
+    await waitFor(() =>
+      expect(mockFitBounds).toHaveBeenCalledWith(
+        [
+          [5, 55],
+          [24, 71],
+        ],
+        expect.objectContaining({
+          duration: 600,
+          maxZoom: 5,
+          padding: 64,
+        }),
+      ),
+    );
+  });
+
   it("renders the dataset summary overlay, country details, and shareable view state", async () => {
     vi.doUnmock("../src/components/MapCanvas");
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
@@ -346,9 +479,13 @@ describe("EVMap", () => {
     expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
       "https://www.xpeng.com/no\nhttps://www.xpeng.com/no/service",
     );
-    expect(
-      await within(footprintPanel!).findByRole("button", { name: "Copied sources" }),
-    ).toBeInTheDocument();
+    await waitFor(() =>
+      expect(
+        within(
+          screen.getByRole("heading", { name: "Brand footprint" }).closest("aside")!,
+        ).getByRole("button", { name: "Copied sources" }),
+      ).toBeInTheDocument(),
+    );
 
     fireEvent.click(await screen.findByRole("button", { name: "Hover Norway" }));
     const previewPanel = screen.getByRole("heading", { name: "Map preview" }).closest(
@@ -379,9 +516,14 @@ describe("EVMap", () => {
     expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
       "https://www.xpeng.com/no\nhttps://www.xpeng.com/no/service",
     );
-    expect(
-      await within(detailsPanel!).findByRole("button", { name: "Copied sources" }),
-    ).toBeInTheDocument();
+    await waitFor(() =>
+      expect(
+        within(screen.getByRole("heading", { name: "Norway" }).closest("aside")!).getByRole(
+          "button",
+          { name: "Copied sources" },
+        ),
+      ).toBeInTheDocument(),
+    );
     expect(
       within(detailsPanel!).getByText(
         "Showing 1 of 2 tracked brands for this country. Clear the brand filter to inspect the rest.",

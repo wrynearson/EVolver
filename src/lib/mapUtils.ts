@@ -1,3 +1,4 @@
+import type { FeatureCollection, Geometry } from "geojson";
 import type { ExpressionSpecification } from "maplibre-gl";
 
 // Return type is loosened because MapLibre's ExpressionSpecification
@@ -71,6 +72,8 @@ export interface LegendItem {
   label: string;
 }
 
+export type MapBounds = [[number, number], [number, number]];
+
 interface GetLegendItemsOptions {
   hasUncertainEntries?: boolean;
 }
@@ -99,5 +102,81 @@ export function getLegendItems(
     { color: LIGHT_BLUE, label: "1 brand" },
     { color: MEDIUM_BLUE, label: "2-3 brands" },
     { color: DARK_BLUE, label: "4+ brands" },
+  ];
+}
+
+function visitGeometryCoordinates(
+  geometry: Geometry | null,
+  onCoordinate: (longitude: number, latitude: number) => void,
+) {
+  if (!geometry) {
+    return;
+  }
+
+  if (geometry.type === "GeometryCollection") {
+    geometry.geometries.forEach((nestedGeometry) =>
+      visitGeometryCoordinates(nestedGeometry, onCoordinate),
+    );
+    return;
+  }
+
+  const visitCoordinates = (coordinates: unknown) => {
+    if (!Array.isArray(coordinates)) {
+      return;
+    }
+
+    if (
+      coordinates.length >= 2 &&
+      typeof coordinates[0] === "number" &&
+      typeof coordinates[1] === "number"
+    ) {
+      onCoordinate(coordinates[0], coordinates[1]);
+      return;
+    }
+
+    coordinates.forEach(visitCoordinates);
+  };
+
+  visitCoordinates(geometry.coordinates);
+}
+
+export function getFeatureBounds(
+  countries: FeatureCollection,
+  isoCodes?: Iterable<string>,
+): MapBounds | null {
+  const requestedIsoCodes = isoCodes ? new Set(isoCodes) : null;
+  let minLongitude = Infinity;
+  let minLatitude = Infinity;
+  let maxLongitude = -Infinity;
+  let maxLatitude = -Infinity;
+
+  countries.features.forEach((feature) => {
+    const isoCode =
+      typeof feature.properties?.ISO_A3 === "string" ? feature.properties.ISO_A3 : null;
+
+    if (requestedIsoCodes && (!isoCode || !requestedIsoCodes.has(isoCode))) {
+      return;
+    }
+
+    visitGeometryCoordinates(feature.geometry, (longitude, latitude) => {
+      minLongitude = Math.min(minLongitude, longitude);
+      minLatitude = Math.min(minLatitude, latitude);
+      maxLongitude = Math.max(maxLongitude, longitude);
+      maxLatitude = Math.max(maxLatitude, latitude);
+    });
+  });
+
+  if (
+    !Number.isFinite(minLongitude) ||
+    !Number.isFinite(minLatitude) ||
+    !Number.isFinite(maxLongitude) ||
+    !Number.isFinite(maxLatitude)
+  ) {
+    return null;
+  }
+
+  return [
+    [minLongitude, minLatitude],
+    [maxLongitude, maxLatitude],
   ];
 }

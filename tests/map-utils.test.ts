@@ -1,5 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { buildColorExpression, getLegendItems } from "../src/lib/mapUtils";
+import type { FeatureCollection } from "geojson";
+import {
+  buildColorExpression,
+  getFeatureBounds,
+  getLegendItems,
+} from "../src/lib/mapUtils";
 import {
   computeCountryBrandCounts,
   computeDatasetSummary,
@@ -77,6 +82,60 @@ describe("getLegendItems", () => {
     expect(getLegendItems("ORA", { hasUncertainEntries: true })).toEqual([
       { color: "#1d4ed8", label: "ORA confirmed" },
       { color: "#93c5fd", label: "ORA uncertain" },
+    ]);
+  });
+});
+
+describe("getFeatureBounds", () => {
+  const countries: FeatureCollection = {
+    type: "FeatureCollection",
+    features: [
+      {
+        type: "Feature",
+        properties: { ISO_A3: "NOR" },
+        geometry: {
+          type: "Polygon",
+          coordinates: [
+            [
+              [5, 58],
+              [11, 58],
+              [11, 71],
+              [5, 71],
+              [5, 58],
+            ],
+          ],
+        },
+      },
+      {
+        type: "Feature",
+        properties: { ISO_A3: "SWE" },
+        geometry: {
+          type: "Polygon",
+          coordinates: [
+            [
+              [11, 55],
+              [24, 55],
+              [24, 69],
+              [11, 69],
+              [11, 55],
+            ],
+          ],
+        },
+      },
+    ],
+  };
+
+  it("returns bounds for all visible country features", () => {
+    expect(getFeatureBounds(countries)).toEqual([
+      [5, 55],
+      [24, 71],
+    ]);
+  });
+
+  it("returns bounds for a specific ISO selection", () => {
+    expect(getFeatureBounds(countries, ["NOR"])).toEqual([
+      [5, 58],
+      [11, 71],
     ]);
   });
 });

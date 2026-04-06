@@ -19,7 +19,7 @@ import {
   serializePresenceDataToCsv,
   serializePresenceDataToJson,
 } from "../lib/dataExport";
-import { buildColorExpression, getLegendItems } from "../lib/mapUtils";
+import { buildColorExpression, getFeatureBounds, getLegendItems } from "../lib/mapUtils";
 import type { FeatureCollection } from "geojson";
 import type { MapCountrySelection } from "../types";
 
@@ -1093,6 +1093,23 @@ export default function EVMap() {
     selectedBrand: activeSelectedBrand || undefined,
     uncertainCountryCodes: selectedBrandUncertainCountryCodes,
   });
+  const mapFocusState = useMemo(() => {
+    if (resolvedSelectedCountry && visibleCountries) {
+      return {
+        key: `country:${resolvedSelectedCountry.isoCode}`,
+        bounds: getFeatureBounds(visibleCountries, [resolvedSelectedCountry.isoCode]),
+      };
+    }
+
+    if (selectedCoverageRegion && visibleCountries) {
+      return {
+        key: `region:${selectedCoverageRegion}`,
+        bounds: getFeatureBounds(visibleCountries),
+      };
+    }
+
+    return { key: "default", bounds: null };
+  }, [resolvedSelectedCountry, selectedCoverageRegion, visibleCountries]);
   const mapStatus = loading
     ? {
         title: "Loading verified EV data",
@@ -1142,6 +1159,8 @@ export default function EVMap() {
             <MapCanvas
               countries={visibleCountries}
               fillColor={fillColor}
+              focusBounds={mapFocusState.bounds}
+              focusTargetKey={mapFocusState.key}
               onHoveredCountryChange={setHoveredCountry}
               onSelectedCountryChange={setSelectedCountry}
             />

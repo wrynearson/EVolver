@@ -1,15 +1,21 @@
-import Map, { Layer, Source } from "react-map-gl/maplibre";
+import { useEffect, useRef } from "react";
+import Map, { Layer, Source, type MapRef } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { FeatureCollection } from "geojson";
 import type { ExpressionSpecification } from "maplibre-gl";
+import type { MapBounds } from "../lib/mapUtils";
 import type { MapCountrySelection } from "../types";
 
 interface MapCanvasProps {
   countries: FeatureCollection;
   fillColor: ExpressionSpecification | string;
+  focusBounds: MapBounds | null;
+  focusTargetKey: string;
   onHoveredCountryChange: (country: MapCountrySelection | null) => void;
   onSelectedCountryChange: (country: MapCountrySelection | null) => void;
 }
+
+const DEFAULT_VIEW_STATE = { longitude: 20, latitude: 30, zoom: 1.5 };
 
 function getCountrySelection(
   properties: Record<string, unknown> | undefined,
@@ -33,12 +39,40 @@ function getCountrySelection(
 export default function MapCanvas({
   countries,
   fillColor,
+  focusBounds,
+  focusTargetKey,
   onHoveredCountryChange,
   onSelectedCountryChange,
 }: MapCanvasProps) {
+  const mapRef = useRef<MapRef | null>(null);
+
+  useEffect(() => {
+    const map = mapRef.current?.getMap();
+
+    if (!map) {
+      return;
+    }
+
+    if (focusBounds) {
+      map.fitBounds(focusBounds, {
+        padding: 64,
+        duration: 600,
+        maxZoom: 5,
+      });
+      return;
+    }
+
+    map.easeTo({
+      center: [DEFAULT_VIEW_STATE.longitude, DEFAULT_VIEW_STATE.latitude],
+      zoom: DEFAULT_VIEW_STATE.zoom,
+      duration: 600,
+    });
+  }, [focusBounds, focusTargetKey]);
+
   return (
     <Map
-      initialViewState={{ longitude: 20, latitude: 30, zoom: 1.5 }}
+      ref={mapRef}
+      initialViewState={DEFAULT_VIEW_STATE}
       style={{ width: "100%", height: "100%" }}
       mapStyle="https://tiles.openfreemap.org/styles/positron"
       interactiveLayerIds={["country-fill"]}
