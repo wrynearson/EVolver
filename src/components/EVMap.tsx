@@ -7,6 +7,7 @@ import {
   getBrandCoverageSummaries,
   getBrandPresenceCountries,
   getCountryRegionLookup,
+  getCountryRegionBrandSuggestions,
   getCountryCoverageSummaries,
   getCountryPresenceDetails,
   getRegionCoverageSummaries,
@@ -644,6 +645,17 @@ export default function EVMap() {
       }
     );
   }, [regionScopedData, resolvedSelectedCountry]);
+  const selectedCountryRegionSuggestions = useMemo(() => {
+    if (!regionScopedData || !resolvedSelectedCountry) {
+      return null;
+    }
+
+    return getCountryRegionBrandSuggestions(
+      regionScopedData,
+      resolvedSelectedCountry.isoCode,
+      countryRegionLookup,
+    );
+  }, [countryRegionLookup, regionScopedData, resolvedSelectedCountry]);
 
   const hoveredCountryDetails = useMemo(() => {
     if (!regionScopedData || !resolvedHoveredCountry) {
@@ -1759,10 +1771,40 @@ export default function EVMap() {
 
           <ul className="mt-3 space-y-3">
             {selectedCountryDetails.brands.length === 0 ? (
-              <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
-                No tracked official brand presence for this country in the current
-                view.
-              </li>
+              <>
+                <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
+                  No tracked official brand presence for this country in the current
+                  view.
+                </li>
+                {selectedCountryRegionSuggestions?.brands.length ? (
+                  <li className="border-t border-gray-200 pt-3">
+                    <p className="text-xs font-medium uppercase tracking-wide text-gray-500">
+                      Brands active elsewhere in {selectedCountryRegionSuggestions.regionName}
+                    </p>
+                    <p className="mt-1 text-sm text-gray-600">
+                      Explore tracked brands already confirmed in nearby markets
+                      across this region.
+                    </p>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {selectedCountryRegionSuggestions.brands.map((brand) => (
+                        <button
+                          key={brand.brandName}
+                          type="button"
+                          className="rounded-full border border-gray-300 px-3 py-1 text-left text-xs text-gray-700 hover:border-blue-300 hover:text-blue-700"
+                          onClick={() => applyBrandSelection(brand.brandName)}
+                        >
+                          <span className="font-medium">{brand.brandName}</span>
+                          <span className="text-gray-500">
+                            {" "}
+                            · {brand.confirmedCountryCount}{" "}
+                            {brand.confirmedCountryCount === 1 ? "market" : "markets"}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </li>
+                ) : null}
+              </>
             ) : (
               selectedCountryDetails.brands.map((brand) => (
                 <li

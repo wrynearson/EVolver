@@ -4,6 +4,7 @@ import {
   computeDatasetSummary,
   filterPresenceDataToBrand,
   filterPresenceDataToRegion,
+  getCountryRegionBrandSuggestions,
   getCountryRegionLookup,
   getCountryCoverageSummaries,
   getRegionCoverageSummaries,
@@ -131,6 +132,32 @@ describe("useEVData helpers", () => {
         brandNames: ["BYD"],
       },
     ]);
+  });
+
+  it("suggests nearby confirmed brands for empty-country views", () => {
+    const countryRegionLookup = getCountryRegionLookup(mockCountries);
+
+    expect(
+      getCountryRegionBrandSuggestions(mockData, "SWE", countryRegionLookup),
+    ).toEqual({
+      regionName: "Europe",
+      brands: [
+        {
+          brandName: "BYD",
+          confirmedCountryCount: 1,
+        },
+        {
+          brandName: "XPeng",
+          confirmedCountryCount: 1,
+        },
+      ],
+    });
+    expect(
+      getCountryRegionBrandSuggestions(mockData, "CHN", countryRegionLookup),
+    ).toEqual({
+      regionName: "Asia",
+      brands: [],
+    });
   });
 
   it("filters dataset entries down to a single region", () => {

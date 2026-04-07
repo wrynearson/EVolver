@@ -669,3 +669,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-07
 **Did**: Stabilized EVMap clipboard feedback and removed flaky transient-label assertions from the integration test while preserving clipboard side-effect coverage.
 **Result**: pass
+
+## 2026-04-07
+**Did**: Narrowed the Neta backlog to monitoring after re-checking Neta's official global surfaces and finding no new sovereign market sites beyond the current footprint, then improved empty country details so they suggest tracked brands already confirmed elsewhere in the same region.
+**Result**: pass

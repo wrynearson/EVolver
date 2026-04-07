@@ -452,6 +452,15 @@ describe("EVMap", () => {
       .closest("aside");
     expect(initialDetailsPanel).not.toBeNull();
     expect(within(initialDetailsPanel!).getByText("SWE · 0 brands")).toBeInTheDocument();
+    expect(
+      within(initialDetailsPanel!).getByText("Brands active elsewhere in Europe"),
+    ).toBeInTheDocument();
+    expect(
+      within(initialDetailsPanel!).getByRole("button", { name: /BYD/i }),
+    ).toBeInTheDocument();
+    expect(
+      within(initialDetailsPanel!).getByRole("button", { name: /XPeng/i }),
+    ).toBeInTheDocument();
 
     const footprintPanel = screen
       .getByRole("heading", { name: "Brand footprint" })
@@ -548,6 +557,9 @@ describe("EVMap", () => {
       within(emptyDetailsPanel!).getByText(
         "No tracked official brand presence for this country in the current view.",
       ),
+    ).toBeInTheDocument();
+    expect(
+      within(emptyDetailsPanel!).getByText("Brands active elsewhere in Europe"),
     ).toBeInTheDocument();
     expect(window.location.search).toBe("?brand=XPeng&country=SWE");
 

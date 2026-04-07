@@ -246,6 +246,58 @@ export function getCountryPresenceDetails(
   };
 }
 
+export function getCountryRegionBrandSuggestions(
+  data: EVPresenceData,
+  isoCode: string,
+  countryRegionLookup: Record<string, string>,
+) {
+  const regionName = countryRegionLookup[isoCode];
+
+  if (!regionName) {
+    return null;
+  }
+
+  const brands = Object.entries(data.brands)
+    .map(([brandName, brand]) => {
+      let confirmedCountryCount = 0;
+
+      for (const [countryIsoCode, entry] of Object.entries(brand.countries)) {
+        if (
+          !entry.present ||
+          entry.uncertain ||
+          countryIsoCode === isoCode ||
+          countryRegionLookup[countryIsoCode] !== regionName
+        ) {
+          continue;
+        }
+
+        confirmedCountryCount += 1;
+      }
+
+      return confirmedCountryCount > 0
+        ? {
+            brandName,
+            confirmedCountryCount,
+          }
+        : null;
+    })
+    .filter((brand): brand is { brandName: string; confirmedCountryCount: number } =>
+      Boolean(brand),
+    )
+    .sort((a, b) => {
+      if (b.confirmedCountryCount !== a.confirmedCountryCount) {
+        return b.confirmedCountryCount - a.confirmedCountryCount;
+      }
+
+      return a.brandName.localeCompare(b.brandName);
+    });
+
+  return {
+    regionName,
+    brands,
+  };
+}
+
 export function getBrandPresenceCountries(
   data: EVPresenceData,
   brandName: string,
