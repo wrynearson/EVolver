@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-06",
+    "last_updated": "2026-04-07",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -3018,6 +3018,76 @@
           "sources": [
             "https://www.chery.co.za/",
             "https://www.chery.co.za/dealers"
+          ],
+          "uncertain": false
+        }
+      }
+    },
+    "Neta": {
+      "website": "https://www.netaauto.co/",
+      "countries": {
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://smartmobilityint.com/neta/",
+          "sources": [
+            "https://smartmobilityint.com/neta/",
+            "https://smartmobilityint.com/neta-signs-partnership-with-smart-mobility-international/",
+            "https://smartmobilityint.com/media/"
+          ],
+          "uncertain": false
+        },
+        "BRA": {
+          "name": "Brazil",
+          "present": true,
+          "source": "https://netaauto.com.br/concessionarias/",
+          "sources": [
+            "https://netaauto.com.br/",
+            "https://netaauto.com.br/concessionarias/",
+            "https://netaauto.com.br/neta-gt/"
+          ],
+          "uncertain": false
+        },
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.hozonauto.com/",
+          "sources": [
+            "https://www.hozonauto.com/",
+            "https://www.hozonauto.com/testdrive.html"
+          ],
+          "uncertain": false
+        },
+        "ETH": {
+          "name": "Ethiopia",
+          "present": true,
+          "source": "https://netaethio.com/welcome-to-the-official-website-of-neta-motors-in-ethiopia/",
+          "sources": [
+            "https://netaethio.com/",
+            "https://netaethio.com/about/",
+            "https://netaethio.com/welcome-to-the-official-website-of-neta-motors-in-ethiopia/"
+          ],
+          "uncertain": false
+        },
+        "IDN": {
+          "name": "Indonesia",
+          "present": true,
+          "source": "https://neta.co.id/en/dealer",
+          "sources": [
+            "https://neta.co.id/",
+            "https://neta.co.id/en/about-us",
+            "https://neta.co.id/en/dealer"
+          ],
+          "uncertain": false
+        },
+        "MYS": {
+          "name": "Malaysia",
+          "present": true,
+          "source": "https://neta.my/",
+          "sources": [
+            "https://neta.my/",
+            "https://netamalaysia.com/",
+            "https://glenmarie.neta.my/"
           ],
           "uncertain": false
         }

@@ -653,3 +653,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-06
 **Did**: Added XPeng official presence for Jordan, Lebanon, and Egypt after confirming XPENG's own Middle East partnership announcement plus live local Jordan and Lebanon market/support sites and XPENG Egypt service surfaces with Raya Auto's exclusive-agent launch page, which closes the current XPENG Middle East backlog slice.
 **Result**: pass
+
+## 2026-04-07
+**Did**: Coverage analysis showed the backlog had drifted to monitoring-only work, so I promoted Neta as the highest-impact gap and added it as a tracked brand with confirmed official presence in China, Indonesia, Malaysia, Brazil, the United Arab Emirates, and Ethiopia using Neta's global market selector plus live local market, dealer, showroom, or distributor pages.
+**Result**: pass
