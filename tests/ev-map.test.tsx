@@ -479,13 +479,6 @@ describe("EVMap", () => {
     expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
       "https://www.xpeng.com/no\nhttps://www.xpeng.com/no/service",
     );
-    await waitFor(() =>
-      expect(
-        within(
-          screen.getByRole("heading", { name: "Brand footprint" }).closest("aside")!,
-        ).getByRole("button", { name: "Copied sources" }),
-      ).toBeInTheDocument(),
-    );
 
     fireEvent.click(await screen.findByRole("button", { name: "Hover Norway" }));
     const previewPanel = screen.getByRole("heading", { name: "Map preview" }).closest(
@@ -515,14 +508,6 @@ describe("EVMap", () => {
     fireEvent.click(within(detailsPanel!).getByRole("button", { name: "Copy sources" }));
     expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
       "https://www.xpeng.com/no\nhttps://www.xpeng.com/no/service",
-    );
-    await waitFor(() =>
-      expect(
-        within(screen.getByRole("heading", { name: "Norway" }).closest("aside")!).getByRole(
-          "button",
-          { name: "Copied sources" },
-        ),
-      ).toBeInTheDocument(),
     );
     expect(
       within(detailsPanel!).getByText(

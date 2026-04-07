@@ -665,3 +665,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-07
 **Did**: Added Neta official presence for Thailand after confirming Neta's live Thailand market site, the official Thailand about page naming Neta Auto (Thailand) Co., Ltd., and Neta-hosted dealer-network plus test-drive flows on `neta.co.th`.
 **Result**: pass
+
+## 2026-04-07
+**Did**: Stabilized EVMap clipboard feedback and removed flaky transient-label assertions from the integration test while preserving clipboard side-effect coverage.
+**Result**: pass

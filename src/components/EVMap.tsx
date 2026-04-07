@@ -348,6 +348,9 @@ export default function EVMap() {
   const { data, countryBrandCount, summary, loading, error } = useEVData();
   const initialSelectionState = getInitialSelectionState();
   const brandFilterInputRef = useRef<HTMLInputElement | null>(null);
+  const hasInitializedCopyLinkReset = useRef(false);
+  const hasInitializedCopyCountryReset = useRef(false);
+  const hasInitializedCopySourcesReset = useRef(false);
   const [countries, setCountries] = useState<FeatureCollection | null>(null);
   const [countriesError, setCountriesError] = useState<string | null>(null);
   const [selectedBrand, setSelectedBrand] = useState<string>(
@@ -894,10 +897,10 @@ export default function EVMap() {
       return;
     }
 
-    void navigator.clipboard.writeText(sources.join("\n")).then(
-      () => setCopySourcesState({ key: targetKey, status: "copied" }),
-      () => setCopySourcesState({ key: targetKey, status: "failed" }),
-    );
+    setCopySourcesState({ key: targetKey, status: "copied" });
+    void navigator.clipboard.writeText(sources.join("\n")).catch(() => {
+      setCopySourcesState({ key: targetKey, status: "failed" });
+    });
   };
   const hasCustomView = Boolean(
     activeSelectedBrand ||
@@ -1051,14 +1054,29 @@ export default function EVMap() {
   ]);
 
   useEffect(() => {
+    if (!hasInitializedCopyLinkReset.current) {
+      hasInitializedCopyLinkReset.current = true;
+      return;
+    }
+
     setCopyLinkStatus("idle");
   }, [activeSelectedBrand, resolvedSelectedCountry, selectedCoverageRegion]);
 
   useEffect(() => {
+    if (!hasInitializedCopyCountryReset.current) {
+      hasInitializedCopyCountryReset.current = true;
+      return;
+    }
+
     setCopyCountryStatus("idle");
   }, [resolvedSelectedCountry]);
 
   useEffect(() => {
+    if (!hasInitializedCopySourcesReset.current) {
+      hasInitializedCopySourcesReset.current = true;
+      return;
+    }
+
     setCopySourcesState({ key: null, status: "idle" });
   }, [activeSelectedBrand, resolvedSelectedCountry]);
 
@@ -1545,10 +1563,10 @@ export default function EVMap() {
                     return;
                   }
 
-                  void navigator.clipboard.writeText(shareUrl).then(
-                    () => setCopyLinkStatus("copied"),
-                    () => setCopyLinkStatus("failed"),
-                  );
+                  setCopyLinkStatus("copied");
+                  void navigator.clipboard.writeText(shareUrl).catch(() => {
+                    setCopyLinkStatus("failed");
+                  });
                 }}
               >
                 {copyLinkStatus === "copied"
@@ -1713,14 +1731,14 @@ export default function EVMap() {
                     return;
                   }
 
+                  setCopyCountryStatus("copied");
                   void navigator.clipboard
                     .writeText(
                       `${selectedCountryDetails.countryName} (${selectedCountryDetails.isoCode})`,
                     )
-                    .then(
-                      () => setCopyCountryStatus("copied"),
-                      () => setCopyCountryStatus("failed"),
-                    );
+                    .catch(() => {
+                      setCopyCountryStatus("failed");
+                    });
                 }}
               >
                 {copyCountryStatus === "copied"
