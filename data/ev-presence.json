@@ -3090,6 +3090,18 @@
             "https://glenmarie.neta.my/"
           ],
           "uncertain": false
+        },
+        "THA": {
+          "name": "Thailand",
+          "present": true,
+          "source": "https://www.neta.co.th/th",
+          "sources": [
+            "https://www.neta.co.th/th",
+            "https://www.neta.co.th/th/aboutus",
+            "https://www.neta.co.th/th/dealer_network",
+            "https://www.neta.co.th/th/testdrive/Neta-X"
+          ],
+          "uncertain": false
         }
       }
     }

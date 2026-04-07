@@ -661,3 +661,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-07
 **Did**: Improved the brand-footprint panel by showing each market's region label and letting the footprint search match on region names as well as country names and ISO codes, backed by EV map coverage.
 **Result**: pass
+
+## 2026-04-07
+**Did**: Added Neta official presence for Thailand after confirming Neta's live Thailand market site, the official Thailand about page naming Neta Auto (Thailand) Co., Ltd., and Neta-hosted dealer-network plus test-drive flows on `neta.co.th`.
+**Result**: pass
