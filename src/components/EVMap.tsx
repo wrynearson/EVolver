@@ -686,8 +686,13 @@ export default function EVMap() {
       return [];
     }
 
-    return getBrandPresenceCountries(regionScopedData, activeSelectedBrand);
-  }, [activeSelectedBrand, regionScopedData]);
+    return getBrandPresenceCountries(regionScopedData, activeSelectedBrand).map(
+      (country) => ({
+        ...country,
+        regionName: countryRegionLookup[country.isoCode],
+      }),
+    );
+  }, [activeSelectedBrand, countryRegionLookup, regionScopedData]);
   const selectedBrandWebsite = useMemo(() => {
     if (!data || !activeSelectedBrand) {
       return "";
@@ -711,7 +716,7 @@ export default function EVMap() {
     () =>
       selectedBrandPresence.filter((country) =>
         matchesSearchQuery(
-          [country.countryName, country.isoCode],
+          [country.countryName, country.isoCode, country.regionName],
           footprintSearchQuery,
         ),
       ),
@@ -1889,7 +1894,7 @@ export default function EVMap() {
               id="brand-footprint-search"
               type="search"
               className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
-              placeholder="Filter by country or ISO code"
+              placeholder="Filter by country, ISO code, or region"
               value={footprintSearchQuery}
               onChange={(event) => setFootprintSearchQuery(event.target.value)}
               onKeyDown={(event) => {
@@ -1957,6 +1962,7 @@ export default function EVMap() {
                       </p>
                       <p className="text-xs uppercase tracking-wide text-gray-500">
                         {country.isoCode}
+                        {country.regionName ? ` · ${country.regionName}` : ""}
                       </p>
                     </button>
                     {country.uncertain ? (

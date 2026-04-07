@@ -28,6 +28,7 @@ export interface CountryPresenceDetails {
 export interface BrandPresenceCountry {
   isoCode: string;
   countryName: string;
+  regionName?: string;
   source: string | null;
   sources: string[];
   uncertain: boolean;

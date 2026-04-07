@@ -657,3 +657,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-07
 **Did**: Coverage analysis showed the backlog had drifted to monitoring-only work, so I promoted Neta as the highest-impact gap and added it as a tracked brand with confirmed official presence in China, Indonesia, Malaysia, Brazil, the United Arab Emirates, and Ethiopia using Neta's global market selector plus live local market, dealer, showroom, or distributor pages.
 **Result**: pass
+
+## 2026-04-07
+**Did**: Improved the brand-footprint panel by showing each market's region label and letting the footprint search match on region names as well as country names and ISO codes, backed by EV map coverage.
+**Result**: pass

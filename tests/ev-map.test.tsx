@@ -629,6 +629,7 @@ describe("EVMap", () => {
     const footprintItems = within(bydFootprintPanel!).getAllByRole("listitem");
     expect(within(footprintItems[0]).getByRole("button", { name: /China/i })).toBeInTheDocument();
     expect(within(footprintItems[1]).getByRole("button", { name: /Norway/i })).toBeInTheDocument();
+    expect(within(footprintItems[1]).getByText("NOR · Europe")).toBeInTheDocument();
     fireEvent.change(within(bydFootprintPanel!).getByLabelText("Sort footprint"), {
       target: { value: "name-desc" },
     });
@@ -644,6 +645,21 @@ describe("EVMap", () => {
       within(bydFootprintPanel!).getByLabelText("Search footprint markets"),
       {
         target: { value: "nor" },
+      },
+    );
+    expect(
+      within(bydFootprintPanel!).getByText("Showing 1 of 2 markets"),
+    ).toBeInTheDocument();
+    expect(
+      within(bydFootprintPanel!).getByRole("button", { name: /Norway/i }),
+    ).toBeInTheDocument();
+    expect(
+      within(bydFootprintPanel!).queryByRole("button", { name: /China/i }),
+    ).not.toBeInTheDocument();
+    fireEvent.change(
+      within(bydFootprintPanel!).getByLabelText("Search footprint markets"),
+      {
+        target: { value: "euro" },
       },
     );
     expect(
