@@ -3047,6 +3047,17 @@
           ],
           "uncertain": false
         },
+        "BOL": {
+          "name": "Bolivia",
+          "present": true,
+          "source": "https://www.gacgroup.com/es-bo/suv/aion-y",
+          "sources": [
+            "https://www.gacgroup.com/es-bo",
+            "https://www.gacgroup.com/es-bo/suv/aion-y",
+            "https://www.gacgroup.com/es-bo/test-drive/aion-y"
+          ],
+          "uncertain": false
+        },
         "CHL": {
           "name": "Chile",
           "present": true,

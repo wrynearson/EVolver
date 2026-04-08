@@ -688,3 +688,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added AION official presence for Chile and Panama after confirming live localized GAC market sites plus official AION product, dealer, and contact/support surfaces on first-party country domains.
 **Result**: pass
 **TODO**: Verify AION's next strongest sovereign markets beyond the updated footprint, prioritizing Bolivia and any remaining Middle East locale that exposes a live first-party AION model or support page.
+
+## 2026-04-08
+**Did**: Added AION official presence for Bolivia after confirming GAC Bolivia's live localized market, AION Y product, and Bolivia test-drive pages, then demoted the remaining AION Middle East follow-up to monitoring because Bahrain and Oman still 404 while Qatar and Saudi Arabia remain GAC-only.
+**Result**: pass
