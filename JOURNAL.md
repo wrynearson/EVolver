@@ -683,3 +683,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added AION official presence for Australia, Kuwait, and Uzbekistan after confirming live localized GAC market pages plus official AION model, service, or contact surfaces, and narrowed the remaining AION follow-up away from Kazakhstan because the official site still exposes no live Kazakhstan AION route.
 **Result**: pass
 **TODO**: Verify AION's next strongest sovereign markets beyond the updated footprint, prioritizing Chile, Panama, Bolivia, and any remaining Middle East locale that exposes a live first-party AION model page.
+
+## 2026-04-08
+**Did**: Added AION official presence for Chile and Panama after confirming live localized GAC market sites plus official AION product, dealer, and contact/support surfaces on first-party country domains.
+**Result**: pass
+**TODO**: Verify AION's next strongest sovereign markets beyond the updated footprint, prioritizing Bolivia and any remaining Middle East locale that exposes a live first-party AION model or support page.

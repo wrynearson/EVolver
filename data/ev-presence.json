@@ -3047,6 +3047,18 @@
           ],
           "uncertain": false
         },
+        "CHL": {
+          "name": "Chile",
+          "present": true,
+          "source": "https://gacmotor.cl/modelos/aion-es/",
+          "sources": [
+            "https://www.gacgroup.com/es-cl",
+            "https://gacmotor.cl/",
+            "https://gacmotor.cl/modelos/aion-es/",
+            "https://gacmotor.cl/centro-de-ayuda/sucursales/"
+          ],
+          "uncertain": false
+        },
         "CHN": {
           "name": "China",
           "present": true,
@@ -3065,6 +3077,19 @@
             "https://www.gacgroup.com/ar-kw",
             "https://www.gacgroup.com/ar-kw/contact-us",
             "https://www.gacgroup.com/en-kw/suv/aion-v"
+          ],
+          "uncertain": false
+        },
+        "PAN": {
+          "name": "Panama",
+          "present": true,
+          "source": "https://gac.com.pa/autos/aion-y-plus",
+          "sources": [
+            "https://www.gacgroup.com/es-pa",
+            "https://gac.com.pa/",
+            "https://gac.com.pa/autos",
+            "https://gac.com.pa/autos/aion-y-plus",
+            "https://gac.com.pa/contactenos"
           ],
           "uncertain": false
         },
