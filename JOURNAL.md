@@ -673,3 +673,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-07
 **Did**: Narrowed the Neta backlog to monitoring after re-checking Neta's official global surfaces and finding no new sovereign market sites beyond the current footprint, then improved empty country details so they suggest tracked brands already confirmed elsewhere in the same region.
 **Result**: pass
+
+## 2026-04-08
+**Did**: Coverage analysis showed the backlog had drifted back to monitoring-only work, so I promoted AION as the highest-impact gap and added it as a tracked brand with confirmed official presence in China, Thailand, the Philippines, Brazil, and South Africa using official market, model, dealer, and test-drive pages.
+**Result**: pass
+**TODO**: Verify AION's next highest-impact sovereign markets beyond the initial footprint, prioritizing Kazakhstan, Uzbekistan, Australia, and the strongest Middle East locales with live first-party consumer-market pages.

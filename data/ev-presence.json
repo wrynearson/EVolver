@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-07",
+    "last_updated": "2026-04-08",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -3018,6 +3018,64 @@
           "sources": [
             "https://www.chery.co.za/",
             "https://www.chery.co.za/dealers"
+          ],
+          "uncertain": false
+        }
+      }
+    },
+    "AION": {
+      "website": "https://www.aionauto.com/",
+      "countries": {
+        "BRA": {
+          "name": "Brazil",
+          "present": true,
+          "source": "https://www.gacgroup.com/pt-br/suv/aion-v",
+          "sources": [
+            "https://www.gacgroup.com/pt-br",
+            "https://www.gacgroup.com/pt-br/suv/aion-v"
+          ],
+          "uncertain": false
+        },
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.aion.com.cn/",
+          "sources": [
+            "https://www.aion.com.cn/",
+            "https://www.aion.com.cn/vehicles/aion_car_introduce?alias=aion_y_plus"
+          ],
+          "uncertain": false
+        },
+        "PHL": {
+          "name": "Philippines",
+          "present": true,
+          "source": "https://www.aionauto.com/en-ph/dealer",
+          "sources": [
+            "https://www.aionauto.com/en-ph",
+            "https://www.aionauto.com/en-ph/dealer",
+            "https://www.aionauto.com/en-ph/test-drive/AION%20Y%20Plus",
+            "https://www.aionauto.com/en-ph/news/article/44927"
+          ],
+          "uncertain": false
+        },
+        "THA": {
+          "name": "Thailand",
+          "present": true,
+          "source": "https://www.aionauto.com/th-th/aion-y-plus",
+          "sources": [
+            "https://www.aionauto.com/",
+            "https://www.aionauto.com/th-th/aion-y-plus",
+            "https://www.aionauto.com/th-th/test-drive"
+          ],
+          "uncertain": false
+        },
+        "ZAF": {
+          "name": "South Africa",
+          "present": true,
+          "source": "https://www.gacgroup.com/en-za/suv/aion-y",
+          "sources": [
+            "https://www.gacgroup.com/en-za",
+            "https://www.gacgroup.com/en-za/suv/aion-y"
           ],
           "uncertain": false
         }
