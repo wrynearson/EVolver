@@ -678,3 +678,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Coverage analysis showed the backlog had drifted back to monitoring-only work, so I promoted AION as the highest-impact gap and added it as a tracked brand with confirmed official presence in China, Thailand, the Philippines, Brazil, and South Africa using official market, model, dealer, and test-drive pages.
 **Result**: pass
 **TODO**: Verify AION's next highest-impact sovereign markets beyond the initial footprint, prioritizing Kazakhstan, Uzbekistan, Australia, and the strongest Middle East locales with live first-party consumer-market pages.
+
+## 2026-04-08
+**Did**: Added AION official presence for Australia, Kuwait, and Uzbekistan after confirming live localized GAC market pages plus official AION model, service, or contact surfaces, and narrowed the remaining AION follow-up away from Kazakhstan because the official site still exposes no live Kazakhstan AION route.
+**Result**: pass
+**TODO**: Verify AION's next strongest sovereign markets beyond the updated footprint, prioritizing Chile, Panama, Bolivia, and any remaining Middle East locale that exposes a live first-party AION model page.

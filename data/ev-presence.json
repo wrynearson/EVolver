@@ -3026,6 +3026,17 @@
     "AION": {
       "website": "https://www.aionauto.com/",
       "countries": {
+        "AUS": {
+          "name": "Australia",
+          "present": true,
+          "source": "https://www.gacgroup.com/en-au/suv/aion-v",
+          "sources": [
+            "https://www.gacgroup.com/en-au",
+            "https://www.gacgroup.com/en-au/suv/aion-v",
+            "https://www.gacgroup.com/en-au/our-service"
+          ],
+          "uncertain": false
+        },
         "BRA": {
           "name": "Brazil",
           "present": true,
@@ -3043,6 +3054,17 @@
           "sources": [
             "https://www.aion.com.cn/",
             "https://www.aion.com.cn/vehicles/aion_car_introduce?alias=aion_y_plus"
+          ],
+          "uncertain": false
+        },
+        "KWT": {
+          "name": "Kuwait",
+          "present": true,
+          "source": "https://www.gacgroup.com/en-kw/suv/aion-v",
+          "sources": [
+            "https://www.gacgroup.com/ar-kw",
+            "https://www.gacgroup.com/ar-kw/contact-us",
+            "https://www.gacgroup.com/en-kw/suv/aion-v"
           ],
           "uncertain": false
         },
@@ -3066,6 +3088,17 @@
             "https://www.aionauto.com/",
             "https://www.aionauto.com/th-th/aion-y-plus",
             "https://www.aionauto.com/th-th/test-drive"
+          ],
+          "uncertain": false
+        },
+        "UZB": {
+          "name": "Uzbekistan",
+          "present": true,
+          "source": "https://www.gacgroup.com/uz-uz/suv/aion-y",
+          "sources": [
+            "https://www.gacgroup.com/uz-uz",
+            "https://www.gacgroup.com/uz-uz/suv/aion-y",
+            "https://www.gacgroup.com/ru-uz/suv/aion-v"
           ],
           "uncertain": false
         },
