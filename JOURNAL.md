@@ -703,3 +703,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-09
 **Did**: Upgraded the coverage-panel tabs so arrow, Home, and End keyboard navigation now move focus with the active Brands/Countries/Regions tab, backed by focused EV map coverage.
 **Result**: pass
+## 2026-04-09
+**Did**: Expanded Voyah coverage by adding Finland from Voyah's live Finnish market and test-drive pages, and strengthened the Denmark and Netherlands entries with direct local showroom, dealer, and contact sources instead of relying mainly on launch news.
+**Result**: pass
+**TODO**: Verify additional Voyah sovereign markets beyond the current China, Norway, Finland, Israel, Denmark, and Netherlands slice using official localized sites or brand-hosted showroom, distributor, or service evidence.
