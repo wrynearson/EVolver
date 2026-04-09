@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-08",
+    "last_updated": "2026-04-09",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -780,6 +780,22 @@
           "name": "China",
           "present": true,
           "source": "https://www.mi.com/su7",
+          "uncertain": false
+        }
+      }
+    },
+    "Li Auto": {
+      "website": "https://www.lixiang.com",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.lixiang.com/support/store/findus",
+          "sources": [
+            "https://www.lixiang.com/",
+            "https://www.lixiang.com/support/store/findus",
+            "https://www.liauto.com/"
+          ],
           "uncertain": false
         }
       }

@@ -4,6 +4,7 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
+- [monitoring] Re-check Li Auto only after its official sites expose a sovereign market, dealer, or service flow outside China; checked 2026-04-09 and the official Chinese and English sites still expose only the China retail/service network.
 - [monitoring] Re-check AION's remaining Middle East locales only after a live first-party AION model, dealer, service, or test-drive route appears; checked 2026-04-08 and Bahrain and Oman locale roots still 404 while Qatar and Saudi Arabia remain GAC-only without a live AION model page.
 - [monitoring] Re-check Neta only after its official global surfaces expose new sovereign market sites or dealer/support flows beyond the current China, Thailand, Indonesia, Malaysia, Brazil, United Arab Emirates, and Ethiopia footprint; checked 2026-04-07 and Neta's live global region links still exposed only the already-tracked sovereign sites plus non-sovereign Hong Kong.
 - [monitoring] Re-check Chery Vietnam only after a live first-party Chery consumer site or dealer, after-sales, or test-drive flow appears; checked 2026-04-04 and no resolvable official Chery Vietnam market site or live local Chery consumer flow was available.

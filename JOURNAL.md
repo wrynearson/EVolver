@@ -692,3 +692,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-08
 **Did**: Added AION official presence for Bolivia after confirming GAC Bolivia's live localized market, AION Y product, and Bolivia test-drive pages, then demoted the remaining AION Middle East follow-up to monitoring because Bahrain and Oman still 404 while Qatar and Saudi Arabia remain GAC-only.
 **Result**: pass
+## 2026-04-09
+**Did**: Coverage analysis showed Li Auto was the highest-impact untracked gap, so I added it as a tracked brand with confirmed official presence in China after validating Li Auto's official home and store-finder surfaces, and I demoted any non-China follow-up to monitoring because the current official Chinese and English sites still expose only the China network.
+**Result**: pass
+
