@@ -696,3 +696,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Coverage analysis showed Li Auto was the highest-impact untracked gap, so I added it as a tracked brand with confirmed official presence in China after validating Li Auto's official home and store-finder surfaces, and I demoted any non-China follow-up to monitoring because the current official Chinese and English sites still expose only the China network.
 **Result**: pass
 
+## 2026-04-09
+**Did**: Coverage analysis showed Voyah was the highest-impact actionable gap beyond the monitoring-only backlog, so I added Voyah as a tracked brand with confirmed official presence in China, Norway, Israel, Denmark, and the Netherlands using Voyah's official global and local-market surfaces plus Dongfeng's official launch news pages.
+**Result**: pass
+**TODO**: Verify additional Voyah sovereign markets beyond the initial China, Norway, Israel, Denmark, and Netherlands slice using official localized sites or brand-hosted showroom, distributor, or service evidence.

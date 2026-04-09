@@ -3247,6 +3247,63 @@
           "uncertain": false
         }
       }
+    },
+    "Voyah": {
+      "website": "https://www.voyah-global.com",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.voyah.com.cn/",
+          "sources": [
+            "https://www.voyah.com.cn/",
+            "https://www.voyah-global.com/"
+          ],
+          "uncertain": false
+        },
+        "NOR": {
+          "name": "Norway",
+          "present": true,
+          "source": "https://voyah.no/",
+          "sources": [
+            "https://voyah.no/",
+            "https://voyah.no/provekjoring",
+            "https://www.voyah-global.com/"
+          ],
+          "uncertain": false
+        },
+        "ISR": {
+          "name": "Israel",
+          "present": true,
+          "source": "https://voyah.co.il/%d7%a6%d7%95%d7%a8-%d7%a7%d7%a9%d7%a8/",
+          "sources": [
+            "https://voyah.co.il/",
+            "https://voyah.co.il/%d7%a6%d7%95%d7%a8-%d7%a7%d7%a9%d7%a8/",
+            "https://www.voyah-global.com/"
+          ],
+          "uncertain": false
+        },
+        "DNK": {
+          "name": "Denmark",
+          "present": true,
+          "source": "https://www.dongfeng-global.com/news/details/245",
+          "sources": [
+            "https://www.dongfeng-global.com/news/details/245",
+            "https://www.voyah-global.com/"
+          ],
+          "uncertain": false
+        },
+        "NLD": {
+          "name": "Netherlands",
+          "present": true,
+          "source": "https://www.dongfeng-global.com/news/details/250",
+          "sources": [
+            "https://www.dongfeng-global.com/news/details/250",
+            "https://www.voyah-global.com/"
+          ],
+          "uncertain": false
+        }
+      }
     }
   }
 }
