@@ -349,6 +349,11 @@ export default function EVMap() {
   const { data, countryBrandCount, summary, loading, error } = useEVData();
   const initialSelectionState = getInitialSelectionState();
   const brandFilterInputRef = useRef<HTMLInputElement | null>(null);
+  const coverageTabRefs = useRef<Record<CoveragePanelView, HTMLButtonElement | null>>({
+    brands: null,
+    countries: null,
+    regions: null,
+  });
   const hasInitializedCopyLinkReset = useRef(false);
   const hasInitializedCopyCountryReset = useRef(false);
   const hasInitializedCopySourcesReset = useRef(false);
@@ -2095,10 +2100,14 @@ export default function EVMap() {
                 <button
                   key={view}
                   type="button"
+                  id={`coverage-tab-${view}`}
                   role="tab"
+                  ref={(element) => {
+                    coverageTabRefs.current[view] = element;
+                  }}
                   aria-selected={isActive}
                   tabIndex={isActive ? 0 : -1}
-                  className={`rounded px-3 py-1.5 text-xs font-medium ${
+                  className={`rounded px-3 py-1.5 text-xs font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-1 ${
                     isActive
                       ? "bg-white text-gray-800 shadow-sm"
                       : "text-gray-500 hover:text-gray-700"
@@ -2113,6 +2122,7 @@ export default function EVMap() {
 
                     event.preventDefault();
                     setCoveragePanelView(nextView);
+                    coverageTabRefs.current[nextView]?.focus();
                   }}
                 >
                   {view === "brands"

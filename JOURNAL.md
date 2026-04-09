@@ -700,3 +700,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Coverage analysis showed Voyah was the highest-impact actionable gap beyond the monitoring-only backlog, so I added Voyah as a tracked brand with confirmed official presence in China, Norway, Israel, Denmark, and the Netherlands using Voyah's official global and local-market surfaces plus Dongfeng's official launch news pages.
 **Result**: pass
 **TODO**: Verify additional Voyah sovereign markets beyond the initial China, Norway, Israel, Denmark, and Netherlands slice using official localized sites or brand-hosted showroom, distributor, or service evidence.
+## 2026-04-09
+**Did**: Upgraded the coverage-panel tabs so arrow, Home, and End keyboard navigation now move focus with the active Brands/Countries/Regions tab, backed by focused EV map coverage.
+**Result**: pass

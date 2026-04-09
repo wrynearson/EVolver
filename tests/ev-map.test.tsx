@@ -1033,11 +1033,30 @@ describe("EVMap", () => {
       .getByRole("heading", { name: "Brand coverage" })
       .closest("aside");
     expect(coveragePanel).not.toBeNull();
+    const brandTab = within(coveragePanel!).getByRole("tab", { name: "Brands" });
+    brandTab.focus();
+    expect(brandTab).toHaveFocus();
+
+    fireEvent.keyDown(brandTab, {
+      key: "ArrowRight",
+    });
+
+    expect(window.location.search).toBe("?view=countries");
+    expect(within(coveragePanel!).getByRole("tab", { name: "Countries" })).toHaveFocus();
+    fireEvent.keyDown(within(coveragePanel!).getByRole("tab", { name: "Countries" }), {
+      key: "End",
+    });
+    expect(window.location.search).toBe("?view=regions");
+    expect(within(coveragePanel!).getByRole("tab", { name: "Regions" })).toHaveFocus();
+    fireEvent.keyDown(within(coveragePanel!).getByRole("tab", { name: "Regions" }), {
+      key: "Home",
+    });
+    expect(window.location.search).toBe("");
+    expect(within(coveragePanel!).getByRole("tab", { name: "Brands" })).toHaveFocus();
 
     fireEvent.keyDown(within(coveragePanel!).getByRole("tab", { name: "Brands" }), {
       key: "ArrowRight",
     });
-
     expect(window.location.search).toBe("?view=countries");
     const countryCoverageSearch = await screen.findByLabelText("Search country coverage");
     fireEvent.change(countryCoverageSearch, { target: { value: "nor" } });
