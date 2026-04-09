@@ -3320,6 +3320,17 @@
           ],
           "uncertain": false
         },
+        "DEU": {
+          "name": "Germany",
+          "present": true,
+          "source": "https://dongfeng-motor.de/models",
+          "sources": [
+            "https://dongfeng-motor.de/models",
+            "https://dongfeng-motor.de/imprint",
+            "https://www.voyah-global.com/"
+          ],
+          "uncertain": false
+        },
         "ISR": {
           "name": "Israel",
           "present": true,
