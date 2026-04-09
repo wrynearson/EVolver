@@ -3284,6 +3284,42 @@
           ],
           "uncertain": false
         },
+        "BEL": {
+          "name": "Belgium",
+          "present": true,
+          "source": "https://www.voyah.be/",
+          "sources": [
+            "https://www.voyah.be/",
+            "https://www.voyah.be/proefrit?hsLang=nl",
+            "https://www.voyah.be/showrooms?hsLang=nl",
+            "https://www.voyah.be/service?hsLang=nl",
+            "https://www.voyah-global.com/"
+          ],
+          "uncertain": false
+        },
+        "ESP": {
+          "name": "Spain",
+          "present": true,
+          "source": "https://www.voyah.es/",
+          "sources": [
+            "https://www.voyah.es/",
+            "https://www.voyah.es/servicios",
+            "https://www.voyah.es/red-comercial",
+            "https://www.voyah-global.com/"
+          ],
+          "uncertain": false
+        },
+        "ITA": {
+          "name": "Italy",
+          "present": true,
+          "source": "https://voyah.it/",
+          "sources": [
+            "https://voyah.it/",
+            "https://voyah.it/concessionari-voyah/",
+            "https://www.voyah-global.com/"
+          ],
+          "uncertain": false
+        },
         "ISR": {
           "name": "Israel",
           "present": true,

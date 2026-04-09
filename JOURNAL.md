@@ -707,3 +707,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Voyah coverage by adding Finland from Voyah's live Finnish market and test-drive pages, and strengthened the Denmark and Netherlands entries with direct local showroom, dealer, and contact sources instead of relying mainly on launch news.
 **Result**: pass
 **TODO**: Verify additional Voyah sovereign markets beyond the current China, Norway, Finland, Israel, Denmark, and Netherlands slice using official localized sites or brand-hosted showroom, distributor, or service evidence.
+## 2026-04-09
+**Did**: Added Voyah official presence for Belgium, Spain, and Italy after confirming live localized market sites plus official test-drive, showroom, service, commercial-network, or dealer pages on first-party country domains, and narrowed the follow-up toward the next explicit Europe leads named on Voyah's global homepage.
+**Result**: pass
+**TODO**: Verify the next strongest Voyah sovereign markets beyond the updated footprint, prioritizing Germany and Bulgaria because Voyah's global homepage explicitly lists them alongside already-confirmed European markets.
