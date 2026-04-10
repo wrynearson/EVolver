@@ -4,7 +4,7 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
-- Verify Hongqi's next highest-impact sovereign markets beyond the initial China, Germany, United Arab Emirates, Philippines, and Saudi Arabia slice using official localized market, location, test-drive, or support pages on first-party Hongqi sites.
+- Verify Hongqi's next highest-impact sovereign markets beyond the current China, Germany, the United Arab Emirates, the Philippines, Saudi Arabia, Mexico, Norway, Sweden, Denmark, and the Netherlands footprint, prioritizing additional first-party local-market, dealer, or test-drive flows in Europe and the Gulf.
 - [monitoring] Re-check Li Auto only after its official sites expose a sovereign market, dealer, or service flow outside China; checked 2026-04-09 and the official Chinese and English sites still expose only the China retail/service network.
 - [monitoring] Re-check AION's remaining Middle East locales only after a live first-party AION model, dealer, service, or test-drive route appears; checked 2026-04-08 and Bahrain and Oman locale roots still 404 while Qatar and Saudi Arabia remain GAC-only without a live AION model page.
 - [monitoring] Re-check Neta only after its official global surfaces expose new sovereign market sites or dealer/support flows beyond the current China, Thailand, Indonesia, Malaysia, Brazil, United Arab Emirates, and Ethiopia footprint; checked 2026-04-07 and Neta's live global region links still exposed only the already-tracked sovereign sites plus non-sovereign Hong Kong.

@@ -3446,6 +3446,60 @@
             "https://www.hongqi-ksa.com/en/testdrive"
           ],
           "uncertain": false
+        },
+        "MEX": {
+          "name": "Mexico",
+          "present": true,
+          "source": "https://www.hongqi-mx.com/",
+          "sources": [
+            "https://www.hongqi-mx.com/",
+            "https://www.hongqi-mx.com/testdrive.html"
+          ],
+          "uncertain": false
+        },
+        "NOR": {
+          "name": "Norway",
+          "present": true,
+          "source": "https://hongqi.no/a/om-hongqi/",
+          "sources": [
+            "https://hongqi.no/",
+            "https://hongqi.no/a/om-hongqi/",
+            "https://hongqi.no/biler/"
+          ],
+          "uncertain": false
+        },
+        "SWE": {
+          "name": "Sweden",
+          "present": true,
+          "source": "https://hongqi.se/",
+          "sources": [
+            "https://hongqi.se/",
+            "https://hongqi.se/upptack-hongqi",
+            "https://hongqi.se/boka-provkorning"
+          ],
+          "uncertain": false
+        },
+        "DNK": {
+          "name": "Denmark",
+          "present": true,
+          "source": "https://hongqi.dk/forhandler/",
+          "sources": [
+            "https://hongqi.dk/",
+            "https://hongqi.dk/forhandler/",
+            "https://hongqi.dk/provekor"
+          ],
+          "uncertain": false
+        },
+        "NLD": {
+          "name": "Netherlands",
+          "present": true,
+          "source": "https://www.hongqi.nl/dealers",
+          "sources": [
+            "https://www.hongqi.nl/",
+            "https://www.hongqi.nl/dealers",
+            "https://www.hongqi.nl/proefrijden"
+          ],
+          "uncertain": false
         }
       }
     }

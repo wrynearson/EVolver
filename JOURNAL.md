@@ -721,3 +721,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-10
 **Did**: Coverage analysis showed the backlog had drifted to monitoring-only work again, so I promoted Hongqi as the highest-impact actionable gap and added it as a tracked brand with confirmed official presence in China, Germany, the United Arab Emirates, the Philippines, and Saudi Arabia using first-party market, contact, location, maintenance, and test-drive surfaces.
 **Result**: pass
+
+## 2026-04-10
+**Did**: Expanded Hongqi coverage by adding Mexico, Norway, Sweden, Denmark, and the Netherlands after confirming live first-party local market sites plus official dealer, importer, or test-drive flows.
+**Result**: pass
+**TODO**: Verify Hongqi's next highest-impact sovereign markets beyond the updated footprint, prioritizing additional first-party local-market, dealer, or test-drive flows in Europe and the Gulf.
