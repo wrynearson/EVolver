@@ -714,3 +714,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-09
 **Did**: Added Voyah official presence for Germany after confirming ADG Sales GmbH's live German models and imprint pages expose Voyah Free consumer pricing plus a `info@voyah-motors.de` contact, and demoted Bulgaria to monitoring because Voyah's global homepage names it but `voyah.bg` still redirects into the German distributor stack while the likely public `/kontakti` route renders only a 404 shell.
 **Result**: pass
+
+## 2026-04-10
+**Did**: Coverage analysis showed the backlog had drifted to monitoring-only work again, so I promoted the next actionable Voyah gap and added Portugal and Poland after confirming live localized Voyah market sites plus official local test-drive/contact and operator pages.
+**Result**: pass

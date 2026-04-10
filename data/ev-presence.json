@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-09",
+    "last_updated": "2026-04-10",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -3251,39 +3251,6 @@
     "Voyah": {
       "website": "https://www.voyah-global.com",
       "countries": {
-        "CHN": {
-          "name": "China",
-          "present": true,
-          "source": "https://www.voyah.com.cn/",
-          "sources": [
-            "https://www.voyah.com.cn/",
-            "https://www.voyah-global.com/"
-          ],
-          "uncertain": false
-        },
-        "NOR": {
-          "name": "Norway",
-          "present": true,
-          "source": "https://voyah.no/",
-          "sources": [
-            "https://voyah.no/",
-            "https://voyah.no/provekjoring",
-            "https://www.voyah-global.com/"
-          ],
-          "uncertain": false
-        },
-        "FIN": {
-          "name": "Finland",
-          "present": true,
-          "source": "https://voyah.fi/",
-          "sources": [
-            "https://voyah.fi/",
-            "https://voyah.fi/provekjoring",
-            "https://www.dongfeng-global.com/news/details/250",
-            "https://www.voyah-global.com/"
-          ],
-          "uncertain": false
-        },
         "BEL": {
           "name": "Belgium",
           "present": true,
@@ -3297,25 +3264,12 @@
           ],
           "uncertain": false
         },
-        "ESP": {
-          "name": "Spain",
+        "CHN": {
+          "name": "China",
           "present": true,
-          "source": "https://www.voyah.es/",
+          "source": "https://www.voyah.com.cn/",
           "sources": [
-            "https://www.voyah.es/",
-            "https://www.voyah.es/servicios",
-            "https://www.voyah.es/red-comercial",
-            "https://www.voyah-global.com/"
-          ],
-          "uncertain": false
-        },
-        "ITA": {
-          "name": "Italy",
-          "present": true,
-          "source": "https://voyah.it/",
-          "sources": [
-            "https://voyah.it/",
-            "https://voyah.it/concessionari-voyah/",
+            "https://www.voyah.com.cn/",
             "https://www.voyah-global.com/"
           ],
           "uncertain": false
@@ -3327,17 +3281,6 @@
           "sources": [
             "https://dongfeng-motor.de/models",
             "https://dongfeng-motor.de/imprint",
-            "https://www.voyah-global.com/"
-          ],
-          "uncertain": false
-        },
-        "ISR": {
-          "name": "Israel",
-          "present": true,
-          "source": "https://voyah.co.il/%d7%a6%d7%95%d7%a8-%d7%a7%d7%a9%d7%a8/",
-          "sources": [
-            "https://voyah.co.il/",
-            "https://voyah.co.il/%d7%a6%d7%95%d7%a8-%d7%a7%d7%a9%d7%a8/",
             "https://www.voyah-global.com/"
           ],
           "uncertain": false
@@ -3354,6 +3297,52 @@
           ],
           "uncertain": false
         },
+        "ESP": {
+          "name": "Spain",
+          "present": true,
+          "source": "https://www.voyah.es/",
+          "sources": [
+            "https://www.voyah.es/",
+            "https://www.voyah.es/servicios",
+            "https://www.voyah.es/red-comercial",
+            "https://www.voyah-global.com/"
+          ],
+          "uncertain": false
+        },
+        "FIN": {
+          "name": "Finland",
+          "present": true,
+          "source": "https://voyah.fi/",
+          "sources": [
+            "https://voyah.fi/",
+            "https://voyah.fi/provekjoring",
+            "https://www.dongfeng-global.com/news/details/250",
+            "https://www.voyah-global.com/"
+          ],
+          "uncertain": false
+        },
+        "ISR": {
+          "name": "Israel",
+          "present": true,
+          "source": "https://voyah.co.il/%d7%a6%d7%95%d7%a8-%d7%a7%d7%a9%d7%a8/",
+          "sources": [
+            "https://voyah.co.il/",
+            "https://voyah.co.il/%d7%a6%d7%95%d7%a8-%d7%a7%d7%a9%d7%a8/",
+            "https://www.voyah-global.com/"
+          ],
+          "uncertain": false
+        },
+        "ITA": {
+          "name": "Italy",
+          "present": true,
+          "source": "https://voyah.it/",
+          "sources": [
+            "https://voyah.it/",
+            "https://voyah.it/concessionari-voyah/",
+            "https://www.voyah-global.com/"
+          ],
+          "uncertain": false
+        },
         "NLD": {
           "name": "Netherlands",
           "present": true,
@@ -3364,6 +3353,39 @@
             "https://voyah.nl/contact?hsLang=nl",
             "https://www.dongfeng-global.com/news/details/250",
             "https://www.voyah-global.com/"
+          ],
+          "uncertain": false
+        },
+        "NOR": {
+          "name": "Norway",
+          "present": true,
+          "source": "https://voyah.no/",
+          "sources": [
+            "https://voyah.no/",
+            "https://voyah.no/provekjoring",
+            "https://www.voyah-global.com/"
+          ],
+          "uncertain": false
+        },
+        "POL": {
+          "name": "Poland",
+          "present": true,
+          "source": "https://voyah.pl/",
+          "sources": [
+            "https://voyah.pl/",
+            "https://voyah.pl/kontakt",
+            "https://voyah.pl/polityka-prywatnosci"
+          ],
+          "uncertain": false
+        },
+        "PRT": {
+          "name": "Portugal",
+          "present": true,
+          "source": "https://www.voyah.pt/",
+          "sources": [
+            "https://www.voyah.pt/",
+            "https://www.voyah.pt/voyah-test-drives",
+            "https://www.voyah.pt/sobre-nos"
           ],
           "uncertain": false
         }
