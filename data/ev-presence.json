@@ -3390,6 +3390,64 @@
           "uncertain": false
         }
       }
+    },
+    "Hongqi": {
+      "website": "https://www.hongqi-auto.com/",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://hongqi.faw.cn/",
+          "sources": [
+            "https://hongqi.faw.cn/",
+            "https://www.hongqi-auto.com/"
+          ],
+          "uncertain": false
+        },
+        "DEU": {
+          "name": "Germany",
+          "present": true,
+          "source": "https://www.hongqi-ev.de/contact-us.html",
+          "sources": [
+            "https://www.hongqi-ev.de/",
+            "https://www.hongqi-ev.de/contact-us.html"
+          ],
+          "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://www.hongqi-ae.com/en/location",
+          "sources": [
+            "https://www.hongqi-ae.com/en",
+            "https://www.hongqi-ae.com/en/location",
+            "https://www.hongqi-ae.com/en/testdrive"
+          ],
+          "uncertain": false
+        },
+        "PHL": {
+          "name": "Philippines",
+          "present": true,
+          "source": "http://www.hongqi.ph/contact-us.html",
+          "sources": [
+            "http://www.hongqi.ph/",
+            "http://www.hongqi.ph/contact-us.html",
+            "http://www.hongqi.ph/schedule-maintenance.html"
+          ],
+          "uncertain": false
+        },
+        "SAU": {
+          "name": "Saudi Arabia",
+          "present": true,
+          "source": "https://www.hongqi-ksa.com/en/location",
+          "sources": [
+            "https://www.hongqi-ksa.com/en/",
+            "https://www.hongqi-ksa.com/en/location",
+            "https://www.hongqi-ksa.com/en/testdrive"
+          ],
+          "uncertain": false
+        }
+      }
     }
   }
 }

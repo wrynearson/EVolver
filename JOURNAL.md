@@ -718,3 +718,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-10
 **Did**: Coverage analysis showed the backlog had drifted to monitoring-only work again, so I promoted the next actionable Voyah gap and added Portugal and Poland after confirming live localized Voyah market sites plus official local test-drive/contact and operator pages.
 **Result**: pass
+## 2026-04-10
+**Did**: Coverage analysis showed the backlog had drifted to monitoring-only work again, so I promoted Hongqi as the highest-impact actionable gap and added it as a tracked brand with confirmed official presence in China, Germany, the United Arab Emirates, the Philippines, and Saudi Arabia using first-party market, contact, location, maintenance, and test-drive surfaces.
+**Result**: pass
