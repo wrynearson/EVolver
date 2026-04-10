@@ -752,6 +752,17 @@ describe("EVMap", () => {
         name: "Open official website for XPeng",
       }),
     ).toHaveAttribute("href", "https://www.xpeng.com");
+    fireEvent.click(
+      within(allBrandsNorwayPanel!).getByRole("button", { name: "Copy all sources" }),
+    );
+    expect(window.navigator.clipboard.writeText).toHaveBeenLastCalledWith(
+      [
+        "https://www.byd.com/no",
+        "https://www.byd.com/no/dealers",
+        "https://www.xpeng.com/no",
+        "https://www.xpeng.com/no/service",
+      ].join("\n"),
+    );
     expect(window.location.search).toBe(
       "?country=NOR&footprintSort=name-desc&view=countries&coverageSort=name",
     );

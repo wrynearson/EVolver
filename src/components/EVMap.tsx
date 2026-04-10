@@ -115,6 +115,21 @@ function getCopySourcesButtonLabel(
       : "Copy sources";
 }
 
+function getCopyAllSourcesButtonLabel(
+  copySourcesState: CopySourcesState,
+  targetKey: string,
+) {
+  if (copySourcesState.key !== targetKey) {
+    return "Copy all sources";
+  }
+
+  return copySourcesState.status === "copied"
+    ? "Copied all sources"
+    : copySourcesState.status === "failed"
+      ? "All sources copy failed"
+      : "Copy all sources";
+}
+
 function filterCountriesToRegion(
   countries: FeatureCollection | null,
   regionName?: string,
@@ -700,6 +715,15 @@ export default function EVMap() {
       }
     );
   }, [regionScopedData, resolvedHoveredCountry]);
+  const selectedCountryAllSources = useMemo(() => {
+    if (!selectedCountryDetails) {
+      return [];
+    }
+
+    return Array.from(
+      new Set(selectedCountryDetails.brands.flatMap((brand) => brand.sources)),
+    );
+  }, [selectedCountryDetails]);
 
   const selectedBrandPresence = useMemo(() => {
     if (!regionScopedData || !activeSelectedBrand) {
@@ -1764,6 +1788,23 @@ export default function EVMap() {
                     ? "Country copy failed"
                     : "Copy country + ISO"}
               </button>
+              {selectedCountryAllSources.length > 0 ? (
+                <button
+                  type="button"
+                  className="mt-2 block text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                  onClick={() =>
+                    copySources(
+                      `${selectedCountryDetails.isoCode}:all-sources`,
+                      selectedCountryAllSources,
+                    )
+                  }
+                >
+                  {getCopyAllSourcesButtonLabel(
+                    copySourcesState,
+                    `${selectedCountryDetails.isoCode}:all-sources`,
+                  )}
+                </button>
+              ) : null}
             </div>
             <button
               type="button"
