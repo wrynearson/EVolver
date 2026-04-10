@@ -3500,6 +3500,38 @@
             "https://www.hongqi.nl/proefrijden"
           ],
           "uncertain": false
+        },
+        "ISL": {
+          "name": "Iceland",
+          "present": true,
+          "source": "https://hongqi.is/hafa-samband/",
+          "sources": [
+            "https://hongqi.is/",
+            "https://hongqi.is/hafa-samband/",
+            "https://hongqi.is/boka-reynsluakstur/"
+          ],
+          "uncertain": false
+        },
+        "POL": {
+          "name": "Poland",
+          "present": true,
+          "source": "https://hongqi-auto.pl/dealerzy",
+          "sources": [
+            "https://hongqi-auto.pl/",
+            "https://hongqi-auto.pl/dealerzy",
+            "https://hongqi-auto.pl/kontakt"
+          ],
+          "uncertain": false
+        },
+        "QAT": {
+          "name": "Qatar",
+          "present": true,
+          "source": "https://www.hongqi-qatar.com/en/location",
+          "sources": [
+            "https://www.hongqi-qatar.com/en",
+            "https://www.hongqi-qatar.com/en/location"
+          ],
+          "uncertain": false
         }
       }
     }
