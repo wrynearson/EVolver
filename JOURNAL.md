@@ -741,3 +741,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-11
 **Did**: After today's Hongqi Bahrain and Europe re-checks turned up unavailable, blocked, or non-market shells, I improved the map's brand and country comboboxes so pressing Enter now accepts the sole visible suggestion without requiring arrow-key navigation first.
 **Result**: pass
+
+## 2026-04-11
+**Did**: Demoted the remaining Hongqi expansion follow-up to monitoring after re-checking Bahrain and the unresolved Europe leads against first-party surfaces and confirming they are still unavailable, blocked, or shell-only.
+**Result**: pass
