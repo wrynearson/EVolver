@@ -36,9 +36,11 @@ type SelectionState = {
   selectedBrand: string;
   selectedCountry: MapCountrySelection | null;
   coveragePanelView: CoveragePanelView;
+  coverageSearchQuery: string;
   selectedCoverageRegion: string;
   coverageSort: CoverageSort;
   footprintSort: FootprintSort;
+  footprintSearchQuery: string;
 };
 type CountryOption = {
   isoCode: string;
@@ -258,9 +260,11 @@ function getSelectionStateFromSearch(search: string): SelectionState {
   const selectedBrand = searchParams.get("brand")?.trim() ?? "";
   const selectedCountryIsoCode = normalizeIsoCode(searchParams.get("country"));
   const requestedCoveragePanelView = searchParams.get("view")?.trim() ?? "";
+  const coverageSearchQuery = searchParams.get("coverageQuery")?.trim() ?? "";
   const selectedCoverageRegion = searchParams.get("region")?.trim() ?? "";
   const requestedCoverageSort = searchParams.get("coverageSort")?.trim() ?? "";
   const requestedFootprintSort = searchParams.get("footprintSort")?.trim() ?? "";
+  const footprintSearchQuery = searchParams.get("footprintQuery")?.trim() ?? "";
   const coveragePanelView = isCoveragePanelView(requestedCoveragePanelView)
     ? requestedCoveragePanelView
     : selectedCoverageRegion
@@ -273,6 +277,7 @@ function getSelectionStateFromSearch(search: string): SelectionState {
       ? { isoCode: selectedCountryIsoCode }
       : null,
     coveragePanelView,
+    coverageSearchQuery,
     selectedCoverageRegion,
     coverageSort: isCoverageSort(requestedCoverageSort)
       ? requestedCoverageSort
@@ -280,6 +285,7 @@ function getSelectionStateFromSearch(search: string): SelectionState {
     footprintSort: isFootprintSort(requestedFootprintSort)
       ? requestedFootprintSort
       : DEFAULT_FOOTPRINT_SORT,
+    footprintSearchQuery,
   };
 }
 
@@ -289,9 +295,11 @@ function getInitialSelectionState(): SelectionState {
       selectedBrand: "",
       selectedCountry: null,
       coveragePanelView: "brands",
+      coverageSearchQuery: "",
       selectedCoverageRegion: "",
       coverageSort: DEFAULT_COVERAGE_SORT,
       footprintSort: DEFAULT_FOOTPRINT_SORT,
+      footprintSearchQuery: "",
     };
   }
 
@@ -302,9 +310,11 @@ function buildShareUrl(
   selectedBrand: string,
   selectedCountry: MapCountrySelection | null,
   coveragePanelView: CoveragePanelView,
+  coverageSearchQuery: string,
   selectedCoverageRegion: string,
   coverageSort: CoverageSort,
   footprintSort: FootprintSort,
+  footprintSearchQuery: string,
 ) {
   if (typeof window === "undefined") {
     return "";
@@ -336,6 +346,12 @@ function buildShareUrl(
     url.searchParams.delete("region");
   }
 
+  if (coverageSearchQuery.trim()) {
+    url.searchParams.set("coverageQuery", coverageSearchQuery.trim());
+  } else {
+    url.searchParams.delete("coverageQuery");
+  }
+
   if (coverageSort !== DEFAULT_COVERAGE_SORT) {
     url.searchParams.set("coverageSort", coverageSort);
   } else {
@@ -346,6 +362,12 @@ function buildShareUrl(
     url.searchParams.set("footprintSort", footprintSort);
   } else {
     url.searchParams.delete("footprintSort");
+  }
+
+  if (footprintSearchQuery.trim()) {
+    url.searchParams.set("footprintQuery", footprintSearchQuery.trim());
+  } else {
+    url.searchParams.delete("footprintQuery");
   }
 
   return url.toString();
@@ -372,6 +394,10 @@ export default function EVMap() {
   const hasInitializedCopyLinkReset = useRef(false);
   const hasInitializedCopyCountryReset = useRef(false);
   const hasInitializedCopySourcesReset = useRef(false);
+  const hasInitializedCoverageSearchReset = useRef(false);
+  const hasInitializedFootprintSearchReset = useRef(false);
+  const skipNextCoverageSearchReset = useRef(false);
+  const skipNextFootprintSearchReset = useRef(false);
   const [countries, setCountries] = useState<FeatureCollection | null>(null);
   const [countriesError, setCountriesError] = useState<string | null>(null);
   const [selectedBrand, setSelectedBrand] = useState<string>(
@@ -390,7 +416,9 @@ export default function EVMap() {
   const [coveragePanelView, setCoveragePanelView] = useState<CoveragePanelView>(
     () => initialSelectionState.coveragePanelView,
   );
-  const [coverageSearchQuery, setCoverageSearchQuery] = useState("");
+  const [coverageSearchQuery, setCoverageSearchQuery] = useState(
+    () => initialSelectionState.coverageSearchQuery,
+  );
   const [selectedCoverageRegion, setSelectedCoverageRegion] = useState(
     () => initialSelectionState.selectedCoverageRegion,
   );
@@ -400,7 +428,9 @@ export default function EVMap() {
   const [footprintSort, setFootprintSort] = useState<FootprintSort>(
     () => initialSelectionState.footprintSort,
   );
-  const [footprintSearchQuery, setFootprintSearchQuery] = useState("");
+  const [footprintSearchQuery, setFootprintSearchQuery] = useState(
+    () => initialSelectionState.footprintSearchQuery,
+  );
   const [countryLookupQuery, setCountryLookupQuery] = useState(() =>
     getCountryLookupValue(initialSelectionState.selectedCountry),
   );
@@ -919,15 +949,19 @@ export default function EVMap() {
         activeSelectedBrand,
         resolvedSelectedCountry,
         coveragePanelView,
+        coverageSearchQuery,
         selectedCoverageRegion,
         coverageSort,
         footprintSort,
+        footprintSearchQuery,
       ),
     [
       activeSelectedBrand,
       coveragePanelView,
+      coverageSearchQuery,
       coverageSort,
       footprintSort,
+      footprintSearchQuery,
       resolvedSelectedCountry,
       selectedCoverageRegion,
     ],
@@ -1025,13 +1059,17 @@ export default function EVMap() {
     const handlePopState = () => {
       const nextState = getSelectionStateFromSearch(window.location.search);
 
+      skipNextCoverageSearchReset.current = true;
+      skipNextFootprintSearchReset.current = true;
       setSelectedBrand(nextState.selectedBrand);
       setBrandLookupQuery(nextState.selectedBrand);
       setSelectedCountry(nextState.selectedCountry);
       setCoveragePanelView(nextState.coveragePanelView);
+      setCoverageSearchQuery(nextState.coverageSearchQuery);
       setSelectedCoverageRegion(nextState.selectedCoverageRegion);
       setCoverageSort(nextState.coverageSort);
       setFootprintSort(nextState.footprintSort);
+      setFootprintSearchQuery(nextState.footprintSearchQuery);
     };
 
     window.addEventListener("popstate", handlePopState);
@@ -1069,9 +1107,11 @@ export default function EVMap() {
       currentBrand === activeSelectedBrand &&
       currentCountry === resolvedSelectedCountry?.isoCode &&
       currentState.coveragePanelView === coveragePanelView &&
+      currentState.coverageSearchQuery === coverageSearchQuery &&
       currentState.selectedCoverageRegion === selectedCoverageRegion &&
       currentState.coverageSort === coverageSort &&
-      currentState.footprintSort === footprintSort
+      currentState.footprintSort === footprintSort &&
+      currentState.footprintSearchQuery === footprintSearchQuery
     ) {
       return;
     }
@@ -1080,16 +1120,20 @@ export default function EVMap() {
       activeSelectedBrand,
       resolvedSelectedCountry,
       coveragePanelView,
+      coverageSearchQuery,
       selectedCoverageRegion,
       coverageSort,
       footprintSort,
+      footprintSearchQuery,
     );
     window.history.replaceState({}, "", nextUrl);
   }, [
     activeSelectedBrand,
     coveragePanelView,
+    coverageSearchQuery,
     coverageSort,
     footprintSort,
+    footprintSearchQuery,
     resolvedSelectedCountry,
     selectedCoverageRegion,
   ]);
@@ -1101,7 +1145,7 @@ export default function EVMap() {
     }
 
     setCopyLinkStatus("idle");
-  }, [activeSelectedBrand, resolvedSelectedCountry, selectedCoverageRegion]);
+  }, [shareUrl]);
 
   useEffect(() => {
     if (!hasInitializedCopyCountryReset.current) {
@@ -1122,10 +1166,30 @@ export default function EVMap() {
   }, [activeSelectedBrand, resolvedSelectedCountry]);
 
   useEffect(() => {
+    if (!hasInitializedCoverageSearchReset.current) {
+      hasInitializedCoverageSearchReset.current = true;
+      return;
+    }
+
+    if (skipNextCoverageSearchReset.current) {
+      skipNextCoverageSearchReset.current = false;
+      return;
+    }
+
     setCoverageSearchQuery("");
   }, [activeSelectedBrand, coveragePanelView, selectedCoverageRegion]);
 
   useEffect(() => {
+    if (!hasInitializedFootprintSearchReset.current) {
+      hasInitializedFootprintSearchReset.current = true;
+      return;
+    }
+
+    if (skipNextFootprintSearchReset.current) {
+      skipNextFootprintSearchReset.current = false;
+      return;
+    }
+
     setFootprintSearchQuery("");
   }, [activeSelectedBrand]);
 

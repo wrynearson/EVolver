@@ -544,6 +544,20 @@ describe("EVMap", () => {
       await screen.findByRole("button", { name: "Copied share link" }),
     ).toBeInTheDocument();
 
+    fireEvent.change(within(footprintPanel!).getByLabelText("Search footprint markets"), {
+      target: { value: "nor" },
+    });
+    expect(screen.getByRole("button", { name: "Copy share link" })).toBeInTheDocument();
+    expect(window.location.search).toBe(
+      "?brand=XPeng&country=NOR&footprintQuery=nor",
+    );
+    expect(
+      screen.getByRole("link", { name: "Open share link in a new tab" }),
+    ).toHaveAttribute(
+      "href",
+      "http://localhost:3000/?brand=XPeng&country=NOR&footprintQuery=nor",
+    );
+
     fireEvent.change(screen.getByLabelText("Country lookup"), {
       target: { value: "SWE" },
     });
@@ -561,7 +575,7 @@ describe("EVMap", () => {
     expect(
       within(emptyDetailsPanel!).getByText("Brands active elsewhere in Europe"),
     ).toBeInTheDocument();
-    expect(window.location.search).toBe("?brand=XPeng&country=SWE");
+    expect(window.location.search).toBe("?brand=XPeng&country=SWE&footprintQuery=nor");
 
     fireEvent.click(await screen.findByRole("button", { name: "Leave Hover" }));
     expect(screen.queryByRole("heading", { name: "Map preview" })).not.toBeInTheDocument();
@@ -1206,6 +1220,7 @@ describe("EVMap", () => {
       country: "SWE",
       view: "countries",
       region: "Europe",
+      coverageQuery: "nor",
       coverageSort: "name",
       footprintSort: "name-desc",
     });
@@ -1407,7 +1422,7 @@ describe("EVMap", () => {
     window.history.replaceState(
       {},
       "",
-      "/?view=countries&region=Europe&coverageSort=name&footprintSort=name-desc",
+      "/?view=countries&region=Europe&coverageQuery=nor&coverageSort=name&footprintSort=name-desc",
     );
 
     const { default: EVMap } = await import("../src/components/EVMap");
@@ -1427,11 +1442,14 @@ describe("EVMap", () => {
       screen.getByRole("link", { name: "Open share link in a new tab" }),
     ).toHaveAttribute(
       "href",
-      "http://localhost:3000/?view=countries&region=Europe&coverageSort=name&footprintSort=name-desc",
+      "http://localhost:3000/?view=countries&region=Europe&coverageQuery=nor&coverageSort=name&footprintSort=name-desc",
     );
     expect(within(countryCoveragePanel!).getByLabelText("Sort rankings")).toHaveDisplayValue(
       "Alphabetical",
     );
+    expect(
+      within(countryCoveragePanel!).getByLabelText("Search country coverage"),
+    ).toHaveDisplayValue("nor");
   });
 
   it("drops invalid brand query params after loading", async () => {

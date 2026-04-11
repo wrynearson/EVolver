@@ -745,3 +745,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-11
 **Did**: Demoted the remaining Hongqi expansion follow-up to monitoring after re-checking Bahrain and the unresolved Europe leads against first-party surfaces and confirming they are still unavailable, blocked, or shell-only.
 **Result**: pass
+
+## 2026-04-11
+**Did**: Made the shared map state more faithful by persisting coverage-panel and brand-footprint search queries in the URL and resetting the copy-link feedback whenever any shareable view state changes, backed by EV map coverage.
+**Result**: pass
