@@ -877,6 +877,36 @@ describe("EVMap", () => {
     expect(window.location.search).toBe("");
   });
 
+  it("selects the only country lookup suggestion on Enter", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    const countryLookup = await screen.findByLabelText("Country lookup");
+    fireEvent.change(countryLookup, { target: { value: "sw" } });
+
+    expect(screen.getByText("Showing 1 matching country")).toBeInTheDocument();
+    expect(screen.getByRole("option", { name: /Sweden/i })).toHaveAttribute(
+      "aria-selected",
+      "false",
+    );
+
+    fireEvent.keyDown(countryLookup, { key: "Enter" });
+
+    expect(screen.getByLabelText("Country lookup")).toHaveDisplayValue("Sweden");
+    expect(screen.getByRole("heading", { name: "Sweden" })).toBeInTheDocument();
+    expect(window.location.search).toBe("?country=SWE");
+  });
+
   it("supports keyboard navigation for country lookup suggestions", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
@@ -941,6 +971,36 @@ describe("EVMap", () => {
 
     expect(screen.getByText("Showing 0 matching brands")).toBeInTheDocument();
     expect(screen.getByText("No brands match this search yet.")).toBeInTheDocument();
+  });
+
+  it("selects the only brand filter suggestion on Enter", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    const brandFilter = await screen.findByLabelText("Brand filter");
+    fireEvent.change(brandFilter, { target: { value: "xp" } });
+
+    expect(screen.getByText("Showing 1 matching brand")).toBeInTheDocument();
+    expect(screen.getByRole("option", { name: "XPeng" })).toHaveAttribute(
+      "aria-selected",
+      "false",
+    );
+
+    fireEvent.keyDown(brandFilter, { key: "Enter" });
+
+    expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("XPeng");
+    expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
+    expect(window.location.search).toBe("?brand=XPeng");
   });
 
   it("supports keyboard navigation for brand filter suggestions", async () => {

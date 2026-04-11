@@ -738,3 +738,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Hongqi coverage by adding Belgium, the Czech Republic, and Oman after confirming live first-party local market sites plus official local contact, test-drive, warranty, or service-booking flows.
 **Result**: pass
 **TODO**: Verify Hongqi's next highest-impact sovereign markets beyond the updated footprint, prioritizing Bahrain and any remaining live first-party Europe locales with local dealer, contact, or test-drive flows.
+## 2026-04-11
+**Did**: After today's Hongqi Bahrain and Europe re-checks turned up unavailable, blocked, or non-market shells, I improved the map's brand and country comboboxes so pressing Enter now accepts the sole visible suggestion without requiring arrow-key navigation first.
+**Result**: pass

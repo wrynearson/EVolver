@@ -1309,18 +1309,21 @@ export default function EVMap() {
                       return;
                     }
 
-                    if (
-                      event.key === "Enter" &&
-                      shouldShowBrandLookupMatches &&
-                      activeBrandLookupIndex >= 0 &&
-                      filteredBrandOptions[activeBrandLookupIndex]
-                    ) {
-                      event.preventDefault();
-                      applyBrandSelection(
-                        filteredBrandOptions[activeBrandLookupIndex],
-                      );
-                      return;
-                    }
+                     if (
+                       event.key === "Enter" &&
+                       shouldShowBrandLookupMatches &&
+                       (filteredBrandOptions[activeBrandLookupIndex] ||
+                         (activeBrandLookupIndex < 0 && filteredBrandOptions.length === 1))
+                     ) {
+                       event.preventDefault();
+                       const selectedBrandOption =
+                         filteredBrandOptions[activeBrandLookupIndex] ??
+                         filteredBrandOptions[0];
+                       applyBrandSelection(
+                         selectedBrandOption,
+                       );
+                       return;
+                     }
 
                     if (event.key !== "Escape") {
                       return;
@@ -1488,20 +1491,23 @@ export default function EVMap() {
                       return;
                     }
 
-                    if (
-                      event.key === "Enter" &&
-                      shouldShowCountryLookupMatches &&
-                      activeCountryLookupIndex >= 0 &&
-                      filteredCountryOptions[activeCountryLookupIndex]
-                    ) {
-                      event.preventDefault();
-                      setSelectedCountry({
-                        isoCode: filteredCountryOptions[activeCountryLookupIndex].isoCode,
-                        countryName:
-                          filteredCountryOptions[activeCountryLookupIndex].countryName,
-                      });
-                      return;
-                    }
+                     if (
+                       event.key === "Enter" &&
+                       shouldShowCountryLookupMatches &&
+                       (filteredCountryOptions[activeCountryLookupIndex] ||
+                         (activeCountryLookupIndex < 0 &&
+                           filteredCountryOptions.length === 1))
+                     ) {
+                       event.preventDefault();
+                       const selectedCountryOption =
+                         filteredCountryOptions[activeCountryLookupIndex] ??
+                         filteredCountryOptions[0];
+                       setSelectedCountry({
+                         isoCode: selectedCountryOption.isoCode,
+                         countryName: selectedCountryOption.countryName,
+                       });
+                       return;
+                     }
 
                     if (event.key !== "Escape") {
                       return;
