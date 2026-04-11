@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-10",
+    "last_updated": "2026-04-11",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -3394,26 +3394,6 @@
     "Hongqi": {
       "website": "https://www.hongqi-auto.com/",
       "countries": {
-        "CHN": {
-          "name": "China",
-          "present": true,
-          "source": "https://hongqi.faw.cn/",
-          "sources": [
-            "https://hongqi.faw.cn/",
-            "https://www.hongqi-auto.com/"
-          ],
-          "uncertain": false
-        },
-        "DEU": {
-          "name": "Germany",
-          "present": true,
-          "source": "https://www.hongqi-ev.de/contact-us.html",
-          "sources": [
-            "https://www.hongqi-ev.de/",
-            "https://www.hongqi-ev.de/contact-us.html"
-          ],
-          "uncertain": false
-        },
         "ARE": {
           "name": "United Arab Emirates",
           "present": true,
@@ -3425,57 +3405,45 @@
           ],
           "uncertain": false
         },
-        "PHL": {
-          "name": "Philippines",
+        "BEL": {
+          "name": "Belgium",
           "present": true,
-          "source": "http://www.hongqi.ph/contact-us.html",
+          "source": "https://www.hongqi.be/nl/contact",
           "sources": [
-            "http://www.hongqi.ph/",
-            "http://www.hongqi.ph/contact-us.html",
-            "http://www.hongqi.ph/schedule-maintenance.html"
+            "https://www.hongqi.be/nl",
+            "https://www.hongqi.be/nl/contact",
+            "https://www.hongqi.be/nl/testrit"
           ],
           "uncertain": false
         },
-        "SAU": {
-          "name": "Saudi Arabia",
+        "CHN": {
+          "name": "China",
           "present": true,
-          "source": "https://www.hongqi-ksa.com/en/location",
+          "source": "https://hongqi.faw.cn/",
           "sources": [
-            "https://www.hongqi-ksa.com/en/",
-            "https://www.hongqi-ksa.com/en/location",
-            "https://www.hongqi-ksa.com/en/testdrive"
+            "https://hongqi.faw.cn/",
+            "https://www.hongqi-auto.com/"
           ],
           "uncertain": false
         },
-        "MEX": {
-          "name": "Mexico",
+        "CZE": {
+          "name": "Czech Republic",
           "present": true,
-          "source": "https://www.hongqi-mx.com/",
+          "source": "https://www.hongqi.cz/kontakt",
           "sources": [
-            "https://www.hongqi-mx.com/",
-            "https://www.hongqi-mx.com/testdrive.html"
+            "https://www.hongqi.cz/",
+            "https://www.hongqi.cz/kontakt",
+            "https://www.hongqi.cz/testovaci-jizda"
           ],
           "uncertain": false
         },
-        "NOR": {
-          "name": "Norway",
+        "DEU": {
+          "name": "Germany",
           "present": true,
-          "source": "https://hongqi.no/a/om-hongqi/",
+          "source": "https://www.hongqi-ev.de/contact-us.html",
           "sources": [
-            "https://hongqi.no/",
-            "https://hongqi.no/a/om-hongqi/",
-            "https://hongqi.no/biler/"
-          ],
-          "uncertain": false
-        },
-        "SWE": {
-          "name": "Sweden",
-          "present": true,
-          "source": "https://hongqi.se/",
-          "sources": [
-            "https://hongqi.se/",
-            "https://hongqi.se/upptack-hongqi",
-            "https://hongqi.se/boka-provkorning"
+            "https://www.hongqi-ev.de/",
+            "https://www.hongqi-ev.de/contact-us.html"
           ],
           "uncertain": false
         },
@@ -3490,6 +3458,27 @@
           ],
           "uncertain": false
         },
+        "ISL": {
+          "name": "Iceland",
+          "present": true,
+          "source": "https://hongqi.is/hafa-samband/",
+          "sources": [
+            "https://hongqi.is/",
+            "https://hongqi.is/hafa-samband/",
+            "https://hongqi.is/boka-reynsluakstur/"
+          ],
+          "uncertain": false
+        },
+        "MEX": {
+          "name": "Mexico",
+          "present": true,
+          "source": "https://www.hongqi-mx.com/",
+          "sources": [
+            "https://www.hongqi-mx.com/",
+            "https://www.hongqi-mx.com/testdrive.html"
+          ],
+          "uncertain": false
+        },
         "NLD": {
           "name": "Netherlands",
           "present": true,
@@ -3501,14 +3490,37 @@
           ],
           "uncertain": false
         },
-        "ISL": {
-          "name": "Iceland",
+        "NOR": {
+          "name": "Norway",
           "present": true,
-          "source": "https://hongqi.is/hafa-samband/",
+          "source": "https://hongqi.no/a/om-hongqi/",
           "sources": [
-            "https://hongqi.is/",
-            "https://hongqi.is/hafa-samband/",
-            "https://hongqi.is/boka-reynsluakstur/"
+            "https://hongqi.no/",
+            "https://hongqi.no/a/om-hongqi/",
+            "https://hongqi.no/biler/"
+          ],
+          "uncertain": false
+        },
+        "OMN": {
+          "name": "Oman",
+          "present": true,
+          "source": "https://www.hongqi-oman.com/en/contact-us",
+          "sources": [
+            "https://www.hongqi-oman.com/en",
+            "https://www.hongqi-oman.com/en/contact-us",
+            "https://www.hongqi-oman.com/en/book-service",
+            "https://www.hongqi-oman.com/en/warranty"
+          ],
+          "uncertain": false
+        },
+        "PHL": {
+          "name": "Philippines",
+          "present": true,
+          "source": "http://www.hongqi.ph/contact-us.html",
+          "sources": [
+            "http://www.hongqi.ph/",
+            "http://www.hongqi.ph/contact-us.html",
+            "http://www.hongqi.ph/schedule-maintenance.html"
           ],
           "uncertain": false
         },
@@ -3530,6 +3542,28 @@
           "sources": [
             "https://www.hongqi-qatar.com/en",
             "https://www.hongqi-qatar.com/en/location"
+          ],
+          "uncertain": false
+        },
+        "SAU": {
+          "name": "Saudi Arabia",
+          "present": true,
+          "source": "https://www.hongqi-ksa.com/en/location",
+          "sources": [
+            "https://www.hongqi-ksa.com/en/",
+            "https://www.hongqi-ksa.com/en/location",
+            "https://www.hongqi-ksa.com/en/testdrive"
+          ],
+          "uncertain": false
+        },
+        "SWE": {
+          "name": "Sweden",
+          "present": true,
+          "source": "https://hongqi.se/",
+          "sources": [
+            "https://hongqi.se/",
+            "https://hongqi.se/upptack-hongqi",
+            "https://hongqi.se/boka-provkorning"
           ],
           "uncertain": false
         }

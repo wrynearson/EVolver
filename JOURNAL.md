@@ -733,3 +733,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-10
 **Did**: Added a country-level Copy all sources action in the details panel so users can copy every currently shown verification link for a market in one click, backed by EV map coverage.
 **Result**: pass
+
+## 2026-04-11
+**Did**: Expanded Hongqi coverage by adding Belgium, the Czech Republic, and Oman after confirming live first-party local market sites plus official local contact, test-drive, warranty, or service-booking flows.
+**Result**: pass
+**TODO**: Verify Hongqi's next highest-impact sovereign markets beyond the updated footprint, prioritizing Bahrain and any remaining live first-party Europe locales with local dealer, contact, or test-drive flows.
