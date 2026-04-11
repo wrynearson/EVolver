@@ -3053,16 +3053,6 @@
           ],
           "uncertain": false
         },
-        "BRA": {
-          "name": "Brazil",
-          "present": true,
-          "source": "https://www.gacgroup.com/pt-br/suv/aion-v",
-          "sources": [
-            "https://www.gacgroup.com/pt-br",
-            "https://www.gacgroup.com/pt-br/suv/aion-v"
-          ],
-          "uncertain": false
-        },
         "BOL": {
           "name": "Bolivia",
           "present": true,
@@ -3071,6 +3061,16 @@
             "https://www.gacgroup.com/es-bo",
             "https://www.gacgroup.com/es-bo/suv/aion-y",
             "https://www.gacgroup.com/es-bo/test-drive/aion-y"
+          ],
+          "uncertain": false
+        },
+        "BRA": {
+          "name": "Brazil",
+          "present": true,
+          "source": "https://www.gacgroup.com/pt-br/suv/aion-v",
+          "sources": [
+            "https://www.gacgroup.com/pt-br",
+            "https://www.gacgroup.com/pt-br/suv/aion-v"
           ],
           "uncertain": false
         },
@@ -3093,6 +3093,18 @@
           "sources": [
             "https://www.aion.com.cn/",
             "https://www.aion.com.cn/vehicles/aion_car_introduce?alias=aion_y_plus"
+          ],
+          "uncertain": false
+        },
+        "FIN": {
+          "name": "Finland",
+          "present": true,
+          "source": "https://www.aionauto.fi/",
+          "sources": [
+            "https://www.aionauto.fi/",
+            "https://www.aionauto.fi/jalleenmyyjat/",
+            "https://www.aionauto.fi/varaa-koeajo/",
+            "https://www.aionauto.fi/tietoa-meista/"
           ],
           "uncertain": false
         },
@@ -3129,6 +3141,29 @@
             "https://www.aionauto.com/en-ph/dealer",
             "https://www.aionauto.com/en-ph/test-drive/AION%20Y%20Plus",
             "https://www.aionauto.com/en-ph/news/article/44927"
+          ],
+          "uncertain": false
+        },
+        "POL": {
+          "name": "Poland",
+          "present": true,
+          "source": "https://gacgroup.pl/aion-v",
+          "sources": [
+            "https://gacgroup.pl/",
+            "https://gacgroup.pl/aion-v",
+            "https://gacgroup.pl/modele/aion-v/",
+            "https://gacgroup.pl/dealerzy"
+          ],
+          "uncertain": false
+        },
+        "PRT": {
+          "name": "Portugal",
+          "present": true,
+          "source": "https://aion.pt/",
+          "sources": [
+            "https://aion.pt/",
+            "https://www.gacgroup.com/pt-pt/",
+            "https://www.gacgroup.com/pt-pt/suv/aion-v"
           ],
           "uncertain": false
         },

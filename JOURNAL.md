@@ -749,3 +749,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-11
 **Did**: Made the shared map state more faithful by persisting coverage-panel and brand-footprint search queries in the URL and resetting the copy-link feedback whenever any shareable view state changes, backed by EV map coverage.
 **Result**: pass
+
+## 2026-04-11
+**Did**: Coverage analysis showed AION was the highest-impact tracked brand still missing Europe, so I added Finland, Poland, and Portugal after confirming live first-party local AION/GAC market sites plus official dealer, importer, about, and test-drive flows on their localized consumer surfaces.
+**Result**: pass

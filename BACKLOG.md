@@ -4,6 +4,7 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
+- Verify whether AION's remaining European locales beyond Finland, Poland, and Portugal expose live first-party market, dealer, service, or test-drive flows that justify more sovereign additions.
 - [monitoring] Re-check Hongqi only after a new first-party sovereign market, dealer, contact, or test-drive flow appears beyond the current Belgium, China, Czech Republic, Denmark, Germany, Iceland, Mexico, the Netherlands, Norway, Oman, the Philippines, Poland, Qatar, Saudi Arabia, Sweden, and the United Arab Emirates footprint; checked 2026-04-11 and Bahrain plus the remaining Europe leads were still unavailable, blocked, or shell-only.
 - [monitoring] Re-check Li Auto only after its official sites expose a sovereign market, dealer, or service flow outside China; checked 2026-04-09 and the official Chinese and English sites still expose only the China retail/service network.
 - [monitoring] Re-check AION's remaining Middle East locales only after a live first-party AION model, dealer, service, or test-drive route appears; checked 2026-04-08 and Bahrain and Oman locale roots still 404 while Qatar and Saudi Arabia remain GAC-only without a live AION model page.
