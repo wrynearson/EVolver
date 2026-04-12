@@ -757,3 +757,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-12
 **Did**: Added AION official presence for France after confirming GAC's live French tenant, first-party AION V model page, and French service page, then demoted the remaining AION Europe follow-up to monitoring because the official Europe stack still exposes no other sovereign locale roots beyond the already-tracked markets.
 **Result**: pass
+
+## 2026-04-12
+**Did**: Added Chery official presence for Turkey, the United Arab Emirates, Egypt, Mexico, and Peru after confirming live first-party local market sites plus dealer, showroom, contact, service, or test-drive flows on each sovereign market surface.
+**Result**: pass
