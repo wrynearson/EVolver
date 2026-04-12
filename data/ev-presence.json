@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-11",
+    "last_updated": "2026-04-12",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -3105,6 +3105,17 @@
             "https://www.aionauto.fi/jalleenmyyjat/",
             "https://www.aionauto.fi/varaa-koeajo/",
             "https://www.aionauto.fi/tietoa-meista/"
+          ],
+          "uncertain": false
+        },
+        "FRA": {
+          "name": "France",
+          "present": true,
+          "source": "https://www.gacgroup.com/fr-fr/suv/aion-v",
+          "sources": [
+            "https://www.gacgroup.com/fr-fr",
+            "https://www.gacgroup.com/fr-fr/suv/aion-v",
+            "https://www.gacgroup.com/fr-fr/our-service"
           ],
           "uncertain": false
         },

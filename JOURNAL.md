@@ -753,3 +753,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-11
 **Did**: Coverage analysis showed AION was the highest-impact tracked brand still missing Europe, so I added Finland, Poland, and Portugal after confirming live first-party local AION/GAC market sites plus official dealer, importer, about, and test-drive flows on their localized consumer surfaces.
 **Result**: pass
+
+## 2026-04-12
+**Did**: Added AION official presence for France after confirming GAC's live French tenant, first-party AION V model page, and French service page, then demoted the remaining AION Europe follow-up to monitoring because the official Europe stack still exposes no other sovereign locale roots beyond the already-tracked markets.
+**Result**: pass
