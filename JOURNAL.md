@@ -765,3 +765,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-12
 **Did**: Strengthened the export-helper guardrails by adding focused tests for source deduplication and CSV escaping of quoted or comma-containing fields.
 **Result**: pass
+
+## 2026-04-12
+**Did**: Re-checked Chery Spain and Italy against live first-party domains and confirmed Spain's official domain remains unreachable while `chery.it` is still only a "coming soon" placeholder, so I demoted that expansion lead to monitoring in the backlog.
+**Result**: pass
+
+## 2026-04-12
+**Did**: Hardened shareable map-state recovery so invalid country query params are cleared after data loads and locked the behavior with regression coverage for stale country and region URLs.
+**Result**: pass

@@ -1025,7 +1025,23 @@ export default function EVMap() {
   }, [data, selectedBrand]);
 
   useEffect(() => {
-    if (!selectedCoverageRegion || Object.keys(countryRegionLookup).length === 0) {
+    if (!selectedCountry || countryOptions.length === 0) {
+      return;
+    }
+
+    if (countryOptions.some((option) => option.isoCode === selectedCountry.isoCode)) {
+      return;
+    }
+
+    setSelectedCountry(null);
+  }, [countryOptions, selectedCountry]);
+
+  useEffect(() => {
+    if (
+      !selectedCoverageRegion ||
+      Object.keys(countryRegionLookup).length === 0 ||
+      !availableRegions.includes(selectedCoverageRegion)
+    ) {
       return;
     }
 
@@ -1045,6 +1061,7 @@ export default function EVMap() {
       setHoveredCountry(null);
     }
   }, [
+    availableRegions,
     countryRegionLookup,
     hoveredCountry,
     selectedCountry,

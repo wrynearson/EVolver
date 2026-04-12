@@ -1475,6 +1475,56 @@ describe("EVMap", () => {
     });
   });
 
+  it("drops invalid country query params after loading", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+    window.history.replaceState(
+      {},
+      "",
+      "/?brand=BYD&country=ZZZ&view=countries&region=Europe",
+    );
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("BYD");
+      expect(screen.getByLabelText("Country lookup")).toHaveDisplayValue("");
+      expect(screen.queryByRole("heading", { name: "ZZZ" })).not.toBeInTheDocument();
+      expect(window.location.search).toBe("?brand=BYD&view=countries&region=Europe");
+    });
+  });
+
+  it("drops invalid region query params after loading", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+    window.history.replaceState({}, "", "/?country=NOR&view=countries&region=Atlantis");
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByLabelText("Country lookup")).toHaveDisplayValue("Norway");
+      expect(window.location.search).toBe("?country=NOR&view=countries");
+    });
+  });
+
   it("syncs brand, country, and coverage state with browser history navigation", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
