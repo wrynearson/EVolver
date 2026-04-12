@@ -100,4 +100,56 @@ describe("data export helpers", () => {
       }),
     ).toBe("ev-presence-all-brands-all-regions-2026-03-31");
   });
+
+  it("deduplicates source URLs and escapes csv fields with special characters", () => {
+    const specialData: EVPresenceData = {
+      metadata: {
+        last_updated: "2026-03-31",
+        definition: "test",
+        schema_version: 2,
+      },
+      brands: {
+        'MG "Premium"': {
+          website: "https://example.com/brand",
+          countries: {
+            ABW: {
+              name: 'Quote "Land", North',
+              present: true,
+              source: "https://example.com/market",
+              sources: [
+                "https://example.com/market",
+                "https://example.com/market",
+                "https://example.com/dealers",
+              ],
+              uncertain: false,
+            },
+          },
+        },
+      },
+    };
+
+    expect(buildPresenceExportRows(specialData, { ABW: 'Latin America, "Caribbean"' }))
+      .toEqual([
+        {
+          brandName: 'MG "Premium"',
+          brandWebsite: "https://example.com/brand",
+          isoCode: "ABW",
+          countryName: 'Quote "Land", North',
+          regionName: 'Latin America, "Caribbean"',
+          present: true,
+          uncertain: false,
+          primarySource: "https://example.com/market",
+          sourceUrls: [
+            "https://example.com/market",
+            "https://example.com/dealers",
+          ],
+        },
+      ]);
+
+    expect(
+      serializePresenceDataToCsv(specialData, { ABW: 'Latin America, "Caribbean"' }),
+    ).toContain(
+      '"MG ""Premium""",https://example.com/brand,ABW,"Quote ""Land"", North","Latin America, ""Caribbean""",true,false,https://example.com/market,https://example.com/market | https://example.com/dealers',
+    );
+  });
 });

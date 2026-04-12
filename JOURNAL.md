@@ -761,3 +761,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-12
 **Did**: Added Chery official presence for Turkey, the United Arab Emirates, Egypt, Mexico, and Peru after confirming live first-party local market sites plus dealer, showroom, contact, service, or test-drive flows on each sovereign market surface.
 **Result**: pass
+
+## 2026-04-12
+**Did**: Strengthened the export-helper guardrails by adding focused tests for source deduplication and CSV escaping of quoted or comma-containing fields.
+**Result**: pass
