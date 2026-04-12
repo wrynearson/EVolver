@@ -773,3 +773,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-12
 **Did**: Hardened shareable map-state recovery so invalid country query params are cleared after data loads and locked the behavior with regression coverage for stale country and region URLs.
 **Result**: pass
+
+## 2026-04-12
+**Did**: Coverage analysis showed the backlog had drifted to monitoring-only work again, so I promoted Deepal as the highest-impact actionable gap and added it as a tracked brand with confirmed official presence in China, Australia, Bangladesh, Singapore, Sri Lanka, and Thailand using first-party local market, dealer, contact, and test-drive flows.
+**Result**: pass
+**TODO**: Verify additional Deepal sovereign markets beyond China, Australia, Bangladesh, Singapore, Sri Lanka, and Thailand using official localized sites plus dealer, test-drive, or aftersales flows.

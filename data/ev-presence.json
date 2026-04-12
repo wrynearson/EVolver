@@ -3094,6 +3094,74 @@
         }
       }
     },
+    "Deepal": {
+      "website": "https://www.deepal.com.cn",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.deepal.com.cn/",
+          "sources": [
+            "https://www.deepal.com.cn/",
+            "https://www.deepal.com.cn/store"
+          ],
+          "uncertain": false
+        },
+        "AUS": {
+          "name": "Australia",
+          "present": true,
+          "source": "https://www.deepal.com.au/buying-tools/book-a-test-drive/",
+          "sources": [
+            "https://www.deepal.com.au/",
+            "https://www.deepal.com.au/about-us/contact-us/",
+            "https://www.deepal.com.au/find-a-dealer/",
+            "https://www.deepal.com.au/buying-tools/book-a-test-drive/"
+          ],
+          "uncertain": false
+        },
+        "BGD": {
+          "name": "Bangladesh",
+          "present": true,
+          "source": "https://deepal.com.bd/",
+          "sources": [
+            "https://deepal.com.bd/",
+            "https://deepal.com.bd/contact_us"
+          ],
+          "uncertain": false
+        },
+        "SGP": {
+          "name": "Singapore",
+          "present": true,
+          "source": "https://www.deepal.sg/book-a-test-drive/",
+          "sources": [
+            "https://www.deepal.sg/",
+            "https://www.deepal.sg/contact-us/",
+            "https://www.deepal.sg/book-a-test-drive/"
+          ],
+          "uncertain": false
+        },
+        "LKA": {
+          "name": "Sri Lanka",
+          "present": true,
+          "source": "https://deepal.lk/test-drive/",
+          "sources": [
+            "https://deepal.lk/",
+            "https://deepal.lk/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "THA": {
+          "name": "Thailand",
+          "present": true,
+          "source": "https://www.changan.co.th/en/dealer/",
+          "sources": [
+            "https://www.changan.co.th/en/deepal/s07-en/",
+            "https://www.changan.co.th/en/dealer/"
+          ],
+          "uncertain": false
+        }
+      }
+    },
     "AION": {
       "website": "https://www.aionauto.com/",
       "countries": {
