@@ -792,3 +792,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-13
 **Did**: Added Deepal official presence for Peru and Uruguay after confirming Peru's live localized Deepal consumer site plus model and contact routes and Uruguay's sovereign Deepal site plus model pages and local contact and showroom details, then closed the stale generic Deepal follow-up by narrowing the remaining leads to monitoring-only parked or non-sovereign domains.
 **Result**: pass
+## 2026-04-13
+**Did**: Added a region breakdown to the brand footprint panel so users can see a selected brand's market spread by region and jump directly into region-scoped map views, backed by new helper and EV map regression coverage.
+**Result**: pass

@@ -1017,6 +1017,75 @@ describe("EVMap", () => {
     expect(window.location.search).toBe("?brand=XPeng");
   });
 
+  it("shows a region breakdown for the selected brand footprint", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText("Brand filter"), {
+      target: { value: "BYD" },
+    });
+
+    const footprintPanel = screen
+      .getByRole("heading", { name: "Brand footprint" })
+      .closest("aside");
+    expect(footprintPanel).not.toBeNull();
+
+    expect(within(footprintPanel!).getByText("Footprint regions")).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).getByRole("button", {
+        name: /All regions · 2 markets/i,
+      }),
+    ).toHaveAttribute("aria-pressed", "true");
+    expect(
+      within(footprintPanel!).getByRole("button", {
+        name: /Asia · 1 market/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).getByRole("button", {
+        name: /Europe · 1 market/i,
+      }),
+    ).toBeInTheDocument();
+
+    fireEvent.click(
+      within(footprintPanel!).getByRole("button", {
+        name: /Europe · 1 market/i,
+      }),
+    );
+
+    expect(screen.getByLabelText("Region filter")).toHaveDisplayValue("Europe");
+    expect(window.location.search).toBe("?brand=BYD&view=brands&region=Europe");
+    expect(
+      within(footprintPanel!).getByRole("button", {
+        name: /Europe · 1 market/i,
+      }),
+    ).toHaveAttribute("aria-pressed", "true");
+    expect(
+      within(footprintPanel!).getByText("Filtering markets to Europe"),
+    ).toBeInTheDocument();
+
+    fireEvent.click(
+      within(footprintPanel!).getByRole("button", {
+        name: /All regions · 2 markets/i,
+      }),
+    );
+
+    expect(screen.getByLabelText("Region filter")).toHaveDisplayValue("All regions");
+    expect(window.location.search).toBe("?brand=BYD");
+  });
+
   it("supports keyboard navigation for brand filter suggestions", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);

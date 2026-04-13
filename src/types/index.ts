@@ -41,6 +41,12 @@ export interface BrandCoverageSummary {
   uncertainCountryCount: number;
 }
 
+export interface BrandRegionCoverageSummary {
+  regionName: string;
+  confirmedCountryCount: number;
+  uncertainCountryCount: number;
+}
+
 export interface CountryCoverageSummary {
   isoCode: string;
   countryName: string;

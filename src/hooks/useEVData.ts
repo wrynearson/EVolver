@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import type {
   BrandCoverageSummary,
   BrandPresenceCountry,
+  BrandRegionCoverageSummary,
   CountryPresenceDetails,
   CountryCoverageSummary,
   EVPresenceData,
@@ -359,6 +360,66 @@ export function getBrandCoverageSummaries(
       }
 
       return a.brandName.localeCompare(b.brandName);
+    });
+}
+
+export function getBrandRegionCoverageSummaries(
+  data: EVPresenceData,
+  brandName: string,
+  countryRegionLookup: Record<string, string>,
+): BrandRegionCoverageSummary[] {
+  const brand = data.brands[brandName];
+
+  if (!brand) {
+    return [];
+  }
+
+  const summaries = new Map<
+    string,
+    { confirmedCountryCount: number; uncertainCountryCount: number }
+  >();
+
+  for (const [isoCode, entry] of Object.entries(brand.countries)) {
+    if (!entry.present) {
+      continue;
+    }
+
+    const regionName = countryRegionLookup[isoCode];
+
+    if (!regionName) {
+      continue;
+    }
+
+    const summary = summaries.get(regionName) ?? {
+      confirmedCountryCount: 0,
+      uncertainCountryCount: 0,
+    };
+
+    if (entry.uncertain) {
+      summary.uncertainCountryCount += 1;
+    } else {
+      summary.confirmedCountryCount += 1;
+    }
+
+    summaries.set(regionName, summary);
+  }
+
+  return Array.from(summaries.entries())
+    .map(([regionName, summary]) => ({
+      regionName,
+      confirmedCountryCount: summary.confirmedCountryCount,
+      uncertainCountryCount: summary.uncertainCountryCount,
+    }))
+    .sort((a, b) => {
+      if (b.confirmedCountryCount !== a.confirmedCountryCount) {
+        return b.confirmedCountryCount - a.confirmedCountryCount;
+      }
+
+      if (b.uncertainCountryCount !== a.uncertainCountryCount) {
+        return b.uncertainCountryCount - a.uncertainCountryCount;
+      }
+
+      return a.regionName.localeCompare(b.regionName);
     });
 }
 

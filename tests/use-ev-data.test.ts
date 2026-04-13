@@ -4,6 +4,7 @@ import {
   computeDatasetSummary,
   filterPresenceDataToBrand,
   filterPresenceDataToRegion,
+  getBrandRegionCoverageSummaries,
   getCountryRegionBrandSuggestions,
   getCountryRegionLookup,
   getCountryCoverageSummaries,
@@ -130,6 +131,34 @@ describe("useEVData helpers", () => {
         confirmedCountryCount: 1,
         uncertainCountryCount: 0,
         brandNames: ["BYD"],
+      },
+    ]);
+  });
+
+  it("builds per-brand region summaries for footprint navigation", () => {
+    const countryRegionLookup = getCountryRegionLookup(mockCountries);
+
+    expect(
+      getBrandRegionCoverageSummaries(mockData, "BYD", countryRegionLookup),
+    ).toEqual([
+      {
+        regionName: "Asia",
+        confirmedCountryCount: 1,
+        uncertainCountryCount: 0,
+      },
+      {
+        regionName: "Europe",
+        confirmedCountryCount: 1,
+        uncertainCountryCount: 0,
+      },
+    ]);
+    expect(
+      getBrandRegionCoverageSummaries(mockData, "XPeng", countryRegionLookup),
+    ).toEqual([
+      {
+        regionName: "Europe",
+        confirmedCountryCount: 1,
+        uncertainCountryCount: 1,
       },
     ]);
   });

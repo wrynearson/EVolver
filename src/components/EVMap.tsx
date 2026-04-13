@@ -5,6 +5,7 @@ import {
   filterPresenceDataToBrand,
   filterPresenceDataToRegion,
   getBrandCoverageSummaries,
+  getBrandRegionCoverageSummaries,
   getBrandPresenceCountries,
   getCountryRegionLookup,
   getCountryRegionBrandSuggestions,
@@ -782,6 +783,26 @@ export default function EVMap() {
           .map((country) => country.isoCode),
       ),
     [selectedBrandPresence],
+  );
+  const selectedBrandRegionCoverageSummaries = useMemo(() => {
+    if (!data || !activeSelectedBrand) {
+      return [];
+    }
+
+    return getBrandRegionCoverageSummaries(
+      data,
+      activeSelectedBrand,
+      countryRegionLookup,
+    );
+  }, [activeSelectedBrand, countryRegionLookup, data]);
+  const selectedBrandTotalCountryCount = useMemo(
+    () =>
+      selectedBrandRegionCoverageSummaries.reduce(
+        (total, region) =>
+          total + region.confirmedCountryCount + region.uncertainCountryCount,
+        0,
+      ),
+    [selectedBrandRegionCoverageSummaries],
   );
   const selectedBrandHasUncertainPresence =
     selectedBrandUncertainCountryCodes.size > 0;
@@ -2075,6 +2096,66 @@ export default function EVMap() {
               Clear
             </button>
           </div>
+
+          {selectedBrandRegionCoverageSummaries.length > 1 ? (
+            <div className="mt-3">
+              <p className="block text-xs font-medium uppercase tracking-wide text-gray-500">
+                Footprint regions
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  className={`rounded-full border px-3 py-1 text-left text-xs ${
+                    selectedCoverageRegion
+                      ? "border-gray-300 text-gray-700 hover:border-blue-300 hover:text-blue-700"
+                      : "border-blue-200 bg-blue-50 text-blue-800"
+                  }`}
+                  aria-pressed={!selectedCoverageRegion}
+                  onClick={() => setSelectedCoverageRegion("")}
+                >
+                  <span className="font-medium">All regions</span>
+                  <span className="text-gray-500">
+                    {" "}
+                    · {selectedBrandTotalCountryCount}{" "}
+                    {selectedBrandTotalCountryCount === 1 ? "market" : "markets"}
+                  </span>
+                </button>
+                {selectedBrandRegionCoverageSummaries.map((region) => {
+                  const totalCountryCount =
+                    region.confirmedCountryCount + region.uncertainCountryCount;
+                  const isActive = selectedCoverageRegion === region.regionName;
+
+                  return (
+                    <button
+                      key={region.regionName}
+                      type="button"
+                      className={`rounded-full border px-3 py-1 text-left text-xs ${
+                        isActive
+                          ? "border-blue-200 bg-blue-50 text-blue-800"
+                          : "border-gray-300 text-gray-700 hover:border-blue-300 hover:text-blue-700"
+                      }`}
+                      aria-pressed={isActive}
+                      onClick={() => setSelectedCoverageRegion(region.regionName)}
+                    >
+                      <span className="font-medium">{region.regionName}</span>
+                      <span className="text-gray-500">
+                        {" "}
+                        · {totalCountryCount}{" "}
+                        {totalCountryCount === 1 ? "market" : "markets"}
+                        {region.uncertainCountryCount > 0
+                          ? ` · ${region.uncertainCountryCount} uncertain`
+                          : ""}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+              <p className="mt-2 text-xs text-gray-500">
+                Jump between the regions where this brand has tracked official
+                presence.
+              </p>
+            </div>
+          ) : null}
 
           <div className="mt-3">
             <label
