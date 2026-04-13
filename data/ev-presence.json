@@ -3129,6 +3129,19 @@
           ],
           "uncertain": false
         },
+        "NPL": {
+          "name": "Nepal",
+          "present": true,
+          "source": "https://changannepal.com/request-a-test-drive",
+          "sources": [
+            "https://changannepal.com/",
+            "https://changannepal.com/deepal/s07",
+            "https://changannepal.com/dealer",
+            "https://changannepal.com/contact-us",
+            "https://changannepal.com/request-a-test-drive"
+          ],
+          "uncertain": false
+        },
         "PAK": {
           "name": "Pakistan",
           "present": true,
