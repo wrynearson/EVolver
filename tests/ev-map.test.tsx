@@ -1086,6 +1086,49 @@ describe("EVMap", () => {
     expect(window.location.search).toBe("?brand=BYD");
   });
 
+  it("supports region-based sorting in the selected brand footprint", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText("Brand filter"), {
+      target: { value: "BYD" },
+    });
+
+    const footprintPanel = screen
+      .getByRole("heading", { name: "Brand footprint" })
+      .closest("aside");
+    expect(footprintPanel).not.toBeNull();
+
+    fireEvent.change(within(footprintPanel!).getByLabelText("Sort footprint"), {
+      target: { value: "region-desc" },
+    });
+
+    const marketButtons = within(footprintPanel!)
+      .getAllByRole("button")
+      .filter(
+        (button) =>
+          button.textContent?.includes("China") ||
+          button.textContent?.includes("Norway"),
+      );
+    expect(marketButtons.map((button) => button.textContent)).toEqual([
+      expect.stringContaining("Norway"),
+      expect.stringContaining("China"),
+    ]);
+    expect(window.location.search).toBe("?brand=BYD&footprintSort=region-desc");
+  });
+
   it("supports keyboard navigation for brand filter suggestions", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);

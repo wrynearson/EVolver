@@ -795,3 +795,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-13
 **Did**: Added a region breakdown to the brand footprint panel so users can see a selected brand's market spread by region and jump directly into region-scoped map views, backed by new helper and EV map regression coverage.
 **Result**: pass
+
+## 2026-04-13
+**Did**: Coverage analysis showed Xiaomi was the highest-impact uncovered major-region gap, but Xiaomi's official global, UK, and Spain surfaces still exposed only electronics content with no overseas EV market, dealer, service, or test-drive flow, so I added it to the monitoring backlog instead of inferring presence.
+**Result**: pass
+
+## 2026-04-13
+**Did**: Added region-based sorting to the brand footprint panel so users can group a selected brand's markets geographically in either direction, backed by EV map regression coverage.
+**Result**: pass

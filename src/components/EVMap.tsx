@@ -32,7 +32,7 @@ type CopySourcesState = {
 };
 type CoveragePanelView = "brands" | "countries" | "regions";
 type CoverageSort = "coverage" | "name";
-type FootprintSort = "name" | "name-desc";
+type FootprintSort = "name" | "name-desc" | "region" | "region-desc";
 type SelectionState = {
   selectedBrand: string;
   selectedCountry: MapCountrySelection | null;
@@ -71,7 +71,12 @@ function isCoverageSort(value: string): value is CoverageSort {
 }
 
 function isFootprintSort(value: string): value is FootprintSort {
-  return value === "name" || value === "name-desc";
+  return (
+    value === "name" ||
+    value === "name-desc" ||
+    value === "region" ||
+    value === "region-desc"
+  );
 }
 
 function matchesSearchQuery(values: Array<string | undefined>, query: string) {
@@ -254,6 +259,43 @@ function getNextLookupIndex(
   }
 
   return currentIndex;
+}
+
+function compareFootprintCountries(
+  a: CountryOption & { regionName?: string; isoCode: string; countryName: string },
+  b: CountryOption & { regionName?: string; isoCode: string; countryName: string },
+  sort: FootprintSort,
+) {
+  const regionNameA = a.regionName ?? "";
+  const regionNameB = b.regionName ?? "";
+  const regionComparison = regionNameA.localeCompare(regionNameB);
+  const countryNameComparison = a.countryName.localeCompare(b.countryName);
+
+  if (sort === "region" || sort === "region-desc") {
+    if (regionComparison !== 0) {
+      return sort === "region-desc" ? -regionComparison : regionComparison;
+    }
+
+    if (countryNameComparison !== 0) {
+      return countryNameComparison;
+    }
+
+    return a.isoCode.localeCompare(b.isoCode);
+  }
+
+  if (sort === "name-desc") {
+    if (countryNameComparison !== 0) {
+      return -countryNameComparison;
+    }
+
+    return b.isoCode.localeCompare(a.isoCode);
+  }
+
+  if (countryNameComparison !== 0) {
+    return countryNameComparison;
+  }
+
+  return a.isoCode.localeCompare(b.isoCode);
 }
 
 function getSelectionStateFromSearch(search: string): SelectionState {
@@ -818,23 +860,9 @@ export default function EVMap() {
     [footprintSearchQuery, selectedBrandPresence],
   );
   const sortedSelectedBrandPresence = useMemo(() => {
-    return [...filteredSelectedBrandPresence].sort((a, b) => {
-      const countryNameComparison = a.countryName.localeCompare(b.countryName);
-
-      if (footprintSort === "name-desc") {
-        if (countryNameComparison !== 0) {
-          return -countryNameComparison;
-        }
-
-        return b.isoCode.localeCompare(a.isoCode);
-      }
-
-      if (countryNameComparison !== 0) {
-        return countryNameComparison;
-      }
-
-      return a.isoCode.localeCompare(b.isoCode);
-    });
+    return [...filteredSelectedBrandPresence].sort((a, b) =>
+      compareFootprintCountries(a, b, footprintSort),
+    );
   }, [filteredSelectedBrandPresence, footprintSort]);
 
   const brandCoverageSummaries = useMemo(() => {
@@ -2206,6 +2234,8 @@ export default function EVMap() {
             >
               <option value="name">Country name (A-Z)</option>
               <option value="name-desc">Country name (Z-A)</option>
+              <option value="region">Region, then country (A-Z)</option>
+              <option value="region-desc">Region, then country (Z-A)</option>
             </select>
           </div>
 
