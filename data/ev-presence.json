@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-12",
+    "last_updated": "2026-04-13",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -3126,6 +3126,18 @@
           "sources": [
             "https://deepal.com.bd/",
             "https://deepal.com.bd/contact_us"
+          ],
+          "uncertain": false
+        },
+        "PAK": {
+          "name": "Pakistan",
+          "present": true,
+          "source": "https://deepal.com.pk/dealer.php",
+          "sources": [
+            "https://deepal.com.pk/",
+            "https://deepal.com.pk/dealer.php",
+            "https://deepal.com.pk/book-now.php",
+            "https://deepal.com.pk/s7/"
           ],
           "uncertain": false
         },

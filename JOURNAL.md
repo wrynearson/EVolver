@@ -778,3 +778,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Coverage analysis showed the backlog had drifted to monitoring-only work again, so I promoted Deepal as the highest-impact actionable gap and added it as a tracked brand with confirmed official presence in China, Australia, Bangladesh, Singapore, Sri Lanka, and Thailand using first-party local market, dealer, contact, and test-drive flows.
 **Result**: pass
 **TODO**: Verify additional Deepal sovereign markets beyond China, Australia, Bangladesh, Singapore, Sri Lanka, and Thailand using official localized sites plus dealer, test-drive, or aftersales flows.
+
+## 2026-04-13
+**Did**: Added Deepal official presence for Pakistan after confirming the live local Deepal Pakistan site exposes consumer model pages plus a first-party dealership locator and register-your-interest test-drive flow.
+**Result**: pass
+**TODO**: Verify additional Deepal sovereign markets beyond China, Australia, Bangladesh, Pakistan, Singapore, Sri Lanka, and Thailand using official localized sites plus dealer, test-drive, or aftersales flows.
