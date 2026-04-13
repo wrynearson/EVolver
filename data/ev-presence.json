@@ -3184,6 +3184,28 @@
             "https://www.changan.co.th/en/dealer/"
           ],
           "uncertain": false
+        },
+        "PER": {
+          "name": "Peru",
+          "present": true,
+          "source": "https://www.deepal.com.pe/",
+          "sources": [
+            "https://www.deepal.com.pe/",
+            "https://www.deepal.com.pe/vehiculo/s07/",
+            "https://www.deepal.com.pe/formulario/contacto/"
+          ],
+          "uncertain": false
+        },
+        "URY": {
+          "name": "Uruguay",
+          "present": true,
+          "source": "https://deepal.uy/",
+          "sources": [
+            "https://deepal.uy/",
+            "https://deepal.uy/modelos/deepal-s05",
+            "https://deepal.uy/modelos/deepal-s7"
+          ],
+          "uncertain": false
         }
       }
     },

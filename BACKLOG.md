@@ -4,7 +4,7 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
-- Verify additional Deepal sovereign markets beyond China, Australia, Bangladesh, Nepal, Pakistan, Singapore, Sri Lanka, and Thailand using official localized sites plus dealer, test-drive, or aftersales flows.
+- [monitoring] Re-check Deepal sovereign domains that currently resolve to parked, blocked, or non-sovereign surfaces only after official local consumer, dealer, contact, or service flows appear; checked 2026-04-13 and `deepal.ae` plus `deepal.co.nz` fell through to parked GoDaddy landers, `deepal.com.pl` led to Dynadot parking, and `deepal.co.uk` was only a frameset to Swiss `deepal.ch`.
 - [monitoring] Re-check AION's remaining European locales only after a new first-party sovereign market, dealer, service, or test-drive flow appears beyond Finland, France, Poland, and Portugal; checked 2026-04-12 and GAC's Europe stack still exposed only the French sovereign tenant plus generic region-level forms for other markets.
 - [monitoring] Re-check Chery Spain and Italy only after first-party local market, dealer, service, or test-drive flows appear; checked 2026-04-12 and Spain's official domain remained unreachable while `chery.it` still served only a "coming soon" placeholder.
 - [monitoring] Re-check Hongqi only after a new first-party sovereign market, dealer, contact, or test-drive flow appears beyond the current Belgium, China, Czech Republic, Denmark, Germany, Iceland, Mexico, the Netherlands, Norway, Oman, the Philippines, Poland, Qatar, Saudi Arabia, Sweden, and the United Arab Emirates footprint; checked 2026-04-11 and Bahrain plus the remaining Europe leads were still unavailable, blocked, or shell-only.
