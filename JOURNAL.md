@@ -803,3 +803,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-13
 **Did**: Added region-based sorting to the brand footprint panel so users can group a selected brand's markets geographically in either direction, backed by EV map regression coverage.
 **Result**: pass
+
+## 2026-04-14
+**Did**: Closed the stale Leapmotor Nepal follow-up after confirming the official `leapmotor.net/nepal` locale still returns a 404 shell while the Israel locale still fails with a 500 error, so further active re-checking adds no value until Leapmotor publishes real public market pages.
+**Result**: pass
+
+## 2026-04-14
+**Did**: Added one-click clear actions for the coverage and brand-footprint search boxes so users can quickly reset panel filters without reaching for Escape, backed by EV map regression coverage.
+**Result**: pass

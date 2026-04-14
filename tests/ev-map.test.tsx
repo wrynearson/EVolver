@@ -609,6 +609,9 @@ describe("EVMap", () => {
       target: { value: "BY" },
     });
     expect(
+      within(coveragePanel!).getByRole("button", { name: "Clear coverage search" }),
+    ).toBeInTheDocument();
+    expect(
       within(coveragePanel!).getByText("Showing 1 of 2 brands"),
     ).toBeInTheDocument();
     expect(within(coveragePanel!).getByText("BYD")).toBeInTheDocument();
@@ -659,6 +662,9 @@ describe("EVMap", () => {
       },
     );
     expect(
+      within(bydFootprintPanel!).getByRole("button", { name: "Clear footprint search" }),
+    ).toBeInTheDocument();
+    expect(
       within(bydFootprintPanel!).getByText("Showing 1 of 2 markets"),
     ).toBeInTheDocument();
     expect(
@@ -667,6 +673,16 @@ describe("EVMap", () => {
     expect(
       within(bydFootprintPanel!).queryByRole("button", { name: /China/i }),
     ).not.toBeInTheDocument();
+    fireEvent.click(
+      within(bydFootprintPanel!).getByRole("button", { name: "Clear footprint search" }),
+    );
+    expect(
+      within(bydFootprintPanel!).getByLabelText("Search footprint markets"),
+    ).toHaveValue("");
+    expect(
+      within(bydFootprintPanel!).getByText("Showing 2 of 2 markets"),
+    ).toBeInTheDocument();
+    expect(window.location.search).toBe("?country=SWE&brand=BYD&footprintSort=name-desc");
     fireEvent.change(
       within(bydFootprintPanel!).getByLabelText("Search footprint markets"),
       {
@@ -716,6 +732,9 @@ describe("EVMap", () => {
       },
     );
     expect(
+      within(countryCoveragePanel!).getByRole("button", { name: "Clear coverage search" }),
+    ).toBeInTheDocument();
+    expect(
       within(countryCoveragePanel!).getByText("Showing 1 of 2 countries"),
     ).toBeInTheDocument();
     expect(within(countryCoveragePanel!).getByText("China")).toBeInTheDocument();
@@ -726,12 +745,12 @@ describe("EVMap", () => {
     expect(
       within(countryCoveragePanel!).getByText("BYD"),
     ).toBeInTheDocument();
-    fireEvent.change(
-      within(countryCoveragePanel!).getByLabelText("Search country coverage"),
-      {
-        target: { value: "" },
-      },
+    fireEvent.click(
+      within(countryCoveragePanel!).getByRole("button", { name: "Clear coverage search" }),
     );
+    expect(
+      within(countryCoveragePanel!).getByLabelText("Search country coverage"),
+    ).toHaveValue("");
     expect(
       within(countryCoveragePanel!).getByText("Norway"),
     ).toBeInTheDocument();
@@ -741,6 +760,7 @@ describe("EVMap", () => {
     expect(
       within(countryCoveragePanel!).getByText("BYD, XPeng"),
     ).toBeInTheDocument();
+    expect(window.location.search).toBe("?country=SWE&footprintSort=name-desc&view=countries");
     fireEvent.change(within(countryCoveragePanel!).getByLabelText("Sort rankings"), {
       target: { value: "name" },
     });
@@ -1562,6 +1582,63 @@ describe("EVMap", () => {
     expect(
       within(countryCoveragePanel!).getByLabelText("Search country coverage"),
     ).toHaveDisplayValue("nor");
+  });
+
+  it("adds one-click clear actions for coverage and footprint searches", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+    window.history.replaceState(
+      {},
+      "",
+      "/?brand=BYD&country=NOR&view=countries&coverageQuery=BY&footprintQuery=nor",
+    );
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const footprintPanel = screen
+      .getByRole("heading", { name: "Brand footprint" })
+      .closest("aside");
+    expect(footprintPanel).not.toBeNull();
+    expect(
+      within(footprintPanel!).getByRole("button", { name: "Clear footprint search" }),
+    ).toBeInTheDocument();
+    fireEvent.click(
+      within(footprintPanel!).getByRole("button", { name: "Clear footprint search" }),
+    );
+    expect(
+      within(footprintPanel!).getByLabelText("Search footprint markets"),
+    ).toHaveValue("");
+    expect(window.location.search).toBe("?brand=BYD&country=NOR&view=countries&coverageQuery=BY");
+
+    cleanup();
+    window.history.replaceState({}, "", "/?country=NOR&view=countries&coverageQuery=BY");
+    render(<EVMap />);
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const coveragePanel = screen
+      .getByRole("heading", { name: "Country coverage" })
+      .closest("aside");
+    expect(coveragePanel).not.toBeNull();
+    expect(
+      within(coveragePanel!).getByRole("button", { name: "Clear coverage search" }),
+    ).toBeInTheDocument();
+    fireEvent.click(
+      within(coveragePanel!).getByRole("button", { name: "Clear coverage search" }),
+    );
+    expect(
+      within(coveragePanel!).getByLabelText("Search country coverage"),
+    ).toHaveValue("");
+    expect(window.location.search).toBe("?country=NOR&view=countries");
   });
 
   it("drops invalid brand query params after loading", async () => {

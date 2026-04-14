@@ -2192,23 +2192,35 @@ export default function EVMap() {
             >
               Search footprint markets
             </label>
-            <input
-              id="brand-footprint-search"
-              type="search"
-              className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
-              placeholder="Filter by country, ISO code, or region"
-              value={footprintSearchQuery}
-              onChange={(event) => setFootprintSearchQuery(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key !== "Escape" || !footprintSearchQuery) {
-                  return;
-                }
+            <div className="mt-1 flex items-center gap-2">
+              <input
+                id="brand-footprint-search"
+                type="search"
+                className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
+                placeholder="Filter by country, ISO code, or region"
+                value={footprintSearchQuery}
+                onChange={(event) => setFootprintSearchQuery(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key !== "Escape" || !footprintSearchQuery) {
+                    return;
+                  }
 
-                event.preventDefault();
-                event.stopPropagation();
-                setFootprintSearchQuery("");
-              }}
-            />
+                  event.preventDefault();
+                  event.stopPropagation();
+                  setFootprintSearchQuery("");
+                }}
+              />
+              {footprintSearchQuery ? (
+                <button
+                  type="button"
+                  className="shrink-0 rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                  onClick={() => setFootprintSearchQuery("")}
+                  aria-label="Clear footprint search"
+                >
+                  Clear
+                </button>
+              ) : null}
+            </div>
             <p className="mt-2 text-xs text-gray-500">
               Showing {sortedSelectedBrandPresence.length} of{" "}
               {selectedBrandPresence.length}{" "}
@@ -2385,28 +2397,40 @@ export default function EVMap() {
                   ? "Search country coverage"
                   : "Search regional coverage"}
             </label>
-            <input
-              id="coverage-search"
-              type="search"
-              className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
-              placeholder={
-                coveragePanelView === "brands"
-                  ? "Filter by brand name"
-                  : coveragePanelView === "countries"
-                    ? "Filter by country, ISO code, region, or brand"
-                    : "Filter by region or active brand"
-              }
-              value={coverageSearchQuery}
-              onChange={(event) => setCoverageSearchQuery(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key !== "Escape" || !coverageSearchQuery) {
-                  return;
+            <div className="mt-1 flex items-center gap-2">
+              <input
+                id="coverage-search"
+                type="search"
+                className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
+                placeholder={
+                  coveragePanelView === "brands"
+                    ? "Filter by brand name"
+                    : coveragePanelView === "countries"
+                      ? "Filter by country, ISO code, region, or brand"
+                      : "Filter by region or active brand"
                 }
+                value={coverageSearchQuery}
+                onChange={(event) => setCoverageSearchQuery(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key !== "Escape" || !coverageSearchQuery) {
+                    return;
+                  }
 
-                event.preventDefault();
-                setCoverageSearchQuery("");
-              }}
-            />
+                  event.preventDefault();
+                  setCoverageSearchQuery("");
+                }}
+              />
+              {coverageSearchQuery ? (
+                <button
+                  type="button"
+                  className="shrink-0 rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                  onClick={() => setCoverageSearchQuery("")}
+                  aria-label="Clear coverage search"
+                >
+                  Clear
+                </button>
+              ) : null}
+            </div>
             <p className="mt-2 text-xs text-gray-500">
               {coveragePanelView === "brands" ? (
                 <>
