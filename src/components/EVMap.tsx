@@ -492,6 +492,9 @@ export default function EVMap() {
     setSelectedBrand("");
     setBrandLookupQuery("");
   };
+  const clearCoverageRegion = () => {
+    setSelectedCoverageRegion("");
+  };
   const resetView = () => {
     clearBrandSelection();
     setHoveredCountry(null);
@@ -1531,20 +1534,32 @@ export default function EVMap() {
             >
               Region filter
             </label>
-            <select
-              id="region-filter"
-              className="mt-1 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
-              disabled={availableRegions.length === 0}
-              value={selectedCoverageRegion}
-              onChange={(event) => setSelectedCoverageRegion(event.target.value)}
-            >
-              <option value="">All regions</option>
-              {availableRegions.map((regionName) => (
-                <option key={regionName} value={regionName}>
-                  {regionName}
-                </option>
-              ))}
-            </select>
+            <div className="mt-1 flex items-center gap-2">
+              <select
+                id="region-filter"
+                className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
+                disabled={availableRegions.length === 0}
+                value={selectedCoverageRegion}
+                onChange={(event) => setSelectedCoverageRegion(event.target.value)}
+              >
+                <option value="">All regions</option>
+                {availableRegions.map((regionName) => (
+                  <option key={regionName} value={regionName}>
+                    {regionName}
+                  </option>
+                ))}
+              </select>
+              {selectedCoverageRegion ? (
+                <button
+                  type="button"
+                  className="shrink-0 rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                  onClick={clearCoverageRegion}
+                  aria-label="Clear region filter"
+                >
+                  Clear
+                </button>
+              ) : null}
+            </div>
             <p className="mt-2 text-xs text-gray-500">
               Focus the map and panels on one world region at a time.
             </p>
@@ -2528,7 +2543,7 @@ export default function EVMap() {
                   <button
                     type="button"
                     className="font-medium underline underline-offset-2"
-                    onClick={() => setSelectedCoverageRegion("")}
+                    onClick={clearCoverageRegion}
                   >
                     Clear region
                   </button>

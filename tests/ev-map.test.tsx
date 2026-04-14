@@ -412,6 +412,39 @@ describe("EVMap", () => {
     );
   });
 
+  it("clears the top-level region filter in one click", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText("Region filter"), {
+      target: { value: "Europe" },
+    });
+
+    expect(screen.getByLabelText("Region filter")).toHaveDisplayValue("Europe");
+    expect(screen.getByRole("button", { name: "Clear region filter" })).toBeInTheDocument();
+    expect(window.location.search).toBe("?view=brands&region=Europe");
+
+    fireEvent.click(screen.getByRole("button", { name: "Clear region filter" }));
+
+    expect(screen.getByLabelText("Region filter")).toHaveDisplayValue("All regions");
+    expect(
+      screen.queryByRole("button", { name: "Clear region filter" }),
+    ).not.toBeInTheDocument();
+    expect(window.location.search).toBe("");
+  });
+
   it("renders the dataset summary overlay, country details, and shareable view state", async () => {
     vi.doUnmock("../src/components/MapCanvas");
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {

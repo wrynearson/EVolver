@@ -819,3 +819,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-14
 **Did**: Coverage analysis still showed Deepal's Middle East footprint was empty, so I promoted the UAE as the highest-impact actionable gap and added it after confirming Al Tayer Motors' official DEEPAL UAE site, local aftersales servicing, showroom pages, and the Premier Motors launch announcement, then pruned the resolved `deepal.ae` lead and demoted Saudi Arabia to monitoring because `deepal.sa` is still bot-gated.
 **Result**: pass
+
+## 2026-04-14
+**Did**: Added a one-click clear action for the top-level region filter so users can reset region-scoped map state and share links without reopening the select, backed by EV map regression coverage.
+**Result**: pass
