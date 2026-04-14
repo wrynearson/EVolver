@@ -811,3 +811,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-14
 **Did**: Added one-click clear actions for the coverage and brand-footprint search boxes so users can quickly reset panel filters without reaching for Escape, backed by EV map regression coverage.
 **Result**: pass
+
+## 2026-04-14
+**Did**: Coverage analysis showed the backlog had drifted to monitoring-only work again, so I promoted Deepal's strongest European gap and added Greece after confirming Changan Europe's live Greek Deepal S05 market page plus its first-party dealer, quote, service, and contact flows.
+**Result**: pass

@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-13",
+    "last_updated": "2026-04-14",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -3204,6 +3204,19 @@
             "https://deepal.uy/",
             "https://deepal.uy/modelos/deepal-s05",
             "https://deepal.uy/modelos/deepal-s7"
+          ],
+          "uncertain": false
+        },
+        "GRC": {
+          "name": "Greece",
+          "present": true,
+          "source": "https://www.changaneurope.com/gr/en/Models/Changan-Deepal-S05",
+          "sources": [
+            "https://www.changaneurope.com/gr/en",
+            "https://www.changaneurope.com/gr/en/Models/Changan-Deepal-S05",
+            "https://www.changaneurope.com/gr/en/Service/Find-a-Dealer",
+            "https://www.changaneurope.com/gr/en/Models/Changan-Deepal-S05/Request-Offer",
+            "https://www.changaneurope.com/gr/en/Contact-Us"
           ],
           "uncertain": false
         }
