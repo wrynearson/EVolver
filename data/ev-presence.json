@@ -3219,6 +3219,19 @@
             "https://www.changaneurope.com/gr/en/Contact-Us"
           ],
           "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://www.altayermotors.com/deepal/",
+          "sources": [
+            "https://www.altayermotors.com/deepal/",
+            "https://www.altayermotors.com/deepal/about-us/",
+            "https://www.altayermotors.com/deepal/aftersales/servicing/",
+            "https://www.altayermotors.com/deepal/locations/deepal-showroom-dubai-al-garhoud/",
+            "https://www.premier-motors.ae/news-events/al-tayer-motors-signs-new-electric-vehicle-brand-deepal/"
+          ],
+          "uncertain": false
         }
       }
     },
