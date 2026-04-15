@@ -3058,6 +3058,17 @@
           ],
           "uncertain": false
         },
+        "POL": {
+          "name": "Poland",
+          "present": true,
+          "source": "https://www.cherypolska.pl/znajdz-dealera",
+          "sources": [
+            "https://www.cherypolska.pl/",
+            "https://www.cherypolska.pl/znajdz-dealera",
+            "https://www.cherypolska.pl/jazda-testowa"
+          ],
+          "uncertain": false
+        },
         "QAT": {
           "name": "Qatar",
           "present": true,
@@ -3078,6 +3089,17 @@
             "https://chery-ksa.com/live",
             "https://chery-ksa.com/live/test-drive/",
             "https://chery-ksa.com/live/address/"
+          ],
+          "uncertain": false
+        },
+        "SVK": {
+          "name": "Slovakia",
+          "present": true,
+          "source": "https://cheryslovakia.sk/en/dealers/",
+          "sources": [
+            "https://cheryslovakia.sk/en/",
+            "https://cheryslovakia.sk/en/dealers/",
+            "https://cheryslovakia.sk/en/test-drive/"
           ],
           "uncertain": false
         },
