@@ -831,3 +831,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-15
 **Did**: Re-checked Neta's official global surfaces and likely sovereign-domain leads, confirmed the global region selector still exposes only already-tracked sovereign markets plus non-sovereign Hong Kong, and closed the active Neta follow-up by demoting the remaining expansion work back to monitoring because `neta.com.vn`, `neta.com.ph`, and `neta.com.au` currently resolve to unrelated or non-EV sites instead of official Neta market, dealer, or service flows.
 **Result**: pass
+
+## 2026-04-15
+**Did**: Coverage analysis showed Chery's European footprint was still limited to the United Kingdom, so I promoted Czech Republic as the highest-impact actionable gap and added it after confirming Chery Czech's localized homepage, live Czech test-drive booking page, and local Tiggo model pages.
+**Result**: pass

@@ -2967,6 +2967,17 @@
           "source": "https://www.chery.cn/homePage",
           "uncertain": false
         },
+        "CZE": {
+          "name": "Czech Republic",
+          "present": true,
+          "source": "https://cherymotor.cz/en/test-drive/",
+          "sources": [
+            "https://cherymotor.cz/en/",
+            "https://cherymotor.cz/en/test-drive/",
+            "https://cherymotor.cz/en/cars/tiggo-7-phev/"
+          ],
+          "uncertain": false
+        },
         "EGY": {
           "name": "Egypt",
           "present": true,
