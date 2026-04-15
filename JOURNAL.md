@@ -827,4 +827,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-15
 **Did**: Coverage analysis showed Neta was still under-covered outside its existing Southeast Asia, Gulf, Brazil, and Ethiopia footprint, so I added Nepal after confirming the live `neta.cgmotors.com.np` local market site plus CG Motors' NETA X and Nepal service-center pages.
 **Result**: pass
-**TODO**: Verify the next strongest Neta sovereign market beyond the updated footprint, prioritizing official local sites that expose both consumer model pages and a live service or dealer flow.
+
+## 2026-04-15
+**Did**: Re-checked Neta's official global surfaces and likely sovereign-domain leads, confirmed the global region selector still exposes only already-tracked sovereign markets plus non-sovereign Hong Kong, and closed the active Neta follow-up by demoting the remaining expansion work back to monitoring because `neta.com.vn`, `neta.com.ph`, and `neta.com.au` currently resolve to unrelated or non-EV sites instead of official Neta market, dealer, or service flows.
+**Result**: pass
