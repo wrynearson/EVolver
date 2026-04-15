@@ -823,3 +823,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-14
 **Did**: Added a one-click clear action for the top-level region filter so users can reset region-scoped map state and share links without reopening the select, backed by EV map regression coverage.
 **Result**: pass
+
+## 2026-04-15
+**Did**: Coverage analysis showed Neta was still under-covered outside its existing Southeast Asia, Gulf, Brazil, and Ethiopia footprint, so I added Nepal after confirming the live `neta.cgmotors.com.np` local market site plus CG Motors' NETA X and Nepal service-center pages.
+**Result**: pass
+**TODO**: Verify the next strongest Neta sovereign market beyond the updated footprint, prioritizing official local sites that expose both consumer model pages and a live service or dealer flow.

@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-14",
+    "last_updated": "2026-04-15",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -3473,6 +3473,17 @@
             "https://neta.my/",
             "https://netamalaysia.com/",
             "https://glenmarie.neta.my/"
+          ],
+          "uncertain": false
+        },
+        "NPL": {
+          "name": "Nepal",
+          "present": true,
+          "source": "https://neta.cgmotors.com.np/",
+          "sources": [
+            "https://neta.cgmotors.com.np/",
+            "https://cg-ev.com/passenger-segments/neta-x",
+            "https://cg-ev.com/privacy-policy/service-center"
           ],
           "uncertain": false
         },

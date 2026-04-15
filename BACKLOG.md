@@ -4,6 +4,7 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
+- Verify NIO's newly announced Austria, Belgium, Czech Republic, Hungary, Luxembourg, Poland, and Romania rollout once official local market, retail, or service surfaces go live beyond the current press-release stage.
 - [monitoring] Re-check Deepal sovereign domains that currently resolve to parked, blocked, or non-sovereign surfaces only after official local consumer, dealer, contact, or service flows appear; checked 2026-04-13 and `deepal.co.nz` fell through to a parked GoDaddy lander, `deepal.com.pl` led to Dynadot parking, and `deepal.co.uk` was only a frameset to Swiss `deepal.ch`.
 - [monitoring] Re-check Deepal Saudi Arabia only after `deepal.sa` exposes a browser-verifiable consumer, dealer, contact, or service flow without bot-gating; checked 2026-04-14 and both direct fetches and Playwright hit 403 / Cloudflare verification pages.
 - [monitoring] Re-check Xiaomi EV only after mi.com or another first-party local Xiaomi surface exposes an overseas market, dealer, service, or test-drive flow outside China; checked 2026-04-13 and Xiaomi's global, UK, and Spain sites still exposed only electronics lifestyle content with no localized EV consumer pages.
