@@ -838,3 +838,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-15
 **Did**: Expanded Chery's European footprint by adding Poland and Slovakia after confirming both markets expose live localized Chery sites plus official dealer and test-drive flows, then narrowed the backlog to remaining European leads beyond that stronger footprint.
 **Result**: pass
+
+## 2026-04-16
+**Did**: Expanded Chery's European footprint by adding Romania after confirming the live Chery Romania market site plus its first-party authorized dealer and service contact network.
+**Result**: pass
