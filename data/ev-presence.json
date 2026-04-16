@@ -3001,6 +3001,17 @@
           ],
           "uncertain": false
         },
+        "GRC": {
+          "name": "Greece",
+          "present": true,
+          "source": "https://www.chery.gr/diktyo-emporon/",
+          "sources": [
+            "https://www.chery.gr/",
+            "https://www.chery.gr/diktyo-emporon/",
+            "https://www.chery.gr/epikoinonia/"
+          ],
+          "uncertain": false
+        },
         "IDN": {
           "name": "Indonesia",
           "present": true,
