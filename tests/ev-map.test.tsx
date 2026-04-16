@@ -143,6 +143,23 @@ const mockData: EVPresenceData = {
   },
 };
 
+const mockUncertainData: EVPresenceData = {
+  ...mockData,
+  brands: {
+    ...mockData.brands,
+    BYD: {
+      ...mockData.brands.BYD,
+      countries: {
+        ...mockData.brands.BYD.countries,
+        NOR: {
+          ...mockData.brands.BYD.countries.NOR,
+          uncertain: true,
+        },
+      },
+    },
+  },
+};
+
 const mockGeoJson = {
   type: "FeatureCollection",
   features: [
@@ -848,26 +865,9 @@ describe("EVMap", () => {
 
   it("explains uncertain badges in the footprint and country details panels", async () => {
     vi.doUnmock("../src/components/MapCanvas");
-    const uncertainData: EVPresenceData = {
-      ...mockData,
-      brands: {
-        ...mockData.brands,
-        BYD: {
-          ...mockData.brands.BYD,
-          countries: {
-            ...mockData.brands.BYD.countries,
-            NOR: {
-              ...mockData.brands.BYD.countries.NOR,
-              uncertain: true,
-            },
-          },
-        },
-      },
-    };
-
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
-      const payload = url.includes("ev-presence.json") ? uncertainData : mockGeoJson;
+      const payload = url.includes("ev-presence.json") ? mockUncertainData : mockGeoJson;
 
       return new Response(JSON.stringify(payload), {
         headers: { "Content-Type": "application/json" },
@@ -904,6 +904,116 @@ describe("EVMap", () => {
         "Highlighting the countries where BYD has tracked official presence, with lighter fills for uncertain entries.",
       ),
     ).toBeInTheDocument();
+  });
+
+  it("filters coverage panels down to uncertain entries and persists the toggle in the URL", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockUncertainData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const coveragePanel = screen
+      .getByRole("heading", { name: "Brand coverage" })
+      .closest("aside");
+    expect(coveragePanel).not.toBeNull();
+
+    const uncertainToggle = within(coveragePanel!).getByLabelText(
+      "Show only brands with uncertain presence",
+    );
+    fireEvent.click(uncertainToggle);
+
+    expect(window.location.search).toBe("?uncertainOnly=true");
+    expect(within(coveragePanel!).getByText("Showing 1 of 1 brand")).toBeInTheDocument();
+    expect(within(coveragePanel!).getByText("BYD")).toBeInTheDocument();
+    expect(within(coveragePanel!).queryByText("XPeng")).not.toBeInTheDocument();
+
+    fireEvent.click(within(coveragePanel!).getByRole("tab", { name: "Countries" }));
+
+    const countryCoveragePanel = screen
+      .getByRole("heading", { name: "Country coverage" })
+      .closest("aside");
+    expect(countryCoveragePanel).not.toBeNull();
+    expect(
+      Object.fromEntries(new URLSearchParams(window.location.search).entries()),
+    ).toEqual({
+      uncertainOnly: "true",
+      view: "countries",
+    });
+    expect(
+      within(countryCoveragePanel!).getByLabelText(
+        "Show only countries with uncertain presence",
+      ),
+    ).toBeChecked();
+    expect(within(countryCoveragePanel!).getByText("Showing 1 of 1 country")).toBeInTheDocument();
+    expect(within(countryCoveragePanel!).getByText("Norway")).toBeInTheDocument();
+    expect(within(countryCoveragePanel!).queryByText("China")).not.toBeInTheDocument();
+
+    fireEvent.click(within(countryCoveragePanel!).getByRole("tab", { name: "Regions" }));
+
+    const regionalCoveragePanel = screen
+      .getByRole("heading", { name: "Regional coverage" })
+      .closest("aside");
+    expect(regionalCoveragePanel).not.toBeNull();
+    expect(
+      Object.fromEntries(new URLSearchParams(window.location.search).entries()),
+    ).toEqual({
+      uncertainOnly: "true",
+      view: "regions",
+    });
+    expect(
+      within(regionalCoveragePanel!).getByLabelText(
+        "Show only regions with uncertain presence",
+      ),
+    ).toBeChecked();
+    expect(within(regionalCoveragePanel!).getByText("Showing 0 of 0 regions")).toBeInTheDocument();
+    expect(
+      within(regionalCoveragePanel!).getByText(
+        "No regions with uncertain presence in this view.",
+      ),
+    ).toBeInTheDocument();
+    expect(within(regionalCoveragePanel!).queryByText("Europe")).not.toBeInTheDocument();
+    expect(within(regionalCoveragePanel!).queryByText("Asia")).not.toBeInTheDocument();
+  });
+
+  it("shows an explicit empty state when the uncertain-only coverage filter has no matches", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const coveragePanel = screen
+      .getByRole("heading", { name: "Brand coverage" })
+      .closest("aside");
+    expect(coveragePanel).not.toBeNull();
+
+    fireEvent.click(
+      within(coveragePanel!).getByLabelText("Show only brands with uncertain presence"),
+    );
+
+    expect(
+      within(coveragePanel!).getByText("No brands with uncertain presence in this view."),
+    ).toBeInTheDocument();
+    expect(within(coveragePanel!).getByText("Showing 0 of 0 brands")).toBeInTheDocument();
   });
 
   it("supports searchable country lookup suggestions", async () => {
@@ -1377,6 +1487,11 @@ describe("EVMap", () => {
     fireEvent.change(within(countryCoveragePanel!).getByLabelText("Sort rankings"), {
       target: { value: "name" },
     });
+    fireEvent.click(
+      within(countryCoveragePanel!).getByLabelText(
+        "Show only countries with uncertain presence",
+      ),
+    );
 
     expect(screen.getByRole("button", { name: "Reset view" })).toBeEnabled();
     expect(
@@ -1387,6 +1502,7 @@ describe("EVMap", () => {
       region: "Europe",
       coverageQuery: "nor",
       coverageSort: "name",
+      uncertainOnly: "true",
       footprintSort: "name-desc",
     });
 
@@ -1615,6 +1731,49 @@ describe("EVMap", () => {
     expect(
       within(countryCoveragePanel!).getByLabelText("Search country coverage"),
     ).toHaveDisplayValue("nor");
+  });
+
+  it("restores uncertain-only coverage state from the URL", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockUncertainData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+    window.history.replaceState(
+      {},
+      "",
+      "/?view=countries&region=Europe&coverageQuery=nor&uncertainOnly=true",
+    );
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const countryCoveragePanel = screen
+      .getByRole("heading", { name: "Country coverage" })
+      .closest("aside");
+    expect(countryCoveragePanel).not.toBeNull();
+    expect(
+      within(countryCoveragePanel!).getByLabelText(
+        "Show only countries with uncertain presence",
+      ),
+    ).toBeChecked();
+    expect(
+      within(countryCoveragePanel!).getByText("Filtering countries to Europe"),
+    ).toBeInTheDocument();
+    expect(within(countryCoveragePanel!).getByText("Showing 1 of 1 country")).toBeInTheDocument();
+    expect(within(countryCoveragePanel!).getByText("Norway")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Open share link in a new tab" }),
+    ).toHaveAttribute(
+      "href",
+      "http://localhost:3000/?view=countries&region=Europe&coverageQuery=nor&uncertainOnly=true",
+    );
   });
 
   it("adds one-click clear actions for coverage and footprint searches", async () => {

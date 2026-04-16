@@ -38,6 +38,7 @@ type SelectionState = {
   selectedCountry: MapCountrySelection | null;
   coveragePanelView: CoveragePanelView;
   coverageSearchQuery: string;
+  showOnlyUncertainCoverage: boolean;
   selectedCoverageRegion: string;
   coverageSort: CoverageSort;
   footprintSort: FootprintSort;
@@ -233,6 +234,42 @@ function getNextCoveragePanelView(
   return null;
 }
 
+function getCoverageFilterToggleLabel(view: CoveragePanelView) {
+  return view === "brands"
+    ? "Show only brands with uncertain presence"
+    : view === "countries"
+      ? "Show only countries with uncertain presence"
+      : "Show only regions with uncertain presence";
+}
+
+function getCoverageEmptyStateMessage(
+  view: CoveragePanelView,
+  showOnlyUncertainCoverage: boolean,
+  hasCoverageSearchQuery: boolean,
+) {
+  if (!showOnlyUncertainCoverage) {
+    return view === "brands"
+      ? "No brands match this filter."
+      : view === "countries"
+        ? "No countries match this filter."
+        : "No regions match this filter.";
+  }
+
+  if (hasCoverageSearchQuery) {
+    return view === "brands"
+      ? "No uncertain brands match this filter."
+      : view === "countries"
+        ? "No uncertain countries match this filter."
+        : "No uncertain regions match this filter.";
+  }
+
+  return view === "brands"
+    ? "No brands with uncertain presence in this view."
+    : view === "countries"
+      ? "No countries with uncertain presence in this view."
+      : "No regions with uncertain presence in this view.";
+}
+
 function getNextLookupIndex(
   currentIndex: number,
   optionCount: number,
@@ -304,6 +341,8 @@ function getSelectionStateFromSearch(search: string): SelectionState {
   const selectedCountryIsoCode = normalizeIsoCode(searchParams.get("country"));
   const requestedCoveragePanelView = searchParams.get("view")?.trim() ?? "";
   const coverageSearchQuery = searchParams.get("coverageQuery")?.trim() ?? "";
+  const showOnlyUncertainCoverage =
+    searchParams.get("uncertainOnly")?.trim() === "true";
   const selectedCoverageRegion = searchParams.get("region")?.trim() ?? "";
   const requestedCoverageSort = searchParams.get("coverageSort")?.trim() ?? "";
   const requestedFootprintSort = searchParams.get("footprintSort")?.trim() ?? "";
@@ -321,6 +360,7 @@ function getSelectionStateFromSearch(search: string): SelectionState {
       : null,
     coveragePanelView,
     coverageSearchQuery,
+    showOnlyUncertainCoverage,
     selectedCoverageRegion,
     coverageSort: isCoverageSort(requestedCoverageSort)
       ? requestedCoverageSort
@@ -339,6 +379,7 @@ function getInitialSelectionState(): SelectionState {
       selectedCountry: null,
       coveragePanelView: "brands",
       coverageSearchQuery: "",
+      showOnlyUncertainCoverage: false,
       selectedCoverageRegion: "",
       coverageSort: DEFAULT_COVERAGE_SORT,
       footprintSort: DEFAULT_FOOTPRINT_SORT,
@@ -354,6 +395,7 @@ function buildShareUrl(
   selectedCountry: MapCountrySelection | null,
   coveragePanelView: CoveragePanelView,
   coverageSearchQuery: string,
+  showOnlyUncertainCoverage: boolean,
   selectedCoverageRegion: string,
   coverageSort: CoverageSort,
   footprintSort: FootprintSort,
@@ -393,6 +435,12 @@ function buildShareUrl(
     url.searchParams.set("coverageQuery", coverageSearchQuery.trim());
   } else {
     url.searchParams.delete("coverageQuery");
+  }
+
+  if (showOnlyUncertainCoverage) {
+    url.searchParams.set("uncertainOnly", "true");
+  } else {
+    url.searchParams.delete("uncertainOnly");
   }
 
   if (coverageSort !== DEFAULT_COVERAGE_SORT) {
@@ -462,6 +510,9 @@ export default function EVMap() {
   const [coverageSearchQuery, setCoverageSearchQuery] = useState(
     () => initialSelectionState.coverageSearchQuery,
   );
+  const [showOnlyUncertainCoverage, setShowOnlyUncertainCoverage] = useState(
+    () => initialSelectionState.showOnlyUncertainCoverage,
+  );
   const [selectedCoverageRegion, setSelectedCoverageRegion] = useState(
     () => initialSelectionState.selectedCoverageRegion,
   );
@@ -502,6 +553,7 @@ export default function EVMap() {
     setCoveragePanelView("brands");
     setSelectedCoverageRegion("");
     setCoverageSort(DEFAULT_COVERAGE_SORT);
+    setShowOnlyUncertainCoverage(false);
     setFootprintSort(DEFAULT_FOOTPRINT_SORT);
     setCoverageSearchQuery("");
     setFootprintSearchQuery("");
@@ -904,13 +956,34 @@ export default function EVMap() {
       ),
     [countryCoverageSummaries, countryRegionLookup, selectedCoverageRegion],
   );
+  const visibleBrandCoverageSummaries = useMemo(
+    () =>
+      brandCoverageSummaries.filter(
+        (brand) => !showOnlyUncertainCoverage || brand.uncertainCountryCount > 0,
+      ),
+    [brandCoverageSummaries, showOnlyUncertainCoverage],
+  );
+  const visibleUncertainCountryCoverageSummaries = useMemo(
+    () =>
+      visibleCountryCoverageSummaries.filter(
+        (country) => !showOnlyUncertainCoverage || country.uncertainBrandCount > 0,
+      ),
+    [showOnlyUncertainCoverage, visibleCountryCoverageSummaries],
+  );
+  const visibleUncertainRegionCoverageSummaries = useMemo(
+    () =>
+      regionCoverageSummaries.filter(
+        (region) => !showOnlyUncertainCoverage || region.uncertainCountryCount > 0,
+      ),
+    [regionCoverageSummaries, showOnlyUncertainCoverage],
+  );
 
   const filteredBrandCoverageSummaries = useMemo(
     () =>
-      brandCoverageSummaries.filter((brand) =>
+      visibleBrandCoverageSummaries.filter((brand) =>
         matchesSearchQuery([brand.brandName], coverageSearchQuery),
       ),
-    [brandCoverageSummaries, coverageSearchQuery],
+    [coverageSearchQuery, visibleBrandCoverageSummaries],
   );
   const sortedBrandCoverageSummaries = useMemo(() => {
     return [...filteredBrandCoverageSummaries].sort((a, b) => {
@@ -932,7 +1005,7 @@ export default function EVMap() {
 
   const filteredCountryCoverageSummaries = useMemo(
     () =>
-      visibleCountryCoverageSummaries.filter((country) =>
+      visibleUncertainCountryCoverageSummaries.filter((country) =>
         matchesSearchQuery(
           [
             country.countryName,
@@ -943,7 +1016,11 @@ export default function EVMap() {
           coverageSearchQuery,
         ),
       ),
-    [coverageSearchQuery, countryRegionLookup, visibleCountryCoverageSummaries],
+    [
+      coverageSearchQuery,
+      countryRegionLookup,
+      visibleUncertainCountryCoverageSummaries,
+    ],
   );
   const sortedCountryCoverageSummaries = useMemo(() => {
     return [...filteredCountryCoverageSummaries].sort((a, b) => {
@@ -965,13 +1042,13 @@ export default function EVMap() {
 
   const filteredRegionCoverageSummaries = useMemo(
     () =>
-      regionCoverageSummaries.filter((region) =>
+      visibleUncertainRegionCoverageSummaries.filter((region) =>
         matchesSearchQuery(
           [region.regionName, region.brandNames.join(" ")],
           coverageSearchQuery,
         ),
       ),
-    [coverageSearchQuery, regionCoverageSummaries],
+    [coverageSearchQuery, visibleUncertainRegionCoverageSummaries],
   );
   const sortedRegionCoverageSummaries = useMemo(() => {
     return [...filteredRegionCoverageSummaries].sort((a, b) => {
@@ -1002,6 +1079,7 @@ export default function EVMap() {
         resolvedSelectedCountry,
         coveragePanelView,
         coverageSearchQuery,
+        showOnlyUncertainCoverage,
         selectedCoverageRegion,
         coverageSort,
         footprintSort,
@@ -1011,6 +1089,7 @@ export default function EVMap() {
       activeSelectedBrand,
       coveragePanelView,
       coverageSearchQuery,
+      showOnlyUncertainCoverage,
       coverageSort,
       footprintSort,
       footprintSearchQuery,
@@ -1034,6 +1113,7 @@ export default function EVMap() {
       resolvedSelectedCountry ||
       selectedCoverageRegion ||
       coveragePanelView !== "brands" ||
+      showOnlyUncertainCoverage ||
       coverageSort !== DEFAULT_COVERAGE_SORT ||
       footprintSort !== DEFAULT_FOOTPRINT_SORT ||
       coverageSearchQuery ||
@@ -1135,6 +1215,7 @@ export default function EVMap() {
       setSelectedCountry(nextState.selectedCountry);
       setCoveragePanelView(nextState.coveragePanelView);
       setCoverageSearchQuery(nextState.coverageSearchQuery);
+      setShowOnlyUncertainCoverage(nextState.showOnlyUncertainCoverage);
       setSelectedCoverageRegion(nextState.selectedCoverageRegion);
       setCoverageSort(nextState.coverageSort);
       setFootprintSort(nextState.footprintSort);
@@ -1177,6 +1258,7 @@ export default function EVMap() {
       currentCountry === resolvedSelectedCountry?.isoCode &&
       currentState.coveragePanelView === coveragePanelView &&
       currentState.coverageSearchQuery === coverageSearchQuery &&
+      currentState.showOnlyUncertainCoverage === showOnlyUncertainCoverage &&
       currentState.selectedCoverageRegion === selectedCoverageRegion &&
       currentState.coverageSort === coverageSort &&
       currentState.footprintSort === footprintSort &&
@@ -1190,6 +1272,7 @@ export default function EVMap() {
       resolvedSelectedCountry,
       coveragePanelView,
       coverageSearchQuery,
+      showOnlyUncertainCoverage,
       selectedCoverageRegion,
       coverageSort,
       footprintSort,
@@ -1200,6 +1283,7 @@ export default function EVMap() {
     activeSelectedBrand,
     coveragePanelView,
     coverageSearchQuery,
+    showOnlyUncertainCoverage,
     coverageSort,
     footprintSort,
     footprintSearchQuery,
@@ -2450,25 +2534,40 @@ export default function EVMap() {
               {coveragePanelView === "brands" ? (
                 <>
                   Showing {sortedBrandCoverageSummaries.length} of{" "}
-                  {brandCoverageSummaries.length}{" "}
-                  {brandCoverageSummaries.length === 1 ? "brand" : "brands"}
+                  {visibleBrandCoverageSummaries.length}{" "}
+                  {visibleBrandCoverageSummaries.length === 1 ? "brand" : "brands"}
                 </>
               ) : coveragePanelView === "countries" ? (
                 <>
                   Showing {sortedCountryCoverageSummaries.length} of{" "}
-                  {visibleCountryCoverageSummaries.length}{" "}
-                  {visibleCountryCoverageSummaries.length === 1
+                  {visibleUncertainCountryCoverageSummaries.length}{" "}
+                  {visibleUncertainCountryCoverageSummaries.length === 1
                     ? "country"
                     : "countries"}
                 </>
               ) : (
                 <>
                   Showing {sortedRegionCoverageSummaries.length} of{" "}
-                  {regionCoverageSummaries.length}{" "}
-                  {regionCoverageSummaries.length === 1 ? "region" : "regions"}
+                  {visibleUncertainRegionCoverageSummaries.length}{" "}
+                  {visibleUncertainRegionCoverageSummaries.length === 1
+                    ? "region"
+                    : "regions"}
                 </>
               )}
             </p>
+          </div>
+          <div className="mt-3 rounded-md border border-amber-200 bg-amber-50 px-3 py-2">
+            <label className="flex items-start gap-2 text-sm text-amber-950">
+              <input
+                type="checkbox"
+                className="mt-0.5 h-4 w-4 rounded border-amber-300 text-amber-700 focus:ring-amber-500"
+                checked={showOnlyUncertainCoverage}
+                onChange={(event) =>
+                  setShowOnlyUncertainCoverage(event.target.checked)
+                }
+              />
+              <span>{getCoverageFilterToggleLabel(coveragePanelView)}</span>
+            </label>
           </div>
           <div className="mt-3">
             <label
@@ -2496,7 +2595,11 @@ export default function EVMap() {
             <ul className="mt-3 max-h-48 space-y-3 overflow-y-auto pr-1">
               {sortedBrandCoverageSummaries.length === 0 ? (
                 <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
-                  No brands match this filter.
+                  {getCoverageEmptyStateMessage(
+                    coveragePanelView,
+                    showOnlyUncertainCoverage,
+                    Boolean(coverageSearchQuery.trim()),
+                  )}
                 </li>
               ) : (
                 sortedBrandCoverageSummaries.map((brand) => (
@@ -2553,7 +2656,11 @@ export default function EVMap() {
               <ul className="mt-3 max-h-48 space-y-3 overflow-y-auto pr-1">
                 {sortedCountryCoverageSummaries.length === 0 ? (
                   <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
-                    No countries match this filter.
+                    {getCoverageEmptyStateMessage(
+                      coveragePanelView,
+                      showOnlyUncertainCoverage,
+                      Boolean(coverageSearchQuery.trim()),
+                    )}
                   </li>
                 ) : (
                   sortedCountryCoverageSummaries.map((country) => (
@@ -2604,7 +2711,11 @@ export default function EVMap() {
             <ul className="mt-3 max-h-48 space-y-3 overflow-y-auto pr-1">
               {sortedRegionCoverageSummaries.length === 0 ? (
                 <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
-                  No regions match this filter.
+                  {getCoverageEmptyStateMessage(
+                    coveragePanelView,
+                    showOnlyUncertainCoverage,
+                    Boolean(coverageSearchQuery.trim()),
+                  )}
                 </li>
               ) : (
                 sortedRegionCoverageSummaries.map((region) => (

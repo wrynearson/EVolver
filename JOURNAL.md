@@ -842,3 +842,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-16
 **Did**: Expanded Chery's European footprint by adding Romania after confirming the live Chery Romania market site plus its first-party authorized dealer and service contact network.
 **Result**: pass
+## 2026-04-16
+**Did**: Added an uncertain-only filter to the coverage panel so users can focus brand, country, and regional rankings on entries that still need verification, with shareable URL state and regression coverage for filtering, empty states, reset, and restore flows.
+**Result**: pass
