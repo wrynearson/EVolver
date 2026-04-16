@@ -3012,6 +3012,17 @@
           ],
           "uncertain": false
         },
+        "HUN": {
+          "name": "Hungary",
+          "present": true,
+          "source": "https://cherymotors.hu/markakereskedesek",
+          "sources": [
+            "https://cherymotors.hu/",
+            "https://cherymotors.hu/markakereskedesek",
+            "https://cherymotors.hu/kapcsolat"
+          ],
+          "uncertain": false
+        },
         "IDN": {
           "name": "Indonesia",
           "present": true,
