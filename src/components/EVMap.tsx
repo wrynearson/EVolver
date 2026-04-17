@@ -615,6 +615,17 @@ export default function EVMap() {
       activeSelectedBrand || undefined,
     );
   }, [activeSelectedBrand, regionScopedData, summary]);
+  const brandLookupCoverageSummaries = useMemo(
+    () => (regionScopedData ? getBrandCoverageSummaries(regionScopedData) : []),
+    [regionScopedData],
+  );
+  const brandLookupCoverageSummaryByName = useMemo(
+    () =>
+      new Map(
+        brandLookupCoverageSummaries.map((summary) => [summary.brandName, summary]),
+      ),
+    [brandLookupCoverageSummaries],
+  );
   const exportData = useMemo(() => {
     if (!regionScopedData) {
       return null;
@@ -1580,27 +1591,45 @@ export default function EVMap() {
                       role="listbox"
                       className="max-h-48 overflow-y-auto py-1"
                     >
-                      {filteredBrandOptions.map((brandName, index) => (
-                        <li key={brandName}>
-                          <button
-                            type="button"
-                            id={`brand-filter-suggestion-${index}`}
-                            role="option"
-                            aria-selected={index === activeBrandLookupIndex}
-                            className={`w-full px-3 py-2 text-left ${
-                              index === activeBrandLookupIndex
-                                ? "bg-blue-50"
-                                : "hover:bg-gray-50"
-                            }`}
-                            onClick={() => applyBrandSelection(brandName)}
-                            onMouseEnter={() => setActiveBrandLookupIndex(index)}
-                          >
-                            <p className="text-sm font-medium text-gray-800">
-                              {brandName}
-                            </p>
-                          </button>
-                        </li>
-                      ))}
+                      {filteredBrandOptions.map((brandName, index) => {
+                        const coverageSummary =
+                          brandLookupCoverageSummaryByName.get(brandName);
+
+                        return (
+                          <li key={brandName}>
+                            <button
+                              type="button"
+                              id={`brand-filter-suggestion-${index}`}
+                              role="option"
+                              aria-label={brandName}
+                              aria-selected={index === activeBrandLookupIndex}
+                              className={`w-full px-3 py-2 text-left ${
+                                index === activeBrandLookupIndex
+                                  ? "bg-blue-50"
+                                  : "hover:bg-gray-50"
+                              }`}
+                              onClick={() => applyBrandSelection(brandName)}
+                              onMouseEnter={() => setActiveBrandLookupIndex(index)}
+                            >
+                              <p className="text-sm font-medium text-gray-800">
+                                {brandName}
+                              </p>
+                              {coverageSummary ? (
+                                <p className="mt-1 text-xs text-gray-500">
+                                  {coverageSummary.confirmedCountryCount.toLocaleString()}{" "}
+                                  confirmed{" "}
+                                  {coverageSummary.confirmedCountryCount === 1
+                                    ? "market"
+                                    : "markets"}
+                                  {coverageSummary.uncertainCountryCount > 0
+                                    ? ` · ${coverageSummary.uncertainCountryCount.toLocaleString()} uncertain`
+                                    : ""}
+                                </p>
+                              ) : null}
+                            </button>
+                          </li>
+                        );
+                      })}
                     </ul>
                   ) : (
                     <p className="px-3 py-3 text-sm text-gray-600">

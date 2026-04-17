@@ -1133,7 +1133,9 @@ describe("EVMap", () => {
     fireEvent.change(brandFilter, { target: { value: "xp" } });
 
     expect(screen.getByText("Showing 1 matching brand")).toBeInTheDocument();
-    expect(screen.getByRole("option", { name: "XPeng" })).toBeInTheDocument();
+    const xpengSuggestion = screen.getByRole("option", { name: "XPeng" });
+    expect(xpengSuggestion).toBeInTheDocument();
+    expect(within(xpengSuggestion).getByText("1 confirmed market")).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Brand footprint" })).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("option", { name: "XPeng" }));
@@ -1178,6 +1180,30 @@ describe("EVMap", () => {
     expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("XPeng");
     expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
     expect(window.location.search).toBe("?brand=XPeng");
+  });
+
+  it("shows uncertain counts in brand filter suggestions", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockUncertainData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    const brandFilter = await screen.findByLabelText("Brand filter");
+    fireEvent.change(brandFilter, { target: { value: "by" } });
+
+    const bydSuggestion = screen.getByRole("option", { name: "BYD" });
+    expect(bydSuggestion).toBeInTheDocument();
+    expect(
+      within(bydSuggestion).getByText("1 confirmed market · 1 uncertain"),
+    ).toBeInTheDocument();
   });
 
   it("shows a region breakdown for the selected brand footprint", async () => {

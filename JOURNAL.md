@@ -857,3 +857,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-17
 **Did**: Expanded Chery's European footprint by adding Serbia, Ukraine, Estonia, Latvia, and Lithuania after confirming Chery's own global market manifest plus each live local market site and local contact or service surfaces.
 **Result**: pass
+
+## 2026-04-17
+**Did**: Re-checked Chery's Sweden and Finland leads and found their official sovereign roots still unresolved or non-customer-facing, then improved the map's brand lookup suggestions so each match shows confirmed and uncertain market counts before selection.
+**Result**: pass
