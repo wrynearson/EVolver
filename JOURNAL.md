@@ -867,3 +867,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-17
 **Did**: Re-checked NIO's announced Austria, Belgium, Czech Republic, Hungary, Luxembourg, Poland, and Romania expansion against NIO's June 2025 official rollout announcements and found those markets are still in phased distributor-launch status without live local consumer sites, so I demoted the backlog item to monitoring.
 **Result**: pass
+## 2026-04-17
+**Did**: Added a one-click brand-website copy action in the brand footprint panel so users can copy the selected brand's official site URL directly from the map UI, backed by EV map regression coverage.
+**Result**: pass

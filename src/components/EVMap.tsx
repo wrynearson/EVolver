@@ -484,6 +484,7 @@ export default function EVMap() {
   });
   const hasInitializedCopyLinkReset = useRef(false);
   const hasInitializedCopyCountryReset = useRef(false);
+  const hasInitializedCopyBrandWebsiteReset = useRef(false);
   const hasInitializedCopySourcesReset = useRef(false);
   const hasInitializedCoverageSearchReset = useRef(false);
   const hasInitializedFootprintSearchReset = useRef(false);
@@ -500,6 +501,7 @@ export default function EVMap() {
   );
   const [copyLinkStatus, setCopyLinkStatus] = useState<CopyStatus>("idle");
   const [copyCountryStatus, setCopyCountryStatus] = useState<CopyStatus>("idle");
+  const [copyBrandWebsiteStatus, setCopyBrandWebsiteStatus] = useState<CopyStatus>("idle");
   const [copySourcesState, setCopySourcesState] = useState<CopySourcesState>({
     key: null,
     status: "idle",
@@ -560,6 +562,7 @@ export default function EVMap() {
     setCountryLookupQuery("");
     setCopyLinkStatus("idle");
     setCopyCountryStatus("idle");
+    setCopyBrandWebsiteStatus("idle");
     setCopySourcesState({ key: null, status: "idle" });
   };
 
@@ -1119,6 +1122,17 @@ export default function EVMap() {
       setCopySourcesState({ key: targetKey, status: "failed" });
     });
   };
+  const copyBrandWebsite = () => {
+    if (!selectedBrandWebsite || !navigator.clipboard?.writeText) {
+      setCopyBrandWebsiteStatus("failed");
+      return;
+    }
+
+    setCopyBrandWebsiteStatus("copied");
+    void navigator.clipboard.writeText(selectedBrandWebsite).catch(() => {
+      setCopyBrandWebsiteStatus("failed");
+    });
+  };
   const hasCustomView = Boolean(
     activeSelectedBrand ||
       resolvedSelectedCountry ||
@@ -1319,6 +1333,15 @@ export default function EVMap() {
 
     setCopyCountryStatus("idle");
   }, [resolvedSelectedCountry]);
+
+  useEffect(() => {
+    if (!hasInitializedCopyBrandWebsiteReset.current) {
+      hasInitializedCopyBrandWebsiteReset.current = true;
+      return;
+    }
+
+    setCopyBrandWebsiteStatus("idle");
+  }, [activeSelectedBrand, selectedBrandWebsite]);
 
   useEffect(() => {
     if (!hasInitializedCopySourcesReset.current) {
@@ -2228,15 +2251,28 @@ export default function EVMap() {
                 {selectedBrandPresence.length === 1 ? "market" : "markets"}
               </p>
               {selectedBrandWebsite ? (
-                <a
-                  href={selectedBrandWebsite}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-1 inline-flex text-xs text-blue-700 underline underline-offset-2"
-                  aria-label={`Open official website for ${activeSelectedBrand}`}
-                >
-                  Official website
-                </a>
+                <div className="mt-1 flex flex-wrap items-center gap-3 text-xs">
+                  <a
+                    href={selectedBrandWebsite}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-blue-700 underline underline-offset-2"
+                    aria-label={`Open official website for ${activeSelectedBrand}`}
+                  >
+                    Official website
+                  </a>
+                  <button
+                    type="button"
+                    className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                    onClick={copyBrandWebsite}
+                  >
+                    {copyBrandWebsiteStatus === "copied"
+                      ? "Copied website URL"
+                      : copyBrandWebsiteStatus === "failed"
+                        ? "Website copy failed"
+                        : "Copy website URL"}
+                  </button>
+                </div>
               ) : null}
               {selectedCoverageRegion ? (
                 <p className="mt-1 text-xs text-gray-500">

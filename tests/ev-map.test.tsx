@@ -534,6 +534,20 @@ describe("EVMap", () => {
         name: "Open official source for Norway",
       }),
     ).toHaveAttribute("href", "https://www.xpeng.com/no");
+    expect(
+      within(footprintPanel!).getByRole("link", {
+        name: "Open official website for XPeng",
+      }),
+    ).toHaveAttribute("href", "https://www.xpeng.com");
+    fireEvent.click(
+      within(footprintPanel!).getByRole("button", { name: "Copy website URL" }),
+    );
+    expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
+      "https://www.xpeng.com",
+    );
+    expect(
+      await within(footprintPanel!).findByRole("button", { name: "Copied website URL" }),
+    ).toBeInTheDocument();
     fireEvent.click(within(footprintPanel!).getByRole("button", { name: "Copy sources" }));
     expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
       "https://www.xpeng.com/no\nhttps://www.xpeng.com/no/service",
