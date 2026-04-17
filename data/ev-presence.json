@@ -3213,6 +3213,17 @@
             "https://cherymotor.lt/kontaktai/"
           ],
           "uncertain": false
+        },
+        "MDA": {
+          "name": "Moldova",
+          "present": true,
+          "source": "https://chery.md/contacts-ru/",
+          "sources": [
+            "https://chery.md/",
+            "https://chery.md/contacts-ru/",
+            "https://chery.md/tekhnicheskoe-obsluzhivanie"
+          ],
+          "uncertain": false
         }
       }
     },
