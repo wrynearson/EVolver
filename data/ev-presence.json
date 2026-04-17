@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-16",
+    "last_updated": "2026-04-17",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -3155,6 +3155,62 @@
           "sources": [
             "https://www.chery.co.za/",
             "https://www.chery.co.za/dealers"
+          ],
+          "uncertain": false
+        },
+        "SRB": {
+          "name": "Serbia",
+          "present": true,
+          "source": "https://www.cheryauto.rs/",
+          "sources": [
+            "https://www.cheryinternational.com/data/tms/website/html/script/globalMap/globalMapData.js",
+            "https://www.cheryauto.rs/",
+            "https://www.cheryauto.rs/kontakt"
+          ],
+          "uncertain": false
+        },
+        "UKR": {
+          "name": "Ukraine",
+          "present": true,
+          "source": "https://chery.ua/",
+          "sources": [
+            "https://www.cheryinternational.com/data/tms/website/html/script/globalMap/globalMapData.js",
+            "https://chery.ua/",
+            "https://chery.ua/kontakti/hochu-kupiti-chery.html",
+            "https://chery.ua/service.html"
+          ],
+          "uncertain": false
+        },
+        "LVA": {
+          "name": "Latvia",
+          "present": true,
+          "source": "https://cherymotor.lv/",
+          "sources": [
+            "https://www.cheryinternational.com/data/tms/website/html/script/globalMap/globalMapData.js",
+            "https://cherymotor.lv/",
+            "https://cherymotor.lv/kontakti/"
+          ],
+          "uncertain": false
+        },
+        "EST": {
+          "name": "Estonia",
+          "present": true,
+          "source": "https://cherymotor.ee/",
+          "sources": [
+            "https://www.cheryinternational.com/data/tms/website/html/script/globalMap/globalMapData.js",
+            "https://cherymotor.ee/",
+            "https://cherymotor.ee/contacts/"
+          ],
+          "uncertain": false
+        },
+        "LTU": {
+          "name": "Lithuania",
+          "present": true,
+          "source": "https://cherymotor.lt/",
+          "sources": [
+            "https://www.cheryinternational.com/data/tms/website/html/script/globalMap/globalMapData.js",
+            "https://cherymotor.lt/",
+            "https://cherymotor.lt/kontaktai/"
           ],
           "uncertain": false
         }

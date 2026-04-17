@@ -853,3 +853,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-16
 **Did**: Expanded Chery's European footprint by adding Hungary after confirming `cherymotors.hu` exposes a live localized market site plus first-party dealer-network and contact pages.
 **Result**: pass
+
+## 2026-04-17
+**Did**: Expanded Chery's European footprint by adding Serbia, Ukraine, Estonia, Latvia, and Lithuania after confirming Chery's own global market manifest plus each live local market site and local contact or service surfaces.
+**Result**: pass
