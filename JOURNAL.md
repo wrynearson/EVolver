@@ -870,3 +870,9 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-17
 **Did**: Added a one-click brand-website copy action in the brand footprint panel so users can copy the selected brand's official site URL directly from the map UI, backed by EV map regression coverage.
 **Result**: pass
+## 2026-04-17
+**Did**: Fixed the EV map regression test for the brand-website copy action by re-querying the live brand footprint panel after its post-click re-render.
+**Result**: pass
+## 2026-04-17
+**Did**: Closed the stale Hongqi follow-up because the remaining Bahrain and Europe leads were already demoted to `[monitoring]` after repeated official-site re-checks kept yielding unavailable, blocked, or shell-only surfaces, so further active chasing adds no value until the public market signals change.
+**Result**: pass
