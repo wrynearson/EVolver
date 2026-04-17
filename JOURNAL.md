@@ -864,3 +864,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-17
 **Did**: Expanded Chery's European footprint by adding Moldova after confirming the live Chery Moldova market site plus its official local contact and service-booking flows operated by official distributor GBS SRL.
 **Result**: pass
+## 2026-04-17
+**Did**: Re-checked NIO's announced Austria, Belgium, Czech Republic, Hungary, Luxembourg, Poland, and Romania expansion against NIO's June 2025 official rollout announcements and found those markets are still in phased distributor-launch status without live local consumer sites, so I demoted the backlog item to monitoring.
+**Result**: pass
