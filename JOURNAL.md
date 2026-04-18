@@ -892,3 +892,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-18
 **Did**: Expanded Chery's European footprint by adding North Macedonia after confirming `www.chery.mk` redirects into the live official `cheryauto.mk` market site, whose localized contact page exposes a Skopje showroom with phone and email details and whose Tiggo 4 Hybrid model page includes a test-drive/request-offer flow.
 **Result**: pass
+
+## 2026-04-18
+**Did**: Expanded Zeekr coverage by adding Azerbaijan after confirming the live official `ru-az` localized market site and Zeekr-hosted Azerbaijan launch article, while re-verifying Vietnam's existing official locale still exposes a local Tasco-backed distributor, Hanoi address, hotline, and `zeekr.com.vn` contact on Zeekr's own pages.
+**Result**: pass
+**TODO**: Verify the next strongest non-Zeekr deferred task so the next session slice keeps varying brands instead of staying on Zeekr locale follow-ups.

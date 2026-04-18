@@ -1387,6 +1387,17 @@
           ],
           "uncertain": false
         },
+        "AZE": {
+          "name": "Azerbaijan",
+          "present": true,
+          "source": "https://www.zeekrlife.com/ru-az/",
+          "sources": [
+            "https://www.zeekrlife.com/ru-az/",
+            "https://www.zeekrlife.com/ru-az/about",
+            "https://www.zeekrlife.com/ru-az/article/article-1"
+          ],
+          "uncertain": false
+        },
         "QAT": {
           "name": "Qatar",
           "present": true,
