@@ -880,3 +880,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded BYD coverage by adding Belgium, India, Argentina, Bahrain, Algeria, and Cyprus after confirming BYD's official dealer-directory country pages plus live city pages with authorized local dealer listings for each market.
 **Result**: pass
 **TODO**: Verify the next strongest BYD sovereign markets from the official dealer directory, prioritizing other untracked Europe, Middle East, and Asia-Pacific locales with live country pages plus dealer-bearing city pages.
+## 2026-04-18
+**Did**: Expanded BYD coverage again by adding Ireland, Switzerland, Oman, and Qatar after confirming BYD's official dealer-directory country pages plus live city pages with authorized local dealer listings in Cork, Zürich, Muscat, and Doha.
+**Result**: pass
+**TODO**: Verify the next strongest non-BYD deferred task so the next session slice varies category instead of continuing the same dealer-directory expansion pattern.

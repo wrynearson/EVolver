@@ -830,6 +830,46 @@
             "https://www.byd.international/city/egkomi"
           ],
           "uncertain": false
+        },
+        "IRL": {
+          "name": "Ireland",
+          "present": true,
+          "source": "https://www.byd.international/city/little-island",
+          "sources": [
+            "https://www.byd.international/country/ireland",
+            "https://www.byd.international/city/little-island"
+          ],
+          "uncertain": false
+        },
+        "CHE": {
+          "name": "Switzerland",
+          "present": true,
+          "source": "https://www.byd.international/city/zurich",
+          "sources": [
+            "https://www.byd.international/country/switzerland",
+            "https://www.byd.international/city/zurich"
+          ],
+          "uncertain": false
+        },
+        "OMN": {
+          "name": "Oman",
+          "present": true,
+          "source": "https://www.byd.international/city/muscat",
+          "sources": [
+            "https://www.byd.international/country/oman",
+            "https://www.byd.international/city/muscat"
+          ],
+          "uncertain": false
+        },
+        "QAT": {
+          "name": "Qatar",
+          "present": true,
+          "source": "https://www.byd.international/city/doha",
+          "sources": [
+            "https://www.byd.international/country/qatar",
+            "https://www.byd.international/city/doha"
+          ],
+          "uncertain": false
         }
       }
     },
