@@ -888,3 +888,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-18
 **Did**: Turned the map hover preview into a quick-action panel so users can apply a hovered brand footprint and open that brand's official country source without first opening the country details panel.
 **Result**: pass
+
+## 2026-04-18
+**Did**: Expanded Chery's European footprint by adding North Macedonia after confirming `www.chery.mk` redirects into the live official `cheryauto.mk` market site, whose localized contact page exposes a Skopje showroom with phone and email details and whose Tiggo 4 Hybrid model page includes a test-drive/request-offer flow.
+**Result**: pass

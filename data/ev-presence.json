@@ -3146,6 +3146,18 @@
           ],
           "uncertain": false
         },
+        "MKD": {
+          "name": "North Macedonia",
+          "present": true,
+          "source": "https://cheryauto.mk/kontakt/",
+          "sources": [
+            "https://www.chery.mk/",
+            "https://cheryauto.mk/",
+            "https://cheryauto.mk/kontakt/",
+            "https://cheryauto.mk/tiggo-4-hybrid/"
+          ],
+          "uncertain": false
+        },
         "MYS": {
           "name": "Malaysia",
           "present": true,
