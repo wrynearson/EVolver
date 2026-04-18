@@ -876,3 +876,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-17
 **Did**: Closed the stale Hongqi follow-up because the remaining Bahrain and Europe leads were already demoted to `[monitoring]` after repeated official-site re-checks kept yielding unavailable, blocked, or shell-only surfaces, so further active chasing adds no value until the public market signals change.
 **Result**: pass
+## 2026-04-18
+**Did**: Expanded BYD coverage by adding Belgium, India, Argentina, Bahrain, Algeria, and Cyprus after confirming BYD's official dealer-directory country pages plus live city pages with authorized local dealer listings for each market.
+**Result**: pass
+**TODO**: Verify the next strongest BYD sovereign markets from the official dealer directory, prioritizing other untracked Europe, Middle East, and Asia-Pacific locales with live country pages plus dealer-bearing city pages.

@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-17",
+    "last_updated": "2026-04-18",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -768,6 +768,66 @@
             "https://bydlk.com/",
             "https://www.byd.international/country/sri-lanka",
             "https://www.byd.international/city/colombo"
+          ],
+          "uncertain": false
+        },
+        "BEL": {
+          "name": "Belgium",
+          "present": true,
+          "source": "https://www.byd.international/city/sint-niklaas",
+          "sources": [
+            "https://www.byd.international/country/belgium",
+            "https://www.byd.international/city/sint-niklaas"
+          ],
+          "uncertain": false
+        },
+        "IND": {
+          "name": "India",
+          "present": true,
+          "source": "https://www.byd.international/city/new-delhi",
+          "sources": [
+            "https://www.byd.international/country/india",
+            "https://www.byd.international/city/new-delhi"
+          ],
+          "uncertain": false
+        },
+        "ARG": {
+          "name": "Argentina",
+          "present": true,
+          "source": "https://www.byd.international/city/buenos-aires",
+          "sources": [
+            "https://www.byd.international/country/argentina",
+            "https://www.byd.international/city/buenos-aires"
+          ],
+          "uncertain": false
+        },
+        "BHR": {
+          "name": "Bahrain",
+          "present": true,
+          "source": "https://www.byd.international/city/sitra",
+          "sources": [
+            "https://www.byd.international/country/bahrain",
+            "https://www.byd.international/city/sitra"
+          ],
+          "uncertain": false
+        },
+        "DZA": {
+          "name": "Algeria",
+          "present": true,
+          "source": "https://www.byd.international/city/bordj-el-kiffan",
+          "sources": [
+            "https://www.byd.international/country/algeria",
+            "https://www.byd.international/city/bordj-el-kiffan"
+          ],
+          "uncertain": false
+        },
+        "CYP": {
+          "name": "Cyprus",
+          "present": true,
+          "source": "https://www.byd.international/city/egkomi",
+          "sources": [
+            "https://www.byd.international/country/cyprus",
+            "https://www.byd.international/city/egkomi"
           ],
           "uncertain": false
         }
