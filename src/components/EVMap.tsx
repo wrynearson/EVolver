@@ -1991,7 +1991,7 @@ export default function EVMap() {
 
       {hoveredCountryDetails ? (
         <div className="pointer-events-none absolute top-6 left-1/2 z-10 w-full max-w-xs -translate-x-1/2 px-4">
-          <div className="rounded-lg bg-white/95 px-4 py-3 shadow-md">
+          <div className="pointer-events-auto rounded-lg bg-white/95 px-4 py-3 shadow-md">
             <h2 className="text-sm font-semibold text-gray-800">Map preview</h2>
             <div className="mt-1 flex items-start justify-between gap-3">
               <div>
@@ -2004,13 +2004,59 @@ export default function EVMap() {
                 </p>
               </div>
             </div>
-            <p className="mt-2 text-xs text-gray-600">
-              {hoveredCountryDetails.brands.length > 0
-                ? hoveredCountryDetails.brands
-                    .map((brand) => brand.brandName)
-                    .join(", ")
-                : "No tracked official brand presence for this country in the current view."}
-            </p>
+            {hoveredCountryDetails.brands.length > 0 ? (
+              <ul className="mt-2 space-y-2">
+                {hoveredCountryDetails.brands.map((brand) => (
+                  <li
+                    key={brand.brandName}
+                    className="rounded-lg border border-gray-200 bg-white px-3 py-2"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className="text-sm font-medium text-gray-800">
+                          {brand.brandName}
+                        </p>
+                        <div className="mt-1 flex flex-wrap items-center gap-3 text-xs">
+                          <button
+                            type="button"
+                            className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                            onClick={() => applyBrandSelection(brand.brandName)}
+                          >
+                            {activeSelectedBrand === brand.brandName
+                              ? "Showing footprint"
+                              : `Show ${brand.brandName} footprint`}
+                          </button>
+                          {brand.source ? (
+                            <a
+                              href={brand.source}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                              aria-label={`Open official source for ${brand.brandName} in ${hoveredCountryDetails.countryName}`}
+                            >
+                              Source
+                            </a>
+                          ) : null}
+                        </div>
+                      </div>
+                      {brand.uncertain ? (
+                        <span
+                          className="cursor-help rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800"
+                          title={UNCERTAIN_BADGE_TOOLTIP}
+                        >
+                          Uncertain
+                        </span>
+                      ) : null}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-2 text-xs text-gray-600">
+                No tracked official brand presence for this country in the current
+                view.
+              </p>
+            )}
             {activeSelectedBrand &&
             allHoveredCountryDetails &&
             allHoveredCountryDetails.brands.length > hoveredCountryDetails.brands.length ? (

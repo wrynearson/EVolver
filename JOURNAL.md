@@ -884,3 +884,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded BYD coverage again by adding Ireland, Switzerland, Oman, and Qatar after confirming BYD's official dealer-directory country pages plus live city pages with authorized local dealer listings in Cork, Zürich, Muscat, and Doha.
 **Result**: pass
 **TODO**: Verify the next strongest non-BYD deferred task so the next session slice varies category instead of continuing the same dealer-directory expansion pattern.
+
+## 2026-04-18
+**Did**: Turned the map hover preview into a quick-action panel so users can apply a hovered brand footprint and open that brand's official country source without first opening the country details panel.
+**Result**: pass

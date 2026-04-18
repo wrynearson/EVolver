@@ -566,7 +566,14 @@ describe("EVMap", () => {
     expect(previewPanel).not.toBeNull();
     expect(within(previewPanel!).getByText("Norway")).toBeInTheDocument();
     expect(within(previewPanel!).getByText("NOR · 1 brand")).toBeInTheDocument();
-    expect(within(previewPanel!).getByText("XPeng")).toBeInTheDocument();
+    expect(
+      within(previewPanel!).getByRole("button", { name: "Showing footprint" }),
+    ).toBeInTheDocument();
+    expect(
+      within(previewPanel!).getByRole("link", {
+        name: "Open official source for XPeng in Norway",
+      }),
+    ).toHaveAttribute("href", "https://www.xpeng.com/no");
     expect(
       within(previewPanel!).getByText(
         "Showing 1 of 2 tracked brands for this country. Clear the brand filter to see the rest.",
@@ -881,6 +888,56 @@ describe("EVMap", () => {
       "?country=NOR&footprintSort=name-desc&view=countries&coverageSort=name&brand=XPeng",
     );
     expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
+  });
+
+  it("lets users apply a brand filter from the map preview", async () => {
+    vi.doUnmock("../src/components/MapCanvas");
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(await screen.findByRole("button", { name: "Hover Norway" })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Hover Norway" }));
+
+    const previewPanel = screen.getByRole("heading", { name: "Map preview" }).closest(
+      "div",
+    );
+    expect(previewPanel).not.toBeNull();
+    expect(
+      within(previewPanel!).getByRole("button", { name: "Show XPeng footprint" }),
+    ).toBeInTheDocument();
+    expect(
+      within(previewPanel!).getByRole("button", { name: "Show BYD footprint" }),
+    ).toBeInTheDocument();
+    expect(
+      within(previewPanel!).getByRole("link", {
+        name: "Open official source for XPeng in Norway",
+      }),
+    ).toHaveAttribute("href", "https://www.xpeng.com/no");
+
+    fireEvent.click(
+      within(previewPanel!).getByRole("button", { name: "Show XPeng footprint" }),
+    );
+
+    expect(screen.getByDisplayValue("XPeng")).toBeInTheDocument();
+    expect(window.location.search).toBe("?brand=XPeng");
+
+    const footprintPanel = screen
+      .getByRole("heading", { name: "Brand footprint" })
+      .closest("aside");
+    expect(footprintPanel).not.toBeNull();
+    expect(within(footprintPanel!).getByText("XPeng · 1 market")).toBeInTheDocument();
   });
 
   it("explains uncertain badges in the footprint and country details panels", async () => {
