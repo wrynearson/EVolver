@@ -907,3 +907,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-19
 **Did**: Fixed a flaky EVMap copy-state regression so the selected brand website copy action no longer resets during initial data hydration, and tightened the regression test to wait against the live document.
 **Result**: pass
+
+## 2026-04-19
+**Did**: Re-checked Voyah's next major-region expansion gap against Voyah's own shipped global-site bundle and confirmed it still exposes only the already-tracked local domains plus an unresolved Bulgaria mention, so I demoted that backlog item to `[monitoring]` and promoted XPeng's first Americas-market gap into the actionable backlog.
+**Result**: no-op
+
+## 2026-04-19
+**Did**: Added a "Copy visible markets" action to the brand footprint panel so users can copy the currently filtered market list for the selected brand, and covered the new workflow with EV map regression tests.
+**Result**: pass

@@ -573,6 +573,12 @@ describe("EVMap", () => {
     expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
       "https://www.xpeng.com/no\nhttps://www.xpeng.com/no/service",
     );
+    fireEvent.click(
+      within(footprintPanel!).getByRole("button", { name: "Copy visible markets" }),
+    );
+    expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
+      "Norway (NOR - Europe)",
+    );
 
     fireEvent.click(await screen.findByRole("button", { name: "Hover Norway" }));
     const previewPanel = screen.getByRole("heading", { name: "Map preview" }).closest(
@@ -1356,6 +1362,15 @@ describe("EVMap", () => {
     expect(
       within(footprintPanel!).getByText("Filtering markets to Europe"),
     ).toBeInTheDocument();
+    fireEvent.click(
+      within(footprintPanel!).getByRole("button", { name: "Copy visible markets" }),
+    );
+    expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
+      "Norway (NOR - Europe)",
+    );
+    expect(
+      within(footprintPanel!).getByRole("button", { name: "Copied visible markets" }),
+    ).toBeInTheDocument();
 
     fireEvent.click(
       within(footprintPanel!).getByRole("button", {
@@ -1365,6 +1380,9 @@ describe("EVMap", () => {
 
     expect(screen.getByLabelText("Region filter")).toHaveDisplayValue("All regions");
     expect(window.location.search).toBe("?brand=BYD");
+    expect(
+      within(footprintPanel!).getByRole("button", { name: "Copy visible markets" }),
+    ).toBeInTheDocument();
   });
 
   it("supports region-based sorting in the selected brand footprint", async () => {

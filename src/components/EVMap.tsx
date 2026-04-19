@@ -141,6 +141,29 @@ function getCopyAllSourcesButtonLabel(
       : idleLabel;
 }
 
+function formatBrandPresenceMarketList(
+  countries: Array<{
+    isoCode: string;
+    countryName: string;
+    regionName?: string;
+    uncertain: boolean;
+  }>,
+) {
+  return countries.map((country) => {
+    const detailParts = [country.isoCode];
+
+    if (country.regionName) {
+      detailParts.push(country.regionName);
+    }
+
+    if (country.uncertain) {
+      detailParts.push("uncertain");
+    }
+
+    return `${country.countryName} (${detailParts.join(" - ")})`;
+  });
+}
+
 function filterCountriesToRegion(
   countries: FeatureCollection | null,
   regionName?: string,
@@ -487,6 +510,7 @@ export default function EVMap() {
   const hasInitializedCopyLinkReset = useRef(false);
   const hasInitializedCopyCountryReset = useRef(false);
   const hasInitializedCopyBrandWebsiteReset = useRef(false);
+  const hasInitializedCopyBrandMarketsReset = useRef(false);
   const hasInitializedCopySourcesReset = useRef(false);
   const hasInitializedCoverageSearchReset = useRef(false);
   const hasInitializedFootprintSearchReset = useRef(false);
@@ -504,6 +528,7 @@ export default function EVMap() {
   const [copyLinkStatus, setCopyLinkStatus] = useState<CopyStatus>("idle");
   const [copyCountryStatus, setCopyCountryStatus] = useState<CopyStatus>("idle");
   const [copyBrandWebsiteStatus, setCopyBrandWebsiteStatus] = useState<CopyStatus>("idle");
+  const [copyBrandMarketsStatus, setCopyBrandMarketsStatus] = useState<CopyStatus>("idle");
   const [copySourcesState, setCopySourcesState] = useState<CopySourcesState>({
     key: null,
     status: "idle",
@@ -565,6 +590,7 @@ export default function EVMap() {
     setCopyLinkStatus("idle");
     setCopyCountryStatus("idle");
     setCopyBrandWebsiteStatus("idle");
+    setCopyBrandMarketsStatus("idle");
     setCopySourcesState({ key: null, status: "idle" });
   };
 
@@ -948,6 +974,10 @@ export default function EVMap() {
       compareFootprintCountries(a, b, footprintSort),
     );
   }, [filteredSelectedBrandPresence, footprintSort]);
+  const selectedBrandMarketList = useMemo(
+    () => formatBrandPresenceMarketList(sortedSelectedBrandPresence),
+    [sortedSelectedBrandPresence],
+  );
 
   const brandCoverageSummaries = useMemo(() => {
     if (!regionScopedData || activeSelectedBrand) {
@@ -1146,6 +1176,17 @@ export default function EVMap() {
     setCopyBrandWebsiteStatus("copied");
     void navigator.clipboard.writeText(selectedBrandWebsite).catch(() => {
       setCopyBrandWebsiteStatus("failed");
+    });
+  };
+  const copyBrandMarkets = () => {
+    if (selectedBrandMarketList.length === 0 || !navigator.clipboard?.writeText) {
+      setCopyBrandMarketsStatus("failed");
+      return;
+    }
+
+    setCopyBrandMarketsStatus("copied");
+    void navigator.clipboard.writeText(selectedBrandMarketList.join("\n")).catch(() => {
+      setCopyBrandMarketsStatus("failed");
     });
   };
   const hasCustomView = Boolean(
@@ -1357,6 +1398,15 @@ export default function EVMap() {
 
     setCopyBrandWebsiteStatus("idle");
   }, [activeSelectedBrand]);
+
+  useEffect(() => {
+    if (!hasInitializedCopyBrandMarketsReset.current) {
+      hasInitializedCopyBrandMarketsReset.current = true;
+      return;
+    }
+
+    setCopyBrandMarketsStatus("idle");
+  }, [selectedBrandMarketList]);
 
   useEffect(() => {
     if (!hasInitializedCopySourcesReset.current) {
@@ -2346,6 +2396,18 @@ export default function EVMap() {
                       : copyBrandWebsiteStatus === "failed"
                         ? "Website copy failed"
                         : "Copy website URL"}
+                  </button>
+                  <button
+                    type="button"
+                    className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                    onClick={copyBrandMarkets}
+                    disabled={selectedBrandMarketList.length === 0}
+                  >
+                    {copyBrandMarketsStatus === "copied"
+                      ? "Copied visible markets"
+                      : copyBrandMarketsStatus === "failed"
+                        ? "Visible markets copy failed"
+                        : "Copy visible markets"}
                   </button>
                 </div>
               ) : null}
