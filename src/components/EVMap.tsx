@@ -1356,7 +1356,7 @@ export default function EVMap() {
     }
 
     setCopyBrandWebsiteStatus("idle");
-  }, [activeSelectedBrand, selectedBrandWebsite]);
+  }, [activeSelectedBrand]);
 
   useEffect(() => {
     if (!hasInitializedCopySourcesReset.current) {

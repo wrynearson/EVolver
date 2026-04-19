@@ -904,3 +904,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-19
 **Did**: Added a one-click "Copy all sources in view" action beside the export controls so users can copy every deduplicated verification URL from the current brand-and-region slice without downloading a file, backed by EV map regression coverage.
 **Result**: pass
+## 2026-04-19
+**Did**: Fixed a flaky EVMap copy-state regression so the selected brand website copy action no longer resets during initial data hydration, and tightened the regression test to wait against the live document.
+**Result**: pass

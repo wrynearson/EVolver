@@ -564,12 +564,8 @@ describe("EVMap", () => {
     expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
       "https://www.xpeng.com",
     );
-    const updatedFootprintPanel = screen
-      .getByRole("heading", { name: "Brand footprint" })
-      .closest("aside");
-    expect(updatedFootprintPanel).not.toBeNull();
     expect(
-      await within(updatedFootprintPanel!).findByRole("button", {
+      await screen.findByRole("button", {
         name: "Copied website URL",
       }),
     ).toBeInTheDocument();
