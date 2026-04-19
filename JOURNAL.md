@@ -915,3 +915,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-19
 **Did**: Added a "Copy visible markets" action to the brand footprint panel so users can copy the currently filtered market list for the selected brand, and covered the new workflow with EV map regression tests.
 **Result**: pass
+## 2026-04-19
+**Did**: Added XPeng Mexico after confirming XPeng's global region selector now links Mexico to a dedicated `/mx` market site and that the live Mexico site exposes localized consumer pages plus an official showroom list for Zapopan, Mexico City, and San Pedro Garza García.
+**Result**: pass
+**TODO**: Verify the next strongest non-XPENG deferred task so the next session slice keeps varying brands instead of staying on XPENG's new Americas follow-ups.

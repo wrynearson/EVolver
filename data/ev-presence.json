@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-18",
+    "last_updated": "2026-04-19",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -1128,6 +1128,17 @@
             "https://www.xpeng.com/region/eg",
             "https://www.xpeng.com/eg/service",
             "https://rayacorp.com/raya-auto-brings-the-latest-xpeng-evs-with-european-specifications-to-egypt-2/"
+          ],
+          "uncertain": false
+        },
+        "MEX": {
+          "name": "Mexico",
+          "present": true,
+          "source": "https://www.xpeng.com/mx/find-us",
+          "sources": [
+            "https://www.xpeng.com/",
+            "https://www.xpeng.com/mx",
+            "https://www.xpeng.com/mx/find-us"
           ],
           "uncertain": false
         }
