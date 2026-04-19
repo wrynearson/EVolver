@@ -16,6 +16,7 @@ import {
   useEVData,
 } from "../hooks/useEVData";
 import {
+  buildPresenceExportRows,
   buildPresenceExportFileBaseName,
   downloadTextFile,
   serializePresenceDataToCsv,
@@ -127,16 +128,17 @@ function getCopySourcesButtonLabel(
 function getCopyAllSourcesButtonLabel(
   copySourcesState: CopySourcesState,
   targetKey: string,
+  idleLabel = "Copy all sources",
 ) {
   if (copySourcesState.key !== targetKey) {
-    return "Copy all sources";
+    return idleLabel;
   }
 
   return copySourcesState.status === "copied"
-    ? "Copied all sources"
+    ? idleLabel.replace("Copy", "Copied")
     : copySourcesState.status === "failed"
-      ? "All sources copy failed"
-      : "Copy all sources";
+      ? `${idleLabel.replace("Copy", "").trim()} copy failed`
+      : idleLabel;
 }
 
 function filterCountriesToRegion(
@@ -646,6 +648,19 @@ export default function EVMap() {
       }),
     [activeSelectedBrand, data, selectedCoverageRegion, visibleSummary],
   );
+  const exportSourceUrls = useMemo(() => {
+    if (!exportData) {
+      return [];
+    }
+
+    return Array.from(
+      new Set(
+        buildPresenceExportRows(exportData, countryRegionLookup).flatMap(
+          (row) => row.sourceUrls,
+        ),
+      ),
+    );
+  }, [countryRegionLookup, exportData]);
 
   const countryOptions = useMemo<CountryOption[]>(() => {
     if (!visibleCountries) {
@@ -1955,6 +1970,20 @@ export default function EVMap() {
                 Download JSON
               </button>
             </div>
+            <button
+              type="button"
+              className="mt-2 w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
+              disabled={exportSourceUrls.length === 0}
+              onClick={() =>
+                copySources("view:all-sources", exportSourceUrls)
+              }
+            >
+              {getCopyAllSourcesButtonLabel(
+                copySourcesState,
+                "view:all-sources",
+                "Copy all sources in view",
+              )}
+            </button>
             <p className="mt-2 text-xs text-gray-500">
               Export the currently filtered dataset for offline analysis.
             </p>

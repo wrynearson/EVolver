@@ -282,6 +282,9 @@ describe("EVMap", () => {
     expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Download CSV" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Download JSON" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Copy all sources in view" }),
+    ).toBeInTheDocument();
 
     fireEvent.change(screen.getByLabelText("Brand filter"), {
       target: { value: "XPeng" },
@@ -299,6 +302,13 @@ describe("EVMap", () => {
       "XPeng,https://www.xpeng.com,NOR,Norway,Europe,true,false,https://www.xpeng.com/no,https://www.xpeng.com/no",
     );
     expect(downloadTextFile.mock.calls[0][0]).not.toContain("BYD");
+    fireEvent.click(screen.getByRole("button", { name: "Copy all sources in view" }));
+    expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
+      "https://www.xpeng.com/no\nhttps://www.xpeng.com/no/service",
+    );
+    expect(
+      await screen.findByRole("button", { name: "Copied all sources in view" }),
+    ).toBeInTheDocument();
 
     fireEvent.change(screen.getByLabelText("Brand filter"), {
       target: { value: "" },
@@ -320,6 +330,15 @@ describe("EVMap", () => {
     expect(Object.keys(exportedJson.brands)).toEqual(["BYD", "XPeng"]);
     expect(Object.keys(exportedJson.brands.BYD.countries)).toEqual(["NOR"]);
     expect(Object.keys(exportedJson.brands.XPeng.countries)).toEqual(["NOR"]);
+    fireEvent.click(screen.getByRole("button", { name: "Copy all sources in view" }));
+    expect(window.navigator.clipboard.writeText).toHaveBeenLastCalledWith(
+      [
+        "https://www.byd.com/no",
+        "https://www.byd.com/no/dealers",
+        "https://www.xpeng.com/no",
+        "https://www.xpeng.com/no/service",
+      ].join("\n"),
+    );
   });
 
   it("keeps the data panels available while the map canvas chunk is still loading", async () => {

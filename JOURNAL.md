@@ -897,3 +897,10 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Zeekr coverage by adding Azerbaijan after confirming the live official `ru-az` localized market site and Zeekr-hosted Azerbaijan launch article, while re-verifying Vietnam's existing official locale still exposes a local Tasco-backed distributor, Hanoi address, hotline, and `zeekr.com.vn` contact on Zeekr's own pages.
 **Result**: pass
 **TODO**: Verify the next strongest non-Zeekr deferred task so the next session slice keeps varying brands instead of staying on Zeekr locale follow-ups.
+## 2026-04-19
+**Did**: Re-checked Chery's remaining official Europe leads through Chery's own global map and confirmed `cherymotor.se` and `cherymotor.fi` still do not resolve, so I demoted that leftover Europe follow-up to `[monitoring]` and promoted Voyah's next major-region expansion gap into the actionable backlog.
+**Result**: no-op
+
+## 2026-04-19
+**Did**: Added a one-click "Copy all sources in view" action beside the export controls so users can copy every deduplicated verification URL from the current brand-and-region slice without downloading a file, backed by EV map regression coverage.
+**Result**: pass
