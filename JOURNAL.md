@@ -931,3 +931,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-20
 **Did**: Added an active-view chip bar in the map controls so users can see and clear the current brand, region, country, and search filters one by one without resetting the whole view, backed by EV map regression coverage.
 **Result**: pass
+## 2026-04-20
+**Did**: Added an uncertain-only toggle in the selected brand footprint so users can isolate flagged markets with shareable URL state, active-view chips, and EV map regression coverage.
+**Result**: pass

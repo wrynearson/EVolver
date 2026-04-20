@@ -1064,6 +1064,57 @@ describe("EVMap", () => {
     ).toBeInTheDocument();
   });
 
+  it("filters the selected brand footprint down to uncertain markets and persists the toggle in the URL", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockUncertainData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText("Brand filter"), {
+      target: { value: "BYD" },
+    });
+
+    const footprintPanel = screen
+      .getByRole("heading", { name: "Brand footprint" })
+      .closest("aside");
+    expect(footprintPanel).not.toBeNull();
+    expect(within(footprintPanel!).getByRole("button", { name: /China/i })).toBeInTheDocument();
+    expect(within(footprintPanel!).getByRole("button", { name: /Norway/i })).toBeInTheDocument();
+
+    fireEvent.click(
+      within(footprintPanel!).getByLabelText("Show only uncertain markets"),
+    );
+
+    expect(window.location.search).toBe(
+      "?brand=BYD&footprintUncertainOnly=true",
+    );
+    expect(
+      within(footprintPanel!).getByLabelText("Show only uncertain markets"),
+    ).toBeChecked();
+    expect(within(footprintPanel!).getByText("Showing 1 of 2 markets")).toBeInTheDocument();
+    expect(within(footprintPanel!).getByRole("button", { name: /Norway/i })).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).queryByRole("button", { name: /China/i }),
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Clear uncertain-only footprint filter" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Open share link in a new tab" }),
+    ).toHaveAttribute(
+      "href",
+      "http://localhost:3000/?brand=BYD&footprintUncertainOnly=true",
+    );
+  });
+
   it("filters coverage panels down to uncertain entries and persists the toggle in the URL", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);

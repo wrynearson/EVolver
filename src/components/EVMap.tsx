@@ -48,6 +48,7 @@ type SelectionState = {
   showOnlyUncertainCoverage: boolean;
   selectedCoverageRegion: string;
   coverageSort: CoverageSort;
+  showOnlyUncertainFootprint: boolean;
   footprintSort: FootprintSort;
   footprintSearchQuery: string;
 };
@@ -309,6 +310,19 @@ function getCoverageEmptyStateMessage(
       : "No regions with uncertain presence in this view.";
 }
 
+function getFootprintEmptyStateMessage(
+  showOnlyUncertainFootprint: boolean,
+  hasFootprintSearchQuery: boolean,
+) {
+  if (!showOnlyUncertainFootprint) {
+    return "No markets match this filter.";
+  }
+
+  return hasFootprintSearchQuery
+    ? "No uncertain markets match this filter."
+    : "No uncertain markets in this footprint.";
+}
+
 function getNextLookupIndex(
   currentIndex: number,
   optionCount: number,
@@ -384,6 +398,8 @@ function getSelectionStateFromSearch(search: string): SelectionState {
     searchParams.get("uncertainOnly")?.trim() === "true";
   const selectedCoverageRegion = searchParams.get("region")?.trim() ?? "";
   const requestedCoverageSort = searchParams.get("coverageSort")?.trim() ?? "";
+  const showOnlyUncertainFootprint =
+    searchParams.get("footprintUncertainOnly")?.trim() === "true";
   const requestedFootprintSort = searchParams.get("footprintSort")?.trim() ?? "";
   const footprintSearchQuery = searchParams.get("footprintQuery")?.trim() ?? "";
   const coveragePanelView = isCoveragePanelView(requestedCoveragePanelView)
@@ -404,6 +420,7 @@ function getSelectionStateFromSearch(search: string): SelectionState {
     coverageSort: isCoverageSort(requestedCoverageSort)
       ? requestedCoverageSort
       : DEFAULT_COVERAGE_SORT,
+    showOnlyUncertainFootprint,
     footprintSort: isFootprintSort(requestedFootprintSort)
       ? requestedFootprintSort
       : DEFAULT_FOOTPRINT_SORT,
@@ -421,6 +438,7 @@ function getInitialSelectionState(): SelectionState {
       showOnlyUncertainCoverage: false,
       selectedCoverageRegion: "",
       coverageSort: DEFAULT_COVERAGE_SORT,
+      showOnlyUncertainFootprint: false,
       footprintSort: DEFAULT_FOOTPRINT_SORT,
       footprintSearchQuery: "",
     };
@@ -437,6 +455,7 @@ function buildShareUrl(
   showOnlyUncertainCoverage: boolean,
   selectedCoverageRegion: string,
   coverageSort: CoverageSort,
+  showOnlyUncertainFootprint: boolean,
   footprintSort: FootprintSort,
   footprintSearchQuery: string,
 ) {
@@ -486,6 +505,12 @@ function buildShareUrl(
     url.searchParams.set("coverageSort", coverageSort);
   } else {
     url.searchParams.delete("coverageSort");
+  }
+
+  if (showOnlyUncertainFootprint) {
+    url.searchParams.set("footprintUncertainOnly", "true");
+  } else {
+    url.searchParams.delete("footprintUncertainOnly");
   }
 
   if (footprintSort !== DEFAULT_FOOTPRINT_SORT) {
@@ -562,6 +587,9 @@ export default function EVMap() {
   const [coverageSort, setCoverageSort] = useState<CoverageSort>(
     () => initialSelectionState.coverageSort,
   );
+  const [showOnlyUncertainFootprint, setShowOnlyUncertainFootprint] = useState(
+    () => initialSelectionState.showOnlyUncertainFootprint,
+  );
   const [footprintSort, setFootprintSort] = useState<FootprintSort>(
     () => initialSelectionState.footprintSort,
   );
@@ -599,6 +627,9 @@ export default function EVMap() {
   const clearFootprintSearch = () => {
     setFootprintSearchQuery("");
   };
+  const clearFootprintUncertainFilter = () => {
+    setShowOnlyUncertainFootprint(false);
+  };
   const resetView = () => {
     clearBrandSelection();
     setHoveredCountry(null);
@@ -607,6 +638,7 @@ export default function EVMap() {
     setSelectedCoverageRegion("");
     setCoverageSort(DEFAULT_COVERAGE_SORT);
     setShowOnlyUncertainCoverage(false);
+    setShowOnlyUncertainFootprint(false);
     setFootprintSort(DEFAULT_FOOTPRINT_SORT);
     setCoverageSearchQuery("");
     setFootprintSearchQuery("");
@@ -985,13 +1017,15 @@ export default function EVMap() {
 
   const filteredSelectedBrandPresence = useMemo(
     () =>
-      selectedBrandPresence.filter((country) =>
-        matchesSearchQuery(
-          [country.countryName, country.isoCode, country.regionName],
-          footprintSearchQuery,
-        ),
+      selectedBrandPresence.filter(
+        (country) =>
+          (!showOnlyUncertainFootprint || country.uncertain) &&
+          matchesSearchQuery(
+            [country.countryName, country.isoCode, country.regionName],
+            footprintSearchQuery,
+          ),
       ),
-    [footprintSearchQuery, selectedBrandPresence],
+    [footprintSearchQuery, selectedBrandPresence, showOnlyUncertainFootprint],
   );
   const sortedSelectedBrandPresence = useMemo(() => {
     return [...filteredSelectedBrandPresence].sort((a, b) =>
@@ -1165,6 +1199,7 @@ export default function EVMap() {
         showOnlyUncertainCoverage,
         selectedCoverageRegion,
         coverageSort,
+        showOnlyUncertainFootprint,
         footprintSort,
         footprintSearchQuery,
       ),
@@ -1174,6 +1209,7 @@ export default function EVMap() {
       coverageSearchQuery,
       showOnlyUncertainCoverage,
       coverageSort,
+      showOnlyUncertainFootprint,
       footprintSort,
       footprintSearchQuery,
       resolvedSelectedCountry,
@@ -1219,6 +1255,7 @@ export default function EVMap() {
       selectedCoverageRegion ||
       coveragePanelView !== "brands" ||
       showOnlyUncertainCoverage ||
+      showOnlyUncertainFootprint ||
       coverageSort !== DEFAULT_COVERAGE_SORT ||
       footprintSort !== DEFAULT_FOOTPRINT_SORT ||
       coverageSearchQuery ||
@@ -1281,6 +1318,14 @@ export default function EVMap() {
           label: `Footprint search: ${footprintSearchQuery.trim()}`,
           clearLabel: "Clear footprint search query",
           onClear: clearFootprintSearch,
+        }
+      : null,
+    activeSelectedBrand && showOnlyUncertainFootprint
+      ? {
+          key: "footprint-uncertain",
+          label: "Uncertain footprint only",
+          clearLabel: "Clear uncertain-only footprint filter",
+          onClear: clearFootprintUncertainFilter,
         }
       : null,
   ].filter((filter): filter is ActiveViewFilter => filter !== null);
@@ -1383,6 +1428,7 @@ export default function EVMap() {
       setShowOnlyUncertainCoverage(nextState.showOnlyUncertainCoverage);
       setSelectedCoverageRegion(nextState.selectedCoverageRegion);
       setCoverageSort(nextState.coverageSort);
+      setShowOnlyUncertainFootprint(nextState.showOnlyUncertainFootprint);
       setFootprintSort(nextState.footprintSort);
       setFootprintSearchQuery(nextState.footprintSearchQuery);
     };
@@ -1426,6 +1472,7 @@ export default function EVMap() {
       currentState.showOnlyUncertainCoverage === showOnlyUncertainCoverage &&
       currentState.selectedCoverageRegion === selectedCoverageRegion &&
       currentState.coverageSort === coverageSort &&
+      currentState.showOnlyUncertainFootprint === showOnlyUncertainFootprint &&
       currentState.footprintSort === footprintSort &&
       currentState.footprintSearchQuery === footprintSearchQuery
     ) {
@@ -1436,13 +1483,14 @@ export default function EVMap() {
       activeSelectedBrand,
       resolvedSelectedCountry,
       coveragePanelView,
-      coverageSearchQuery,
-      showOnlyUncertainCoverage,
-      selectedCoverageRegion,
-      coverageSort,
-      footprintSort,
-      footprintSearchQuery,
-    );
+        coverageSearchQuery,
+        showOnlyUncertainCoverage,
+        selectedCoverageRegion,
+        coverageSort,
+        showOnlyUncertainFootprint,
+        footprintSort,
+        footprintSearchQuery,
+      );
     window.history.replaceState({}, "", nextUrl);
   }, [
     activeSelectedBrand,
@@ -1450,6 +1498,7 @@ export default function EVMap() {
     coverageSearchQuery,
     showOnlyUncertainCoverage,
     coverageSort,
+    showOnlyUncertainFootprint,
     footprintSort,
     footprintSearchQuery,
     resolvedSelectedCountry,
@@ -2630,15 +2679,28 @@ export default function EVMap() {
                 </button>
               ) : null}
             </div>
-            <p className="mt-2 text-xs text-gray-500">
-              Showing {sortedSelectedBrandPresence.length} of{" "}
-              {selectedBrandPresence.length}{" "}
-              {selectedBrandPresence.length === 1 ? "market" : "markets"}
-            </p>
-          </div>
-          <div className="mt-3">
-            <label
-              htmlFor="footprint-sort"
+              <p className="mt-2 text-xs text-gray-500">
+                Showing {sortedSelectedBrandPresence.length} of{" "}
+                {selectedBrandPresence.length}{" "}
+                {selectedBrandPresence.length === 1 ? "market" : "markets"}
+              </p>
+            </div>
+            <div className="mt-3 rounded-md border border-amber-200 bg-amber-50 px-3 py-2">
+              <label className="flex items-start gap-2 text-sm text-amber-950">
+                <input
+                  type="checkbox"
+                  className="mt-0.5 h-4 w-4 rounded border-amber-300 text-amber-700 focus:ring-amber-500"
+                  checked={showOnlyUncertainFootprint}
+                  onChange={(event) =>
+                    setShowOnlyUncertainFootprint(event.target.checked)
+                  }
+                />
+                <span>Show only uncertain markets</span>
+              </label>
+            </div>
+            <div className="mt-3">
+              <label
+                htmlFor="footprint-sort"
               className="block text-xs font-medium uppercase tracking-wide text-gray-500"
             >
               Sort footprint
@@ -2663,7 +2725,10 @@ export default function EVMap() {
           <ul className="mt-3 max-h-48 space-y-3 overflow-y-auto pr-1">
             {sortedSelectedBrandPresence.length === 0 ? (
               <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
-                No markets match this filter.
+                {getFootprintEmptyStateMessage(
+                  showOnlyUncertainFootprint,
+                  Boolean(footprintSearchQuery.trim()),
+                )}
               </li>
             ) : (
               sortedSelectedBrandPresence.map((country) => (
