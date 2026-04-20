@@ -928,3 +928,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded BYD coverage by adding Israel and Ukraine after confirming BYD's official dealer-directory country pages plus live city and dealer-detail pages for Bnei Brak and Kyiv.
 **Result**: pass
 **TODO**: Ship the next session slice as a product or UX improvement instead of another data-only expansion so the recent journal run varies category.
+## 2026-04-20
+**Did**: Added an active-view chip bar in the map controls so users can see and clear the current brand, region, country, and search filters one by one without resetting the whole view, backed by EV map regression coverage.
+**Result**: pass

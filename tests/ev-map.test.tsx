@@ -481,6 +481,66 @@ describe("EVMap", () => {
     expect(window.location.search).toBe("");
   });
 
+  it("surfaces active view filters and clears them one by one", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+    window.history.replaceState(
+      {},
+      "",
+      "/?brand=XPeng&country=SWE&view=brands&region=Europe&footprintQuery=nor",
+    );
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(screen.getByText("Active view")).toBeInTheDocument();
+    expect(screen.getByText("Brand: XPeng")).toBeInTheDocument();
+    expect(screen.getByText("Region: Europe")).toBeInTheDocument();
+    expect(screen.getByText("Country: Sweden (SWE)")).toBeInTheDocument();
+    expect(screen.getByText("Footprint search: nor")).toBeInTheDocument();
+    expect(screen.getByLabelText("Search footprint markets")).toHaveValue("nor");
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "Clear footprint search query" }),
+    );
+
+    expect(screen.getByLabelText("Search footprint markets")).toHaveValue("");
+    await waitFor(() =>
+      expect(window.location.search).toBe(
+        "?brand=XPeng&country=SWE&view=brands&region=Europe",
+      ),
+    );
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "Clear active country selection" }),
+    );
+
+    expect(screen.getByLabelText("Country lookup")).toHaveValue("");
+    await waitFor(() =>
+      expect(window.location.search).toBe("?brand=XPeng&view=brands&region=Europe"),
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Clear active brand filter" }));
+
+    expect(screen.getByLabelText("Brand filter")).toHaveValue("");
+    expect(screen.queryByText("Brand footprint")).not.toBeInTheDocument();
+    await waitFor(() => expect(window.location.search).toBe("?view=brands&region=Europe"));
+
+    fireEvent.click(screen.getByRole("button", { name: "Clear active region filter" }));
+
+    expect(screen.getByLabelText("Region filter")).toHaveDisplayValue("All regions");
+    await waitFor(() => expect(window.location.search).toBe(""));
+    expect(screen.queryByText("Active view")).not.toBeInTheDocument();
+  });
+
   it("renders the dataset summary overlay, country details, and shareable view state", async () => {
     vi.doUnmock("../src/components/MapCanvas");
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {

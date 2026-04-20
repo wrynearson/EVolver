@@ -34,6 +34,12 @@ type CopySourcesState = {
 type CoveragePanelView = "brands" | "countries" | "regions";
 type CoverageSort = "coverage" | "name";
 type FootprintSort = "name" | "name-desc" | "region" | "region-desc";
+type ActiveViewFilter = {
+  key: string;
+  label: string;
+  clearLabel: string;
+  onClear: () => void;
+};
 type SelectionState = {
   selectedBrand: string;
   selectedCountry: MapCountrySelection | null;
@@ -265,6 +271,14 @@ function getCoverageFilterToggleLabel(view: CoveragePanelView) {
     : view === "countries"
       ? "Show only countries with uncertain presence"
       : "Show only regions with uncertain presence";
+}
+
+function getCoveragePanelViewLabel(view: CoveragePanelView) {
+  return view === "brands"
+    ? "Brands"
+    : view === "countries"
+      ? "Countries"
+      : "Regions";
 }
 
 function getCoverageEmptyStateMessage(
@@ -574,6 +588,16 @@ export default function EVMap() {
   };
   const clearCoverageRegion = () => {
     setSelectedCoverageRegion("");
+  };
+  const clearSelectedCountry = () => {
+    setCountryLookupQuery("");
+    setSelectedCountry(null);
+  };
+  const clearCoverageSearch = () => {
+    setCoverageSearchQuery("");
+  };
+  const clearFootprintSearch = () => {
+    setFootprintSearchQuery("");
   };
   const resetView = () => {
     clearBrandSelection();
@@ -1200,6 +1224,66 @@ export default function EVMap() {
       coverageSearchQuery ||
       footprintSearchQuery,
   );
+  const activeViewFilters: ActiveViewFilter[] = [
+    activeSelectedBrand
+      ? {
+          key: "brand",
+          label: `Brand: ${activeSelectedBrand}`,
+          clearLabel: "Clear active brand filter",
+          onClear: clearBrandSelection,
+        }
+      : null,
+    selectedCoverageRegion
+      ? {
+          key: "region",
+          label: `Region: ${selectedCoverageRegion}`,
+          clearLabel: "Clear active region filter",
+          onClear: clearCoverageRegion,
+        }
+      : null,
+    resolvedSelectedCountry
+      ? {
+          key: "country",
+          label: `Country: ${
+            resolvedSelectedCountry.countryName ?? resolvedSelectedCountry.isoCode
+          } (${resolvedSelectedCountry.isoCode})`,
+          clearLabel: "Clear active country selection",
+          onClear: clearSelectedCountry,
+        }
+      : null,
+    !activeSelectedBrand && coveragePanelView !== "brands"
+      ? {
+          key: "coverage-view",
+          label: `Coverage view: ${getCoveragePanelViewLabel(coveragePanelView)}`,
+          clearLabel: "Reset coverage view",
+          onClear: () => setCoveragePanelView("brands"),
+        }
+      : null,
+    !activeSelectedBrand && showOnlyUncertainCoverage
+      ? {
+          key: "coverage-uncertain",
+          label: "Uncertain only",
+          clearLabel: "Clear uncertain-only filter",
+          onClear: () => setShowOnlyUncertainCoverage(false),
+        }
+      : null,
+    !activeSelectedBrand && coverageSearchQuery.trim()
+      ? {
+          key: "coverage-search",
+          label: `Coverage search: ${coverageSearchQuery.trim()}`,
+          clearLabel: "Clear coverage search query",
+          onClear: clearCoverageSearch,
+        }
+      : null,
+    activeSelectedBrand && footprintSearchQuery.trim()
+      ? {
+          key: "footprint-search",
+          label: `Footprint search: ${footprintSearchQuery.trim()}`,
+          clearLabel: "Clear footprint search query",
+          onClear: clearFootprintSearch,
+        }
+      : null,
+  ].filter((filter): filter is ActiveViewFilter => filter !== null);
   const legendItems = useMemo(
     () =>
       getLegendItems(activeSelectedBrand || undefined, {
@@ -1872,10 +1956,7 @@ export default function EVMap() {
                   <button
                     type="button"
                     className="shrink-0 rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                    onClick={() => {
-                      setCountryLookupQuery("");
-                      setSelectedCountry(null);
-                    }}
+                    onClick={clearSelectedCountry}
                     aria-label="Clear country lookup"
                   >
                     Clear
@@ -1937,6 +2018,33 @@ export default function EVMap() {
               ) : null}
             </div>
           </div>
+          {activeViewFilters.length > 0 ? (
+            <div className="mt-3 rounded-md border border-blue-200 bg-blue-50 px-3 py-3">
+              <h3 className="text-xs font-medium uppercase tracking-wide text-blue-900">
+                Active view
+              </h3>
+              <p className="mt-1 text-xs text-blue-900/80">
+                Clear the filters shaping the current map and exports without
+                resetting the whole view.
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {activeViewFilters.map((filter) => (
+                  <button
+                    key={filter.key}
+                    type="button"
+                    className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-3 py-1 text-left text-xs font-medium text-blue-900 hover:border-blue-300 hover:text-blue-950"
+                    onClick={filter.onClear}
+                    aria-label={filter.clearLabel}
+                  >
+                    <span>{filter.label}</span>
+                    <span aria-hidden="true" className="text-sm leading-none">
+                      ×
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : null}
           <div className="mt-3">
             <div className="grid grid-cols-2 gap-2">
               <button
@@ -2508,14 +2616,14 @@ export default function EVMap() {
 
                   event.preventDefault();
                   event.stopPropagation();
-                  setFootprintSearchQuery("");
+                  clearFootprintSearch();
                 }}
               />
               {footprintSearchQuery ? (
                 <button
                   type="button"
                   className="shrink-0 rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                  onClick={() => setFootprintSearchQuery("")}
+                  onClick={clearFootprintSearch}
                   aria-label="Clear footprint search"
                 >
                   Clear
@@ -2718,14 +2826,14 @@ export default function EVMap() {
                   }
 
                   event.preventDefault();
-                  setCoverageSearchQuery("");
+                  clearCoverageSearch();
                 }}
               />
               {coverageSearchQuery ? (
                 <button
                   type="button"
                   className="shrink-0 rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                  onClick={() => setCoverageSearchQuery("")}
+                  onClick={clearCoverageSearch}
                   aria-label="Clear coverage search"
                 >
                   Clear
