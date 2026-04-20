@@ -870,6 +870,28 @@
             "https://www.byd.international/city/doha"
           ],
           "uncertain": false
+        },
+        "ISR": {
+          "name": "Israel",
+          "present": true,
+          "source": "https://www.byd.international/country/israel",
+          "sources": [
+            "https://www.byd.international/country/israel",
+            "https://www.byd.international/city/bnei-brak",
+            "https://www.byd.international/car-dealer/byd-bnei-brak-bnei-brak"
+          ],
+          "uncertain": false
+        },
+        "UKR": {
+          "name": "Ukraine",
+          "present": true,
+          "source": "https://www.byd.international/country/ukraine",
+          "sources": [
+            "https://www.byd.international/country/ukraine",
+            "https://www.byd.international/city/kyiv",
+            "https://www.byd.international/car-dealer/ecodrive-auto"
+          ],
+          "uncertain": false
         }
       }
     },

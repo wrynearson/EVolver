@@ -923,3 +923,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-20
 **Did**: Added XPeng Colombia after confirming XPeng's own global country selector now links Colombia to a dedicated `/co` market site and that the live Colombia site exposes a first-party localized homepage plus a Colombia test-drive booking flow.
 **Result**: pass
+
+## 2026-04-20
+**Did**: Expanded BYD coverage by adding Israel and Ukraine after confirming BYD's official dealer-directory country pages plus live city and dealer-detail pages for Bnei Brak and Kyiv.
+**Result**: pass
+**TODO**: Ship the next session slice as a product or UX improvement instead of another data-only expansion so the recent journal run varies category.
