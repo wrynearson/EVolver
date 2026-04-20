@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-19",
+    "last_updated": "2026-04-20",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -1139,6 +1139,18 @@
             "https://www.xpeng.com/",
             "https://www.xpeng.com/mx",
             "https://www.xpeng.com/mx/find-us"
+          ],
+          "uncertain": false
+        },
+        "COL": {
+          "name": "Colombia",
+          "present": true,
+          "source": "https://www.xpeng.com/co/",
+          "sources": [
+            "https://www.xpeng.com/",
+            "https://www.xpeng.com/co/",
+            "https://www.xpeng.com/region/co",
+            "https://www.xpeng.com/co/test-drive"
           ],
           "uncertain": false
         }

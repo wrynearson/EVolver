@@ -919,3 +919,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added XPeng Mexico after confirming XPeng's global region selector now links Mexico to a dedicated `/mx` market site and that the live Mexico site exposes localized consumer pages plus an official showroom list for Zapopan, Mexico City, and San Pedro Garza García.
 **Result**: pass
 **TODO**: Verify the next strongest non-XPENG deferred task so the next session slice keeps varying brands instead of staying on XPENG's new Americas follow-ups.
+
+## 2026-04-20
+**Did**: Added XPeng Colombia after confirming XPeng's own global country selector now links Colombia to a dedicated `/co` market site and that the live Colombia site exposes a first-party localized homepage plus a Colombia test-drive booking flow.
+**Result**: pass
