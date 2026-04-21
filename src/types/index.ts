@@ -47,6 +47,14 @@ export interface BrandRegionCoverageSummary {
   uncertainCountryCount: number;
 }
 
+export interface BrandMajorRegionGapSummary {
+  brandName: string;
+  website: string;
+  confirmedCountryCount: number;
+  coveredMajorRegionCount: number;
+  missingRegions: string[];
+}
+
 export interface CountryCoverageSummary {
   isoCode: string;
   countryName: string;

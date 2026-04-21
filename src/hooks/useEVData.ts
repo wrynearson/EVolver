@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import type {
   BrandCoverageSummary,
+  BrandMajorRegionGapSummary,
   BrandPresenceCountry,
   BrandRegionCoverageSummary,
   CountryPresenceDetails,
@@ -21,6 +22,137 @@ const IGNORED_COVERAGE_REGIONS = new Set([
   "Antarctica",
   "Seven seas (open ocean)",
 ]);
+
+const MAJOR_EV_REGION_ORDER = [
+  "Europe",
+  "Southeast Asia",
+  "Americas",
+  "Middle East",
+] as const;
+
+const MAJOR_EV_REGION_COUNTRIES: Record<
+  (typeof MAJOR_EV_REGION_ORDER)[number],
+  string[]
+> = {
+  Europe: [
+    "ALB",
+    "AND",
+    "AUT",
+    "BEL",
+    "BIH",
+    "BGR",
+    "BLR",
+    "CHE",
+    "CYP",
+    "CZE",
+    "DEU",
+    "DNK",
+    "ESP",
+    "EST",
+    "FIN",
+    "FRA",
+    "GBR",
+    "GRC",
+    "HRV",
+    "HUN",
+    "IRL",
+    "ISL",
+    "ITA",
+    "LTU",
+    "LUX",
+    "LVA",
+    "MDA",
+    "MKD",
+    "MLT",
+    "MNE",
+    "NLD",
+    "NOR",
+    "POL",
+    "PRT",
+    "ROU",
+    "SRB",
+    "SVK",
+    "SVN",
+    "SWE",
+    "UKR",
+  ],
+  "Southeast Asia": [
+    "BRN",
+    "IDN",
+    "KHM",
+    "LAO",
+    "MMR",
+    "MYS",
+    "PHL",
+    "SGP",
+    "THA",
+    "TLS",
+    "VNM",
+  ],
+  Americas: [
+    "ATG",
+    "ARG",
+    "BHS",
+    "BLZ",
+    "BOL",
+    "BRA",
+    "BRB",
+    "CAN",
+    "CHL",
+    "COL",
+    "CRI",
+    "CUB",
+    "DMA",
+    "DOM",
+    "ECU",
+    "GRD",
+    "GTM",
+    "GUY",
+    "HND",
+    "HTI",
+    "JAM",
+    "KNA",
+    "LCA",
+    "MEX",
+    "NIC",
+    "PAN",
+    "PER",
+    "PRY",
+    "SLV",
+    "SUR",
+    "TTO",
+    "URY",
+    "USA",
+    "VCT",
+    "VEN",
+  ],
+  "Middle East": [
+    "ARE",
+    "ARM",
+    "AZE",
+    "BHR",
+    "CYP",
+    "EGY",
+    "GEO",
+    "IRQ",
+    "ISR",
+    "JOR",
+    "KWT",
+    "LBN",
+    "OMN",
+    "QAT",
+    "SAU",
+    "SYR",
+    "TUR",
+  ],
+};
+
+const MAJOR_EV_REGION_BY_COUNTRY: Record<string, (typeof MAJOR_EV_REGION_ORDER)[number]> =
+  Object.fromEntries(
+    Object.entries(MAJOR_EV_REGION_COUNTRIES).flatMap(([regionName, countries]) =>
+      countries.map((isoCode) => [isoCode, regionName]),
+    ),
+  ) as Record<string, (typeof MAJOR_EV_REGION_ORDER)[number]>;
 
 /**
  * Loads ev-presence.json and computes per-country brand counts.
@@ -420,6 +552,54 @@ export function getBrandRegionCoverageSummaries(
       }
 
       return a.regionName.localeCompare(b.regionName);
+    });
+}
+
+export function getBrandMajorRegionGapSummaries(
+  data: EVPresenceData,
+): BrandMajorRegionGapSummary[] {
+  return Object.entries(data.brands)
+    .map(([brandName, brand]) => {
+      const coveredMajorRegions = new Set<string>();
+      let confirmedCountryCount = 0;
+
+      for (const [isoCode, entry] of Object.entries(brand.countries)) {
+        if (!entry.present || entry.uncertain) {
+          continue;
+        }
+
+        confirmedCountryCount += 1;
+
+        const majorRegionName = MAJOR_EV_REGION_BY_COUNTRY[isoCode];
+
+        if (majorRegionName) {
+          coveredMajorRegions.add(majorRegionName);
+        }
+      }
+
+      const missingRegions = MAJOR_EV_REGION_ORDER.filter(
+        (regionName) => !coveredMajorRegions.has(regionName),
+      );
+
+      return {
+        brandName,
+        website: brand.website,
+        confirmedCountryCount,
+        coveredMajorRegionCount: coveredMajorRegions.size,
+        missingRegions,
+      };
+    })
+    .filter((brand) => brand.missingRegions.length > 0)
+    .sort((a, b) => {
+      if (b.confirmedCountryCount !== a.confirmedCountryCount) {
+        return b.confirmedCountryCount - a.confirmedCountryCount;
+      }
+
+      if (b.missingRegions.length !== a.missingRegions.length) {
+        return b.missingRegions.length - a.missingRegions.length;
+      }
+
+      return a.brandName.localeCompare(b.brandName);
     });
 }
 

@@ -4,6 +4,7 @@ import {
   computeDatasetSummary,
   filterPresenceDataToBrand,
   filterPresenceDataToRegion,
+  getBrandMajorRegionGapSummaries,
   getBrandRegionCoverageSummaries,
   getCountryRegionBrandSuggestions,
   getCountryRegionLookup,
@@ -159,6 +160,25 @@ describe("useEVData helpers", () => {
         regionName: "Europe",
         confirmedCountryCount: 1,
         uncertainCountryCount: 1,
+      },
+    ]);
+  });
+
+  it("highlights tracked brands that still miss major EV regions", () => {
+    expect(getBrandMajorRegionGapSummaries(mockData)).toEqual([
+      {
+        brandName: "BYD",
+        website: "https://www.byd.com",
+        confirmedCountryCount: 2,
+        coveredMajorRegionCount: 1,
+        missingRegions: ["Southeast Asia", "Americas", "Middle East"],
+      },
+      {
+        brandName: "XPeng",
+        website: "https://www.xpeng.com",
+        confirmedCountryCount: 1,
+        coveredMajorRegionCount: 1,
+        missingRegions: ["Southeast Asia", "Americas", "Middle East"],
       },
     ]);
   });

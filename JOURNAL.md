@@ -945,3 +945,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-21
 **Did**: Stabilized the visible coverage ranking copy regression by awaiting the copied-state button label in the EVMap test, eliminating the suite-order timing flake without changing runtime behavior.
 **Result**: pass
+
+## 2026-04-21
+**Did**: Added a major-region gap panel in the dataset summary so users can see which tracked brands still lack confirmed coverage in Europe, Southeast Asia, the Americas, and the Middle East, backed by new helper coverage logic and EV map regressions.
+**Result**: pass
+**TODO**: Verify the highest-confidence major-region gap surfaced by the new panel, prioritizing Voyah's first Southeast Asia or Americas market from official first-party consumer or dealer pages.

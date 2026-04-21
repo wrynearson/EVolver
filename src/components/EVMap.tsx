@@ -5,6 +5,7 @@ import {
   filterPresenceDataToBrand,
   filterPresenceDataToRegion,
   getBrandCoverageSummaries,
+  getBrandMajorRegionGapSummaries,
   getBrandRegionCoverageSummaries,
   getBrandPresenceCountries,
   getCountryRegionLookup,
@@ -1142,6 +1143,19 @@ export default function EVMap() {
     () => formatBrandPresenceMarketList(sortedSelectedBrandPresence),
     [sortedSelectedBrandPresence],
   );
+  const majorRegionGapSummaries = useMemo(() => {
+    if (!data) {
+      return [];
+    }
+
+    const summaries = getBrandMajorRegionGapSummaries(data);
+
+    if (activeSelectedBrand) {
+      return summaries.filter((summary) => summary.brandName === activeSelectedBrand);
+    }
+
+    return summaries.slice(0, 5);
+  }, [activeSelectedBrand, data]);
 
   const brandCoverageSummaries = useMemo(() => {
     if (!regionScopedData || activeSelectedBrand) {
@@ -2368,6 +2382,71 @@ export default function EVMap() {
               </dd>
             </div>
           </dl>
+          {majorRegionGapSummaries.length > 0 ? (
+            <div className="mt-3 rounded-md border border-amber-200 bg-amber-50 px-3 py-3">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h3 className="text-xs font-medium uppercase tracking-wide text-amber-900">
+                    Major region gaps
+                  </h3>
+                  <p className="mt-1 text-xs text-amber-900/80">
+                    {activeSelectedBrand
+                      ? "This brand still has no confirmed presence in these major EV regions."
+                      : "Tracked brands with the biggest remaining major-region white space."}
+                  </p>
+                </div>
+                <span className="rounded-full bg-white px-2 py-1 text-xs font-medium text-amber-900">
+                  {activeSelectedBrand ? "Global scan" : "Top gaps"}
+                </span>
+              </div>
+              {selectedCoverageRegion ? (
+                <p className="mt-2 text-xs text-amber-900/70">
+                  This gap scan stays global so you can compare expansion priorities
+                  beyond the current region filter.
+                </p>
+              ) : null}
+              <ul className="mt-3 space-y-2">
+                {majorRegionGapSummaries.map((summary) => (
+                  <li
+                    key={summary.brandName}
+                    className="rounded-md border border-amber-200 bg-white px-3 py-3"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className="text-sm font-medium text-gray-800">
+                          {summary.brandName}
+                        </p>
+                        <p className="mt-1 text-xs text-gray-500">
+                          {summary.confirmedCountryCount.toLocaleString()} confirmed{" "}
+                          {summary.confirmedCountryCount === 1 ? "market" : "markets"} ·{" "}
+                          {summary.coveredMajorRegionCount}/4 major regions covered
+                        </p>
+                      </div>
+                      {!activeSelectedBrand ? (
+                        <button
+                          type="button"
+                          className="shrink-0 rounded-md border border-amber-200 px-3 py-2 text-xs font-medium text-amber-900 hover:bg-amber-100"
+                          onClick={() => applyBrandSelection(summary.brandName)}
+                        >
+                          Show {summary.brandName} footprint
+                        </button>
+                      ) : null}
+                    </div>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {summary.missingRegions.map((regionName) => (
+                        <span
+                          key={`${summary.brandName}:${regionName}`}
+                          className="rounded-full bg-amber-100 px-2 py-1 text-xs font-medium text-amber-900"
+                        >
+                          {regionName}
+                        </span>
+                      ))}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </div>
       ) : null}
 

@@ -2009,6 +2009,39 @@ describe("EVMap", () => {
     );
   });
 
+  it("shows major-region gaps and lets users focus a listed brand", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const summaryPanel = screen.getByText("Dataset summary").closest("div");
+    expect(summaryPanel).not.toBeNull();
+    expect(within(summaryPanel!).getByText("Major region gaps")).toBeInTheDocument();
+    expect(within(summaryPanel!).getByText("BYD")).toBeInTheDocument();
+    expect(within(summaryPanel!).getAllByText("Southeast Asia")).toHaveLength(2);
+
+    fireEvent.click(
+      within(summaryPanel!).getByRole("button", {
+        name: "Show BYD footprint",
+      }),
+    );
+
+    await waitFor(() => {
+      expect(screen.getByLabelText("Brand filter")).toHaveValue("BYD");
+    });
+  });
+
   it("restores shareable coverage panel state from the URL", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
