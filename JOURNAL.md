@@ -942,3 +942,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-21
 **Did**: Expanded Deepal coverage by adding Egypt after confirming the live official Deepal Egypt market site, its about page naming GB Auto as Deepal's exclusive distributor in Egypt, and the matching local contact surface.
 **Result**: pass
+## 2026-04-21
+**Did**: Stabilized the visible coverage ranking copy regression by awaiting the copied-state button label in the EVMap test, eliminating the suite-order timing flake without changing runtime behavior.
+**Result**: pass

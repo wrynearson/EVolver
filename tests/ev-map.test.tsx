@@ -1966,7 +1966,9 @@ describe("EVMap", () => {
       ["BYD (2 confirmed markets)", "XPeng (1 confirmed market)"].join("\n"),
     );
     expect(
-      within(coveragePanel!).getByRole("button", { name: "Copied visible brands" }),
+      await within(coveragePanel!).findByRole("button", {
+        name: "Copied visible brands",
+      }),
     ).toBeInTheDocument();
 
     fireEvent.click(within(coveragePanel!).getByRole("tab", { name: "Countries" }));
