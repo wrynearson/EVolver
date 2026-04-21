@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-20",
+    "last_updated": "2026-04-21",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -3531,6 +3531,17 @@
             "https://www.altayermotors.com/deepal/aftersales/servicing/",
             "https://www.altayermotors.com/deepal/locations/deepal-showroom-dubai-al-garhoud/",
             "https://www.premier-motors.ae/news-events/al-tayer-motors-signs-new-electric-vehicle-brand-deepal/"
+          ],
+          "uncertain": false
+        },
+        "EGY": {
+          "name": "Egypt",
+          "present": true,
+          "source": "https://www.deepal-eg.com/en/about_us/",
+          "sources": [
+            "https://www.deepal-eg.com/en/",
+            "https://www.deepal-eg.com/en/about_us/",
+            "https://www.deepal-eg.com/en/contact_us/"
           ],
           "uncertain": false
         }

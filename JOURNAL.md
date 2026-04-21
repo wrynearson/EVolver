@@ -938,3 +938,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-21
 **Did**: Added one-click coverage ranking copy actions so users can copy the currently visible brand, country, or region coverage list from the map panel, backed by EV map regression coverage.
 **Result**: pass
+
+## 2026-04-21
+**Did**: Expanded Deepal coverage by adding Egypt after confirming the live official Deepal Egypt market site, its about page naming GB Auto as Deepal's exclusive distributor in Egypt, and the matching local contact surface.
+**Result**: pass
