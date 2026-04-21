@@ -934,3 +934,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-20
 **Did**: Added an uncertain-only toggle in the selected brand footprint so users can isolate flagged markets with shareable URL state, active-view chips, and EV map regression coverage.
 **Result**: pass
+
+## 2026-04-21
+**Did**: Added one-click coverage ranking copy actions so users can copy the currently visible brand, country, or region coverage list from the map panel, backed by EV map regression coverage.
+**Result**: pass

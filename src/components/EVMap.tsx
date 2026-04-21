@@ -24,7 +24,12 @@ import {
 } from "../lib/dataExport";
 import { buildColorExpression, getFeatureBounds, getLegendItems } from "../lib/mapUtils";
 import type { FeatureCollection } from "geojson";
-import type { MapCountrySelection } from "../types";
+import type {
+  BrandCoverageSummary,
+  CountryCoverageSummary,
+  MapCountrySelection,
+  RegionCoverageSummary,
+} from "../types";
 
 type CopyStatus = "idle" | "copied" | "failed";
 type CopySourcesState = {
@@ -148,6 +153,24 @@ function getCopyAllSourcesButtonLabel(
       : idleLabel;
 }
 
+function getCopyCoverageButtonLabel(
+  view: CoveragePanelView,
+  status: CopyStatus,
+) {
+  const idleLabel =
+    view === "brands"
+      ? "Copy visible brands"
+      : view === "countries"
+        ? "Copy visible countries"
+        : "Copy visible regions";
+
+  return status === "copied"
+    ? idleLabel.replace("Copy", "Copied")
+    : status === "failed"
+      ? `${idleLabel.replace("Copy", "").trim()} copy failed`
+      : idleLabel;
+}
+
 function formatBrandPresenceMarketList(
   countries: Array<{
     isoCode: string;
@@ -168,6 +191,87 @@ function formatBrandPresenceMarketList(
     }
 
     return `${country.countryName} (${detailParts.join(" - ")})`;
+  });
+}
+
+function formatBrandCoverageList(summaries: BrandCoverageSummary[]) {
+  return summaries.map((brand) => {
+    const detailParts = [
+      `${brand.confirmedCountryCount} confirmed ${
+        brand.confirmedCountryCount === 1 ? "market" : "markets"
+      }`,
+    ];
+
+    if (brand.uncertainCountryCount > 0) {
+      detailParts.push(
+        `${brand.uncertainCountryCount} uncertain ${
+          brand.uncertainCountryCount === 1 ? "market" : "markets"
+        }`,
+      );
+    }
+
+    return `${brand.brandName} (${detailParts.join(" - ")})`;
+  });
+}
+
+function formatCountryCoverageList(
+  summaries: CountryCoverageSummary[],
+  countryRegionLookup: Record<string, string>,
+) {
+  return summaries.map((country) => {
+    const detailParts = [country.isoCode];
+    const regionName = countryRegionLookup[country.isoCode];
+
+    if (regionName) {
+      detailParts.push(regionName);
+    }
+
+    detailParts.push(
+      `${country.confirmedBrandCount} confirmed ${
+        country.confirmedBrandCount === 1 ? "brand" : "brands"
+      }`,
+    );
+
+    if (country.uncertainBrandCount > 0) {
+      detailParts.push(
+        `${country.uncertainBrandCount} uncertain ${
+          country.uncertainBrandCount === 1 ? "brand" : "brands"
+        }`,
+      );
+    }
+
+    const activeBrands = country.brandNames.join(", ");
+
+    return activeBrands
+      ? `${country.countryName} (${detailParts.join(" - ")}) — ${activeBrands}`
+      : `${country.countryName} (${detailParts.join(" - ")})`;
+  });
+}
+
+function formatRegionCoverageList(summaries: RegionCoverageSummary[]) {
+  return summaries.map((region) => {
+    const detailParts = [
+      `${region.confirmedCountryCount} confirmed ${
+        region.confirmedCountryCount === 1 ? "country" : "countries"
+      }`,
+      `${region.brandNames.length} tracked ${
+        region.brandNames.length === 1 ? "brand" : "brands"
+      }`,
+    ];
+
+    if (region.uncertainCountryCount > 0) {
+      detailParts.push(
+        `${region.uncertainCountryCount} uncertain ${
+          region.uncertainCountryCount === 1 ? "country" : "countries"
+        }`,
+      );
+    }
+
+    const activeBrands = region.brandNames.join(", ");
+
+    return activeBrands
+      ? `${region.regionName} (${detailParts.join(" - ")}) — ${activeBrands}`
+      : `${region.regionName} (${detailParts.join(" - ")})`;
   });
 }
 
@@ -550,6 +654,7 @@ export default function EVMap() {
   const hasInitializedCopyCountryReset = useRef(false);
   const hasInitializedCopyBrandWebsiteReset = useRef(false);
   const hasInitializedCopyBrandMarketsReset = useRef(false);
+  const hasInitializedCopyCoverageReset = useRef(false);
   const hasInitializedCopySourcesReset = useRef(false);
   const hasInitializedCoverageSearchReset = useRef(false);
   const hasInitializedFootprintSearchReset = useRef(false);
@@ -568,6 +673,7 @@ export default function EVMap() {
   const [copyCountryStatus, setCopyCountryStatus] = useState<CopyStatus>("idle");
   const [copyBrandWebsiteStatus, setCopyBrandWebsiteStatus] = useState<CopyStatus>("idle");
   const [copyBrandMarketsStatus, setCopyBrandMarketsStatus] = useState<CopyStatus>("idle");
+  const [copyCoverageStatus, setCopyCoverageStatus] = useState<CopyStatus>("idle");
   const [copySourcesState, setCopySourcesState] = useState<CopySourcesState>({
     key: null,
     status: "idle",
@@ -1188,6 +1294,26 @@ export default function EVMap() {
       return a.regionName.localeCompare(b.regionName);
     });
   }, [coverageSort, filteredRegionCoverageSummaries]);
+  const coveragePanelCopyList = useMemo(() => {
+    if (coveragePanelView === "brands") {
+      return formatBrandCoverageList(sortedBrandCoverageSummaries);
+    }
+
+    if (coveragePanelView === "countries") {
+      return formatCountryCoverageList(
+        sortedCountryCoverageSummaries,
+        countryRegionLookup,
+      );
+    }
+
+    return formatRegionCoverageList(sortedRegionCoverageSummaries);
+  }, [
+    countryRegionLookup,
+    coveragePanelView,
+    sortedBrandCoverageSummaries,
+    sortedCountryCoverageSummaries,
+    sortedRegionCoverageSummaries,
+  ]);
 
   const shareUrl = useMemo(
     () =>
@@ -1247,6 +1373,17 @@ export default function EVMap() {
     setCopyBrandMarketsStatus("copied");
     void navigator.clipboard.writeText(selectedBrandMarketList.join("\n")).catch(() => {
       setCopyBrandMarketsStatus("failed");
+    });
+  };
+  const copyVisibleCoverage = () => {
+    if (coveragePanelCopyList.length === 0 || !navigator.clipboard?.writeText) {
+      setCopyCoverageStatus("failed");
+      return;
+    }
+
+    setCopyCoverageStatus("copied");
+    void navigator.clipboard.writeText(coveragePanelCopyList.join("\n")).catch(() => {
+      setCopyCoverageStatus("failed");
     });
   };
   const hasCustomView = Boolean(
@@ -1540,6 +1677,15 @@ export default function EVMap() {
 
     setCopyBrandMarketsStatus("idle");
   }, [selectedBrandMarketList]);
+
+  useEffect(() => {
+    if (!hasInitializedCopyCoverageReset.current) {
+      hasInitializedCopyCoverageReset.current = true;
+      return;
+    }
+
+    setCopyCoverageStatus("idle");
+  }, [coveragePanelCopyList, coveragePanelView]);
 
   useEffect(() => {
     if (!hasInitializedCopySourcesReset.current) {
@@ -2811,6 +2957,19 @@ export default function EVMap() {
                     ? "See which countries have the widest confirmed tracked brand coverage."
                     : "Compare confirmed coverage across regions and drill into the strongest clusters."}
               </p>
+              <div className="mt-1 flex flex-wrap items-center gap-3 text-xs">
+                <button
+                  type="button"
+                  className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800 disabled:text-gray-400 disabled:no-underline"
+                  onClick={copyVisibleCoverage}
+                  disabled={coveragePanelCopyList.length === 0}
+                >
+                  {getCopyCoverageButtonLabel(
+                    coveragePanelView,
+                    copyCoverageStatus,
+                  )}
+                </button>
+              </div>
             </div>
 
           <div

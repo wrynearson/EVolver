@@ -1938,6 +1938,75 @@ describe("EVMap", () => {
     expect(within(drilledCountryCoveragePanel!).getByText("China")).toBeInTheDocument();
   });
 
+  it("copies the visible coverage rankings for brands, countries, and regions", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const coveragePanel = screen
+      .getByRole("heading", { name: "Brand coverage" })
+      .closest("aside");
+    expect(coveragePanel).not.toBeNull();
+
+    fireEvent.click(
+      within(coveragePanel!).getByRole("button", { name: "Copy visible brands" }),
+    );
+    expect(window.navigator.clipboard.writeText).toHaveBeenLastCalledWith(
+      ["BYD (2 confirmed markets)", "XPeng (1 confirmed market)"].join("\n"),
+    );
+    expect(
+      within(coveragePanel!).getByRole("button", { name: "Copied visible brands" }),
+    ).toBeInTheDocument();
+
+    fireEvent.click(within(coveragePanel!).getByRole("tab", { name: "Countries" }));
+
+    const countryCoveragePanel = screen
+      .getByRole("heading", { name: "Country coverage" })
+      .closest("aside");
+    expect(countryCoveragePanel).not.toBeNull();
+    fireEvent.change(within(countryCoveragePanel!).getByLabelText("Search country coverage"), {
+      target: { value: "nor" },
+    });
+
+    fireEvent.click(
+      within(countryCoveragePanel!).getByRole("button", {
+        name: "Copy visible countries",
+      }),
+    );
+    expect(window.navigator.clipboard.writeText).toHaveBeenLastCalledWith(
+      "Norway (NOR - Europe - 2 confirmed brands) — BYD, XPeng",
+    );
+
+    fireEvent.click(within(countryCoveragePanel!).getByRole("tab", { name: "Regions" }));
+
+    const regionalCoveragePanel = screen
+      .getByRole("heading", { name: "Regional coverage" })
+      .closest("aside");
+    expect(regionalCoveragePanel).not.toBeNull();
+    fireEvent.click(
+      within(regionalCoveragePanel!).getByRole("button", {
+        name: "Copy visible regions",
+      }),
+    );
+    expect(window.navigator.clipboard.writeText).toHaveBeenLastCalledWith(
+      [
+        "Europe (1 confirmed country - 2 tracked brands) — BYD, XPeng",
+        "Asia (1 confirmed country - 1 tracked brand) — BYD",
+      ].join("\n"),
+    );
+  });
+
   it("restores shareable coverage panel state from the URL", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
