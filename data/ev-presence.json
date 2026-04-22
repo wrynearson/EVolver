@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-21",
+    "last_updated": "2026-04-22",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -4129,6 +4129,43 @@
             "https://hongqi.se/",
             "https://hongqi.se/upptack-hongqi",
             "https://hongqi.se/boka-provkorning"
+          ],
+          "uncertain": false
+        }
+      }
+    },
+    "DENZA": {
+      "website": "https://www.denza.com/",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.tengshiauto.com/",
+          "sources": [
+            "https://www.tengshiauto.com/",
+            "https://www.tengshiauto.com/product-detail/N9-new.html"
+          ],
+          "uncertain": false
+        },
+        "GBR": {
+          "name": "United Kingdom",
+          "present": true,
+          "source": "https://www.denza.com/uk",
+          "sources": [
+            "https://www.denza.com/uk",
+            "https://www.denza.com/uk/model-page/z9gt.html",
+            "https://www.denza.com/uk/about-denza.html"
+          ],
+          "uncertain": false
+        },
+        "SGP": {
+          "name": "Singapore",
+          "present": true,
+          "source": "https://denza.sg/",
+          "sources": [
+            "https://denza.sg/",
+            "https://denza.sg/contact-us/",
+            "https://denza.sg/privacy-policy/"
           ],
           "uncertain": false
         }
