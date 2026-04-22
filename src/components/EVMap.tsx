@@ -27,6 +27,7 @@ import { buildColorExpression, getFeatureBounds, getLegendItems } from "../lib/m
 import type { FeatureCollection } from "geojson";
 import type {
   BrandCoverageSummary,
+  BrandMajorRegionGapSummary,
   CountryCoverageSummary,
   MapCountrySelection,
   RegionCoverageSummary,
@@ -273,6 +274,15 @@ function formatRegionCoverageList(summaries: RegionCoverageSummary[]) {
     return activeBrands
       ? `${region.regionName} (${detailParts.join(" - ")}) — ${activeBrands}`
       : `${region.regionName} (${detailParts.join(" - ")})`;
+  });
+}
+
+function formatMajorRegionGapList(summaries: BrandMajorRegionGapSummary[]) {
+  return summaries.map((summary) => {
+    const confirmedMarketLabel =
+      summary.confirmedCountryCount === 1 ? "market" : "markets";
+
+    return `${summary.brandName} (${summary.confirmedCountryCount} confirmed ${confirmedMarketLabel} - ${summary.coveredMajorRegionCount}/4 major regions covered) — missing ${summary.missingRegions.join(", ")}`;
   });
 }
 
@@ -656,6 +666,7 @@ export default function EVMap() {
   const hasInitializedCopyBrandWebsiteReset = useRef(false);
   const hasInitializedCopyBrandMarketsReset = useRef(false);
   const hasInitializedCopyCoverageReset = useRef(false);
+  const hasInitializedCopyMajorRegionGapsReset = useRef(false);
   const hasInitializedCopySourcesReset = useRef(false);
   const hasInitializedCoverageSearchReset = useRef(false);
   const hasInitializedFootprintSearchReset = useRef(false);
@@ -675,6 +686,8 @@ export default function EVMap() {
   const [copyBrandWebsiteStatus, setCopyBrandWebsiteStatus] = useState<CopyStatus>("idle");
   const [copyBrandMarketsStatus, setCopyBrandMarketsStatus] = useState<CopyStatus>("idle");
   const [copyCoverageStatus, setCopyCoverageStatus] = useState<CopyStatus>("idle");
+  const [copyMajorRegionGapsStatus, setCopyMajorRegionGapsStatus] =
+    useState<CopyStatus>("idle");
   const [copySourcesState, setCopySourcesState] = useState<CopySourcesState>({
     key: null,
     status: "idle",
@@ -1156,6 +1169,10 @@ export default function EVMap() {
 
     return summaries.slice(0, 5);
   }, [activeSelectedBrand, data]);
+  const majorRegionGapCopyList = useMemo(
+    () => formatMajorRegionGapList(majorRegionGapSummaries),
+    [majorRegionGapSummaries],
+  );
 
   const brandCoverageSummaries = useMemo(() => {
     if (!regionScopedData || activeSelectedBrand) {
@@ -1398,6 +1415,17 @@ export default function EVMap() {
     setCopyCoverageStatus("copied");
     void navigator.clipboard.writeText(coveragePanelCopyList.join("\n")).catch(() => {
       setCopyCoverageStatus("failed");
+    });
+  };
+  const copyMajorRegionGaps = () => {
+    if (majorRegionGapCopyList.length === 0 || !navigator.clipboard?.writeText) {
+      setCopyMajorRegionGapsStatus("failed");
+      return;
+    }
+
+    setCopyMajorRegionGapsStatus("copied");
+    void navigator.clipboard.writeText(majorRegionGapCopyList.join("\n")).catch(() => {
+      setCopyMajorRegionGapsStatus("failed");
     });
   };
   const hasCustomView = Boolean(
@@ -1700,6 +1728,15 @@ export default function EVMap() {
 
     setCopyCoverageStatus("idle");
   }, [coveragePanelCopyList, coveragePanelView]);
+
+  useEffect(() => {
+    if (!hasInitializedCopyMajorRegionGapsReset.current) {
+      hasInitializedCopyMajorRegionGapsReset.current = true;
+      return;
+    }
+
+    setCopyMajorRegionGapsStatus("idle");
+  }, [majorRegionGapCopyList]);
 
   useEffect(() => {
     if (!hasInitializedCopySourcesReset.current) {
@@ -2394,6 +2431,20 @@ export default function EVMap() {
                       ? "This brand still has no confirmed presence in these major EV regions."
                       : "Tracked brands with the biggest remaining major-region white space."}
                   </p>
+                  <div className="mt-1">
+                    <button
+                      type="button"
+                      className="text-xs font-medium text-amber-900 underline underline-offset-2 hover:text-amber-950 disabled:text-amber-900/50 disabled:no-underline"
+                      onClick={copyMajorRegionGaps}
+                      disabled={majorRegionGapCopyList.length === 0}
+                    >
+                      {copyMajorRegionGapsStatus === "copied"
+                        ? "Copied gap priorities"
+                        : copyMajorRegionGapsStatus === "failed"
+                          ? "Gap priorities copy failed"
+                          : "Copy gap priorities"}
+                    </button>
+                  </div>
                 </div>
                 <span className="rounded-full bg-white px-2 py-1 text-xs font-medium text-amber-900">
                   {activeSelectedBrand ? "Global scan" : "Top gaps"}

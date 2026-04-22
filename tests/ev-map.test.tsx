@@ -2030,6 +2030,22 @@ describe("EVMap", () => {
     expect(within(summaryPanel!).getByText("Major region gaps")).toBeInTheDocument();
     expect(within(summaryPanel!).getByText("BYD")).toBeInTheDocument();
     expect(within(summaryPanel!).getAllByText("Southeast Asia")).toHaveLength(2);
+    fireEvent.click(
+      within(summaryPanel!).getByRole("button", {
+        name: "Copy gap priorities",
+      }),
+    );
+    expect(window.navigator.clipboard.writeText).toHaveBeenLastCalledWith(
+      [
+        "BYD (2 confirmed markets - 1/4 major regions covered) — missing Southeast Asia, Americas, Middle East",
+        "XPeng (1 confirmed market - 1/4 major regions covered) — missing Southeast Asia, Americas, Middle East",
+      ].join("\n"),
+    );
+    expect(
+      await within(summaryPanel!).findByRole("button", {
+        name: "Copied gap priorities",
+      }),
+    ).toBeInTheDocument();
 
     fireEvent.click(
       within(summaryPanel!).getByRole("button", {

@@ -950,3 +950,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added a major-region gap panel in the dataset summary so users can see which tracked brands still lack confirmed coverage in Europe, Southeast Asia, the Americas, and the Middle East, backed by new helper coverage logic and EV map regressions.
 **Result**: pass
 **TODO**: Verify the highest-confidence major-region gap surfaced by the new panel, prioritizing Voyah's first Southeast Asia or Americas market from official first-party consumer or dealer pages.
+
+## 2026-04-22
+**Did**: Re-checked Voyah's first Southeast Asia or Americas gap against Voyah's own live global site and JS bundle, closed it back to monitoring when the first-party `Find Us` flow still exposed only China, Norway, and Israel, and added a one-click copy action for the major-region gap panel with regression coverage.
+**Result**: pass
