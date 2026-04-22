@@ -4147,6 +4147,28 @@
           ],
           "uncertain": false
         },
+        "AUS": {
+          "name": "Australia",
+          "present": true,
+          "source": "https://www.denza.com/au",
+          "sources": [
+            "https://www.denza.com/au",
+            "https://www.denza.com/au/about-denza",
+            "https://www.denza.com/au/car/d9"
+          ],
+          "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://www.denza.com/en-ae",
+          "sources": [
+            "https://www.denza.com/en-ae",
+            "https://www.denza.com/en-ae/about-denza.html",
+            "https://www.denza.com/en-ae/models/b8.html"
+          ],
+          "uncertain": false
+        },
         "GBR": {
           "name": "United Kingdom",
           "present": true,

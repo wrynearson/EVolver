@@ -965,3 +965,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-22
 **Did**: Added DENZA as a tracked brand with confirmed official presence in China, the United Kingdom, and Singapore after verifying DENZA's mainland consumer site plus its dedicated UK market pages and Singapore showroom/test-drive surfaces.
 **Result**: pass
+
+## 2026-04-22
+**Did**: Expanded DENZA coverage by adding Australia and the United Arab Emirates after confirming DENZA's official localized market pages plus supporting model and brand-story pages on denza.com.
+**Result**: pass
