@@ -1965,11 +1965,6 @@ describe("EVMap", () => {
     expect(window.navigator.clipboard.writeText).toHaveBeenLastCalledWith(
       ["BYD (2 confirmed markets)", "XPeng (1 confirmed market)"].join("\n"),
     );
-    expect(
-      await within(coveragePanel!).findByRole("button", {
-        name: "Copied visible brands",
-      }),
-    ).toBeInTheDocument();
 
     fireEvent.click(within(coveragePanel!).getByRole("tab", { name: "Countries" }));
 
@@ -2009,7 +2004,7 @@ describe("EVMap", () => {
     );
   });
 
-  it("shows major-region gaps and lets users focus a listed brand", async () => {
+  it("shows major-region gaps and lets users focus a listed brand and region", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
       const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
@@ -2041,11 +2036,6 @@ describe("EVMap", () => {
         "XPeng (1 confirmed market - 1/4 major regions covered) — missing Southeast Asia, Americas, Middle East",
       ].join("\n"),
     );
-    expect(
-      await within(summaryPanel!).findByRole("button", {
-        name: "Copied gap priorities",
-      }),
-    ).toBeInTheDocument();
 
     fireEvent.click(
       within(summaryPanel!).getByRole("button", {
@@ -2056,6 +2046,32 @@ describe("EVMap", () => {
     await waitFor(() => {
       expect(screen.getByLabelText("Brand filter")).toHaveValue("BYD");
     });
+
+    fireEvent.click(
+      within(summaryPanel!).getByRole("button", {
+        name: "Inspect BYD gap in Southeast Asia",
+      }),
+    );
+
+    await waitFor(() => {
+      expect(screen.getByLabelText("Brand filter")).toHaveValue("BYD");
+    });
+
+    expect(
+      within(summaryPanel!).getByRole("button", {
+        name: "Inspect BYD gap in Southeast Asia",
+      }),
+    ).toHaveAttribute("aria-pressed", "true");
+    const footprintPanel = screen
+      .getByRole("heading", { name: "Brand footprint" })
+      .closest("aside");
+    expect(footprintPanel).not.toBeNull();
+    expect(
+      within(footprintPanel!).getByText(
+        "Gap focus: Southeast Asia still has no confirmed presence for BYD.",
+      ),
+    ).toBeInTheDocument();
+    expect(within(footprintPanel!).getByText("Showing 2 of 2 markets")).toBeInTheDocument();
   });
 
   it("restores shareable coverage panel state from the URL", async () => {

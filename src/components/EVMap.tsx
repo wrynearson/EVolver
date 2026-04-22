@@ -707,6 +707,10 @@ export default function EVMap() {
   const [coverageSort, setCoverageSort] = useState<CoverageSort>(
     () => initialSelectionState.coverageSort,
   );
+  const [selectedMajorRegionGap, setSelectedMajorRegionGap] = useState<{
+    brandName: string;
+    regionName: string;
+  } | null>(null);
   const [showOnlyUncertainFootprint, setShowOnlyUncertainFootprint] = useState(
     () => initialSelectionState.showOnlyUncertainFootprint,
   );
@@ -729,10 +733,14 @@ export default function EVMap() {
   const applyBrandSelection = (brandName: string) => {
     setSelectedBrand(brandName);
     setBrandLookupQuery(brandName);
+    setSelectedMajorRegionGap((current) =>
+      current?.brandName === brandName ? current : null,
+    );
   };
   const clearBrandSelection = () => {
     setSelectedBrand("");
     setBrandLookupQuery("");
+    setSelectedMajorRegionGap(null);
   };
   const clearCoverageRegion = () => {
     setSelectedCoverageRegion("");
@@ -740,6 +748,11 @@ export default function EVMap() {
   const clearSelectedCountry = () => {
     setCountryLookupQuery("");
     setSelectedCountry(null);
+  };
+  const focusBrandMajorRegionGap = (brandName: string, regionName: string) => {
+    applyBrandSelection(brandName);
+    clearSelectedCountry();
+    setSelectedMajorRegionGap({ brandName, regionName });
   };
   const clearCoverageSearch = () => {
     setCoverageSearchQuery("");
@@ -1134,6 +1147,10 @@ export default function EVMap() {
   );
   const selectedBrandHasUncertainPresence =
     selectedBrandUncertainCountryCodes.size > 0;
+  const activeMajorRegionGap =
+    activeSelectedBrand && selectedMajorRegionGap?.brandName === activeSelectedBrand
+      ? selectedMajorRegionGap.regionName
+      : "";
 
   const filteredSelectedBrandPresence = useMemo(
     () =>
@@ -2485,12 +2502,26 @@ export default function EVMap() {
                     </div>
                     <div className="mt-2 flex flex-wrap gap-2">
                       {summary.missingRegions.map((regionName) => (
-                        <span
+                        <button
                           key={`${summary.brandName}:${regionName}`}
-                          className="rounded-full bg-amber-100 px-2 py-1 text-xs font-medium text-amber-900"
+                          type="button"
+                          className={`rounded-full border px-2 py-1 text-xs font-medium ${
+                            activeSelectedBrand === summary.brandName &&
+                            activeMajorRegionGap === regionName
+                              ? "border-amber-300 bg-amber-200 text-amber-950"
+                              : "border-amber-200 bg-amber-100 text-amber-900 hover:bg-amber-200"
+                          }`}
+                          aria-pressed={
+                            activeSelectedBrand === summary.brandName &&
+                            activeMajorRegionGap === regionName
+                          }
+                          aria-label={`Inspect ${summary.brandName} gap in ${regionName}`}
+                          onClick={() =>
+                            focusBrandMajorRegionGap(summary.brandName, regionName)
+                          }
                         >
                           {regionName}
-                        </span>
+                        </button>
                       ))}
                     </div>
                   </li>
@@ -2847,6 +2878,12 @@ export default function EVMap() {
               {selectedCoverageRegion ? (
                 <p className="mt-1 text-xs text-gray-500">
                   Filtering markets to {selectedCoverageRegion}
+                </p>
+              ) : null}
+              {activeMajorRegionGap ? (
+                <p className="mt-1 text-xs text-amber-700">
+                  Gap focus: {activeMajorRegionGap} still has no confirmed presence
+                  for {activeSelectedBrand}.
                 </p>
               ) : null}
             </div>

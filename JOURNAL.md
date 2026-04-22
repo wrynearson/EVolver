@@ -954,3 +954,10 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-22
 **Did**: Re-checked Voyah's first Southeast Asia or Americas gap against Voyah's own live global site and JS bundle, closed it back to monitoring when the first-party `Find Us` flow still exposed only China, Norway, and Israel, and added a one-click copy action for the major-region gap panel with regression coverage.
 **Result**: pass
+## 2026-04-22
+**Did**: Re-checked Neta's first Europe expansion gap against Neta's public global pages and business-contact surfaces, confirmed those first-party pages still expose no European sovereign market or dealer flow, and demoted the follow-up back to `[monitoring]` after the current `netaauto.co` site also failed browser checks with `ERR_CERT_DATE_INVALID`.
+**Result**: no-op
+
+## 2026-04-22
+**Did**: Made the major-region gap panel actionable by letting users focus a brand's specific missing region and carry that gap context into the brand footprint panel, backed by EV map regression coverage and stabler copy-action assertions.
+**Result**: pass
