@@ -493,7 +493,7 @@ describe("EVMap", () => {
     window.history.replaceState(
       {},
       "",
-      "/?brand=XPeng&country=SWE&view=brands&region=Europe&footprintQuery=nor",
+      "/?brand=XPeng&country=SWE&view=brands&region=Europe&coverageSort=name&footprintSort=name-desc&footprintQuery=nor",
     );
 
     const { default: EVMap } = await import("../src/components/EVMap");
@@ -505,6 +505,8 @@ describe("EVMap", () => {
     expect(screen.getByText("Brand: XPeng")).toBeInTheDocument();
     expect(screen.getByText("Region: Europe")).toBeInTheDocument();
     expect(screen.getByText("Country: Sweden (SWE)")).toBeInTheDocument();
+    expect(screen.getByText("Coverage sort: Alphabetical")).toBeInTheDocument();
+    expect(screen.getByText("Footprint sort: Country name (Z-A)")).toBeInTheDocument();
     expect(screen.getByText("Footprint search: nor")).toBeInTheDocument();
     expect(screen.getByLabelText("Search footprint markets")).toHaveValue("nor");
 
@@ -515,7 +517,16 @@ describe("EVMap", () => {
     expect(screen.getByLabelText("Search footprint markets")).toHaveValue("");
     await waitFor(() =>
       expect(window.location.search).toBe(
-        "?brand=XPeng&country=SWE&view=brands&region=Europe",
+        "?brand=XPeng&country=SWE&view=brands&region=Europe&coverageSort=name&footprintSort=name-desc",
+      ),
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Reset footprint sort" }));
+
+    expect(screen.getByLabelText("Sort footprint")).toHaveDisplayValue("Country name (A-Z)");
+    await waitFor(() =>
+      expect(window.location.search).toBe(
+        "?brand=XPeng&country=SWE&view=brands&region=Europe&coverageSort=name",
       ),
     );
 
@@ -525,13 +536,22 @@ describe("EVMap", () => {
 
     expect(screen.getByLabelText("Country lookup")).toHaveValue("");
     await waitFor(() =>
-      expect(window.location.search).toBe("?brand=XPeng&view=brands&region=Europe"),
+      expect(window.location.search).toBe(
+        "?brand=XPeng&view=brands&region=Europe&coverageSort=name",
+      ),
     );
 
     fireEvent.click(screen.getByRole("button", { name: "Clear active brand filter" }));
 
     expect(screen.getByLabelText("Brand filter")).toHaveValue("");
     expect(screen.queryByText("Brand footprint")).not.toBeInTheDocument();
+    await waitFor(() =>
+      expect(window.location.search).toBe("?view=brands&region=Europe&coverageSort=name"),
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Reset coverage sort" }));
+
+    expect(screen.getByLabelText("Sort rankings")).toHaveDisplayValue("Coverage strength");
     await waitFor(() => expect(window.location.search).toBe("?view=brands&region=Europe"));
 
     fireEvent.click(screen.getByRole("button", { name: "Clear active region filter" }));

@@ -984,3 +984,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-23
 **Did**: Expanded Deepal coverage by adding Germany after confirming Changan Europe's live German Deepal market site plus first-party German test-drive and contact flows.
 **Result**: pass
+
+## 2026-04-23
+**Did**: Re-checked Voyah's highest-impact missing-region gap after recalculating the major-region coverage ranking and confirmed Voyah's own global `Find Us` dialog still hard-codes only China, Norway, and Israel, so the Southeast Asia/Americas follow-up stays in monitoring.
+**Result**: no-op
+
+## 2026-04-23
+**Did**: Surfaced non-default coverage and footprint sort choices in the active-view chip bar so users can see and clear sort-driven shared state without resetting the rest of the map, backed by EV map regression coverage.
+**Result**: pass

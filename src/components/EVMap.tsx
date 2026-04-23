@@ -98,6 +98,20 @@ function getSourceCountBadgeTitle(sourceCount: number) {
   return `Verified from ${sourceCount} official ${sourceCount === 1 ? "source URL" : "source URLs"}.`;
 }
 
+function getCoverageSortLabel(sort: CoverageSort) {
+  return sort === "name" ? "Alphabetical" : "Coverage strength";
+}
+
+function getFootprintSortLabel(sort: FootprintSort) {
+  return sort === "name"
+    ? "Country name (A-Z)"
+    : sort === "name-desc"
+      ? "Country name (Z-A)"
+      : sort === "region"
+        ? "Region, then country (A-Z)"
+        : "Region, then country (Z-A)";
+}
+
 function isCoveragePanelView(value: string): value is CoveragePanelView {
   return value === "brands" || value === "countries" || value === "regions";
 }
@@ -1531,6 +1545,14 @@ export default function EVMap() {
           onClear: clearCoverageSearch,
         }
       : null,
+    coverageSort !== DEFAULT_COVERAGE_SORT
+      ? {
+          key: "coverage-sort",
+          label: `Coverage sort: ${getCoverageSortLabel(coverageSort)}`,
+          clearLabel: "Reset coverage sort",
+          onClear: () => setCoverageSort(DEFAULT_COVERAGE_SORT),
+        }
+      : null,
     activeSelectedBrand && footprintSearchQuery.trim()
       ? {
           key: "footprint-search",
@@ -1545,6 +1567,14 @@ export default function EVMap() {
           label: "Uncertain footprint only",
           clearLabel: "Clear uncertain-only footprint filter",
           onClear: clearFootprintUncertainFilter,
+        }
+      : null,
+    activeSelectedBrand && footprintSort !== DEFAULT_FOOTPRINT_SORT
+      ? {
+          key: "footprint-sort",
+          label: `Footprint sort: ${getFootprintSortLabel(footprintSort)}`,
+          clearLabel: "Reset footprint sort",
+          onClear: () => setFootprintSort(DEFAULT_FOOTPRINT_SORT),
         }
       : null,
   ].filter((filter): filter is ActiveViewFilter => filter !== null);
