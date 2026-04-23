@@ -980,3 +980,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-23
 **Did**: Closed DENZA's exhausted sovereign-market follow-up back to monitoring after confirming its public first-party locales still top out at the already-tracked sovereign footprint plus Macau and Europe-only surfaces, and surfaced official source counts in the map preview, country details, and brand footprint panels.
 **Result**: pass
+
+## 2026-04-23
+**Did**: Expanded Deepal coverage by adding Germany after confirming Changan Europe's live German Deepal market site plus first-party German test-drive and contact flows.
+**Result**: pass

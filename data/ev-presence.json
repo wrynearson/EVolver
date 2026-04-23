@@ -3521,6 +3521,18 @@
           ],
           "uncertain": false
         },
+        "DEU": {
+          "name": "Germany",
+          "present": true,
+          "source": "https://www.changaneurope.com/de/modelle/changan-deepal-s05",
+          "sources": [
+            "https://www.changaneurope.com/de/",
+            "https://www.changaneurope.com/de/modelle/changan-deepal-s05",
+            "https://www.changaneurope.com/de/probefahrt",
+            "https://www.changaneurope.com/de/kontakt"
+          ],
+          "uncertain": false
+        },
         "ARE": {
           "name": "United Arab Emirates",
           "present": true,
