@@ -618,6 +618,7 @@ describe("EVMap", () => {
         name: "Open official website for XPeng",
       }),
     ).toHaveAttribute("href", "https://www.xpeng.com");
+    expect(within(footprintPanel!).getByText("2 sources")).toBeInTheDocument();
     fireEvent.click(
       within(footprintPanel!).getByRole("button", { name: "Copy website URL" }),
     );
@@ -655,6 +656,7 @@ describe("EVMap", () => {
         name: "Open official source for XPeng in Norway",
       }),
     ).toHaveAttribute("href", "https://www.xpeng.com/no");
+    expect(within(previewPanel!).getByText("2 sources")).toBeInTheDocument();
     expect(
       within(previewPanel!).getByText(
         "Showing 1 of 2 tracked brands for this country. Clear the brand filter to see the rest.",
@@ -672,6 +674,7 @@ describe("EVMap", () => {
     expect(
       within(detailsPanel!).getByRole("link", { name: "https://www.xpeng.com/no" }),
     ).toHaveAttribute("href", "https://www.xpeng.com/no");
+    expect(within(detailsPanel!).getByText("2 sources")).toBeInTheDocument();
     fireEvent.click(within(detailsPanel!).getByRole("button", { name: "Copy sources" }));
     expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
       "https://www.xpeng.com/no\nhttps://www.xpeng.com/no/service",
@@ -800,8 +803,10 @@ describe("EVMap", () => {
     ).toHaveAttribute("href", "https://www.byd.com");
     const footprintItems = within(bydFootprintPanel!).getAllByRole("listitem");
     expect(within(footprintItems[0]).getByRole("button", { name: /China/i })).toBeInTheDocument();
+    expect(within(footprintItems[0]).getByText("1 source")).toBeInTheDocument();
     expect(within(footprintItems[1]).getByRole("button", { name: /Norway/i })).toBeInTheDocument();
     expect(within(footprintItems[1]).getByText("NOR · Europe")).toBeInTheDocument();
+    expect(within(footprintItems[1]).getByText("2 sources")).toBeInTheDocument();
     fireEvent.change(within(bydFootprintPanel!).getByLabelText("Sort footprint"), {
       target: { value: "name-desc" },
     });
@@ -1055,6 +1060,8 @@ describe("EVMap", () => {
     expect(
       within(footprintPanel!).getByText("Uncertain", { selector: "span" }),
     ).toHaveAttribute("title", expectedTooltip);
+    expect(within(detailsPanel!).getByText("2 sources")).toBeInTheDocument();
+    expect(within(footprintPanel!).getByText("2 sources")).toBeInTheDocument();
     expect(screen.getByText("BYD confirmed")).toBeInTheDocument();
     expect(screen.getByText("BYD uncertain")).toBeInTheDocument();
     expect(

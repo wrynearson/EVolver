@@ -78,6 +78,26 @@ const DEFAULT_FOOTPRINT_SORT: FootprintSort = "name";
 const UNCERTAIN_BADGE_TOOLTIP =
   "Official presence is tracked here, but the supporting evidence still needs direct verification or reconciliation.";
 
+function getSourceCountLabel(sourceCount: number) {
+  return `${sourceCount} ${sourceCount === 1 ? "source" : "sources"}`;
+}
+
+function getSourceCountBadgeClassName(sourceCount: number) {
+  if (sourceCount >= 3) {
+    return "rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800";
+  }
+
+  if (sourceCount === 2) {
+    return "rounded-full bg-sky-100 px-2 py-0.5 text-xs font-medium text-sky-800";
+  }
+
+  return "rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-700";
+}
+
+function getSourceCountBadgeTitle(sourceCount: number) {
+  return `Verified from ${sourceCount} official ${sourceCount === 1 ? "source URL" : "source URLs"}.`;
+}
+
 function isCoveragePanelView(value: string): value is CoveragePanelView {
   return value === "brands" || value === "countries" || value === "regions";
 }
@@ -2593,14 +2613,24 @@ export default function EVMap() {
                           ) : null}
                         </div>
                       </div>
-                      {brand.uncertain ? (
-                        <span
-                          className="cursor-help rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800"
-                          title={UNCERTAIN_BADGE_TOOLTIP}
-                        >
-                          Uncertain
-                        </span>
-                      ) : null}
+                      <div className="flex flex-wrap items-center justify-end gap-2">
+                        {brand.sources.length > 0 ? (
+                          <span
+                            className={getSourceCountBadgeClassName(brand.sources.length)}
+                            title={getSourceCountBadgeTitle(brand.sources.length)}
+                          >
+                            {getSourceCountLabel(brand.sources.length)}
+                          </span>
+                        ) : null}
+                        {brand.uncertain ? (
+                          <span
+                            className="cursor-help rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800"
+                            title={UNCERTAIN_BADGE_TOOLTIP}
+                          >
+                            Uncertain
+                          </span>
+                        ) : null}
+                      </div>
                     </div>
                   </li>
                 ))}
@@ -2785,14 +2815,24 @@ export default function EVMap() {
                         </button>
                       </div>
                     </div>
-                    {brand.uncertain ? (
-                      <span
-                        className="cursor-help rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800"
-                        title={UNCERTAIN_BADGE_TOOLTIP}
-                      >
-                        Uncertain
-                      </span>
-                    ) : null}
+                    <div className="flex flex-wrap items-center justify-end gap-2">
+                      {brand.sources.length > 0 ? (
+                        <span
+                          className={getSourceCountBadgeClassName(brand.sources.length)}
+                          title={getSourceCountBadgeTitle(brand.sources.length)}
+                        >
+                          {getSourceCountLabel(brand.sources.length)}
+                        </span>
+                      ) : null}
+                      {brand.uncertain ? (
+                        <span
+                          className="cursor-help rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800"
+                          title={UNCERTAIN_BADGE_TOOLTIP}
+                        >
+                          Uncertain
+                        </span>
+                      ) : null}
+                    </div>
                   </div>
                   <ul className="mt-2 space-y-1 text-xs text-blue-700">
                     {brand.sources.map((source) => (
@@ -3087,15 +3127,25 @@ export default function EVMap() {
                         {country.isoCode}
                         {country.regionName ? ` · ${country.regionName}` : ""}
                       </p>
+                      {country.sources.length > 0 ? (
+                        <p
+                          className="mt-1 text-xs text-gray-500"
+                          title={getSourceCountBadgeTitle(country.sources.length)}
+                        >
+                          {getSourceCountLabel(country.sources.length)}
+                        </p>
+                      ) : null}
                     </button>
-                    {country.uncertain ? (
-                      <span
-                        className="cursor-help rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800"
-                        title={UNCERTAIN_BADGE_TOOLTIP}
-                      >
-                        Uncertain
-                      </span>
-                    ) : null}
+                    <div className="flex flex-wrap items-center justify-end gap-2">
+                      {country.uncertain ? (
+                        <span
+                          className="cursor-help rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-800"
+                          title={UNCERTAIN_BADGE_TOOLTIP}
+                        >
+                          Uncertain
+                        </span>
+                      ) : null}
+                    </div>
                   </div>
                   {country.source ? (
                     <div className="mt-2 flex flex-wrap items-center gap-3 text-xs">
