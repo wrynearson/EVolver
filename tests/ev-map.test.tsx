@@ -2071,7 +2071,59 @@ describe("EVMap", () => {
         "Gap focus: Southeast Asia still has no confirmed presence for BYD.",
       ),
     ).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).getByRole("button", { name: "Clear gap focus" }),
+    ).toBeInTheDocument();
     expect(within(footprintPanel!).getByText("Showing 2 of 2 markets")).toBeInTheDocument();
+
+    fireEvent.click(
+      within(summaryPanel!).getByRole("button", {
+        name: "Inspect BYD gap in Southeast Asia",
+      }),
+    );
+
+    expect(
+      within(summaryPanel!).getByRole("button", {
+        name: "Inspect BYD gap in Southeast Asia",
+      }),
+    ).toHaveAttribute("aria-pressed", "false");
+    expect(
+      within(footprintPanel!).queryByText(
+        "Gap focus: Southeast Asia still has no confirmed presence for BYD.",
+      ),
+    ).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Brand filter")).toHaveValue("BYD");
+
+    fireEvent.click(
+      within(summaryPanel!).getByRole("button", {
+        name: "Inspect BYD gap in Southeast Asia",
+      }),
+    );
+
+    expect(
+      within(summaryPanel!).getByRole("button", {
+        name: "Inspect BYD gap in Southeast Asia",
+      }),
+    ).toHaveAttribute("aria-pressed", "true");
+    expect(
+      within(footprintPanel!).getByText(
+        "Gap focus: Southeast Asia still has no confirmed presence for BYD.",
+      ),
+    ).toBeInTheDocument();
+
+    fireEvent.click(within(footprintPanel!).getByRole("button", { name: "Clear gap focus" }));
+
+    expect(
+      within(summaryPanel!).getByRole("button", {
+        name: "Inspect BYD gap in Southeast Asia",
+      }),
+    ).toHaveAttribute("aria-pressed", "false");
+    expect(
+      within(footprintPanel!).queryByText(
+        "Gap focus: Southeast Asia still has no confirmed presence for BYD.",
+      ),
+    ).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Brand filter")).toHaveValue("BYD");
   });
 
   it("restores shareable coverage panel state from the URL", async () => {

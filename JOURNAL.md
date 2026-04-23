@@ -973,3 +973,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-23
 **Did**: Expanded DENZA coverage by adding Indonesia, Malaysia, and New Zealand after confirming live official localized DENZA market sites plus supporting local contact, dealer/find-store, and test-drive flows on DENZA's own domains.
 **Result**: pass
+
+## 2026-04-23
+**Did**: Made major-region gap focus in the EV map easier to clear by turning the gap pills into true toggles and adding a dedicated clear action in the brand footprint panel, backed by regression coverage.
+**Result**: pass

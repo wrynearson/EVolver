@@ -763,6 +763,9 @@ export default function EVMap() {
   const clearFootprintUncertainFilter = () => {
     setShowOnlyUncertainFootprint(false);
   };
+  const clearMajorRegionGap = () => {
+    setSelectedMajorRegionGap(null);
+  };
   const resetView = () => {
     clearBrandSelection();
     setHoveredCountry(null);
@@ -2516,9 +2519,17 @@ export default function EVMap() {
                             activeMajorRegionGap === regionName
                           }
                           aria-label={`Inspect ${summary.brandName} gap in ${regionName}`}
-                          onClick={() =>
-                            focusBrandMajorRegionGap(summary.brandName, regionName)
-                          }
+                          onClick={() => {
+                            if (
+                              activeSelectedBrand === summary.brandName &&
+                              activeMajorRegionGap === regionName
+                            ) {
+                              clearMajorRegionGap();
+                              return;
+                            }
+
+                            focusBrandMajorRegionGap(summary.brandName, regionName);
+                          }}
                         >
                           {regionName}
                         </button>
@@ -2881,10 +2892,19 @@ export default function EVMap() {
                 </p>
               ) : null}
               {activeMajorRegionGap ? (
-                <p className="mt-1 text-xs text-amber-700">
-                  Gap focus: {activeMajorRegionGap} still has no confirmed presence
-                  for {activeSelectedBrand}.
-                </p>
+                <div className="mt-1 flex flex-wrap items-center gap-3 text-xs">
+                  <p className="text-amber-700">
+                    Gap focus: {activeMajorRegionGap} still has no confirmed presence
+                    for {activeSelectedBrand}.
+                  </p>
+                  <button
+                    type="button"
+                    className="font-medium text-amber-800 underline underline-offset-2 hover:text-amber-900"
+                    onClick={clearMajorRegionGap}
+                  >
+                    Clear gap focus
+                  </button>
+                </div>
               ) : null}
             </div>
             <button
