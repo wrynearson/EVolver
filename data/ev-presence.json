@@ -4146,6 +4146,43 @@
         }
       }
     },
+    "AVATR": {
+      "website": "https://www.avatr.com/",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.avatr.com/",
+          "sources": [
+            "https://www.avatr.com/",
+            "https://www.avatr.com/shops"
+          ],
+          "uncertain": false
+        },
+        "THA": {
+          "name": "Thailand",
+          "present": true,
+          "source": "https://www.avatr.co.th/",
+          "sources": [
+            "https://www.avatr.com/en/overseas",
+            "https://www.avatr.co.th/"
+          ],
+          "uncertain": false
+        },
+        "SGP": {
+          "name": "Singapore",
+          "present": true,
+          "source": "https://avatr.sg/",
+          "sources": [
+            "https://www.avatr.com/en/overseas",
+            "https://avatr.sg/",
+            "https://avatr.sg/find-us/",
+            "https://avatr.sg/book-a-test-drive/"
+          ],
+          "uncertain": false
+        }
+      }
+    },
     "DENZA": {
       "website": "https://www.denza.com/",
       "countries": {

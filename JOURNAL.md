@@ -992,3 +992,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-23
 **Did**: Surfaced non-default coverage and footprint sort choices in the active-view chip bar so users can see and clear sort-driven shared state without resetting the rest of the map, backed by EV map regression coverage.
 **Result**: pass
+
+## 2026-04-23
+**Did**: Added AVATR as a tracked brand with confirmed official presence in China, Thailand, and Singapore after verifying AVATR's own overseas hub links plus live local consumer, showroom/find-us, and test-drive flows on first-party market sites.
+**Result**: pass
