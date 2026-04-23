@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-22",
+    "last_updated": "2026-04-23",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -4177,6 +4177,39 @@
             "https://www.denza.com/uk",
             "https://www.denza.com/uk/model-page/z9gt.html",
             "https://www.denza.com/uk/about-denza.html"
+          ],
+          "uncertain": false
+        },
+        "IDN": {
+          "name": "Indonesia",
+          "present": true,
+          "source": "https://www.denza.com/id",
+          "sources": [
+            "https://www.denza.com/id",
+            "https://www.denza.com/id/contact-us",
+            "https://www.denza.com/id/test-drive"
+          ],
+          "uncertain": false
+        },
+        "MYS": {
+          "name": "Malaysia",
+          "present": true,
+          "source": "https://www.denza.com/my",
+          "sources": [
+            "https://www.denza.com/my",
+            "https://www.denza.com/my/contact-us",
+            "https://www.denza.com/my/test-drive"
+          ],
+          "uncertain": false
+        },
+        "NZL": {
+          "name": "New Zealand",
+          "present": true,
+          "source": "https://www.denza.com/nz",
+          "sources": [
+            "https://www.denza.com/nz",
+            "https://www.denza.com/nz/find-store",
+            "https://www.denza.com/nz/contact-us"
           ],
           "uncertain": false
         },

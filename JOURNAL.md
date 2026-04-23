@@ -969,3 +969,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-22
 **Did**: Expanded DENZA coverage by adding Australia and the United Arab Emirates after confirming DENZA's official localized market pages plus supporting model and brand-story pages on denza.com.
 **Result**: pass
+
+## 2026-04-23
+**Did**: Expanded DENZA coverage by adding Indonesia, Malaysia, and New Zealand after confirming live official localized DENZA market sites plus supporting local contact, dealer/find-store, and test-drive flows on DENZA's own domains.
+**Result**: pass

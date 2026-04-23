@@ -4,7 +4,7 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
-- Verify additional DENZA sovereign markets beyond China, Australia, the United Arab Emirates, the United Kingdom, and Singapore using official first-party country pages, dealer listings, or test-drive flows.
+- Verify additional DENZA sovereign markets beyond China, Australia, Indonesia, Malaysia, New Zealand, the United Arab Emirates, the United Kingdom, and Singapore using official first-party country pages, dealer listings, or test-drive flows.
 - [monitoring] Re-check NIO's newly announced Austria, Belgium, Czech Republic, Hungary, Luxembourg, Poland, and Romania rollout only after official local market, retail, or service surfaces go live beyond the current press-release stage; checked 2026-04-17 and NIO's own June 2025 expansion announcements still describe distributor partnerships and phased 2025-2026 launches rather than live local consumer sites.
 - [monitoring] Re-check Voyah's next major-region gap only after Voyah's first-party surfaces expose a live Southeast Asia or Americas sovereign market beyond the current Europe, Israel, and China footprint; checked 2026-04-22 and Voyah's own global site still exposes only China, Norway, and Israel in its `Find Us` bundle while the homepage copy continues to name only the already-tracked European markets plus an unresolved Bulgaria mention.
 - [monitoring] Re-check Chery's remaining European sovereign-domain leads, especially Sweden and Finland, only after official first-party local market, dealer, contact, or test-drive flows appear; checked 2026-04-19 and Chery's own global map still points to `cherymotor.se` and `cherymotor.fi`, but both domains remain non-resolving.
