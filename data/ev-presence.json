@@ -983,6 +983,16 @@
             "https://www.nio.com/news/20241129002"
           ],
           "uncertain": false
+        },
+        "CRI": {
+          "name": "Costa Rica",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250818001"
+          ],
+          "uncertain": false
         }
       }
     },

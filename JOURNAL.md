@@ -1009,3 +1009,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-24
 **Did**: Expanded DENZA coverage by adding Brazil and Mexico after confirming live official `denza.com/br` and `denza.com/mx` market sites plus localized first-party model, test-drive, and dealer or roadside-support flows on DENZA's own domains.
 **Result**: pass
+
+## 2026-04-24
+**Did**: Expanded NIO coverage by adding Costa Rica after recalculating the major-region gap ranking and confirming NIO's live `findourpartners` directory plus its official distribution-announcement page both name Horizontes Cielo Azul as Costa Rica's NIO, ONVO, and firefly partner.
+**Result**: pass
