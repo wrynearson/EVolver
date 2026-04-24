@@ -1667,6 +1667,70 @@
         }
       }
     },
+    "MAXUS": {
+      "website": "https://en.saicmaxus.com/",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.saicmaxus.com/dealer",
+          "sources": [
+            "https://www.saicmaxus.com/index.shtml",
+            "https://www.saicmaxus.com/dealer",
+            "https://www.saicmaxus.com/service/station"
+          ],
+          "uncertain": false
+        },
+        "NOR": {
+          "name": "Norway",
+          "present": true,
+          "source": "https://maxus.no/forhandlere",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://maxus.no/",
+            "https://maxus.no/forhandlere",
+            "https://maxus.no/kontakt"
+          ],
+          "uncertain": false
+        },
+        "IDN": {
+          "name": "Indonesia",
+          "present": true,
+          "source": "https://www.maxus.id/dealers/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxus.id/",
+            "https://www.maxus.id/dealers/",
+            "https://www.maxus.id/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "SAU": {
+          "name": "Saudi Arabia",
+          "present": true,
+          "source": "https://maxus.sa/find-a-dealer/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://maxus.sa/",
+            "https://maxus.sa/find-a-dealer/",
+            "https://maxus.sa/find-us/"
+          ],
+          "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://www.maxus.ae/Contact/Locations",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxus.ae/",
+            "https://www.maxus.ae/Contact/Locations",
+            "https://www.maxus.ae/TestDrive"
+          ],
+          "uncertain": false
+        }
+      }
+    },
     "MG (SAIC)": {
       "website": "https://www.mgmotor.com",
       "countries": {

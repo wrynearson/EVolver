@@ -1013,3 +1013,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-24
 **Did**: Expanded NIO coverage by adding Costa Rica after recalculating the major-region gap ranking and confirming NIO's live `findourpartners` directory plus its official distribution-announcement page both name Horizontes Cielo Azul as Costa Rica's NIO, ONVO, and firefly partner.
 **Result**: pass
+
+## 2026-04-24
+**Did**: Added MAXUS as a tracked brand with confirmed official presence in China, Norway, Indonesia, Saudi Arabia, and the United Arab Emirates after using SAIC MAXUS's global market selector plus live local dealer, contact, and test-drive flows to seed a high-confidence first slice.
+**Result**: pass
+**TODO**: Verify MAXUS's next strongest sovereign markets beyond China, Indonesia, Norway, Saudi Arabia, and the United Arab Emirates, prioritizing first-party local sites with live dealer, contact, or test-drive flows.
