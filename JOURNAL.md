@@ -1001,3 +1001,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded AVATR coverage by adding the United Arab Emirates and Azerbaijan after confirming AVATR's live UAE showroom and authorized dealer flow plus AVATR Azerbaijan's localized consumer and contact pages on first-party local market sites.
 **Result**: pass
 **TODO**: Verify AVATR's next sovereign markets beyond Azerbaijan, China, Singapore, Thailand, and the United Arab Emirates, prioritizing first-party sovereign locales backed by live local consumer, dealer, contact, or test-drive flows.
+
+## 2026-04-24
+**Did**: Closed AVATR's next-sovereign follow-up back to monitoring after confirming AVATR's own live overseas switcher still exposes only Hong Kong, Thailand, and Singapore, leaving no additional sovereign market beyond the already-tracked Thailand, Singapore, United Arab Emirates, and Azerbaijan footprint.
+**Result**: pass
+
+## 2026-04-24
+**Did**: Expanded DENZA coverage by adding Brazil and Mexico after confirming live official `denza.com/br` and `denza.com/mx` market sites plus localized first-party model, test-drive, and dealer or roadside-support flows on DENZA's own domains.
+**Result**: pass

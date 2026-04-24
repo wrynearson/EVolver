@@ -4240,6 +4240,17 @@
           ],
           "uncertain": false
         },
+        "BRA": {
+          "name": "Brazil",
+          "present": true,
+          "source": "https://www.denza.com/br",
+          "sources": [
+            "https://www.denza.com/br",
+            "https://www.denza.com/br/test-drive",
+            "https://www.denza.com/br/concessionarias"
+          ],
+          "uncertain": false
+        },
         "GBR": {
           "name": "United Kingdom",
           "present": true,
@@ -4259,6 +4270,17 @@
             "https://www.denza.com/id",
             "https://www.denza.com/id/contact-us",
             "https://www.denza.com/id/test-drive"
+          ],
+          "uncertain": false
+        },
+        "MEX": {
+          "name": "Mexico",
+          "present": true,
+          "source": "https://www.denza.com/mx",
+          "sources": [
+            "https://www.denza.com/mx",
+            "https://www.denza.com/mx/model-page/B5.html",
+            "https://www.denza.com/mx/test-drive-mx.html"
           ],
           "uncertain": false
         },
