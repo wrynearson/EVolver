@@ -827,6 +827,26 @@ describe("EVMap", () => {
     expect(within(footprintItems[1]).getByRole("button", { name: /Norway/i })).toBeInTheDocument();
     expect(within(footprintItems[1]).getByText("NOR · Europe")).toBeInTheDocument();
     expect(within(footprintItems[1]).getByText("2 sources")).toBeInTheDocument();
+    const compactToggle = within(bydFootprintPanel!).getByRole("button", {
+      name: "Compact view",
+    });
+    expect(compactToggle).toHaveAttribute("aria-pressed", "false");
+    fireEvent.click(compactToggle);
+    expect(
+      within(bydFootprintPanel!).getByRole("button", { name: "Expanded view" }),
+    ).toHaveAttribute("aria-pressed", "true");
+    expect(
+      within(footprintItems[1]).getByRole("button", { name: /Norway \(NOR\)/i }),
+    ).toBeInTheDocument();
+    expect(within(footprintItems[1]).queryByText("NOR · Europe")).not.toBeInTheDocument();
+    expect(within(footprintItems[1]).queryByText("2 sources")).not.toBeInTheDocument();
+    fireEvent.click(
+      within(bydFootprintPanel!).getByRole("button", { name: "Expanded view" }),
+    );
+    expect(
+      within(bydFootprintPanel!).getByRole("button", { name: "Compact view" }),
+    ).toHaveAttribute("aria-pressed", "false");
+    expect(within(footprintItems[1]).getByText("NOR · Europe")).toBeInTheDocument();
     fireEvent.change(within(bydFootprintPanel!).getByLabelText("Sort footprint"), {
       target: { value: "name-desc" },
     });

@@ -754,6 +754,7 @@ export default function EVMap() {
   const [footprintSearchQuery, setFootprintSearchQuery] = useState(
     () => initialSelectionState.footprintSearchQuery,
   );
+  const [compactFootprintView, setCompactFootprintView] = useState(false);
   const [countryLookupQuery, setCountryLookupQuery] = useState(() =>
     getCountryLookupValue(initialSelectionState.selectedCountry),
   );
@@ -2954,6 +2955,14 @@ export default function EVMap() {
                         ? "Visible markets copy failed"
                         : "Copy visible markets"}
                   </button>
+                  <button
+                    type="button"
+                    className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                    aria-pressed={compactFootprintView}
+                    onClick={() => setCompactFootprintView((current) => !current)}
+                  >
+                    {compactFootprintView ? "Expanded view" : "Compact view"}
+                  </button>
                 </div>
               ) : null}
               {selectedCoverageRegion ? (
@@ -3125,7 +3134,11 @@ export default function EVMap() {
             </select>
           </div>
 
-          <ul className="mt-3 max-h-48 space-y-3 overflow-y-auto pr-1">
+          <ul
+            className={`mt-3 max-h-48 overflow-y-auto pr-1 ${
+              compactFootprintView ? "space-y-2" : "space-y-3"
+            }`}
+          >
             {sortedSelectedBrandPresence.length === 0 ? (
               <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
                 {getFootprintEmptyStateMessage(
@@ -3137,7 +3150,9 @@ export default function EVMap() {
               sortedSelectedBrandPresence.map((country) => (
                 <li
                   key={country.isoCode}
-                  className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
+                  className={`border-t border-gray-200 first:border-t-0 ${
+                    compactFootprintView ? "pt-2 first:pt-0" : "pt-3 first:pt-0"
+                  }`}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <button
@@ -3151,19 +3166,25 @@ export default function EVMap() {
                       }
                     >
                       <p className="text-sm font-medium text-gray-800">
-                        {country.countryName}
+                        {compactFootprintView
+                          ? `${country.countryName} (${country.isoCode})`
+                          : country.countryName}
                       </p>
-                      <p className="text-xs uppercase tracking-wide text-gray-500">
-                        {country.isoCode}
-                        {country.regionName ? ` · ${country.regionName}` : ""}
-                      </p>
-                      {country.sources.length > 0 ? (
-                        <p
-                          className="mt-1 text-xs text-gray-500"
-                          title={getSourceCountBadgeTitle(country.sources.length)}
-                        >
-                          {getSourceCountLabel(country.sources.length)}
-                        </p>
+                      {!compactFootprintView ? (
+                        <>
+                          <p className="text-xs uppercase tracking-wide text-gray-500">
+                            {country.isoCode}
+                            {country.regionName ? ` · ${country.regionName}` : ""}
+                          </p>
+                          {country.sources.length > 0 ? (
+                            <p
+                              className="mt-1 text-xs text-gray-500"
+                              title={getSourceCountBadgeTitle(country.sources.length)}
+                            >
+                              {getSourceCountLabel(country.sources.length)}
+                            </p>
+                          ) : null}
+                        </>
                       ) : null}
                     </button>
                     <div className="flex flex-wrap items-center justify-end gap-2">

@@ -1018,3 +1018,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added MAXUS as a tracked brand with confirmed official presence in China, Norway, Indonesia, Saudi Arabia, and the United Arab Emirates after using SAIC MAXUS's global market selector plus live local dealer, contact, and test-drive flows to seed a high-confidence first slice.
 **Result**: pass
 **TODO**: Verify MAXUS's next strongest sovereign markets beyond China, Indonesia, Norway, Saudi Arabia, and the United Arab Emirates, prioritizing first-party local sites with live dealer, contact, or test-drive flows.
+
+## 2026-04-24
+**Did**: Added a compact toggle to the brand footprint panel so users can collapse each market row down to a cleaner country-plus-ISO list while keeping the existing source links and drill-down actions, backed by EV map regression coverage.
+**Result**: pass
