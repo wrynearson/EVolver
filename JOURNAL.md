@@ -996,3 +996,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-23
 **Did**: Added AVATR as a tracked brand with confirmed official presence in China, Thailand, and Singapore after verifying AVATR's own overseas hub links plus live local consumer, showroom/find-us, and test-drive flows on first-party market sites.
 **Result**: pass
+
+## 2026-04-24
+**Did**: Expanded AVATR coverage by adding the United Arab Emirates and Azerbaijan after confirming AVATR's live UAE showroom and authorized dealer flow plus AVATR Azerbaijan's localized consumer and contact pages on first-party local market sites.
+**Result**: pass
+**TODO**: Verify AVATR's next sovereign markets beyond Azerbaijan, China, Singapore, Thailand, and the United Arab Emirates, prioritizing first-party sovereign locales backed by live local consumer, dealer, contact, or test-drive flows.

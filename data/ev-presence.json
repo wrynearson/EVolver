@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-23",
+    "last_updated": "2026-04-24",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -4178,6 +4178,28 @@
             "https://avatr.sg/",
             "https://avatr.sg/find-us/",
             "https://avatr.sg/book-a-test-drive/"
+          ],
+          "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://avatruae.com/",
+          "sources": [
+            "https://avatruae.com/",
+            "https://avatruae.com/experience-avatr/",
+            "https://avatruae.com/new-avatr-showroom/",
+            "https://smartmobilityint.com/avatr/"
+          ],
+          "uncertain": false
+        },
+        "AZE": {
+          "name": "Azerbaijan",
+          "present": true,
+          "source": "https://avatr.az/en/",
+          "sources": [
+            "https://avatr.az/en/",
+            "https://avatr.az/en/contact/"
           ],
           "uncertain": false
         }
