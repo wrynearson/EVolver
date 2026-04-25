@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-24",
+    "last_updated": "2026-04-25",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -1726,6 +1726,61 @@
             "https://www.maxus.ae/",
             "https://www.maxus.ae/Contact/Locations",
             "https://www.maxus.ae/TestDrive"
+          ],
+          "uncertain": false
+        },
+        "ECU": {
+          "name": "Ecuador",
+          "present": true,
+          "source": "https://www.maxusecuador.com/concesionarios",
+          "sources": [
+            "https://www.maxusecuador.com/",
+            "https://www.maxusecuador.com/concesionarios",
+            "https://www.maxusecuador.com/cotizador"
+          ],
+          "uncertain": false
+        },
+        "PRY": {
+          "name": "Paraguay",
+          "present": true,
+          "source": "https://maxus.com.py/sucursales/",
+          "sources": [
+            "https://maxus.com.py/",
+            "https://maxus.com.py/sucursales/",
+            "https://maxus.com.py/contacto/",
+            "https://maxus.com.py/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "URY": {
+          "name": "Uruguay",
+          "present": true,
+          "source": "https://www.maxus.uy/contacto",
+          "sources": [
+            "https://www.maxus.uy/",
+            "https://www.maxus.uy/contacto",
+            "https://www.maxus.uy/test-drive"
+          ],
+          "uncertain": false
+        },
+        "AUT": {
+          "name": "Austria",
+          "present": true,
+          "source": "https://www.maxus-motors.at/haendler",
+          "sources": [
+            "https://www.maxus-motors.at/",
+            "https://www.maxus-motors.at/modelle",
+            "https://www.maxus-motors.at/haendler"
+          ],
+          "uncertain": false
+        },
+        "HUN": {
+          "name": "Hungary",
+          "present": true,
+          "source": "https://maxus.hu/markakereskedesek/",
+          "sources": [
+            "https://maxus.hu/",
+            "https://maxus.hu/markakereskedesek/"
           ],
           "uncertain": false
         }
