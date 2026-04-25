@@ -1783,6 +1783,67 @@
             "https://maxus.hu/markakereskedesek/"
           ],
           "uncertain": false
+        },
+        "DNK": {
+          "name": "Denmark",
+          "present": true,
+          "source": "https://maxus-danmark.dk/kontakt",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://maxus-danmark.dk/",
+            "https://maxus-danmark.dk/forhandlere",
+            "https://maxus-danmark.dk/kontakt"
+          ],
+          "uncertain": false
+        },
+        "FIN": {
+          "name": "Finland",
+          "present": true,
+          "source": "https://maxus.fi/jalleenmyyjat",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://maxus.fi/",
+            "https://maxus.fi/jalleenmyyjat",
+            "https://maxus.fi/uutiset/3438858_maxus-laajentaa-jlleenmyyntiverkostoaan-tampereella-ja-oulussa"
+          ],
+          "uncertain": false
+        },
+        "ESP": {
+          "name": "Spain",
+          "present": true,
+          "source": "https://www.maxus-automotive.es/concesionarios",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxus-automotive.es/",
+            "https://www.maxus-automotive.es/concesionarios",
+            "https://www.maxus-automotive.es/contacto"
+          ],
+          "uncertain": false
+        },
+        "PRT": {
+          "name": "Portugal",
+          "present": true,
+          "source": "https://maxusportugal.pt/contacto/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://maxusportugal.pt/",
+            "https://maxusportugal.pt/concessionarios/",
+            "https://maxusportugal.pt/contacto/"
+          ],
+          "uncertain": false
+        },
+        "SVN": {
+          "name": "Slovenia",
+          "present": true,
+          "source": "https://www.maxus.si/poiscite-trgovca",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxus.si/",
+            "https://www.maxus.si/poiscite-trgovca",
+            "https://www.maxus.si/kontakt",
+            "https://www.maxus.si/rezervirajte-testno-voznjo"
+          ],
+          "uncertain": false
         }
       }
     },

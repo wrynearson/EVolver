@@ -4,7 +4,7 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
-- Verify MAXUS's next strongest sovereign markets beyond Austria, China, Ecuador, Hungary, Indonesia, Norway, Paraguay, Saudi Arabia, the United Arab Emirates, and Uruguay, prioritizing first-party local sites with live dealer, contact, or test-drive flows.
+- Verify MAXUS's next strongest sovereign markets beyond Austria, China, Denmark, Ecuador, Finland, Hungary, Indonesia, Norway, Paraguay, Portugal, Saudi Arabia, Slovenia, Spain, the United Arab Emirates, and Uruguay, prioritizing other first-party local sites with live dealer, contact, or test-drive flows.
 
 - [monitoring] Re-check DENZA only after its public first-party site exposes a new sovereign market beyond China, Australia, Brazil, Indonesia, Malaysia, Mexico, New Zealand, Singapore, the United Arab Emirates, and the United Kingdom; checked 2026-04-24 and DENZA's own public country/region selector now includes live Brazil and Mexico market sites, while the remaining public Americas candidates still 404 and the rest of the visible sovereign footprint still tops out at the already-tracked markets plus Macau-only (`zh-mo` / `en-mo`) and Europe-region surfaces rather than additional sovereign country sites.
 - [monitoring] Re-check NIO's newly announced Austria, Belgium, Czech Republic, Hungary, Luxembourg, Poland, and Romania rollout only after official local market, retail, or service surfaces go live beyond the current press-release stage; checked 2026-04-17 and NIO's own June 2025 expansion announcements still describe distributor partnerships and phased 2025-2026 launches rather than live local consumer sites.

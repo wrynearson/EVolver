@@ -1027,3 +1027,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded MAXUS coverage by adding Austria, Ecuador, Hungary, Paraguay, and Uruguay after confirming live first-party local market sites plus dealer, contact, and test-drive flows across those sovereign markets.
 **Result**: pass
 **TODO**: Verify MAXUS's next strongest sovereign markets beyond Austria, China, Ecuador, Hungary, Indonesia, Norway, Paraguay, Saudi Arabia, the United Arab Emirates, and Uruguay, prioritizing first-party local sites with live dealer, contact, or test-drive flows.
+
+## 2026-04-25
+**Did**: Expanded MAXUS coverage by adding Denmark, Finland, Portugal, Slovenia, and Spain after confirming SAIC MAXUS's global selector plus live first-party local dealer, contact, or test-drive surfaces across those sovereign markets.
+**Result**: pass
+**TODO**: Verify MAXUS's next strongest sovereign markets beyond Austria, China, Denmark, Ecuador, Finland, Hungary, Indonesia, Norway, Paraguay, Portugal, Saudi Arabia, Slovenia, Spain, the United Arab Emirates, and Uruguay, prioritizing other first-party local sites with live dealer, contact, or test-drive flows.
