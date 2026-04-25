@@ -1844,6 +1844,42 @@
             "https://www.maxus.si/rezervirajte-testno-voznjo"
           ],
           "uncertain": false
+        },
+        "BEL": {
+          "name": "Belgium",
+          "present": true,
+          "source": "https://www.maxusmotors.be/nl/testrit",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxusmotors.be/nl",
+            "https://www.maxusmotors.be/nl/contact",
+            "https://www.maxusmotors.be/nl/testrit"
+          ],
+          "uncertain": false
+        },
+        "NLD": {
+          "name": "Netherlands",
+          "present": true,
+          "source": "https://www.maxus-motors.nl/contact/vestigingen/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxus-motors.nl/",
+            "https://www.maxus-motors.nl/contact/vestigingen/",
+            "https://www.maxus-motors.nl/proefrit/"
+          ],
+          "uncertain": false
+        },
+        "CHE": {
+          "name": "Switzerland",
+          "present": true,
+          "source": "https://www.maxusmotors.ch/de/haendler",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxusmotors.ch/de/",
+            "https://www.maxusmotors.ch/de/haendler",
+            "https://www.maxusmotors.ch/de/kontakt/kontaktieren-sie-uns"
+          ],
+          "uncertain": false
         }
       }
     },
