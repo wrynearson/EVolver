@@ -1670,53 +1670,6 @@
     "MAXUS": {
       "website": "https://en.saicmaxus.com/",
       "countries": {
-        "CHN": {
-          "name": "China",
-          "present": true,
-          "source": "https://www.saicmaxus.com/dealer",
-          "sources": [
-            "https://www.saicmaxus.com/index.shtml",
-            "https://www.saicmaxus.com/dealer",
-            "https://www.saicmaxus.com/service/station"
-          ],
-          "uncertain": false
-        },
-        "NOR": {
-          "name": "Norway",
-          "present": true,
-          "source": "https://maxus.no/forhandlere",
-          "sources": [
-            "https://en.saicmaxus.com/global.shtml",
-            "https://maxus.no/",
-            "https://maxus.no/forhandlere",
-            "https://maxus.no/kontakt"
-          ],
-          "uncertain": false
-        },
-        "IDN": {
-          "name": "Indonesia",
-          "present": true,
-          "source": "https://www.maxus.id/dealers/",
-          "sources": [
-            "https://en.saicmaxus.com/global.shtml",
-            "https://www.maxus.id/",
-            "https://www.maxus.id/dealers/",
-            "https://www.maxus.id/test-drive/"
-          ],
-          "uncertain": false
-        },
-        "SAU": {
-          "name": "Saudi Arabia",
-          "present": true,
-          "source": "https://maxus.sa/find-a-dealer/",
-          "sources": [
-            "https://en.saicmaxus.com/global.shtml",
-            "https://maxus.sa/",
-            "https://maxus.sa/find-a-dealer/",
-            "https://maxus.sa/find-us/"
-          ],
-          "uncertain": false
-        },
         "ARE": {
           "name": "United Arab Emirates",
           "present": true,
@@ -1726,40 +1679,6 @@
             "https://www.maxus.ae/",
             "https://www.maxus.ae/Contact/Locations",
             "https://www.maxus.ae/TestDrive"
-          ],
-          "uncertain": false
-        },
-        "ECU": {
-          "name": "Ecuador",
-          "present": true,
-          "source": "https://www.maxusecuador.com/concesionarios",
-          "sources": [
-            "https://www.maxusecuador.com/",
-            "https://www.maxusecuador.com/concesionarios",
-            "https://www.maxusecuador.com/cotizador"
-          ],
-          "uncertain": false
-        },
-        "PRY": {
-          "name": "Paraguay",
-          "present": true,
-          "source": "https://maxus.com.py/sucursales/",
-          "sources": [
-            "https://maxus.com.py/",
-            "https://maxus.com.py/sucursales/",
-            "https://maxus.com.py/contacto/",
-            "https://maxus.com.py/test-drive/"
-          ],
-          "uncertain": false
-        },
-        "URY": {
-          "name": "Uruguay",
-          "present": true,
-          "source": "https://www.maxus.uy/contacto",
-          "sources": [
-            "https://www.maxus.uy/",
-            "https://www.maxus.uy/contacto",
-            "https://www.maxus.uy/test-drive"
           ],
           "uncertain": false
         },
@@ -1774,13 +1693,38 @@
           ],
           "uncertain": false
         },
-        "HUN": {
-          "name": "Hungary",
+        "BEL": {
+          "name": "Belgium",
           "present": true,
-          "source": "https://maxus.hu/markakereskedesek/",
+          "source": "https://www.maxusmotors.be/nl/testrit",
           "sources": [
-            "https://maxus.hu/",
-            "https://maxus.hu/markakereskedesek/"
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxusmotors.be/nl",
+            "https://www.maxusmotors.be/nl/contact",
+            "https://www.maxusmotors.be/nl/testrit"
+          ],
+          "uncertain": false
+        },
+        "CHE": {
+          "name": "Switzerland",
+          "present": true,
+          "source": "https://www.maxusmotors.ch/de/haendler",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxusmotors.ch/de/",
+            "https://www.maxusmotors.ch/de/haendler",
+            "https://www.maxusmotors.ch/de/kontakt/kontaktieren-sie-uns"
+          ],
+          "uncertain": false
+        },
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.saicmaxus.com/dealer",
+          "sources": [
+            "https://www.saicmaxus.com/index.shtml",
+            "https://www.saicmaxus.com/dealer",
+            "https://www.saicmaxus.com/service/station"
           ],
           "uncertain": false
         },
@@ -1796,15 +1740,26 @@
           ],
           "uncertain": false
         },
-        "FIN": {
-          "name": "Finland",
+        "DOM": {
+          "name": "Dominican Republic",
           "present": true,
-          "source": "https://maxus.fi/jalleenmyyjat",
+          "source": "https://maxus.do/contacto/",
           "sources": [
             "https://en.saicmaxus.com/global.shtml",
-            "https://maxus.fi/",
-            "https://maxus.fi/jalleenmyyjat",
-            "https://maxus.fi/uutiset/3438858_maxus-laajentaa-jlleenmyyntiverkostoaan-tampereella-ja-oulussa"
+            "https://maxusrd.com/",
+            "https://maxus.do/contacto/",
+            "https://maxus.do/dealers/"
+          ],
+          "uncertain": false
+        },
+        "ECU": {
+          "name": "Ecuador",
+          "present": true,
+          "source": "https://www.maxusecuador.com/concesionarios",
+          "sources": [
+            "https://www.maxusecuador.com/",
+            "https://www.maxusecuador.com/concesionarios",
+            "https://www.maxusecuador.com/cotizador"
           ],
           "uncertain": false
         },
@@ -1820,6 +1775,76 @@
           ],
           "uncertain": false
         },
+        "FIN": {
+          "name": "Finland",
+          "present": true,
+          "source": "https://maxus.fi/jalleenmyyjat",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://maxus.fi/",
+            "https://maxus.fi/jalleenmyyjat",
+            "https://maxus.fi/uutiset/3438858_maxus-laajentaa-jlleenmyyntiverkostoaan-tampereella-ja-oulussa"
+          ],
+          "uncertain": false
+        },
+        "GTM": {
+          "name": "Guatemala",
+          "present": true,
+          "source": "https://maxus.com.gt/contactanos",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "http://www.maxus.com.gt",
+            "https://maxus.com.gt/productos",
+            "https://maxus.com.gt/contactanos"
+          ],
+          "uncertain": false
+        },
+        "HUN": {
+          "name": "Hungary",
+          "present": true,
+          "source": "https://maxus.hu/markakereskedesek/",
+          "sources": [
+            "https://maxus.hu/",
+            "https://maxus.hu/markakereskedesek/"
+          ],
+          "uncertain": false
+        },
+        "IDN": {
+          "name": "Indonesia",
+          "present": true,
+          "source": "https://www.maxus.id/dealers/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxus.id/",
+            "https://www.maxus.id/dealers/",
+            "https://www.maxus.id/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "NLD": {
+          "name": "Netherlands",
+          "present": true,
+          "source": "https://www.maxus-motors.nl/contact/vestigingen/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxus-motors.nl/",
+            "https://www.maxus-motors.nl/contact/vestigingen/",
+            "https://www.maxus-motors.nl/proefrit/"
+          ],
+          "uncertain": false
+        },
+        "NOR": {
+          "name": "Norway",
+          "present": true,
+          "source": "https://maxus.no/forhandlere",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://maxus.no/",
+            "https://maxus.no/forhandlere",
+            "https://maxus.no/kontakt"
+          ],
+          "uncertain": false
+        },
         "PRT": {
           "name": "Portugal",
           "present": true,
@@ -1829,6 +1854,30 @@
             "https://maxusportugal.pt/",
             "https://maxusportugal.pt/concessionarios/",
             "https://maxusportugal.pt/contacto/"
+          ],
+          "uncertain": false
+        },
+        "PRY": {
+          "name": "Paraguay",
+          "present": true,
+          "source": "https://maxus.com.py/sucursales/",
+          "sources": [
+            "https://maxus.com.py/",
+            "https://maxus.com.py/sucursales/",
+            "https://maxus.com.py/contacto/",
+            "https://maxus.com.py/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "SAU": {
+          "name": "Saudi Arabia",
+          "present": true,
+          "source": "https://maxus.sa/find-a-dealer/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://maxus.sa/",
+            "https://maxus.sa/find-a-dealer/",
+            "https://maxus.sa/find-us/"
           ],
           "uncertain": false
         },
@@ -1845,39 +1894,26 @@
           ],
           "uncertain": false
         },
-        "BEL": {
-          "name": "Belgium",
+        "URY": {
+          "name": "Uruguay",
           "present": true,
-          "source": "https://www.maxusmotors.be/nl/testrit",
+          "source": "https://www.maxus.uy/contacto",
           "sources": [
-            "https://en.saicmaxus.com/global.shtml",
-            "https://www.maxusmotors.be/nl",
-            "https://www.maxusmotors.be/nl/contact",
-            "https://www.maxusmotors.be/nl/testrit"
+            "https://www.maxus.uy/",
+            "https://www.maxus.uy/contacto",
+            "https://www.maxus.uy/test-drive"
           ],
           "uncertain": false
         },
-        "NLD": {
-          "name": "Netherlands",
+        "ZAF": {
+          "name": "South Africa",
           "present": true,
-          "source": "https://www.maxus-motors.nl/contact/vestigingen/",
+          "source": "https://maxus.co.za/contactMobile/",
           "sources": [
             "https://en.saicmaxus.com/global.shtml",
-            "https://www.maxus-motors.nl/",
-            "https://www.maxus-motors.nl/contact/vestigingen/",
-            "https://www.maxus-motors.nl/proefrit/"
-          ],
-          "uncertain": false
-        },
-        "CHE": {
-          "name": "Switzerland",
-          "present": true,
-          "source": "https://www.maxusmotors.ch/de/haendler",
-          "sources": [
-            "https://en.saicmaxus.com/global.shtml",
-            "https://www.maxusmotors.ch/de/",
-            "https://www.maxusmotors.ch/de/haendler",
-            "https://www.maxusmotors.ch/de/kontakt/kontaktieren-sie-uns"
+            "https://maxus.co.za/",
+            "https://maxus.co.za/contactMobile/",
+            "https://www.maxus.co.za/resources/"
           ],
           "uncertain": false
         }
