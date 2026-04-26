@@ -1847,6 +1847,17 @@
           ],
           "uncertain": false
         },
+        "ISL": {
+          "name": "Iceland",
+          "present": true,
+          "source": "https://maxus.is/hafdu-samband",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://maxus.is/",
+            "https://maxus.is/hafdu-samband"
+          ],
+          "uncertain": false
+        },
         "LUX": {
           "name": "Luxembourg",
           "present": true,
@@ -1870,6 +1881,18 @@
             "https://www.maxus.com.mt/page-sitemap.xml",
             "https://www.maxus.com.mt/about/",
             "https://www.maxus.com.mt/contact/"
+          ],
+          "uncertain": false
+        },
+        "MYS": {
+          "name": "Malaysia",
+          "present": true,
+          "source": "https://weststarmaxus.com/testdrive.php",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://weststarmaxus.com/",
+            "https://weststarmaxus.com/contacts.php",
+            "https://weststarmaxus.com/testdrive.php"
           ],
           "uncertain": false
         },
@@ -1969,6 +1992,18 @@
             "https://www.maxus.si/poiscite-trgovca",
             "https://www.maxus.si/kontakt",
             "https://www.maxus.si/rezervirajte-testno-voznjo"
+          ],
+          "uncertain": false
+        },
+        "SWE": {
+          "name": "Sweden",
+          "present": true,
+          "source": "https://maxus.se/aterforsaljare",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://maxus.se/",
+            "https://maxus.se/aterforsaljare",
+            "https://maxus.se/provkorning"
           ],
           "uncertain": false
         },

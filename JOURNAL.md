@@ -1056,3 +1056,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded MAXUS coverage by adding Poland after confirming SAIC MAXUS's official global selector plus Poland's live EV model page, contact flow, and rendered dealer and service network on the local first-party site.
 **Result**: pass
 **TODO**: Verify MAXUS's next strongest sovereign markets beyond Austria, Belgium, China, Denmark, the Dominican Republic, Ecuador, Finland, France, Germany, Guatemala, Hungary, Indonesia, Luxembourg, Malta, the Netherlands, Norway, Paraguay, Poland, Portugal, Romania, Saudi Arabia, Slovenia, South Africa, Spain, Switzerland, the United Arab Emirates, and Uruguay, prioritizing other first-party local sites with live dealer, contact, or test-drive flows.
+
+## 2026-04-26
+**Did**: Expanded MAXUS coverage by adding Iceland, Malaysia, and Sweden after confirming SAIC MAXUS's official global selector plus each local first-party site's live EV lineup and contact, dealer, or test-drive surfaces.
+**Result**: pass
+**TODO**: Verify MAXUS's next strongest sovereign markets beyond Austria, Belgium, China, Denmark, the Dominican Republic, Ecuador, Finland, France, Germany, Guatemala, Hungary, Iceland, Indonesia, Luxembourg, Malaysia, Malta, the Netherlands, Norway, Paraguay, Poland, Portugal, Romania, Saudi Arabia, Slovenia, South Africa, Spain, Sweden, Switzerland, the United Arab Emirates, and Uruguay, prioritizing other first-party local sites with live dealer, contact, or test-drive flows.
