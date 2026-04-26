@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-25",
+    "last_updated": "2026-04-26",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -1728,6 +1728,19 @@
           ],
           "uncertain": false
         },
+        "DEU": {
+          "name": "Germany",
+          "present": true,
+          "source": "https://www.maxus.de/de/haendler",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxus.de/de",
+            "https://www.maxus.de/sitemaps/de.xml",
+            "https://www.maxus.de/de/haendler",
+            "https://www.maxus.de/de/kontakt"
+          ],
+          "uncertain": false
+        },
         "DNK": {
           "name": "Denmark",
           "present": true,
@@ -1787,6 +1800,19 @@
           ],
           "uncertain": false
         },
+        "FRA": {
+          "name": "France",
+          "present": true,
+          "source": "https://www.maxusmotors.fr/concessions",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxusmotors.fr/fr",
+            "https://www.maxusmotors.fr/sitemap.xml",
+            "https://www.maxusmotors.fr/concessions",
+            "https://www.maxusmotors.fr/contact"
+          ],
+          "uncertain": false
+        },
         "GTM": {
           "name": "Guatemala",
           "present": true,
@@ -1818,6 +1844,32 @@
             "https://www.maxus.id/",
             "https://www.maxus.id/dealers/",
             "https://www.maxus.id/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "LUX": {
+          "name": "Luxembourg",
+          "present": true,
+          "source": "https://www.maxusmotors.lu/fr/concessionnaires",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxusmotors.lu/fr",
+            "https://www.maxusmotors.lu/sitemaps/fr.xml",
+            "https://www.maxusmotors.lu/fr/concessionnaires",
+            "https://www.maxusmotors.lu/fr/contact"
+          ],
+          "uncertain": false
+        },
+        "MLT": {
+          "name": "Malta",
+          "present": true,
+          "source": "https://www.maxus.com.mt/contact/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxus.com.mt/",
+            "https://www.maxus.com.mt/page-sitemap.xml",
+            "https://www.maxus.com.mt/about/",
+            "https://www.maxus.com.mt/contact/"
           ],
           "uncertain": false
         },
@@ -1866,6 +1918,19 @@
             "https://maxus.com.py/sucursales/",
             "https://maxus.com.py/contacto/",
             "https://maxus.com.py/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "ROU": {
+          "name": "Romania",
+          "present": true,
+          "source": "https://www.maxus-romania.ro/solicita-test-drive",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxus-romania.ro/",
+            "https://www.maxus-romania.ro/sitemap-content.xml",
+            "https://www.maxus-romania.ro/contact",
+            "https://www.maxus-romania.ro/solicita-test-drive"
           ],
           "uncertain": false
         },
