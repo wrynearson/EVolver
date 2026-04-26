@@ -1858,6 +1858,16 @@
           ],
           "uncertain": false
         },
+        "JOR": {
+          "name": "Jordan",
+          "present": true,
+          "source": "https://www.maxus-jordan.com/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxus-jordan.com/"
+          ],
+          "uncertain": false
+        },
         "LUX": {
           "name": "Luxembourg",
           "present": true,
