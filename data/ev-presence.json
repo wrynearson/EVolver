@@ -1897,6 +1897,19 @@
           ],
           "uncertain": false
         },
+        "POL": {
+          "name": "Poland",
+          "present": true,
+          "source": "https://maxuspolska.pl/dealerzy",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://maxuspolska.pl/",
+            "https://maxuspolska.pl/modele/e-deliver-7",
+            "https://maxuspolska.pl/kontakt",
+            "https://maxuspolska.pl/dealerzy"
+          ],
+          "uncertain": false
+        },
         "PRT": {
           "name": "Portugal",
           "present": true,
