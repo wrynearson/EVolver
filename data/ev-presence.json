@@ -1682,6 +1682,17 @@
           ],
           "uncertain": false
         },
+        "ARM": {
+          "name": "Armenia",
+          "present": true,
+          "source": "https://auto-gallery.am/request-a-test-drive/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://auto-gallery.am/saicmaxus/",
+            "https://auto-gallery.am/request-a-test-drive/"
+          ],
+          "uncertain": false
+        },
         "AUT": {
           "name": "Austria",
           "present": true,
@@ -1702,6 +1713,26 @@
             "https://www.maxusmotors.be/nl",
             "https://www.maxusmotors.be/nl/contact",
             "https://www.maxusmotors.be/nl/testrit"
+          ],
+          "uncertain": false
+        },
+        "BHR": {
+          "name": "Bahrain",
+          "present": true,
+          "source": "https://maxusbahrain.com/index.html",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://maxusbahrain.com/index.html"
+          ],
+          "uncertain": false
+        },
+        "BRN": {
+          "name": "Brunei",
+          "present": true,
+          "source": "https://maxus.com.bn/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://maxus.com.bn/"
           ],
           "uncertain": false
         },
@@ -1825,6 +1856,17 @@
           ],
           "uncertain": false
         },
+        "HND": {
+          "name": "Honduras",
+          "present": true,
+          "source": "https://imotors.hn/contactanos/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://imotors.hn/maxus/",
+            "https://imotors.hn/contactanos/"
+          ],
+          "uncertain": false
+        },
         "HUN": {
           "name": "Hungary",
           "present": true,
@@ -1855,6 +1897,19 @@
             "https://en.saicmaxus.com/global.shtml",
             "https://maxus.is/",
             "https://maxus.is/hafdu-samband"
+          ],
+          "uncertain": false
+        },
+        "ISR": {
+          "name": "Israel",
+          "present": true,
+          "source": "https://maxus.co.il/test-drive/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://maxus.co.il/",
+            "https://maxus.co.il/contact-us/",
+            "https://maxus.co.il/service-centers-and-showrooms/",
+            "https://maxus.co.il/test-drive/"
           ],
           "uncertain": false
         },
@@ -1964,6 +2019,17 @@
             "https://maxus.com.py/sucursales/",
             "https://maxus.com.py/contacto/",
             "https://maxus.com.py/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "QAT": {
+          "name": "Qatar",
+          "present": true,
+          "source": "https://www.maxusqatar.com/contactus.php",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxusqatar.com/",
+            "https://www.maxusqatar.com/contactus.php"
           ],
           "uncertain": false
         },
