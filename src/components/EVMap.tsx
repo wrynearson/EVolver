@@ -687,7 +687,7 @@ function buildShareUrl(
  * (popups, sidebar, brand selector, etc.) over its daily evolution runs.
  */
 export default function EVMap() {
-  const { data, countryBrandCount, summary, loading, error } = useEVData();
+  const { data, countryBrandCount, summary, loading, error, retry } = useEVData();
   const initialSelectionState = getInitialSelectionState();
   const brandFilterInputRef = useRef<HTMLInputElement | null>(null);
   const coverageTabRefs = useRef<Record<CoveragePanelView, HTMLButtonElement | null>>({
@@ -708,6 +708,7 @@ export default function EVMap() {
   const skipNextFootprintSearchReset = useRef(false);
   const [countries, setCountries] = useState<FeatureCollection | null>(null);
   const [countriesError, setCountriesError] = useState<string | null>(null);
+  const [countryRequestVersion, setCountryRequestVersion] = useState(0);
   const [selectedBrand, setSelectedBrand] = useState<string>(
     () => initialSelectionState.selectedBrand,
   );
@@ -1586,8 +1587,16 @@ export default function EVMap() {
       }),
     [activeSelectedBrand, selectedBrandHasUncertainPresence],
   );
+  const retryCountryBoundaries = () => {
+    setCountryRequestVersion((currentVersion) => currentVersion + 1);
+  };
 
   useEffect(() => {
+    let cancelled = false;
+
+    setCountries(null);
+    setCountriesError(null);
+
     fetch(import.meta.env.BASE_URL + "data/ne_110m_countries.geojson")
       .then((res) => {
         if (!res.ok) {
@@ -1597,16 +1606,28 @@ export default function EVMap() {
         return res.json();
       })
       .then((geojson: FeatureCollection) => {
+        if (cancelled) {
+          return;
+        }
+
         setCountries(geojson);
         setCountriesError(null);
       })
       .catch((err) => {
+        if (cancelled) {
+          return;
+        }
+
         console.error("Failed to load country boundaries:", err);
         setCountriesError(
           "The world boundary dataset could not be loaded for this session.",
         );
       });
-  }, []);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [countryRequestVersion]);
 
   useEffect(() => {
     if (!data || !selectedBrand || data.brands[selectedBrand]) {
@@ -1901,6 +1922,7 @@ export default function EVMap() {
       ? {
           title: "Dataset load failed",
           description: error,
+          onRetry: retry,
         }
       : !data
       ? {
@@ -1912,6 +1934,7 @@ export default function EVMap() {
         ? {
             title: "Map boundaries unavailable",
             description: countriesError,
+            onRetry: retryCountryBoundaries,
           }
       : !visibleCountries
         ? {
@@ -1934,6 +1957,7 @@ export default function EVMap() {
               <MapViewportStatus
                 title={mapStatus.title}
                 description={mapStatus.description}
+                onRetry={mapStatus.onRetry}
               />
             }
           >
@@ -1950,6 +1974,7 @@ export default function EVMap() {
           <MapViewportStatus
             title={mapStatus.title}
             description={mapStatus.description}
+            onRetry={mapStatus.onRetry}
           />
         )}
       </div>
@@ -3617,9 +3642,11 @@ export default function EVMap() {
 function MapViewportStatus({
   title,
   description,
+  onRetry,
 }: {
   title: string;
   description: string;
+  onRetry?: () => void;
 }) {
   return (
     <div className="flex h-full w-full items-center justify-center bg-slate-100 px-6">
@@ -3633,6 +3660,15 @@ function MapViewportStatus({
         </p>
         <h2 className="mt-3 text-2xl font-semibold text-slate-900">{title}</h2>
         <p className="mt-3 text-sm leading-6 text-slate-600">{description}</p>
+        {onRetry ? (
+          <button
+            type="button"
+            className="mt-6 rounded-full bg-sky-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-sky-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+            onClick={onRetry}
+          >
+            Retry
+          </button>
+        ) : null}
       </div>
     </div>
   );

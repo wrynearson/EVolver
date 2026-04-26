@@ -2505,4 +2505,85 @@ describe("EVMap", () => {
       expect.any(Error),
     );
   });
+
+  it("retries and recovers when the EV presence data request initially fails", async () => {
+    const consoleError = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+    let datasetRequestCount = 0;
+
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+
+      if (url.includes("ev-presence.json")) {
+        datasetRequestCount += 1;
+
+        if (datasetRequestCount === 1) {
+          return new Response("dataset unavailable", { status: 503 });
+        }
+
+        return new Response(JSON.stringify(mockData), {
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+
+      return new Response(JSON.stringify(mockGeoJson), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset load failed")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Retry" }));
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(await screen.findByTestId("map")).toBeInTheDocument();
+    expect(screen.queryByText("Dataset load failed")).not.toBeInTheDocument();
+    expect(datasetRequestCount).toBe(2);
+    expect(consoleError).toHaveBeenCalledTimes(1);
+  });
+
+  it("retries and recovers when the country geometry request initially fails", async () => {
+    const consoleError = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+    let geometryRequestCount = 0;
+
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+
+      if (url.includes("ev-presence.json")) {
+        return new Response(JSON.stringify(mockData), {
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+
+      geometryRequestCount += 1;
+
+      if (geometryRequestCount === 1) {
+        return new Response("geojson unavailable", { status: 503 });
+      }
+
+      return new Response(JSON.stringify(mockGeoJson), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Map boundaries unavailable")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Retry" }));
+
+    expect(await screen.findByTestId("map")).toBeInTheDocument();
+    expect(screen.queryByText("Map boundaries unavailable")).not.toBeInTheDocument();
+    expect(geometryRequestCount).toBe(2);
+    expect(consoleError).toHaveBeenCalledTimes(1);
+  });
 });

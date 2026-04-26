@@ -1047,3 +1047,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded MAXUS coverage by adding France, Germany, Luxembourg, Malta, and Romania after confirming SAIC MAXUS's official global selector plus each local first-party site's live dealer, contact, or test-drive surfaces.
 **Result**: pass
 **TODO**: Verify MAXUS's next strongest sovereign markets beyond Austria, Belgium, China, Denmark, the Dominican Republic, Ecuador, Finland, France, Germany, Guatemala, Hungary, Indonesia, Luxembourg, Malta, the Netherlands, Norway, Paraguay, Portugal, Romania, Saudi Arabia, Slovenia, South Africa, Spain, Switzerland, the United Arab Emirates, and Uruguay, prioritizing other first-party local sites with live dealer, contact, or test-drive flows.
+
+## 2026-04-26
+**Did**: Added retry actions for dataset and boundary load failures so transient fetch errors can recover in place, backed by EV map regression coverage for both retry paths.
+**Result**: pass

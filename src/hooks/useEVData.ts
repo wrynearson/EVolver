@@ -166,8 +166,17 @@ export function useEVData() {
   const [summary, setSummary] = useState<EVDataSummary | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [requestVersion, setRequestVersion] = useState(0);
 
   useEffect(() => {
+    let cancelled = false;
+
+    setLoading(true);
+    setError(null);
+    setData(null);
+    setCountryBrandCount({});
+    setSummary(null);
+
     fetch(import.meta.env.BASE_URL + "data/ev-presence.json")
       .then((res) => {
         if (!res.ok) {
@@ -177,6 +186,10 @@ export function useEVData() {
         return res.json();
       })
       .then((json: EVPresenceData) => {
+        if (cancelled) {
+          return;
+        }
+
         setData(json);
         setCountryBrandCount(computeCountryBrandCounts(json));
         setSummary(computeDatasetSummary(json));
@@ -184,13 +197,28 @@ export function useEVData() {
         setLoading(false);
       })
       .catch((err) => {
+        if (cancelled) {
+          return;
+        }
+
         console.error("Failed to load EV presence data:", err);
         setError("The verified EV presence dataset could not be loaded.");
         setLoading(false);
       });
-  }, []);
 
-  return { data, countryBrandCount, summary, loading, error };
+    return () => {
+      cancelled = true;
+    };
+  }, [requestVersion]);
+
+  return {
+    data,
+    countryBrandCount,
+    summary,
+    loading,
+    error,
+    retry: () => setRequestVersion((currentVersion) => currentVersion + 1),
+  };
 }
 
 /**
