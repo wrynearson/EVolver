@@ -2011,7 +2011,7 @@ export default function EVMap() {
                       ? `brand-filter-suggestion-${activeBrandLookupIndex}`
                       : undefined
                   }
-                  className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
+                  className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 disabled:cursor-not-allowed disabled:opacity-60"
                   placeholder="Search by brand name"
                   disabled={brandOptions.length === 0}
                   value={brandLookupQuery}
@@ -2165,7 +2165,7 @@ export default function EVMap() {
             <div className="mt-1 flex items-center gap-2">
               <select
                 id="region-filter"
-                className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
+                className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 disabled:cursor-not-allowed disabled:opacity-60"
                 disabled={availableRegions.length === 0}
                 value={selectedCoverageRegion}
                 onChange={(event) => setSelectedCoverageRegion(event.target.value)}
@@ -2217,7 +2217,7 @@ export default function EVMap() {
                       ? `country-filter-suggestion-${activeCountryLookupIndex}`
                       : undefined
                   }
-                  className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700"
+                  className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 disabled:cursor-not-allowed disabled:opacity-60"
                   placeholder="Search by country or ISO code"
                   disabled={countryOptions.length === 0}
                   value={countryLookupQuery}
@@ -2971,7 +2971,7 @@ export default function EVMap() {
                   </button>
                   <button
                     type="button"
-                    className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                    className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800 disabled:cursor-not-allowed disabled:text-gray-400 disabled:no-underline"
                     onClick={copyBrandMarkets}
                     disabled={selectedBrandMarketList.length === 0}
                   >
@@ -3127,6 +3127,8 @@ export default function EVMap() {
               <label className="flex items-start gap-2 text-sm text-amber-950">
                 <input
                   type="checkbox"
+                  id="footprint-uncertain-filter"
+                  aria-label="Show only uncertain markets"
                   className="mt-0.5 h-4 w-4 rounded border-amber-300 text-amber-700 focus:ring-amber-500"
                   checked={showOnlyUncertainFootprint}
                   onChange={(event) =>
@@ -3408,6 +3410,8 @@ export default function EVMap() {
             <label className="flex items-start gap-2 text-sm text-amber-950">
               <input
                 type="checkbox"
+                id="coverage-uncertain-filter"
+                aria-label={getCoverageFilterToggleLabel(coveragePanelView)}
                 className="mt-0.5 h-4 w-4 rounded border-amber-300 text-amber-700 focus:ring-amber-500"
                 checked={showOnlyUncertainCoverage}
                 onChange={(event) =>

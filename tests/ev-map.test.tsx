@@ -162,6 +162,15 @@ const mockUncertainData: EVPresenceData = {
   },
 };
 
+const mockEmptyData: EVPresenceData = {
+  metadata: {
+    last_updated: "2026-03-13",
+    definition: "test",
+    schema_version: 2,
+  },
+  brands: {},
+};
+
 const mockGeoJson = {
   type: "FeatureCollection",
   features: [
@@ -229,6 +238,11 @@ const mockGeoJson = {
       },
     },
   ],
+};
+
+const mockEmptyGeoJson = {
+  type: "FeatureCollection",
+  features: [],
 };
 
 describe("EVMap", () => {
@@ -374,6 +388,35 @@ describe("EVMap", () => {
         "The data panels are ready while the interactive MapLibre canvas finishes loading.",
       ),
     ).toBeInTheDocument();
+  });
+
+  it("styles empty-state filters as disabled when there are no brands or country geometries", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockEmptyData : mockEmptyGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const brandFilter = screen.getByLabelText("Brand filter");
+    const regionFilter = screen.getByLabelText("Region filter");
+    const countryLookup = screen.getByLabelText("Country lookup");
+
+    expect(brandFilter).toBeDisabled();
+    expect(regionFilter).toBeDisabled();
+    expect(countryLookup).toBeDisabled();
+
+    expect(brandFilter).toHaveClass("disabled:cursor-not-allowed", "disabled:opacity-60");
+    expect(regionFilter).toHaveClass("disabled:cursor-not-allowed", "disabled:opacity-60");
+    expect(countryLookup).toHaveClass("disabled:cursor-not-allowed", "disabled:opacity-60");
   });
 
   it("fits the map to a selected country", async () => {

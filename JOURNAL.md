@@ -1090,3 +1090,12 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded MAXUS coverage by adding Kuwait and Singapore after confirming SAIC MAXUS's official global selector plus each market's live first-party local site, contact/showroom surface, and test-drive flow.
 **Result**: pass
 **TODO**: Verify MAXUS's next strongest sovereign markets beyond Armenia, Austria, Bahrain, Belgium, Brunei, China, the Czech Republic, Denmark, the Dominican Republic, Ecuador, Finland, France, Germany, Greece, Guatemala, Honduras, Hungary, Iceland, Indonesia, Israel, Jordan, Kuwait, Luxembourg, Malaysia, Malta, the Netherlands, Norway, Paraguay, Poland, Portugal, Qatar, Romania, Saudi Arabia, Serbia, Singapore, Slovenia, South Africa, Spain, Sweden, Switzerland, Turkey, Ukraine, the United Arab Emirates, and Uruguay, prioritizing other first-party local sites with live dealer, contact, or test-drive flows.
+
+## 2026-04-27
+**Did**: Expanded MAXUS coverage by adding Venezuela after confirming SAIC MAXUS's official global selector plus MAXUS Venezuela's live first-party contact and dealer-network pages.
+**Result**: pass
+**TODO**: Verify MAXUS's next strongest sovereign markets beyond Armenia, Austria, Bahrain, Belgium, Brunei, China, the Czech Republic, Denmark, the Dominican Republic, Ecuador, Finland, France, Germany, Greece, Guatemala, Honduras, Hungary, Iceland, Indonesia, Israel, Jordan, Kuwait, Luxembourg, Malaysia, Malta, the Netherlands, Norway, Paraguay, Poland, Portugal, Qatar, Romania, Saudi Arabia, Serbia, Singapore, Slovenia, South Africa, Spain, Sweden, Switzerland, Turkey, Ukraine, the United Arab Emirates, Uruguay, and Venezuela, prioritizing other first-party local sites with live dealer, contact, or test-drive flows.
+
+## 2026-04-27
+**Did**: Improved EV map accessibility and empty-state affordances by adding explicit uncertain-filter labels, consistent disabled styling for empty filters, and regression coverage for the disabled filter state.
+**Result**: pass
