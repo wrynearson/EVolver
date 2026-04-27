@@ -1076,3 +1076,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded MAXUS coverage by adding the Czech Republic, Serbia, Turkey, and Ukraine after confirming each market's live first-party MAXUS site plus local model, contact, price-list, or importer pages.
 **Result**: pass
 **TODO**: Verify MAXUS's next strongest sovereign markets beyond Armenia, Austria, Bahrain, Belgium, Brunei, China, the Czech Republic, Denmark, the Dominican Republic, Ecuador, Finland, France, Germany, Guatemala, Honduras, Hungary, Iceland, Indonesia, Israel, Jordan, Luxembourg, Malaysia, Malta, the Netherlands, Norway, Paraguay, Poland, Portugal, Qatar, Romania, Saudi Arabia, Serbia, Slovenia, South Africa, Spain, Sweden, Switzerland, Turkey, Ukraine, the United Arab Emirates, and Uruguay, prioritizing other first-party local sites with live dealer, contact, or test-drive flows.
+
+## 2026-04-27
+**Did**: Added a visible hover outline on the interactive map so hovered countries are highlighted directly on the map instead of only in the preview panel, backed by EV map regression coverage.
+**Result**: pass

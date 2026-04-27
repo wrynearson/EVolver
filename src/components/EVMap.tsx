@@ -1966,6 +1966,7 @@ export default function EVMap() {
               fillColor={fillColor}
               focusBounds={mapFocusState.bounds}
               focusTargetKey={mapFocusState.key}
+              hoveredCountryIsoCode={hoveredCountry?.isoCode ?? null}
               onHoveredCountryChange={setHoveredCountry}
               onSelectedCountryChange={setSelectedCountry}
             />

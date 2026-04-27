@@ -95,7 +95,9 @@ const MockMapComponent = React.forwardRef(
 const mockSource = vi.fn(({ children }: { children?: ReactNode }) => (
   <div data-testid="source">{children}</div>
 ));
-const mockLayer = vi.fn(() => <div data-testid="layer" />);
+const mockLayer = vi.fn(({ id }: { id?: string }) => (
+  <div data-testid={id ? `layer-${id}` : "layer"} />
+));
 
 vi.mock("react-map-gl/maplibre", () => ({
   default: MockMapComponent,
@@ -662,6 +664,7 @@ describe("EVMap", () => {
     );
 
     fireEvent.click(await screen.findByRole("button", { name: "Hover Norway" }));
+    expect(screen.getByTestId("layer-country-hover-line")).toBeInTheDocument();
     const previewPanel = screen.getByRole("heading", { name: "Map preview" }).closest(
       "div",
     );
@@ -759,6 +762,7 @@ describe("EVMap", () => {
     expect(window.location.search).toBe("?brand=XPeng&country=SWE&footprintQuery=nor");
 
     fireEvent.click(await screen.findByRole("button", { name: "Leave Hover" }));
+    expect(screen.queryByTestId("layer-country-hover-line")).not.toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Map preview" })).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: "Clear brand filter" }));

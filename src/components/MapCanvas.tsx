@@ -11,6 +11,7 @@ interface MapCanvasProps {
   fillColor: ExpressionSpecification | string;
   focusBounds: MapBounds | null;
   focusTargetKey: string;
+  hoveredCountryIsoCode: string | null;
   onHoveredCountryChange: (country: MapCountrySelection | null) => void;
   onSelectedCountryChange: (country: MapCountrySelection | null) => void;
 }
@@ -41,6 +42,7 @@ export default function MapCanvas({
   fillColor,
   focusBounds,
   focusTargetKey,
+  hoveredCountryIsoCode,
   onHoveredCountryChange,
   onSelectedCountryChange,
 }: MapCanvasProps) {
@@ -95,6 +97,18 @@ export default function MapCanvas({
           type="line"
           paint={{ "line-color": "#627BC1", "line-width": 0.5 }}
         />
+        {hoveredCountryIsoCode ? (
+          <Layer
+            id="country-hover-line"
+            type="line"
+            filter={["==", ["get", "ISO_A3"], hoveredCountryIsoCode]}
+            paint={{
+              "line-color": "#1d4ed8",
+              "line-width": 2,
+              "line-opacity": 0.95,
+            }}
+          />
+        ) : null}
       </Source>
     </Map>
   );
