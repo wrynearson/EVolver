@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-26",
+    "last_updated": "2026-04-27",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -1759,6 +1759,17 @@
           ],
           "uncertain": false
         },
+        "CZE": {
+          "name": "Czech Republic",
+          "present": true,
+          "source": "https://www.maxus.cz/testovaci-jizda/",
+          "sources": [
+            "https://www.maxus.cz/",
+            "https://www.maxus.cz/modely/",
+            "https://www.maxus.cz/testovaci-jizda/"
+          ],
+          "uncertain": false
+        },
         "DEU": {
           "name": "Germany",
           "present": true,
@@ -2058,6 +2069,17 @@
           ],
           "uncertain": false
         },
+        "SRB": {
+          "name": "Serbia",
+          "present": true,
+          "source": "https://www.maxus.rs/kontakt.php",
+          "sources": [
+            "https://www.maxus.rs/",
+            "https://www.maxus.rs/zasto-maxus.php",
+            "https://www.maxus.rs/kontakt.php"
+          ],
+          "uncertain": false
+        },
         "SVN": {
           "name": "Slovenia",
           "present": true,
@@ -2080,6 +2102,28 @@
             "https://maxus.se/",
             "https://maxus.se/aterforsaljare",
             "https://maxus.se/provkorning"
+          ],
+          "uncertain": false
+        },
+        "TUR": {
+          "name": "Turkey",
+          "present": true,
+          "source": "https://www.maxus-turkiye.com/tr/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxus-turkiye.com/tr/",
+            "https://www.maxus-turkiye.com/tr/fiyat-listesi.html"
+          ],
+          "uncertain": false
+        },
+        "UKR": {
+          "name": "Ukraine",
+          "present": true,
+          "source": "https://saic-maxus.com.ua/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://saic-maxus.com.ua/",
+            "https://saic-maxus.com.ua/price-list/"
           ],
           "uncertain": false
         },

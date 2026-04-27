@@ -1071,3 +1071,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded MAXUS coverage by adding Armenia, Bahrain, Brunei, Honduras, Israel, and Qatar after confirming SAIC MAXUS's official global selector plus each local first-party site's live contact, showroom, dealer, or test-drive surfaces.
 **Result**: pass
 **TODO**: Verify MAXUS's next strongest sovereign markets beyond Armenia, Austria, Bahrain, Belgium, Brunei, China, Denmark, the Dominican Republic, Ecuador, Finland, France, Germany, Guatemala, Honduras, Hungary, Iceland, Indonesia, Israel, Jordan, Luxembourg, Malaysia, Malta, the Netherlands, Norway, Paraguay, Poland, Portugal, Qatar, Romania, Saudi Arabia, Slovenia, South Africa, Spain, Sweden, Switzerland, the United Arab Emirates, and Uruguay, prioritizing other first-party local sites with live dealer, contact, or test-drive flows.
+
+## 2026-04-27
+**Did**: Expanded MAXUS coverage by adding the Czech Republic, Serbia, Turkey, and Ukraine after confirming each market's live first-party MAXUS site plus local model, contact, price-list, or importer pages.
+**Result**: pass
+**TODO**: Verify MAXUS's next strongest sovereign markets beyond Armenia, Austria, Bahrain, Belgium, Brunei, China, the Czech Republic, Denmark, the Dominican Republic, Ecuador, Finland, France, Germany, Guatemala, Honduras, Hungary, Iceland, Indonesia, Israel, Jordan, Luxembourg, Malaysia, Malta, the Netherlands, Norway, Paraguay, Poland, Portugal, Qatar, Romania, Saudi Arabia, Serbia, Slovenia, South Africa, Spain, Sweden, Switzerland, Turkey, Ukraine, the United Arab Emirates, and Uruguay, prioritizing other first-party local sites with live dealer, contact, or test-drive flows.
