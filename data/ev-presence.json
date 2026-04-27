@@ -1867,6 +1867,18 @@
           ],
           "uncertain": false
         },
+        "GRC": {
+          "name": "Greece",
+          "present": true,
+          "source": "https://maxushellas.gr/test-drive/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://maxushellas.gr/",
+            "https://maxushellas.gr/cars/edeliver-9/",
+            "https://maxushellas.gr/test-drive/"
+          ],
+          "uncertain": false
+        },
         "HND": {
           "name": "Honduras",
           "present": true,

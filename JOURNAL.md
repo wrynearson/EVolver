@@ -1080,3 +1080,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-27
 **Did**: Added a visible hover outline on the interactive map so hovered countries are highlighted directly on the map instead of only in the preview panel, backed by EV map regression coverage.
 **Result**: pass
+
+## 2026-04-27
+**Did**: Expanded MAXUS coverage by adding Greece after confirming SAIC MAXUS's official global selector plus Maxus Hellas's live localized site, EV product page, and test-drive flow.
+**Result**: pass
+**TODO**: Verify MAXUS's next strongest sovereign markets beyond Armenia, Austria, Bahrain, Belgium, Brunei, China, the Czech Republic, Denmark, the Dominican Republic, Ecuador, Finland, France, Germany, Greece, Guatemala, Honduras, Hungary, Iceland, Indonesia, Israel, Jordan, Luxembourg, Malaysia, Malta, the Netherlands, Norway, Paraguay, Poland, Portugal, Qatar, Romania, Saudi Arabia, Serbia, Slovenia, South Africa, Spain, Sweden, Switzerland, Turkey, Ukraine, the United Arab Emirates, and Uruguay, prioritizing other first-party local sites with live dealer, contact, or test-drive flows.
