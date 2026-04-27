@@ -1855,18 +1855,6 @@
           ],
           "uncertain": false
         },
-        "GTM": {
-          "name": "Guatemala",
-          "present": true,
-          "source": "https://maxus.com.gt/contactanos",
-          "sources": [
-            "https://en.saicmaxus.com/global.shtml",
-            "http://www.maxus.com.gt",
-            "https://maxus.com.gt/productos",
-            "https://maxus.com.gt/contactanos"
-          ],
-          "uncertain": false
-        },
         "GRC": {
           "name": "Greece",
           "present": true,
@@ -1876,6 +1864,18 @@
             "https://maxushellas.gr/",
             "https://maxushellas.gr/cars/edeliver-9/",
             "https://maxushellas.gr/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "GTM": {
+          "name": "Guatemala",
+          "present": true,
+          "source": "https://maxus.com.gt/contactanos",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "http://www.maxus.com.gt",
+            "https://maxus.com.gt/productos",
+            "https://maxus.com.gt/contactanos"
           ],
           "uncertain": false
         },
@@ -1943,6 +1943,18 @@
           "sources": [
             "https://en.saicmaxus.com/global.shtml",
             "https://www.maxus-jordan.com/"
+          ],
+          "uncertain": false
+        },
+        "KWT": {
+          "name": "Kuwait",
+          "present": true,
+          "source": "https://maxuskw.com/contact-us/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://maxuskw.com/",
+            "https://maxuskw.com/contact-us/",
+            "https://maxuskw.com/test-drive/"
           ],
           "uncertain": false
         },
@@ -2078,6 +2090,18 @@
             "https://maxus.sa/",
             "https://maxus.sa/find-a-dealer/",
             "https://maxus.sa/find-us/"
+          ],
+          "uncertain": false
+        },
+        "SGP": {
+          "name": "Singapore",
+          "present": true,
+          "source": "https://www.cyclecarriage.com/sg/maxus/contact-us",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.cyclecarriage.com/sg/maxus",
+            "https://www.cyclecarriage.com/sg/maxus/contact-us",
+            "https://www.cyclecarriage.com/sg/maxus/test-drive"
           ],
           "uncertain": false
         },
