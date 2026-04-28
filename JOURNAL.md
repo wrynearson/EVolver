@@ -1099,3 +1099,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-27
 **Did**: Improved EV map accessibility and empty-state affordances by adding explicit uncertain-filter labels, consistent disabled styling for empty filters, and regression coverage for the disabled filter state.
 **Result**: pass
+
+## 2026-04-28
+**Did**: Expanded MAXUS coverage by adding Australia and New Zealand after confirming SAIC MAXUS's official global selector hands both markets to live LDV-branded local sites with public dealer, contact, and test-drive flows.
+**Result**: pass

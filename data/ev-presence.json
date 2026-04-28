@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-27",
+    "last_updated": "2026-04-28",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -1693,6 +1693,18 @@
           ],
           "uncertain": false
         },
+        "AUS": {
+          "name": "Australia",
+          "present": true,
+          "source": "https://www.ldvautomotive.com.au/locate-a-dealer/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.ldvautomotive.com.au/",
+            "https://www.ldvautomotive.com.au/locate-a-dealer/",
+            "https://www.ldvautomotive.com.au/test-drive/"
+          ],
+          "uncertain": false
+        },
         "AUT": {
           "name": "Austria",
           "present": true,
@@ -2017,6 +2029,18 @@
             "https://maxus.no/",
             "https://maxus.no/forhandlere",
             "https://maxus.no/kontakt"
+          ],
+          "uncertain": false
+        },
+        "NZL": {
+          "name": "New Zealand",
+          "present": true,
+          "source": "https://ldv.co.nz/dealers/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://ldv.co.nz/",
+            "https://ldv.co.nz/contact-us/",
+            "https://ldv.co.nz/dealers/"
           ],
           "uncertain": false
         },
