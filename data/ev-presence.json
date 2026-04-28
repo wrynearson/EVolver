@@ -2094,6 +2094,18 @@
           ],
           "uncertain": false
         },
+        "PER": {
+          "name": "Peru",
+          "present": true,
+          "source": "https://maxus.divemotor.pe/concesionarios/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxus.pe/",
+            "https://maxus.divemotor.pe/concesionarios/",
+            "https://forms.divemotor.com/maxus-test-drive/"
+          ],
+          "uncertain": false
+        },
         "POL": {
           "name": "Poland",
           "present": true,
