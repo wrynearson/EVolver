@@ -1682,6 +1682,18 @@
           ],
           "uncertain": false
         },
+        "ARG": {
+          "name": "Argentina",
+          "present": true,
+          "source": "https://www.maxus.com.ar/sobre-maxus.html",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxus.com.ar/",
+            "https://www.maxus.com.ar/sobre-maxus.html",
+            "https://www.maxus.com.ar/contacto"
+          ],
+          "uncertain": false
+        },
         "ARM": {
           "name": "Armenia",
           "present": true,
@@ -1735,6 +1747,18 @@
           "sources": [
             "https://en.saicmaxus.com/global.shtml",
             "https://maxusbahrain.com/index.html"
+          ],
+          "uncertain": false
+        },
+        "BOL": {
+          "name": "Bolivia",
+          "present": true,
+          "source": "https://www.maxus.bo/sucursales",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxus.bo/",
+            "https://www.maxus.bo/sucursales",
+            "https://www.maxus.bo/contacto"
           ],
           "uncertain": false
         },
