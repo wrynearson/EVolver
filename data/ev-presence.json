@@ -1760,6 +1760,18 @@
           ],
           "uncertain": false
         },
+        "CHL": {
+          "name": "Chile",
+          "present": true,
+          "source": "https://maxus.cl/sucursales",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://maxus.cl/",
+            "https://maxus.cl/sucursales",
+            "https://maxus.cl/contactanos"
+          ],
+          "uncertain": false
+        },
         "CHN": {
           "name": "China",
           "present": true,
@@ -1867,6 +1879,19 @@
           ],
           "uncertain": false
         },
+        "GBR": {
+          "name": "United Kingdom",
+          "present": true,
+          "source": "https://saicmaxus.co.uk/find-a-dealer/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://saicmaxus.co.uk/",
+            "https://saicmaxus.co.uk/find-a-dealer/",
+            "https://saicmaxus.co.uk/make-an-enquiry/",
+            "https://saicmaxus.co.uk/book-a-test-drive/"
+          ],
+          "uncertain": false
+        },
         "GRC": {
           "name": "Greece",
           "present": true,
@@ -1932,6 +1957,18 @@
             "https://en.saicmaxus.com/global.shtml",
             "https://maxus.is/",
             "https://maxus.is/hafdu-samband"
+          ],
+          "uncertain": false
+        },
+        "IRL": {
+          "name": "Ireland",
+          "present": true,
+          "source": "https://saicmaxus.ie/find-a-dealer/",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://saicmaxus.ie/",
+            "https://saicmaxus.ie/find-a-dealer/",
+            "https://saicmaxus.ie/book-a-test-drive/"
           ],
           "uncertain": false
         },
@@ -2041,6 +2078,19 @@
             "https://ldv.co.nz/",
             "https://ldv.co.nz/contact-us/",
             "https://ldv.co.nz/dealers/"
+          ],
+          "uncertain": false
+        },
+        "PAN": {
+          "name": "Panama",
+          "present": true,
+          "source": "https://www.maxus.com.pa/sucursales",
+          "sources": [
+            "https://en.saicmaxus.com/global.shtml",
+            "https://www.maxus.com.pa/",
+            "https://www.maxus.com.pa/sucursales",
+            "https://www.maxus.com.pa/contactenos",
+            "https://www.maxus.com.pa/cotiza-tu-maxus"
           ],
           "uncertain": false
         },

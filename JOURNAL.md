@@ -1103,3 +1103,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-28
 **Did**: Expanded MAXUS coverage by adding Australia and New Zealand after confirming SAIC MAXUS's official global selector hands both markets to live LDV-branded local sites with public dealer, contact, and test-drive flows.
 **Result**: pass
+
+## 2026-04-28
+**Did**: Expanded MAXUS coverage by adding Chile, Ireland, Panama, and the United Kingdom after confirming SAIC MAXUS's official global selector plus first-party dealer, contact, and test-drive routes on each local market domain.
+**Result**: pass
+**TODO**: Verify MAXUS's next strongest sovereign markets beyond Armenia, Australia, Austria, Bahrain, Belgium, Brunei, Chile, China, the Czech Republic, Denmark, the Dominican Republic, Ecuador, Finland, France, Germany, Greece, Guatemala, Honduras, Hungary, Iceland, Indonesia, Ireland, Israel, Jordan, Kuwait, Luxembourg, Malaysia, Malta, the Netherlands, New Zealand, Norway, Panama, Paraguay, Poland, Portugal, Qatar, Romania, Saudi Arabia, Serbia, Singapore, Slovenia, South Africa, Spain, Sweden, Switzerland, Turkey, Ukraine, the United Arab Emirates, the United Kingdom, Uruguay, and Venezuela, prioritizing other first-party local sites with live dealer, contact, or test-drive flows.
