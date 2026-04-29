@@ -1132,3 +1132,9 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added Dongfeng as a tracked brand with an initial verified footprint in China, Chile, Ecuador, Panama, Saudi Arabia, and the United Arab Emirates using Dongfeng's own global passenger-network registry plus live local market and dealer surfaces.
 **Result**: pass
 **TODO**: Expand Dongfeng's passenger-EV footprint beyond the initial verified markets by pairing the official global passenger-network registry with live local consumer or dealer flows, prioritizing Malaysia, Nepal, Peru, and Egypt.
+
+
+## 2026-04-29
+**Did**: Expanded Dongfeng coverage by adding Egypt after confirming Dongfeng's own global passenger-network registry plus Dongfeng Egypt's live Mage EV model and services/support pages.
+**Result**: pass
+**TODO**: Expand Dongfeng's passenger-EV footprint beyond China, Chile, Ecuador, Egypt, Panama, Saudi Arabia, and the United Arab Emirates by pairing the official global passenger-network registry with live local consumer or dealer flows, prioritizing Malaysia, Nepal, and Peru.

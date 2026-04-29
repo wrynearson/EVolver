@@ -5040,6 +5040,17 @@
             "https://www.dongfeng-ksa.com/en/offers"
           ],
           "uncertain": false
+        },
+        "EGY": {
+          "name": "Egypt",
+          "present": true,
+          "source": "https://dongfeng-egypt.com/our-models/mage-ev",
+          "sources": [
+            "https://www.dongfeng-global.com/servicesSupports?type=2",
+            "https://dongfeng-egypt.com/our-models/mage-ev",
+            "https://dongfeng-egypt.com/services-support"
+          ],
+          "uncertain": false
         }
       }
     }
