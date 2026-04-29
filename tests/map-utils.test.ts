@@ -298,6 +298,7 @@ describe("computeDatasetSummary", () => {
       visibleBrandLabel: "All brands",
       brandCount: 2,
       visibleCountryCount: 2,
+      uncertainCountryCount: 1,
       lastUpdated: "2026-03-13",
     });
   });
@@ -345,6 +346,7 @@ describe("computeDatasetSummary", () => {
       visibleBrandLabel: "BrandA",
       brandCount: 2,
       visibleCountryCount: 1,
+      uncertainCountryCount: 1,
       lastUpdated: "2026-03-13",
     });
   });

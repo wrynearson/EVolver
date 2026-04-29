@@ -15,6 +15,7 @@ export interface EVDataSummary {
   visibleBrandLabel: string;
   brandCount: number;
   visibleCountryCount: number;
+  uncertainCountryCount: number;
   lastUpdated: string;
 }
 
@@ -303,13 +304,20 @@ export function computeDatasetSummary(
   brandName?: string,
 ): EVDataSummary {
   const confirmedCountries = new Set<string>();
+  const uncertainCountries = new Set<string>();
   const brands = brandName
     ? Object.entries(data.brands).filter(([name]) => name === brandName)
     : Object.entries(data.brands);
 
   for (const [, brand] of brands) {
     for (const [isoCode, entry] of Object.entries(brand.countries)) {
-      if (entry.present && !entry.uncertain) {
+      if (!entry.present) {
+        continue;
+      }
+
+      if (entry.uncertain) {
+        uncertainCountries.add(isoCode);
+      } else {
         confirmedCountries.add(isoCode);
       }
     }
@@ -319,6 +327,7 @@ export function computeDatasetSummary(
     visibleBrandLabel: brandName ?? "All brands",
     brandCount: Object.keys(data.brands).length,
     visibleCountryCount: confirmedCountries.size,
+    uncertainCountryCount: uncertainCountries.size,
     lastUpdated: data.metadata.last_updated,
   };
 }

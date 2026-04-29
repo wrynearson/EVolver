@@ -87,6 +87,7 @@ describe("useEVData helpers", () => {
       visibleBrandLabel: "XPeng",
       brandCount: 2,
       visibleCountryCount: 1,
+      uncertainCountryCount: 1,
       lastUpdated: "2026-03-31",
     });
   });
@@ -226,6 +227,7 @@ describe("useEVData helpers", () => {
       visibleBrandLabel: "All brands",
       brandCount: 2,
       visibleCountryCount: 1,
+      uncertainCountryCount: 1,
       lastUpdated: "2026-03-31",
     });
   });

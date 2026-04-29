@@ -1118,3 +1118,12 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded MAXUS coverage by adding Argentina and Bolivia after confirming live first-party MAXUS market sites plus distributor/about, branch, and contact surfaces in both sovereign markets.
 **Result**: pass
 **TODO**: Verify MAXUS's next strongest sovereign markets beyond Argentina, Armenia, Australia, Austria, Bahrain, Belgium, Bolivia, Brunei, Chile, China, the Czech Republic, Denmark, the Dominican Republic, Ecuador, Finland, France, Germany, Greece, Guatemala, Honduras, Hungary, Iceland, Indonesia, Ireland, Israel, Jordan, Kuwait, Luxembourg, Malaysia, Malta, the Netherlands, New Zealand, Norway, Panama, Paraguay, Peru, Poland, Portugal, Qatar, Romania, Saudi Arabia, Serbia, Singapore, Slovenia, South Africa, Spain, Sweden, Switzerland, Turkey, Ukraine, the United Arab Emirates, the United Kingdom, Uruguay, and Venezuela, prioritizing other first-party local sites with live dealer, contact, or test-drive flows.
+
+## 2026-04-29
+**Did**: Probed SAIC MAXUS's remaining sovereign-looking selector leads and narrowed the follow-up to Costa Rica and Croatia after confirming the official global selector still links only those local surfaces beyond the tracked footprint.
+**Result**: pass
+**TODO**: Re-check MAXUS Costa Rica and Croatia only after their selector-linked local roots become browser-accessible again; on 2026-04-29 the Costa Rica roots returned 403 access-denied responses and `maxus.hr` failed DNS resolution.
+
+## 2026-04-29
+**Did**: Added an "Uncertain markets in view" metric to the dataset summary so filtered map views expose confidence gaps alongside confirmed market coverage.
+**Result**: pass

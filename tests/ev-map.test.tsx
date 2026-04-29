@@ -635,10 +635,15 @@ describe("EVMap", () => {
     expect(screen.queryByText("2-3 brands")).not.toBeInTheDocument();
     expect(screen.getByText("Brands tracked")).toBeInTheDocument();
     expect(screen.getByText("Countries in view")).toBeInTheDocument();
+    expect(screen.getByText("Uncertain markets in view")).toBeInTheDocument();
     expect(screen.getByText("2026-03-13")).toBeInTheDocument();
 
     const xpengRow = screen.getByText("Countries in view").closest("div");
     expect(xpengRow).toHaveTextContent("1");
+    const uncertainMarketsRow = screen
+      .getByText("Uncertain markets in view")
+      .closest("div");
+    expect(uncertainMarketsRow).toHaveTextContent("0");
     expect(window.location.search).toBe("?brand=XPeng&country=SWE");
 
     const initialDetailsPanel = screen
@@ -1886,6 +1891,10 @@ describe("EVMap", () => {
     expect(screen.getByText("All brands · Europe")).toBeInTheDocument();
     const countriesInViewRow = screen.getByText("Countries in view").closest("div");
     expect(countriesInViewRow).toHaveTextContent("1");
+    const uncertainMarketsRow = screen
+      .getByText("Uncertain markets in view")
+      .closest("div");
+    expect(uncertainMarketsRow).toHaveTextContent("0");
 
     fireEvent.change(screen.getByLabelText("Country lookup"), {
       target: { value: "chi" },

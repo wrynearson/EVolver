@@ -2510,6 +2510,12 @@ export default function EVMap() {
               </dd>
             </div>
             <div className="flex items-center justify-between gap-4">
+              <dt>Uncertain markets in view</dt>
+              <dd className="font-medium text-gray-800">
+                {visibleSummary.uncertainCountryCount}
+              </dd>
+            </div>
+            <div className="flex items-center justify-between gap-4">
               <dt>Last updated</dt>
               <dd className="font-medium text-gray-800">
                 {visibleSummary.lastUpdated}
