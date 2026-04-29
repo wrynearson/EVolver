@@ -1392,6 +1392,32 @@ describe("EVMap", () => {
     expect(window.location.search).toBe("?country=SWE");
   });
 
+  it("selects the only country lookup suggestion on Space", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    const countryLookup = await screen.findByLabelText("Country lookup");
+    fireEvent.change(countryLookup, { target: { value: "sw" } });
+
+    expect(screen.getByText("Showing 1 matching country")).toBeInTheDocument();
+
+    fireEvent.keyDown(countryLookup, { key: " " });
+
+    expect(screen.getByLabelText("Country lookup")).toHaveDisplayValue("Sweden");
+    expect(screen.getByRole("heading", { name: "Sweden" })).toBeInTheDocument();
+    expect(window.location.search).toBe("?country=SWE");
+  });
+
   it("supports keyboard navigation for country lookup suggestions", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
@@ -1484,6 +1510,32 @@ describe("EVMap", () => {
     );
 
     fireEvent.keyDown(brandFilter, { key: "Enter" });
+
+    expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("XPeng");
+    expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
+    expect(window.location.search).toBe("?brand=XPeng");
+  });
+
+  it("selects the only brand filter suggestion on Space", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    const brandFilter = await screen.findByLabelText("Brand filter");
+    fireEvent.change(brandFilter, { target: { value: "xp" } });
+
+    expect(screen.getByText("Showing 1 matching brand")).toBeInTheDocument();
+
+    fireEvent.keyDown(brandFilter, { key: " " });
 
     expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("XPeng");
     expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();

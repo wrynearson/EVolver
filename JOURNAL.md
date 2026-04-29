@@ -1138,3 +1138,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Dongfeng coverage by adding Egypt after confirming Dongfeng's own global passenger-network registry plus Dongfeng Egypt's live Mage EV model and services/support pages.
 **Result**: pass
 **TODO**: Expand Dongfeng's passenger-EV footprint beyond China, Chile, Ecuador, Egypt, Panama, Saudi Arabia, and the United Arab Emirates by pairing the official global passenger-network registry with live local consumer or dealer flows, prioritizing Malaysia, Nepal, and Peru.
+## 2026-04-29
+**Did**: Expanded Dongfeng coverage by adding Peru after confirming Dongfeng's global passenger-network registry plus Dongfeng Motor Peru's live local market and dealer surfaces.
+**Result**: pass
+**TODO**: Expand Dongfeng's passenger-EV footprint beyond China, Chile, Ecuador, Egypt, Panama, Peru, Saudi Arabia, and the United Arab Emirates by pairing the official global passenger-network registry with live local consumer or dealer flows, prioritizing Malaysia and Nepal.
+
+## 2026-04-29
+**Did**: Improved keyboard accessibility for the brand and country lookup comboboxes by letting Space select the active suggestion, backed by regression coverage.
+**Result**: pass

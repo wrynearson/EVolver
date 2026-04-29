@@ -500,6 +500,10 @@ function getNextLookupIndex(
   return currentIndex;
 }
 
+function isLookupActivationKey(key: string) {
+  return key === "Enter" || key === " " || key === "Spacebar";
+}
+
 function compareFootprintCountries(
   a: CountryOption & { regionName?: string; isoCode: string; countryName: string },
   b: CountryOption & { regionName?: string; isoCode: string; countryName: string },
@@ -2053,7 +2057,7 @@ export default function EVMap() {
                     }
 
                      if (
-                       event.key === "Enter" &&
+                       isLookupActivationKey(event.key) &&
                        shouldShowBrandLookupMatches &&
                        (filteredBrandOptions[activeBrandLookupIndex] ||
                          (activeBrandLookupIndex < 0 && filteredBrandOptions.length === 1))
@@ -2265,7 +2269,7 @@ export default function EVMap() {
                     }
 
                      if (
-                       event.key === "Enter" &&
+                       isLookupActivationKey(event.key) &&
                        shouldShowCountryLookupMatches &&
                        (filteredCountryOptions[activeCountryLookupIndex] ||
                          (activeCountryLookupIndex < 0 &&

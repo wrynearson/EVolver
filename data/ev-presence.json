@@ -5030,6 +5030,17 @@
           ],
           "uncertain": false
         },
+        "PER": {
+          "name": "Peru",
+          "present": true,
+          "source": "https://dongfengmotor.pe/dongfeng/",
+          "sources": [
+            "https://www.dongfeng-global.com/servicesSupports?type=2",
+            "https://dongfengmotor.pe/dongfeng/",
+            "https://dongfengmotor.pe/dongfeng/formulario-nami-box/"
+          ],
+          "uncertain": false
+        },
         "SAU": {
           "name": "Saudi Arabia",
           "present": true,
