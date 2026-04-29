@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-28",
+    "last_updated": "2026-04-29",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -4967,6 +4967,77 @@
             "https://denza.sg/",
             "https://denza.sg/contact-us/",
             "https://denza.sg/privacy-policy/"
+          ],
+          "uncertain": false
+        }
+      }
+    },
+    "Dongfeng": {
+      "website": "https://www.dongfeng-global.com/",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.dongfeng-global.com/",
+          "sources": [
+            "https://www.dongfeng-global.com/",
+            "https://www.dongfeng-global.com/showRoom",
+            "https://www.dongfeng-global.com/vehicleModel/box"
+          ],
+          "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://dongfeng-uae.com/",
+          "sources": [
+            "https://www.dongfeng-global.com/servicesSupports",
+            "https://dongfeng-uae.com/",
+            "https://dongfeng-uae.com/book-test-drive/"
+          ],
+          "uncertain": false
+        },
+        "CHL": {
+          "name": "Chile",
+          "present": true,
+          "source": "https://dongfengindumotora.cl/",
+          "sources": [
+            "https://www.dongfeng-global.com/servicesSupports",
+            "https://dongfengindumotora.cl/",
+            "https://dongfengindumotora.cl/content/dam/nammi/galer%C3%ADa/desk-nammi-carrusel-1200px/AUTONOM%C3%8DA%20-%20OK.jpg"
+          ],
+          "uncertain": false
+        },
+        "ECU": {
+          "name": "Ecuador",
+          "present": true,
+          "source": "https://www.dongfeng.ec/",
+          "sources": [
+            "https://www.dongfeng-global.com/servicesSupports",
+            "https://www.dongfeng.ec/",
+            "https://www.dongfeng.ec/mage-ev?hsLang=es-ec"
+          ],
+          "uncertain": false
+        },
+        "PAN": {
+          "name": "Panama",
+          "present": true,
+          "source": "http://www.dongfengpanama.com.pa/",
+          "sources": [
+            "https://www.dongfeng-global.com/servicesSupports",
+            "http://www.dongfengpanama.com.pa/",
+            "http://www.dongfengpanama.com.pa/reservar-cita-taller"
+          ],
+          "uncertain": false
+        },
+        "SAU": {
+          "name": "Saudi Arabia",
+          "present": true,
+          "source": "https://www.dongfeng-ksa.com/en",
+          "sources": [
+            "https://www.dongfeng-global.com/servicesSupports",
+            "https://www.dongfeng-ksa.com/en",
+            "https://www.dongfeng-ksa.com/en/offers"
           ],
           "uncertain": false
         }

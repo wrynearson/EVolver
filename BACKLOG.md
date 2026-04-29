@@ -4,6 +4,8 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
+- Expand Dongfeng's passenger-EV footprint beyond China, Chile, Ecuador, Panama, Saudi Arabia, and the United Arab Emirates by pairing the official global passenger-network registry with live local consumer or dealer flows, prioritizing Malaysia, Nepal, Peru, and Egypt.
+
 - [monitoring] Re-check MAXUS Costa Rica and Croatia only after SAIC MAXUS's official selector-linked local surfaces become browser-accessible and expose live dealer, contact, or test-drive flows; checked 2026-04-29 and the global selector still lists `maxus.autos` / `maxus.cr` for Costa Rica plus `maxus.hr` for Croatia, but the Costa Rica roots currently return 403 access-denied responses while the Croatia root fails DNS resolution.
 
 - [monitoring] Re-check DENZA only after its public first-party site exposes a new sovereign market beyond China, Australia, Brazil, Indonesia, Malaysia, Mexico, New Zealand, Singapore, the United Arab Emirates, and the United Kingdom; checked 2026-04-24 and DENZA's own public country/region selector now includes live Brazil and Mexico market sites, while the remaining public Americas candidates still 404 and the rest of the visible sovereign footprint still tops out at the already-tracked markets plus Macau-only (`zh-mo` / `en-mo`) and Europe-region surfaces rather than additional sovereign country sites.

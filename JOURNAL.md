@@ -1127,3 +1127,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-29
 **Did**: Added an "Uncertain markets in view" metric to the dataset summary so filtered map views expose confidence gaps alongside confirmed market coverage.
 **Result**: pass
+
+## 2026-04-29
+**Did**: Added Dongfeng as a tracked brand with an initial verified footprint in China, Chile, Ecuador, Panama, Saudi Arabia, and the United Arab Emirates using Dongfeng's own global passenger-network registry plus live local market and dealer surfaces.
+**Result**: pass
+**TODO**: Expand Dongfeng's passenger-EV footprint beyond the initial verified markets by pairing the official global passenger-network registry with live local consumer or dealer flows, prioritizing Malaysia, Nepal, Peru, and Egypt.
