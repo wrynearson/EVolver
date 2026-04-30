@@ -1146,3 +1146,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-29
 **Did**: Improved keyboard accessibility for the brand and country lookup comboboxes by letting Space select the active suggestion, backed by regression coverage.
 **Result**: pass
+
+## 2026-04-30
+**Did**: Narrowed the Dongfeng follow-up away from Malaysia and Nepal after Dongfeng's own global passenger-network page failed to list either market, then made major-region gap focus shareable and restorable through the map URL with regression coverage.
+**Result**: pass

@@ -50,6 +50,7 @@ type ActiveViewFilter = {
 type SelectionState = {
   selectedBrand: string;
   selectedCountry: MapCountrySelection | null;
+  selectedMajorRegionGap: string;
   coveragePanelView: CoveragePanelView;
   coverageSearchQuery: string;
   showOnlyUncertainCoverage: boolean;
@@ -543,7 +544,9 @@ function compareFootprintCountries(
 
 function getSelectionStateFromSearch(search: string): SelectionState {
   const searchParams = new URLSearchParams(search);
-  const selectedBrand = searchParams.get("brand")?.trim() ?? "";
+  const requestedSelectedBrand = searchParams.get("brand")?.trim() ?? "";
+  const selectedMajorRegionGap = searchParams.get("gapRegion")?.trim() ?? "";
+  const selectedBrand = requestedSelectedBrand;
   const selectedCountryIsoCode = normalizeIsoCode(searchParams.get("country"));
   const requestedCoveragePanelView = searchParams.get("view")?.trim() ?? "";
   const coverageSearchQuery = searchParams.get("coverageQuery")?.trim() ?? "";
@@ -566,6 +569,7 @@ function getSelectionStateFromSearch(search: string): SelectionState {
     selectedCountry: selectedCountryIsoCode
       ? { isoCode: selectedCountryIsoCode }
       : null,
+    selectedMajorRegionGap: selectedBrand ? selectedMajorRegionGap : "",
     coveragePanelView,
     coverageSearchQuery,
     showOnlyUncertainCoverage,
@@ -586,6 +590,7 @@ function getInitialSelectionState(): SelectionState {
     return {
       selectedBrand: "",
       selectedCountry: null,
+      selectedMajorRegionGap: "",
       coveragePanelView: "brands",
       coverageSearchQuery: "",
       showOnlyUncertainCoverage: false,
@@ -603,6 +608,7 @@ function getInitialSelectionState(): SelectionState {
 function buildShareUrl(
   selectedBrand: string,
   selectedCountry: MapCountrySelection | null,
+  selectedMajorRegionGap: string,
   coveragePanelView: CoveragePanelView,
   coverageSearchQuery: string,
   showOnlyUncertainCoverage: boolean,
@@ -628,6 +634,12 @@ function buildShareUrl(
     url.searchParams.set("country", selectedCountry.isoCode);
   } else {
     url.searchParams.delete("country");
+  }
+
+  if (selectedBrand && selectedMajorRegionGap) {
+    url.searchParams.set("gapRegion", selectedMajorRegionGap);
+  } else {
+    url.searchParams.delete("gapRegion");
   }
 
   if (coveragePanelView !== "brands" || selectedCoverageRegion) {
@@ -749,7 +761,14 @@ export default function EVMap() {
   const [selectedMajorRegionGap, setSelectedMajorRegionGap] = useState<{
     brandName: string;
     regionName: string;
-  } | null>(null);
+  } | null>(() =>
+    initialSelectionState.selectedBrand && initialSelectionState.selectedMajorRegionGap
+      ? {
+          brandName: initialSelectionState.selectedBrand,
+          regionName: initialSelectionState.selectedMajorRegionGap,
+        }
+      : null,
+  );
   const [showOnlyUncertainFootprint, setShowOnlyUncertainFootprint] = useState(
     () => initialSelectionState.showOnlyUncertainFootprint,
   );
@@ -1411,6 +1430,7 @@ export default function EVMap() {
       buildShareUrl(
         activeSelectedBrand,
         resolvedSelectedCountry,
+        activeMajorRegionGap,
         coveragePanelView,
         coverageSearchQuery,
         showOnlyUncertainCoverage,
@@ -1430,6 +1450,7 @@ export default function EVMap() {
       footprintSort,
       footprintSearchQuery,
       resolvedSelectedCountry,
+      activeMajorRegionGap,
       selectedCoverageRegion,
     ],
   );
@@ -1495,6 +1516,7 @@ export default function EVMap() {
       coveragePanelView !== "brands" ||
       showOnlyUncertainCoverage ||
       showOnlyUncertainFootprint ||
+      Boolean(activeMajorRegionGap) ||
       coverageSort !== DEFAULT_COVERAGE_SORT ||
       footprintSort !== DEFAULT_FOOTPRINT_SORT ||
       coverageSearchQuery ||
@@ -1581,6 +1603,14 @@ export default function EVMap() {
           label: `Footprint sort: ${getFootprintSortLabel(footprintSort)}`,
           clearLabel: "Reset footprint sort",
           onClear: () => setFootprintSort(DEFAULT_FOOTPRINT_SORT),
+        }
+      : null,
+    activeSelectedBrand && activeMajorRegionGap
+      ? {
+          key: "major-region-gap",
+          label: `Gap focus: ${activeMajorRegionGap}`,
+          clearLabel: "Clear active major-region gap focus",
+          onClear: clearMajorRegionGap,
         }
       : null,
   ].filter((filter): filter is ActiveViewFilter => filter !== null);
@@ -1698,6 +1728,14 @@ export default function EVMap() {
       setSelectedBrand(nextState.selectedBrand);
       setBrandLookupQuery(nextState.selectedBrand);
       setSelectedCountry(nextState.selectedCountry);
+      setSelectedMajorRegionGap(
+        nextState.selectedBrand && nextState.selectedMajorRegionGap
+          ? {
+              brandName: nextState.selectedBrand,
+              regionName: nextState.selectedMajorRegionGap,
+            }
+          : null,
+      );
       setCoveragePanelView(nextState.coveragePanelView);
       setCoverageSearchQuery(nextState.coverageSearchQuery);
       setShowOnlyUncertainCoverage(nextState.showOnlyUncertainCoverage);
@@ -1742,6 +1780,7 @@ export default function EVMap() {
     if (
       currentBrand === activeSelectedBrand &&
       currentCountry === resolvedSelectedCountry?.isoCode &&
+      currentState.selectedMajorRegionGap === activeMajorRegionGap &&
       currentState.coveragePanelView === coveragePanelView &&
       currentState.coverageSearchQuery === coverageSearchQuery &&
       currentState.showOnlyUncertainCoverage === showOnlyUncertainCoverage &&
@@ -1757,18 +1796,20 @@ export default function EVMap() {
     const nextUrl = buildShareUrl(
       activeSelectedBrand,
       resolvedSelectedCountry,
+      activeMajorRegionGap,
       coveragePanelView,
-        coverageSearchQuery,
-        showOnlyUncertainCoverage,
-        selectedCoverageRegion,
-        coverageSort,
-        showOnlyUncertainFootprint,
-        footprintSort,
-        footprintSearchQuery,
-      );
+      coverageSearchQuery,
+      showOnlyUncertainCoverage,
+      selectedCoverageRegion,
+      coverageSort,
+      showOnlyUncertainFootprint,
+      footprintSort,
+      footprintSearchQuery,
+    );
     window.history.replaceState({}, "", nextUrl);
   }, [
     activeSelectedBrand,
+    activeMajorRegionGap,
     coveragePanelView,
     coverageSearchQuery,
     showOnlyUncertainCoverage,

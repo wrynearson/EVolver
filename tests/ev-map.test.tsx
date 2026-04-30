@@ -2226,8 +2226,18 @@ describe("EVMap", () => {
         "Gap focus: Southeast Asia still has no confirmed presence for BYD.",
       ),
     ).toBeInTheDocument();
+    expect(window.location.search).toBe("?brand=BYD&gapRegion=Southeast+Asia");
+    expect(
+      screen.getByRole("link", { name: "Open share link in a new tab" }),
+    ).toHaveAttribute(
+      "href",
+      "http://localhost:3000/?brand=BYD&gapRegion=Southeast+Asia",
+    );
     expect(
       within(footprintPanel!).getByRole("button", { name: "Clear gap focus" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Clear active major-region gap focus" }),
     ).toBeInTheDocument();
     expect(within(footprintPanel!).getByText("Showing 2 of 2 markets")).toBeInTheDocument();
 
@@ -2247,6 +2257,7 @@ describe("EVMap", () => {
         "Gap focus: Southeast Asia still has no confirmed presence for BYD.",
       ),
     ).not.toBeInTheDocument();
+    expect(window.location.search).toBe("?brand=BYD");
     expect(screen.getByLabelText("Brand filter")).toHaveValue("BYD");
 
     fireEvent.click(
@@ -2550,6 +2561,21 @@ describe("EVMap", () => {
       within(filteredCountryCoveragePanel!).getByText("Filtering countries to Europe"),
     ).toBeInTheDocument();
     expect(window.location.search).toBe("?view=countries&region=Europe");
+
+    window.history.pushState({}, "", "/?brand=BYD&gapRegion=Southeast+Asia");
+    fireEvent.popState(window);
+
+    const gapFocusedFootprintPanel = screen
+      .getByRole("heading", { name: "Brand footprint" })
+      .closest("aside");
+    expect(gapFocusedFootprintPanel).not.toBeNull();
+    expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("BYD");
+    expect(
+      within(gapFocusedFootprintPanel!).getByText(
+        "Gap focus: Southeast Asia still has no confirmed presence for BYD.",
+      ),
+    ).toBeInTheDocument();
+    expect(window.location.search).toBe("?brand=BYD&gapRegion=Southeast+Asia");
   });
 
   it("shows a dataset error state when the EV presence data request fails", async () => {
