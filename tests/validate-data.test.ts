@@ -135,4 +135,36 @@ describe("ev-presence.json", () => {
       }
     }
   });
+
+  it("source lists stay trimmed and deduplicated", () => {
+    data = JSON.parse(raw);
+    for (const [brandName, brand] of Object.entries(data.brands)) {
+      for (const [isoCode, entry] of Object.entries(brand.countries)) {
+        const prefix = `${brandName}.${isoCode}`;
+
+        if (entry.source !== null) {
+          expect(entry.source, `${prefix}.source should be trimmed`).toBe(
+            entry.source.trim(),
+          );
+        }
+
+        if (!entry.sources) {
+          continue;
+        }
+
+        const trimmedSources = entry.sources.map((source) => source.trim());
+        expect(trimmedSources, `${prefix}.sources should not contain blank URLs`).not.toContain(
+          "",
+        );
+        expect(
+          entry.sources,
+          `${prefix}.sources entries should be trimmed`,
+        ).toEqual(trimmedSources);
+        expect(
+          new Set(trimmedSources).size,
+          `${prefix}.sources should not contain duplicate URLs`,
+        ).toBe(trimmedSources.length);
+      }
+    }
+  });
 });
