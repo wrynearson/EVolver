@@ -4986,6 +4986,18 @@
           ],
           "uncertain": false
         },
+        "BGR": {
+          "name": "Bulgaria",
+          "present": true,
+          "source": "https://chinamotor.bg/dealers/",
+          "sources": [
+            "https://www.forthingmotor.com/distributor/",
+            "https://chinamotor.bg/",
+            "https://chinamotor.bg/dealers/",
+            "https://chinamotor.bg/dongfeng-box/"
+          ],
+          "uncertain": false
+        },
         "CHL": {
           "name": "Chile",
           "present": true,
@@ -5111,6 +5123,32 @@
             "https://www.dongfeng-global.com/servicesSupports",
             "https://www.dongfeng-ksa.com/en",
             "https://www.dongfeng-ksa.com/en/offers"
+          ],
+          "uncertain": false
+        },
+        "SVK": {
+          "name": "Slovakia",
+          "present": true,
+          "source": "https://dfmotor.sk/predajcovia-a-servis/",
+          "sources": [
+            "https://plastonic.sk/",
+            "https://plastonic.sk/dealers/",
+            "https://dfmotor.sk/",
+            "https://dfmotor.sk/predajcovia-a-servis/",
+            "https://dfmotor.sk/testovacia-jazda/"
+          ],
+          "uncertain": false
+        },
+        "TUN": {
+          "name": "Tunisia",
+          "present": true,
+          "source": "https://www.dongfeng.tn/reseau/",
+          "sources": [
+            "https://www.forthingmotor.com/distributor/",
+            "https://www.dongfeng.tn/",
+            "https://www.dongfeng.tn/reseau/",
+            "https://www.dongfeng.tn/dongfeng-box/",
+            "https://www.dongfeng.tn/test-drive/"
           ],
           "uncertain": false
         }

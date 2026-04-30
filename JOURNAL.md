@@ -1160,3 +1160,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Dongfeng coverage by adding Hungary, Kuwait, and Qatar after confirming Dongfeng's own passenger-network selector plus official Forthing distributor evidence and live local dealer or test-drive flows in each market.
 **Result**: pass
 **TODO**: Expand Dongfeng's passenger-EV footprint in the remaining selector-linked sovereign markets, prioritizing Bulgaria, Slovakia, and Tunisia where Dongfeng or Forthing official distributor signals already exist.
+
+## 2026-04-30
+**Did**: Expanded Dongfeng coverage by adding Bulgaria, Slovakia, and Tunisia after confirming official distributor-linked local market sites plus live dealer, service, EV model, or test-drive flows in each market.
+**Result**: pass
+**TODO**: Expand Dongfeng's passenger-EV footprint in the remaining selector-linked sovereign markets, prioritizing Azerbaijan, the Dominican Republic, Latvia, Montenegro, North Macedonia, and Uruguay where official distributor signals still need live EV model or dealer-flow verification.
