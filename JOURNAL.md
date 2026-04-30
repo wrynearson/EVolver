@@ -1150,3 +1150,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-30
 **Did**: Narrowed the Dongfeng follow-up away from Malaysia and Nepal after Dongfeng's own global passenger-network page failed to list either market, then made major-region gap focus shareable and restorable through the map URL with regression coverage.
 **Result**: pass
+
+## 2026-04-30
+**Did**: Expanded Dongfeng coverage by adding Algeria after confirming Dongfeng/Forthing's Africa operation-center page plus Dongfeng Algérie's live local showroom, distributor, and after-sales support surfaces.
+**Result**: pass
+**TODO**: Expand Dongfeng's passenger-EV footprint beyond Algeria, China, Chile, Ecuador, Egypt, Panama, Peru, Saudi Arabia, and the United Arab Emirates by pairing the official global passenger-network registry with live local EV model or dealer flows in the remaining selector-linked sovereign markets.
