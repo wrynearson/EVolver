@@ -5042,6 +5042,32 @@
           ],
           "uncertain": false
         },
+        "HUN": {
+          "name": "Hungary",
+          "present": true,
+          "source": "https://dongfengmotor.hu/kereskedok-es-szerviz/",
+          "sources": [
+            "https://www.dongfeng-global.com/servicesSupports?type=2",
+            "https://www.forthingmotor.com/distributor/",
+            "https://dongfengmotor.hu/",
+            "https://dongfengmotor.hu/kereskedok-es-szerviz/",
+            "https://dongfengmotor.hu/tesztvezetes/"
+          ],
+          "uncertain": false
+        },
+        "KWT": {
+          "name": "Kuwait",
+          "present": true,
+          "source": "https://forthing.com.kw/model-friday.html",
+          "sources": [
+            "https://www.dongfeng-global.com/servicesSupports?type=2",
+            "https://www.forthingmotor.com/distributor/",
+            "https://forthing.com.kw/",
+            "https://forthing.com.kw/model-friday.html",
+            "https://forthing.com.kw/contact.html"
+          ],
+          "uncertain": false
+        },
         "PAN": {
           "name": "Panama",
           "present": true,
@@ -5061,6 +5087,19 @@
             "https://www.dongfeng-global.com/servicesSupports?type=2",
             "https://dongfengmotor.pe/dongfeng/",
             "https://dongfengmotor.pe/dongfeng/formulario-nami-box/"
+          ],
+          "uncertain": false
+        },
+        "QAT": {
+          "name": "Qatar",
+          "present": true,
+          "source": "https://forthing-qatar.com/test-drive-request",
+          "sources": [
+            "https://www.dongfeng-global.com/servicesSupports?type=2",
+            "https://www.forthingmotor.com/distributor/",
+            "https://dongfengqatar.com/",
+            "https://forthing-qatar.com/",
+            "https://forthing-qatar.com/test-drive-request"
           ],
           "uncertain": false
         },

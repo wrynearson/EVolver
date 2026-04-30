@@ -4,7 +4,7 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
-- Expand Dongfeng's passenger-EV footprint beyond Algeria, China, Chile, Ecuador, Egypt, Panama, Peru, Saudi Arabia, and the United Arab Emirates by pairing the official global passenger-network registry with live local EV model or dealer flows in the remaining selector-linked sovereign markets.
+- Expand Dongfeng's passenger-EV footprint beyond the currently verified sovereign markets by pairing the official global passenger-network registry with live local EV model or dealer flows in the remaining selector-linked sovereign markets.
 
 - [monitoring] Re-check MAXUS Costa Rica and Croatia only after SAIC MAXUS's official selector-linked local surfaces become browser-accessible and expose live dealer, contact, or test-drive flows; checked 2026-04-29 and the global selector still lists `maxus.autos` / `maxus.cr` for Costa Rica plus `maxus.hr` for Croatia, but the Costa Rica roots currently return 403 access-denied responses while the Croatia root fails DNS resolution.
 
