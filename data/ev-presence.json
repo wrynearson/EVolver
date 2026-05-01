@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-30",
+    "last_updated": "2026-05-01",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -4986,6 +4986,17 @@
           ],
           "uncertain": false
         },
+        "AZE": {
+          "name": "Azerbaijan",
+          "present": true,
+          "source": "https://dfmc.az/",
+          "sources": [
+            "https://www.forthingmotor.com/distributor/",
+            "https://dfmc.az/",
+            "https://dfmc.az/test-drive"
+          ],
+          "uncertain": false
+        },
         "BGR": {
           "name": "Bulgaria",
           "present": true,
@@ -5077,6 +5088,41 @@
             "https://forthing.com.kw/",
             "https://forthing.com.kw/model-friday.html",
             "https://forthing.com.kw/contact.html"
+          ],
+          "uncertain": false
+        },
+        "LVA": {
+          "name": "Latvia",
+          "present": true,
+          "source": "https://dongfengwess.lv/en/contacts/",
+          "sources": [
+            "https://www.forthingmotor.com/distributor/",
+            "https://dongfengmotor.lv/en/contacts/",
+            "https://dongfengwess.lv/en/box/",
+            "https://dongfengwess.lv/en/contacts/"
+          ],
+          "uncertain": false
+        },
+        "MKD": {
+          "name": "North Macedonia",
+          "present": true,
+          "source": "https://dongfeng.mk/box/",
+          "sources": [
+            "https://dongfeng.mk/patnichki-vozila/",
+            "https://dongfeng.mk/box/",
+            "https://dongfeng.mk/kontakt/"
+          ],
+          "uncertain": false
+        },
+        "MNE": {
+          "name": "Montenegro",
+          "present": true,
+          "source": "https://www.forthing.me/friday.html",
+          "sources": [
+            "https://www.forthingmotor.com/distributor/",
+            "https://www.forthing.me/",
+            "https://www.forthing.me/friday.html",
+            "https://www.forthing.me/contact.html"
           ],
           "uncertain": false
         },

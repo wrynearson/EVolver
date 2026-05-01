@@ -1169,3 +1169,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-04-30
 **Did**: Strengthened the data guardrails by adding a validation test that rejects duplicate or whitespace-padded source URLs in `ev-presence.json`.
 **Result**: pass
+
+## 2026-05-01
+**Did**: Expanded Dongfeng coverage by adding Azerbaijan, Latvia, Montenegro, and North Macedonia after confirming official local dealer surfaces plus live EV model, contact, or showroom pages on each market's first-party site.
+**Result**: pass
+**TODO**: Expand Dongfeng's passenger-EV footprint in the remaining selector-linked sovereign markets, prioritizing the Dominican Republic and Uruguay where official distributor signals still need live EV model or dealer-flow verification.
