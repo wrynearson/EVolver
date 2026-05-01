@@ -5043,6 +5043,18 @@
           ],
           "uncertain": false
         },
+        "DOM": {
+          "name": "Dominican Republic",
+          "present": true,
+          "source": "https://peraviamotors.com/en/dongfeng/rich-6-ev",
+          "sources": [
+            "https://www.forthingmotor.com/distributor/",
+            "https://peraviamotors.com/en/dongfeng",
+            "https://peraviamotors.com/en/dongfeng/rich-6-ev",
+            "https://peraviamotors.com/en/contacto?vehicle=rich-6-ev"
+          ],
+          "uncertain": false
+        },
         "ECU": {
           "name": "Ecuador",
           "present": true,
@@ -5195,6 +5207,19 @@
             "https://www.dongfeng.tn/reseau/",
             "https://www.dongfeng.tn/dongfeng-box/",
             "https://www.dongfeng.tn/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "URY": {
+          "name": "Uruguay",
+          "present": true,
+          "source": "https://www.dongfengmotors.uy/models/mage",
+          "sources": [
+            "https://www.forthingmotor.com/distributor/",
+            "https://www.forthingmotor.com/south-america/",
+            "https://www.dongfengmotors.uy/",
+            "https://www.dongfengmotors.uy/models/mage",
+            "https://www.dongfengmotors.uy/contact"
           ],
           "uncertain": false
         }

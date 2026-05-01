@@ -1174,3 +1174,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Dongfeng coverage by adding Azerbaijan, Latvia, Montenegro, and North Macedonia after confirming official local dealer surfaces plus live EV model, contact, or showroom pages on each market's first-party site.
 **Result**: pass
 **TODO**: Expand Dongfeng's passenger-EV footprint in the remaining selector-linked sovereign markets, prioritizing the Dominican Republic and Uruguay where official distributor signals still need live EV model or dealer-flow verification.
+
+## 2026-05-01
+**Did**: Expanded Dongfeng coverage by adding the Dominican Republic and Uruguay after confirming Forthing's official distributor network plus each local market's live EV model and official distributor or contact surfaces.
+**Result**: pass
