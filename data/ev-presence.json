@@ -5031,18 +5031,6 @@
           ],
           "uncertain": false
         },
-        "DZA": {
-          "name": "Algeria",
-          "present": true,
-          "source": "https://dongfeng-dz.com/",
-          "sources": [
-            "https://www.forthingmotor.com/africaalgeria/",
-            "https://dongfeng-dz.com/",
-            "https://dongfeng-dz.com/distributeurs/",
-            "https://dongfeng-dz.com/services/"
-          ],
-          "uncertain": false
-        },
         "DOM": {
           "name": "Dominican Republic",
           "present": true,
@@ -5052,6 +5040,18 @@
             "https://peraviamotors.com/en/dongfeng",
             "https://peraviamotors.com/en/dongfeng/rich-6-ev",
             "https://peraviamotors.com/en/contacto?vehicle=rich-6-ev"
+          ],
+          "uncertain": false
+        },
+        "DZA": {
+          "name": "Algeria",
+          "present": true,
+          "source": "https://dongfeng-dz.com/",
+          "sources": [
+            "https://www.forthingmotor.com/africaalgeria/",
+            "https://dongfeng-dz.com/",
+            "https://dongfeng-dz.com/distributeurs/",
+            "https://dongfeng-dz.com/services/"
           ],
           "uncertain": false
         },
@@ -5157,6 +5157,19 @@
             "https://www.dongfeng-global.com/servicesSupports?type=2",
             "https://dongfengmotor.pe/dongfeng/",
             "https://dongfengmotor.pe/dongfeng/formulario-nami-box/"
+          ],
+          "uncertain": false
+        },
+        "PHL": {
+          "name": "Philippines",
+          "present": true,
+          "source": "https://dongfengmotorsph.com/dealer-locator/",
+          "sources": [
+            "https://dongfengmotorsph.com/",
+            "https://dongfengmotorsph.com/vehicles/nammi/",
+            "https://dongfengmotorsph.com/vehicles/forthing-friday/",
+            "https://dongfengmotorsph.com/dealer-locator/",
+            "https://dongfengmotorsph.com/test-drive/"
           ],
           "uncertain": false
         },

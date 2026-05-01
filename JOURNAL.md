@@ -1178,3 +1178,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-01
 **Did**: Expanded Dongfeng coverage by adding the Dominican Republic and Uruguay after confirming Forthing's official distributor network plus each local market's live EV model and official distributor or contact surfaces.
 **Result**: pass
+
+## 2026-05-01
+**Did**: Expanded Dongfeng coverage into Southeast Asia by adding the Philippines after confirming Dongfeng Motors Philippines' live EV model, dealer, and test-drive flows.
+**Result**: pass
+**TODO**: Expand Dongfeng's Southeast Asia footprint beyond China and the Philippines by verifying the next official sovereign market with a live EV model plus dealer, contact, or test-drive flow.
