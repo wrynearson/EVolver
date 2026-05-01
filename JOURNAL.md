@@ -1183,3 +1183,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Dongfeng coverage into Southeast Asia by adding the Philippines after confirming Dongfeng Motors Philippines' live EV model, dealer, and test-drive flows.
 **Result**: pass
 **TODO**: Expand Dongfeng's Southeast Asia footprint beyond China and the Philippines by verifying the next official sovereign market with a live EV model plus dealer, contact, or test-drive flow.
+
+## 2026-05-01
+**Did**: Expanded Dongfeng coverage in Southeast Asia by adding Malaysia after confirming CADB's official Dongfeng Malaysia distributor page plus the local BOX EV, dealer-network, and booking/test-drive flows.
+**Result**: pass
+**TODO**: Expand Dongfeng's Southeast Asia footprint beyond China, Malaysia, and the Philippines by verifying the next official sovereign market with a live EV model plus dealer, contact, or test-drive flow.

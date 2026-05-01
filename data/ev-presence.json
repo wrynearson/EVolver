@@ -5138,6 +5138,19 @@
           ],
           "uncertain": false
         },
+        "MYS": {
+          "name": "Malaysia",
+          "present": true,
+          "source": "https://dongfengcarsmalaysia.com/dealers",
+          "sources": [
+            "https://dongfengcarsmalaysia.com/",
+            "https://dongfengcarsmalaysia.com/about-us",
+            "https://dongfengcarsmalaysia.com/box",
+            "https://dongfengcarsmalaysia.com/dealers",
+            "https://dongfengcarsmalaysia.com/booking"
+          ],
+          "uncertain": false
+        },
         "PAN": {
           "name": "Panama",
           "present": true,
