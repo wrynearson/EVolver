@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-01",
+    "last_updated": "2026-05-02",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -5246,6 +5246,18 @@
             "https://www.dongfengmotors.uy/",
             "https://www.dongfengmotors.uy/models/mage",
             "https://www.dongfengmotors.uy/contact"
+          ],
+          "uncertain": false
+        },
+        "VNM": {
+          "name": "Vietnam",
+          "present": true,
+          "source": "https://dongfengcar.vn/dongfeng-box/",
+          "sources": [
+            "https://www.forthingmotor.com/southeast-asia-vietnam/",
+            "https://dongfengcar.vn/",
+            "https://dongfengcar.vn/dongfeng-box/",
+            "https://dongfengcar.vn/showroom-va-tram-sac/"
           ],
           "uncertain": false
         }
