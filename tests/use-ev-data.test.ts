@@ -5,6 +5,7 @@ import {
   filterPresenceDataToBrand,
   filterPresenceDataToRegion,
   getBrandMajorRegionGapSummaries,
+  getBrandMajorRegionProgressSummaries,
   getBrandRegionCoverageSummaries,
   getCountryRegionBrandSuggestions,
   getCountryRegionLookup,
@@ -180,6 +181,61 @@ describe("useEVData helpers", () => {
         confirmedCountryCount: 1,
         coveredMajorRegionCount: 1,
         missingRegions: ["Southeast Asia", "Americas", "Middle East"],
+      },
+    ]);
+  });
+
+  it("builds major-region progress summaries for a selected brand", () => {
+    expect(getBrandMajorRegionProgressSummaries(mockData, "BYD")).toEqual([
+      {
+        regionName: "Europe",
+        confirmedCountryCount: 1,
+        uncertainCountryCount: 0,
+        totalCountryCount: 40,
+      },
+      {
+        regionName: "Southeast Asia",
+        confirmedCountryCount: 0,
+        uncertainCountryCount: 0,
+        totalCountryCount: 11,
+      },
+      {
+        regionName: "Americas",
+        confirmedCountryCount: 0,
+        uncertainCountryCount: 0,
+        totalCountryCount: 35,
+      },
+      {
+        regionName: "Middle East",
+        confirmedCountryCount: 0,
+        uncertainCountryCount: 0,
+        totalCountryCount: 17,
+      },
+    ]);
+    expect(getBrandMajorRegionProgressSummaries(mockData, "XPeng")).toEqual([
+      {
+        regionName: "Europe",
+        confirmedCountryCount: 1,
+        uncertainCountryCount: 1,
+        totalCountryCount: 40,
+      },
+      {
+        regionName: "Southeast Asia",
+        confirmedCountryCount: 0,
+        uncertainCountryCount: 0,
+        totalCountryCount: 11,
+      },
+      {
+        regionName: "Americas",
+        confirmedCountryCount: 0,
+        uncertainCountryCount: 0,
+        totalCountryCount: 35,
+      },
+      {
+        regionName: "Middle East",
+        confirmedCountryCount: 0,
+        uncertainCountryCount: 0,
+        totalCountryCount: 17,
       },
     ]);
   });

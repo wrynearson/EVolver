@@ -1197,3 +1197,12 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Dongfeng's Southeast Asia footprint by adding Thailand after confirming Forthing's official Thailand-entry news plus the live Thai locale, FRIDAY EV model page, and local contact flow.
 **Result**: pass
 **TODO**: Expand Dongfeng's Southeast Asia footprint beyond China, Malaysia, the Philippines, Thailand, and Vietnam by verifying the next official sovereign market with a live EV model plus dealer, contact, or test-drive flow.
+
+## 2026-05-02
+**Did**: Checked the next Dongfeng Southeast Asia leads and found Singapore to be the strongest official candidate, but its official `dongfeng.sg` consumer, contact, and model pages are currently bot-gated behind Cloudflare in both direct fetches and browser verification, so I did not add unverifiable data.
+**Result**: no-op
+
+## 2026-05-02
+**Did**: Added major-region progress bars to the selected brand footprint panel so users can see confirmed versus uncertain coverage across Europe, Southeast Asia, the Americas, and the Middle East at a glance, backed by helper and UI regression coverage.
+**Result**: pass
+

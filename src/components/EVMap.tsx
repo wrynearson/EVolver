@@ -6,6 +6,7 @@ import {
   filterPresenceDataToRegion,
   getBrandCoverageSummaries,
   getBrandMajorRegionGapSummaries,
+  getBrandMajorRegionProgressSummaries,
   getBrandRegionCoverageSummaries,
   getBrandPresenceCountries,
   getCountryRegionLookup,
@@ -28,6 +29,7 @@ import type { FeatureCollection } from "geojson";
 import type {
   BrandCoverageSummary,
   BrandMajorRegionGapSummary,
+  BrandMajorRegionProgressSummary,
   CountryCoverageSummary,
   MapCountrySelection,
   RegionCoverageSummary,
@@ -111,6 +113,10 @@ function getFootprintSortLabel(sort: FootprintSort) {
       : sort === "region"
         ? "Region, then country (A-Z)"
         : "Region, then country (Z-A)";
+}
+
+function formatMarketCount(count: number) {
+  return `${count} ${count === 1 ? "market" : "markets"}`;
 }
 
 function isCoveragePanelView(value: string): value is CoveragePanelView {
@@ -319,6 +325,18 @@ function formatMajorRegionGapList(summaries: BrandMajorRegionGapSummary[]) {
 
     return `${summary.brandName} (${summary.confirmedCountryCount} confirmed ${confirmedMarketLabel} - ${summary.coveredMajorRegionCount}/4 major regions covered) — missing ${summary.missingRegions.join(", ")}`;
   });
+}
+
+function getMajorRegionCoverageLabel(region: BrandMajorRegionProgressSummary) {
+  const detailParts = [`${region.confirmedCountryCount} confirmed`];
+
+  if (region.uncertainCountryCount > 0) {
+    detailParts.push(`${region.uncertainCountryCount} uncertain`);
+  }
+
+  detailParts.push(`of ${region.totalCountryCount} countries`);
+
+  return `${region.regionName}: ${detailParts.join(" · ")}`;
 }
 
 function filterCountriesToRegion(
@@ -1198,6 +1216,13 @@ export default function EVMap() {
       countryRegionLookup,
     );
   }, [activeSelectedBrand, countryRegionLookup, data]);
+  const selectedBrandMajorRegionProgressSummaries = useMemo(() => {
+    if (!data || !activeSelectedBrand) {
+      return [];
+    }
+
+    return getBrandMajorRegionProgressSummaries(data, activeSelectedBrand);
+  }, [activeSelectedBrand, data]);
   const selectedBrandTotalCountryCount = useMemo(
     () =>
       selectedBrandRegionCoverageSummaries.reduce(
@@ -3129,6 +3154,90 @@ export default function EVMap() {
                 Jump between the regions where this brand has tracked official
                 presence.
               </p>
+            </div>
+          ) : null}
+
+          {selectedBrandMajorRegionProgressSummaries.length > 0 ? (
+            <div className="mt-3">
+              <p className="block text-xs font-medium uppercase tracking-wide text-gray-500">
+                Major-region progress
+              </p>
+              <p className="mt-1 text-xs text-gray-500">
+                Confirmed coverage is shown in blue, with uncertain markets
+                layered on top where evidence still needs direct verification.
+              </p>
+              <div className="mt-2 space-y-3">
+                {selectedBrandMajorRegionProgressSummaries.map((region) => {
+                  const trackedCountryCount =
+                    region.confirmedCountryCount + region.uncertainCountryCount;
+                  const remainingCountryCount =
+                    region.totalCountryCount - trackedCountryCount;
+                  const trackedWidthPercent =
+                    (trackedCountryCount / region.totalCountryCount) * 100;
+
+                  return (
+                    <div key={region.regionName}>
+                      <div className="flex items-center justify-between gap-3 text-xs">
+                        <span className="font-medium text-gray-700">
+                          {region.regionName}
+                        </span>
+                        <span className="text-gray-500">
+                          {region.confirmedCountryCount} confirmed
+                          {region.uncertainCountryCount > 0
+                            ? ` · ${region.uncertainCountryCount} uncertain`
+                            : ""}
+                          {" / "}
+                          {region.totalCountryCount}
+                        </span>
+                      </div>
+                      <div
+                        className="mt-1 h-2 overflow-hidden rounded-full bg-gray-200"
+                        role="img"
+                        aria-label={getMajorRegionCoverageLabel(region)}
+                      >
+                        {trackedCountryCount > 0 ? (
+                          <div
+                            className="flex h-full"
+                            style={{ width: `${trackedWidthPercent}%` }}
+                          >
+                            {region.confirmedCountryCount > 0 ? (
+                              <div
+                                className="h-full bg-blue-500"
+                                style={{
+                                  width: `${
+                                    (region.confirmedCountryCount /
+                                      trackedCountryCount) *
+                                    100
+                                  }%`,
+                                }}
+                              />
+                            ) : null}
+                            {region.uncertainCountryCount > 0 ? (
+                              <div
+                                className="h-full bg-amber-300"
+                                style={{
+                                  width: `${
+                                    (region.uncertainCountryCount /
+                                      trackedCountryCount) *
+                                    100
+                                  }%`,
+                                }}
+                              />
+                            ) : null}
+                          </div>
+                        ) : null}
+                      </div>
+                      <p className="mt-1 text-[11px] text-gray-500">
+                        {trackedCountryCount === 0
+                          ? "No tracked markets yet in this major EV region."
+                          : `${formatMarketCount(trackedCountryCount)} tracked in this region, leaving ${formatMarketCount(
+                              remainingCountryCount,
+                            )} without confirmed coverage.`}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           ) : null}
 

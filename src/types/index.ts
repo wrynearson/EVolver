@@ -55,6 +55,13 @@ export interface BrandMajorRegionGapSummary {
   missingRegions: string[];
 }
 
+export interface BrandMajorRegionProgressSummary {
+  regionName: string;
+  confirmedCountryCount: number;
+  uncertainCountryCount: number;
+  totalCountryCount: number;
+}
+
 export interface CountryCoverageSummary {
   isoCode: string;
   countryName: string;

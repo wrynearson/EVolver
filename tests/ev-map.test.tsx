@@ -1593,6 +1593,29 @@ describe("EVMap", () => {
 
     expect(within(footprintPanel!).getByText("Footprint regions")).toBeInTheDocument();
     expect(
+      within(footprintPanel!).getByText("Major-region progress"),
+    ).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).getByText(
+        "Confirmed coverage is shown in blue, with uncertain markets layered on top where evidence still needs direct verification.",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).getByRole("img", {
+        name: "Europe: 1 confirmed · of 40 countries",
+      }),
+    ).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).getByText(
+        "1 market tracked in this region, leaving 39 markets without confirmed coverage.",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).getAllByText(
+        "No tracked markets yet in this major EV region.",
+      ),
+    ).toHaveLength(3);
+    expect(
       within(footprintPanel!).getByRole("button", {
         name: /All regions · 2 markets/i,
       }),

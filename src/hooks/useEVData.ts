@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import type {
   BrandCoverageSummary,
   BrandMajorRegionGapSummary,
+  BrandMajorRegionProgressSummary,
   BrandPresenceCountry,
   BrandRegionCoverageSummary,
   CountryPresenceDetails,
@@ -638,6 +639,43 @@ export function getBrandMajorRegionGapSummaries(
 
       return a.brandName.localeCompare(b.brandName);
     });
+}
+
+export function getBrandMajorRegionProgressSummaries(
+  data: EVPresenceData,
+  brandName: string,
+): BrandMajorRegionProgressSummary[] {
+  const brand = data.brands[brandName];
+
+  if (!brand) {
+    return [];
+  }
+
+  return MAJOR_EV_REGION_ORDER.map((regionName) => {
+    let confirmedCountryCount = 0;
+    let uncertainCountryCount = 0;
+
+    for (const isoCode of MAJOR_EV_REGION_COUNTRIES[regionName]) {
+      const entry = brand.countries[isoCode];
+
+      if (!entry?.present) {
+        continue;
+      }
+
+      if (entry.uncertain) {
+        uncertainCountryCount += 1;
+      } else {
+        confirmedCountryCount += 1;
+      }
+    }
+
+    return {
+      regionName,
+      confirmedCountryCount,
+      uncertainCountryCount,
+      totalCountryCount: MAJOR_EV_REGION_COUNTRIES[regionName].length,
+    };
+  });
 }
 
 export function getCountryCoverageSummaries(
