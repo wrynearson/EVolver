@@ -419,6 +419,50 @@ describe("EVMap", () => {
     expect(countryLookup).toHaveClass("disabled:cursor-not-allowed", "disabled:opacity-60");
   });
 
+  it("lets users collapse and restore the summary and side panels", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    const summaryHeading = await screen.findByRole("heading", { name: "Dataset summary" });
+    const summaryPanel = summaryHeading.parentElement?.parentElement ?? null;
+    expect(summaryPanel).not.toBeNull();
+
+    fireEvent.click(within(summaryPanel!).getByRole("button", { name: "Collapse panel" }));
+    expect(within(summaryPanel!).getByRole("button", { name: "Expand panel" })).toBeInTheDocument();
+    expect(within(summaryPanel!).queryByLabelText("Brand filter")).not.toBeInTheDocument();
+
+    fireEvent.click(within(summaryPanel!).getByRole("button", { name: "Expand panel" }));
+    expect(within(summaryPanel!).getByLabelText("Brand filter")).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText("Brand filter"), {
+      target: { value: "BYD" },
+    });
+
+    const footprintPanel = await screen.findByRole("heading", { name: "Brand footprint" });
+    const footprintAside = footprintPanel.closest("aside");
+    expect(footprintAside).not.toBeNull();
+
+    fireEvent.click(within(footprintAside!).getByRole("button", { name: "Collapse panel" }));
+    expect(screen.queryByLabelText("Search footprint markets")).not.toBeInTheDocument();
+
+    const collapsedSidePanel = screen.getByText("BYD · 2 markets").closest("aside");
+    expect(collapsedSidePanel).not.toBeNull();
+    expect(within(collapsedSidePanel!).getByText("BYD · 2 markets")).toBeInTheDocument();
+
+    fireEvent.click(within(collapsedSidePanel!).getByRole("button", { name: "Expand panel" }));
+    expect(screen.getByLabelText("Search footprint markets")).toBeInTheDocument();
+  });
+
   it("fits the map to a selected country", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
@@ -2198,7 +2242,9 @@ describe("EVMap", () => {
 
     expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
 
-    const summaryPanel = screen.getByText("Dataset summary").closest("div");
+    const summaryPanel =
+      screen.getByRole("heading", { name: "Dataset summary" }).parentElement?.parentElement ??
+      null;
     expect(summaryPanel).not.toBeNull();
     expect(within(summaryPanel!).getByText("Major region gaps")).toBeInTheDocument();
     expect(within(summaryPanel!).getByText("BYD")).toBeInTheDocument();

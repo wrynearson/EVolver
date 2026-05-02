@@ -1206,3 +1206,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added major-region progress bars to the selected brand footprint panel so users can see confirmed versus uncertain coverage across Europe, Southeast Asia, the Americas, and the Middle East at a glance, backed by helper and UI regression coverage.
 **Result**: pass
 
+## 2026-05-02
+**Did**: Added collapsible dataset-summary and side panels so users can reclaim map space without losing the current filters, footprint context, or coverage state, backed by EV map regression coverage.
+**Result**: pass

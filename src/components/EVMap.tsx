@@ -105,6 +105,14 @@ function getCoverageSortLabel(sort: CoverageSort) {
   return sort === "name" ? "Alphabetical" : "Coverage strength";
 }
 
+function getCoveragePanelTitle(view: CoveragePanelView) {
+  return view === "brands"
+    ? "Brand coverage"
+    : view === "countries"
+      ? "Country coverage"
+      : "Regional coverage";
+}
+
 function getFootprintSortLabel(sort: FootprintSort) {
   return sort === "name"
     ? "Country name (A-Z)"
@@ -797,6 +805,8 @@ export default function EVMap() {
     () => initialSelectionState.footprintSearchQuery,
   );
   const [compactFootprintView, setCompactFootprintView] = useState(false);
+  const [summaryPanelCollapsed, setSummaryPanelCollapsed] = useState(false);
+  const [sidePanelCollapsed, setSidePanelCollapsed] = useState(false);
   const [countryLookupQuery, setCountryLookupQuery] = useState(() =>
     getCountryLookupValue(initialSelectionState.selectedCountry),
   );
@@ -1449,6 +1459,30 @@ export default function EVMap() {
     sortedCountryCoverageSummaries,
     sortedRegionCoverageSummaries,
   ]);
+  const sidePanelHeading = selectedCountryDetails
+    ? selectedCountryDetails.countryName
+    : activeSelectedBrand
+      ? "Brand footprint"
+      : getCoveragePanelTitle(coveragePanelView);
+  const sidePanelSummary = selectedCountryDetails
+    ? `${selectedCountryDetails.isoCode} · ${selectedCountryDetails.brands.length} ${
+        selectedCountryDetails.brands.length === 1 ? "brand" : "brands"
+      }`
+    : activeSelectedBrand
+      ? `${activeSelectedBrand} · ${selectedBrandPresence.length} ${
+          selectedBrandPresence.length === 1 ? "market" : "markets"
+        }`
+      : coveragePanelView === "brands"
+        ? `Showing ${sortedBrandCoverageSummaries.length} of ${brandCoverageSummaries.length} ${
+            brandCoverageSummaries.length === 1 ? "brand" : "brands"
+          }`
+        : coveragePanelView === "countries"
+          ? `Showing ${sortedCountryCoverageSummaries.length} of ${
+              visibleCountryCoverageSummaries.length
+            } ${visibleCountryCoverageSummaries.length === 1 ? "country" : "countries"}`
+          : `Showing ${sortedRegionCoverageSummaries.length} of ${
+              regionCoverageSummaries.length
+            } ${regionCoverageSummaries.length === 1 ? "region" : "regions"}`;
 
   const shareUrl = useMemo(
     () =>
@@ -2052,9 +2086,25 @@ export default function EVMap() {
 
       {visibleSummary ? (
         <div className="absolute top-6 left-6 bg-white/90 rounded-lg shadow-md px-4 py-3 max-w-xs">
-          <h2 className="text-sm font-semibold text-gray-800">
-            Dataset summary
-          </h2>
+          <div className="flex items-start justify-between gap-4">
+            <h2 className="text-sm font-semibold text-gray-800">
+              Dataset summary
+            </h2>
+            <button
+              type="button"
+              className="text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+              aria-expanded={!summaryPanelCollapsed}
+              onClick={() => setSummaryPanelCollapsed((current) => !current)}
+            >
+              {summaryPanelCollapsed ? "Expand panel" : "Collapse panel"}
+            </button>
+          </div>
+          {summaryPanelCollapsed ? (
+            <p className="mt-2 text-xs text-gray-500">
+              Keep the current filters and exports handy while opening more map space.
+            </p>
+          ) : (
+            <>
           <div className="mt-3">
             <label
               htmlFor="brand-filter"
@@ -2693,6 +2743,8 @@ export default function EVMap() {
               </ul>
             </div>
           ) : null}
+            </>
+          )}
         </div>
       ) : null}
 
@@ -2787,7 +2839,27 @@ export default function EVMap() {
         </div>
       ) : null}
 
-      {selectedCountryDetails ? (
+      {(selectedCountryDetails || activeSelectedBrand || brandCoverageSummaries.length > 0) &&
+      sidePanelCollapsed ? (
+        <aside className="absolute right-6 bottom-6 w-72 rounded-lg bg-white/95 px-4 py-3 shadow-md">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h2 className="text-sm font-semibold text-gray-800">{sidePanelHeading}</h2>
+              <p className="mt-1 text-xs text-gray-500">{sidePanelSummary}</p>
+            </div>
+            <button
+              type="button"
+              className="text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+              aria-expanded={!sidePanelCollapsed}
+              onClick={() => setSidePanelCollapsed(false)}
+            >
+              Expand panel
+            </button>
+          </div>
+        </aside>
+      ) : null}
+
+      {selectedCountryDetails && !sidePanelCollapsed ? (
         <aside
           className="absolute top-6 right-6 max-w-sm rounded-lg bg-white/95 px-4 py-3 shadow-md"
           aria-labelledby="selected-country-heading"
@@ -2856,13 +2928,23 @@ export default function EVMap() {
                 </button>
               ) : null}
             </div>
-            <button
-              type="button"
-              className="text-sm text-gray-500 hover:text-gray-700"
-              onClick={() => setSelectedCountry(null)}
-            >
-              Close
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                className="text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                aria-expanded={!sidePanelCollapsed}
+                onClick={() => setSidePanelCollapsed(true)}
+              >
+                Collapse panel
+              </button>
+              <button
+                type="button"
+                className="text-sm text-gray-500 hover:text-gray-700"
+                onClick={() => setSelectedCountry(null)}
+              >
+                Close
+              </button>
+            </div>
           </div>
 
           <ul className="mt-3 space-y-3">
@@ -2997,7 +3079,7 @@ export default function EVMap() {
         </aside>
       ) : null}
 
-      {activeSelectedBrand ? (
+      {activeSelectedBrand && !sidePanelCollapsed ? (
         <aside
           className="absolute right-6 bottom-6 max-h-80 w-80 overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md"
           aria-labelledby="brand-footprint-heading"
@@ -3088,13 +3170,23 @@ export default function EVMap() {
                 </div>
               ) : null}
             </div>
-            <button
-              type="button"
-              className="text-sm text-gray-500 hover:text-gray-700"
-              onClick={clearBrandSelection}
-            >
-              Clear
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                className="text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                aria-expanded={!sidePanelCollapsed}
+                onClick={() => setSidePanelCollapsed(true)}
+              >
+                Collapse panel
+              </button>
+              <button
+                type="button"
+                className="text-sm text-gray-500 hover:text-gray-700"
+                onClick={clearBrandSelection}
+              >
+                Clear
+              </button>
+            </div>
           </div>
 
           {selectedBrandRegionCoverageSummaries.length > 1 ? (
@@ -3416,15 +3508,12 @@ export default function EVMap() {
             )}
           </ul>
         </aside>
-      ) : brandCoverageSummaries.length > 0 ? (
+      ) : !sidePanelCollapsed && brandCoverageSummaries.length > 0 ? (
         <aside className="absolute right-6 bottom-6 max-h-80 w-80 overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md">
-          <div>
+          <div className="flex items-start justify-between gap-4">
+            <div>
               <h2 className="text-sm font-semibold text-gray-800">
-                {coveragePanelView === "brands"
-                  ? "Brand coverage"
-                  : coveragePanelView === "countries"
-                    ? "Country coverage"
-                    : "Regional coverage"}
+                {getCoveragePanelTitle(coveragePanelView)}
               </h2>
               <p className="text-xs text-gray-500">
                 {coveragePanelView === "brands"
@@ -3447,6 +3536,15 @@ export default function EVMap() {
                 </button>
               </div>
             </div>
+            <button
+              type="button"
+              className="text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+              aria-expanded={!sidePanelCollapsed}
+              onClick={() => setSidePanelCollapsed(true)}
+            >
+              Collapse panel
+            </button>
+          </div>
 
           <div
             className="mt-3 inline-flex rounded-md border border-gray-200 bg-gray-50 p-1"
