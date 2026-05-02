@@ -5210,6 +5210,19 @@
           ],
           "uncertain": false
         },
+        "THA": {
+          "name": "Thailand",
+          "present": true,
+          "source": "https://th.forthingmotor.com/friday/",
+          "sources": [
+            "https://www.forthingmotor.com/news/forge-ahead-toward-a-new-era-forthing-shines-in-asean-dongfeng-forthing-embarks-on-a-new-journey-in-thailand-market/",
+            "https://www.forthingmotor.com/news/dflzm-unveils-friday-and-v9-at-bangkok-motor-show/",
+            "https://th.forthingmotor.com/",
+            "https://th.forthingmotor.com/friday/",
+            "https://th.forthingmotor.com/contact-us/"
+          ],
+          "uncertain": false
+        },
         "SVK": {
           "name": "Slovakia",
           "present": true,

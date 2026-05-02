@@ -1192,3 +1192,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Dongfeng's Southeast Asia footprint by adding Vietnam after confirming Forthing's official Hanoi operation-center page plus Dongfeng Vietnam's live BOX EV model page and showroom/charging-network surface.
 **Result**: pass
 **TODO**: Expand Dongfeng's Southeast Asia footprint beyond China, Malaysia, the Philippines, and Vietnam by verifying the next official sovereign market with a live EV model plus dealer, contact, or test-drive flow.
+
+## 2026-05-02
+**Did**: Expanded Dongfeng's Southeast Asia footprint by adding Thailand after confirming Forthing's official Thailand-entry news plus the live Thai locale, FRIDAY EV model page, and local contact flow.
+**Result**: pass
+**TODO**: Expand Dongfeng's Southeast Asia footprint beyond China, Malaysia, the Philippines, Thailand, and Vietnam by verifying the next official sovereign market with a live EV model plus dealer, contact, or test-drive flow.
