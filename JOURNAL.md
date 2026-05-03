@@ -1221,3 +1221,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Dongfeng's Southeast Asia footprint by adding Singapore after confirming Dongfeng's own global network payload lists Volt as the local passenger distributor and the official `dongfeng.sg` site exposes localized contact and test-drive pages.
 **Result**: pass
 **TODO**: Expand Dongfeng's Southeast Asia footprint beyond Cambodia, China, Malaysia, the Philippines, Singapore, Thailand, and Vietnam by verifying the next sovereign market from official Dongfeng or Forthing surfaces that exposes a live local EV model plus dealer, contact, or test-drive flow.
+
+## 2026-05-03
+**Did**: Added dashed map outlines and a matching legend hint for countries that include uncertain brand entries in the multi-brand view, backed by map utility and EV map regression coverage.
+**Result**: pass

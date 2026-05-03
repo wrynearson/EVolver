@@ -1379,6 +1379,13 @@ export default function EVMap() {
       ),
     [countryCoverageSummaries, countryRegionLookup, selectedCoverageRegion],
   );
+  const visibleUncertainCountryCodes = useMemo(
+    () =>
+      visibleCountryCoverageSummaries
+        .filter((country) => country.uncertainBrandCount > 0)
+        .map((country) => country.isoCode),
+    [visibleCountryCoverageSummaries],
+  );
   const visibleBrandCoverageSummaries = useMemo(
     () =>
       brandCoverageSummaries.filter(
@@ -1767,9 +1774,15 @@ export default function EVMap() {
   const legendItems = useMemo(
     () =>
       getLegendItems(activeSelectedBrand || undefined, {
-        hasUncertainEntries: selectedBrandHasUncertainPresence,
+        hasUncertainEntries: activeSelectedBrand
+          ? selectedBrandHasUncertainPresence
+          : visibleUncertainCountryCodes.length > 0,
       }),
-    [activeSelectedBrand, selectedBrandHasUncertainPresence],
+    [
+      activeSelectedBrand,
+      selectedBrandHasUncertainPresence,
+      visibleUncertainCountryCodes,
+    ],
   );
   const retryCountryBoundaries = () => {
     setCountryRequestVersion((currentVersion) => currentVersion + 1);
@@ -2162,6 +2175,9 @@ export default function EVMap() {
               focusBounds={mapFocusState.bounds}
               focusTargetKey={mapFocusState.key}
               hoveredCountryIsoCode={hoveredCountry?.isoCode ?? null}
+              uncertainCountryIsoCodes={
+                activeSelectedBrand ? undefined : visibleUncertainCountryCodes
+              }
               onHoveredCountryChange={setHoveredCountry}
               onSelectedCountryChange={setSelectedCountry}
             />
@@ -4152,7 +4168,9 @@ export default function EVMap() {
         <h3 className="text-sm font-semibold mb-2 text-gray-700">
           {activeSelectedBrand ? "Filtered brand presence" : "Chinese EV Brands Present"}
         </h3>
-        {activeSelectedBrand || selectedCoverageRegion ? (
+        {activeSelectedBrand ||
+        selectedCoverageRegion ||
+        (!activeSelectedBrand && visibleUncertainCountryCodes.length > 0) ? (
           <p className="mb-2 max-w-[12rem] text-xs text-gray-500">
             {activeSelectedBrand && selectedCoverageRegion
               ? selectedBrandHasUncertainPresence
@@ -4162,14 +4180,26 @@ export default function EVMap() {
                 ? selectedBrandHasUncertainPresence
                   ? `Highlighting the countries where ${activeSelectedBrand} has tracked official presence, with lighter fills for uncertain entries.`
                   : `Highlighting the countries where ${activeSelectedBrand} has confirmed official presence.`
-                : `Highlighting confirmed tracked brand presence within ${selectedCoverageRegion}.`}
+                : selectedCoverageRegion
+                  ? visibleUncertainCountryCodes.length > 0
+                    ? `Highlighting tracked brand presence within ${selectedCoverageRegion}, with dashed outlines marking countries that include uncertain entries.`
+                    : `Highlighting confirmed tracked brand presence within ${selectedCoverageRegion}.`
+                  : "Dashed outlines mark countries that include at least one uncertain brand entry."}
           </p>
         ) : null}
         {legendItems.map((item) => (
           <div key={item.label} className="flex items-center gap-2 text-sm">
             <span
-              className="w-4 h-4 rounded-sm inline-block"
-              style={{ backgroundColor: item.color }}
+              className={`inline-block h-4 w-4 rounded-sm ${
+                item.variant === "outline-dashed"
+                  ? "border-2 border-dashed bg-transparent"
+                  : ""
+              }`}
+              style={
+                item.variant === "outline-dashed"
+                  ? { borderColor: item.color }
+                  : { backgroundColor: item.color }
+              }
             />
             <span className="text-gray-600">{item.label}</span>
           </div>

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import Map, { Layer, Source, type MapRef } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { FeatureCollection } from "geojson";
@@ -12,6 +12,7 @@ interface MapCanvasProps {
   focusBounds: MapBounds | null;
   focusTargetKey: string;
   hoveredCountryIsoCode: string | null;
+  uncertainCountryIsoCodes?: Iterable<string>;
   onHoveredCountryChange: (country: MapCountrySelection | null) => void;
   onSelectedCountryChange: (country: MapCountrySelection | null) => void;
 }
@@ -43,10 +44,22 @@ export default function MapCanvas({
   focusBounds,
   focusTargetKey,
   hoveredCountryIsoCode,
+  uncertainCountryIsoCodes,
   onHoveredCountryChange,
   onSelectedCountryChange,
 }: MapCanvasProps) {
   const mapRef = useRef<MapRef | null>(null);
+  const resolvedUncertainCountryIsoCodes = useMemo(
+    () => Array.from(new Set(uncertainCountryIsoCodes ?? [])),
+    [uncertainCountryIsoCodes],
+  );
+  const interactiveLayerIds = useMemo(
+    () =>
+      resolvedUncertainCountryIsoCodes.length > 0
+        ? ["country-fill", "country-uncertain-line"]
+        : ["country-fill"],
+    [resolvedUncertainCountryIsoCodes],
+  );
 
   useEffect(() => {
     const map = mapRef.current?.getMap();
@@ -77,7 +90,7 @@ export default function MapCanvas({
       initialViewState={DEFAULT_VIEW_STATE}
       style={{ width: "100%", height: "100%" }}
       mapStyle="https://tiles.openfreemap.org/styles/positron"
-      interactiveLayerIds={["country-fill"]}
+      interactiveLayerIds={interactiveLayerIds}
       onMouseMove={(event) =>
         onHoveredCountryChange(getCountrySelection(event.features?.[0]?.properties))
       }
@@ -92,6 +105,19 @@ export default function MapCanvas({
           type="fill"
           paint={{ "fill-color": fillColor, "fill-opacity": 0.7 }}
         />
+        {resolvedUncertainCountryIsoCodes.length > 0 ? (
+          <Layer
+            id="country-uncertain-line"
+            type="line"
+            filter={["in", "ISO_A3", ...resolvedUncertainCountryIsoCodes]}
+            paint={{
+              "line-color": "#f59e0b",
+              "line-width": 1.75,
+              "line-dasharray": [2, 1],
+              "line-opacity": 0.95,
+            }}
+          />
+        ) : null}
         <Layer
           id="country-line"
           type="line"

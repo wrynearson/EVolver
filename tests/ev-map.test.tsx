@@ -1112,6 +1112,33 @@ describe("EVMap", () => {
     expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
   });
 
+  it("highlights uncertain countries in the multi-brand map legend and overlay", async () => {
+    vi.doUnmock("../src/components/MapCanvas");
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockUncertainData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Chinese EV Brands Present")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Dashed outlines mark countries that include at least one uncertain brand entry.",
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByText("Includes uncertain entries")).toBeInTheDocument();
+    expect(
+      await screen.findByTestId("layer-country-uncertain-line"),
+    ).toBeInTheDocument();
+  });
+
   it("lets users apply a brand filter from the map preview", async () => {
     vi.doUnmock("../src/components/MapCanvas");
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {

@@ -84,6 +84,19 @@ describe("getLegendItems", () => {
       { color: "#93c5fd", label: "ORA uncertain" },
     ]);
   });
+
+  it("adds an uncertainty indicator to the multi-brand legend when needed", () => {
+    expect(getLegendItems(undefined, { hasUncertainEntries: true })).toEqual([
+      { color: "#93c5fd", label: "1 brand" },
+      { color: "#3b82f6", label: "2-3 brands" },
+      { color: "#1d4ed8", label: "4+ brands" },
+      {
+        color: "#f59e0b",
+        label: "Includes uncertain entries",
+        variant: "outline-dashed",
+      },
+    ]);
+  });
 });
 
 describe("getFeatureBounds", () => {

@@ -8,6 +8,7 @@ const TRANSPARENT_FILL = "rgba(0,0,0,0)";
 const LIGHT_BLUE = "#93c5fd";
 const MEDIUM_BLUE = "#3b82f6";
 const DARK_BLUE = "#1d4ed8";
+const AMBER = "#f59e0b";
 
 interface BuildColorExpressionOptions {
   selectedBrand?: string;
@@ -70,6 +71,7 @@ function selectedBrandCountToColor(count: number, uncertain: boolean): string {
 export interface LegendItem {
   color: string;
   label: string;
+  variant?: "fill" | "outline-dashed";
 }
 
 export type MapBounds = [[number, number], [number, number]];
@@ -98,11 +100,21 @@ export function getLegendItems(
     return [{ color: LIGHT_BLUE, label: `${selectedBrand} present` }];
   }
 
-  return [
+  const items: LegendItem[] = [
     { color: LIGHT_BLUE, label: "1 brand" },
     { color: MEDIUM_BLUE, label: "2-3 brands" },
     { color: DARK_BLUE, label: "4+ brands" },
   ];
+
+  if (options.hasUncertainEntries) {
+    items.push({
+      color: AMBER,
+      label: "Includes uncertain entries",
+      variant: "outline-dashed",
+    });
+  }
+
+  return items;
 }
 
 function visitGeometryCoordinates(
