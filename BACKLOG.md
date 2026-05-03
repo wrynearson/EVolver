@@ -4,7 +4,7 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
-- Expand Dongfeng's Southeast Asia footprint beyond Cambodia, China, Malaysia, the Philippines, Thailand, and Vietnam by verifying the next sovereign market from official Dongfeng or Forthing surfaces that exposes a live local EV model plus dealer, contact, or test-drive flow.
+- Expand Dongfeng's Southeast Asia footprint beyond Cambodia, China, Malaysia, the Philippines, Singapore, Thailand, and Vietnam by verifying the next sovereign market from official Dongfeng or Forthing surfaces that exposes a live local EV model plus dealer, contact, or test-drive flow.
 
 - [monitoring] Re-check MAXUS Costa Rica and Croatia only after SAIC MAXUS's official selector-linked local surfaces become browser-accessible and expose live dealer, contact, or test-drive flows; checked 2026-04-29 and the global selector still lists `maxus.autos` / `maxus.cr` for Costa Rica plus `maxus.hr` for Croatia, but the Costa Rica roots currently return 403 access-denied responses while the Croatia root fails DNS resolution.
 
