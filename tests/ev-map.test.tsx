@@ -1876,6 +1876,12 @@ describe("EVMap", () => {
     fireEvent.keyDown(within(coveragePanel!).getByRole("tab", { name: "Regions" }), {
       key: "Home",
     });
+    expect(window.location.search).toBe("?view=snapshot");
+    expect(within(coveragePanel!).getByRole("tab", { name: "Snapshot" })).toHaveFocus();
+
+    fireEvent.keyDown(within(coveragePanel!).getByRole("tab", { name: "Snapshot" }), {
+      key: "ArrowRight",
+    });
     expect(window.location.search).toBe("");
     expect(within(coveragePanel!).getByRole("tab", { name: "Brands" })).toHaveFocus();
 
@@ -2161,6 +2167,7 @@ describe("EVMap", () => {
   });
 
   it("copies the visible coverage rankings for brands, countries, and regions", async () => {
+    window.history.replaceState({}, "", "/");
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
       const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
@@ -2181,14 +2188,63 @@ describe("EVMap", () => {
       .closest("aside");
     expect(coveragePanel).not.toBeNull();
 
+    fireEvent.click(within(coveragePanel!).getByRole("tab", { name: "Snapshot" }));
+
+    const snapshotPanel = screen
+      .getByRole("heading", { name: "Coverage snapshot" })
+      .closest("aside");
+    expect(snapshotPanel).not.toBeNull();
+    expect(within(snapshotPanel!).queryByLabelText("Search brand coverage")).not.toBeInTheDocument();
+    expect(within(snapshotPanel!).getByText("Leading brands")).toBeInTheDocument();
+    expect(within(snapshotPanel!).getByText("Most-covered countries")).toBeInTheDocument();
     fireEvent.click(
-      within(coveragePanel!).getByRole("button", { name: "Copy visible brands" }),
+      within(snapshotPanel!).getByRole("button", { name: "Copy coverage snapshot" }),
+    );
+    expect(window.navigator.clipboard.writeText).toHaveBeenLastCalledWith(
+      [
+        "Leading brands",
+        "1. BYD (2 confirmed markets)",
+        "2. XPeng (1 confirmed market)",
+        "",
+        "Most-covered countries",
+        "1. Norway (NOR - Europe - 2 confirmed brands) — BYD, XPeng",
+        "2. China (CHN - Asia - 1 confirmed brand) — BYD",
+        "",
+        "Strongest regions",
+        "1. Europe (1 confirmed country - 2 tracked brands) — BYD, XPeng",
+        "2. Asia (1 confirmed country - 1 tracked brand) — BYD",
+        "",
+        "Largest major-region gaps",
+        "1. BYD (2 confirmed markets - 1/4 major regions covered) — missing Southeast Asia, Americas, Middle East",
+        "2. XPeng (1 confirmed market - 1/4 major regions covered) — missing Southeast Asia, Americas, Middle East",
+      ].join("\n"),
+    );
+    const leadingBrandsSection = within(snapshotPanel!).getByText("Leading brands").closest("section");
+    expect(leadingBrandsSection).not.toBeNull();
+    fireEvent.click(within(leadingBrandsSection!).getByRole("button", { name: /1\. BYD/i }));
+    expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Clear brand filter" }));
+
+    const refreshedCoveragePanel = screen
+      .getByRole("heading", { name: "Coverage snapshot" })
+      .closest("aside");
+    expect(refreshedCoveragePanel).not.toBeNull();
+
+    fireEvent.click(within(refreshedCoveragePanel!).getByRole("tab", { name: "Brands" }));
+
+    const brandCoveragePanel = screen
+      .getByRole("heading", { name: "Brand coverage" })
+      .closest("aside");
+    expect(brandCoveragePanel).not.toBeNull();
+
+    fireEvent.click(
+      within(brandCoveragePanel!).getByRole("button", { name: "Copy visible brands" }),
     );
     expect(window.navigator.clipboard.writeText).toHaveBeenLastCalledWith(
       ["BYD (2 confirmed markets)", "XPeng (1 confirmed market)"].join("\n"),
     );
 
-    fireEvent.click(within(coveragePanel!).getByRole("tab", { name: "Countries" }));
+    fireEvent.click(within(brandCoveragePanel!).getByRole("tab", { name: "Countries" }));
 
     const countryCoveragePanel = screen
       .getByRole("heading", { name: "Country coverage" })
@@ -2359,6 +2415,37 @@ describe("EVMap", () => {
       ),
     ).not.toBeInTheDocument();
     expect(screen.getByLabelText("Brand filter")).toHaveValue("BYD");
+  });
+
+  it("restores the snapshot coverage view from the URL", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+    window.history.replaceState({}, "", "/?view=snapshot");
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const snapshotPanel = screen
+      .getByRole("heading", { name: "Coverage snapshot" })
+      .closest("aside");
+    expect(snapshotPanel).not.toBeNull();
+    expect(within(snapshotPanel!).getByRole("tab", { name: "Snapshot" })).toHaveAttribute(
+      "aria-selected",
+      "true",
+    );
+    expect(within(snapshotPanel!).queryByLabelText("Search brand coverage")).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Open share link in a new tab" }),
+    ).toHaveAttribute("href", "http://localhost:3000/?view=snapshot");
   });
 
   it("restores shareable coverage panel state from the URL", async () => {
@@ -2618,6 +2705,12 @@ describe("EVMap", () => {
 
     expect(screen.getByRole("heading", { name: "Regional coverage" })).toBeInTheDocument();
     expect(window.location.search).toBe("?view=regions");
+
+    window.history.pushState({}, "", "/?view=snapshot");
+    fireEvent.popState(window);
+
+    expect(screen.getByRole("heading", { name: "Coverage snapshot" })).toBeInTheDocument();
+    expect(window.location.search).toBe("?view=snapshot");
 
     window.history.pushState({}, "", "/?view=countries&region=Europe");
     fireEvent.popState(window);
