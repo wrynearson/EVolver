@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-02",
+    "last_updated": "2026-05-03",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -5087,6 +5087,17 @@
             "https://dongfengmotor.hu/",
             "https://dongfengmotor.hu/kereskedok-es-szerviz/",
             "https://dongfengmotor.hu/tesztvezetes/"
+          ],
+          "uncertain": false
+        },
+        "KHM": {
+          "name": "Cambodia",
+          "present": true,
+          "source": "https://www.dongfeng-global.com/servicesSupports?type=2",
+          "sources": [
+            "https://www.dongfeng-global.com/servicesSupports?type=2",
+            "https://www.dongfeng-global.com/_nuxt/361bd59.js",
+            "https://www.dongfeng-global.com/_nuxt/e89983f.js"
           ],
           "uncertain": false
         },

@@ -1212,3 +1212,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-03
 **Did**: Added a new coverage snapshot tab to the map side panel so users can scan leading brands, most-covered countries, strongest regions, and major-region gaps at a glance, with regression coverage for copying, deep-link restore, and tab navigation.
 **Result**: pass
+## 2026-05-03
+**Did**: Expanded Dongfeng's Southeast Asia footprint by adding Cambodia after confirming Dongfeng's live global dealer-network page and first-party network payload both list Cambodia as a passenger-vehicle market.
+**Result**: pass
+**TODO**: Expand Dongfeng's Southeast Asia footprint beyond Cambodia, China, Malaysia, the Philippines, Thailand, and Vietnam by verifying the next sovereign market from official Dongfeng or Forthing surfaces that exposes a live local EV model plus dealer, contact, or test-drive flow.
