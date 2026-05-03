@@ -1209,3 +1209,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-02
 **Did**: Added collapsible dataset-summary and side panels so users can reclaim map space without losing the current filters, footprint context, or coverage state, backed by EV map regression coverage.
 **Result**: pass
+## 2026-05-03
+**Did**: Added a new coverage snapshot tab to the map side panel so users can scan leading brands, most-covered countries, strongest regions, and major-region gaps at a glance, with regression coverage for copying, deep-link restore, and tab navigation.
+**Result**: pass
