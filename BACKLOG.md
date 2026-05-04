@@ -4,7 +4,7 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
-- Continue IM Motors footprint expansion by verifying the next official sovereign overseas market beyond China, Jordan, and Singapore, prioritizing Mauritius and Myanmar once their local consumer/contact or test-drive flows are directly browser-verifiable.
+- Continue IM Motors footprint expansion by verifying the next official sovereign overseas market beyond China, Jordan, Mauritius, and Singapore, prioritizing Myanmar once its local consumer/contact or test-drive flows are directly browser-verifiable.
 
 - [monitoring] Re-check Dongfeng's next Southeast Asia sovereign market only after official Dongfeng or Forthing surfaces expose a new live local EV model plus dealer, contact, or test-drive flow beyond Cambodia, China, Malaysia, the Philippines, Singapore, Thailand, and Vietnam; checked 2026-05-04 and the official Forthing Southeast Asia page still points only to Vietnam while broader Dongfeng/Forthing surfaces expose no additional sovereign local consumer sites.
 

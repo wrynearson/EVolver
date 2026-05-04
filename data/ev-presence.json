@@ -4825,6 +4825,17 @@
           ],
           "uncertain": false
         },
+        "MUS": {
+          "name": "Mauritius",
+          "present": true,
+          "source": "https://www.immotors.mu/contact-8",
+          "sources": [
+            "https://www.immotors.mu/",
+            "https://www.immotors.mu/contact-8",
+            "https://www.immotors.mu/im5"
+          ],
+          "uncertain": false
+        },
         "SGP": {
           "name": "Singapore",
           "present": true,

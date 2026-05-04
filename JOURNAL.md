@@ -1233,3 +1233,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Added IM Motors as a new tracked brand with confirmed presence in China, Singapore, and Jordan using IM Motors' official domestic site plus live Singapore and Jordan local model, showroom, contact, and test-drive surfaces.
 **Result**: pass
 **TODO**: Expand IM Motors beyond China, Jordan, and Singapore by verifying the next official sovereign overseas market, prioritizing Mauritius and Myanmar once their local consumer/contact or test-drive flows are directly browser-verifiable.
+
+## 2026-05-04
+**Did**: Expanded IM Motors' overseas footprint by adding Mauritius after confirming the live first-party `immotors.mu` market site plus its official distributor contact flow for local IM6 and IM5 enquiries and test drives.
+**Result**: pass
+**TODO**: Expand IM Motors beyond China, Jordan, Mauritius, and Singapore by verifying the next official sovereign overseas market, prioritizing Myanmar once its local consumer/contact or test-drive flows are directly browser-verifiable.
