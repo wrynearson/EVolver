@@ -689,6 +689,24 @@ describe("EVMap", () => {
       .closest("div");
     expect(uncertainMarketsRow).toHaveTextContent("0");
     expect(window.location.search).toBe("?brand=XPeng&country=SWE");
+    fireEvent.click(screen.getByRole("button", { name: "Copy summary" }));
+    expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
+      [
+        "Dataset summary",
+        "Showing: XPeng",
+        "Brands tracked: 2",
+        "Countries in view: 1",
+        "Uncertain markets in view: 0",
+        "Last updated: 2026-03-13",
+        "",
+        "Active view filters",
+        "- Brand: XPeng",
+        "- Country: Sweden (SWE)",
+      ].join("\n"),
+    );
+    expect(
+      await screen.findByRole("button", { name: "Copied summary" }),
+    ).toBeInTheDocument();
 
     const initialDetailsPanel = screen
       .getByRole("heading", { name: "Sweden" })

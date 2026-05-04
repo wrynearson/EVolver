@@ -232,6 +232,14 @@ function getCopyCoverageButtonLabel(
       : idleLabel;
 }
 
+function getCopySummaryButtonLabel(status: CopyStatus) {
+  return status === "copied"
+    ? "Copied summary"
+    : status === "failed"
+      ? "Summary copy failed"
+      : "Copy summary";
+}
+
 function formatBrandPresenceMarketList(
   countries: Array<{
     isoCode: string;
@@ -370,6 +378,38 @@ function formatCoverageSnapshotList(options: {
     ...section.items.map((item, itemIndex) => `${itemIndex + 1}. ${item}`),
     ...(sectionIndex < sections.length - 1 ? [""] : []),
   ]);
+}
+
+function formatDatasetSummaryList(options: {
+  visibleBrandLabel: string;
+  selectedCoverageRegion: string;
+  brandCount: number;
+  visibleCountryCount: number;
+  uncertainCountryCount: number;
+  lastUpdated: string;
+  activeViewFilters: string[];
+}) {
+  const lines = [
+    "Dataset summary",
+    `Showing: ${options.visibleBrandLabel}${
+      options.selectedCoverageRegion ? ` · ${options.selectedCoverageRegion}` : ""
+    }`,
+    `Brands tracked: ${options.brandCount}`,
+    `Countries in view: ${options.visibleCountryCount}`,
+    `Uncertain markets in view: ${options.uncertainCountryCount}`,
+    `Last updated: ${options.lastUpdated}`,
+  ];
+
+  if (options.activeViewFilters.length === 0) {
+    return lines;
+  }
+
+  return [
+    ...lines,
+    "",
+    "Active view filters",
+    ...options.activeViewFilters.map((filter) => `- ${filter}`),
+  ];
 }
 
 function formatMajorRegionGapList(summaries: BrandMajorRegionGapSummary[]) {
@@ -797,6 +837,7 @@ export default function EVMap() {
   const hasInitializedCopyBrandWebsiteReset = useRef(false);
   const hasInitializedCopyBrandMarketsReset = useRef(false);
   const hasInitializedCopyCoverageReset = useRef(false);
+  const hasInitializedCopySummaryReset = useRef(false);
   const hasInitializedCopyMajorRegionGapsReset = useRef(false);
   const hasInitializedCopySourcesReset = useRef(false);
   const hasInitializedCoverageSearchReset = useRef(false);
@@ -818,6 +859,7 @@ export default function EVMap() {
   const [copyBrandWebsiteStatus, setCopyBrandWebsiteStatus] = useState<CopyStatus>("idle");
   const [copyBrandMarketsStatus, setCopyBrandMarketsStatus] = useState<CopyStatus>("idle");
   const [copyCoverageStatus, setCopyCoverageStatus] = useState<CopyStatus>("idle");
+  const [copySummaryStatus, setCopySummaryStatus] = useState<CopyStatus>("idle");
   const [copyMajorRegionGapsStatus, setCopyMajorRegionGapsStatus] =
     useState<CopyStatus>("idle");
   const [copySourcesState, setCopySourcesState] = useState<CopySourcesState>({
@@ -1666,6 +1708,17 @@ export default function EVMap() {
       setCopyMajorRegionGapsStatus("failed");
     });
   };
+  const copyDatasetSummary = () => {
+    if (!datasetSummaryCopyText || !navigator.clipboard?.writeText) {
+      setCopySummaryStatus("failed");
+      return;
+    }
+
+    setCopySummaryStatus("copied");
+    void navigator.clipboard.writeText(datasetSummaryCopyText).catch(() => {
+      setCopySummaryStatus("failed");
+    });
+  };
   const hasCustomView = Boolean(
     activeSelectedBrand ||
       resolvedSelectedCountry ||
@@ -1771,6 +1824,23 @@ export default function EVMap() {
         }
       : null,
   ].filter((filter): filter is ActiveViewFilter => filter !== null);
+  const activeViewFilterLabels = activeViewFilters.map((filter) => filter.label);
+  const activeViewFilterLabelSignature = activeViewFilterLabels.join("\n");
+  const datasetSummaryCopyText = useMemo(() => {
+    if (!visibleSummary) {
+      return "";
+    }
+
+    return formatDatasetSummaryList({
+      visibleBrandLabel: visibleSummary.visibleBrandLabel,
+      selectedCoverageRegion,
+      brandCount: visibleSummary.brandCount,
+      visibleCountryCount: visibleSummary.visibleCountryCount,
+      uncertainCountryCount: visibleSummary.uncertainCountryCount,
+      lastUpdated: visibleSummary.lastUpdated,
+      activeViewFilters: activeViewFilterLabels,
+    }).join("\n");
+  }, [activeViewFilterLabelSignature, activeViewFilterLabels, selectedCoverageRegion, visibleSummary]);
   const legendItems = useMemo(
     () =>
       getLegendItems(activeSelectedBrand || undefined, {
@@ -2028,6 +2098,15 @@ export default function EVMap() {
 
     setCopyCoverageStatus("idle");
   }, [coveragePanelCopyList, coveragePanelView]);
+
+  useEffect(() => {
+    if (!hasInitializedCopySummaryReset.current) {
+      hasInitializedCopySummaryReset.current = true;
+      return;
+    }
+
+    setCopySummaryStatus("idle");
+  }, [datasetSummaryCopyText]);
 
   useEffect(() => {
     if (!hasInitializedCopyMajorRegionGapsReset.current) {
@@ -2647,6 +2726,14 @@ export default function EVMap() {
                     : "Copy share link"}
               </button>
             </div>
+            <button
+              type="button"
+              className="mt-2 w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
+              disabled={!visibleSummary}
+              onClick={copyDatasetSummary}
+            >
+              {getCopySummaryButtonLabel(copySummaryStatus)}
+            </button>
             {shareUrl ? (
               <a
                 className="mt-2 block text-center text-sm font-medium text-blue-700 underline decoration-blue-300 underline-offset-2 hover:text-blue-800"

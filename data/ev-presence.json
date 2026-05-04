@@ -4836,6 +4836,18 @@
           ],
           "uncertain": false
         },
+        "MMR": {
+          "name": "Myanmar",
+          "present": true,
+          "source": "https://www.im.com.mm/contact-us/",
+          "sources": [
+            "https://www.im.com.mm/",
+            "https://www.im.com.mm/im-ls6/",
+            "https://www.im.com.mm/contact-us/",
+            "https://www.im.com.mm/request-a-test-drive/"
+          ],
+          "uncertain": false
+        },
         "SGP": {
           "name": "Singapore",
           "present": true,

@@ -1238,3 +1238,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded IM Motors' overseas footprint by adding Mauritius after confirming the live first-party `immotors.mu` market site plus its official distributor contact flow for local IM6 and IM5 enquiries and test drives.
 **Result**: pass
 **TODO**: Expand IM Motors beyond China, Jordan, Mauritius, and Singapore by verifying the next official sovereign overseas market, prioritizing Myanmar once its local consumer/contact or test-drive flows are directly browser-verifiable.
+
+## 2026-05-04
+**Did**: Expanded IM Motors' overseas footprint by adding Myanmar after confirming the official local IM market site, its live LS6 consumer page, Yangon contact details, and request-a-test-drive flow.
+**Result**: pass
+
+## 2026-05-04
+**Did**: Added a copy-summary action to the dataset summary panel so users can grab a plain-text recap of the current filtered map view, backed by EV map regression coverage.
+**Result**: pass
