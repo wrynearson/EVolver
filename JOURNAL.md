@@ -1225,3 +1225,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-03
 **Did**: Added dashed map outlines and a matching legend hint for countries that include uncertain brand entries in the multi-brand view, backed by map utility and EV map regression coverage.
 **Result**: pass
+## 2026-05-04
+**Did**: Closed the stale Dongfeng Southeast Asia expansion TODO after re-checking official Dongfeng and Forthing surfaces and confirming they still expose no new sovereign local EV market beyond the already-tracked Cambodia, China, Malaysia, the Philippines, Singapore, Thailand, and Vietnam footprint.
+**Result**: no-op
+
+## 2026-05-04
+**Did**: Added IM Motors as a new tracked brand with confirmed presence in China, Singapore, and Jordan using IM Motors' official domestic site plus live Singapore and Jordan local model, showroom, contact, and test-drive surfaces.
+**Result**: pass
+**TODO**: Expand IM Motors beyond China, Jordan, and Singapore by verifying the next official sovereign overseas market, prioritizing Mauritius and Myanmar once their local consumer/contact or test-drive flows are directly browser-verifiable.

@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-03",
+    "last_updated": "2026-05-04",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -4794,6 +4794,45 @@
             "https://hongqi.se/",
             "https://hongqi.se/upptack-hongqi",
             "https://hongqi.se/boka-provkorning"
+          ],
+          "uncertain": false
+        }
+      }
+    },
+    "IM Motors": {
+      "website": "https://www.immotors.com",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.immotors.com/",
+          "sources": [
+            "https://www.immotors.com/",
+            "https://www.immotors.com/website/dealer",
+            "https://www.immotors.com/website/test_drive?carType=ls9"
+          ],
+          "uncertain": false
+        },
+        "JOR": {
+          "name": "Jordan",
+          "present": true,
+          "source": "https://www.immotors.com.jo/contact-us",
+          "sources": [
+            "https://www.immotors.com.jo/",
+            "https://www.immotors.com.jo/products/im6",
+            "https://www.immotors.com.jo/contact-us",
+            "https://www.immotors.com.jo/request-test-drive"
+          ],
+          "uncertain": false
+        },
+        "SGP": {
+          "name": "Singapore",
+          "present": true,
+          "source": "https://www.immotors.com.sg/Contact-Us",
+          "sources": [
+            "https://www.eurokarsgroup.com/brands/singapore/im-motors",
+            "https://www.immotors.com.sg/IM6",
+            "https://www.immotors.com.sg/Contact-Us"
           ],
           "uncertain": false
         }
