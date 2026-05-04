@@ -4858,6 +4858,18 @@
             "https://www.immotors.com.sg/Contact-Us"
           ],
           "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://www.immotorsuae.com/experience/",
+          "sources": [
+            "https://www.immotorsuae.com/",
+            "https://www.immotorsuae.com/im-6/",
+            "https://www.immotorsuae.com/experience/",
+            "https://smartmobilityint.com/im/"
+          ],
+          "uncertain": false
         }
       }
     },

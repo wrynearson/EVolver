@@ -1246,3 +1246,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-04
 **Did**: Added a copy-summary action to the dataset summary panel so users can grab a plain-text recap of the current filtered map view, backed by EV map regression coverage.
 **Result**: pass
+
+## 2026-05-04
+**Did**: Expanded IM Motors' overseas footprint by adding the United Arab Emirates after confirming the live IM Motors UAE market site, its local IM 6 model page, the UAE demo-drive experience form, and Smart Mobility International's official IM brand page.
+**Result**: pass
+**TODO**: Expand IM Motors beyond China, Jordan, Mauritius, Myanmar, Singapore, and the United Arab Emirates by verifying the next official sovereign overseas market from live local consumer, contact, or demo-drive flows.
