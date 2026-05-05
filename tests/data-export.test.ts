@@ -2,11 +2,12 @@ import { describe, expect, it } from "vitest";
 import {
   buildPresenceExportFileBaseName,
   buildPresenceExportRows,
+  serializeCountryPresenceDetailsToText,
   serializePresenceDataToCsv,
   serializePresenceDataToJson,
   serializeSourceUrlsToText,
 } from "../src/lib/dataExport";
-import type { EVPresenceData } from "../src/types";
+import type { CountryPresenceDetails, EVPresenceData } from "../src/types";
 
 const mockData: EVPresenceData = {
   metadata: {
@@ -110,6 +111,48 @@ describe("data export helpers", () => {
         "https://www.byd.com/no",
       ]),
     ).toBe("https://www.byd.com/no\nhttps://www.byd.com/no/dealers");
+  });
+
+  it("serializes country presence details as readable plain text", () => {
+    const countryDetails: CountryPresenceDetails = {
+      isoCode: "NOR",
+      countryName: "Norway",
+      brands: [
+        {
+          brandName: "BYD",
+          website: "https://www.byd.com",
+          source: "https://www.byd.com/no",
+          sources: ["https://www.byd.com/no", "https://www.byd.com/no/dealers"],
+          uncertain: false,
+        },
+        {
+          brandName: "XPeng",
+          website: "https://www.xpeng.com",
+          source: "https://www.xpeng.com/no",
+          sources: ["https://www.xpeng.com/no"],
+          uncertain: true,
+        },
+      ],
+    };
+
+    expect(serializeCountryPresenceDetailsToText(countryDetails)).toBe(
+      [
+        "Country: Norway (NOR)",
+        "Tracked brands: 2",
+        "",
+        "BYD",
+        "Website: https://www.byd.com",
+        "Official sources:",
+        "- https://www.byd.com/no",
+        "- https://www.byd.com/no/dealers",
+        "",
+        "XPeng",
+        "Website: https://www.xpeng.com",
+        "Status: uncertain",
+        "Official sources:",
+        "- https://www.xpeng.com/no",
+      ].join("\n"),
+    );
   });
 
   it("deduplicates source URLs and escapes csv fields with special characters", () => {

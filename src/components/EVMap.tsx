@@ -21,6 +21,7 @@ import {
   buildPresenceExportRows,
   buildPresenceExportFileBaseName,
   downloadTextFile,
+  serializeCountryPresenceDetailsToText,
   serializePresenceDataToCsv,
   serializePresenceDataToJson,
   serializeSourceUrlsToText,
@@ -835,6 +836,7 @@ export default function EVMap() {
   });
   const hasInitializedCopyLinkReset = useRef(false);
   const hasInitializedCopyCountryReset = useRef(false);
+  const hasInitializedCopyCountryProfileReset = useRef(false);
   const hasInitializedCopyBrandWebsiteReset = useRef(false);
   const hasInitializedCopyBrandMarketsReset = useRef(false);
   const hasInitializedCopyCoverageReset = useRef(false);
@@ -857,6 +859,8 @@ export default function EVMap() {
   );
   const [copyLinkStatus, setCopyLinkStatus] = useState<CopyStatus>("idle");
   const [copyCountryStatus, setCopyCountryStatus] = useState<CopyStatus>("idle");
+  const [copyCountryProfileStatus, setCopyCountryProfileStatus] =
+    useState<CopyStatus>("idle");
   const [copyBrandWebsiteStatus, setCopyBrandWebsiteStatus] = useState<CopyStatus>("idle");
   const [copyBrandMarketsStatus, setCopyBrandMarketsStatus] = useState<CopyStatus>("idle");
   const [copyCoverageStatus, setCopyCoverageStatus] = useState<CopyStatus>("idle");
@@ -966,6 +970,7 @@ export default function EVMap() {
     setCountryLookupQuery("");
     setCopyLinkStatus("idle");
     setCopyCountryStatus("idle");
+    setCopyCountryProfileStatus("idle");
     setCopyBrandWebsiteStatus("idle");
     setCopyBrandMarketsStatus("idle");
     setCopySourcesState({ key: null, status: "idle" });
@@ -1687,6 +1692,21 @@ export default function EVMap() {
       setCopyBrandMarketsStatus("failed");
     });
   };
+  const copyCountryProfile = () => {
+    const countryDetails = allSelectedCountryDetails ?? selectedCountryDetails;
+
+    if (!countryDetails || !navigator.clipboard?.writeText) {
+      setCopyCountryProfileStatus("failed");
+      return;
+    }
+
+    setCopyCountryProfileStatus("copied");
+    void navigator.clipboard
+      .writeText(serializeCountryPresenceDetailsToText(countryDetails))
+      .catch(() => {
+        setCopyCountryProfileStatus("failed");
+      });
+  };
   const copyVisibleCoverage = () => {
     if (coveragePanelCopyList.length === 0 || !navigator.clipboard?.writeText) {
       setCopyCoverageStatus("failed");
@@ -2072,6 +2092,15 @@ export default function EVMap() {
 
     setCopyCountryStatus("idle");
   }, [resolvedSelectedCountry]);
+
+  useEffect(() => {
+    if (!hasInitializedCopyCountryProfileReset.current) {
+      hasInitializedCopyCountryProfileReset.current = true;
+      return;
+    }
+
+    setCopyCountryProfileStatus("idle");
+  }, [allSelectedCountryDetails, selectedCountryDetails]);
 
   useEffect(() => {
     if (!hasInitializedCopyBrandWebsiteReset.current) {
@@ -3122,6 +3151,17 @@ export default function EVMap() {
                   : copyCountryStatus === "failed"
                     ? "Country copy failed"
                     : "Copy country + ISO"}
+              </button>
+              <button
+                type="button"
+                className="mt-2 block text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                onClick={copyCountryProfile}
+              >
+                {copyCountryProfileStatus === "copied"
+                  ? "Copied country profile"
+                  : copyCountryProfileStatus === "failed"
+                    ? "Country profile copy failed"
+                    : "Copy country profile"}
               </button>
               {selectedCountryAllSources.length > 0 ? (
                 <button

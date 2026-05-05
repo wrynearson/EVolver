@@ -836,6 +836,31 @@ describe("EVMap", () => {
       await within(detailsPanel!).findByRole("button", { name: "Copied country + ISO" }),
     ).toBeInTheDocument();
 
+    fireEvent.click(
+      within(detailsPanel!).getByRole("button", { name: "Copy country profile" }),
+    );
+    expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
+      [
+        "Country: Norway (NOR)",
+        "Tracked brands: 2",
+        "",
+        "BYD",
+        "Website: https://www.byd.com",
+        "Official sources:",
+        "- https://www.byd.com/no",
+        "- https://www.byd.com/no/dealers",
+        "",
+        "XPeng",
+        "Website: https://www.xpeng.com",
+        "Official sources:",
+        "- https://www.xpeng.com/no",
+        "- https://www.xpeng.com/no/service",
+      ].join("\n"),
+    );
+    expect(
+      await within(detailsPanel!).findByRole("button", { name: "Copied country profile" }),
+    ).toBeInTheDocument();
+
     fireEvent.click(screen.getByRole("button", { name: "Copy share link" }));
     expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
       "http://localhost:3000/?brand=XPeng&country=NOR",

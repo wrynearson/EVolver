@@ -1,4 +1,4 @@
-import type { EVPresenceData } from "../types";
+import type { CountryPresenceDetails, EVPresenceData } from "../types";
 
 export interface PresenceExportRow {
   brandName: string;
@@ -109,6 +109,40 @@ export function serializePresenceDataToJson(data: EVPresenceData): string {
 
 export function serializeSourceUrlsToText(sourceUrls: string[]): string {
   return Array.from(new Set(sourceUrls)).join("\n");
+}
+
+export function serializeCountryPresenceDetailsToText(
+  details: CountryPresenceDetails,
+): string {
+  const lines = [
+    `Country: ${details.countryName} (${details.isoCode})`,
+    `Tracked brands: ${details.brands.length}`,
+  ];
+
+  if (details.brands.length === 0) {
+    lines.push("", "No tracked official brand presence.");
+    return lines.join("\n");
+  }
+
+  for (const brand of details.brands) {
+    lines.push("", brand.brandName, `Website: ${brand.website}`);
+
+    if (brand.uncertain) {
+      lines.push("Status: uncertain");
+    }
+
+    if (brand.sources.length === 0) {
+      lines.push("Official sources: none recorded");
+      continue;
+    }
+
+    lines.push("Official sources:");
+    for (const source of brand.sources) {
+      lines.push(`- ${source}`);
+    }
+  }
+
+  return lines.join("\n");
 }
 
 export function buildPresenceExportFileBaseName(options: {
