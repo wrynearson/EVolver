@@ -4882,6 +4882,40 @@
             "https://shop.mgmotor.com.au/find-a-dealer"
           ],
           "uncertain": false
+        },
+        "THA": {
+          "name": "Thailand",
+          "present": true,
+          "source": "https://www.mgcars.com/th/test-drive",
+          "sources": [
+            "https://www.mgcars.com/th/cars/mg-im6",
+            "https://www.mgcars.com/th/test-drive",
+            "https://www.mgcars.com/th/dealer"
+          ],
+          "uncertain": false
+        },
+        "NZL": {
+          "name": "New Zealand",
+          "present": true,
+          "source": "https://shop.mgmotor.co.nz/im6",
+          "sources": [
+            "https://shop.mgmotor.co.nz/im6",
+            "https://shop.mgmotor.co.nz/configurator/im6?ref=website&spec=2116",
+            "https://shop.mgmotor.co.nz/brochures/MG_IM6_Brochure_NZ.pdf"
+          ],
+          "uncertain": false
+        },
+        "GBR": {
+          "name": "United Kingdom",
+          "present": true,
+          "source": "https://im.mg.co.uk/test-drive/im6",
+          "sources": [
+            "https://im.mg.co.uk/im5",
+            "https://im.mg.co.uk/im6",
+            "https://im.mg.co.uk/configurator",
+            "https://im.mg.co.uk/test-drive/im6"
+          ],
+          "uncertain": false
         }
       }
     },

@@ -1256,3 +1256,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded IM Motors' overseas footprint by adding Australia after confirming MG Motor Australia's first-party IM range pages for the IM5 and IM6 plus its authorized national IM dealer-network page.
 **Result**: pass
 **TODO**: Expand IM Motors beyond Australia, China, Jordan, Mauritius, Myanmar, Singapore, and the United Arab Emirates by verifying the next official sovereign overseas market from live local consumer, contact, or demo-drive flows.
+
+## 2026-05-05
+**Did**: Expanded IM Motors' overseas footprint by adding Thailand, New Zealand, and the United Kingdom from first-party MG market pages that now expose localized IM model, configurator, dealer, and test-drive flows.
+**Result**: pass
+**TODO**: Expand IM Motors beyond Australia, China, Jordan, Mauritius, Myanmar, New Zealand, Singapore, Thailand, the United Arab Emirates, and the United Kingdom by verifying the next official sovereign overseas market from live local consumer, contact, or demo-drive flows.
