@@ -23,6 +23,7 @@ import {
   downloadTextFile,
   serializePresenceDataToCsv,
   serializePresenceDataToJson,
+  serializeSourceUrlsToText,
 } from "../lib/dataExport";
 import { buildColorExpression, getFeatureBounds, getLegendItems } from "../lib/mapUtils";
 import type { FeatureCollection } from "geojson";
@@ -1660,7 +1661,7 @@ export default function EVMap() {
     }
 
     setCopySourcesState({ key: targetKey, status: "copied" });
-    void navigator.clipboard.writeText(sources.join("\n")).catch(() => {
+    void navigator.clipboard.writeText(serializeSourceUrlsToText(sources)).catch(() => {
       setCopySourcesState({ key: targetKey, status: "failed" });
     });
   };
@@ -2271,7 +2272,7 @@ export default function EVMap() {
       </div>
 
       {visibleSummary ? (
-        <div className="absolute top-6 left-6 bg-white/90 rounded-lg shadow-md px-4 py-3 max-w-xs">
+        <div className="absolute top-6 left-6 right-6 flex max-h-[calc(100vh-24rem)] flex-col rounded-lg bg-white/90 px-4 py-3 shadow-md sm:right-auto sm:max-h-[calc(100vh-3rem)] sm:max-w-xs">
           <div className="flex items-start justify-between gap-4">
             <h2 className="text-sm font-semibold text-gray-800">
               Dataset summary
@@ -2290,7 +2291,7 @@ export default function EVMap() {
               Keep the current filters and exports handy while opening more map space.
             </p>
           ) : (
-            <>
+            <div className="mt-2 min-h-0 overflow-y-auto pr-1">
           <div className="mt-3">
             <label
               htmlFor="brand-filter"
@@ -2746,12 +2747,12 @@ export default function EVMap() {
               </a>
             ) : null}
           </div>
-          <div className="mt-3">
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                className="rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
-                disabled={!exportData}
+            <div className="mt-3">
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+                <button
+                  type="button"
+                  className="rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
+                  disabled={!exportData}
                 onClick={() => {
                   if (!exportData) {
                     return;
@@ -2781,12 +2782,30 @@ export default function EVMap() {
                     "application/json;charset=utf-8",
                   );
                 }}
-              >
-                Download JSON
-              </button>
-            </div>
-            <button
-              type="button"
+                >
+                  Download JSON
+                </button>
+                <button
+                  type="button"
+                  className="rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
+                  disabled={exportSourceUrls.length === 0}
+                  onClick={() => {
+                    if (exportSourceUrls.length === 0) {
+                      return;
+                    }
+
+                    downloadTextFile(
+                      serializeSourceUrlsToText(exportSourceUrls),
+                      `${exportFileBaseName}-sources.txt`,
+                      "text/plain;charset=utf-8",
+                    );
+                  }}
+                >
+                  Download sources
+                </button>
+              </div>
+              <button
+                type="button"
               className="mt-2 w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
               disabled={exportSourceUrls.length === 0}
               onClick={() =>
@@ -2937,7 +2956,7 @@ export default function EVMap() {
               </ul>
             </div>
           ) : null}
-            </>
+            </div>
           )}
         </div>
       ) : null}
@@ -3703,7 +3722,7 @@ export default function EVMap() {
           </ul>
         </aside>
       ) : !sidePanelCollapsed && brandCoverageSummaries.length > 0 ? (
-        <aside className="absolute right-6 bottom-6 max-h-80 w-80 overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md">
+        <aside className="absolute right-6 bottom-6 left-6 max-h-[40vh] w-auto overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md sm:left-auto sm:max-h-80 sm:w-80">
           <div className="flex items-start justify-between gap-4">
             <div>
               <h2 className="text-sm font-semibold text-gray-800">

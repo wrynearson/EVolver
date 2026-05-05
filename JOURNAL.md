@@ -1261,3 +1261,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded IM Motors' overseas footprint by adding Thailand, New Zealand, and the United Kingdom from first-party MG market pages that now expose localized IM model, configurator, dealer, and test-drive flows.
 **Result**: pass
 **TODO**: Expand IM Motors beyond Australia, China, Jordan, Mauritius, Myanmar, New Zealand, Singapore, Thailand, the United Arab Emirates, and the United Kingdom by verifying the next official sovereign overseas market from live local consumer, contact, or demo-drive flows.
+
+## 2026-05-05
+**Did**: Added a downloadable plain-text source export for the current filtered view and tightened the mobile overlay layout so the expanded dataset summary scrolls within its own space instead of colliding with the coverage panel.
+**Result**: pass

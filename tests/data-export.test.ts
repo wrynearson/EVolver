@@ -4,6 +4,7 @@ import {
   buildPresenceExportRows,
   serializePresenceDataToCsv,
   serializePresenceDataToJson,
+  serializeSourceUrlsToText,
 } from "../src/lib/dataExport";
 import type { EVPresenceData } from "../src/types";
 
@@ -99,6 +100,16 @@ describe("data export helpers", () => {
         lastUpdated: "2026-03-31",
       }),
     ).toBe("ev-presence-all-brands-all-regions-2026-03-31");
+  });
+
+  it("serializes source URL lists as deduplicated plain text", () => {
+    expect(
+      serializeSourceUrlsToText([
+        "https://www.byd.com/no",
+        "https://www.byd.com/no/dealers",
+        "https://www.byd.com/no",
+      ]),
+    ).toBe("https://www.byd.com/no\nhttps://www.byd.com/no/dealers");
   });
 
   it("deduplicates source URLs and escapes csv fields with special characters", () => {

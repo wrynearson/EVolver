@@ -298,6 +298,7 @@ describe("EVMap", () => {
     expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Download CSV" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Download JSON" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Download sources" })).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: "Copy all sources in view" }),
     ).toBeInTheDocument();
@@ -325,6 +326,14 @@ describe("EVMap", () => {
     expect(
       await screen.findByRole("button", { name: "Copied all sources in view" }),
     ).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Download sources" }));
+    expect(downloadTextFile).toHaveBeenCalledTimes(2);
+    expect(downloadTextFile).toHaveBeenNthCalledWith(
+      2,
+      "https://www.xpeng.com/no\nhttps://www.xpeng.com/no/service",
+      "ev-presence-xpeng-all-regions-2026-03-13-sources.txt",
+      "text/plain;charset=utf-8",
+    );
 
     fireEvent.change(screen.getByLabelText("Brand filter"), {
       target: { value: "" },
@@ -334,15 +343,15 @@ describe("EVMap", () => {
     });
     fireEvent.click(screen.getByRole("button", { name: "Download JSON" }));
 
-    expect(downloadTextFile).toHaveBeenCalledTimes(2);
+    expect(downloadTextFile).toHaveBeenCalledTimes(3);
     expect(downloadTextFile).toHaveBeenNthCalledWith(
-      2,
+      3,
       expect.any(String),
       "ev-presence-all-brands-europe-2026-03-13.json",
       "application/json;charset=utf-8",
     );
 
-    const exportedJson = JSON.parse(downloadTextFile.mock.calls[1][0]) as EVPresenceData;
+    const exportedJson = JSON.parse(downloadTextFile.mock.calls[2][0]) as EVPresenceData;
     expect(Object.keys(exportedJson.brands)).toEqual(["BYD", "XPeng"]);
     expect(Object.keys(exportedJson.brands.BYD.countries)).toEqual(["NOR"]);
     expect(Object.keys(exportedJson.brands.XPeng.countries)).toEqual(["NOR"]);

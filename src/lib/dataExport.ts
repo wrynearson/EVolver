@@ -107,6 +107,10 @@ export function serializePresenceDataToJson(data: EVPresenceData): string {
   return JSON.stringify(data, null, 2);
 }
 
+export function serializeSourceUrlsToText(sourceUrls: string[]): string {
+  return Array.from(new Set(sourceUrls)).join("\n");
+}
+
 export function buildPresenceExportFileBaseName(options: {
   brandName?: string;
   regionName?: string;
