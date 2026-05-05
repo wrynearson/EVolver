@@ -8,7 +8,7 @@ Aim to complete the full session in a single pass: assess, act, test, commit, an
    - Are any tests currently failing?
    - Is there a deferred task in JOURNAL.md marked `TODO:`?
    - Are there `"uncertain": true` entries in ev-presence.json?
-   - Is there an item in BACKLOG.md to decompose into a session-sized task? **Before picking it**, apply the backlog saturation check: count recent journal entries for that item. If the last 3 sessions touching it produced no positive outcome (no new data added, no code shipped — only closures, narrowing, or inconclusive re-checks), the item is **saturated**. Treat it as `[monitoring]` for this session and pick the next category instead. If BACKLOG.md is empty **or all remaining items are `[monitoring]`**, compute the current brand × market coverage — which brands are untracked, which tracked brands have zero coverage in major EV regions (Europe, SE Asia, Americas, Middle East) — and add the single highest-impact gap as a new actionable BACKLOG item, then pick it.
+   - Is there an item in BACKLOG.md to decompose into a session-sized task? **Before picking it**, apply the backlog saturation check: count recent journal entries for that item. If the last 3 sessions touching it produced no positive outcome (no new data added, no code shipped — only closures, narrowing, or inconclusive re-checks), the item is **saturated**. Treat it as `[monitoring]` for this session and pick the next category instead. If BACKLOG.md is empty **or all remaining items are `[monitoring]`**, compute the current brand × market coverage — which brands are untracked, which tracked brands have zero coverage in major EV regions (Europe, SE Asia, Americas, Middle East, Africa, Oceania) — and add the single highest-impact gap as a new actionable BACKLOG item, then pick it.
    - Is there a worthwhile code or product improvement — new features, better visualisations, richer data fields, stronger tests, improved UX? Ambition is encouraged as long as the task fits within one session.
 
    Pick the **single most important item** from the first applicable category. Within a category, prefer the task with the highest user-visible impact — e.g. a brand with many unverified markets beats re-checking one already-confirmed point; a meaningful new feature beats a cosmetic tweak.
@@ -24,7 +24,7 @@ Aim to complete the full session in a single pass: assess, act, test, commit, an
 5. **Test**: Run `pnpm test` after each change. If tests fail, revert that change and document why in JOURNAL.md
 6. **Commit**: If all tests pass, `git add` and `git commit` with a descriptive message. Do NOT git push.
 7. **Journal**: Append to JOURNAL.md using this format:
-8. **Always loop**: After journaling, return immediately to step 1. Completing one task is **not** a stopping condition — a session should contain multiple tasks. Before looping, apply the **session variety** check: if the last 3 journal entries (including the one you just wrote) are all the same task type — e.g. all data-only for the same brand — the next iteration must pick a different category regardless of the normal priority order. Only stop when you hit a genuine stopping condition listed in *When to stop* below.
+8. **Always loop**: After journaling, return immediately to step 1. Completing one task is **not** a stopping condition — a session should contain multiple tasks. Before looping, apply the **session variety** check: if the last 3 journal entries (including the one you just wrote) are all the same task type — e.g. all data-expansion sessions, regardless of which brand — the next iteration must pick a different category regardless of the normal priority order. Only stop when you hit a genuine stopping condition listed in *When to stop* below.
    ```
    ## YYYY-MM-DD
    **Did**: [one sentence]
@@ -77,3 +77,10 @@ When deferring a market to BACKLOG.md because it is a known shell or pre-launch 
 - Treat `[monitoring]` items as **lowest priority** — only act on them if all other backlog work is exhausted, or if more than 2 weeks have passed since the last check recorded in JOURNAL.md.
 - When you do check a `[monitoring]` item and still find no change, update the backlog entry's last-checked date and move on. Do not write a journal TODO that simply restates the monitoring need.
 - Promote a `[monitoring]` item to a normal backlog task only when you find concrete evidence that the market signals have improved (e.g., a real localized homepage, live dealer listings, or a consumer test-drive flow).
+
+## Product quality
+
+- **No bloat** — Every UI feature must have a clear, demonstrated user need. Before adding a new panel, button, or widget, ask: does this make the map more useful or the data easier to understand? Prefer depth over breadth — one well-executed feature beats three half-working ones.
+- **Verify with Playwright** — After any UI change, open the app in the Playwright MCP browser and confirm the feature works end-to-end. Check that all elements are visible, reachable, and interactive. Test at both mobile (375px wide) and desktop (1280px wide) viewport sizes. If a feature cannot be verified this way, do not ship it.
+- **Remove broken or empty features** — A feature that is invisible, unreachable, or permanently shows zero/empty results is worse than no feature. Remove or hide it rather than leaving dead UI in place.
+- **Responsive design** — The UI must function at both mobile and desktop viewport sizes. Overlay panels must not clip their own content — if a panel's content can grow taller than the viewport, it must scroll internally rather than being cut off by the container.

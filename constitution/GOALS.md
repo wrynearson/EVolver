@@ -26,6 +26,9 @@ Any manufacturer **headquartered in China** that produces **battery electric veh
 
 - BYD, NIO, XPeng, Li Auto, Zeekr, Xiaomi, Leapmotor
 - MG (SAIC Motor), Chery, GAC Aion, Neta, Great Wall/ORA, Dongfeng
+- OMODA / JAECOO (Chery's international sub-brands, actively expanding across 30+ markets)
+- Wuling / Baojun (SAIC-GM-Wuling JV, dominant in Southeast Asia and Africa with affordable EVs)
+- Lynk & Co (Geely, active across European markets with hybrid and EV models)
 - Any new brand the agent discovers that fits this definition
 
 ## Scope

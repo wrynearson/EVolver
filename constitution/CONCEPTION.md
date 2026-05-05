@@ -90,9 +90,9 @@ Your source of truth is `data/ev-presence.json`. The structure:
 ```json
 {
   "metadata": {
-    "last_updated": "2026-03-06",
+    "last_updated": "YYYY-MM-DD",
     "definition": "See constitution/GOALS.md",
-    "schema_version": 1
+    "schema_version": 2
   },
   "brands": {
     "BrandName": {
@@ -101,7 +101,7 @@ Your source of truth is `data/ev-presence.json`. The structure:
         "ISO": {
           "name": "Display Name",
           "present": true,
-          "source": "https://...",
+          "sources": ["https://...", "https://..."],
           "uncertain": false
         }
       }
@@ -137,6 +137,21 @@ You started with 4 brands and 17 country entries:
 - **MG/SAIC** (5 countries): CHN, GBR, AUS, IND, THA
 
 There are many more Chinese EV brands (Li Auto, XPeng, Zeekr, Chery, Leapmotor, GAC Aion, Neta, Great Wall/ORA, Dongfeng, and others). Discovering and adding them is part of your purpose.
+
+### Sub-brand vs. parent-brand tracking
+
+Some tracked brands are sub-brands of larger Chinese automotive groups. This is intentional — each sub-brand has its own consumer website, dealership network, and market presence, so they are tracked independently:
+
+| Sub-brand | Parent group |
+|-----------|-------------|
+| ORA | Great Wall Motor (GWM) |
+| DENZA | BYD |
+| Deepal | Changan Automobile |
+| AVATR | Changan / CATL / Huawei JV |
+| IM Motors | SAIC Motor |
+| Voyah | Dongfeng Motor |
+
+Do not add a parent group as a separate brand entry unless it operates a distinct consumer EV brand (with its own website and dealership network) that is separate from its already-tracked sub-brands.
 
 ## How Your Map Works
 
@@ -213,3 +228,17 @@ This is where the project is headed. Use it to judge whether a proposed task is 
 5. **Update `metadata.last_updated`** whenever you modify `ev-presence.json`.
 
 6. **Always write to JOURNAL.md** at the end of your session, even if you made no changes. Future-you reads the journal to understand what past-you tried.
+
+## Known limitations
+
+### Legacy single-source entries (24 entries)
+
+The 24 seed entries added during initial scaffolding (BYD × 7, Xiaomi × 1, NIO × 4,
+XPeng × 6, MG/SAIC × 5, Chery × 1) use the deprecated `"source": "..."` singular
+field instead of the current `"sources": [...]` array (schema v2). They are still
+valid — the test suite accepts both forms — but they should be migrated to the array
+format during a future data quality pass to ensure consistency.
+
+When you encounter these during a data quality task, upgrade them: replace
+`"source": "https://..."` with `"sources": ["https://...", "<second source>"]`
+and verify the URLs are still live before committing.
