@@ -1251,3 +1251,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded IM Motors' overseas footprint by adding the United Arab Emirates after confirming the live IM Motors UAE market site, its local IM 6 model page, the UAE demo-drive experience form, and Smart Mobility International's official IM brand page.
 **Result**: pass
 **TODO**: Expand IM Motors beyond China, Jordan, Mauritius, Myanmar, Singapore, and the United Arab Emirates by verifying the next official sovereign overseas market from live local consumer, contact, or demo-drive flows.
+
+## 2026-05-05
+**Did**: Expanded IM Motors' overseas footprint by adding Australia after confirming MG Motor Australia's first-party IM range pages for the IM5 and IM6 plus its authorized national IM dealer-network page.
+**Result**: pass
+**TODO**: Expand IM Motors beyond Australia, China, Jordan, Mauritius, Myanmar, Singapore, and the United Arab Emirates by verifying the next official sovereign overseas market from live local consumer, contact, or demo-drive flows.

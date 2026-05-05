@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-04",
+    "last_updated": "2026-05-05",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -4868,6 +4868,18 @@
             "https://www.immotorsuae.com/im-6/",
             "https://www.immotorsuae.com/experience/",
             "https://smartmobilityint.com/im/"
+          ],
+          "uncertain": false
+        },
+        "AUS": {
+          "name": "Australia",
+          "present": true,
+          "source": "https://shop.mgmotor.com.au/find-a-dealer",
+          "sources": [
+            "https://www.mgmotor.com.au/",
+            "https://shop.mgmotor.com.au/im5",
+            "https://shop.mgmotor.com.au/im6",
+            "https://shop.mgmotor.com.au/find-a-dealer"
           ],
           "uncertain": false
         }
