@@ -1265,3 +1265,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-05
 **Did**: Added a downloadable plain-text source export for the current filtered view and tightened the mobile overlay layout so the expanded dataset summary scrolls within its own space instead of colliding with the coverage panel.
 **Result**: pass
+
+## 2026-05-05
+**Did**: Expanded IM Motors' overseas footprint by adding Norway after confirming MG Motor Norway's first-party IM5 and IM6 test-drive flows plus its official Norwegian dealer map.
+**Result**: pass
+**TODO**: Expand IM Motors beyond Australia, China, Jordan, Mauritius, Myanmar, New Zealand, Norway, Singapore, Thailand, the United Arab Emirates, and the United Kingdom by verifying the next official sovereign overseas market from live local consumer, dealer, contact, or demo-drive flows.

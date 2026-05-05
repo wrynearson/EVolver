@@ -4916,6 +4916,17 @@
             "https://im.mg.co.uk/test-drive/im6"
           ],
           "uncertain": false
+        },
+        "NOR": {
+          "name": "Norway",
+          "present": true,
+          "source": "https://www.mgmotor.eu/nn-NO/request-test-drive/im5",
+          "sources": [
+            "https://www.mgmotor.eu/nn-NO/request-test-drive/im5",
+            "https://www.mgmotor.eu/nn-NO/request-test-drive/im6",
+            "https://www.mgmotor.eu/nn-NO/map"
+          ],
+          "uncertain": false
         }
       }
     },
