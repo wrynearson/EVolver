@@ -1293,3 +1293,12 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-06
 **Did**: Added AVATR's first European market by confirming AVATR Ukraine's live localized homepage plus its official dealer-network page with authorized dealers and test-drive language.
 **Result**: pass
+
+## 2026-05-06
+**Did**: Added AVATR Qatar after confirming AVATR's overseas hub now names Qatar among its live overseas markets and the official AVATR Qatar site exposes local showroom and test-drive flows.
+**Result**: pass
+**TODO**: Verify AVATR's first official sovereign market in the Americas, Africa, or Oceania once AVATR exposes a live localized consumer, contact, showroom, or test-drive flow there.
+
+## 2026-05-06
+**Did**: Added global major-region coverage context to each brand ranking card so users can see whether a brand's footprint is balanced across the four tracked expansion regions without leaving the coverage panel, and verified the updated panel at desktop and mobile widths.
+**Result**: pass

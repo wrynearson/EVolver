@@ -1403,6 +1403,16 @@ export default function EVMap() {
     () => formatMajorRegionGapList(majorRegionGapSummaries),
     [majorRegionGapSummaries],
   );
+  const globalBrandMajorRegionGapSummaryByName = useMemo(
+    () =>
+      new Map(
+        (data ? getBrandMajorRegionGapSummaries(data) : []).map((summary) => [
+          summary.brandName,
+          summary,
+        ]),
+      ),
+    [data],
+  );
 
   const brandCoverageSummaries = useMemo(() => {
     if (!regionScopedData || activeSelectedBrand) {
@@ -4167,7 +4177,14 @@ export default function EVMap() {
                   )}
                 </li>
               ) : (
-                sortedBrandCoverageSummaries.map((brand) => (
+                sortedBrandCoverageSummaries.map((brand) => {
+                  const globalMajorRegionGapSummary =
+                    globalBrandMajorRegionGapSummaryByName.get(brand.brandName);
+                  const coveredMajorRegionCount =
+                    globalMajorRegionGapSummary?.coveredMajorRegionCount ?? 4;
+                  const missingRegions = globalMajorRegionGapSummary?.missingRegions ?? [];
+
+                  return (
                   <li
                     key={brand.brandName}
                     className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
@@ -4188,6 +4205,12 @@ export default function EVMap() {
                             ? ` · ${brand.uncertainCountryCount} uncertain`
                             : ""}
                         </p>
+                        <p className="mt-1 text-xs text-gray-500">
+                          Global major-region coverage: {coveredMajorRegionCount}/4
+                          {missingRegions.length > 0
+                            ? ` · Missing ${missingRegions.join(", ")}`
+                            : " · No major-region gaps"}
+                        </p>
                       </button>
                       <a
                         href={brand.website}
@@ -4200,7 +4223,8 @@ export default function EVMap() {
                       </a>
                     </div>
                   </li>
-                ))
+                  );
+                })
               )}
             </ul>
           ) : coveragePanelView === "countries" ? (

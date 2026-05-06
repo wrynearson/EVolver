@@ -5044,6 +5044,18 @@
           ],
           "uncertain": false
         },
+        "QAT": {
+          "name": "Qatar",
+          "present": true,
+          "source": "https://www.avatrqa.com/",
+          "sources": [
+            "https://www.avatr.com/en/overseas",
+            "https://www.avatrqa.com/",
+            "https://www.avatrqa.com/showrooms",
+            "https://www.avatrqa.com/test-drive"
+          ],
+          "uncertain": false
+        },
         "UKR": {
           "name": "Ukraine",
           "present": true,

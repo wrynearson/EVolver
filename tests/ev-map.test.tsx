@@ -925,6 +925,12 @@ describe("EVMap", () => {
     ).toBeInTheDocument();
     expect(within(coveragePanel!).getByText("BYD")).toBeInTheDocument();
     expect(within(coveragePanel!).getByText("2 confirmed markets")).toBeInTheDocument();
+    const brandCoverageItems = within(coveragePanel!).getAllByRole("listitem");
+    expect(
+      within(brandCoverageItems[0]).getByText(
+        "Global major-region coverage: 1/4 · Missing Southeast Asia, Americas, Middle East",
+      ),
+    ).toBeInTheDocument();
     expect(
       within(coveragePanel!).getByLabelText("Search brand coverage"),
     ).toBeInTheDocument();
