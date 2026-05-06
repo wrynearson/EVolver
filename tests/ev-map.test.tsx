@@ -1592,7 +1592,9 @@ describe("EVMap", () => {
     expect(screen.getByText("Showing 1 matching brand")).toBeInTheDocument();
     const xpengSuggestion = screen.getByRole("option", { name: "XPeng" });
     expect(xpengSuggestion).toBeInTheDocument();
-    expect(within(xpengSuggestion).getByText("1 confirmed market")).toBeInTheDocument();
+    expect(
+      within(xpengSuggestion).getByText("1 confirmed market · 1/4 major regions"),
+    ).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Brand footprint" })).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("option", { name: "XPeng" }));
@@ -1685,7 +1687,9 @@ describe("EVMap", () => {
     const bydSuggestion = screen.getByRole("option", { name: "BYD" });
     expect(bydSuggestion).toBeInTheDocument();
     expect(
-      within(bydSuggestion).getByText("1 confirmed market · 1 uncertain"),
+      within(bydSuggestion).getByText(
+        "1 confirmed market · 1 uncertain · 0/4 major regions",
+      ),
     ).toBeInTheDocument();
   });
 

@@ -1281,3 +1281,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-06
 **Did**: Added AVATR's first South Asian markets by confirming Nepal and Sri Lanka through AVATR's overseas hub plus live local dealer, showroom, and contact surfaces.
 **Result**: pass
+
+## 2026-05-06
+**Did**: Added major-region coverage context to the brand filter suggestions so users can see how globally established a brand is before narrowing the map, and verified the updated lookup flow at desktop and mobile widths.
+**Result**: pass

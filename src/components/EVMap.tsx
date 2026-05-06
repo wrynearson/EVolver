@@ -132,6 +132,10 @@ function formatMarketCount(count: number) {
   return `${count} ${count === 1 ? "market" : "markets"}`;
 }
 
+function formatMajorRegionCoverageCount(count: number) {
+  return `${count}/4 major regions`;
+}
+
 function isCoveragePanelView(value: string): value is CoveragePanelView {
   return (
     value === "snapshot" ||
@@ -1038,6 +1042,15 @@ export default function EVMap() {
         brandLookupCoverageSummaries.map((summary) => [summary.brandName, summary]),
       ),
     [brandLookupCoverageSummaries],
+  );
+  const brandLookupMajorRegionGapSummaryByName = useMemo(
+    () =>
+      new Map(
+        (regionScopedData ? getBrandMajorRegionGapSummaries(regionScopedData) : []).map(
+          (summary) => [summary.brandName, summary],
+        ),
+      ),
+    [regionScopedData],
   );
   const exportData = useMemo(() => {
     if (!regionScopedData) {
@@ -2445,6 +2458,8 @@ export default function EVMap() {
                       {filteredBrandOptions.map((brandName, index) => {
                         const coverageSummary =
                           brandLookupCoverageSummaryByName.get(brandName);
+                        const majorRegionGapSummary =
+                          brandLookupMajorRegionGapSummaryByName.get(brandName);
 
                         return (
                           <li key={brandName}>
@@ -2469,15 +2484,18 @@ export default function EVMap() {
                                 <p className="mt-1 text-xs text-gray-500">
                                   {coverageSummary.confirmedCountryCount.toLocaleString()}{" "}
                                   confirmed{" "}
-                                  {coverageSummary.confirmedCountryCount === 1
-                                    ? "market"
-                                    : "markets"}
-                                  {coverageSummary.uncertainCountryCount > 0
-                                    ? ` · ${coverageSummary.uncertainCountryCount.toLocaleString()} uncertain`
-                                    : ""}
-                                </p>
-                              ) : null}
-                            </button>
+                                   {coverageSummary.confirmedCountryCount === 1
+                                     ? "market"
+                                     : "markets"}
+                                   {coverageSummary.uncertainCountryCount > 0
+                                     ? ` · ${coverageSummary.uncertainCountryCount.toLocaleString()} uncertain`
+                                     : ""}
+                                   {majorRegionGapSummary
+                                     ? ` · ${formatMajorRegionCoverageCount(majorRegionGapSummary.coveredMajorRegionCount)}`
+                                     : ""}
+                                 </p>
+                               ) : null}
+                             </button>
                           </li>
                         );
                       })}
