@@ -5043,6 +5043,16 @@
             "https://avatrjo.com/Pages/overseas"
           ],
           "uncertain": false
+        },
+        "UKR": {
+          "name": "Ukraine",
+          "present": true,
+          "source": "https://avatr-ukraine.com/en/contacts/dealers/",
+          "sources": [
+            "https://avatr-ukraine.com/en/",
+            "https://avatr-ukraine.com/en/contacts/dealers/"
+          ],
+          "uncertain": false
         }
       }
     },
