@@ -1277,3 +1277,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-06
 **Did**: Added XPENG's first Oceania markets by confirming XPENG's own global market selector plus live Australia and New Zealand market, dealer, and test-drive surfaces, which closes XPENG's remaining major-region gap.
 **Result**: pass
+
+## 2026-05-06
+**Did**: Added AVATR's first South Asian markets by confirming Nepal and Sri Lanka through AVATR's overseas hub plus live local dealer, showroom, and contact surfaces.
+**Result**: pass

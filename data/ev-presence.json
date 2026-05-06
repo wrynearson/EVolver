@@ -5010,6 +5010,28 @@
             "https://avatr.az/en/contact/"
           ],
           "uncertain": false
+        },
+        "NPL": {
+          "name": "Nepal",
+          "present": true,
+          "source": "https://avatrnepal.com/",
+          "sources": [
+            "https://www.avatr.com/en/overseas",
+            "https://avatrnepal.com/",
+            "https://avatrnepal.com/branch",
+            "https://avatrnepal.com/test-drive"
+          ],
+          "uncertain": false
+        },
+        "LKA": {
+          "name": "Sri Lanka",
+          "present": true,
+          "source": "https://avatr.lk/",
+          "sources": [
+            "https://www.avatr.com/en/overseas",
+            "https://avatr.lk/"
+          ],
+          "uncertain": false
         }
       }
     },
