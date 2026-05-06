@@ -1274,3 +1274,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Closed the stale IM Motors overseas-expansion TODO after re-checking first-party IM/MG surfaces and demoting it to monitoring, then added a copy-country-profile action to the country panel for sharing complete market details.
 **Result**: pass
 
+## 2026-05-06
+**Did**: Added XPENG's first Oceania markets by confirming XPENG's own global market selector plus live Australia and New Zealand market, dealer, and test-drive surfaces, which closes XPENG's remaining major-region gap.
+**Result**: pass

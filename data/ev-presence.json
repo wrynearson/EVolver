@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-05",
+    "last_updated": "2026-05-06",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -1005,6 +1005,18 @@
           "source": "https://www.xpeng.com",
           "uncertain": false
         },
+        "AUS": {
+          "name": "Australia",
+          "present": true,
+          "source": "https://xpeng.com.au/",
+          "sources": [
+            "https://www.xpeng.com/",
+            "https://xpeng.com.au/",
+            "https://www.xpeng.com/find-us",
+            "https://xpeng.com.au/testdrive"
+          ],
+          "uncertain": false
+        },
         "NOR": {
           "name": "Norway",
           "present": true,
@@ -1015,6 +1027,18 @@
           "name": "Netherlands",
           "present": true,
           "source": "https://www.xpeng.com/nl",
+          "uncertain": false
+        },
+        "NZL": {
+          "name": "New Zealand",
+          "present": true,
+          "source": "https://www.xpeng.com/nz/find-us",
+          "sources": [
+            "https://www.xpeng.com/",
+            "https://www.xpeng.com/nz",
+            "https://www.xpeng.com/nz/find-us",
+            "https://www.xpeng.com/nz/test-drive"
+          ],
           "uncertain": false
         },
         "SWE": {
