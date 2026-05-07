@@ -4,7 +4,7 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
-- Expand AVATR beyond Azerbaijan, China, Jordan, Nepal, Qatar, Singapore, Sri Lanka, Thailand, Ukraine, and the United Arab Emirates by verifying the next official sovereign overseas market from live localized consumer, contact, or test-drive flows, prioritizing a first market in the Americas, Africa, or Oceania.
+- [monitoring] Re-check AVATR's first sovereign market in the Americas, Africa, or Oceania only after its official overseas surfaces expose a localized consumer, showroom, contact, dealer, or test-drive flow there; checked 2026-05-07 and the live global overseas page plus market selector still top out at regional cooperation contacts for Latin America and Africa plus localized market links only for Hong Kong, Thailand, and Singapore.
 
 - [monitoring] Re-check IM Motors only after first-party IM or MG market surfaces expose a new sovereign overseas market beyond Australia, China, Jordan, Mauritius, Myanmar, New Zealand, Norway, Singapore, Thailand, the United Arab Emirates, and the United Kingdom; checked 2026-05-05 and the currently verifiable `mgmotor.eu` IM5/IM6 pages remain Europe-region surfaces rather than a new sovereign local market.
 

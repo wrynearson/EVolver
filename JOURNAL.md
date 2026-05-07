@@ -1318,3 +1318,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-07
 **Did**: Added a copy-preview action to the hover panel so users can share a country's visible brands without opening the full country details, backed by regression coverage for successful and failed clipboard writes.
 **Result**: pass
+
+## 2026-05-07
+**Did**: Re-checked AVATR's live overseas page and browser-rendered market selector, confirmed that the Americas and Africa still expose only regional cooperation contacts while the official localized market links still stop at Hong Kong, Thailand, and Singapore, and demoted the first Americas/Africa/Oceania lead to monitoring in BACKLOG.md.
+**Result**: no-op
