@@ -1885,6 +1885,18 @@ export default function EVMap() {
       activeViewFilters: activeViewFilterLabels,
     }).join("\n");
   }, [activeViewFilterLabelSignature, selectedCoverageRegion, visibleSummary]);
+  const datasetSummaryResetSignature = useMemo(
+    () =>
+      [
+        shareUrl,
+        visibleSummary?.visibleBrandLabel ?? "",
+        visibleSummary?.brandCount ?? "",
+        visibleSummary?.visibleCountryCount ?? "",
+        visibleSummary?.uncertainCountryCount ?? "",
+        visibleSummary?.lastUpdated ?? "",
+      ].join("\n"),
+    [shareUrl, visibleSummary],
+  );
   const legendItems = useMemo(
     () =>
       getLegendItems(activeSelectedBrand || undefined, {
@@ -2159,7 +2171,7 @@ export default function EVMap() {
     }
 
     setCopySummaryStatus("idle");
-  }, [datasetSummaryCopyText]);
+  }, [datasetSummaryResetSignature]);
 
   useEffect(() => {
     if (!hasInitializedCopyMajorRegionGapsReset.current) {

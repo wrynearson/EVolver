@@ -1311,3 +1311,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Re-checked AVATR's official overseas hub and live browser-rendered global page for a first sovereign market in the Americas, Africa, or Oceania, but found only regional cooperation contacts rather than a localized consumer, dealer, showroom, or test-drive market.
 **Result**: no-op
 **TODO**: Verify AVATR's first official sovereign market in the Americas, Africa, or Oceania once AVATR exposes a live localized consumer, contact, showroom, or test-drive flow there.
+
+## 2026-05-07
+**Did**: Stabilized the dataset summary copy action by resetting its status from a stable view-state signature instead of the fully formatted summary text, so lazy rerenders no longer clear the "Copied summary" state mid-test.
+**Result**: pass
