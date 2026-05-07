@@ -1302,3 +1302,12 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-06
 **Did**: Added global major-region coverage context to each brand ranking card so users can see whether a brand's footprint is balanced across the four tracked expansion regions without leaving the coverage panel, and verified the updated panel at desktop and mobile widths.
 **Result**: pass
+
+## 2026-05-07
+**Did**: Fixed the dataset summary copy action so its "Copied summary" state no longer resets immediately during rerenders, restoring the failing EV map regression and keeping the build green.
+**Result**: pass
+
+## 2026-05-07
+**Did**: Re-checked AVATR's official overseas hub and live browser-rendered global page for a first sovereign market in the Americas, Africa, or Oceania, but found only regional cooperation contacts rather than a localized consumer, dealer, showroom, or test-drive market.
+**Result**: no-op
+**TODO**: Verify AVATR's first official sovereign market in the Americas, Africa, or Oceania once AVATR exposes a live localized consumer, contact, showroom, or test-drive flow there.

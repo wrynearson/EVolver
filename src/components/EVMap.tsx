@@ -1884,7 +1884,7 @@ export default function EVMap() {
       lastUpdated: visibleSummary.lastUpdated,
       activeViewFilters: activeViewFilterLabels,
     }).join("\n");
-  }, [activeViewFilterLabelSignature, activeViewFilterLabels, selectedCoverageRegion, visibleSummary]);
+  }, [activeViewFilterLabelSignature, selectedCoverageRegion, visibleSummary]);
   const legendItems = useMemo(
     () =>
       getLegendItems(activeSelectedBrand || undefined, {
