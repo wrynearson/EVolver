@@ -32,6 +32,7 @@ import type {
   BrandCoverageSummary,
   BrandMajorRegionGapSummary,
   BrandMajorRegionProgressSummary,
+  CountryPresenceDetails,
   CountryCoverageSummary,
   MapCountrySelection,
   RegionCoverageSummary,
@@ -246,6 +247,14 @@ function getCopySummaryButtonLabel(status: CopyStatus) {
       : "Copy summary";
 }
 
+function getCopyPreviewSummaryButtonLabel(status: CopyStatus) {
+  return status === "copied"
+    ? "Copied preview summary"
+    : status === "failed"
+      ? "Preview summary copy failed"
+      : "Copy preview summary";
+}
+
 function formatBrandPresenceMarketList(
   countries: Array<{
     isoCode: string;
@@ -425,6 +434,19 @@ function formatMajorRegionGapList(summaries: BrandMajorRegionGapSummary[]) {
 
     return `${summary.brandName} (${summary.confirmedCountryCount} confirmed ${confirmedMarketLabel} - ${summary.coveredMajorRegionCount}/4 major regions covered) — missing ${summary.missingRegions.join(", ")}`;
   });
+}
+
+function formatHoveredCountrySummary(country: CountryPresenceDetails) {
+  const visibleBrands =
+    country.brands.length > 0
+      ? country.brands
+          .map((brand) =>
+            brand.uncertain ? `${brand.brandName} (uncertain)` : brand.brandName,
+          )
+          .join(", ")
+      : "none";
+
+  return `${country.countryName} (${country.isoCode})\nBrands in view: ${visibleBrands}`;
 }
 
 function getMajorRegionCoverageLabel(region: BrandMajorRegionProgressSummary) {
@@ -839,6 +861,7 @@ export default function EVMap() {
     regions: null,
   });
   const hasInitializedCopyLinkReset = useRef(false);
+  const hasInitializedCopyPreviewSummaryReset = useRef(false);
   const hasInitializedCopyCountryReset = useRef(false);
   const hasInitializedCopyCountryProfileReset = useRef(false);
   const hasInitializedCopyBrandWebsiteReset = useRef(false);
@@ -862,6 +885,8 @@ export default function EVMap() {
     () => initialSelectionState.selectedCountry,
   );
   const [copyLinkStatus, setCopyLinkStatus] = useState<CopyStatus>("idle");
+  const [copyPreviewSummaryStatus, setCopyPreviewSummaryStatus] =
+    useState<CopyStatus>("idle");
   const [copyCountryStatus, setCopyCountryStatus] = useState<CopyStatus>("idle");
   const [copyCountryProfileStatus, setCopyCountryProfileStatus] =
     useState<CopyStatus>("idle");
@@ -973,6 +998,7 @@ export default function EVMap() {
     setFootprintSearchQuery("");
     setCountryLookupQuery("");
     setCopyLinkStatus("idle");
+    setCopyPreviewSummaryStatus("idle");
     setCopyCountryStatus("idle");
     setCopyCountryProfileStatus("idle");
     setCopyBrandWebsiteStatus("idle");
@@ -1652,6 +1678,10 @@ export default function EVMap() {
             : `Showing ${sortedRegionCoverageSummaries.length} of ${
                 regionCoverageSummaries.length
               } ${regionCoverageSummaries.length === 1 ? "region" : "regions"}`;
+  const hoveredCountrySummaryText = useMemo(
+    () => (hoveredCountryDetails ? formatHoveredCountrySummary(hoveredCountryDetails) : ""),
+    [hoveredCountryDetails],
+  );
 
   const shareUrl = useMemo(
     () =>
@@ -1761,6 +1791,17 @@ export default function EVMap() {
     setCopySummaryStatus("copied");
     void navigator.clipboard.writeText(datasetSummaryCopyText).catch(() => {
       setCopySummaryStatus("failed");
+    });
+  };
+  const copyHoveredCountrySummary = () => {
+    if (!hoveredCountrySummaryText || !navigator.clipboard?.writeText) {
+      setCopyPreviewSummaryStatus("failed");
+      return;
+    }
+
+    setCopyPreviewSummaryStatus("copied");
+    void navigator.clipboard.writeText(hoveredCountrySummaryText).catch(() => {
+      setCopyPreviewSummaryStatus("failed");
     });
   };
   const hasCustomView = Boolean(
@@ -2118,6 +2159,15 @@ export default function EVMap() {
 
     setCopyLinkStatus("idle");
   }, [shareUrl]);
+
+  useEffect(() => {
+    if (!hasInitializedCopyPreviewSummaryReset.current) {
+      hasInitializedCopyPreviewSummaryReset.current = true;
+      return;
+    }
+
+    setCopyPreviewSummaryStatus("idle");
+  }, [hoveredCountrySummaryText]);
 
   useEffect(() => {
     if (!hasInitializedCopyCountryReset.current) {
@@ -3044,6 +3094,13 @@ export default function EVMap() {
                   {hoveredCountryDetails.brands.length === 1 ? "brand" : "brands"}
                 </p>
               </div>
+              <button
+                type="button"
+                className="text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                onClick={copyHoveredCountrySummary}
+              >
+                {getCopyPreviewSummaryButtonLabel(copyPreviewSummaryStatus)}
+              </button>
             </div>
             {hoveredCountryDetails.brands.length > 0 ? (
               <ul className="mt-2 space-y-2">

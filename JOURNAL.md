@@ -1315,3 +1315,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-07
 **Did**: Stabilized the dataset summary copy action by resetting its status from a stable view-state signature instead of the fully formatted summary text, so lazy rerenders no longer clear the "Copied summary" state mid-test.
 **Result**: pass
+## 2026-05-07
+**Did**: Added a copy-preview action to the hover panel so users can share a country's visible brands without opening the full country details, backed by regression coverage for successful and failed clipboard writes.
+**Result**: pass

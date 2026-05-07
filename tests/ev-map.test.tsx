@@ -1247,6 +1247,85 @@ describe("EVMap", () => {
     expect(within(footprintPanel!).getByText("XPeng · 1 market")).toBeInTheDocument();
   });
 
+  it("copies the hovered country preview summary", async () => {
+    vi.doUnmock("../src/components/MapCanvas");
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(await screen.findByRole("button", { name: "Hover Norway" })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Hover Norway" }));
+
+    const previewPanel = screen.getByRole("heading", { name: "Map preview" }).closest(
+      "div",
+    );
+    expect(previewPanel).not.toBeNull();
+
+    fireEvent.click(
+      within(previewPanel!).getByRole("button", { name: "Copy preview summary" }),
+    );
+
+    expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
+      "Norway (NOR)\nBrands in view: BYD, XPeng",
+    );
+    expect(
+      within(previewPanel!).getByRole("button", { name: "Copied preview summary" }),
+    ).toBeInTheDocument();
+  });
+
+  it("surfaces hover preview copy failures", async () => {
+    vi.doUnmock("../src/components/MapCanvas");
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+    Object.defineProperty(window.navigator, "clipboard", {
+      configurable: true,
+      value: {
+        writeText: vi.fn().mockRejectedValue(new Error("copy failed")),
+      },
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(await screen.findByRole("button", { name: "Hover Norway" })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Hover Norway" }));
+
+    const previewPanel = screen.getByRole("heading", { name: "Map preview" }).closest(
+      "div",
+    );
+    expect(previewPanel).not.toBeNull();
+
+    fireEvent.click(
+      within(previewPanel!).getByRole("button", { name: "Copy preview summary" }),
+    );
+
+    expect(
+      await within(previewPanel!).findByRole("button", {
+        name: "Preview summary copy failed",
+      }),
+    ).toBeInTheDocument();
+  });
+
   it("explains uncertain badges in the footprint and country details panels", async () => {
     vi.doUnmock("../src/components/MapCanvas");
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
