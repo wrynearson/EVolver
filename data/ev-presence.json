@@ -1004,6 +1004,16 @@
             "https://www.lynkco.com/sv-se/find-us"
           ],
           "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://lynkco.ae/location",
+          "sources": [
+            "https://lynkco.ae/",
+            "https://lynkco.ae/location"
+          ],
+          "uncertain": false
         }
       }
     },
