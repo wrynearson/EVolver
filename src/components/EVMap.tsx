@@ -4425,7 +4425,7 @@ export default function EVMap() {
         </aside>
       ) : null}
 
-      <div className="absolute bottom-6 left-6 bg-white/90 rounded-lg shadow-md px-4 py-3">
+      <div className="absolute right-6 bottom-6 left-6 rounded-lg bg-white/90 px-4 py-3 shadow-md sm:right-auto sm:max-w-xs">
         <h3 className="text-sm font-semibold mb-2 text-gray-700">
           {activeSelectedBrand ? "Filtered brand presence" : "Chinese EV Brands Present"}
         </h3>

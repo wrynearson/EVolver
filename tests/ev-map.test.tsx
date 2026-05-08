@@ -1185,7 +1185,14 @@ describe("EVMap", () => {
 
     render(<EVMap />);
 
-    expect(await screen.findByText("Chinese EV Brands Present")).toBeInTheDocument();
+    const legendHeading = await screen.findByText("Chinese EV Brands Present");
+    expect(legendHeading).toBeInTheDocument();
+    expect(legendHeading.closest("div")).toHaveClass(
+      "right-6",
+      "left-6",
+      "sm:right-auto",
+      "sm:max-w-xs",
+    );
     expect(
       screen.getByText(
         "Dashed outlines mark countries that include at least one uncertain brand entry.",

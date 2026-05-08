@@ -1340,3 +1340,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Lynk & Co by adding the Philippines after confirming the official local site, its authorized dealer locator, live test-drive flow, and FAQ naming United Asia Auto Group, Inc. as the official distributor.
 **Result**: pass
 **TODO**: Verify the next official sovereign Lynk & Co market beyond Belgium, China, France, Germany, Italy, the Netherlands, the Philippines, Spain, Sweden, and the United Arab Emirates from a live localized consumer site plus dealer, showroom, or test-drive flow.
+
+## 2026-05-08
+**Did**: Made the map legend responsive so it stretches within mobile viewport gutters while staying compact on desktop, then verified the layout at 375px and 1280px alongside the full test/build suite.
+**Result**: pass
