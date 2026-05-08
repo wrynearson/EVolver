@@ -1014,6 +1014,17 @@
             "https://lynkco.ae/location"
           ],
           "uncertain": false
+        },
+        "PHL": {
+          "name": "Philippines",
+          "present": true,
+          "source": "https://lynkco.ph/dealers/",
+          "sources": [
+            "https://lynkco.ph/contact-us-faqs/",
+            "https://lynkco.ph/dealers/",
+            "https://lynkco.ph/book-a-test-drive/"
+          ],
+          "uncertain": false
         }
       }
     },
