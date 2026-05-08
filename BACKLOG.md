@@ -4,6 +4,8 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
+- Add Lynk & Co as a tracked brand beyond Belgium, China, France, Germany, Italy, the Netherlands, Spain, and Sweden by verifying the next sovereign official market sites that already expose localized consumer plus dealer or test-drive flows.
+
 - [monitoring] Re-check AVATR's first sovereign market in the Americas, Africa, or Oceania only after its official overseas surfaces expose a localized consumer, showroom, contact, dealer, or test-drive flow there; checked 2026-05-07 and the live global overseas page plus market selector still top out at regional cooperation contacts for Latin America and Africa plus localized market links only for Hong Kong, Thailand, and Singapore.
 
 - [monitoring] Re-check IM Motors only after first-party IM or MG market surfaces expose a new sovereign overseas market beyond Australia, China, Jordan, Mauritius, Myanmar, New Zealand, Norway, Singapore, Thailand, the United Arab Emirates, and the United Kingdom; checked 2026-05-05 and the currently verifiable `mgmotor.eu` IM5/IM6 pages remain Europe-region surfaces rather than a new sovereign local market.

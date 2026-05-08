@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-06",
+    "last_updated": "2026-05-08",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -917,6 +917,91 @@
             "https://www.lixiang.com/",
             "https://www.lixiang.com/support/store/findus",
             "https://www.liauto.com/"
+          ],
+          "uncertain": false
+        }
+      }
+    },
+    "Lynk & Co": {
+      "website": "https://www.lynkco.com",
+      "countries": {
+        "BEL": {
+          "name": "Belgium",
+          "present": true,
+          "source": "https://www.lynkco.com/fr-be/find-us",
+          "sources": [
+            "https://www.lynkco.com/fr-be/",
+            "https://www.lynkco.com/fr-be/find-us"
+          ],
+          "uncertain": false
+        },
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.lynkco.com.cn/",
+          "sources": [
+            "https://www.lynkco.com.cn/",
+            "https://www.lynkco.com.cn/contactus/privacypolicy"
+          ],
+          "uncertain": false
+        },
+        "DEU": {
+          "name": "Germany",
+          "present": true,
+          "source": "https://www.lynkco.com/de-de/find-us",
+          "sources": [
+            "https://www.lynkco.com/de-de/",
+            "https://www.lynkco.com/de-de/find-us"
+          ],
+          "uncertain": false
+        },
+        "ESP": {
+          "name": "Spain",
+          "present": true,
+          "source": "https://www.lynkco.com/es-es/find-us",
+          "sources": [
+            "https://www.lynkco.com/es-es/",
+            "https://www.lynkco.com/es-es/find-us"
+          ],
+          "uncertain": false
+        },
+        "FRA": {
+          "name": "France",
+          "present": true,
+          "source": "https://www.lynkco.com/fr-fr/find-us",
+          "sources": [
+            "https://www.lynkco.com/fr-fr/",
+            "https://www.lynkco.com/fr-fr/find-us"
+          ],
+          "uncertain": false
+        },
+        "ITA": {
+          "name": "Italy",
+          "present": true,
+          "source": "https://www.lynkco.com/it-it/testdrive",
+          "sources": [
+            "https://www.lynkco.com/it-it/",
+            "https://www.lynkco.com/it-it/testdrive"
+          ],
+          "uncertain": false
+        },
+        "NLD": {
+          "name": "Netherlands",
+          "present": true,
+          "source": "https://www.lynkco.com/nl-nl/find-us",
+          "sources": [
+            "https://www.lynkco.com/nl-nl/",
+            "https://www.lynkco.com/nl-nl/find-us"
+          ],
+          "uncertain": false
+        },
+        "SWE": {
+          "name": "Sweden",
+          "present": true,
+          "source": "https://www.lynkco.com/sv-se/find-us",
+          "sources": [
+            "https://www.lynkco.com/sv-se/",
+            "https://www.lynkco.com/sv-se/find-us"
           ],
           "uncertain": false
         }

@@ -1326,3 +1326,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-08
 **Did**: Fixed the dataset summary copy-state reset so the panel keeps its "Copied summary" feedback visible through late rerenders, restoring the failing EV map regression and verifying the interaction at desktop and mobile widths.
 **Result**: pass
+
+## 2026-05-08
+**Did**: Added Lynk & Co as a tracked brand with 8 confirmed official markets (Belgium, China, France, Germany, Italy, the Netherlands, Spain, and Sweden) using its own localized market plus dealer or test-drive surfaces, and narrowed the remaining expansion work into a new actionable backlog item.
+**Result**: pass
