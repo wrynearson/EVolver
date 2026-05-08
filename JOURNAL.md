@@ -1322,3 +1322,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-07
 **Did**: Re-checked AVATR's live overseas page and browser-rendered market selector, confirmed that the Americas and Africa still expose only regional cooperation contacts while the official localized market links still stop at Hong Kong, Thailand, and Singapore, and demoted the first Americas/Africa/Oceania lead to monitoring in BACKLOG.md.
 **Result**: no-op
+
+## 2026-05-08
+**Did**: Fixed the dataset summary copy-state reset so the panel keeps its "Copied summary" feedback visible through late rerenders, restoring the failing EV map regression and verifying the interaction at desktop and mobile widths.
+**Result**: pass

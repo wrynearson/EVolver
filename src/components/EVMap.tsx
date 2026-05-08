@@ -2220,7 +2220,11 @@ export default function EVMap() {
       return;
     }
 
-    setCopySummaryStatus("idle");
+    const resetTimer = window.setTimeout(() => {
+      setCopySummaryStatus("idle");
+    }, 1500);
+
+    return () => window.clearTimeout(resetTimer);
   }, [datasetSummaryResetSignature]);
 
   useEffect(() => {
