@@ -1344,3 +1344,13 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-08
 **Did**: Made the map legend responsive so it stretches within mobile viewport gutters while staying compact on desktop, then verified the layout at 375px and 1280px alongside the full test/build suite.
 **Result**: pass
+
+## 2026-05-08
+**Did**: Expanded Lynk & Co by adding the Czech Republic and Switzerland after confirming live localized Lynk & Co market sites plus official find-us and test-drive flows.
+**Result**: pass
+**TODO**: Verify the next official sovereign Lynk & Co market beyond Belgium, China, the Czech Republic, France, Germany, Italy, the Netherlands, the Philippines, Spain, Sweden, Switzerland, and the United Arab Emirates from a live localized consumer site plus dealer, showroom, or test-drive flow.
+
+## 2026-05-08
+**Did**: Expanded Lynk & Co again by adding Austria after confirming the live localized Austrian site plus official Austria contact and service-information pages with local support routes and phone contacts.
+**Result**: pass
+**TODO**: Verify the next official sovereign Lynk & Co market beyond Austria, Belgium, China, the Czech Republic, France, Germany, Italy, the Netherlands, the Philippines, Spain, Sweden, Switzerland, and the United Arab Emirates from a live localized consumer site plus dealer, showroom, or test-drive flow.

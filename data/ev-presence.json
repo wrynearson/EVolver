@@ -925,6 +925,17 @@
     "Lynk & Co": {
       "website": "https://www.lynkco.com",
       "countries": {
+        "AUT": {
+          "name": "Austria",
+          "present": true,
+          "source": "https://www.lynkco.com/de-at/about/contact",
+          "sources": [
+            "https://www.lynkco.com/de-at/",
+            "https://www.lynkco.com/de-at/about/contact",
+            "https://www.lynkco.com/de-at/help/service-information"
+          ],
+          "uncertain": false
+        },
         "BEL": {
           "name": "Belgium",
           "present": true,
@@ -942,6 +953,28 @@
           "sources": [
             "https://www.lynkco.com.cn/",
             "https://www.lynkco.com.cn/contactus/privacypolicy"
+          ],
+          "uncertain": false
+        },
+        "CHE": {
+          "name": "Switzerland",
+          "present": true,
+          "source": "https://www.lynkco.com/fr-ch/find-us",
+          "sources": [
+            "https://www.lynkco.com/fr-ch/",
+            "https://www.lynkco.com/fr-ch/find-us",
+            "https://www.lynkco.com/fr-ch/testdrive"
+          ],
+          "uncertain": false
+        },
+        "CZE": {
+          "name": "Czech Republic",
+          "present": true,
+          "source": "https://www.lynkco.com/cs-cz/find-us",
+          "sources": [
+            "https://www.lynkco.com/cs-cz/",
+            "https://www.lynkco.com/cs-cz/find-us",
+            "https://www.lynkco.com/cs-cz/testdrive"
           ],
           "uncertain": false
         },
