@@ -1070,6 +1070,18 @@
             "https://www.lynkco-see.com/ro/contact/"
           ],
           "uncertain": false
+        },
+        "MEX": {
+          "name": "Mexico",
+          "present": true,
+          "source": "https://www.lynkco.com/es-mx/findadealer",
+          "sources": [
+            "https://www.lynkco.com/findadealer",
+            "https://www.lynkco.com/es-mx/",
+            "https://www.lynkco.com/es-mx/findadealer",
+            "https://www.lynkco.com/es-mx/test-drive"
+          ],
+          "uncertain": false
         }
       }
     },

@@ -56,6 +56,16 @@ describe("ev-presence.json", () => {
     }
   });
 
+  it("each brand website is trimmed and a valid URL", () => {
+    data = JSON.parse(raw);
+    for (const [brandName, brand] of Object.entries(data.brands)) {
+      expect(brand.website, `${brandName}.website should be trimmed`).toBe(
+        brand.website.trim(),
+      );
+      expect(() => new URL(brand.website), `${brandName}.website should be a valid URL`).not.toThrow();
+    }
+  });
+
   it("each country entry has required fields with correct types", () => {
     data = JSON.parse(raw);
     for (const [brandName, brand] of Object.entries(data.brands)) {

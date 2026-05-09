@@ -1358,3 +1358,12 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-09
 **Did**: Expanded Lynk & Co by adding Romania after confirming Lynk & Co's official service market selector routes Romania to a dedicated `lynkco-see.com/ro/` localized site and that the Romanian root plus `test-drive` and `contact` routes are live first-party pages behind Cloudflare rather than missing.
 **Result**: pass
+
+## 2026-05-09
+**Did**: Expanded Lynk & Co by adding Mexico after confirming Lynk & Co's own country selector points Mexico to a live localized `es-mx` market site and that the official Mexico dealer locator plus test-drive flow are live.
+**Result**: pass
+**TODO**: Ship the next session slice as a product or UX improvement instead of another data-only expansion so the recent journal run varies category.
+
+## 2026-05-09
+**Did**: Strengthened the data guardrails by validating that every tracked brand website is trimmed and parseable as a real URL before data changes can ship.
+**Result**: pass

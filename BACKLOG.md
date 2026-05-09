@@ -4,7 +4,7 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
-- Expand Lynk & Co beyond Austria, Belgium, China, the Czech Republic, France, Germany, Italy, the Netherlands, the Philippines, Romania, Spain, Sweden, Switzerland, and the United Arab Emirates by verifying the next sovereign official market site that already exposes localized consumer plus dealer, showroom, or test-drive flows.
+- Expand Lynk & Co beyond Austria, Belgium, China, the Czech Republic, France, Germany, Italy, Mexico, the Netherlands, the Philippines, Romania, Spain, Sweden, Switzerland, and the United Arab Emirates by verifying the next sovereign official market site that already exposes localized consumer plus dealer, showroom, or test-drive flows.
 
 - [monitoring] Re-check AVATR's first sovereign market in the Americas, Africa, or Oceania only after its official overseas surfaces expose a localized consumer, showroom, contact, dealer, or test-drive flow there; checked 2026-05-07 and the live global overseas page plus market selector still top out at regional cooperation contacts for Latin America and Africa plus localized market links only for Hong Kong, Thailand, and Singapore.
 
