@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-08",
+    "last_updated": "2026-05-09",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -1056,6 +1056,18 @@
             "https://lynkco.ph/contact-us-faqs/",
             "https://lynkco.ph/dealers/",
             "https://lynkco.ph/book-a-test-drive/"
+          ],
+          "uncertain": false
+        },
+        "ROU": {
+          "name": "Romania",
+          "present": true,
+          "source": "https://www.lynkco-see.com/ro/",
+          "sources": [
+            "https://www.lynkco.com/en/service-and-assistance/service-market-selector",
+            "https://www.lynkco-see.com/ro/",
+            "https://www.lynkco-see.com/ro/test-drive/",
+            "https://www.lynkco-see.com/ro/contact/"
           ],
           "uncertain": false
         }

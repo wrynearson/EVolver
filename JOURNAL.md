@@ -1354,3 +1354,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Lynk & Co again by adding Austria after confirming the live localized Austrian site plus official Austria contact and service-information pages with local support routes and phone contacts.
 **Result**: pass
 **TODO**: Verify the next official sovereign Lynk & Co market beyond Austria, Belgium, China, the Czech Republic, France, Germany, Italy, the Netherlands, the Philippines, Spain, Sweden, Switzerland, and the United Arab Emirates from a live localized consumer site plus dealer, showroom, or test-drive flow.
+
+## 2026-05-09
+**Did**: Expanded Lynk & Co by adding Romania after confirming Lynk & Co's official service market selector routes Romania to a dedicated `lynkco-see.com/ro/` localized site and that the Romanian root plus `test-drive` and `contact` routes are live first-party pages behind Cloudflare rather than missing.
+**Result**: pass
