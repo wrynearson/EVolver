@@ -1498,6 +1498,57 @@ describe("EVMap", () => {
     );
   });
 
+  it("filters the selected brand footprint down to single-source markets and persists the toggle in the URL", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText("Brand filter"), {
+      target: { value: "BYD" },
+    });
+
+    const footprintPanel = screen
+      .getByRole("heading", { name: "Brand footprint" })
+      .closest("aside");
+    expect(footprintPanel).not.toBeNull();
+    expect(within(footprintPanel!).getByRole("button", { name: /China/i })).toBeInTheDocument();
+    expect(within(footprintPanel!).getByRole("button", { name: /Norway/i })).toBeInTheDocument();
+
+    fireEvent.click(
+      within(footprintPanel!).getByLabelText("Show only single-source markets"),
+    );
+
+    expect(window.location.search).toBe("?brand=BYD&footprintSingleSourceOnly=true");
+    expect(
+      within(footprintPanel!).getByLabelText("Show only single-source markets"),
+    ).toBeChecked();
+    expect(within(footprintPanel!).getByText("Showing 1 of 2 markets")).toBeInTheDocument();
+    expect(within(footprintPanel!).getByRole("button", { name: /China/i })).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).queryByRole("button", { name: /Norway/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Clear single-source footprint filter" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Open share link in a new tab" }),
+    ).toHaveAttribute(
+      "href",
+      "http://localhost:3000/?brand=BYD&footprintSingleSourceOnly=true",
+    );
+  });
+
   it("filters coverage panels down to uncertain entries and persists the toggle in the URL", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
@@ -2774,6 +2825,50 @@ describe("EVMap", () => {
     ).toHaveAttribute(
       "href",
       "http://localhost:3000/?view=countries&region=Europe&coverageQuery=nor&uncertainOnly=true",
+    );
+  });
+
+  it("restores the single-source footprint filter from the URL", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+    window.history.replaceState(
+      {},
+      "",
+      "/?brand=BYD&footprintSingleSourceOnly=true&footprintQuery=chi",
+    );
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const footprintPanel = screen
+      .getByRole("heading", { name: "Brand footprint" })
+      .closest("aside");
+    expect(footprintPanel).not.toBeNull();
+    expect(
+      within(footprintPanel!).getByLabelText("Show only single-source markets"),
+    ).toBeChecked();
+    expect(
+      within(footprintPanel!).getByLabelText("Search footprint markets"),
+    ).toHaveValue("chi");
+    expect(within(footprintPanel!).getByText("Showing 1 of 2 markets")).toBeInTheDocument();
+    expect(within(footprintPanel!).getByRole("button", { name: /China/i })).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).queryByRole("button", { name: /Norway/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Open share link in a new tab" }),
+    ).toHaveAttribute(
+      "href",
+      "http://localhost:3000/?brand=BYD&footprintSingleSourceOnly=true&footprintQuery=chi",
     );
   });
 

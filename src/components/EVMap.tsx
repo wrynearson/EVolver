@@ -62,6 +62,7 @@ type SelectionState = {
   selectedCoverageRegion: string;
   coverageSort: CoverageSort;
   showOnlyUncertainFootprint: boolean;
+  showOnlySingleSourceFootprint: boolean;
   footprintSort: FootprintSort;
   footprintSearchQuery: string;
 };
@@ -610,15 +611,28 @@ function getCoverageEmptyStateMessage(
 
 function getFootprintEmptyStateMessage(
   showOnlyUncertainFootprint: boolean,
+  showOnlySingleSourceFootprint: boolean,
   hasFootprintSearchQuery: boolean,
 ) {
-  if (!showOnlyUncertainFootprint) {
+  if (!showOnlyUncertainFootprint && !showOnlySingleSourceFootprint) {
     return "No markets match this filter.";
   }
 
+  if (showOnlyUncertainFootprint && showOnlySingleSourceFootprint) {
+    return hasFootprintSearchQuery
+      ? "No uncertain single-source markets match this filter."
+      : "No uncertain single-source markets in this footprint.";
+  }
+
+  if (showOnlyUncertainFootprint) {
+    return hasFootprintSearchQuery
+      ? "No uncertain markets match this filter."
+      : "No uncertain markets in this footprint.";
+  }
+
   return hasFootprintSearchQuery
-    ? "No uncertain markets match this filter."
-    : "No uncertain markets in this footprint.";
+    ? "No single-source markets match this filter."
+    : "No single-source markets in this footprint.";
 }
 
 function getNextLookupIndex(
@@ -704,6 +718,8 @@ function getSelectionStateFromSearch(search: string): SelectionState {
   const requestedCoverageSort = searchParams.get("coverageSort")?.trim() ?? "";
   const showOnlyUncertainFootprint =
     searchParams.get("footprintUncertainOnly")?.trim() === "true";
+  const showOnlySingleSourceFootprint =
+    searchParams.get("footprintSingleSourceOnly")?.trim() === "true";
   const requestedFootprintSort = searchParams.get("footprintSort")?.trim() ?? "";
   const footprintSearchQuery = searchParams.get("footprintQuery")?.trim() ?? "";
   const coveragePanelView = isCoveragePanelView(requestedCoveragePanelView)
@@ -726,6 +742,7 @@ function getSelectionStateFromSearch(search: string): SelectionState {
       ? requestedCoverageSort
       : DEFAULT_COVERAGE_SORT,
     showOnlyUncertainFootprint,
+    showOnlySingleSourceFootprint,
     footprintSort: isFootprintSort(requestedFootprintSort)
       ? requestedFootprintSort
       : DEFAULT_FOOTPRINT_SORT,
@@ -745,6 +762,7 @@ function getInitialSelectionState(): SelectionState {
       selectedCoverageRegion: "",
       coverageSort: DEFAULT_COVERAGE_SORT,
       showOnlyUncertainFootprint: false,
+      showOnlySingleSourceFootprint: false,
       footprintSort: DEFAULT_FOOTPRINT_SORT,
       footprintSearchQuery: "",
     };
@@ -763,6 +781,7 @@ function buildShareUrl(
   selectedCoverageRegion: string,
   coverageSort: CoverageSort,
   showOnlyUncertainFootprint: boolean,
+  showOnlySingleSourceFootprint: boolean,
   footprintSort: FootprintSort,
   footprintSearchQuery: string,
 ) {
@@ -824,6 +843,12 @@ function buildShareUrl(
     url.searchParams.set("footprintUncertainOnly", "true");
   } else {
     url.searchParams.delete("footprintUncertainOnly");
+  }
+
+  if (showOnlySingleSourceFootprint) {
+    url.searchParams.set("footprintSingleSourceOnly", "true");
+  } else {
+    url.searchParams.delete("footprintSingleSourceOnly");
   }
 
   if (footprintSort !== DEFAULT_FOOTPRINT_SORT) {
@@ -929,6 +954,8 @@ export default function EVMap() {
   const [showOnlyUncertainFootprint, setShowOnlyUncertainFootprint] = useState(
     () => initialSelectionState.showOnlyUncertainFootprint,
   );
+  const [showOnlySingleSourceFootprint, setShowOnlySingleSourceFootprint] =
+    useState(() => initialSelectionState.showOnlySingleSourceFootprint);
   const [footprintSort, setFootprintSort] = useState<FootprintSort>(
     () => initialSelectionState.footprintSort,
   );
@@ -981,6 +1008,9 @@ export default function EVMap() {
   const clearFootprintUncertainFilter = () => {
     setShowOnlyUncertainFootprint(false);
   };
+  const clearFootprintSingleSourceFilter = () => {
+    setShowOnlySingleSourceFootprint(false);
+  };
   const clearMajorRegionGap = () => {
     setSelectedMajorRegionGap(null);
   };
@@ -993,6 +1023,7 @@ export default function EVMap() {
     setCoverageSort(DEFAULT_COVERAGE_SORT);
     setShowOnlyUncertainCoverage(false);
     setShowOnlyUncertainFootprint(false);
+    setShowOnlySingleSourceFootprint(false);
     setFootprintSort(DEFAULT_FOOTPRINT_SORT);
     setCoverageSearchQuery("");
     setFootprintSearchQuery("");
@@ -1408,12 +1439,18 @@ export default function EVMap() {
       selectedBrandPresence.filter(
         (country) =>
           (!showOnlyUncertainFootprint || country.uncertain) &&
+          (!showOnlySingleSourceFootprint || country.sources.length === 1) &&
           matchesSearchQuery(
             [country.countryName, country.isoCode, country.regionName],
             footprintSearchQuery,
           ),
       ),
-    [footprintSearchQuery, selectedBrandPresence, showOnlyUncertainFootprint],
+    [
+      footprintSearchQuery,
+      selectedBrandPresence,
+      showOnlySingleSourceFootprint,
+      showOnlyUncertainFootprint,
+    ],
   );
   const sortedSelectedBrandPresence = useMemo(() => {
     return [...filteredSelectedBrandPresence].sort((a, b) =>
@@ -1707,6 +1744,7 @@ export default function EVMap() {
         selectedCoverageRegion,
         coverageSort,
         showOnlyUncertainFootprint,
+        showOnlySingleSourceFootprint,
         footprintSort,
         footprintSearchQuery,
       ),
@@ -1717,6 +1755,7 @@ export default function EVMap() {
       showOnlyUncertainCoverage,
       coverageSort,
       showOnlyUncertainFootprint,
+      showOnlySingleSourceFootprint,
       footprintSort,
       footprintSearchQuery,
       resolvedSelectedCountry,
@@ -1823,6 +1862,7 @@ export default function EVMap() {
       coveragePanelView !== "brands" ||
       showOnlyUncertainCoverage ||
       showOnlyUncertainFootprint ||
+      showOnlySingleSourceFootprint ||
       Boolean(activeMajorRegionGap) ||
       coverageSort !== DEFAULT_COVERAGE_SORT ||
       footprintSort !== DEFAULT_FOOTPRINT_SORT ||
@@ -1902,6 +1942,14 @@ export default function EVMap() {
           label: "Uncertain footprint only",
           clearLabel: "Clear uncertain-only footprint filter",
           onClear: clearFootprintUncertainFilter,
+        }
+      : null,
+    activeSelectedBrand && showOnlySingleSourceFootprint
+      ? {
+          key: "footprint-single-source",
+          label: "Single-source footprint only",
+          clearLabel: "Clear single-source footprint filter",
+          onClear: clearFootprintSingleSourceFilter,
         }
       : null,
     activeSelectedBrand && footprintSort !== DEFAULT_FOOTPRINT_SORT
@@ -2084,6 +2132,7 @@ export default function EVMap() {
       setSelectedCoverageRegion(nextState.selectedCoverageRegion);
       setCoverageSort(nextState.coverageSort);
       setShowOnlyUncertainFootprint(nextState.showOnlyUncertainFootprint);
+      setShowOnlySingleSourceFootprint(nextState.showOnlySingleSourceFootprint);
       setFootprintSort(nextState.footprintSort);
       setFootprintSearchQuery(nextState.footprintSearchQuery);
     };
@@ -2129,6 +2178,8 @@ export default function EVMap() {
       currentState.selectedCoverageRegion === selectedCoverageRegion &&
       currentState.coverageSort === coverageSort &&
       currentState.showOnlyUncertainFootprint === showOnlyUncertainFootprint &&
+      currentState.showOnlySingleSourceFootprint ===
+        showOnlySingleSourceFootprint &&
       currentState.footprintSort === footprintSort &&
       currentState.footprintSearchQuery === footprintSearchQuery
     ) {
@@ -2145,6 +2196,7 @@ export default function EVMap() {
       selectedCoverageRegion,
       coverageSort,
       showOnlyUncertainFootprint,
+      showOnlySingleSourceFootprint,
       footprintSort,
       footprintSearchQuery,
     );
@@ -2157,6 +2209,7 @@ export default function EVMap() {
     showOnlyUncertainCoverage,
     coverageSort,
     showOnlyUncertainFootprint,
+    showOnlySingleSourceFootprint,
     footprintSort,
     footprintSearchQuery,
     resolvedSelectedCountry,
@@ -3770,6 +3823,25 @@ export default function EVMap() {
                 <span>Show only uncertain markets</span>
               </label>
             </div>
+            <div className="mt-2 rounded-md border border-slate-200 bg-slate-50 px-3 py-2">
+              <label className="flex items-start gap-2 text-sm text-slate-900">
+                <input
+                  type="checkbox"
+                  id="footprint-single-source-filter"
+                  aria-label="Show only single-source markets"
+                  className="mt-0.5 h-4 w-4 rounded border-slate-300 text-slate-700 focus:ring-slate-500"
+                  checked={showOnlySingleSourceFootprint}
+                  onChange={(event) =>
+                    setShowOnlySingleSourceFootprint(event.target.checked)
+                  }
+                />
+                <span>Show only single-source markets</span>
+              </label>
+              <p className="mt-2 text-xs text-slate-600">
+                Surface markets that currently rely on a single recorded official
+                source URL.
+              </p>
+            </div>
             <div className="mt-3">
               <label
                 htmlFor="footprint-sort"
@@ -3803,6 +3875,7 @@ export default function EVMap() {
               <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
                 {getFootprintEmptyStateMessage(
                   showOnlyUncertainFootprint,
+                  showOnlySingleSourceFootprint,
                   Boolean(footprintSearchQuery.trim()),
                 )}
               </li>

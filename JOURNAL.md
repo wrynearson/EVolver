@@ -1371,3 +1371,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-09
 **Did**: Added one-click "Show all tracked brands" actions in the filtered country preview and country details so users can clear a brand focus without losing the active country context, backed by EV map regression coverage.
 **Result**: pass
+
+## 2026-05-09
+**Did**: Added a shareable single-source footprint filter so users can isolate markets backed by only one recorded official source URL while reviewing a brand footprint, with regression coverage and browser verification at desktop and mobile widths.
+**Result**: pass
