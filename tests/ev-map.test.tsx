@@ -801,8 +801,11 @@ describe("EVMap", () => {
     expect(within(previewPanel!).getByText("2 sources")).toBeInTheDocument();
     expect(
       within(previewPanel!).getByText(
-        "Showing 1 of 2 tracked brands for this country. Clear the brand filter to see the rest.",
+        "Showing 1 of 2 tracked brands for this country.",
       ),
+    ).toBeInTheDocument();
+    expect(
+      within(previewPanel!).getByRole("button", { name: "Show all tracked brands" }),
     ).toBeInTheDocument();
 
     fireEvent.click(within(footprintPanel!).getByRole("button", { name: /Norway/i }));
@@ -823,8 +826,11 @@ describe("EVMap", () => {
     );
     expect(
       within(detailsPanel!).getByText(
-        "Showing 1 of 2 tracked brands for this country. Clear the brand filter to inspect the rest.",
+        "Showing 1 of 2 tracked brands for this country.",
       ),
+    ).toBeInTheDocument();
+    expect(
+      within(detailsPanel!).getByRole("button", { name: "Show all tracked brands" }),
     ).toBeInTheDocument();
     expect(window.location.search).toBe("?brand=XPeng&country=NOR");
 
@@ -1168,6 +1174,69 @@ describe("EVMap", () => {
       "?country=NOR&footprintSort=name-desc&view=countries&coverageSort=name&brand=XPeng",
     );
     expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
+  });
+
+  it("lets users reveal all tracked brands from filtered country context", async () => {
+    vi.doUnmock("../src/components/MapCanvas");
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+    window.history.replaceState({}, "", "/?brand=XPeng&country=NOR");
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const filteredDetailsPanel = screen.getByRole("heading", { name: "Norway" }).closest(
+      "aside",
+    );
+    expect(filteredDetailsPanel).not.toBeNull();
+    expect(
+      within(filteredDetailsPanel!).getByRole("button", { name: "Show all tracked brands" }),
+    ).toBeInTheDocument();
+
+    fireEvent.click(await screen.findByRole("button", { name: "Hover Norway" }));
+
+    const filteredPreviewPanel = screen.getByRole("heading", { name: "Map preview" }).closest(
+      "div",
+    );
+    expect(filteredPreviewPanel).not.toBeNull();
+    expect(
+      within(filteredPreviewPanel!).getByRole("button", { name: "Show all tracked brands" }),
+    ).toBeInTheDocument();
+
+    fireEvent.click(
+      within(filteredPreviewPanel!).getByRole("button", { name: "Show all tracked brands" }),
+    );
+
+    await waitFor(() => {
+      expect(screen.getByLabelText("Brand filter")).toHaveValue("");
+    });
+
+    const allBrandsPreviewPanel = screen.getByRole("heading", { name: "Map preview" }).closest(
+      "div",
+    );
+    expect(allBrandsPreviewPanel).not.toBeNull();
+    expect(within(allBrandsPreviewPanel!).getByText("NOR · 2 brands")).toBeInTheDocument();
+    expect(
+      within(allBrandsPreviewPanel!).getByRole("button", { name: "Show BYD footprint" }),
+    ).toBeInTheDocument();
+
+    const allBrandsDetailsPanel = screen.getByRole("heading", { name: "Norway" }).closest(
+      "aside",
+    );
+    expect(allBrandsDetailsPanel).not.toBeNull();
+    expect(within(allBrandsDetailsPanel!).getByText("NOR · 2 brands")).toBeInTheDocument();
+    expect(within(allBrandsDetailsPanel!).getByText("BYD")).toBeInTheDocument();
+    expect(within(allBrandsDetailsPanel!).getByText("XPeng")).toBeInTheDocument();
+    expect(window.location.search).toBe("?country=NOR");
   });
 
   it("highlights uncertain countries in the multi-brand map legend and overlay", async () => {

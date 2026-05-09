@@ -1319,6 +1319,18 @@ export default function EVMap() {
       }
     );
   }, [regionScopedData, resolvedHoveredCountry]);
+  const hoveredCountryHasHiddenBrands = Boolean(
+    activeSelectedBrand &&
+      allHoveredCountryDetails &&
+      hoveredCountryDetails &&
+      allHoveredCountryDetails.brands.length > hoveredCountryDetails.brands.length,
+  );
+  const selectedCountryHasHiddenBrands = Boolean(
+    activeSelectedBrand &&
+      allSelectedCountryDetails &&
+      selectedCountryDetails &&
+      allSelectedCountryDetails.brands.length > selectedCountryDetails.brands.length,
+  );
   const selectedCountryAllSources = useMemo(() => {
     if (!selectedCountryDetails) {
       return [];
@@ -3169,14 +3181,21 @@ export default function EVMap() {
                 view.
               </p>
             )}
-            {activeSelectedBrand &&
-            allHoveredCountryDetails &&
-            allHoveredCountryDetails.brands.length > hoveredCountryDetails.brands.length ? (
-              <p className="mt-2 text-xs text-gray-500">
-                Showing {hoveredCountryDetails.brands.length} of{" "}
-                {allHoveredCountryDetails.brands.length} tracked brands for this
-                country. Clear the brand filter to see the rest.
-              </p>
+            {hoveredCountryHasHiddenBrands ? (
+              <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-gray-500">
+                <p>
+                  Showing {hoveredCountryDetails.brands.length} of{" "}
+                  {allHoveredCountryDetails?.brands.length ?? 0} tracked brands for
+                  this country.
+                </p>
+                <button
+                  type="button"
+                  className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                  onClick={clearBrandSelection}
+                >
+                  Show all tracked brands
+                </button>
+              </div>
             ) : null}
           </div>
         </div>
@@ -3421,14 +3440,21 @@ export default function EVMap() {
               ))
             )}
           </ul>
-          {activeSelectedBrand &&
-          allSelectedCountryDetails &&
-          allSelectedCountryDetails.brands.length > selectedCountryDetails.brands.length ? (
-            <p className="mt-3 border-t border-gray-200 pt-3 text-xs text-gray-500">
-              Showing {selectedCountryDetails.brands.length} of{" "}
-              {allSelectedCountryDetails.brands.length} tracked brands for this
-              country. Clear the brand filter to inspect the rest.
-            </p>
+          {selectedCountryHasHiddenBrands ? (
+            <div className="mt-3 border-t border-gray-200 pt-3">
+              <p className="text-xs text-gray-500">
+                Showing {selectedCountryDetails.brands.length} of{" "}
+                {allSelectedCountryDetails?.brands.length ?? 0} tracked brands for
+                this country.
+              </p>
+              <button
+                type="button"
+                className="mt-2 text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                onClick={clearBrandSelection}
+              >
+                Show all tracked brands
+              </button>
+            </div>
           ) : null}
         </aside>
       ) : null}

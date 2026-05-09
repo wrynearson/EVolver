@@ -1367,3 +1367,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-09
 **Did**: Strengthened the data guardrails by validating that every tracked brand website is trimmed and parseable as a real URL before data changes can ship.
 **Result**: pass
+
+## 2026-05-09
+**Did**: Added one-click "Show all tracked brands" actions in the filtered country preview and country details so users can clear a brand focus without losing the active country context, backed by EV map regression coverage.
+**Result**: pass
