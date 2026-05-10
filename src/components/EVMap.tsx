@@ -256,6 +256,14 @@ function getCopyPreviewSummaryButtonLabel(status: CopyStatus) {
       : "Copy preview summary";
 }
 
+function getCopyShareLinkButtonLabel(status: CopyStatus) {
+  return status === "copied"
+    ? "Copied share link"
+    : status === "failed"
+      ? "Share link copy failed"
+      : "Copy share link";
+}
+
 function formatBrandPresenceMarketList(
   countries: Array<{
     isoCode: string;
@@ -1855,6 +1863,17 @@ export default function EVMap() {
       setCopyPreviewSummaryStatus("failed");
     });
   };
+  const copyShareLink = () => {
+    if (!shareUrl || !navigator.clipboard?.writeText) {
+      setCopyLinkStatus("failed");
+      return;
+    }
+
+    setCopyLinkStatus("copied");
+    void navigator.clipboard.writeText(shareUrl).catch(() => {
+      setCopyLinkStatus("failed");
+    });
+  };
   const hasCustomView = Boolean(
     activeSelectedBrand ||
       resolvedSelectedCountry ||
@@ -2896,23 +2915,9 @@ export default function EVMap() {
               <button
                 type="button"
                 className="rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                onClick={() => {
-                  if (!shareUrl || !navigator.clipboard?.writeText) {
-                    setCopyLinkStatus("failed");
-                    return;
-                  }
-
-                  setCopyLinkStatus("copied");
-                  void navigator.clipboard.writeText(shareUrl).catch(() => {
-                    setCopyLinkStatus("failed");
-                  });
-                }}
+                onClick={copyShareLink}
               >
-                {copyLinkStatus === "copied"
-                  ? "Copied share link"
-                  : copyLinkStatus === "failed"
-                    ? "Copy failed"
-                    : "Copy share link"}
+                {getCopyShareLinkButtonLabel(copyLinkStatus)}
               </button>
             </div>
             <button

@@ -1388,3 +1388,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Lynk & Co by adding Croatia after confirming Lynk & Co's own service market selector routes Croatia to a dedicated `lynkco-see.com/hr/` market site and that the Croatian root plus `test-drive` and `contact` routes are live first-party pages behind Cloudflare rather than missing.
 **Result**: pass
 **TODO**: Verify the next official sovereign Lynk & Co market beyond Austria, Belgium, Bulgaria, China, Croatia, the Czech Republic, France, Germany, Greece, Italy, Mexico, the Netherlands, the Philippines, Romania, Spain, Sweden, Switzerland, and the United Arab Emirates from a live localized consumer site plus dealer, showroom, or test-drive flow.
+
+## 2026-05-10
+**Did**: Improved the share-link copy feedback so its failure state now uses the same specific wording style as the rest of the map UI, and added regression coverage for clipboard write failures.
+**Result**: pass
