@@ -925,6 +925,18 @@
     "Lynk & Co": {
       "website": "https://www.lynkco.com",
       "countries": {
+        "ALB": {
+          "name": "Albania",
+          "present": true,
+          "source": "https://www.lynkco-see.com/al/",
+          "sources": [
+            "https://www.lynkco.com/en/service-and-assistance/service-market-selector",
+            "https://www.lynkco-see.com/al/",
+            "https://www.lynkco-see.com/al/test-drive/",
+            "https://www.lynkco-see.com/al/contact/"
+          ],
+          "uncertain": false
+        },
         "ARE": {
           "name": "United Arab Emirates",
           "present": true,
@@ -953,6 +965,18 @@
           "sources": [
             "https://www.lynkco.com/fr-be/",
             "https://www.lynkco.com/fr-be/find-us"
+          ],
+          "uncertain": false
+        },
+        "BIH": {
+          "name": "Bosnia and Herzegovina",
+          "present": true,
+          "source": "https://www.lynkco-see.com/ba/",
+          "sources": [
+            "https://www.lynkco.com/en/service-and-assistance/service-market-selector",
+            "https://www.lynkco-see.com/ba/",
+            "https://www.lynkco-see.com/ba/test-drive/",
+            "https://www.lynkco-see.com/ba/contact/"
           ],
           "uncertain": false
         },
@@ -1064,6 +1088,30 @@
           ],
           "uncertain": false
         },
+        "MDA": {
+          "name": "Moldova",
+          "present": true,
+          "source": "https://www.lynkco-see.com/md/",
+          "sources": [
+            "https://www.lynkco.com/en/service-and-assistance/service-market-selector",
+            "https://www.lynkco-see.com/md/",
+            "https://www.lynkco-see.com/md/test-drive/",
+            "https://www.lynkco-see.com/md/contact/"
+          ],
+          "uncertain": false
+        },
+        "MKD": {
+          "name": "North Macedonia",
+          "present": true,
+          "source": "https://www.lynkco-see.com/mk/",
+          "sources": [
+            "https://www.lynkco.com/en/service-and-assistance/service-market-selector",
+            "https://www.lynkco-see.com/mk/",
+            "https://www.lynkco-see.com/mk/test-drive/",
+            "https://www.lynkco-see.com/mk/contact/"
+          ],
+          "uncertain": false
+        },
         "MEX": {
           "name": "Mexico",
           "present": true,
@@ -1073,6 +1121,18 @@
             "https://www.lynkco.com/es-mx/",
             "https://www.lynkco.com/es-mx/findadealer",
             "https://www.lynkco.com/es-mx/test-drive"
+          ],
+          "uncertain": false
+        },
+        "MNE": {
+          "name": "Montenegro",
+          "present": true,
+          "source": "https://www.lynkco-see.com/me/",
+          "sources": [
+            "https://www.lynkco.com/en/service-and-assistance/service-market-selector",
+            "https://www.lynkco-see.com/me/",
+            "https://www.lynkco-see.com/me/test-drive/",
+            "https://www.lynkco-see.com/me/contact/"
           ],
           "uncertain": false
         },
@@ -1106,6 +1166,30 @@
             "https://www.lynkco-see.com/ro/",
             "https://www.lynkco-see.com/ro/test-drive/",
             "https://www.lynkco-see.com/ro/contact/"
+          ],
+          "uncertain": false
+        },
+        "SRB": {
+          "name": "Serbia",
+          "present": true,
+          "source": "https://www.lynkco-see.com/rs/",
+          "sources": [
+            "https://www.lynkco.com/en/service-and-assistance/service-market-selector",
+            "https://www.lynkco-see.com/rs/",
+            "https://www.lynkco-see.com/rs/test-drive/",
+            "https://www.lynkco-see.com/rs/contact/"
+          ],
+          "uncertain": false
+        },
+        "SVN": {
+          "name": "Slovenia",
+          "present": true,
+          "source": "https://www.lynkco-see.com/si/",
+          "sources": [
+            "https://www.lynkco.com/en/service-and-assistance/service-market-selector",
+            "https://www.lynkco-see.com/si/",
+            "https://www.lynkco-see.com/si/test-drive/",
+            "https://www.lynkco-see.com/si/contact/"
           ],
           "uncertain": false
         },
