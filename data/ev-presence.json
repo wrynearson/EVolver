@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-09",
+    "last_updated": "2026-05-10",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -1005,6 +1005,18 @@
           "sources": [
             "https://www.lynkco.com/fr-fr/",
             "https://www.lynkco.com/fr-fr/find-us"
+          ],
+          "uncertain": false
+        },
+        "GRC": {
+          "name": "Greece",
+          "present": true,
+          "source": "https://www.lynkco-see.com/gr/",
+          "sources": [
+            "https://www.lynkco.com/en/service-and-assistance/service-market-selector",
+            "https://www.lynkco-see.com/gr/",
+            "https://www.lynkco-see.com/gr/test-drive/",
+            "https://www.lynkco-see.com/gr/contact/"
           ],
           "uncertain": false
         },

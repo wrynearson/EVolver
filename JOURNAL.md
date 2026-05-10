@@ -1375,3 +1375,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-09
 **Did**: Added a shareable single-source footprint filter so users can isolate markets backed by only one recorded official source URL while reviewing a brand footprint, with regression coverage and browser verification at desktop and mobile widths.
 **Result**: pass
+
+## 2026-05-10
+**Did**: Expanded Lynk & Co by adding Greece after confirming Lynk & Co's own service market selector routes Greece to a dedicated `lynkco-see.com/gr/` market site and that the Greek root plus `test-drive` and `contact` routes are live first-party pages behind Cloudflare rather than missing.
+**Result**: pass
