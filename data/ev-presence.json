@@ -925,6 +925,16 @@
     "Lynk & Co": {
       "website": "https://www.lynkco.com",
       "countries": {
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://lynkco.ae/location",
+          "sources": [
+            "https://lynkco.ae/",
+            "https://lynkco.ae/location"
+          ],
+          "uncertain": false
+        },
         "AUT": {
           "name": "Austria",
           "present": true,
@@ -946,13 +956,15 @@
           ],
           "uncertain": false
         },
-        "CHN": {
-          "name": "China",
+        "BGR": {
+          "name": "Bulgaria",
           "present": true,
-          "source": "https://www.lynkco.com.cn/",
+          "source": "https://www.lynkco-see.com/bg/",
           "sources": [
-            "https://www.lynkco.com.cn/",
-            "https://www.lynkco.com.cn/contactus/privacypolicy"
+            "https://www.lynkco.com/en/service-and-assistance/service-market-selector",
+            "https://www.lynkco-see.com/bg/",
+            "https://www.lynkco-see.com/bg/test-drive/",
+            "https://www.lynkco-see.com/bg/contact/"
           ],
           "uncertain": false
         },
@@ -964,6 +976,16 @@
             "https://www.lynkco.com/fr-ch/",
             "https://www.lynkco.com/fr-ch/find-us",
             "https://www.lynkco.com/fr-ch/testdrive"
+          ],
+          "uncertain": false
+        },
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.lynkco.com.cn/",
+          "sources": [
+            "https://www.lynkco.com.cn/",
+            "https://www.lynkco.com.cn/contactus/privacypolicy"
           ],
           "uncertain": false
         },
@@ -1030,6 +1052,18 @@
           ],
           "uncertain": false
         },
+        "MEX": {
+          "name": "Mexico",
+          "present": true,
+          "source": "https://www.lynkco.com/es-mx/findadealer",
+          "sources": [
+            "https://www.lynkco.com/findadealer",
+            "https://www.lynkco.com/es-mx/",
+            "https://www.lynkco.com/es-mx/findadealer",
+            "https://www.lynkco.com/es-mx/test-drive"
+          ],
+          "uncertain": false
+        },
         "NLD": {
           "name": "Netherlands",
           "present": true,
@@ -1037,26 +1071,6 @@
           "sources": [
             "https://www.lynkco.com/nl-nl/",
             "https://www.lynkco.com/nl-nl/find-us"
-          ],
-          "uncertain": false
-        },
-        "SWE": {
-          "name": "Sweden",
-          "present": true,
-          "source": "https://www.lynkco.com/sv-se/find-us",
-          "sources": [
-            "https://www.lynkco.com/sv-se/",
-            "https://www.lynkco.com/sv-se/find-us"
-          ],
-          "uncertain": false
-        },
-        "ARE": {
-          "name": "United Arab Emirates",
-          "present": true,
-          "source": "https://lynkco.ae/location",
-          "sources": [
-            "https://lynkco.ae/",
-            "https://lynkco.ae/location"
           ],
           "uncertain": false
         },
@@ -1083,15 +1097,13 @@
           ],
           "uncertain": false
         },
-        "MEX": {
-          "name": "Mexico",
+        "SWE": {
+          "name": "Sweden",
           "present": true,
-          "source": "https://www.lynkco.com/es-mx/findadealer",
+          "source": "https://www.lynkco.com/sv-se/find-us",
           "sources": [
-            "https://www.lynkco.com/findadealer",
-            "https://www.lynkco.com/es-mx/",
-            "https://www.lynkco.com/es-mx/findadealer",
-            "https://www.lynkco.com/es-mx/test-drive"
+            "https://www.lynkco.com/sv-se/",
+            "https://www.lynkco.com/sv-se/find-us"
           ],
           "uncertain": false
         }

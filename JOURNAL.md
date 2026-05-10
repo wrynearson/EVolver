@@ -1379,3 +1379,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-10
 **Did**: Expanded Lynk & Co by adding Greece after confirming Lynk & Co's own service market selector routes Greece to a dedicated `lynkco-see.com/gr/` market site and that the Greek root plus `test-drive` and `contact` routes are live first-party pages behind Cloudflare rather than missing.
 **Result**: pass
+## 2026-05-10
+**Did**: Expanded Lynk & Co by adding Bulgaria after confirming Lynk & Co's own service market selector routes Bulgaria to a dedicated `lynkco-see.com/bg/` market site and that the Bulgarian root plus `test-drive` and `contact` routes are live first-party pages behind Cloudflare rather than missing.
+**Result**: pass
+**TODO**: Verify the next official sovereign Lynk & Co market beyond Austria, Belgium, Bulgaria, China, the Czech Republic, France, Germany, Greece, Italy, Mexico, the Netherlands, the Philippines, Romania, Spain, Sweden, Switzerland, and the United Arab Emirates from a live localized consumer site plus dealer, showroom, or test-drive flow.
