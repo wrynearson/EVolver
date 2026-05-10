@@ -1042,6 +1042,18 @@
           ],
           "uncertain": false
         },
+        "HRV": {
+          "name": "Croatia",
+          "present": true,
+          "source": "https://www.lynkco-see.com/hr/",
+          "sources": [
+            "https://www.lynkco.com/en/service-and-assistance/service-market-selector",
+            "https://www.lynkco-see.com/hr/",
+            "https://www.lynkco-see.com/hr/test-drive/",
+            "https://www.lynkco-see.com/hr/contact/"
+          ],
+          "uncertain": false
+        },
         "ITA": {
           "name": "Italy",
           "present": true,
