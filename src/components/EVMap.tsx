@@ -256,6 +256,14 @@ function getCopyPreviewSummaryButtonLabel(status: CopyStatus) {
       : "Copy preview summary";
 }
 
+function getCopyHoveredSourcesButtonLabel(status: CopyStatus) {
+  return status === "copied"
+    ? "Copied all sources"
+    : status === "failed"
+      ? "All sources copy failed"
+      : "Copy all sources";
+}
+
 function getCopyShareLinkButtonLabel(status: CopyStatus) {
   return status === "copied"
     ? "Copied share link"
@@ -920,6 +928,8 @@ export default function EVMap() {
   const [copyLinkStatus, setCopyLinkStatus] = useState<CopyStatus>("idle");
   const [copyPreviewSummaryStatus, setCopyPreviewSummaryStatus] =
     useState<CopyStatus>("idle");
+  const [copyHoveredSourcesStatus, setCopyHoveredSourcesStatus] =
+    useState<CopyStatus>("idle");
   const [copyCountryStatus, setCopyCountryStatus] = useState<CopyStatus>("idle");
   const [copyCountryProfileStatus, setCopyCountryProfileStatus] =
     useState<CopyStatus>("idle");
@@ -1038,6 +1048,7 @@ export default function EVMap() {
     setCountryLookupQuery("");
     setCopyLinkStatus("idle");
     setCopyPreviewSummaryStatus("idle");
+    setCopyHoveredSourcesStatus("idle");
     setCopyCountryStatus("idle");
     setCopyCountryProfileStatus("idle");
     setCopyBrandWebsiteStatus("idle");
@@ -1370,6 +1381,15 @@ export default function EVMap() {
       selectedCountryDetails &&
       allSelectedCountryDetails.brands.length > selectedCountryDetails.brands.length,
   );
+  const hoveredCountryAllSources = useMemo(() => {
+    if (!hoveredCountryDetails) {
+      return [];
+    }
+
+    return Array.from(
+      new Set(hoveredCountryDetails.brands.flatMap((brand) => brand.sources)),
+    );
+  }, [hoveredCountryDetails]);
   const selectedCountryAllSources = useMemo(() => {
     if (!selectedCountryDetails) {
       return [];
@@ -1739,6 +1759,10 @@ export default function EVMap() {
     () => (hoveredCountryDetails ? formatHoveredCountrySummary(hoveredCountryDetails) : ""),
     [hoveredCountryDetails],
   );
+  const hoveredCountrySourcesText = useMemo(
+    () => serializeSourceUrlsToText(hoveredCountryAllSources),
+    [hoveredCountryAllSources],
+  );
 
   const shareUrl = useMemo(
     () =>
@@ -1861,6 +1885,17 @@ export default function EVMap() {
     setCopyPreviewSummaryStatus("copied");
     void navigator.clipboard.writeText(hoveredCountrySummaryText).catch(() => {
       setCopyPreviewSummaryStatus("failed");
+    });
+  };
+  const copyHoveredCountrySources = () => {
+    if (!hoveredCountrySourcesText || !navigator.clipboard?.writeText) {
+      setCopyHoveredSourcesStatus("failed");
+      return;
+    }
+
+    setCopyHoveredSourcesStatus("copied");
+    void navigator.clipboard.writeText(hoveredCountrySourcesText).catch(() => {
+      setCopyHoveredSourcesStatus("failed");
     });
   };
   const copyShareLink = () => {
@@ -2252,6 +2287,10 @@ export default function EVMap() {
 
     setCopyPreviewSummaryStatus("idle");
   }, [hoveredCountrySummaryText]);
+
+  useEffect(() => {
+    setCopyHoveredSourcesStatus("idle");
+  }, [hoveredCountrySourcesText]);
 
   useEffect(() => {
     if (!hasInitializedCopyCountryReset.current) {
@@ -3168,13 +3207,24 @@ export default function EVMap() {
                   {hoveredCountryDetails.brands.length === 1 ? "brand" : "brands"}
                 </p>
               </div>
-              <button
-                type="button"
-                className="text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
-                onClick={copyHoveredCountrySummary}
-              >
-                {getCopyPreviewSummaryButtonLabel(copyPreviewSummaryStatus)}
-              </button>
+              <div className="flex flex-col items-end gap-2">
+                <button
+                  type="button"
+                  className="text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                  onClick={copyHoveredCountrySummary}
+                >
+                  {getCopyPreviewSummaryButtonLabel(copyPreviewSummaryStatus)}
+                </button>
+                {hoveredCountryAllSources.length > 0 ? (
+                  <button
+                    type="button"
+                    className="text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                    onClick={copyHoveredCountrySources}
+                  >
+                    {getCopyHoveredSourcesButtonLabel(copyHoveredSourcesStatus)}
+                  </button>
+                ) : null}
+              </div>
             </div>
             {hoveredCountryDetails.brands.length > 0 ? (
               <ul className="mt-2 space-y-2">

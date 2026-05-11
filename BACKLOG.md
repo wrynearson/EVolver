@@ -4,7 +4,7 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
-- Expand Lynk & Co beyond Albania, Austria, Belgium, Bosnia and Herzegovina, Bulgaria, China, Croatia, the Czech Republic, France, Germany, Greece, Italy, Mexico, Moldova, Montenegro, the Netherlands, North Macedonia, the Philippines, Romania, Serbia, Slovenia, Spain, Sweden, Switzerland, and the United Arab Emirates by verifying the next sovereign official market site that already exposes localized consumer plus dealer, showroom, or test-drive flows.
+- [monitoring] Re-check Lynk & Co only after its first-party market selectors expose a new sovereign market beyond Albania, Austria, Belgium, Bosnia and Herzegovina, Bulgaria, China, Croatia, the Czech Republic, France, Germany, Greece, Italy, Mexico, Moldova, Montenegro, the Netherlands, North Macedonia, the Philippines, Romania, Serbia, Slovenia, Spain, Sweden, Switzerland, and the United Arab Emirates; checked 2026-05-11 and the official selector now tops out at those already-tracked sovereign markets plus Kosovo, whose `lynkco-see.com/xk/` locale still falls outside the repo's sovereign-country dataset and `ISO_A3` mapping.
 
 - [monitoring] Re-check AVATR's first sovereign market in the Americas, Africa, or Oceania only after its official overseas surfaces expose a localized consumer, showroom, contact, dealer, or test-drive flow there; checked 2026-05-07 and the live global overseas page plus market selector still top out at regional cooperation contacts for Latin America and Africa plus localized market links only for Hong Kong, Thailand, and Singapore.
 

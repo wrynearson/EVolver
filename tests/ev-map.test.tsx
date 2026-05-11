@@ -1360,6 +1360,46 @@ describe("EVMap", () => {
     ).toBeInTheDocument();
   });
 
+  it("copies all hovered country sources", async () => {
+    vi.doUnmock("../src/components/MapCanvas");
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(await screen.findByRole("button", { name: "Hover Norway" })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Hover Norway" }));
+
+    const previewPanel = screen.getByRole("heading", { name: "Map preview" }).closest(
+      "div",
+    );
+    expect(previewPanel).not.toBeNull();
+
+    fireEvent.click(within(previewPanel!).getByRole("button", { name: "Copy all sources" }));
+
+    expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
+      [
+        "https://www.byd.com/no",
+        "https://www.byd.com/no/dealers",
+        "https://www.xpeng.com/no",
+        "https://www.xpeng.com/no/service",
+      ].join("\n"),
+    );
+    expect(
+      within(previewPanel!).getByRole("button", { name: "Copied all sources" }),
+    ).toBeInTheDocument();
+  });
+
   it("surfaces hover preview copy failures", async () => {
     vi.doUnmock("../src/components/MapCanvas");
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
@@ -1398,6 +1438,46 @@ describe("EVMap", () => {
     expect(
       await within(previewPanel!).findByRole("button", {
         name: "Preview summary copy failed",
+      }),
+    ).toBeInTheDocument();
+  });
+
+  it("surfaces hovered sources copy failures", async () => {
+    vi.doUnmock("../src/components/MapCanvas");
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+    Object.defineProperty(window.navigator, "clipboard", {
+      configurable: true,
+      value: {
+        writeText: vi.fn().mockRejectedValue(new Error("copy failed")),
+      },
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(await screen.findByRole("button", { name: "Hover Norway" })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Hover Norway" }));
+
+    const previewPanel = screen.getByRole("heading", { name: "Map preview" }).closest(
+      "div",
+    );
+    expect(previewPanel).not.toBeNull();
+
+    fireEvent.click(within(previewPanel!).getByRole("button", { name: "Copy all sources" }));
+
+    expect(
+      await within(previewPanel!).findByRole("button", {
+        name: "All sources copy failed",
       }),
     ).toBeInTheDocument();
   });

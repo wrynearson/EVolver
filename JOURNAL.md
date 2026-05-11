@@ -1402,3 +1402,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Lynk & Co again by adding Albania, Bosnia and Herzegovina, Moldova, Montenegro, North Macedonia, and Slovenia after confirming Lynk & Co's own service market selector routes each country to a dedicated `lynkco-see.com` market site and that every local root plus `test-drive` and `contact` route is a live first-party page behind Cloudflare rather than missing.
 **Result**: pass
 **TODO**: Verify the next official sovereign Lynk & Co market beyond Albania, Austria, Belgium, Bosnia and Herzegovina, Bulgaria, China, Croatia, the Czech Republic, France, Germany, Greece, Italy, Mexico, Moldova, Montenegro, the Netherlands, North Macedonia, the Philippines, Romania, Serbia, Slovenia, Spain, Sweden, Switzerland, and the United Arab Emirates from a live localized consumer site plus dealer, showroom, or test-drive flow.
+
+## 2026-05-11
+**Did**: Closed the active Lynk & Co expansion follow-up after re-checking its official market selectors and confirming the only untracked locale left is Kosovo, whose disputed-market `lynkco-see.com/xk/` route still falls outside the repo's sovereign-country/`ISO_A3` mapping, then added a hover-preview "Copy all sources" action with regression coverage and verified it at desktop and mobile widths.
+**Result**: pass
