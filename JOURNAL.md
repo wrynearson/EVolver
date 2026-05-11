@@ -1413,3 +1413,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-11
 **Did**: Added OMODA | JAECOO as a tracked brand with verified official presence in the United Kingdom, Malaysia, and Pakistan using first-party local market, dealer, contact, and test-drive surfaces, and recorded the broader rollout as the next backlog slice.
 **Result**: pass
+## 2026-05-11
+**Did**: Expanded OMODA | JAECOO by adding Australia, Bangladesh, Singapore, Thailand, and the United Arab Emirates after confirming first-party local sites plus official dealer, showroom, contact, or test-drive flows in each market.
+**Result**: pass
+**TODO**: Verify the next official sovereign OMODA | JAECOO markets beyond Australia, Bangladesh, Malaysia, Pakistan, Singapore, Thailand, the United Arab Emirates, and the United Kingdom from first-party localized sites plus dealer, contact, or test-drive flows.

@@ -5825,6 +5825,63 @@
             "https://omodajaecoo.pk/contact-us"
           ],
           "uncertain": false
+        },
+        "AUS": {
+          "name": "Australia",
+          "present": true,
+          "source": "https://www.omodajaecoo.com.au/find-dealer",
+          "sources": [
+            "https://www.omodajaecoo.com.au/",
+            "https://www.omodajaecoo.com.au/find-dealer",
+            "https://www.omodajaecoo.com.au/book-test-drive"
+          ],
+          "uncertain": false
+        },
+        "THA": {
+          "name": "Thailand",
+          "present": true,
+          "source": "https://www.omodajaecoo.co.th/en/test-drive",
+          "sources": [
+            "https://www.omodajaecoo.co.th/en",
+            "https://www.omodajaecoo.co.th/en/test-drive",
+            "https://www.omodajaecoo.co.th/en/contact-us",
+            "https://www.omodajaecoo.co.th/en/find-a-dealer"
+          ],
+          "uncertain": false
+        },
+        "BGD": {
+          "name": "Bangladesh",
+          "present": true,
+          "source": "https://www.omodajaecoobd.com/testdrive",
+          "sources": [
+            "https://www.omodajaecoobd.com/",
+            "https://www.omodajaecoobd.com/contact",
+            "https://www.omodajaecoobd.com/testdrive"
+          ],
+          "uncertain": false
+        },
+        "SGP": {
+          "name": "Singapore",
+          "present": true,
+          "source": "https://omodajaecoo.com.sg/test-drive/",
+          "sources": [
+            "https://omodajaecoo.com.sg/",
+            "https://omodajaecoo.com.sg/contact-us/",
+            "https://omodajaecoo.com.sg/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://omodajaecoo-dubai.ae/en/showrooms/",
+          "sources": [
+            "https://omodajaecoo-dubai.ae/en/",
+            "https://omodajaecoo-dubai.ae/en/contact-us/",
+            "https://omodajaecoo-dubai.ae/en/showrooms/",
+            "https://omodajaecoo-dubai.ae/en/test-drive/jaecoo/j7/"
+          ],
+          "uncertain": false
         }
       }
     }
