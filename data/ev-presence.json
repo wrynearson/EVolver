@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-10",
+    "last_updated": "2026-05-11",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -5786,6 +5786,43 @@
             "https://dongfengcar.vn/",
             "https://dongfengcar.vn/dongfeng-box/",
             "https://dongfengcar.vn/showroom-va-tram-sac/"
+          ],
+          "uncertain": false
+        }
+      }
+    },
+    "OMODA | JAECOO": {
+      "website": "https://www.omodajaecoo.com/global/",
+      "countries": {
+        "GBR": {
+          "name": "United Kingdom",
+          "present": true,
+          "source": "https://jaecoo.co.uk/find-a-dealer",
+          "sources": [
+            "https://jaecoo.co.uk/",
+            "https://jaecoo.co.uk/find-a-dealer",
+            "https://jaecoo.co.uk/test-drive"
+          ],
+          "uncertain": false
+        },
+        "MYS": {
+          "name": "Malaysia",
+          "present": true,
+          "source": "https://www.omodajaecoo.com.my/dealer-locator",
+          "sources": [
+            "https://www.omodajaecoo.com.my/",
+            "https://www.omodajaecoo.com.my/dealer-locator",
+            "https://www.omodajaecoo.com.my/contact-us"
+          ],
+          "uncertain": false
+        },
+        "PAK": {
+          "name": "Pakistan",
+          "present": true,
+          "source": "https://omodajaecoo.pk/",
+          "sources": [
+            "https://omodajaecoo.pk/",
+            "https://omodajaecoo.pk/contact-us"
           ],
           "uncertain": false
         }

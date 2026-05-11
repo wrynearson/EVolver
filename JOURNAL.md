@@ -1409,3 +1409,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-11
 **Did**: Added a discoverable keyboard-shortcuts help card in the dataset summary, plus a global `?` toggle that reopens the summary when needed so the map's existing power-user shortcuts are easier to learn and reuse.
 **Result**: pass
+
+## 2026-05-11
+**Did**: Added OMODA | JAECOO as a tracked brand with verified official presence in the United Kingdom, Malaysia, and Pakistan using first-party local market, dealer, contact, and test-drive surfaces, and recorded the broader rollout as the next backlog slice.
+**Result**: pass
