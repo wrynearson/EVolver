@@ -1406,3 +1406,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-11
 **Did**: Closed the active Lynk & Co expansion follow-up after re-checking its official market selectors and confirming the only untracked locale left is Kosovo, whose disputed-market `lynkco-see.com/xk/` route still falls outside the repo's sovereign-country/`ISO_A3` mapping, then added a hover-preview "Copy all sources" action with regression coverage and verified it at desktop and mobile widths.
 **Result**: pass
+## 2026-05-11
+**Did**: Added a discoverable keyboard-shortcuts help card in the dataset summary, plus a global `?` toggle that reopens the summary when needed so the map's existing power-user shortcuts are easier to learn and reuse.
+**Result**: pass

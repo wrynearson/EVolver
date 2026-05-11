@@ -85,6 +85,24 @@ const DEFAULT_COVERAGE_SORT: CoverageSort = "coverage";
 const DEFAULT_FOOTPRINT_SORT: FootprintSort = "name";
 const UNCERTAIN_BADGE_TOOLTIP =
   "Official presence is tracked here, but the supporting evidence still needs direct verification or reconciliation.";
+const KEYBOARD_SHORTCUTS = [
+  {
+    keys: "Ctrl/Cmd + K",
+    description: "Focus the brand filter and select its current value.",
+  },
+  {
+    keys: "?",
+    description: "Show or hide this shortcuts card from anywhere outside a text field.",
+  },
+  {
+    keys: "Escape",
+    description: "Clear the active brand or country search, or close an open detail panel.",
+  },
+  {
+    keys: "Arrow keys / Home / End",
+    description: "Switch the coverage ranking tabs while they are focused.",
+  },
+] as const;
 
 function getSourceCountLabel(sourceCount: number) {
   return `${sourceCount} ${sourceCount === 1 ? "source" : "sources"}`;
@@ -169,6 +187,19 @@ function matchesSearchQuery(values: Array<string | undefined>, query: string) {
 
   return values.some((value) =>
     value?.toLowerCase().includes(normalizedQuery),
+  );
+}
+
+function isEditableKeyboardTarget(target: EventTarget | null) {
+  if (!(target instanceof HTMLElement)) {
+    return false;
+  }
+
+  return (
+    target.isContentEditable ||
+    target instanceof HTMLInputElement ||
+    target instanceof HTMLTextAreaElement ||
+    target instanceof HTMLSelectElement
   );
 }
 
@@ -983,6 +1014,7 @@ export default function EVMap() {
   const [compactFootprintView, setCompactFootprintView] = useState(false);
   const [summaryPanelCollapsed, setSummaryPanelCollapsed] = useState(false);
   const [sidePanelCollapsed, setSidePanelCollapsed] = useState(false);
+  const [showKeyboardShortcuts, setShowKeyboardShortcuts] = useState(false);
   const [countryLookupQuery, setCountryLookupQuery] = useState(() =>
     getCountryLookupValue(initialSelectionState.selectedCountry),
   );
@@ -2205,12 +2237,33 @@ export default function EVMap() {
         event.preventDefault();
         brandFilterInputRef.current?.focus();
         brandFilterInputRef.current?.select();
+        return;
       }
+
+      if (
+        event.key !== "?" ||
+        event.ctrlKey ||
+        event.metaKey ||
+        event.altKey ||
+        isEditableKeyboardTarget(event.target)
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+
+      if (summaryPanelCollapsed) {
+        setSummaryPanelCollapsed(false);
+        setShowKeyboardShortcuts(true);
+        return;
+      }
+
+      setShowKeyboardShortcuts((current) => !current);
     };
 
     window.addEventListener("keydown", handleGlobalKeyDown);
     return () => window.removeEventListener("keydown", handleGlobalKeyDown);
-  }, []);
+  }, [summaryPanelCollapsed]);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -2941,6 +2994,44 @@ export default function EVMap() {
               </div>
             </div>
           ) : null}
+          <div className="mt-3 rounded-md border border-slate-200 bg-slate-50 px-3 py-3">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h3 className="text-xs font-medium uppercase tracking-wide text-slate-700">
+                  Keyboard shortcuts
+                </h3>
+                <p className="mt-1 text-xs text-slate-600">
+                  Use the existing map shortcuts without memorizing them.
+                </p>
+              </div>
+              <button
+                type="button"
+                className="shrink-0 text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                aria-expanded={showKeyboardShortcuts}
+                aria-controls="keyboard-shortcuts-panel"
+                onClick={() => setShowKeyboardShortcuts((current) => !current)}
+              >
+                {showKeyboardShortcuts ? "Hide keyboard shortcuts" : "Show keyboard shortcuts"}
+              </button>
+            </div>
+            <p className="mt-2 text-xs text-slate-500">Press <kbd className="rounded border border-slate-300 bg-white px-1 py-0.5 font-mono text-[11px] text-slate-700">?</kbd> to toggle this panel quickly.</p>
+            {showKeyboardShortcuts ? (
+              <dl
+                id="keyboard-shortcuts-panel"
+                className="mt-3 space-y-2 border-t border-slate-200 pt-3 text-sm text-slate-700"
+              >
+                {KEYBOARD_SHORTCUTS.map((shortcut) => (
+                  <div
+                    key={shortcut.keys}
+                    className="grid gap-1 sm:grid-cols-[minmax(0,11rem)_1fr] sm:gap-3"
+                  >
+                    <dt className="font-medium text-slate-900">{shortcut.keys}</dt>
+                    <dd className="text-slate-600">{shortcut.description}</dd>
+                  </div>
+                ))}
+              </dl>
+            ) : null}
+          </div>
           <div className="mt-3">
             <div className="grid grid-cols-2 gap-2">
               <button

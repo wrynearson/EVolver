@@ -2307,6 +2307,50 @@ describe("EVMap", () => {
     expect(screen.queryByRole("heading", { name: "Sweden" })).not.toBeInTheDocument();
   });
 
+  it("shows a discoverable keyboard shortcuts card and toggles it with ?", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const toggleButton = screen.getByRole("button", {
+      name: "Show keyboard shortcuts",
+    });
+    expect(screen.queryByText("Ctrl/Cmd + K")).not.toBeInTheDocument();
+
+    fireEvent.click(toggleButton);
+    expect(screen.getByText("Ctrl/Cmd + K")).toBeInTheDocument();
+    expect(
+      screen.getByText("Focus the brand filter and select its current value."),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Hide keyboard shortcuts" })).toHaveAttribute(
+      "aria-expanded",
+      "true",
+    );
+
+    fireEvent.keyDown(window, { key: "?" });
+    expect(screen.queryByText("Ctrl/Cmd + K")).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Show keyboard shortcuts" })).toHaveAttribute(
+      "aria-expanded",
+      "false",
+    );
+
+    const brandFilter = screen.getByLabelText("Brand filter");
+    brandFilter.focus();
+    fireEvent.keyDown(brandFilter, { key: "?" });
+    expect(screen.queryByText("Ctrl/Cmd + K")).not.toBeInTheDocument();
+  });
+
   it("resets the current view back to the default map state", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
