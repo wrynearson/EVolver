@@ -5952,6 +5952,52 @@
             "https://www.jaecoo.co.za/test-drive"
           ],
           "uncertain": false
+        },
+        "BGR": {
+          "name": "Bulgaria",
+          "present": true,
+          "source": "https://www.omoda-jaecoo.bg/webforms/test-drive/",
+          "sources": [
+            "https://www.omoda-jaecoo.bg/",
+            "https://www.omoda-jaecoo.bg/contact-us/",
+            "https://www.omoda-jaecoo.bg/webforms/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "HRV": {
+          "name": "Croatia",
+          "present": true,
+          "source": "https://omodajaecoo.hr/pronadite-koncesionara",
+          "sources": [
+            "https://omodajaecoo.hr/",
+            "https://omodajaecoo.hr/pronadite-koncesionara",
+            "https://omodajaecoo.hr/upoznajte-nas/kontakt"
+          ],
+          "uncertain": false
+        },
+        "PHL": {
+          "name": "Philippines",
+          "present": true,
+          "source": "https://www.omodajaecoo.com/ph/dealers/",
+          "sources": [
+            "https://www.omodajaecoo.com/ph/",
+            "https://www.omodajaecoo.com/ph/dealers/",
+            "https://www.omodajaecoo.com/ph/newContactUs/",
+            "https://www.omodajaecoo.com/ph/testDrive/"
+          ],
+          "uncertain": false
+        },
+        "PRT": {
+          "name": "Portugal",
+          "present": true,
+          "source": "https://omodajaecoo.pt/concessionarios/",
+          "sources": [
+            "https://omodajaecoo.pt/",
+            "https://omodajaecoo.pt/concessionarios/",
+            "https://omodajaecoo.pt/contactos/",
+            "https://omodajaecoo.pt/test-drive/"
+          ],
+          "uncertain": false
         }
       }
     }

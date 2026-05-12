@@ -1436,3 +1436,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-12
 **Did**: Added a built-in SVG favicon link in `index.html` so the app stops requesting a missing `favicon.ico` and loads cleanly in the browser tab at desktop and mobile sizes.
 **Result**: pass
+
+## 2026-05-12
+**Did**: Expanded OMODA | JAECOO by adding Bulgaria, Croatia, the Philippines, and Portugal after confirming each market's first-party localized site plus official dealer, contact, or test-drive flows, which also closes the stale repeated generic OMODA follow-up without carrying the same TODO forward again.
+**Result**: pass
