@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-11",
+    "last_updated": "2026-05-12",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -5880,6 +5880,27 @@
             "https://omodajaecoo-dubai.ae/en/contact-us/",
             "https://omodajaecoo-dubai.ae/en/showrooms/",
             "https://omodajaecoo-dubai.ae/en/test-drive/jaecoo/j7/"
+          ],
+          "uncertain": false
+        },
+        "BEL": {
+          "name": "Belgium",
+          "present": true,
+          "source": "https://www.omodajaecoo.be/en/find-a-dealer",
+          "sources": [
+            "https://www.omodajaecoo.be/en",
+            "https://www.omodajaecoo.be/en/find-a-dealer",
+            "https://www.omodajaecoo.be/en/contact-us"
+          ],
+          "uncertain": false
+        },
+        "HUN": {
+          "name": "Hungary",
+          "present": true,
+          "source": "https://omodajaecoo.hu/",
+          "sources": [
+            "https://omodajaecoo.hu/",
+            "https://omodajaecoo.hu/kapcsolat/"
           ],
           "uncertain": false
         }
