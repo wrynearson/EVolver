@@ -1422,3 +1422,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded OMODA | JAECOO by adding Belgium and Hungary after confirming first-party localized market sites plus official dealer-finder or contact flows on each local site.
 **Result**: pass
 **TODO**: Verify the next official sovereign OMODA | JAECOO markets beyond Australia, Bangladesh, Belgium, Hungary, Malaysia, Pakistan, Singapore, Thailand, the United Arab Emirates, and the United Kingdom from first-party localized sites plus dealer, contact, or test-drive flows.
+
+## 2026-05-12
+**Did**: Expanded OMODA | JAECOO by adding Brazil and France after confirming Brazil's official local site, dealership map, customer support, and test-drive signup flow plus France's official local storefront, dealer-locator route, and live test-drive flow.
+**Result**: pass
+**TODO**: Verify the next official sovereign OMODA | JAECOO markets beyond Australia, Bangladesh, Belgium, Brazil, France, Hungary, Malaysia, Pakistan, Singapore, Thailand, the United Arab Emirates, and the United Kingdom from first-party localized sites plus dealer, contact, or test-drive flows.

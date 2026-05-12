@@ -5903,6 +5903,29 @@
             "https://omodajaecoo.hu/kapcsolat/"
           ],
           "uncertain": false
+        },
+        "BRA": {
+          "name": "Brazil",
+          "present": true,
+          "source": "https://www.omodajaecoo.com.br/concessionarias",
+          "sources": [
+            "https://www.omodajaecoo.com.br/",
+            "https://www.omodajaecoo.com.br/concessionarias",
+            "https://www.omodajaecoo.com.br/atendimento",
+            "https://www.omodajaecoo.com.br/cadastro"
+          ],
+          "uncertain": false
+        },
+        "FRA": {
+          "name": "France",
+          "present": true,
+          "source": "https://omoda-jaecoo.fr/pages/dealer-locator",
+          "sources": [
+            "https://omoda-jaecoo.fr/",
+            "https://omoda-jaecoo.fr/pages/dealer-locator",
+            "https://omoda-jaecoo.fr/pages/reservez-essai"
+          ],
+          "uncertain": false
         }
       }
     }
