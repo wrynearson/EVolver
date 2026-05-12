@@ -5926,6 +5926,32 @@
             "https://omoda-jaecoo.fr/pages/reservez-essai"
           ],
           "uncertain": false
+        },
+        "MEX": {
+          "name": "Mexico",
+          "present": true,
+          "source": "https://www.omoda.mx/distribuidores/",
+          "sources": [
+            "https://www.omoda.mx/inicio/",
+            "https://www.omoda.mx/distribuidores/",
+            "https://www.jaecoo.mx/contacto/",
+            "https://www.jaecoo.mx/forms/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "ZAF": {
+          "name": "South Africa",
+          "present": true,
+          "source": "https://www.jaecoo.co.za/dealers",
+          "sources": [
+            "https://www.omoda.co.za/",
+            "https://www.omoda.co.za/dealers",
+            "https://www.omoda.co.za/enquire/test-drive",
+            "https://www.jaecoo.co.za/",
+            "https://www.jaecoo.co.za/dealers",
+            "https://www.jaecoo.co.za/test-drive"
+          ],
+          "uncertain": false
         }
       }
     }
