@@ -6022,6 +6022,38 @@
             "https://www.omodajaecoo.com.tr/test-surusu/"
           ],
           "uncertain": false
+        },
+        "DEU": {
+          "name": "Germany",
+          "present": true,
+          "source": "https://www.omodajaecoo-auto.de/",
+          "sources": [
+            "https://www.omodajaecoo-auto.de/",
+            "https://www.omodajaecoo-auto.de/kontakt"
+          ],
+          "uncertain": false
+        },
+        "POL": {
+          "name": "Poland",
+          "present": true,
+          "source": "https://www.omodajaecoo.pl/znajdz-dealera",
+          "sources": [
+            "https://www.omodajaecoo.pl/",
+            "https://www.omodajaecoo.pl/znajdz-dealera",
+            "https://www.omodajaecoo.pl/jazda-testowa"
+          ],
+          "uncertain": false
+        },
+        "GRC": {
+          "name": "Greece",
+          "present": true,
+          "source": "https://www.omodajaecoo.gr/dealer-map/",
+          "sources": [
+            "https://www.omodajaecoo.gr/",
+            "https://www.omodajaecoo.gr/dealer-map/",
+            "https://www.omodajaecoo.gr/test-drive/"
+          ],
+          "uncertain": false
         }
       }
     }
