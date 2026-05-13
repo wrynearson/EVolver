@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-12",
+    "last_updated": "2026-05-13",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -5996,6 +5996,30 @@
             "https://omodajaecoo.pt/concessionarios/",
             "https://omodajaecoo.pt/contactos/",
             "https://omodajaecoo.pt/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "ESP": {
+          "name": "Spain",
+          "present": true,
+          "source": "https://www.omodajaecoo.es/localizador-de-concesionarios",
+          "sources": [
+            "https://www.omodajaecoo.es/",
+            "https://www.omodajaecoo.es/prueba-de-vehiculos",
+            "https://www.omodajaecoo.es/localizador-de-concesionarios",
+            "https://www.omodajaecoo.es/clientes/servicios-autorizados-recambios-y-accesorios"
+          ],
+          "uncertain": false
+        },
+        "TUR": {
+          "name": "Turkey",
+          "present": true,
+          "source": "https://www.omodajaecoo.com.tr/yetkili-satici-ve-servisler/",
+          "sources": [
+            "https://www.omodajaecoo.com.tr/",
+            "https://www.omodajaecoo.com.tr/yetkili-satici-ve-servisler/",
+            "https://www.omodajaecoo.com.tr/iletisim/",
+            "https://www.omodajaecoo.com.tr/test-surusu/"
           ],
           "uncertain": false
         }
