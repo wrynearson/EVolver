@@ -5961,6 +5961,17 @@
           ],
           "uncertain": false
         },
+        "ITA": {
+          "name": "Italy",
+          "present": true,
+          "source": "https://www.omodajaecooitalia.com/dealer/",
+          "sources": [
+            "https://www.omodajaecooitalia.com/",
+            "https://www.omodajaecooitalia.com/dealer/",
+            "https://www.omodajaecooitalia.com/test-drive/"
+          ],
+          "uncertain": false
+        },
         "LTU": {
           "name": "Lithuania",
           "present": true,
