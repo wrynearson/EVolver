@@ -2253,6 +2253,9 @@ describe("EVMap", () => {
     fireEvent.keyDown(window, { key: "k", ctrlKey: true });
     expect(brandFilter).toHaveFocus();
 
+    fireEvent.keyDown(window, { key: "K", ctrlKey: true, shiftKey: true });
+    expect(countryLookup).toHaveFocus();
+
     fireEvent.change(brandFilter, { target: { value: "XPeng" } });
     expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
     fireEvent.keyDown(brandFilter, { key: "Escape" });
@@ -2332,6 +2335,10 @@ describe("EVMap", () => {
     expect(screen.getByText("Ctrl/Cmd + K")).toBeInTheDocument();
     expect(
       screen.getByText("Focus the brand filter and select its current value."),
+    ).toBeInTheDocument();
+    expect(screen.getByText("Ctrl/Cmd + Shift + K")).toBeInTheDocument();
+    expect(
+      screen.getByText("Focus the country lookup and select its current value."),
     ).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Hide keyboard shortcuts" })).toHaveAttribute(
       "aria-expanded",

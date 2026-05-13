@@ -91,6 +91,10 @@ const KEYBOARD_SHORTCUTS = [
     description: "Focus the brand filter and select its current value.",
   },
   {
+    keys: "Ctrl/Cmd + Shift + K",
+    description: "Focus the country lookup and select its current value.",
+  },
+  {
     keys: "?",
     description: "Show or hide this shortcuts card from anywhere outside a text field.",
   },
@@ -926,6 +930,7 @@ export default function EVMap() {
   const { data, countryBrandCount, summary, loading, error, retry } = useEVData();
   const initialSelectionState = getInitialSelectionState();
   const brandFilterInputRef = useRef<HTMLInputElement | null>(null);
+  const countryLookupInputRef = useRef<HTMLInputElement | null>(null);
   const coverageTabRefs = useRef<Record<CoveragePanelView, HTMLButtonElement | null>>({
     snapshot: null,
     brands: null,
@@ -2235,6 +2240,12 @@ export default function EVMap() {
     const handleGlobalKeyDown = (event: KeyboardEvent) => {
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
         event.preventDefault();
+        if (event.shiftKey) {
+          countryLookupInputRef.current?.focus();
+          countryLookupInputRef.current?.select();
+          return;
+        }
+
         brandFilterInputRef.current?.focus();
         brandFilterInputRef.current?.select();
         return;
@@ -2808,6 +2819,7 @@ export default function EVMap() {
             <div className="mt-1">
               <div className="flex items-center gap-2">
                 <input
+                  ref={countryLookupInputRef}
                   id="country-filter"
                   type="search"
                   role="combobox"

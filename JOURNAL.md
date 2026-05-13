@@ -1459,3 +1459,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded OMODA | JAECOO by adding Italy after confirming the official local market site plus its live dealer locator and test-drive flow on `omodajaecooitalia.com`.
 **Result**: pass
 **TODO**: Verify the next official sovereign OMODA | JAECOO markets beyond Australia, Austria, Bangladesh, Belgium, Brazil, Bulgaria, Croatia, the Czech Republic, France, Germany, Greece, Hungary, Italy, Latvia, Lithuania, Malaysia, Mexico, Pakistan, the Philippines, Poland, Portugal, Singapore, Slovakia, Slovenia, South Africa, Spain, Thailand, Turkey, the United Arab Emirates, and the United Kingdom from first-party localized sites plus dealer, contact, or test-drive flows.
+
+## 2026-05-13
+**Did**: Added a `Ctrl/Cmd + Shift + K` shortcut that focuses the country lookup, updated the in-app shortcuts card, and verified the interaction in tests plus desktop and mobile browser runs.
+**Result**: pass
