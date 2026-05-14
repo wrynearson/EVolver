@@ -1557,6 +1557,59 @@ describe("EVMap", () => {
     ).toBeInTheDocument();
   });
 
+  it("lets users focus the selected country panel on uncertain brands only", async () => {
+    vi.doUnmock("../src/components/MapCanvas");
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockUncertainData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+    window.history.replaceState({}, "", "/?country=NOR");
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const detailsPanel = screen.getByRole("heading", { name: "Norway" }).closest("aside");
+    expect(detailsPanel).not.toBeNull();
+    expect(within(detailsPanel!).getByText("NOR · 2 brands")).toBeInTheDocument();
+    expect(within(detailsPanel!).getByText("BYD")).toBeInTheDocument();
+    expect(within(detailsPanel!).getByText("XPeng")).toBeInTheDocument();
+
+    fireEvent.click(
+      within(detailsPanel!).getByRole("button", { name: "1 uncertain brand" }),
+    );
+
+    expect(
+      within(detailsPanel!).getByRole("button", { name: "Showing 1 uncertain brand" }),
+    ).toHaveAttribute("aria-pressed", "true");
+    expect(within(detailsPanel!).getByText("BYD")).toBeInTheDocument();
+    expect(within(detailsPanel!).queryByText("XPeng")).not.toBeInTheDocument();
+    expect(
+      within(detailsPanel!).getByText("Showing 1 of 2 tracked brands for this country."),
+    ).toBeInTheDocument();
+    expect(
+      within(detailsPanel!).getByRole("button", { name: "Show all brands in this country" }),
+    ).toBeInTheDocument();
+
+    fireEvent.click(
+      within(detailsPanel!).getByRole("button", { name: "Show all brands in this country" }),
+    );
+
+    expect(
+      within(detailsPanel!).getByRole("button", { name: "1 uncertain brand" }),
+    ).toHaveAttribute("aria-pressed", "false");
+    expect(within(detailsPanel!).getByText("XPeng")).toBeInTheDocument();
+    expect(
+      within(detailsPanel!).queryByText("Showing 1 of 2 tracked brands for this country."),
+    ).not.toBeInTheDocument();
+  });
+
   it("filters the selected brand footprint down to uncertain markets and persists the toggle in the URL", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);

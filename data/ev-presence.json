@@ -30,7 +30,10 @@
           "name": "Norway",
           "present": true,
           "source": "https://www.byd.com/no",
-          "uncertain": false
+          "uncertain": false,
+          "sources": [
+            "https://www.byd.com/no"
+          ]
         },
         "AUS": {
           "name": "Australia",
@@ -6221,6 +6224,17 @@
             "https://www.omodajaecoo.com.uy/contacto",
             "https://www.omodajaecoo.com.uy/concesionarios",
             "https://www.omodajaecoo.com.uy/nosotros"
+          ],
+          "uncertain": false
+        },
+        "VNM": {
+          "name": "Vietnam",
+          "present": true,
+          "source": "https://omoda-jaecoo.com.vn/dang-ky-lai-thu/",
+          "sources": [
+            "https://omoda-jaecoo.com.vn/",
+            "https://omoda-jaecoo.com.vn/o-to/jaecoo-j7/",
+            "https://omoda-jaecoo.com.vn/dang-ky-lai-thu/"
           ],
           "uncertain": false
         },

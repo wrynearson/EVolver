@@ -1008,6 +1008,8 @@ export default function EVMap() {
   const [showOnlyUncertainFootprint, setShowOnlyUncertainFootprint] = useState(
     () => initialSelectionState.showOnlyUncertainFootprint,
   );
+  const [showOnlyUncertainCountryBrands, setShowOnlyUncertainCountryBrands] =
+    useState(false);
   const [showOnlySingleSourceFootprint, setShowOnlySingleSourceFootprint] =
     useState(() => initialSelectionState.showOnlySingleSourceFootprint);
   const [footprintSort, setFootprintSort] = useState<FootprintSort>(
@@ -1056,6 +1058,9 @@ export default function EVMap() {
   };
   const clearCoverageSearch = () => {
     setCoverageSearchQuery("");
+  };
+  const clearSelectedCountryUncertainFilter = () => {
+    setShowOnlyUncertainCountryBrands(false);
   };
   const clearFootprintSearch = () => {
     setFootprintSearchQuery("");
@@ -1417,6 +1422,25 @@ export default function EVMap() {
       allSelectedCountryDetails &&
       selectedCountryDetails &&
       allSelectedCountryDetails.brands.length > selectedCountryDetails.brands.length,
+  );
+  const selectedCountryUncertainBrandCount = useMemo(
+    () =>
+      selectedCountryDetails?.brands.filter((brand) => brand.uncertain).length ?? 0,
+    [selectedCountryDetails],
+  );
+  const visibleSelectedCountryBrands = useMemo(() => {
+    if (!selectedCountryDetails) {
+      return [];
+    }
+
+    return showOnlyUncertainCountryBrands
+      ? selectedCountryDetails.brands.filter((brand) => brand.uncertain)
+      : selectedCountryDetails.brands;
+  }, [selectedCountryDetails, showOnlyUncertainCountryBrands]);
+  const selectedCountryHasHiddenUncertainBrands = Boolean(
+    selectedCountryDetails &&
+      showOnlyUncertainCountryBrands &&
+      visibleSelectedCountryBrands.length < selectedCountryDetails.brands.length,
   );
   const hoveredCountryAllSources = useMemo(() => {
     if (!hoveredCountryDetails) {
@@ -2163,6 +2187,18 @@ export default function EVMap() {
 
     setSelectedCountry(null);
   }, [countryOptions, selectedCountry]);
+
+  useEffect(() => {
+    setShowOnlyUncertainCountryBrands(false);
+  }, [activeSelectedBrand, resolvedSelectedCountry?.isoCode]);
+
+  useEffect(() => {
+    if (selectedCountryUncertainBrandCount > 0 || !showOnlyUncertainCountryBrands) {
+      return;
+    }
+
+    setShowOnlyUncertainCountryBrands(false);
+  }, [selectedCountryUncertainBrandCount, showOnlyUncertainCountryBrands]);
 
   useEffect(() => {
     if (
@@ -3458,6 +3494,31 @@ export default function EVMap() {
                 {selectedCountryDetails.isoCode} · {selectedCountryDetails.brands.length}{" "}
                 {selectedCountryDetails.brands.length === 1 ? "brand" : "brands"}
               </p>
+              {selectedCountryUncertainBrandCount > 0 ? (
+                <button
+                  type="button"
+                  className={`mt-2 inline-flex rounded-full px-2.5 py-1 text-xs font-medium ${
+                    showOnlyUncertainCountryBrands
+                      ? "bg-amber-600 text-white"
+                      : "bg-amber-100 text-amber-900 hover:bg-amber-200"
+                  }`}
+                  aria-pressed={showOnlyUncertainCountryBrands}
+                  title={
+                    showOnlyUncertainCountryBrands
+                      ? "Showing only uncertain tracked brands for this country."
+                      : `Show only the ${selectedCountryUncertainBrandCount} uncertain tracked ${
+                          selectedCountryUncertainBrandCount === 1 ? "brand" : "brands"
+                        } in this country.`
+                  }
+                  onClick={() =>
+                    setShowOnlyUncertainCountryBrands((currentValue) => !currentValue)
+                  }
+                >
+                  {showOnlyUncertainCountryBrands ? "Showing " : ""}
+                  {selectedCountryUncertainBrandCount} uncertain{" "}
+                  {selectedCountryUncertainBrandCount === 1 ? "brand" : "brands"}
+                </button>
+              ) : null}
               <button
                 type="button"
                 className="mt-2 text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
@@ -3532,11 +3593,12 @@ export default function EVMap() {
           </div>
 
           <ul className="mt-3 space-y-3">
-            {selectedCountryDetails.brands.length === 0 ? (
+            {visibleSelectedCountryBrands.length === 0 ? (
               <>
                 <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
-                  No tracked official brand presence for this country in the current
-                  view.
+                  {showOnlyUncertainCountryBrands
+                    ? "No uncertain tracked brand presence for this country in the current view."
+                    : "No tracked official brand presence for this country in the current view."}
                 </li>
                 {selectedCountryRegionSuggestions?.brands.length ? (
                   <li className="border-t border-gray-200 pt-3">
@@ -3568,7 +3630,7 @@ export default function EVMap() {
                 ) : null}
               </>
             ) : (
-              selectedCountryDetails.brands.map((brand) => (
+              visibleSelectedCountryBrands.map((brand) => (
                 <li
                   key={brand.brandName}
                   className="border-t border-gray-200 pt-3 first:border-t-0 first:pt-0"
@@ -3651,6 +3713,22 @@ export default function EVMap() {
               ))
             )}
           </ul>
+          {selectedCountryHasHiddenUncertainBrands ? (
+            <div className="mt-3 border-t border-gray-200 pt-3">
+              <p className="text-xs text-gray-500">
+                Showing {visibleSelectedCountryBrands.length} of{" "}
+                {selectedCountryDetails?.brands.length ?? 0} tracked brands for this
+                country.
+              </p>
+              <button
+                type="button"
+                className="mt-2 text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                onClick={clearSelectedCountryUncertainFilter}
+              >
+                Show all brands in this country
+              </button>
+            </div>
+          ) : null}
           {selectedCountryHasHiddenBrands ? (
             <div className="mt-3 border-t border-gray-200 pt-3">
               <p className="text-xs text-gray-500">

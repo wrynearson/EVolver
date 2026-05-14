@@ -1477,3 +1477,12 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded OMODA | JAECOO across Latin America by adding Costa Rica, Ecuador, Peru, and Uruguay after confirming official local market sites plus live dealer, contact, quote, service, or test-drive flows.
 **Result**: pass
 **TODO**: Verify the next official sovereign OMODA | JAECOO markets beyond Australia, Austria, Bangladesh, Belgium, Brazil, Bulgaria, Chile, Costa Rica, Croatia, the Czech Republic, Ecuador, France, Germany, Greece, Hungary, Italy, Kazakhstan, Latvia, Lithuania, Malaysia, Mexico, the Netherlands, New Zealand, Pakistan, Peru, the Philippines, Poland, Portugal, Romania, Singapore, Slovakia, Slovenia, South Africa, Spain, Thailand, Turkey, the United Arab Emirates, the United Kingdom, and Uruguay from first-party localized sites plus dealer, contact, or test-drive flows.
+
+## 2026-05-14
+**Did**: Expanded OMODA | JAECOO by adding Vietnam after confirming the live Vietnam market site plus its Jaecoo J7 model page and first-party test-drive flow on `omoda-jaecoo.com.vn`.
+**Result**: pass
+
+## 2026-05-14
+**Did**: Added an uncertain-only toggle and summary badge in the selected-country panel so users can isolate flagged brand entries without leaving country details, backed by EV map regression coverage.
+**Result**: pass
+**TODO**: Verify the next official sovereign OMODA | JAECOO markets beyond Australia, Austria, Bangladesh, Belgium, Brazil, Bulgaria, Chile, Costa Rica, Croatia, the Czech Republic, Ecuador, France, Germany, Greece, Hungary, Italy, Kazakhstan, Latvia, Lithuania, Malaysia, Mexico, the Netherlands, New Zealand, Pakistan, Peru, the Philippines, Poland, Portugal, Romania, Singapore, Slovakia, Slovenia, South Africa, Spain, Thailand, Turkey, the United Arab Emirates, the United Kingdom, Uruguay, and Vietnam from first-party localized sites plus dealer, contact, or test-drive flows.
