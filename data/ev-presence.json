@@ -6039,6 +6039,18 @@
           ],
           "uncertain": false
         },
+        "NLD": {
+          "name": "Netherlands",
+          "present": true,
+          "source": "https://www.omodajaecoo.nl/nl/find-a-dealer",
+          "sources": [
+            "https://www.omodajaecoo.nl/nl",
+            "https://www.omodajaecoo.nl/nl/find-a-dealer",
+            "https://www.omodajaecoo.nl/en/contact-us",
+            "https://www.omodajaecoo.nl/test-drive"
+          ],
+          "uncertain": false
+        },
         "NZL": {
           "name": "New Zealand",
           "present": true,
@@ -6092,6 +6104,18 @@
             "https://omodajaecoo.pt/concessionarios/",
             "https://omodajaecoo.pt/contactos/",
             "https://omodajaecoo.pt/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "ROU": {
+          "name": "Romania",
+          "present": true,
+          "source": "https://www.omoda-jaecoo.ro/gaseste-un-dealer/",
+          "sources": [
+            "https://www.omoda-jaecoo.ro/",
+            "https://www.omoda-jaecoo.ro/gaseste-un-dealer/",
+            "https://www.omoda-jaecoo.ro/contact-us/",
+            "https://www.omoda-jaecoo.ro/webforms/test-drive/"
           ],
           "uncertain": false
         },
