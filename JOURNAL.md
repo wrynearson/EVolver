@@ -1463,3 +1463,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-13
 **Did**: Added a `Ctrl/Cmd + Shift + K` shortcut that focuses the country lookup, updated the in-app shortcuts card, and verified the interaction in tests plus desktop and mobile browser runs.
 **Result**: pass
+
+## 2026-05-14
+**Did**: Expanded OMODA | JAECOO by adding Chile, Kazakhstan, and New Zealand after confirming each market's first-party localized site plus live dealer, contact, or test-drive flows.
+**Result**: pass
+**TODO**: Verify the next official sovereign OMODA | JAECOO markets beyond Australia, Austria, Bangladesh, Belgium, Brazil, Bulgaria, Chile, Croatia, the Czech Republic, France, Germany, Greece, Hungary, Italy, Kazakhstan, Latvia, Lithuania, Malaysia, Mexico, New Zealand, Pakistan, the Philippines, Poland, Portugal, Singapore, Slovakia, Slovenia, South Africa, Spain, Thailand, Turkey, the United Arab Emirates, and the United Kingdom from first-party localized sites plus dealer, contact, or test-drive flows.

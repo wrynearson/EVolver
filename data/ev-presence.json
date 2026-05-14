@@ -5873,6 +5873,17 @@
           ],
           "uncertain": false
         },
+        "CHL": {
+          "name": "Chile",
+          "present": true,
+          "source": "https://www.omodajaecoo.cl/sucursales/",
+          "sources": [
+            "https://www.omodajaecoo.cl/",
+            "https://www.omodajaecoo.cl/sucursales/",
+            "https://www.omodajaecoo.cl/contacto/contactanos/"
+          ],
+          "uncertain": false
+        },
         "CZE": {
           "name": "Czech Republic",
           "present": true,
@@ -5972,6 +5983,17 @@
           ],
           "uncertain": false
         },
+        "KAZ": {
+          "name": "Kazakhstan",
+          "present": true,
+          "source": "https://omoda-auto.kz/dealers",
+          "sources": [
+            "https://omoda-auto.kz/",
+            "https://omoda-auto.kz/dealers",
+            "https://omoda-auto.kz/contacts"
+          ],
+          "uncertain": false
+        },
         "LTU": {
           "name": "Lithuania",
           "present": true,
@@ -6014,6 +6036,17 @@
             "https://www.omodajaecoo.com.my/",
             "https://www.omodajaecoo.com.my/dealer-locator",
             "https://www.omodajaecoo.com.my/contact-us"
+          ],
+          "uncertain": false
+        },
+        "NZL": {
+          "name": "New Zealand",
+          "present": true,
+          "source": "https://www.omodajaecoo.co.nz/find-a-dealer",
+          "sources": [
+            "https://www.omodajaecoo.co.nz/",
+            "https://www.omodajaecoo.co.nz/find-a-dealer",
+            "https://www.omodajaecoo.co.nz/book-test-drive"
           ],
           "uncertain": false
         },
