@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-13",
+    "last_updated": "2026-05-14",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -5884,6 +5884,18 @@
           ],
           "uncertain": false
         },
+        "CRI": {
+          "name": "Costa Rica",
+          "present": true,
+          "source": "https://omodajaecoo.cr/sucursales",
+          "sources": [
+            "https://omodajaecoo.cr/",
+            "https://omodajaecoo.cr/sucursales",
+            "https://omodajaecoo.cr/cotizar",
+            "https://omodajaecoo.cr/vehiculos/e5"
+          ],
+          "uncertain": false
+        },
         "CZE": {
           "name": "Czech Republic",
           "present": true,
@@ -5903,6 +5915,18 @@
           "sources": [
             "https://www.omodajaecoo-auto.de/",
             "https://www.omodajaecoo-auto.de/kontakt"
+          ],
+          "uncertain": false
+        },
+        "ECU": {
+          "name": "Ecuador",
+          "present": true,
+          "source": "https://omodajaecoo.ec/authorized-service",
+          "sources": [
+            "https://omodajaecoo.ec/",
+            "https://omodajaecoo.ec/quote",
+            "https://omodajaecoo.ec/authorized-service",
+            "https://omodajaecoo.ec/test-drive"
           ],
           "uncertain": false
         },
@@ -6072,6 +6096,17 @@
           ],
           "uncertain": false
         },
+        "PER": {
+          "name": "Peru",
+          "present": true,
+          "source": "https://www.omodajaecoo.pe/dealers",
+          "sources": [
+            "https://www.omodajaecoo.pe/",
+            "https://www.omodajaecoo.pe/dealers",
+            "https://www.omodajaecoo.pe/testdrive"
+          ],
+          "uncertain": false
+        },
         "PHL": {
           "name": "Philippines",
           "present": true,
@@ -6174,6 +6209,18 @@
             "https://www.omodajaecoo.com.tr/yetkili-satici-ve-servisler/",
             "https://www.omodajaecoo.com.tr/iletisim/",
             "https://www.omodajaecoo.com.tr/test-surusu/"
+          ],
+          "uncertain": false
+        },
+        "URY": {
+          "name": "Uruguay",
+          "present": true,
+          "source": "https://www.omodajaecoo.com.uy/concesionarios",
+          "sources": [
+            "https://www.omodajaecoo.com.uy/",
+            "https://www.omodajaecoo.com.uy/contacto",
+            "https://www.omodajaecoo.com.uy/concesionarios",
+            "https://www.omodajaecoo.com.uy/nosotros"
           ],
           "uncertain": false
         },
