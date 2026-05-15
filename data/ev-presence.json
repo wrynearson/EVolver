@@ -6090,6 +6090,18 @@
           ],
           "uncertain": false
         },
+        "MAR": {
+          "name": "Morocco",
+          "present": true,
+          "source": "https://www.jaecoo.ma/fr/concession/jaecoo-maroc",
+          "sources": [
+            "https://www.jaecoo.ma/",
+            "https://www.jaecoo.ma/fr/concession/jaecoo-maroc",
+            "https://www.jaecoo.ma/?form=reserver-un-essai",
+            "https://www.jaecoo.ma/?form=demande-information"
+          ],
+          "uncertain": false
+        },
         "MEX": {
           "name": "Mexico",
           "present": true,
@@ -6199,6 +6211,18 @@
             "https://omodajaecoo.pt/concessionarios/",
             "https://omodajaecoo.pt/contactos/",
             "https://omodajaecoo.pt/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "QAT": {
+          "name": "Qatar",
+          "present": true,
+          "source": "https://omodajaecooqatar.com/en/locations",
+          "sources": [
+            "https://omodajaecooqatar.com/en",
+            "https://omodajaecooqatar.com/en/test-drive",
+            "https://omodajaecooqatar.com/en/locations",
+            "https://omodajaecooqatar.com/en/contactUs"
           ],
           "uncertain": false
         },
