@@ -6158,6 +6158,18 @@
           ],
           "uncertain": false
         },
+        "NPL": {
+          "name": "Nepal",
+          "present": true,
+          "source": "https://omodajaecoonepal.com/book-appointment",
+          "sources": [
+            "https://omodajaecoonepal.com/",
+            "https://omodajaecoonepal.com/book-appointment",
+            "https://omodajaecoonepal.com/dealers",
+            "https://omodajaecoonepal.com/service-network"
+          ],
+          "uncertain": false
+        },
         "PAK": {
           "name": "Pakistan",
           "present": true,
@@ -6165,6 +6177,17 @@
           "sources": [
             "https://omodajaecoo.pk/",
             "https://omodajaecoo.pk/contact-us"
+          ],
+          "uncertain": false
+        },
+        "PAN": {
+          "name": "Panama",
+          "present": true,
+          "source": "https://omodajaecoo.com.pa/",
+          "sources": [
+            "https://omodajaecoo.com.pa/",
+            "https://cotizar.omodajaecoo.com.pa/",
+            "https://citas.omodajaecoo.com.pa/"
           ],
           "uncertain": false
         },

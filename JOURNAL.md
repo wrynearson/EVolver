@@ -1501,3 +1501,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded OMODA | JAECOO by adding Morocco and Qatar after confirming Morocco's official local JAECOO market site plus concession and reserve-an-essai flows, and Qatar's official local OMODA&JAECOO site plus live test-drive, location, and contact routes.
 **Result**: pass
 **TODO**: Verify the next official sovereign OMODA | JAECOO markets beyond the updated footprint, prioritizing remaining live local sites that expose more than a launch-signup shell.
+
+## 2026-05-15
+**Did**: Expanded OMODA | JAECOO by adding Nepal and Panama after confirming the official global selector links both sovereign markets to live first-party local sites, with Nepal exposing official dealer, service-network, and book-appointment flows and Panama exposing localized model, quote, and service-booking flows.
+**Result**: pass
