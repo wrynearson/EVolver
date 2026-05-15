@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-14",
+    "last_updated": "2026-05-15",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -5999,6 +5999,17 @@
           ],
           "uncertain": false
         },
+        "IDN": {
+          "name": "Indonesia",
+          "present": true,
+          "source": "https://jaecoo.id/dealers",
+          "sources": [
+            "https://jaecoo.id/",
+            "https://jaecoo.id/dealers",
+            "https://jaecoo.id/contact-us"
+          ],
+          "uncertain": false
+        },
         "ITA": {
           "name": "Italy",
           "present": true,
@@ -6154,6 +6165,16 @@
             "https://www.omoda-jaecoo.ro/gaseste-un-dealer/",
             "https://www.omoda-jaecoo.ro/contact-us/",
             "https://www.omoda-jaecoo.ro/webforms/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "RUS": {
+          "name": "Russia",
+          "present": true,
+          "source": "https://jaecoo.ru/",
+          "sources": [
+            "https://jaecoo.ru/",
+            "https://omoda.ru/"
           ],
           "uncertain": false
         },
