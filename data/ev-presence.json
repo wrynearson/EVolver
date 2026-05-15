@@ -5921,6 +5921,21 @@
           ],
           "uncertain": false
         },
+        "DNK": {
+          "name": "Denmark",
+          "present": true,
+          "source": "https://omoda.dk/find-forhandler/",
+          "sources": [
+            "https://omodajaecoo.dk/",
+            "https://omoda.dk/",
+            "https://omoda.dk/find-forhandler/",
+            "https://omoda.dk/proevetur/",
+            "https://jaecoo.dk/",
+            "https://jaecoo.dk/find-forhandler/",
+            "https://jaecoo.dk/proevetur/"
+          ],
+          "uncertain": false
+        },
         "ECU": {
           "name": "Ecuador",
           "present": true,
@@ -5942,6 +5957,17 @@
             "https://www.omodajaecoo.es/prueba-de-vehiculos",
             "https://www.omodajaecoo.es/localizador-de-concesionarios",
             "https://www.omodajaecoo.es/clientes/servicios-autorizados-recambios-y-accesorios"
+          ],
+          "uncertain": false
+        },
+        "EST": {
+          "name": "Estonia",
+          "present": true,
+          "source": "https://www.omodajaecoo.ee/meist/proovisoit",
+          "sources": [
+            "https://www.omodajaecoo.ee/",
+            "https://www.omodajaecoo.ee/meist/proovisoit",
+            "https://www.omodajaecoo.ee/meist/vota-meiega-uhendust"
           ],
           "uncertain": false
         },
@@ -6054,6 +6080,16 @@
           ],
           "uncertain": false
         },
+        "MDA": {
+          "name": "Moldova",
+          "present": true,
+          "source": "https://www.omodajaecoo.md/contactUs",
+          "sources": [
+            "https://www.omodajaecoo.md/",
+            "https://www.omodajaecoo.md/contactUs"
+          ],
+          "uncertain": false
+        },
         "MEX": {
           "name": "Mexico",
           "present": true,
@@ -6063,6 +6099,16 @@
             "https://www.omoda.mx/distribuidores/",
             "https://www.jaecoo.mx/contacto/",
             "https://www.jaecoo.mx/forms/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "MNE": {
+          "name": "Montenegro",
+          "present": true,
+          "source": "https://www.omodajaecoo.me/",
+          "sources": [
+            "https://www.omodajaecoo.me/",
+            "https://www.omodajaecoo.me/news"
           ],
           "uncertain": false
         },

@@ -1491,3 +1491,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded OMODA | JAECOO by adding Indonesia and Russia after confirming first-party local sites plus live dealer and contact/test-drive flows on `jaecoo.id` and the paired official Russia-market roots on `jaecoo.ru` and `omoda.ru`.
 **Result**: pass
 **TODO**: Verify the next official sovereign OMODA | JAECOO markets beyond Australia, Austria, Bangladesh, Belgium, Brazil, Bulgaria, Chile, Costa Rica, Croatia, the Czech Republic, Ecuador, France, Germany, Greece, Hungary, Indonesia, Italy, Kazakhstan, Latvia, Lithuania, Malaysia, Mexico, the Netherlands, New Zealand, Pakistan, Peru, the Philippines, Poland, Portugal, Romania, Russia, Singapore, Slovakia, Slovenia, South Africa, Spain, Thailand, Turkey, the United Arab Emirates, the United Kingdom, Uruguay, and Vietnam from first-party localized sites plus dealer, contact, or test-drive flows.
+
+## 2026-05-15
+**Did**: Expanded OMODA | JAECOO by adding Denmark, Estonia, Moldova, and Montenegro after confirming official local market sites plus live dealer, contact, or test-drive flows on their first-party country pages.
+**Result**: pass
+**TODO**: Verify the next official sovereign OMODA | JAECOO markets beyond the updated footprint, prioritizing remaining live local sites that expose more than a launch-signup shell.
