@@ -1523,3 +1523,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-16
 **Did**: Fixed the brand-footprint region lookup so countries with `ISO_A3: "-99"` fall back to sovereign codes and tiny missing-island markets use explicit region overrides, restoring accurate region counts and labels for brands like MG (SAIC).
 **Result**: pass
+## 2026-05-16
+**Did**: Expanded MG (SAIC)'s African footprint by adding Côte d'Ivoire after confirming MG Motor Côte d'Ivoire's first-party site plus live official-dealer, contact, test-drive, and aftersales flows under HR Motors.
+**Result**: pass
+**TODO**: Verify the next official MG (SAIC) African sovereign market beyond Côte d'Ivoire, Egypt, Mauritius, Morocco, South Africa, Tunisia, and Uganda from official localized sites plus dealer, contact, or test-drive flows.
