@@ -2172,6 +2172,126 @@ describe("EVMap", () => {
     ).toBeInTheDocument();
   });
 
+  it("keeps footprint region counts aligned when metadata falls back from ISO_A3", async () => {
+    const fallbackData: EVPresenceData = {
+      metadata: {
+        last_updated: "2026-05-16",
+        definition: "test",
+        schema_version: 2,
+      },
+      brands: {
+        "MG (SAIC)": {
+          website: "https://www.mgmotor.com",
+          countries: {
+            FRA: {
+              name: "France",
+              present: true,
+              source: "https://www.mgmotor.fr/",
+              uncertain: false,
+            },
+            MUS: {
+              name: "Mauritius",
+              present: true,
+              source: "https://mgmotor.mu/contact-us/",
+              uncertain: false,
+            },
+            CHN: {
+              name: "China",
+              present: true,
+              source: "https://www.mgmotor.com.cn",
+              uncertain: false,
+            },
+          },
+        },
+      },
+    };
+    const fallbackGeoJson = {
+      type: "FeatureCollection",
+      features: [
+        {
+          type: "Feature",
+          properties: {
+            ISO_A3: "-99",
+            ADM0_A3: "FRA",
+            ADMIN: "France",
+            REGION_UN: "Europe",
+            CONTINENT: "Europe",
+          },
+          geometry: {
+            type: "Polygon",
+            coordinates: [
+              [
+                [0, 42],
+                [8, 42],
+                [8, 51],
+                [0, 51],
+                [0, 42],
+              ],
+            ],
+          },
+        },
+        {
+          type: "Feature",
+          properties: {
+            ISO_A3: "CHN",
+            ADMIN: "China",
+            REGION_UN: "Asia",
+            CONTINENT: "Asia",
+          },
+          geometry: {
+            type: "Polygon",
+            coordinates: [
+              [
+                [73, 18],
+                [135, 18],
+                [135, 53],
+                [73, 53],
+                [73, 18],
+              ],
+            ],
+          },
+        },
+      ],
+    };
+
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? fallbackData : fallbackGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText("Brand filter"), {
+      target: { value: "MG (SAIC)" },
+    });
+
+    const footprintPanel = screen
+      .getByRole("heading", { name: "Brand footprint" })
+      .closest("aside");
+    expect(footprintPanel).not.toBeNull();
+    expect(within(footprintPanel!).getByText("MG (SAIC) · 3 markets")).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).getByRole("button", { name: /All regions · 3 markets/i }),
+    ).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).getByRole("button", { name: /Europe · 1 market/i }),
+    ).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).getByRole("button", { name: /Africa · 1 market/i }),
+    ).toBeInTheDocument();
+    expect(
+      within(footprintPanel!).getByRole("button", { name: /Asia · 1 market/i }),
+    ).toBeInTheDocument();
+  });
+
   it("supports region-based sorting in the selected brand footprint", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);

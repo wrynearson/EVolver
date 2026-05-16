@@ -166,6 +166,104 @@ describe("useEVData helpers", () => {
     ]);
   });
 
+  it("falls back to ADM0_A3 codes and static region overrides for footprint lookups", () => {
+    const fallbackCountries = {
+      type: "FeatureCollection",
+      features: [
+        {
+          properties: {
+            ISO_A3: "-99",
+            ADM0_A3: "FRA",
+            REGION_UN: "Europe",
+            CONTINENT: "Europe",
+          },
+        },
+        {
+          properties: {
+            ISO_A3: "-99",
+            ADM0_A3: "NOR",
+            REGION_UN: "Europe",
+            CONTINENT: "Europe",
+          },
+        },
+        {
+          properties: {
+            ISO_A3: "CHN",
+            REGION_UN: "Asia",
+            CONTINENT: "Asia",
+          },
+        },
+      ],
+    } as const;
+
+    const fallbackData: EVPresenceData = {
+      metadata: {
+        last_updated: "2026-05-16",
+        definition: "test",
+        schema_version: 2,
+      },
+      brands: {
+        "MG (SAIC)": {
+          website: "https://www.mgmotor.com",
+          countries: {
+            FRA: {
+              name: "France",
+              present: true,
+              source: "https://www.mgmotor.fr/",
+              uncertain: false,
+            },
+            NOR: {
+              name: "Norway",
+              present: true,
+              source: "https://www.mgmotor.eu/nn-NO/",
+              uncertain: false,
+            },
+            MUS: {
+              name: "Mauritius",
+              present: true,
+              source: "https://mgmotor.mu/contact-us/",
+              uncertain: false,
+            },
+            CHN: {
+              name: "China",
+              present: true,
+              source: "https://www.mgmotor.com.cn",
+              uncertain: false,
+            },
+          },
+        },
+      },
+    };
+
+    const countryRegionLookup = getCountryRegionLookup(fallbackCountries);
+
+    expect(countryRegionLookup).toMatchObject({
+      FRA: "Europe",
+      NOR: "Europe",
+      MUS: "Africa",
+      CHN: "Asia",
+    });
+    expect(
+      getBrandRegionCoverageSummaries(fallbackData, "MG (SAIC)", countryRegionLookup),
+    ).toEqual([
+      {
+        regionName: "Europe",
+        confirmedCountryCount: 2,
+        uncertainCountryCount: 0,
+      },
+      {
+        regionName: "Africa",
+        confirmedCountryCount: 1,
+        uncertainCountryCount: 0,
+      },
+      {
+        regionName: "Asia",
+        confirmedCountryCount: 1,
+        uncertainCountryCount: 0,
+      },
+    ]);
+  });
+
   it("highlights tracked brands that still miss major EV regions", () => {
     expect(getBrandMajorRegionGapSummaries(mockData)).toEqual([
       {

@@ -4,7 +4,7 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
-- Verify the next official MG (SAIC) African sovereign market beyond Egypt, Mauritius, Morocco, South Africa, and Tunisia from official localized sites plus dealer, contact, or test-drive flows.
+- Verify the next official MG (SAIC) African sovereign market beyond Egypt, Mauritius, Morocco, South Africa, Tunisia, and Uganda from official localized sites plus dealer, contact, or test-drive flows.
 
 - [monitoring] Re-check OMODA | JAECOO only after its official global selector or a first-party sovereign local site exposes a new live market beyond Australia, Austria, Bangladesh, Belgium, Brazil, Bulgaria, Chile, Costa Rica, Croatia, the Czech Republic, Ecuador, France, Germany, Greece, Hungary, Indonesia, Italy, Kazakhstan, Latvia, Lithuania, Malaysia, Mexico, Moldova, Montenegro, Morocco, Nepal, the Netherlands, New Zealand, Pakistan, Panama, Peru, the Philippines, Poland, Portugal, Qatar, Romania, Russia, Singapore, Slovakia, Slovenia, South Africa, Spain, Thailand, Turkey, the United Arab Emirates, the United Kingdom, Uruguay, and Vietnam; checked 2026-05-15 and the only remaining selector-linked Saudi Arabia lead (`omodaksa.com`) is still parked without a live localized consumer, dealer, contact, or test-drive flow.
 

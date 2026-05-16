@@ -3051,6 +3051,18 @@
           ],
           "uncertain": false
         },
+        "UGA": {
+          "name": "Uganda",
+          "present": true,
+          "source": "https://www.mguganda.com/contact",
+          "sources": [
+            "https://www.mguganda.com/",
+            "https://www.mguganda.com/contact",
+            "https://www.mguganda.com/book-a-test-drive",
+            "https://www.mguganda.com/after-sales"
+          ],
+          "uncertain": false
+        },
         "CHL": {
           "name": "Chile",
           "present": true,

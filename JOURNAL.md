@@ -1514,3 +1514,12 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded MG (SAIC)'s African footprint again by adding Tunisia and Mauritius after confirming MG-branded sovereign sites plus live first-party quote, test-drive, showroom, and distributor contact flows.
 **Result**: pass
 **TODO**: Verify the next official MG (SAIC) African sovereign market beyond Egypt, Mauritius, Morocco, South Africa, and Tunisia from official localized sites plus dealer, contact, or test-drive flows.
+
+## 2026-05-16
+**Did**: Expanded MG (SAIC)'s African footprint again by adding Uganda after confirming MG Motors Uganda's live first-party contact, test-drive, and after-sales flows under MAC East Africa's authorized MG dealer site.
+**Result**: pass
+**TODO**: Verify the next official MG (SAIC) African sovereign market beyond Egypt, Mauritius, Morocco, South Africa, Tunisia, and Uganda from official localized sites plus dealer, contact, or test-drive flows.
+
+## 2026-05-16
+**Did**: Fixed the brand-footprint region lookup so countries with `ISO_A3: "-99"` fall back to sovereign codes and tiny missing-island markets use explicit region overrides, restoring accurate region counts and labels for brands like MG (SAIC).
+**Result**: pass

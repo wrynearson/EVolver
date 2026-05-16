@@ -25,6 +25,19 @@ const IGNORED_COVERAGE_REGIONS = new Set([
   "Seven seas (open ocean)",
 ]);
 
+const COUNTRY_REGION_OVERRIDES: Record<string, string> = {
+  ATG: "Americas",
+  BHR: "Asia",
+  BRB: "Americas",
+  GRD: "Americas",
+  KNA: "Americas",
+  LCA: "Americas",
+  MLT: "Europe",
+  MUS: "Africa",
+  SGP: "Asia",
+  VCT: "Americas",
+};
+
 const MAJOR_EV_REGION_ORDER = [
   "Europe",
   "Southeast Asia",
@@ -271,14 +284,22 @@ export function normalizeCoverageRegion(regionName?: string | null): string | nu
 export function getCountryRegionLookup(
   countries: FeatureCollection,
 ): Record<string, string> {
-  const lookup: Record<string, string> = {};
+  if (countries.features.length === 0) {
+    return {};
+  }
+
+  const lookup: Record<string, string> = { ...COUNTRY_REGION_OVERRIDES };
 
   for (const feature of countries.features) {
     const properties = feature.properties;
     const isoCode =
-      typeof properties?.ISO_A3 === "string" ? properties.ISO_A3 : null;
+      typeof properties?.ISO_A3 === "string" && properties.ISO_A3 !== "-99"
+        ? properties.ISO_A3
+        : typeof properties?.ADM0_A3 === "string" && properties.ADM0_A3 !== "-99"
+          ? properties.ADM0_A3
+          : null;
 
-    if (!isoCode || isoCode === "-99") {
+    if (!isoCode) {
       continue;
     }
 
