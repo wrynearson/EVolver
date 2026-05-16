@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-15",
+    "last_updated": "2026-05-16",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -2991,6 +2991,42 @@
             "https://www.mg-sa.com/",
             "https://www.mg-sa.com/contact-us/",
             "https://www.mg-sa.com/owners/care-beyond"
+          ],
+          "uncertain": false
+        },
+        "EGY": {
+          "name": "Egypt",
+          "present": true,
+          "source": "https://www.mgmotor.com.eg/locations-showrooms/",
+          "sources": [
+            "https://www.mgmotor.com.eg/",
+            "https://www.mgmotor.com.eg/model/electric-model/",
+            "https://www.mgmotor.com.eg/locations-showrooms/",
+            "https://www.mgmotor.com.eg/contact-us/"
+          ],
+          "uncertain": false
+        },
+        "MAR": {
+          "name": "Morocco",
+          "present": true,
+          "source": "https://www.mg-maroc.com/locations/",
+          "sources": [
+            "https://www.mg-maroc.com/",
+            "https://www.mg-maroc.com/locations/",
+            "https://www.mg-maroc.com/contact-us/",
+            "https://www.mg-maroc.com/book-a-test-drive/"
+          ],
+          "uncertain": false
+        },
+        "ZAF": {
+          "name": "South Africa",
+          "present": true,
+          "source": "https://www.mgmotor.co.za/dealers.html",
+          "sources": [
+            "https://www.mgmotor.co.za/",
+            "https://www.mgmotor.co.za/mg-zs.html",
+            "https://www.mgmotor.co.za/dealers.html",
+            "https://www.mgmotor.co.za/contact-us.html"
           ],
           "uncertain": false
         },

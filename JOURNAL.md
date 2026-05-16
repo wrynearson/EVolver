@@ -1505,3 +1505,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-15
 **Did**: Expanded OMODA | JAECOO by adding Nepal and Panama after confirming the official global selector links both sovereign markets to live first-party local sites, with Nepal exposing official dealer, service-network, and book-appointment flows and Panama exposing localized model, quote, and service-booking flows.
 **Result**: pass
+
+## 2026-05-16
+**Did**: Expanded MG (SAIC)'s African footprint by adding Egypt, Morocco, and South Africa after confirming each market's official MG site plus live dealer, contact, showroom, or test-drive flows.
+**Result**: pass

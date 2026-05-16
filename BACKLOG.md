@@ -4,6 +4,8 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
+- Verify the next official MG (SAIC) African sovereign market beyond Egypt, Morocco, and South Africa from official localized sites plus dealer, contact, or test-drive flows.
+
 - [monitoring] Re-check OMODA | JAECOO only after its official global selector or a first-party sovereign local site exposes a new live market beyond Australia, Austria, Bangladesh, Belgium, Brazil, Bulgaria, Chile, Costa Rica, Croatia, the Czech Republic, Ecuador, France, Germany, Greece, Hungary, Indonesia, Italy, Kazakhstan, Latvia, Lithuania, Malaysia, Mexico, Moldova, Montenegro, Morocco, Nepal, the Netherlands, New Zealand, Pakistan, Panama, Peru, the Philippines, Poland, Portugal, Qatar, Romania, Russia, Singapore, Slovakia, Slovenia, South Africa, Spain, Thailand, Turkey, the United Arab Emirates, the United Kingdom, Uruguay, and Vietnam; checked 2026-05-15 and the only remaining selector-linked Saudi Arabia lead (`omodaksa.com`) is still parked without a live localized consumer, dealer, contact, or test-drive flow.
 
 - [monitoring] Re-check Lynk & Co only after its first-party market selectors expose a new sovereign market beyond Albania, Austria, Belgium, Bosnia and Herzegovina, Bulgaria, China, Croatia, the Czech Republic, France, Germany, Greece, Italy, Mexico, Moldova, Montenegro, the Netherlands, North Macedonia, the Philippines, Romania, Serbia, Slovenia, Spain, Sweden, Switzerland, and the United Arab Emirates; checked 2026-05-11 and the official selector now tops out at those already-tracked sovereign markets plus Kosovo, whose `lynkco-see.com/xk/` locale still falls outside the repo's sovereign-country dataset and `ISO_A3` mapping.
