@@ -3030,6 +3030,27 @@
           ],
           "uncertain": false
         },
+        "TUN": {
+          "name": "Tunisia",
+          "present": true,
+          "source": "https://mgmotors.tn/request-test-drive",
+          "sources": [
+            "https://mgmotors.tn/",
+            "https://mgmotors.tn/request-test-drive",
+            "https://mgmotors.tn/quote"
+          ],
+          "uncertain": false
+        },
+        "MUS": {
+          "name": "Mauritius",
+          "present": true,
+          "source": "https://mgmotor.mu/contact-us/",
+          "sources": [
+            "https://mgmotor.mu/mgcars/",
+            "https://mgmotor.mu/contact-us/"
+          ],
+          "uncertain": false
+        },
         "CHL": {
           "name": "Chile",
           "present": true,

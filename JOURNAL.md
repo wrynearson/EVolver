@@ -1509,3 +1509,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-16
 **Did**: Expanded MG (SAIC)'s African footprint by adding Egypt, Morocco, and South Africa after confirming each market's official MG site plus live dealer, contact, showroom, or test-drive flows.
 **Result**: pass
+
+## 2026-05-16
+**Did**: Expanded MG (SAIC)'s African footprint again by adding Tunisia and Mauritius after confirming MG-branded sovereign sites plus live first-party quote, test-drive, showroom, and distributor contact flows.
+**Result**: pass
+**TODO**: Verify the next official MG (SAIC) African sovereign market beyond Egypt, Mauritius, Morocco, South Africa, and Tunisia from official localized sites plus dealer, contact, or test-drive flows.
