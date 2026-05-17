@@ -1527,3 +1527,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded MG (SAIC)'s African footprint by adding Côte d'Ivoire after confirming MG Motor Côte d'Ivoire's first-party site plus live official-dealer, contact, test-drive, and aftersales flows under HR Motors.
 **Result**: pass
 **TODO**: Verify the next official MG (SAIC) African sovereign market beyond Côte d'Ivoire, Egypt, Mauritius, Morocco, South Africa, Tunisia, and Uganda from official localized sites plus dealer, contact, or test-drive flows.
+
+## 2026-05-17
+**Did**: Expanded MG (SAIC)'s African footprint by adding Nigeria after confirming MG Motor Nigeria's live sovereign site plus official local dealer, enquiry, test-drive, and service-booking flows on the country domain.
+**Result**: pass
+**TODO**: Verify the next official MG (SAIC) African sovereign market beyond Côte d'Ivoire, Egypt, Mauritius, Morocco, Nigeria, South Africa, Tunisia, and Uganda from official localized sites plus dealer, contact, or test-drive flows.

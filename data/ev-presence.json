@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-16",
+    "last_updated": "2026-05-17",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -3048,6 +3048,19 @@
           "sources": [
             "https://mgmotor.mu/mgcars/",
             "https://mgmotor.mu/contact-us/"
+          ],
+          "uncertain": false
+        },
+        "NGA": {
+          "name": "Nigeria",
+          "present": true,
+          "source": "https://mgmotor.com.ng/find-delears/",
+          "sources": [
+            "https://mgmotor.com.ng/",
+            "https://mgmotor.com.ng/find-delears/",
+            "https://mgmotor.com.ng/book-a-test-drive/",
+            "https://mgmotor.com.ng/make-an-enquiry/",
+            "https://mgmotor.com.ng/book-a-service/"
           ],
           "uncertain": false
         },
