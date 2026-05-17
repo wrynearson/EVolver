@@ -1532,3 +1532,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded MG (SAIC)'s African footprint by adding Nigeria after confirming MG Motor Nigeria's live sovereign site plus official local dealer, enquiry, test-drive, and service-booking flows on the country domain.
 **Result**: pass
 **TODO**: Verify the next official MG (SAIC) African sovereign market beyond Côte d'Ivoire, Egypt, Mauritius, Morocco, Nigeria, South Africa, Tunisia, and Uganda from official localized sites plus dealer, contact, or test-drive flows.
+
+## 2026-05-17
+**Did**: Closed the active MG (SAIC) Africa follow-up and demoted it to monitoring after re-checking the strongest remaining Ghana and Tanzania sovereign-domain leads, whose public first-party sites currently fail trustworthy verification because of broken certificates plus recycled or inconsistent market content.
+**Result**: no-op
+
+## 2026-05-17
+**Did**: Added a dataset-freshness hint to the summary overlay and copied summary text so users can see at a glance whether the current map snapshot was updated today, yesterday, or several days ago, with regression coverage plus desktop and mobile browser verification.
+**Result**: pass

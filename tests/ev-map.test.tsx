@@ -661,6 +661,7 @@ describe("EVMap", () => {
 
   it("renders the dataset summary overlay, country details, and shareable view state", async () => {
     vi.doUnmock("../src/components/MapCanvas");
+    vi.spyOn(Date, "now").mockReturnValue(Date.parse("2026-03-15T12:00:00Z"));
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
       const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
@@ -690,6 +691,7 @@ describe("EVMap", () => {
     expect(screen.getByText("Countries in view")).toBeInTheDocument();
     expect(screen.getByText("Uncertain markets in view")).toBeInTheDocument();
     expect(screen.getByText("2026-03-13")).toBeInTheDocument();
+    expect(screen.getByText("Updated 2 days ago")).toBeInTheDocument();
 
     const xpengRow = screen.getByText("Countries in view").closest("div");
     expect(xpengRow).toHaveTextContent("1");
@@ -707,6 +709,7 @@ describe("EVMap", () => {
         "Countries in view: 1",
         "Uncertain markets in view: 0",
         "Last updated: 2026-03-13",
+        "Freshness: Updated 2 days ago",
         "",
         "Active view filters",
         "- Brand: XPeng",

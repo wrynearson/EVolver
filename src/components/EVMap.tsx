@@ -112,6 +112,34 @@ function getSourceCountLabel(sourceCount: number) {
   return `${sourceCount} ${sourceCount === 1 ? "source" : "sources"}`;
 }
 
+function getDatasetFreshnessLabel(lastUpdated: string) {
+  const timestamp = Date.parse(`${lastUpdated}T00:00:00Z`);
+
+  if (Number.isNaN(timestamp)) {
+    return null;
+  }
+
+  const now = new Date(Date.now());
+  const currentUtcMidnight = Date.UTC(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate(),
+  );
+  const dayDifference = Math.round(
+    (currentUtcMidnight - timestamp) / (1000 * 60 * 60 * 24),
+  );
+
+  if (dayDifference <= 0) {
+    return "Updated today";
+  }
+
+  if (dayDifference === 1) {
+    return "Updated yesterday";
+  }
+
+  return `Updated ${dayDifference} days ago`;
+}
+
 function getSourceCountBadgeClassName(sourceCount: number) {
   if (sourceCount >= 3) {
     return "rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800";
@@ -456,6 +484,7 @@ function formatDatasetSummaryList(options: {
   lastUpdated: string;
   activeViewFilters: string[];
 }) {
+  const freshnessLabel = getDatasetFreshnessLabel(options.lastUpdated);
   const lines = [
     "Dataset summary",
     `Showing: ${options.visibleBrandLabel}${
@@ -465,6 +494,7 @@ function formatDatasetSummaryList(options: {
     `Countries in view: ${options.visibleCountryCount}`,
     `Uncertain markets in view: ${options.uncertainCountryCount}`,
     `Last updated: ${options.lastUpdated}`,
+    ...(freshnessLabel ? [`Freshness: ${freshnessLabel}`] : []),
   ];
 
   if (options.activeViewFilters.length === 0) {
@@ -2086,6 +2116,9 @@ export default function EVMap() {
   ].filter((filter): filter is ActiveViewFilter => filter !== null);
   const activeViewFilterLabels = activeViewFilters.map((filter) => filter.label);
   const activeViewFilterLabelSignature = activeViewFilterLabels.join("\n");
+  const datasetFreshnessLabel = visibleSummary
+    ? getDatasetFreshnessLabel(visibleSummary.lastUpdated)
+    : null;
   const datasetSummaryCopyText = useMemo(() => {
     if (!visibleSummary) {
       return "";
@@ -3221,8 +3254,13 @@ export default function EVMap() {
             </div>
             <div className="flex items-center justify-between gap-4">
               <dt>Last updated</dt>
-              <dd className="font-medium text-gray-800">
-                {visibleSummary.lastUpdated}
+              <dd className="text-right">
+                <div className="font-medium text-gray-800">
+                  {visibleSummary.lastUpdated}
+                </div>
+                {datasetFreshnessLabel ? (
+                  <div className="text-xs text-gray-500">{datasetFreshnessLabel}</div>
+                ) : null}
               </dd>
             </div>
           </dl>
