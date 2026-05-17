@@ -1544,3 +1544,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-17
 **Did**: Added Wuling / Baojun as a newly tracked brand with China and the Philippines confirmed from first-party consumer, dealer, contact, and test-drive surfaces, and wrote the next sovereign-market expansion step to the backlog.
 **Result**: pass
+
+## 2026-05-17
+**Did**: Expanded Wuling / Baojun into Vietnam after confirming Wuling EV Vietnam's live local EV storefront plus first-party authorized-dealer and test-drive flows operated with TMT Motors.
+**Result**: pass

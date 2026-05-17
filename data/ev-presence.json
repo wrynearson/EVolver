@@ -3213,6 +3213,18 @@
             "https://wulingph.com/schedule-a-demo-drive/"
           ],
           "uncertain": false
+        },
+        "VNM": {
+          "name": "Vietnam",
+          "present": true,
+          "source": "https://wuling-ev.vn/",
+          "sources": [
+            "https://wuling-ev.vn/",
+            "https://wuling-ev.vn/vi/dai-ly",
+            "https://wuling-ev.vn/en/Cost%20Estimates/Register%20Test%20Drive",
+            "https://wuling-ev.vn/en/tmt-motors-officially-opened-the-nationwide-authorized-wuling-dealer-system-581"
+          ],
+          "uncertain": false
         }
       }
     },
