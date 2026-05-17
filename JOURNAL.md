@@ -1540,3 +1540,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-17
 **Did**: Added a dataset-freshness hint to the summary overlay and copied summary text so users can see at a glance whether the current map snapshot was updated today, yesterday, or several days ago, with regression coverage plus desktop and mobile browser verification.
 **Result**: pass
+
+## 2026-05-17
+**Did**: Added Wuling / Baojun as a newly tracked brand with China and the Philippines confirmed from first-party consumer, dealer, contact, and test-drive surfaces, and wrote the next sovereign-market expansion step to the backlog.
+**Result**: pass

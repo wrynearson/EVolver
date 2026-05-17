@@ -3188,6 +3188,34 @@
         }
       }
     },
+    "Wuling / Baojun": {
+      "website": "https://www.wuling.com/baojun",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.wuling.com/baojun",
+          "sources": [
+            "https://www.wuling.com/baojun",
+            "https://www.wuling.com/testDrive?id=280",
+            "https://www.wuling.com/dealerSearch"
+          ],
+          "uncertain": false
+        },
+        "PHL": {
+          "name": "Philippines",
+          "present": true,
+          "source": "https://wulingph.com/",
+          "sources": [
+            "https://wulingph.com/",
+            "https://wulingph.com/about-us/",
+            "https://wulingph.com/contact-us/",
+            "https://wulingph.com/schedule-a-demo-drive/"
+          ],
+          "uncertain": false
+        }
+      }
+    },
     "Leapmotor": {
       "website": "https://www.leapmotor.net",
       "countries": {

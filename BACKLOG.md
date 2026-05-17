@@ -4,6 +4,8 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
+- Expand Wuling / Baojun beyond China and the Philippines by verifying the next sovereign market from first-party local consumer, contact, dealer, or test-drive flows.
+
 - [monitoring] Re-check MG (SAIC)'s next African sovereign market only after MG's first-party public footprint or a sovereign local MG site exposes a clean localized consumer, dealer, contact, or test-drive flow beyond Côte d'Ivoire, Egypt, Mauritius, Morocco, Nigeria, South Africa, Tunisia, and Uganda; checked 2026-05-17 and the strongest remaining Ghana and Tanzania leads currently fail trustworthy browser verification because their public domains are certificate-broken and/or still render recycled or inconsistent content.
 
 - [monitoring] Re-check OMODA | JAECOO only after its official global selector or a first-party sovereign local site exposes a new live market beyond Australia, Austria, Bangladesh, Belgium, Brazil, Bulgaria, Chile, Costa Rica, Croatia, the Czech Republic, Ecuador, France, Germany, Greece, Hungary, Indonesia, Italy, Kazakhstan, Latvia, Lithuania, Malaysia, Mexico, Moldova, Montenegro, Morocco, Nepal, the Netherlands, New Zealand, Pakistan, Panama, Peru, the Philippines, Poland, Portugal, Qatar, Romania, Russia, Singapore, Slovakia, Slovenia, South Africa, Spain, Thailand, Turkey, the United Arab Emirates, the United Kingdom, Uruguay, and Vietnam; checked 2026-05-15 and the only remaining selector-linked Saudi Arabia lead (`omodaksa.com`) is still parked without a live localized consumer, dealer, contact, or test-drive flow.
