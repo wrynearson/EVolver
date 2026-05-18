@@ -1564,3 +1564,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-18
 **Did**: Expanded Wuling / Baojun into Malaysia after confirming the live local Wuling Bingo EV consumer site plus Malaysia-specific enquiry, showroom, and service-network flows across `wulingmalaysia.com` and `tqwuling.my`.
 **Result**: pass
+
+## 2026-05-18
+**Did**: Expanded Wuling / Baojun into Indonesia by confirming Wuling Indonesia's official sovereign market site plus its first-party dealer and test-drive flows on `wuling.id`.
+**Result**: pass

@@ -3260,6 +3260,17 @@
             "https://tqwuling.my/our-network/"
           ],
           "uncertain": false
+        },
+        "IDN": {
+          "name": "Indonesia",
+          "present": true,
+          "source": "https://wuling.id/en",
+          "sources": [
+            "https://wuling.id/en",
+            "https://wuling.id/en/dealer",
+            "https://wuling.id/en/test-drive"
+          ],
+          "uncertain": false
         }
       }
     },
