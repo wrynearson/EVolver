@@ -3236,6 +3236,18 @@
             "https://www.wulingthai.com/test-drive"
           ],
           "uncertain": false
+        },
+        "NPL": {
+          "name": "Nepal",
+          "present": true,
+          "source": "https://wuling.com.np/",
+          "sources": [
+            "https://wuling.com.np/",
+            "https://wuling.com.np/about-us/",
+            "https://wuling.com.np/contact/",
+            "https://wuling.com.np/car/air-ev-300km/"
+          ],
+          "uncertain": false
         }
       }
     },
