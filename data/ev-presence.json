@@ -3248,6 +3248,18 @@
             "https://wuling.com.np/car/air-ev-300km/"
           ],
           "uncertain": false
+        },
+        "MYS": {
+          "name": "Malaysia",
+          "present": true,
+          "source": "https://www.wulingmalaysia.com/",
+          "sources": [
+            "https://www.wulingmalaysia.com/",
+            "https://www.wulingmalaysia.com/contact/",
+            "https://tqwuling.my/",
+            "https://tqwuling.my/our-network/"
+          ],
+          "uncertain": false
         }
       }
     },

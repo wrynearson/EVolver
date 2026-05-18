@@ -1560,4 +1560,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-18
 **Did**: Expanded Wuling / Baojun into Nepal after confirming Wuling Motors Nepal's live local site plus its about, contact, and Air EV booking/test-drive pages on `wuling.com.np`.
 **Result**: pass
-**TODO**: Verify the next official Wuling / Baojun sovereign market beyond China, Nepal, the Philippines, Thailand, and Vietnam from first-party local consumer, contact, dealer, or test-drive flows, prioritizing Malaysia while its live showroom and service-network pages remain available.
+
+## 2026-05-18
+**Did**: Expanded Wuling / Baojun into Malaysia after confirming the live local Wuling Bingo EV consumer site plus Malaysia-specific enquiry, showroom, and service-network flows across `wulingmalaysia.com` and `tqwuling.my`.
+**Result**: pass
