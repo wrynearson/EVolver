@@ -3,7 +3,7 @@ import Map, { Layer, Source, type MapRef } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { FeatureCollection } from "geojson";
 import type { ExpressionSpecification } from "maplibre-gl";
-import type { MapBounds } from "../lib/mapUtils";
+import { getFocusBoundsOptions, type MapBounds } from "../lib/mapUtils";
 import type { MapCountrySelection } from "../types";
 
 interface MapCanvasProps {
@@ -69,10 +69,11 @@ export default function MapCanvas({
     }
 
     if (focusBounds) {
+      const focusBoundsOptions = getFocusBoundsOptions(focusBounds);
       map.fitBounds(focusBounds, {
-        padding: 64,
+        padding: focusBoundsOptions.padding,
         duration: 600,
-        maxZoom: 5,
+        maxZoom: focusBoundsOptions.maxZoom,
       });
       return;
     }

@@ -75,6 +75,10 @@ export interface LegendItem {
 }
 
 export type MapBounds = [[number, number], [number, number]];
+export interface FocusBoundsOptions {
+  padding: number;
+  maxZoom: number;
+}
 
 interface GetLegendItemsOptions {
   hasUncertainEntries?: boolean;
@@ -191,4 +195,29 @@ export function getFeatureBounds(
     [minLongitude, minLatitude],
     [maxLongitude, maxLatitude],
   ];
+}
+
+export function getFocusBoundsOptions(bounds: MapBounds): FocusBoundsOptions {
+  const longitudeSpan = Math.abs(bounds[1][0] - bounds[0][0]);
+  const latitudeSpan = Math.abs(bounds[1][1] - bounds[0][1]);
+  const smallestSpan = Math.min(longitudeSpan, latitudeSpan);
+
+  if (smallestSpan <= 1) {
+    return {
+      padding: 72,
+      maxZoom: 7,
+    };
+  }
+
+  if (smallestSpan <= 3) {
+    return {
+      padding: 72,
+      maxZoom: 6,
+    };
+  }
+
+  return {
+    padding: 64,
+    maxZoom: 5,
+  };
 }

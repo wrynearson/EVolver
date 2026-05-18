@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-17",
+    "last_updated": "2026-05-18",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -3223,6 +3223,17 @@
             "https://wuling-ev.vn/vi/dai-ly",
             "https://wuling-ev.vn/en/Cost%20Estimates/Register%20Test%20Drive",
             "https://wuling-ev.vn/en/tmt-motors-officially-opened-the-nationwide-authorized-wuling-dealer-system-581"
+          ],
+          "uncertain": false
+        },
+        "THA": {
+          "name": "Thailand",
+          "present": true,
+          "source": "https://www.wulingthai.com/dealers",
+          "sources": [
+            "https://www.wulingthai.com/",
+            "https://www.wulingthai.com/dealers",
+            "https://www.wulingthai.com/test-drive"
           ],
           "uncertain": false
         }

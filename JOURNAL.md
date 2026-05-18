@@ -1548,3 +1548,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-17
 **Did**: Expanded Wuling / Baojun into Vietnam after confirming Wuling EV Vietnam's live local EV storefront plus first-party authorized-dealer and test-drive flows operated with TMT Motors.
 **Result**: pass
+
+## 2026-05-18
+**Did**: Expanded Wuling / Baojun into Thailand after confirming Wuling Thailand's live sovereign site plus first-party dealer-network and test-drive flows on `wulingthai.com`.
+**Result**: pass
+
+## 2026-05-18
+**Did**: Improved fit-to-country framing for very small sovereign markets by giving tiny bounds a closer map zoom, with regression coverage and live browser checks against the Qatar route on desktop and mobile.
+**Result**: pass

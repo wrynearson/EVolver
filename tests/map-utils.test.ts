@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import type { FeatureCollection } from "geojson";
 import {
   buildColorExpression,
+  getFocusBoundsOptions,
   getFeatureBounds,
   getLegendItems,
 } from "../src/lib/mapUtils";
@@ -150,6 +151,32 @@ describe("getFeatureBounds", () => {
       [5, 58],
       [11, 71],
     ]);
+  });
+});
+
+describe("getFocusBoundsOptions", () => {
+  it("keeps the default framing for larger areas", () => {
+    expect(
+      getFocusBoundsOptions([
+        [5, 58],
+        [11, 71],
+      ]),
+    ).toEqual({
+      padding: 64,
+      maxZoom: 5,
+    });
+  });
+
+  it("allows a closer fit for small sovereign markets", () => {
+    expect(
+      getFocusBoundsOptions([
+        [50.744, 24.556],
+        [51.607, 26.115],
+      ]),
+    ).toEqual({
+      padding: 72,
+      maxZoom: 7,
+    });
   });
 });
 

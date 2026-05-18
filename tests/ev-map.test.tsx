@@ -87,6 +87,16 @@ const MockMapComponent = React.forwardRef(
         >
           Select Sweden
         </button>
+        <button
+          type="button"
+          onClick={() =>
+            onClick?.({
+              features: [{ properties: { ISO_A3: "QAT", ADMIN: "Qatar" } }],
+            })
+          }
+        >
+          Select Qatar
+        </button>
         {children}
       </div>
     );
@@ -233,6 +243,27 @@ const mockGeoJson = {
             [135, 53],
             [73, 53],
             [73, 18],
+          ],
+        ],
+      },
+    },
+    {
+      type: "Feature",
+      properties: {
+        ISO_A3: "QAT",
+        ADMIN: "Qatar",
+        REGION_UN: "Asia",
+        CONTINENT: "Asia",
+      },
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [50.744, 24.556],
+            [51.607, 24.556],
+            [51.607, 26.115],
+            [50.744, 26.115],
+            [50.744, 24.556],
           ],
         ],
       },
@@ -503,6 +534,42 @@ describe("EVMap", () => {
           duration: 600,
           maxZoom: 5,
           padding: 64,
+        }),
+      ),
+    );
+  });
+
+  it("uses a closer fit for smaller country selections", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(await screen.findByTestId("map")).toBeInTheDocument();
+    mockFitBounds.mockClear();
+    mockEaseTo.mockClear();
+
+    fireEvent.click(screen.getByRole("button", { name: "Select Qatar" }));
+
+    await waitFor(() =>
+      expect(mockFitBounds).toHaveBeenCalledWith(
+        [
+          [50.744, 24.556],
+          [51.607, 26.115],
+        ],
+        expect.objectContaining({
+          duration: 600,
+          maxZoom: 7,
+          padding: 72,
         }),
       ),
     );
