@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-18",
+    "last_updated": "2026-05-19",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -3199,6 +3199,18 @@
             "https://www.wuling.com/baojun",
             "https://www.wuling.com/testDrive?id=280",
             "https://www.wuling.com/dealerSearch"
+          ],
+          "uncertain": false
+        },
+        "BRN": {
+          "name": "Brunei",
+          "present": true,
+          "source": "https://wulingbn.com/",
+          "sources": [
+            "https://wulingbn.com/",
+            "https://wulingbn.com/contact/",
+            "https://wulingbn.com/air-ev/",
+            "https://wulingbn.com/after-sales/"
           ],
           "uncertain": false
         },

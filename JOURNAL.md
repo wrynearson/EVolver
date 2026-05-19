@@ -1568,3 +1568,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-18
 **Did**: Expanded Wuling / Baojun into Indonesia by confirming Wuling Indonesia's official sovereign market site plus its first-party dealer and test-drive flows on `wuling.id`.
 **Result**: pass
+
+## 2026-05-19
+**Did**: Expanded Wuling / Baojun into Brunei after confirming Wuling Brunei's live sovereign market site plus its official local contact, Air EV product, and after-sales support pages.
+**Result**: pass
+**TODO**: Verify the next Wuling / Baojun sovereign market beyond Brunei, China, Indonesia, Malaysia, Nepal, the Philippines, Thailand, and Vietnam from first-party local consumer, contact, dealer, or test-drive flows.
