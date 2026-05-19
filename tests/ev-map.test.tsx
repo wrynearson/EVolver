@@ -2138,6 +2138,54 @@ describe("EVMap", () => {
     ).toBeInTheDocument();
   });
 
+  it("shows tracked coverage context in country lookup suggestions", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockUncertainData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    const countryLookup = await screen.findByLabelText("Country lookup");
+    fireEvent.change(countryLookup, { target: { value: "no" } });
+
+    const norwaySuggestion = screen.getByRole("option", { name: /^Norway\b/i });
+    expect(norwaySuggestion).toBeInTheDocument();
+    expect(
+      within(norwaySuggestion).getByText("1 confirmed brand · 1 uncertain · NOR · Europe"),
+    ).toBeInTheDocument();
+  });
+
+  it("shows an explicit no-coverage hint in country lookup suggestions", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    const countryLookup = await screen.findByLabelText("Country lookup");
+    fireEvent.change(countryLookup, { target: { value: "sw" } });
+
+    const swedenSuggestion = screen.getByRole("option", { name: /^Sweden\b/i });
+    expect(swedenSuggestion).toBeInTheDocument();
+    expect(
+      within(swedenSuggestion).getByText("No tracked brands yet · SWE · Europe"),
+    ).toBeInTheDocument();
+  });
+
   it("shows a region breakdown for the selected brand footprint", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);

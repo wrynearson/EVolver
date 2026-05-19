@@ -188,6 +188,40 @@ function formatMajorRegionCoverageCount(count: number) {
   return `${count}/4 major regions`;
 }
 
+function getCountryLookupSuggestionLabel(
+  country: CountryOption,
+  coverageSummary?: CountryCoverageSummary,
+) {
+  const labelParts: string[] = [];
+
+  if (!coverageSummary) {
+    labelParts.push("No tracked brands yet");
+  } else if (
+    coverageSummary.confirmedBrandCount > 0 ||
+    coverageSummary.uncertainBrandCount > 0
+  ) {
+    labelParts.push(
+      `${coverageSummary.confirmedBrandCount.toLocaleString()} confirmed ${
+        coverageSummary.confirmedBrandCount === 1 ? "brand" : "brands"
+      }`,
+    );
+
+    if (coverageSummary.uncertainBrandCount > 0) {
+      labelParts.push(`${coverageSummary.uncertainBrandCount.toLocaleString()} uncertain`);
+    }
+  } else {
+    labelParts.push("No tracked brands yet");
+  }
+
+  labelParts.push(country.isoCode);
+
+  if (country.regionName) {
+    labelParts.push(country.regionName);
+  }
+
+  return labelParts.join(" · ");
+}
+
 function isCoveragePanelView(value: string): value is CoveragePanelView {
   return (
     value === "snapshot" ||
@@ -1196,6 +1230,15 @@ export default function EVMap() {
       new Map(
         (regionScopedData ? getBrandMajorRegionGapSummaries(regionScopedData) : []).map(
           (summary) => [summary.brandName, summary],
+        ),
+      ),
+    [regionScopedData],
+  );
+  const countryLookupCoverageSummaryByIso = useMemo(
+    () =>
+      new Map(
+        (regionScopedData ? getCountryCoverageSummaries(regionScopedData) : []).map(
+          (summary) => [summary.isoCode, summary],
         ),
       ),
     [regionScopedData],
@@ -3008,36 +3051,41 @@ export default function EVMap() {
                       role="listbox"
                       className="max-h-48 overflow-y-auto py-1"
                     >
-                      {filteredCountryOptions.map((country, index) => (
-                        <li key={country.isoCode}>
-                          <button
-                            type="button"
-                            id={`country-filter-suggestion-${index}`}
-                            role="option"
-                            aria-selected={index === activeCountryLookupIndex}
-                            className={`w-full px-3 py-2 text-left ${
-                              index === activeCountryLookupIndex
-                                ? "bg-blue-50"
-                                : "hover:bg-gray-50"
-                            }`}
-                            onClick={() => {
-                              setSelectedCountry({
-                                isoCode: country.isoCode,
-                                countryName: country.countryName,
-                              });
-                            }}
-                            onMouseEnter={() => setActiveCountryLookupIndex(index)}
-                          >
-                            <p className="text-sm font-medium text-gray-800">
-                              {country.countryName}
-                            </p>
-                            <p className="text-xs uppercase tracking-wide text-gray-500">
-                              {country.isoCode}
-                              {country.regionName ? ` · ${country.regionName}` : ""}
-                            </p>
-                          </button>
-                        </li>
-                      ))}
+                      {filteredCountryOptions.map((country, index) => {
+                        const coverageSummary = countryLookupCoverageSummaryByIso.get(
+                          country.isoCode,
+                        );
+
+                        return (
+                          <li key={country.isoCode}>
+                            <button
+                              type="button"
+                              id={`country-filter-suggestion-${index}`}
+                              role="option"
+                              aria-selected={index === activeCountryLookupIndex}
+                              className={`w-full px-3 py-2 text-left ${
+                                index === activeCountryLookupIndex
+                                  ? "bg-blue-50"
+                                  : "hover:bg-gray-50"
+                              }`}
+                              onClick={() => {
+                                setSelectedCountry({
+                                  isoCode: country.isoCode,
+                                  countryName: country.countryName,
+                                });
+                              }}
+                              onMouseEnter={() => setActiveCountryLookupIndex(index)}
+                            >
+                              <p className="text-sm font-medium text-gray-800">
+                                {country.countryName}
+                              </p>
+                              <p className="mt-1 text-xs text-gray-500">
+                                {getCountryLookupSuggestionLabel(country, coverageSummary)}
+                              </p>
+                            </button>
+                          </li>
+                        );
+                      })}
                     </ul>
                   ) : (
                     <p className="px-3 py-3 text-sm text-gray-600">
