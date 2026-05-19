@@ -3283,6 +3283,30 @@
             "https://wuling.id/en/test-drive"
           ],
           "uncertain": false
+        },
+        "JOR": {
+          "name": "Jordan",
+          "present": true,
+          "source": "https://wuling.com.jo/",
+          "sources": [
+            "https://wuling.com.jo/",
+            "https://wuling.com.jo/about-innova/",
+            "https://wuling.com.jo/contact-us/",
+            "https://wuling.com.jo/request-a-test-drive/"
+          ],
+          "uncertain": false
+        },
+        "LBN": {
+          "name": "Lebanon",
+          "present": true,
+          "source": "https://wuling.com.lb/",
+          "sources": [
+            "https://wuling.com.lb/",
+            "https://wuling.com.lb/about-innova/",
+            "https://wuling.com.lb/contact-us/",
+            "https://wuling.com.lb/request-a-test-drive/"
+          ],
+          "uncertain": false
         }
       }
     },

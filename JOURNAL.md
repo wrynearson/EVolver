@@ -1577,3 +1577,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-19
 **Did**: Added tracked-coverage hints to country lookup suggestions so each result now shows confirmed or uncertain brand context before selection, then verified the interaction in tests plus desktop and mobile browser runs.
 **Result**: pass
+
+## 2026-05-19
+**Did**: Expanded Wuling / Baojun into Jordan and Lebanon after confirming both sovereign sites expose first-party local consumer pages plus official Innova distributor, contact, and test-drive flows.
+**Result**: pass
+**TODO**: Verify the next Wuling / Baojun sovereign market beyond Brunei, China, Indonesia, Jordan, Lebanon, Malaysia, Nepal, the Philippines, Thailand, and Vietnam from first-party local consumer, contact, dealer, or test-drive flows.
