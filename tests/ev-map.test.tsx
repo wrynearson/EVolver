@@ -3164,6 +3164,117 @@ describe("EVMap", () => {
     expect(screen.getByLabelText("Brand filter")).toHaveValue("BYD");
   });
 
+  it("shows peer-backed expansion candidates for an active major-region gap", async () => {
+    const gapCandidateData: EVPresenceData = {
+      metadata: {
+        last_updated: "2026-05-19",
+        definition: "test",
+        schema_version: 2,
+      },
+      brands: {
+        BYD: {
+          website: "https://www.byd.com",
+          countries: {
+            CHN: {
+              name: "China",
+              present: true,
+              source: "https://www.byd.com/cn",
+              uncertain: false,
+            },
+            NOR: {
+              name: "Norway",
+              present: true,
+              source: "https://www.byd.com/no",
+              uncertain: false,
+            },
+          },
+        },
+        XPeng: {
+          website: "https://www.xpeng.com",
+          countries: {
+            NOR: {
+              name: "Norway",
+              present: true,
+              source: "https://www.xpeng.com/no",
+              uncertain: false,
+            },
+            QAT: {
+              name: "Qatar",
+              present: true,
+              source: "https://www.xpeng.com/qa",
+              uncertain: false,
+            },
+          },
+        },
+        Neta: {
+          website: "https://www.neta.auto",
+          countries: {
+            JOR: {
+              name: "Jordan",
+              present: true,
+              source: "https://www.neta.auto/jo",
+              uncertain: false,
+            },
+          },
+        },
+      },
+    };
+
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json")
+        ? gapCandidateData
+        : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+    window.history.replaceState({}, "", "/?brand=BYD&gapRegion=Middle+East");
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const footprintPanel = screen
+      .getByRole("heading", { name: "Brand footprint" })
+      .closest("aside");
+    expect(footprintPanel).not.toBeNull();
+    expect(
+      within(footprintPanel!).getByText(
+        "Gap focus: Middle East still has no confirmed presence for BYD.",
+      ),
+    ).toBeInTheDocument();
+    expect(within(footprintPanel!).getByText("Expansion candidates")).toBeInTheDocument();
+    expect(within(footprintPanel!).getByText("1. Jordan")).toBeInTheDocument();
+    expect(within(footprintPanel!).getByText("JOR · 1 peer brand")).toBeInTheDocument();
+    expect(within(footprintPanel!).getByText("2. Qatar")).toBeInTheDocument();
+    expect(within(footprintPanel!).getByText("QAT · 1 peer brand")).toBeInTheDocument();
+
+    fireEvent.click(
+      within(footprintPanel!).getByRole("button", { name: "Copy gap candidates" }),
+    );
+    expect(window.navigator.clipboard.writeText).toHaveBeenLastCalledWith(
+      [
+        "Suggested expansion candidates for BYD in Middle East",
+        "Jordan (JOR - 1 peer brand) — Neta",
+        "Qatar (QAT - 1 peer brand) — XPeng",
+      ].join("\n"),
+    );
+
+    fireEvent.click(
+      within(footprintPanel!).getByRole("button", {
+        name: /2\. Qatar\s+QAT · 1 peer brand\s+XPeng/i,
+      }),
+    );
+
+    await waitFor(() => {
+      expect(screen.getByLabelText("Country lookup")).toHaveValue("Qatar");
+    });
+  });
+
   it("restores the snapshot coverage view from the URL", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);

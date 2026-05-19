@@ -62,6 +62,13 @@ export interface BrandMajorRegionProgressSummary {
   totalCountryCount: number;
 }
 
+export interface BrandMajorRegionGapCountryCandidate {
+  isoCode: string;
+  countryName: string;
+  peerBrandCount: number;
+  brandNames: string[];
+}
+
 export interface CountryCoverageSummary {
   isoCode: string;
   countryName: string;

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import type {
   BrandCoverageSummary,
+  BrandMajorRegionGapCountryCandidate,
   BrandMajorRegionGapSummary,
   BrandMajorRegionProgressSummary,
   BrandPresenceCountry,
@@ -697,6 +698,69 @@ export function getBrandMajorRegionProgressSummaries(
       totalCountryCount: MAJOR_EV_REGION_COUNTRIES[regionName].length,
     };
   });
+}
+
+export function getBrandMajorRegionGapCountryCandidates(
+  data: EVPresenceData,
+  brandName: string,
+  regionName: string,
+): BrandMajorRegionGapCountryCandidate[] {
+  const brand = data.brands[brandName];
+  const regionCountries =
+    MAJOR_EV_REGION_COUNTRIES[
+      regionName as keyof typeof MAJOR_EV_REGION_COUNTRIES
+    ] ?? null;
+
+  if (!brand || !regionCountries) {
+    return [];
+  }
+
+  return regionCountries
+    .map((isoCode) => {
+      if (brand.countries[isoCode]?.present) {
+        return null;
+      }
+
+      let countryName = isoCode;
+      const brandNames: string[] = [];
+
+      for (const [otherBrandName, otherBrand] of Object.entries(data.brands)) {
+        if (otherBrandName === brandName) {
+          continue;
+        }
+
+        const entry = otherBrand.countries[isoCode];
+
+        if (!entry?.present || entry.uncertain) {
+          continue;
+        }
+
+        countryName = entry.name || countryName;
+        brandNames.push(otherBrandName);
+      }
+
+      if (brandNames.length === 0) {
+        return null;
+      }
+
+      return {
+        isoCode,
+        countryName,
+        peerBrandCount: brandNames.length,
+        brandNames: brandNames.sort((a, b) => a.localeCompare(b)),
+      };
+    })
+    .filter(
+      (candidate): candidate is BrandMajorRegionGapCountryCandidate =>
+        candidate !== null,
+    )
+    .sort((a, b) => {
+      if (b.peerBrandCount !== a.peerBrandCount) {
+        return b.peerBrandCount - a.peerBrandCount;
+      }
+
+      return a.countryName.localeCompare(b.countryName);
+    });
 }
 
 export function getCountryCoverageSummaries(

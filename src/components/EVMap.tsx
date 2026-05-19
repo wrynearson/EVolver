@@ -5,6 +5,7 @@ import {
   filterPresenceDataToBrand,
   filterPresenceDataToRegion,
   getBrandCoverageSummaries,
+  getBrandMajorRegionGapCountryCandidates,
   getBrandMajorRegionGapSummaries,
   getBrandMajorRegionProgressSummaries,
   getBrandRegionCoverageSummaries,
@@ -30,6 +31,7 @@ import { buildColorExpression, getFeatureBounds, getLegendItems } from "../lib/m
 import type { FeatureCollection } from "geojson";
 import type {
   BrandCoverageSummary,
+  BrandMajorRegionGapCountryCandidate,
   BrandMajorRegionGapSummary,
   BrandMajorRegionProgressSummary,
   CountryPresenceDetails,
@@ -552,6 +554,22 @@ function formatMajorRegionGapList(summaries: BrandMajorRegionGapSummary[]) {
   });
 }
 
+function formatMajorRegionGapCandidateList(
+  brandName: string,
+  regionName: string,
+  candidates: BrandMajorRegionGapCountryCandidate[],
+) {
+  return [
+    `Suggested expansion candidates for ${brandName} in ${regionName}`,
+    ...candidates.map(
+      (candidate) =>
+        `${candidate.countryName} (${candidate.isoCode} - ${candidate.peerBrandCount} peer ${
+          candidate.peerBrandCount === 1 ? "brand" : "brands"
+        }) — ${candidate.brandNames.join(", ")}`,
+    ),
+  ];
+}
+
 function formatHoveredCountrySummary(country: CountryPresenceDetails) {
   const visibleBrands =
     country.brands.length > 0
@@ -1007,6 +1025,7 @@ export default function EVMap() {
   const hasInitializedCopyCountryProfileReset = useRef(false);
   const hasInitializedCopyBrandWebsiteReset = useRef(false);
   const hasInitializedCopyBrandMarketsReset = useRef(false);
+  const hasInitializedCopyGapCandidatesReset = useRef(false);
   const hasInitializedCopyCoverageReset = useRef(false);
   const hasInitializedCopySummaryReset = useRef(false);
   const hasInitializedCopyMajorRegionGapsReset = useRef(false);
@@ -1035,6 +1054,7 @@ export default function EVMap() {
     useState<CopyStatus>("idle");
   const [copyBrandWebsiteStatus, setCopyBrandWebsiteStatus] = useState<CopyStatus>("idle");
   const [copyBrandMarketsStatus, setCopyBrandMarketsStatus] = useState<CopyStatus>("idle");
+  const [copyGapCandidatesStatus, setCopyGapCandidatesStatus] = useState<CopyStatus>("idle");
   const [copyCoverageStatus, setCopyCoverageStatus] = useState<CopyStatus>("idle");
   const [copySummaryStatus, setCopySummaryStatus] = useState<CopyStatus>("idle");
   const [copyMajorRegionGapsStatus, setCopyMajorRegionGapsStatus] =
@@ -1595,6 +1615,36 @@ export default function EVMap() {
     activeSelectedBrand && selectedMajorRegionGap?.brandName === activeSelectedBrand
       ? selectedMajorRegionGap.regionName
       : "";
+  const selectedBrandMajorRegionGapCandidates = useMemo(() => {
+    if (!data || !activeSelectedBrand || !activeMajorRegionGap) {
+      return [];
+    }
+
+    return getBrandMajorRegionGapCountryCandidates(
+      data,
+      activeSelectedBrand,
+      activeMajorRegionGap,
+    ).slice(0, 4);
+  }, [activeMajorRegionGap, activeSelectedBrand, data]);
+  const selectedBrandMajorRegionGapCandidateList = useMemo(() => {
+    if (
+      !activeSelectedBrand ||
+      !activeMajorRegionGap ||
+      selectedBrandMajorRegionGapCandidates.length === 0
+    ) {
+      return [];
+    }
+
+    return formatMajorRegionGapCandidateList(
+      activeSelectedBrand,
+      activeMajorRegionGap,
+      selectedBrandMajorRegionGapCandidates,
+    );
+  }, [
+    activeMajorRegionGap,
+    activeSelectedBrand,
+    selectedBrandMajorRegionGapCandidates,
+  ]);
 
   const filteredSelectedBrandPresence = useMemo(
     () =>
@@ -1961,6 +2011,22 @@ export default function EVMap() {
     void navigator.clipboard.writeText(selectedBrandMarketList.join("\n")).catch(() => {
       setCopyBrandMarketsStatus("failed");
     });
+  };
+  const copyGapCandidates = () => {
+    if (
+      selectedBrandMajorRegionGapCandidateList.length === 0 ||
+      !navigator.clipboard?.writeText
+    ) {
+      setCopyGapCandidatesStatus("failed");
+      return;
+    }
+
+    setCopyGapCandidatesStatus("copied");
+    void navigator.clipboard
+      .writeText(selectedBrandMajorRegionGapCandidateList.join("\n"))
+      .catch(() => {
+        setCopyGapCandidatesStatus("failed");
+      });
   };
   const copyCountryProfile = () => {
     const countryDetails = allSelectedCountryDetails ?? selectedCountryDetails;
@@ -2503,6 +2569,15 @@ export default function EVMap() {
 
     setCopyBrandMarketsStatus("idle");
   }, [selectedBrandMarketList]);
+
+  useEffect(() => {
+    if (!hasInitializedCopyGapCandidatesReset.current) {
+      hasInitializedCopyGapCandidatesReset.current = true;
+      return;
+    }
+
+    setCopyGapCandidatesStatus("idle");
+  }, [selectedBrandMajorRegionGapCandidateList]);
 
   useEffect(() => {
     if (!hasInitializedCopyCoverageReset.current) {
@@ -3922,6 +3997,63 @@ export default function EVMap() {
                   >
                     Clear gap focus
                   </button>
+                </div>
+              ) : null}
+              {selectedBrandMajorRegionGapCandidates.length > 0 ? (
+                <div className="mt-3 rounded-md border border-amber-200 bg-amber-50 px-3 py-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wide text-amber-900">
+                        Expansion candidates
+                      </p>
+                      <p className="mt-1 text-xs text-amber-900">
+                        Peer brands already have confirmed coverage in these gap
+                        markets.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      className="text-xs font-medium text-amber-900 underline underline-offset-2 hover:text-amber-950"
+                      onClick={copyGapCandidates}
+                    >
+                      {copyGapCandidatesStatus === "copied"
+                        ? "Copied gap candidates"
+                        : copyGapCandidatesStatus === "failed"
+                          ? "Gap candidates copy failed"
+                          : "Copy gap candidates"}
+                    </button>
+                  </div>
+                  <ul className="mt-2 space-y-2">
+                    {selectedBrandMajorRegionGapCandidates.map((candidate, index) => (
+                      <li key={candidate.isoCode}>
+                        <button
+                          type="button"
+                          className="w-full rounded-md border border-transparent px-2 py-1 text-left hover:border-amber-300 hover:bg-white/70"
+                          onClick={() =>
+                            setSelectedCountry({
+                              isoCode: candidate.isoCode,
+                              countryName: candidate.countryName,
+                            })
+                          }
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div>
+                              <p className="text-sm font-medium text-amber-950">
+                                {index + 1}. {candidate.countryName}
+                              </p>
+                              <p className="text-xs text-amber-900">
+                                {candidate.isoCode} · {candidate.peerBrandCount} peer{" "}
+                                {candidate.peerBrandCount === 1 ? "brand" : "brands"}
+                              </p>
+                            </div>
+                            <p className="text-right text-xs text-amber-900">
+                              {candidate.brandNames.join(", ")}
+                            </p>
+                          </div>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ) : null}
             </div>

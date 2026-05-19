@@ -4,6 +4,7 @@ import {
   computeDatasetSummary,
   filterPresenceDataToBrand,
   filterPresenceDataToRegion,
+  getBrandMajorRegionGapCountryCandidates,
   getBrandMajorRegionGapSummaries,
   getBrandMajorRegionProgressSummaries,
   getBrandRegionCoverageSummaries,
@@ -334,6 +335,103 @@ describe("useEVData helpers", () => {
         confirmedCountryCount: 0,
         uncertainCountryCount: 0,
         totalCountryCount: 17,
+      },
+    ]);
+  });
+
+  it("ranks peer-backed expansion candidates inside a major-region gap", () => {
+    const gapData: EVPresenceData = {
+      metadata: {
+        last_updated: "2026-05-19",
+        definition: "test",
+        schema_version: 2,
+      },
+      brands: {
+        BYD: {
+          website: "https://www.byd.com",
+          countries: {
+            CHN: {
+              name: "China",
+              present: true,
+              source: "https://www.byd.com/cn",
+              uncertain: false,
+            },
+            NOR: {
+              name: "Norway",
+              present: true,
+              source: "https://www.byd.com/no",
+              uncertain: false,
+            },
+          },
+        },
+        XPeng: {
+          website: "https://www.xpeng.com",
+          countries: {
+            THA: {
+              name: "Thailand",
+              present: true,
+              source: "https://www.xpeng.com/th",
+              uncertain: false,
+            },
+            MYS: {
+              name: "Malaysia",
+              present: true,
+              source: "https://www.xpeng.com/my",
+              uncertain: false,
+            },
+          },
+        },
+        Neta: {
+          website: "https://www.neta.auto",
+          countries: {
+            THA: {
+              name: "Thailand",
+              present: true,
+              source: "https://www.neta.auto/th",
+              uncertain: false,
+            },
+            PHL: {
+              name: "Philippines",
+              present: true,
+              source: "https://www.neta.auto/ph",
+              uncertain: false,
+            },
+          },
+        },
+        ORA: {
+          website: "https://www.gwm-global.com/ora",
+          countries: {
+            VNM: {
+              name: "Vietnam",
+              present: true,
+              source: "https://www.gwm.com.vn/ora",
+              uncertain: true,
+            },
+          },
+        },
+      },
+    };
+
+    expect(
+      getBrandMajorRegionGapCountryCandidates(gapData, "BYD", "Southeast Asia"),
+    ).toEqual([
+      {
+        isoCode: "THA",
+        countryName: "Thailand",
+        peerBrandCount: 2,
+        brandNames: ["Neta", "XPeng"],
+      },
+      {
+        isoCode: "MYS",
+        countryName: "Malaysia",
+        peerBrandCount: 1,
+        brandNames: ["XPeng"],
+      },
+      {
+        isoCode: "PHL",
+        countryName: "Philippines",
+        peerBrandCount: 1,
+        brandNames: ["Neta"],
       },
     ]);
   });

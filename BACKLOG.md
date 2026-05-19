@@ -4,7 +4,7 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
-- Expand Wuling / Baojun beyond Brunei, China, Indonesia, Jordan, Lebanon, Malaysia, Nepal, the Philippines, Thailand, and Vietnam by verifying the next sovereign market from first-party local consumer, contact, dealer, or test-drive flows.
+- [monitoring] Re-check Wuling / Baojun only after a first-party sovereign local site exposes a new live consumer, contact, dealer, or test-drive flow beyond Brunei, China, Indonesia, Jordan, Lebanon, Malaysia, Nepal, the Philippines, Thailand, and Vietnam; checked 2026-05-19 and the strongest remaining sovereign-domain leads produced no trustworthy additions because `wuling.com.au` resolves to a parked ad/captcha stack, likely Gulf ccTLD leads fail DNS, and the live `wuling-global.com` surface is Hong Kong-only rather than a new sovereign market.
 
 - [monitoring] Re-check MG (SAIC)'s next African sovereign market only after MG's first-party public footprint or a sovereign local MG site exposes a clean localized consumer, dealer, contact, or test-drive flow beyond Côte d'Ivoire, Egypt, Mauritius, Morocco, Nigeria, South Africa, Tunisia, and Uganda; checked 2026-05-17 and the strongest remaining Ghana and Tanzania leads currently fail trustworthy browser verification because their public domains are certificate-broken and/or still render recycled or inconsistent content.
 

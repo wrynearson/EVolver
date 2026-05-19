@@ -1582,3 +1582,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Wuling / Baojun into Jordan and Lebanon after confirming both sovereign sites expose first-party local consumer pages plus official Innova distributor, contact, and test-drive flows.
 **Result**: pass
 **TODO**: Verify the next Wuling / Baojun sovereign market beyond Brunei, China, Indonesia, Jordan, Lebanon, Malaysia, Nepal, the Philippines, Thailand, and Vietnam from first-party local consumer, contact, dealer, or test-drive flows.
+
+## 2026-05-19
+**Did**: Closed the active Wuling / Baojun follow-up and demoted it to monitoring after re-checking the strongest remaining sovereign-domain leads; `wuling.com.au` currently resolves to a parked ad/captcha stack, likely Gulf ccTLD leads fail DNS, and the live `wuling-global.com` surface is Hong Kong-only rather than a new sovereign consumer market.
+**Result**: no-op
+
+## 2026-05-19
+**Did**: Added peer-backed expansion candidates to gap-focused brand footprints so users can see and copy the strongest unserved countries inside a missing major region, then focus a suggested market directly from the list.
+**Result**: pass
