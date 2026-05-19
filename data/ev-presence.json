@@ -1464,12 +1464,12 @@
         "EGY": {
           "name": "Egypt",
           "present": true,
-          "source": "https://www.xpeng.com/eg/service",
+          "source": "https://xpeng.com/eg/contact-us",
           "sources": [
-            "https://www.xpeng.com/news/018dcf00ee9c8dc66fae2c9e8e280031",
             "https://www.xpeng.com/region/eg",
-            "https://www.xpeng.com/eg/service",
-            "https://rayacorp.com/raya-auto-brings-the-latest-xpeng-evs-with-european-specifications-to-egypt-2/"
+            "https://xpeng.com/eg",
+            "https://xpeng.com/eg/contact-us",
+            "https://xpeng.com/eg/service"
           ],
           "uncertain": false
         },
@@ -1493,6 +1493,28 @@
             "https://www.xpeng.com/co/",
             "https://www.xpeng.com/region/co",
             "https://www.xpeng.com/co/test-drive"
+          ],
+          "uncertain": false
+        },
+        "MAR": {
+          "name": "Morocco",
+          "present": true,
+          "source": "https://xpengma.com/test-drive/",
+          "sources": [
+            "https://www.xpeng.com/news/01991346e14798ee96718a0281100064",
+            "https://xpengma.com/",
+            "https://xpengma.com/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "TUN": {
+          "name": "Tunisia",
+          "present": true,
+          "source": "https://www.xpengtunisie.com/contactez-nous/",
+          "sources": [
+            "https://www.xpeng.com/news/01991346e14798ee96718a0281100064",
+            "https://www.xpengtunisie.com/",
+            "https://www.xpengtunisie.com/contactez-nous/"
           ],
           "uncertain": false
         }

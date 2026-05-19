@@ -1590,3 +1590,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-19
 **Did**: Added peer-backed expansion candidates to gap-focused brand footprints so users can see and copy the strongest unserved countries inside a missing major region, then focus a suggested market directly from the list.
 **Result**: pass
+
+## 2026-05-19
+**Did**: Expanded XPENG's African footprint by adding Morocco and Tunisia, while refreshing Egypt to first-party `xpeng.com/eg` evidence after confirming XPENG's official country selector plus live local market, contact, and service or test-drive flows, and moved the remaining Africa follow-up into monitoring.
+**Result**: pass
