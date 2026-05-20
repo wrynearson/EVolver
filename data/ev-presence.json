@@ -1270,6 +1270,16 @@
           ],
           "uncertain": false
         },
+        "AZE": {
+          "name": "Azerbaijan",
+          "present": true,
+          "source": "https://www.nio.com/news/20241115001",
+          "sources": [
+            "https://www.nio.com/news/20241115001",
+            "https://www.nio.com/news/20250422001"
+          ],
+          "uncertain": false
+        },
         "CRI": {
           "name": "Costa Rica",
           "present": true,

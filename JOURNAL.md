@@ -1600,3 +1600,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-20
 **Did**: Added 10 newly listed NIO partner markets — Austria, Belgium, Czech Republic, Greece, Hungary, Luxembourg, Poland, Portugal, Romania, and Uzbekistan — after confirming NIO brand coverage on NIO's official partner directory and matching June/August 2025 NIO newsroom expansion announcements.
 **Result**: pass
+## 2026-05-20
+**Did**: Added Azerbaijan to NIO after confirming NIO's official market-entry announcement plus its 2024 ESG report both describe a live local general distributor and sales-and-service network buildout there.
+**Result**: pass
