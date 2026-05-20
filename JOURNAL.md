@@ -1607,3 +1607,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Coverage analysis showed firefly was the highest-impact uncovered brand, so I added it with 16 confirmed markets — Austria, Belgium, China, Costa Rica, the Czech Republic, Denmark, Greece, Hungary, Luxembourg, the Netherlands, Norway, Poland, Portugal, Romania, Singapore, and Uzbekistan — after confirming NIO's official partner directory plus firefly and NIO rollout news.
 **Result**: pass
 **TODO**: Verify additional official firefly sovereign markets beyond Austria, Belgium, China, Costa Rica, the Czech Republic, Denmark, Greece, Hungary, Luxembourg, the Netherlands, Norway, Poland, Portugal, Romania, Singapore, and Uzbekistan from NIO's official partner directory plus firefly rollout news, prioritizing Bulgaria, Cyprus, and Thailand.
+## 2026-05-20
+**Did**: Closed the active firefly follow-up by adding Bulgaria, Cyprus, and Thailand after confirming NIO's official partner directory plus the June 2025 NIO European rollout news for Bulgaria and Cyprus and the live Thai-market firefly distributor site run by Thonburi Blue Sky for Thailand.
+**Result**: pass

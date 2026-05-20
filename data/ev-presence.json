@@ -1434,6 +1434,16 @@
           ],
           "uncertain": false
         },
+        "BGR": {
+          "name": "Bulgaria",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250617001"
+          ],
+          "uncertain": false
+        },
         "CRI": {
           "name": "Costa Rica",
           "present": true,
@@ -1441,6 +1451,16 @@
           "sources": [
             "https://www.nio.com/findourpartners",
             "https://www.nio.com/news/20250818001"
+          ],
+          "uncertain": false
+        },
+        "CYP": {
+          "name": "Cyprus",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250617001"
           ],
           "uncertain": false
         },
@@ -1553,6 +1573,16 @@
             "https://www.nio.com/findourpartners",
             "https://www.nio.com/news/20250818001",
             "https://www.nio.com/news/20251118001"
+          ],
+          "uncertain": false
+        },
+        "THA": {
+          "name": "Thailand",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://thonburibluesky.com/en_TH/our-car/"
           ],
           "uncertain": false
         },
