@@ -1597,3 +1597,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-20
 **Did**: Coverage analysis showed Dongfeng's Oceania gap was the highest-impact actionable task, so I added New Zealand after confirming Dongfeng's official global launch news plus the live New Zealand market site, BOX EV page, dealer locator, and test-drive flow, and moved the remaining Australia follow-up into monitoring.
 **Result**: pass
+## 2026-05-20
+**Did**: Added 10 newly listed NIO partner markets — Austria, Belgium, Czech Republic, Greece, Hungary, Luxembourg, Poland, Portugal, Romania, and Uzbekistan — after confirming NIO brand coverage on NIO's official partner directory and matching June/August 2025 NIO newsroom expansion announcements.
+**Result**: pass

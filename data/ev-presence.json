@@ -1279,6 +1279,111 @@
             "https://www.nio.com/news/20250818001"
           ],
           "uncertain": false
+        },
+        "BEL": {
+          "name": "Belgium",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250603003"
+          ],
+          "uncertain": false
+        },
+        "LUX": {
+          "name": "Luxembourg",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250603003"
+          ],
+          "uncertain": false
+        },
+        "AUT": {
+          "name": "Austria",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250603003",
+            "https://www.nio.com/news/20250617001"
+          ],
+          "uncertain": false
+        },
+        "HUN": {
+          "name": "Hungary",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250603003",
+            "https://www.nio.com/news/20250617001"
+          ],
+          "uncertain": false
+        },
+        "POL": {
+          "name": "Poland",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250603003",
+            "https://www.nio.com/news/20250617001"
+          ],
+          "uncertain": false
+        },
+        "CZE": {
+          "name": "Czech Republic",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250603003",
+            "https://www.nio.com/news/20250617001"
+          ],
+          "uncertain": false
+        },
+        "ROU": {
+          "name": "Romania",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250603003",
+            "https://www.nio.com/news/20250617001"
+          ],
+          "uncertain": false
+        },
+        "GRC": {
+          "name": "Greece",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250617001"
+          ],
+          "uncertain": false
+        },
+        "PRT": {
+          "name": "Portugal",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250617001"
+          ],
+          "uncertain": false
+        },
+        "UZB": {
+          "name": "Uzbekistan",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250818001"
+          ],
+          "uncertain": false
         }
       }
     },
