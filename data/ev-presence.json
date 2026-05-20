@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-19",
+    "last_updated": "2026-05-20",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -5893,6 +5893,19 @@
             "https://dongfengcarsmalaysia.com/box",
             "https://dongfengcarsmalaysia.com/dealers",
             "https://dongfengcarsmalaysia.com/booking"
+          ],
+          "uncertain": false
+        },
+        "NZL": {
+          "name": "New Zealand",
+          "present": true,
+          "source": "https://dongfeng.co.nz/find-a-dealer/",
+          "sources": [
+            "https://www.dongfeng-global.com/news/details/387",
+            "https://dongfeng.co.nz/",
+            "https://dongfeng.co.nz/box/",
+            "https://dongfeng.co.nz/find-a-dealer/",
+            "https://dongfeng.co.nz/book-a-test-drive/"
           ],
           "uncertain": false
         },

@@ -1594,3 +1594,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-19
 **Did**: Expanded XPENG's African footprint by adding Morocco and Tunisia, while refreshing Egypt to first-party `xpeng.com/eg` evidence after confirming XPENG's official country selector plus live local market, contact, and service or test-drive flows, and moved the remaining Africa follow-up into monitoring.
 **Result**: pass
+## 2026-05-20
+**Did**: Coverage analysis showed Dongfeng's Oceania gap was the highest-impact actionable task, so I added New Zealand after confirming Dongfeng's official global launch news plus the live New Zealand market site, BOX EV page, dealer locator, and test-drive flow, and moved the remaining Australia follow-up into monitoring.
+**Result**: pass
