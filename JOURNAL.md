@@ -1603,3 +1603,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-20
 **Did**: Added Azerbaijan to NIO after confirming NIO's official market-entry announcement plus its 2024 ESG report both describe a live local general distributor and sales-and-service network buildout there.
 **Result**: pass
+## 2026-05-20
+**Did**: Coverage analysis showed firefly was the highest-impact uncovered brand, so I added it with 16 confirmed markets — Austria, Belgium, China, Costa Rica, the Czech Republic, Denmark, Greece, Hungary, Luxembourg, the Netherlands, Norway, Poland, Portugal, Romania, Singapore, and Uzbekistan — after confirming NIO's official partner directory plus firefly and NIO rollout news.
+**Result**: pass
+**TODO**: Verify additional official firefly sovereign markets beyond Austria, Belgium, China, Costa Rica, the Czech Republic, Denmark, Greece, Hungary, Luxembourg, the Netherlands, Norway, Poland, Portugal, Romania, Singapore, and Uzbekistan from NIO's official partner directory plus firefly rollout news, prioritizing Bulgaria, Cyprus, and Thailand.

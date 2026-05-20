@@ -1397,6 +1397,177 @@
         }
       }
     },
+    "firefly": {
+      "website": "https://www.firefly.world/",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.firefly.world/news/20250423006",
+          "sources": [
+            "https://www.firefly.world/",
+            "https://www.firefly.world/news/20241221001",
+            "https://www.firefly.world/news/20250423006",
+            "https://www.nio.com/news/20241221003"
+          ],
+          "uncertain": false
+        },
+        "AUT": {
+          "name": "Austria",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250603003",
+            "https://www.nio.com/news/20251118001"
+          ],
+          "uncertain": false
+        },
+        "BEL": {
+          "name": "Belgium",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250603003",
+            "https://www.nio.com/news/20251118001"
+          ],
+          "uncertain": false
+        },
+        "CRI": {
+          "name": "Costa Rica",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250818001"
+          ],
+          "uncertain": false
+        },
+        "CZE": {
+          "name": "Czech Republic",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250603003"
+          ],
+          "uncertain": false
+        },
+        "DNK": {
+          "name": "Denmark",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20251118001"
+          ],
+          "uncertain": false
+        },
+        "GRC": {
+          "name": "Greece",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20251118001"
+          ],
+          "uncertain": false
+        },
+        "HUN": {
+          "name": "Hungary",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250603003"
+          ],
+          "uncertain": false
+        },
+        "LUX": {
+          "name": "Luxembourg",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250603003",
+            "https://www.nio.com/news/20251118001"
+          ],
+          "uncertain": false
+        },
+        "NLD": {
+          "name": "Netherlands",
+          "present": true,
+          "source": "https://www.firefly.world/news/20250423006",
+          "sources": [
+            "https://www.firefly.world/news/20250423006",
+            "https://www.nio.com/news/20251118001"
+          ],
+          "uncertain": false
+        },
+        "NOR": {
+          "name": "Norway",
+          "present": true,
+          "source": "https://www.firefly.world/news/20250423006",
+          "sources": [
+            "https://www.firefly.world/news/20250423006",
+            "https://www.nio.com/news/20251118001"
+          ],
+          "uncertain": false
+        },
+        "POL": {
+          "name": "Poland",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250603003"
+          ],
+          "uncertain": false
+        },
+        "PRT": {
+          "name": "Portugal",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20251118001"
+          ],
+          "uncertain": false
+        },
+        "ROU": {
+          "name": "Romania",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250603003"
+          ],
+          "uncertain": false
+        },
+        "SGP": {
+          "name": "Singapore",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250818001",
+            "https://www.nio.com/news/20251118001"
+          ],
+          "uncertain": false
+        },
+        "UZB": {
+          "name": "Uzbekistan",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250818001"
+          ],
+          "uncertain": false
+        }
+      }
+    },
     "XPeng": {
       "website": "https://www.xpeng.com",
       "countries": {
