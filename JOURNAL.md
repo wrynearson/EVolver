@@ -1621,3 +1621,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-21
 **Did**: Coverage analysis showed ONVO was the highest-impact uncovered brand, so I added ONVO as a tracked brand with confirmed official presence in China, Costa Rica, and Uzbekistan after confirming ONVO's first-party China consumer and service surfaces plus NIO's official partner directory and market-entry announcement.
 **Result**: pass
+
+## 2026-05-21
+**Did**: Closed the active ONVO follow-up and demoted it to monitoring after re-checking NIO's official partner directory plus the latest official rollout notes; the live directory adds only non-sovereign Macau alongside the already-tracked Costa Rica and Uzbekistan entries, and the remaining sovereign announcements still expose NIO/firefly or future-tense rollout language rather than a new live ONVO market.
+**Result**: no-op
+
+## 2026-05-21
+**Did**: Coverage analysis showed AITO was the highest-impact uncovered brand with live first-party international consumer surfaces, so I added AITO as a tracked brand with confirmed official presence in China, the Philippines, and the United Arab Emirates after confirming `aito.auto`'s domestic consumer and service flows, the local `aito.ph` dealer and test-drive surfaces, and AITO's official UAE partnership launch page covering sales, delivery, after-sales, and local test drives.
+**Result**: pass

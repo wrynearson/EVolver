@@ -6970,6 +6970,43 @@
           "uncertain": false
         }
       }
+    },
+    "AITO": {
+      "website": "https://www.aitoauto.com/",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://aito.auto/",
+          "sources": [
+            "https://aito.auto/",
+            "https://aito.auto/service"
+          ],
+          "uncertain": false
+        },
+        "PHL": {
+          "name": "Philippines",
+          "present": true,
+          "source": "https://www.aito.ph/dealerships",
+          "sources": [
+            "https://www.aito.ph/",
+            "https://www.aito.ph/dealerships",
+            "https://www.aito.ph/aitotestdrive",
+            "https://www.aito.ph/requestaquote"
+          ],
+          "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://www.aitoauto.com/en/news/33",
+          "sources": [
+            "https://www.aitoauto.com/",
+            "https://www.aitoauto.com/en/news/33"
+          ],
+          "uncertain": false
+        }
+      }
     }
   }
 }
