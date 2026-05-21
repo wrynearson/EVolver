@@ -272,14 +272,26 @@ describe("useEVData helpers", () => {
         website: "https://www.byd.com",
         confirmedCountryCount: 2,
         coveredMajorRegionCount: 1,
-        missingRegions: ["Southeast Asia", "Americas", "Middle East"],
+        missingRegions: [
+          "Southeast Asia",
+          "Americas",
+          "Middle East",
+          "Africa",
+          "Oceania",
+        ],
       },
       {
         brandName: "XPeng",
         website: "https://www.xpeng.com",
         confirmedCountryCount: 1,
         coveredMajorRegionCount: 1,
-        missingRegions: ["Southeast Asia", "Americas", "Middle East"],
+        missingRegions: [
+          "Southeast Asia",
+          "Americas",
+          "Middle East",
+          "Africa",
+          "Oceania",
+        ],
       },
     ]);
   });
@@ -310,6 +322,18 @@ describe("useEVData helpers", () => {
         uncertainCountryCount: 0,
         totalCountryCount: 17,
       },
+      {
+        regionName: "Africa",
+        confirmedCountryCount: 0,
+        uncertainCountryCount: 0,
+        totalCountryCount: 54,
+      },
+      {
+        regionName: "Oceania",
+        confirmedCountryCount: 0,
+        uncertainCountryCount: 0,
+        totalCountryCount: 14,
+      },
     ]);
     expect(getBrandMajorRegionProgressSummaries(mockData, "XPeng")).toEqual([
       {
@@ -335,6 +359,18 @@ describe("useEVData helpers", () => {
         confirmedCountryCount: 0,
         uncertainCountryCount: 0,
         totalCountryCount: 17,
+      },
+      {
+        regionName: "Africa",
+        confirmedCountryCount: 0,
+        uncertainCountryCount: 0,
+        totalCountryCount: 54,
+      },
+      {
+        regionName: "Oceania",
+        confirmedCountryCount: 0,
+        uncertainCountryCount: 0,
+        totalCountryCount: 14,
       },
     ]);
   });

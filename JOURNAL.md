@@ -1610,3 +1610,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-20
 **Did**: Closed the active firefly follow-up by adding Bulgaria, Cyprus, and Thailand after confirming NIO's official partner directory plus the June 2025 NIO European rollout news for Bulgaria and Cyprus and the live Thai-market firefly distributor site run by Thonburi Blue Sky for Thailand.
 **Result**: pass
+## 2026-05-21
+**Did**: Coverage analysis showed Lynk & Co's Australia and South Africa blind spots were still the highest-impact zero-coverage gaps, so I expanded the app's major-region coverage model from four regions to six by adding Africa and Oceania to the gap summaries, refreshed the related UI labels and regression tests, and updated the Lynk & Co monitoring note after confirming the official selectors still do not expose a new sovereign market there.
+**Result**: pass

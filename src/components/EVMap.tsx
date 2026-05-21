@@ -16,6 +16,7 @@ import {
   getCountryPresenceDetails,
   getRegionCoverageSummaries,
   normalizeCoverageRegion,
+  TOTAL_MAJOR_EV_REGION_COUNT,
   useEVData,
 } from "../hooks/useEVData";
 import {
@@ -187,7 +188,7 @@ function formatMarketCount(count: number) {
 }
 
 function formatMajorRegionCoverageCount(count: number) {
-  return `${count}/4 major regions`;
+  return `${count}/${TOTAL_MAJOR_EV_REGION_COUNT} major regions`;
 }
 
 function getCountryLookupSuggestionLabel(
@@ -550,7 +551,7 @@ function formatMajorRegionGapList(summaries: BrandMajorRegionGapSummary[]) {
     const confirmedMarketLabel =
       summary.confirmedCountryCount === 1 ? "market" : "markets";
 
-    return `${summary.brandName} (${summary.confirmedCountryCount} confirmed ${confirmedMarketLabel} - ${summary.coveredMajorRegionCount}/4 major regions covered) — missing ${summary.missingRegions.join(", ")}`;
+    return `${summary.brandName} (${summary.confirmedCountryCount} confirmed ${confirmedMarketLabel} - ${summary.coveredMajorRegionCount}/${TOTAL_MAJOR_EV_REGION_COUNT} major regions covered) — missing ${summary.missingRegions.join(", ")}`;
   });
 }
 
@@ -3438,7 +3439,7 @@ export default function EVMap() {
                         <p className="mt-1 text-xs text-gray-500">
                           {summary.confirmedCountryCount.toLocaleString()} confirmed{" "}
                           {summary.confirmedCountryCount === 1 ? "market" : "markets"} ·{" "}
-                          {summary.coveredMajorRegionCount}/4 major regions covered
+                          {summary.coveredMajorRegionCount}/{TOTAL_MAJOR_EV_REGION_COUNT} major regions covered
                         </p>
                       </div>
                       {!activeSelectedBrand ? (
@@ -4832,7 +4833,7 @@ export default function EVMap() {
                             : ""}
                         </p>
                         <p className="mt-1 text-xs text-gray-500">
-                          Global major-region coverage: {coveredMajorRegionCount}/4
+                          Global major-region coverage: {coveredMajorRegionCount}/{TOTAL_MAJOR_EV_REGION_COUNT}
                           {missingRegions.length > 0
                             ? ` · Missing ${missingRegions.join(", ")}`
                             : " · No major-region gaps"}

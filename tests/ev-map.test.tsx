@@ -1004,7 +1004,7 @@ describe("EVMap", () => {
     const brandCoverageItems = within(coveragePanel!).getAllByRole("listitem");
     expect(
       within(brandCoverageItems[0]).getByText(
-        "Global major-region coverage: 1/4 · Missing Southeast Asia, Americas, Middle East",
+        "Global major-region coverage: 1/6 · Missing Southeast Asia, Americas, Middle East, Africa, Oceania",
       ),
     ).toBeInTheDocument();
     expect(
@@ -2038,7 +2038,7 @@ describe("EVMap", () => {
     const xpengSuggestion = screen.getByRole("option", { name: "XPeng" });
     expect(xpengSuggestion).toBeInTheDocument();
     expect(
-      within(xpengSuggestion).getByText("1 confirmed market · 1/4 major regions"),
+      within(xpengSuggestion).getByText("1 confirmed market · 1/6 major regions"),
     ).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Brand footprint" })).not.toBeInTheDocument();
 
@@ -2133,7 +2133,7 @@ describe("EVMap", () => {
     expect(bydSuggestion).toBeInTheDocument();
     expect(
       within(bydSuggestion).getByText(
-        "1 confirmed market · 1 uncertain · 0/4 major regions",
+        "1 confirmed market · 1 uncertain · 0/6 major regions",
       ),
     ).toBeInTheDocument();
   });
@@ -2234,7 +2234,7 @@ describe("EVMap", () => {
       within(footprintPanel!).getAllByText(
         "No tracked markets yet in this major EV region.",
       ),
-    ).toHaveLength(3);
+    ).toHaveLength(5);
     expect(
       within(footprintPanel!).getByRole("button", {
         name: /All regions · 2 markets/i,
@@ -2962,8 +2962,8 @@ describe("EVMap", () => {
         "2. Asia (1 confirmed country - 1 tracked brand) — BYD",
         "",
         "Largest major-region gaps",
-        "1. BYD (2 confirmed markets - 1/4 major regions covered) — missing Southeast Asia, Americas, Middle East",
-        "2. XPeng (1 confirmed market - 1/4 major regions covered) — missing Southeast Asia, Americas, Middle East",
+        "1. BYD (2 confirmed markets - 1/6 major regions covered) — missing Southeast Asia, Americas, Middle East, Africa, Oceania",
+        "2. XPeng (1 confirmed market - 1/6 major regions covered) — missing Southeast Asia, Americas, Middle East, Africa, Oceania",
       ].join("\n"),
     );
     const leadingBrandsSection = within(snapshotPanel!).getByText("Leading brands").closest("section");
@@ -3059,8 +3059,8 @@ describe("EVMap", () => {
     );
     expect(window.navigator.clipboard.writeText).toHaveBeenLastCalledWith(
       [
-        "BYD (2 confirmed markets - 1/4 major regions covered) — missing Southeast Asia, Americas, Middle East",
-        "XPeng (1 confirmed market - 1/4 major regions covered) — missing Southeast Asia, Americas, Middle East",
+        "BYD (2 confirmed markets - 1/6 major regions covered) — missing Southeast Asia, Americas, Middle East, Africa, Oceania",
+        "XPeng (1 confirmed market - 1/6 major regions covered) — missing Southeast Asia, Americas, Middle East, Africa, Oceania",
       ].join("\n"),
     );
 
