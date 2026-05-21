@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-20",
+    "last_updated": "2026-05-21",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -1382,6 +1382,42 @@
           "sources": [
             "https://www.nio.com/findourpartners",
             "https://www.nio.com/news/20250617001"
+          ],
+          "uncertain": false
+        },
+        "UZB": {
+          "name": "Uzbekistan",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250818001"
+          ],
+          "uncertain": false
+        }
+      }
+    },
+    "ONVO": {
+      "website": "https://www.onvo.cn/",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.onvo.cn/",
+          "sources": [
+            "https://www.onvo.cn/",
+            "https://www.onvo.cn/service",
+            "https://www.onvo.cn/map?channel=officialMap"
+          ],
+          "uncertain": false
+        },
+        "CRI": {
+          "name": "Costa Rica",
+          "present": true,
+          "source": "https://www.nio.com/findourpartners",
+          "sources": [
+            "https://www.nio.com/findourpartners",
+            "https://www.nio.com/news/20250818001"
           ],
           "uncertain": false
         },

@@ -4,6 +4,7 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
+- Verify the next official ONVO sovereign market beyond China, Costa Rica, and Uzbekistan from ONVO's first-party China site plus NIO's official partner directory and rollout announcements.
 - [monitoring] Re-check Wuling / Baojun only after a first-party sovereign local site exposes a new live consumer, contact, dealer, or test-drive flow beyond Brunei, China, Indonesia, Jordan, Lebanon, Malaysia, Nepal, the Philippines, Thailand, and Vietnam; checked 2026-05-19 and the strongest remaining sovereign-domain leads produced no trustworthy additions because `wuling.com.au` resolves to a parked ad/captcha stack, likely Gulf ccTLD leads fail DNS, and the live `wuling-global.com` surface is Hong Kong-only rather than a new sovereign market.
 
 - [monitoring] Re-check XPENG's next African sovereign market only after XPENG's official country selector or a first-party local site exposes a live consumer, contact, dealer, or service flow beyond Egypt, Morocco, and Tunisia; checked 2026-05-19 and the current South Africa/Kenya mentions on XPENG's own news page are still future-target statements rather than live local market surfaces.

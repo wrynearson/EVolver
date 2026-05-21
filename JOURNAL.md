@@ -1617,3 +1617,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-21
 **Did**: Fixed the coverage snapshot's largest-gap cards to use the shared six-region total instead of stale hard-coded `/4 regions` copy, then added regression coverage and re-checked the snapshot panel at desktop and mobile sizes.
 **Result**: pass
+
+## 2026-05-21
+**Did**: Coverage analysis showed ONVO was the highest-impact uncovered brand, so I added ONVO as a tracked brand with confirmed official presence in China, Costa Rica, and Uzbekistan after confirming ONVO's first-party China consumer and service surfaces plus NIO's official partner directory and market-entry announcement.
+**Result**: pass
