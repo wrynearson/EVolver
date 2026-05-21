@@ -1613,3 +1613,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-21
 **Did**: Coverage analysis showed Lynk & Co's Australia and South Africa blind spots were still the highest-impact zero-coverage gaps, so I expanded the app's major-region coverage model from four regions to six by adding Africa and Oceania to the gap summaries, refreshed the related UI labels and regression tests, and updated the Lynk & Co monitoring note after confirming the official selectors still do not expose a new sovereign market there.
 **Result**: pass
+
+## 2026-05-21
+**Did**: Fixed the coverage snapshot's largest-gap cards to use the shared six-region total instead of stale hard-coded `/4 regions` copy, then added regression coverage and re-checked the snapshot panel at desktop and mobile sizes.
+**Result**: pass

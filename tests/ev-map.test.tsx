@@ -2966,6 +2966,7 @@ describe("EVMap", () => {
         "2. XPeng (1 confirmed market - 1/6 major regions covered) — missing Southeast Asia, Americas, Middle East, Africa, Oceania",
       ].join("\n"),
     );
+    expect(within(snapshotPanel!).getAllByText("1/6 regions")).toHaveLength(2);
     const leadingBrandsSection = within(snapshotPanel!).getByText("Leading brands").closest("section");
     expect(leadingBrandsSection).not.toBeNull();
     fireEvent.click(within(leadingBrandsSection!).getByRole("button", { name: /1\. BYD/i }));

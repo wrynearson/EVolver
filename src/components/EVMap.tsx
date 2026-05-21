@@ -4671,7 +4671,8 @@ export default function EVMap() {
                                   </p>
                                 </div>
                                 <p className="text-right text-xs text-amber-900">
-                                  {summary.coveredMajorRegionCount}/4 regions
+                                  {summary.coveredMajorRegionCount}/
+                                  {TOTAL_MAJOR_EV_REGION_COUNT} regions
                                 </p>
                               </div>
                             </button>
