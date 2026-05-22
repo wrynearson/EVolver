@@ -1629,3 +1629,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-21
 **Did**: Coverage analysis showed AITO was the highest-impact uncovered brand with live first-party international consumer surfaces, so I added AITO as a tracked brand with confirmed official presence in China, the Philippines, and the United Arab Emirates after confirming `aito.auto`'s domestic consumer and service flows, the local `aito.ph` dealer and test-drive surfaces, and AITO's official UAE partnership launch page covering sales, delivery, after-sales, and local test drives.
 **Result**: pass
+
+## 2026-05-22
+**Did**: Fixed the mobile overlay stack so the dataset summary, coverage panel, and legend no longer overlap by tightening mobile panel heights and lifting the bottom overlays above the legend, backed by regression coverage and browser verification at 375px and 1280px.
+**Result**: pass

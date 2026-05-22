@@ -85,6 +85,8 @@ const COVERAGE_PANEL_VIEWS: CoveragePanelView[] = [
   "regions",
 ];
 const DEFAULT_COVERAGE_SORT: CoverageSort = "coverage";
+const MOBILE_BOTTOM_OVERLAY_OFFSET_CLASS = "bottom-36 sm:bottom-6";
+const MOBILE_BOTTOM_PANEL_MAX_HEIGHT_CLASS = "max-h-[28vh] sm:max-h-80";
 const DEFAULT_FOOTPRINT_SORT: FootprintSort = "name";
 const UNCERTAIN_BADGE_TOOLTIP =
   "Official presence is tracked here, but the supporting evidence still needs direct verification or reconciliation.";
@@ -2765,7 +2767,7 @@ export default function EVMap() {
       </div>
 
       {visibleSummary ? (
-        <div className="absolute top-6 left-6 right-6 flex max-h-[calc(100vh-24rem)] flex-col rounded-lg bg-white/90 px-4 py-3 shadow-md sm:right-auto sm:max-h-[calc(100vh-3rem)] sm:max-w-xs">
+        <div className="absolute top-6 left-6 right-6 flex max-h-[calc(100vh-28rem)] flex-col rounded-lg bg-white/90 px-4 py-3 shadow-md sm:right-auto sm:max-h-[calc(100vh-3rem)] sm:max-w-xs">
           <div className="flex items-start justify-between gap-4">
             <h2 className="text-sm font-semibold text-gray-800">
               Dataset summary
@@ -3612,7 +3614,9 @@ export default function EVMap() {
 
       {(selectedCountryDetails || activeSelectedBrand || brandCoverageSummaries.length > 0) &&
       sidePanelCollapsed ? (
-        <aside className="absolute right-6 bottom-6 w-72 rounded-lg bg-white/95 px-4 py-3 shadow-md">
+        <aside
+          className={`absolute right-6 left-6 ${MOBILE_BOTTOM_OVERLAY_OFFSET_CLASS} w-auto rounded-lg bg-white/95 px-4 py-3 shadow-md sm:left-auto sm:w-72`}
+        >
           <div className="flex items-start justify-between gap-4">
             <div>
               <h2 className="text-sm font-semibold text-gray-800">{sidePanelHeading}</h2>
@@ -3912,7 +3916,7 @@ export default function EVMap() {
 
       {activeSelectedBrand && !sidePanelCollapsed ? (
         <aside
-          className="absolute right-6 bottom-6 max-h-80 w-80 overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md"
+          className={`absolute right-6 left-6 ${MOBILE_BOTTOM_OVERLAY_OFFSET_CLASS} ${MOBILE_BOTTOM_PANEL_MAX_HEIGHT_CLASS} w-auto overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md sm:left-auto sm:w-80`}
           aria-labelledby="brand-footprint-heading"
           tabIndex={-1}
           onKeyDown={(event) => {
@@ -4417,7 +4421,9 @@ export default function EVMap() {
           </ul>
         </aside>
       ) : !sidePanelCollapsed && brandCoverageSummaries.length > 0 ? (
-        <aside className="absolute right-6 bottom-6 left-6 max-h-[40vh] w-auto overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md sm:left-auto sm:max-h-80 sm:w-80">
+        <aside
+          className={`absolute right-6 left-6 ${MOBILE_BOTTOM_OVERLAY_OFFSET_CLASS} ${MOBILE_BOTTOM_PANEL_MAX_HEIGHT_CLASS} w-auto overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md sm:left-auto sm:w-80`}
+        >
           <div className="flex items-start justify-between gap-4">
             <div>
               <h2 className="text-sm font-semibold text-gray-800">

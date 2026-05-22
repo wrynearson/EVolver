@@ -503,6 +503,44 @@ describe("EVMap", () => {
     expect(screen.getByLabelText("Search footprint markets")).toBeInTheDocument();
   });
 
+  it("keeps mobile bottom overlays offset above the legend", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    const coveragePanel = screen
+      .getByRole("heading", { name: "Brand coverage" })
+      .closest("aside");
+    expect(coveragePanel).not.toBeNull();
+    expect(coveragePanel).toHaveClass("bottom-36", "sm:bottom-6");
+
+    fireEvent.change(screen.getByLabelText("Brand filter"), {
+      target: { value: "BYD" },
+    });
+
+    const footprintPanel = await screen.findByRole("heading", { name: "Brand footprint" });
+    const footprintAside = footprintPanel.closest("aside");
+    expect(footprintAside).not.toBeNull();
+    expect(footprintAside).toHaveClass("bottom-36", "sm:bottom-6");
+
+    fireEvent.click(within(footprintAside!).getByRole("button", { name: "Collapse panel" }));
+
+    const collapsedSidePanel = screen.getByText("BYD · 2 markets").closest("aside");
+    expect(collapsedSidePanel).not.toBeNull();
+    expect(collapsedSidePanel).toHaveClass("bottom-36", "sm:bottom-6");
+  });
+
   it("fits the map to a selected country", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
