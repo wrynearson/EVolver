@@ -7045,6 +7045,53 @@
           "uncertain": false
         }
       }
+    },
+    "JAC / Yiwei": {
+      "website": "https://jacen.jac.com.cn/",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://yiwei.jac.com.cn/dealers.html",
+          "sources": [
+            "https://yiwei.jac.com.cn/",
+            "https://yiwei.jac.com.cn/dealers.html"
+          ],
+          "uncertain": false
+        },
+        "BRA": {
+          "name": "Brazil",
+          "present": true,
+          "source": "https://www.jacmotors.com.br/experiencia-x-test-drive/",
+          "sources": [
+            "https://www.jacmotors.com.br/",
+            "https://www.jacmotors.com.br/experiencia-x-test-drive/"
+          ],
+          "uncertain": false
+        },
+        "MEX": {
+          "name": "Mexico",
+          "present": true,
+          "source": "https://www.jac.mx/encuentra-un-distribuidor",
+          "sources": [
+            "https://www.jac.mx/",
+            "https://www.jac.mx/e30x",
+            "https://www.jac.mx/encuentra-un-distribuidor"
+          ],
+          "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://jacuae.com/en/book-a-test-drive/",
+          "sources": [
+            "https://jacuae.com/",
+            "https://jacuae.com/en/book-a-test-drive/",
+            "https://jacuae.com/JAC-Motors-first-electric-vehicle-JAC-E30X.html"
+          ],
+          "uncertain": false
+        }
+      }
     }
   }
 }

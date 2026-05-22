@@ -1637,3 +1637,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-22
 **Did**: Coverage analysis showed Skywell was the next highest-impact untracked brand with live first-party international consumer surfaces, so I added Skywell as a tracked brand with confirmed official presence in China, the United Kingdom, and the United Arab Emirates after confirming its domestic partner-network pages, UK dealer-network and test-drive flows, and UAE dealership and test-drive surfaces, then moved further expansion into monitoring.
 **Result**: pass
+
+## 2026-05-22
+**Did**: Coverage analysis showed JAC / Yiwei was the next highest-impact uncovered EV footprint with verifiable domestic-export continuity, so I added it as a tracked brand with confirmed official presence in China, Brazil, Mexico, and the United Arab Emirates after confirming Yiwei's domestic dealer network plus JAC's live local EV model, dealer, and test-drive flows in each overseas market.
+**Result**: pass
