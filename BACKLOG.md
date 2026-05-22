@@ -4,8 +4,6 @@ Items here are goals too large for a single session. When no immediate TODOs or 
 
 Remove an item when it is fully complete.
 
-- Verify the next official JAC / Yiwei sovereign market beyond Brazil, China, Mexico, and the United Arab Emirates from first-party domestic Yiwei or overseas JAC consumer, dealer, or test-drive flows, starting with the Philippines lead exposed by JAC's official overseas network.
-
 - [monitoring] Re-check ONVO only after NIO's official partner directory or a first-party ONVO local market surface exposes a live sovereign market beyond China, Costa Rica, and Uzbekistan; checked 2026-05-21 and the current official partner directory adds only non-sovereign Macau while the remaining sovereign rollout notes still expose NIO/firefly-only or future-tense expansion signals rather than a new live ONVO market.
 - [monitoring] Re-check AITO only after its official global or sovereign local sites expose a new live consumer, dealer, test-drive, or after-sales flow beyond China, the Philippines, and the United Arab Emirates; checked 2026-05-21 and the currently verifiable first-party footprint tops out at those three markets while the broader global launch remains early-stage.
 - [monitoring] Re-check Wuling / Baojun only after a first-party sovereign local site exposes a new live consumer, contact, dealer, or test-drive flow beyond Brunei, China, Indonesia, Jordan, Lebanon, Malaysia, Nepal, the Philippines, Thailand, and Vietnam; checked 2026-05-19 and the strongest remaining sovereign-domain leads produced no trustworthy additions because `wuling.com.au` resolves to a parked ad/captcha stack, likely Gulf ccTLD leads fail DNS, and the live `wuling-global.com` surface is Hong Kong-only rather than a new sovereign market.

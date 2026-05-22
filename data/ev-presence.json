@@ -7090,6 +7090,17 @@
             "https://jacuae.com/JAC-Motors-first-electric-vehicle-JAC-E30X.html"
           ],
           "uncertain": false
+        },
+        "CHL": {
+          "name": "Chile",
+          "present": true,
+          "source": "https://jacautoschile.cl/concesionarios/",
+          "sources": [
+            "https://www.jacautoschile.cl/modelos/electricos/jac-ignite-30x/",
+            "https://jacautoschile.cl/concesionarios/",
+            "https://www.jacautoschile.cl/noticias/jac-activa-el-modo-eco-y-presenta-el-nuevo-ignite30x-el-electrico-de-referencia-para-los-jovenes-de-la-ciudad/"
+          ],
+          "uncertain": false
         }
       }
     }

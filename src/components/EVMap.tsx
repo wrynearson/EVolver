@@ -19,6 +19,7 @@ import {
   TOTAL_MAJOR_EV_REGION_COUNT,
   useEVData,
 } from "../hooks/useEVData";
+import { type CopyStatus, useCopyStatus } from "../hooks/useCopyStatus";
 import {
   buildPresenceExportRows,
   buildPresenceExportFileBaseName,
@@ -41,7 +42,6 @@ import type {
   RegionCoverageSummary,
 } from "../types";
 
-type CopyStatus = "idle" | "copied" | "failed";
 type CopySourcesState = {
   key: string | null;
   status: CopyStatus;
@@ -1022,16 +1022,6 @@ export default function EVMap() {
     countries: null,
     regions: null,
   });
-  const hasInitializedCopyLinkReset = useRef(false);
-  const hasInitializedCopyPreviewSummaryReset = useRef(false);
-  const hasInitializedCopyCountryReset = useRef(false);
-  const hasInitializedCopyCountryProfileReset = useRef(false);
-  const hasInitializedCopyBrandWebsiteReset = useRef(false);
-  const hasInitializedCopyBrandMarketsReset = useRef(false);
-  const hasInitializedCopyGapCandidatesReset = useRef(false);
-  const hasInitializedCopyCoverageReset = useRef(false);
-  const hasInitializedCopySummaryReset = useRef(false);
-  const hasInitializedCopyMajorRegionGapsReset = useRef(false);
   const hasInitializedCopySourcesReset = useRef(false);
   const hasInitializedCoverageSearchReset = useRef(false);
   const hasInitializedFootprintSearchReset = useRef(false);
@@ -1047,25 +1037,11 @@ export default function EVMap() {
   const [selectedCountry, setSelectedCountry] = useState<MapCountrySelection | null>(
     () => initialSelectionState.selectedCountry,
   );
-  const [copyLinkStatus, setCopyLinkStatus] = useState<CopyStatus>("idle");
-  const [copyPreviewSummaryStatus, setCopyPreviewSummaryStatus] =
-    useState<CopyStatus>("idle");
-  const [copyHoveredSourcesStatus, setCopyHoveredSourcesStatus] =
-    useState<CopyStatus>("idle");
-  const [copyCountryStatus, setCopyCountryStatus] = useState<CopyStatus>("idle");
-  const [copyCountryProfileStatus, setCopyCountryProfileStatus] =
-    useState<CopyStatus>("idle");
-  const [copyBrandWebsiteStatus, setCopyBrandWebsiteStatus] = useState<CopyStatus>("idle");
-  const [copyBrandMarketsStatus, setCopyBrandMarketsStatus] = useState<CopyStatus>("idle");
-  const [copyGapCandidatesStatus, setCopyGapCandidatesStatus] = useState<CopyStatus>("idle");
-  const [copyCoverageStatus, setCopyCoverageStatus] = useState<CopyStatus>("idle");
-  const [copySummaryStatus, setCopySummaryStatus] = useState<CopyStatus>("idle");
-  const [copyMajorRegionGapsStatus, setCopyMajorRegionGapsStatus] =
-    useState<CopyStatus>("idle");
   const [copySourcesState, setCopySourcesState] = useState<CopySourcesState>({
     key: null,
     status: "idle",
   });
+  const [copySummaryStatus, setCopySummaryStatus] = useState<CopyStatus>("idle");
   const [coveragePanelView, setCoveragePanelView] = useState<CoveragePanelView>(
     () => initialSelectionState.coveragePanelView,
   );
@@ -2258,6 +2234,34 @@ export default function EVMap() {
       ].join("\n"),
     [shareUrl, visibleSummary],
   );
+  const [copyLinkStatus, setCopyLinkStatus] = useCopyStatus([shareUrl]);
+  const [copyPreviewSummaryStatus, setCopyPreviewSummaryStatus] = useCopyStatus([
+    hoveredCountrySummaryText,
+  ]);
+  const [copyHoveredSourcesStatus, setCopyHoveredSourcesStatus] = useCopyStatus([
+    hoveredCountrySourcesText,
+  ]);
+  const [copyCountryStatus, setCopyCountryStatus] = useCopyStatus([resolvedSelectedCountry]);
+  const [copyCountryProfileStatus, setCopyCountryProfileStatus] = useCopyStatus([
+    allSelectedCountryDetails,
+    selectedCountryDetails,
+  ]);
+  const [copyBrandWebsiteStatus, setCopyBrandWebsiteStatus] = useCopyStatus([
+    activeSelectedBrand,
+  ]);
+  const [copyBrandMarketsStatus, setCopyBrandMarketsStatus] = useCopyStatus([
+    selectedBrandMarketList,
+  ]);
+  const [copyGapCandidatesStatus, setCopyGapCandidatesStatus] = useCopyStatus([
+    selectedBrandMajorRegionGapCandidateList,
+  ]);
+  const [copyCoverageStatus, setCopyCoverageStatus] = useCopyStatus([
+    coveragePanelCopyList,
+    coveragePanelView,
+  ]);
+  const [copyMajorRegionGapsStatus, setCopyMajorRegionGapsStatus] = useCopyStatus([
+    majorRegionGapCopyList,
+  ]);
   const legendItems = useMemo(
     () =>
       getLegendItems(activeSelectedBrand || undefined, {
@@ -2516,84 +2520,19 @@ export default function EVMap() {
   ]);
 
   useEffect(() => {
-    if (!hasInitializedCopyLinkReset.current) {
-      hasInitializedCopyLinkReset.current = true;
+    if (copySourcesState.status === "idle" || typeof window === "undefined") {
       return;
     }
 
-    setCopyLinkStatus("idle");
-  }, [shareUrl]);
+    const resetTimer = window.setTimeout(() => {
+      setCopySourcesState({ key: null, status: "idle" });
+    }, 1500);
+
+    return () => window.clearTimeout(resetTimer);
+  }, [copySourcesState]);
 
   useEffect(() => {
-    if (!hasInitializedCopyPreviewSummaryReset.current) {
-      hasInitializedCopyPreviewSummaryReset.current = true;
-      return;
-    }
-
-    setCopyPreviewSummaryStatus("idle");
-  }, [hoveredCountrySummaryText]);
-
-  useEffect(() => {
-    setCopyHoveredSourcesStatus("idle");
-  }, [hoveredCountrySourcesText]);
-
-  useEffect(() => {
-    if (!hasInitializedCopyCountryReset.current) {
-      hasInitializedCopyCountryReset.current = true;
-      return;
-    }
-
-    setCopyCountryStatus("idle");
-  }, [resolvedSelectedCountry]);
-
-  useEffect(() => {
-    if (!hasInitializedCopyCountryProfileReset.current) {
-      hasInitializedCopyCountryProfileReset.current = true;
-      return;
-    }
-
-    setCopyCountryProfileStatus("idle");
-  }, [allSelectedCountryDetails, selectedCountryDetails]);
-
-  useEffect(() => {
-    if (!hasInitializedCopyBrandWebsiteReset.current) {
-      hasInitializedCopyBrandWebsiteReset.current = true;
-      return;
-    }
-
-    setCopyBrandWebsiteStatus("idle");
-  }, [activeSelectedBrand]);
-
-  useEffect(() => {
-    if (!hasInitializedCopyBrandMarketsReset.current) {
-      hasInitializedCopyBrandMarketsReset.current = true;
-      return;
-    }
-
-    setCopyBrandMarketsStatus("idle");
-  }, [selectedBrandMarketList]);
-
-  useEffect(() => {
-    if (!hasInitializedCopyGapCandidatesReset.current) {
-      hasInitializedCopyGapCandidatesReset.current = true;
-      return;
-    }
-
-    setCopyGapCandidatesStatus("idle");
-  }, [selectedBrandMajorRegionGapCandidateList]);
-
-  useEffect(() => {
-    if (!hasInitializedCopyCoverageReset.current) {
-      hasInitializedCopyCoverageReset.current = true;
-      return;
-    }
-
-    setCopyCoverageStatus("idle");
-  }, [coveragePanelCopyList, coveragePanelView]);
-
-  useEffect(() => {
-    if (!hasInitializedCopySummaryReset.current) {
-      hasInitializedCopySummaryReset.current = true;
+    if (copySummaryStatus === "idle" || typeof window === "undefined") {
       return;
     }
 
@@ -2602,16 +2541,7 @@ export default function EVMap() {
     }, 1500);
 
     return () => window.clearTimeout(resetTimer);
-  }, [datasetSummaryResetSignature]);
-
-  useEffect(() => {
-    if (!hasInitializedCopyMajorRegionGapsReset.current) {
-      hasInitializedCopyMajorRegionGapsReset.current = true;
-      return;
-    }
-
-    setCopyMajorRegionGapsStatus("idle");
-  }, [majorRegionGapCopyList]);
+  }, [copySummaryStatus]);
 
   useEffect(() => {
     if (!hasInitializedCopySourcesReset.current) {
