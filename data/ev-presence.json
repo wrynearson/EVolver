@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-21",
+    "last_updated": "2026-05-22",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -7003,6 +7003,44 @@
           "sources": [
             "https://www.aitoauto.com/",
             "https://www.aitoauto.com/en/news/33"
+          ],
+          "uncertain": false
+        }
+      }
+    },
+    "Skywell": {
+      "website": "https://en.skywellev.com/",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://www.skywellev.com/partner",
+          "sources": [
+            "https://www.skywellev.com/",
+            "https://www.skywellev.com/partner",
+            "https://en.skywellev.com/partner"
+          ],
+          "uncertain": false
+        },
+        "GBR": {
+          "name": "United Kingdom",
+          "present": true,
+          "source": "https://skywell-uk.com/news/trio-of-new-dealers-strengthen-skywell-network/",
+          "sources": [
+            "https://skywell-uk.com/",
+            "https://skywell-uk.com/news/trio-of-new-dealers-strengthen-skywell-network/",
+            "https://skywell-uk.com/news/skywell-strengthens-its-network-in-the-north-with-new-dealers-either-side-of-the-pennines/"
+          ],
+          "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://www.skywell-uae.com/contact-us",
+          "sources": [
+            "https://www.skywell-uae.com/",
+            "https://www.skywell-uae.com/contact-us",
+            "https://www.skywell-uae.com/test-drive"
           ],
           "uncertain": false
         }

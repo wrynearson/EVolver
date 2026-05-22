@@ -1633,3 +1633,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-22
 **Did**: Fixed the mobile overlay stack so the dataset summary, coverage panel, and legend no longer overlap by tightening mobile panel heights and lifting the bottom overlays above the legend, backed by regression coverage and browser verification at 375px and 1280px.
 **Result**: pass
+
+## 2026-05-22
+**Did**: Coverage analysis showed Skywell was the next highest-impact untracked brand with live first-party international consumer surfaces, so I added Skywell as a tracked brand with confirmed official presence in China, the United Kingdom, and the United Arab Emirates after confirming its domestic partner-network pages, UK dealer-network and test-drive flows, and UAE dealership and test-drive surfaces, then moved further expansion into monitoring.
+**Result**: pass
