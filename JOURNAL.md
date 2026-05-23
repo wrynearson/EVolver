@@ -1653,3 +1653,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-23
 **Did**: Coverage analysis showed JAC / Yiwei's Europe gap was the highest-impact actionable backlog slice, so I added Switzerland after confirming JAC Schweiz AG's live sovereign EV model pages, nationwide service-and-sales partner network, and importer/about surfaces on the official local site.
 **Result**: pass
+
+## 2026-05-23
+**Did**: Re-checked JAC / Yiwei's best Southeast Asia lead via JAC's official dealer locator and local market domains, confirmed the Philippines passenger URL now resolves to unrelated gambling spam while Malaysia and Singapore still expose only commercial-truck surfaces, and demoted that stale expansion lead to monitoring while promoting firefly's first Middle East market gap into the actionable backlog.
+**Result**: no-op
