@@ -2222,18 +2222,6 @@ export default function EVMap() {
       activeViewFilters: activeViewFilterLabels,
     }).join("\n");
   }, [activeViewFilterLabelSignature, selectedCoverageRegion, visibleSummary]);
-  const datasetSummaryResetSignature = useMemo(
-    () =>
-      [
-        shareUrl,
-        visibleSummary?.visibleBrandLabel ?? "",
-        visibleSummary?.brandCount ?? "",
-        visibleSummary?.visibleCountryCount ?? "",
-        visibleSummary?.uncertainCountryCount ?? "",
-        visibleSummary?.lastUpdated ?? "",
-      ].join("\n"),
-    [shareUrl, visibleSummary],
-  );
   const [copyLinkStatus, setCopyLinkStatus] = useCopyStatus([shareUrl]);
   const [copyPreviewSummaryStatus, setCopyPreviewSummaryStatus] = useCopyStatus([
     hoveredCountrySummaryText,

@@ -1649,3 +1649,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-22
 **Did**: Simplified the map's copy-feedback state handling with a reusable hook so share, preview, coverage, footprint, and gap copy buttons consistently return to idle labels after a short delay, and added direct hook regression coverage.
 **Result**: pass
+
+## 2026-05-23
+**Did**: Coverage analysis showed JAC / Yiwei's Europe gap was the highest-impact actionable backlog slice, so I added Switzerland after confirming JAC Schweiz AG's live sovereign EV model pages, nationwide service-and-sales partner network, and importer/about surfaces on the official local site.
+**Result**: pass

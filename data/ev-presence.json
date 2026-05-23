@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-22",
+    "last_updated": "2026-05-23",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -7099,6 +7099,18 @@
             "https://www.jacautoschile.cl/modelos/electricos/jac-ignite-30x/",
             "https://jacautoschile.cl/concesionarios/",
             "https://www.jacautoschile.cl/noticias/jac-activa-el-modo-eco-y-presenta-el-nuevo-ignite30x-el-electrico-de-referencia-para-los-jovenes-de-la-ciudad/"
+          ],
+          "uncertain": false
+        },
+        "CHE": {
+          "name": "Switzerland",
+          "present": true,
+          "source": "https://jac-schweiz.ch/en/service-and-sales-partners/",
+          "sources": [
+            "https://jac-schweiz.ch/en/",
+            "https://jac-schweiz.ch/en/e30x/",
+            "https://jac-schweiz.ch/en/service-and-sales-partners/",
+            "https://jac-schweiz.ch/en/about/"
           ],
           "uncertain": false
         }
