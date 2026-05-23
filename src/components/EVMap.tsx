@@ -374,6 +374,14 @@ function getCopyShareLinkButtonLabel(status: CopyStatus) {
       : "Copy share link";
 }
 
+function getCopyVisibleBrandsButtonLabel(status: CopyStatus) {
+  return status === "copied"
+    ? "Copied visible brands"
+    : status === "failed"
+      ? "Visible brands copy failed"
+      : "Copy visible brands";
+}
+
 function formatBrandPresenceMarketList(
   countries: Array<{
     isoCode: string;
@@ -584,6 +592,41 @@ function formatHoveredCountrySummary(country: CountryPresenceDetails) {
       : "none";
 
   return `${country.countryName} (${country.isoCode})\nBrands in view: ${visibleBrands}`;
+}
+
+function formatVisibleCountryBrandList(
+  countryName: string,
+  isoCode: string,
+  brands: Array<{
+    brandName: string;
+    sources: string[];
+    uncertain: boolean;
+  }>,
+) {
+  const lines = [
+    `Country: ${countryName} (${isoCode})`,
+    `Visible brands in view: ${brands.length}`,
+  ];
+
+  if (brands.length === 0) {
+    lines.push("", "No tracked brands are visible in the current view.");
+    return lines.join("\n");
+  }
+
+  lines.push(
+    "",
+    ...brands.map((brand) => {
+      const detailParts = [getSourceCountLabel(brand.sources.length)];
+
+      if (brand.uncertain) {
+        detailParts.push("uncertain");
+      }
+
+      return `- ${brand.brandName} (${detailParts.join(" - ")})`;
+    }),
+  );
+
+  return lines.join("\n");
 }
 
 function getMajorRegionCoverageLabel(region: BrandMajorRegionProgressSummary) {
@@ -2022,6 +2065,25 @@ export default function EVMap() {
         setCopyCountryProfileStatus("failed");
       });
   };
+  const copyVisibleCountryBrands = () => {
+    if (!selectedCountryDetails || !navigator.clipboard?.writeText) {
+      setCopyVisibleCountryBrandsStatus("failed");
+      return;
+    }
+
+    setCopyVisibleCountryBrandsStatus("copied");
+    void navigator.clipboard
+      .writeText(
+        formatVisibleCountryBrandList(
+          selectedCountryDetails.countryName,
+          selectedCountryDetails.isoCode,
+          visibleSelectedCountryBrands,
+        ),
+      )
+      .catch(() => {
+        setCopyVisibleCountryBrandsStatus("failed");
+      });
+  };
   const copyVisibleCoverage = () => {
     if (coveragePanelCopyList.length === 0 || !navigator.clipboard?.writeText) {
       setCopyCoverageStatus("failed");
@@ -2233,6 +2295,10 @@ export default function EVMap() {
   const [copyCountryProfileStatus, setCopyCountryProfileStatus] = useCopyStatus([
     allSelectedCountryDetails,
     selectedCountryDetails,
+  ]);
+  const [copyVisibleCountryBrandsStatus, setCopyVisibleCountryBrandsStatus] = useCopyStatus([
+    selectedCountryDetails,
+    visibleSelectedCountryBrands,
   ]);
   const [copyBrandWebsiteStatus, setCopyBrandWebsiteStatus] = useCopyStatus([
     activeSelectedBrand,
@@ -3638,6 +3704,13 @@ export default function EVMap() {
                   : copyCountryProfileStatus === "failed"
                     ? "Country profile copy failed"
                     : "Copy country profile"}
+              </button>
+              <button
+                type="button"
+                className="mt-2 block text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                onClick={copyVisibleCountryBrands}
+              >
+                {getCopyVisibleBrandsButtonLabel(copyVisibleCountryBrandsStatus)}
               </button>
               {selectedCountryAllSources.length > 0 ? (
                 <button

@@ -975,6 +975,21 @@ describe("EVMap", () => {
       await within(detailsPanel!).findByRole("button", { name: "Copied country profile" }),
     ).toBeInTheDocument();
 
+    fireEvent.click(
+      within(detailsPanel!).getByRole("button", { name: "Copy visible brands" }),
+    );
+    expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
+      [
+        "Country: Norway (NOR)",
+        "Visible brands in view: 1",
+        "",
+        "- XPeng (2 sources)",
+      ].join("\n"),
+    );
+    expect(
+      await within(detailsPanel!).findByRole("button", { name: "Copied visible brands" }),
+    ).toBeInTheDocument();
+
     fireEvent.click(screen.getByRole("button", { name: "Copy share link" }));
     expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
       "http://localhost:3000/?brand=XPeng&country=NOR",
@@ -1013,6 +1028,22 @@ describe("EVMap", () => {
       within(emptyDetailsPanel!).getByText(
         "No tracked official brand presence for this country in the current view.",
       ),
+    ).toBeInTheDocument();
+    fireEvent.click(
+      within(emptyDetailsPanel!).getByRole("button", { name: "Copy visible brands" }),
+    );
+    expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
+      [
+        "Country: Sweden (SWE)",
+        "Visible brands in view: 0",
+        "",
+        "No tracked brands are visible in the current view.",
+      ].join("\n"),
+    );
+    expect(
+      await within(emptyDetailsPanel!).findByRole("button", {
+        name: "Copied visible brands",
+      }),
     ).toBeInTheDocument();
     expect(
       within(emptyDetailsPanel!).getByText("Brands active elsewhere in Europe"),
