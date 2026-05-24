@@ -1675,3 +1675,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-24
 **Did**: Coverage analysis showed IM Motors' Americas gap was the highest-impact actionable slice once MG Motor Mexico exposed a live `MG IM LS7` market page plus first-party Mexico test-drive and contact flows, so I added Mexico and refreshed the IM monitoring note.
 **Result**: pass
+
+## 2026-05-24
+**Did**: Coverage analysis showed NIO's Oceania gap was the highest-impact uncovered tracked-brand slice, so I checked NIO's official partner directory plus the current `nio.com` and `firefly.world` first-party global surfaces, confirmed that Australia and New Zealand still lack a sovereign NIO consumer, distributor, dealer, or test-drive flow, and recorded the gap as monitoring in BACKLOG.md.
+**Result**: no-op
+
+## 2026-05-24
+**Did**: Added a `Ctrl/Cmd + Alt + R` shortcut plus shortcuts-card guidance for focusing the existing region filter without clearing it, backed by regression coverage and browser verification at desktop and mobile widths.
+**Result**: pass

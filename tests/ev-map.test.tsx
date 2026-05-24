@@ -2606,6 +2606,7 @@ describe("EVMap", () => {
     expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
 
     const brandFilter = screen.getByLabelText("Brand filter");
+    const regionFilter = screen.getByLabelText("Region filter");
     const countryLookup = screen.getByLabelText("Country lookup");
     countryLookup.focus();
     expect(countryLookup).toHaveFocus();
@@ -2615,6 +2616,9 @@ describe("EVMap", () => {
 
     fireEvent.keyDown(window, { key: "K", ctrlKey: true, shiftKey: true });
     expect(countryLookup).toHaveFocus();
+
+    fireEvent.keyDown(window, { key: "R", ctrlKey: true, altKey: true });
+    expect(regionFilter).toHaveFocus();
 
     fireEvent.change(brandFilter, { target: { value: "XPeng" } });
     expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
@@ -2699,6 +2703,10 @@ describe("EVMap", () => {
     expect(screen.getByText("Ctrl/Cmd + Shift + K")).toBeInTheDocument();
     expect(
       screen.getByText("Focus the country lookup and select its current value."),
+    ).toBeInTheDocument();
+    expect(screen.getByText("Ctrl/Cmd + Alt + R")).toBeInTheDocument();
+    expect(
+      screen.getByText("Focus the region filter without clearing the current region."),
     ).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Hide keyboard shortcuts" })).toHaveAttribute(
       "aria-expanded",

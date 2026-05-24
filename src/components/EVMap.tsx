@@ -100,6 +100,10 @@ const KEYBOARD_SHORTCUTS = [
     description: "Focus the country lookup and select its current value.",
   },
   {
+    keys: "Ctrl/Cmd + Alt + R",
+    description: "Focus the region filter without clearing the current region.",
+  },
+  {
     keys: "?",
     description: "Show or hide this shortcuts card from anywhere outside a text field.",
   },
@@ -1059,6 +1063,7 @@ export default function EVMap() {
   const initialSelectionState = getInitialSelectionState();
   const brandFilterInputRef = useRef<HTMLInputElement | null>(null);
   const countryLookupInputRef = useRef<HTMLInputElement | null>(null);
+  const regionFilterRef = useRef<HTMLSelectElement | null>(null);
   const coverageTabRefs = useRef<Record<CoveragePanelView, HTMLButtonElement | null>>({
     snapshot: null,
     brands: null,
@@ -2491,6 +2496,17 @@ export default function EVMap() {
       }
 
       if (
+        (event.ctrlKey || event.metaKey) &&
+        event.altKey &&
+        !event.shiftKey &&
+        event.key.toLowerCase() === "r"
+      ) {
+        event.preventDefault();
+        regionFilterRef.current?.focus();
+        return;
+      }
+
+      if (
         event.key !== "?" ||
         event.ctrlKey ||
         event.metaKey ||
@@ -2955,6 +2971,7 @@ export default function EVMap() {
             </label>
             <div className="mt-1 flex items-center gap-2">
               <select
+                ref={regionFilterRef}
                 id="region-filter"
                 className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 disabled:cursor-not-allowed disabled:opacity-60"
                 disabled={availableRegions.length === 0}
