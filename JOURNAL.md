@@ -1667,3 +1667,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-24
 **Did**: Coverage analysis showed Lynk & Co's Africa gap was the highest-impact actionable slice, so I added Egypt and Morocco after confirming Lynk & Co's own global market menu now routes both countries to live localized market sites plus matching local dealer/contact flows on the official Lynk & Co domain.
 **Result**: pass
+
+## 2026-05-24
+**Did**: Coverage analysis showed Lynk & Co's Oceania gap was still the highest-impact follow-up after the Africa expansion, so I added Australia after confirming the official `en-au` market serves a localized home page plus live car, dealer-locator, test-drive, and order flows on Lynk & Co's own domain.
+**Result**: pass

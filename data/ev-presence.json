@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-23",
+    "last_updated": "2026-05-24",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -950,6 +950,19 @@
           ],
           "uncertain": false
         },
+        "AUS": {
+          "name": "Australia",
+          "present": true,
+          "source": "https://www.lynkco.com/en-au",
+          "sources": [
+            "https://www.lynkco.com/en-au",
+            "https://www.lynkco.com/en-au/cars",
+            "https://www.lynkco.com/en-au/find-us",
+            "https://www.lynkco.com/en-au/testdrive",
+            "https://www.lynkco.com/en-au/order"
+          ],
+          "uncertain": false
+        },
         "AUT": {
           "name": "Austria",
           "present": true,
@@ -971,18 +984,6 @@
           ],
           "uncertain": false
         },
-        "BIH": {
-          "name": "Bosnia and Herzegovina",
-          "present": true,
-          "source": "https://www.lynkco-see.com/ba/",
-          "sources": [
-            "https://www.lynkco.com/en/service-and-assistance/service-market-selector",
-            "https://www.lynkco-see.com/ba/",
-            "https://www.lynkco-see.com/ba/test-drive/",
-            "https://www.lynkco-see.com/ba/contact/"
-          ],
-          "uncertain": false
-        },
         "BGR": {
           "name": "Bulgaria",
           "present": true,
@@ -992,6 +993,18 @@
             "https://www.lynkco-see.com/bg/",
             "https://www.lynkco-see.com/bg/test-drive/",
             "https://www.lynkco-see.com/bg/contact/"
+          ],
+          "uncertain": false
+        },
+        "BIH": {
+          "name": "Bosnia and Herzegovina",
+          "present": true,
+          "source": "https://www.lynkco-see.com/ba/",
+          "sources": [
+            "https://www.lynkco.com/en/service-and-assistance/service-market-selector",
+            "https://www.lynkco-see.com/ba/",
+            "https://www.lynkco-see.com/ba/test-drive/",
+            "https://www.lynkco-see.com/ba/contact/"
           ],
           "uncertain": false
         },
@@ -1127,18 +1140,6 @@
           ],
           "uncertain": false
         },
-        "MKD": {
-          "name": "North Macedonia",
-          "present": true,
-          "source": "https://www.lynkco-see.com/mk/",
-          "sources": [
-            "https://www.lynkco.com/en/service-and-assistance/service-market-selector",
-            "https://www.lynkco-see.com/mk/",
-            "https://www.lynkco-see.com/mk/test-drive/",
-            "https://www.lynkco-see.com/mk/contact/"
-          ],
-          "uncertain": false
-        },
         "MEX": {
           "name": "Mexico",
           "present": true,
@@ -1148,6 +1149,18 @@
             "https://www.lynkco.com/es-mx/",
             "https://www.lynkco.com/es-mx/findadealer",
             "https://www.lynkco.com/es-mx/test-drive"
+          ],
+          "uncertain": false
+        },
+        "MKD": {
+          "name": "North Macedonia",
+          "present": true,
+          "source": "https://www.lynkco-see.com/mk/",
+          "sources": [
+            "https://www.lynkco.com/en/service-and-assistance/service-market-selector",
+            "https://www.lynkco-see.com/mk/",
+            "https://www.lynkco-see.com/mk/test-drive/",
+            "https://www.lynkco-see.com/mk/contact/"
           ],
           "uncertain": false
         },
