@@ -1671,3 +1671,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-24
 **Did**: Coverage analysis showed Lynk & Co's Oceania gap was still the highest-impact follow-up after the Africa expansion, so I added Australia after confirming the official `en-au` market serves a localized home page plus live car, dealer-locator, test-drive, and order flows on Lynk & Co's own domain.
 **Result**: pass
+
+## 2026-05-24
+**Did**: Coverage analysis showed IM Motors' Americas gap was the highest-impact actionable slice once MG Motor Mexico exposed a live `MG IM LS7` market page plus first-party Mexico test-drive and contact flows, so I added Mexico and refreshed the IM monitoring note.
+**Result**: pass

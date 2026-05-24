@@ -5785,6 +5785,17 @@
           ],
           "uncertain": false
         },
+        "MEX": {
+          "name": "Mexico",
+          "present": true,
+          "source": "https://www.mgmotor.com.mx/vehiculos/MGIMLS7",
+          "sources": [
+            "https://www.mgmotor.com.mx/vehiculos/MGIMLS7",
+            "https://www.mgmotor.com.mx/prueba-de-manejo",
+            "https://www.mgmotor.com.mx/contactanos"
+          ],
+          "uncertain": false
+        },
         "SGP": {
           "name": "Singapore",
           "present": true,
