@@ -1037,6 +1037,18 @@
           ],
           "uncertain": false
         },
+        "EGY": {
+          "name": "Egypt",
+          "present": true,
+          "source": "https://www.lynkco.com/egypt-en/findadealer",
+          "sources": [
+            "https://www.lynkco.com/findadealer",
+            "https://www.lynkco.com/egypt-en/",
+            "https://www.lynkco.com/egypt-en/findadealer",
+            "https://www.lynkco.com/egypt-en/contactus"
+          ],
+          "uncertain": false
+        },
         "ESP": {
           "name": "Spain",
           "present": true,
@@ -1088,6 +1100,18 @@
           "sources": [
             "https://www.lynkco.com/it-it/",
             "https://www.lynkco.com/it-it/testdrive"
+          ],
+          "uncertain": false
+        },
+        "MAR": {
+          "name": "Morocco",
+          "present": true,
+          "source": "https://www.lynkco.com/en-ma/",
+          "sources": [
+            "https://www.lynkco.com/findadealer",
+            "https://www.lynkco.com/en-ma/",
+            "https://www.lynkco.com/fr-ma/",
+            "https://www.lynkco.com/en-ma/contactus"
           ],
           "uncertain": false
         },

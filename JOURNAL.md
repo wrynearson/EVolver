@@ -1663,3 +1663,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-23
 **Did**: Added a `Copy visible brands` action to the country details panel so users can share the currently shown country-brand list, including filtered empty states, without copying the full market profile.
 **Result**: pass
+
+## 2026-05-24
+**Did**: Coverage analysis showed Lynk & Co's Africa gap was the highest-impact actionable slice, so I added Egypt and Morocco after confirming Lynk & Co's own global market menu now routes both countries to live localized market sites plus matching local dealer/contact flows on the official Lynk & Co domain.
+**Result**: pass
