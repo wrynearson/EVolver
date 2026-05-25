@@ -1683,3 +1683,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-24
 **Did**: Added a `Ctrl/Cmd + Alt + R` shortcut plus shortcuts-card guidance for focusing the existing region filter without clearing it, backed by regression coverage and browser verification at desktop and mobile widths.
 **Result**: pass
+## 2026-05-25
+**Did**: Fixed the left overlay stack so the dataset summary panel now reserves desktop space above the always-visible legend instead of overlapping its export controls, backed by regression coverage plus browser verification at 1280px and 375px widths.
+**Result**: pass
+**TODO**: Verify Wuling / Baojun's first Americas market, prioritizing Mexico and Brazil through official SAIC-GM-Wuling export surfaces plus any sovereign local consumer, dealer, or test-drive sites.

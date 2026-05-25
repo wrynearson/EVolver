@@ -87,6 +87,8 @@ const COVERAGE_PANEL_VIEWS: CoveragePanelView[] = [
 const DEFAULT_COVERAGE_SORT: CoverageSort = "coverage";
 const MOBILE_BOTTOM_OVERLAY_OFFSET_CLASS = "bottom-36 sm:bottom-6";
 const MOBILE_BOTTOM_PANEL_MAX_HEIGHT_CLASS = "max-h-[28vh] sm:max-h-80";
+const SUMMARY_PANEL_MAX_HEIGHT_CLASS =
+  "max-h-[calc(100vh-28rem)] sm:max-h-[calc(100vh-13rem)]";
 const DEFAULT_FOOTPRINT_SORT: FootprintSort = "name";
 const UNCERTAIN_BADGE_TOOLTIP =
   "Official presence is tracked here, but the supporting evidence still needs direct verification or reconciliation.";
@@ -2767,7 +2769,9 @@ export default function EVMap() {
       </div>
 
       {visibleSummary ? (
-        <div className="absolute top-6 left-6 right-6 flex max-h-[calc(100vh-28rem)] flex-col rounded-lg bg-white/90 px-4 py-3 shadow-md sm:right-auto sm:max-h-[calc(100vh-3rem)] sm:max-w-xs">
+        <div
+          className={`absolute top-6 left-6 right-6 flex ${SUMMARY_PANEL_MAX_HEIGHT_CLASS} flex-col rounded-lg bg-white/90 px-4 py-3 shadow-md sm:right-auto sm:max-w-xs`}
+        >
           <div className="flex items-start justify-between gap-4">
             <h2 className="text-sm font-semibold text-gray-800">
               Dataset summary

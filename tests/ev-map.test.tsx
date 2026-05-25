@@ -541,6 +541,30 @@ describe("EVMap", () => {
     expect(collapsedSidePanel).toHaveClass("bottom-36", "sm:bottom-6");
   });
 
+  it("reserves desktop legend space beneath the summary panel", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    const summaryHeading = await screen.findByRole("heading", { name: "Dataset summary" });
+    const summaryPanel = summaryHeading.parentElement?.parentElement ?? null;
+
+    expect(summaryPanel).not.toBeNull();
+    expect(summaryPanel).toHaveClass(
+      "max-h-[calc(100vh-28rem)]",
+      "sm:max-h-[calc(100vh-13rem)]",
+    );
+  });
+
   it("fits the map to a selected country", async () => {
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
       const url = String(input);
