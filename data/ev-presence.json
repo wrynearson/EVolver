@@ -912,6 +912,16 @@
     "Li Auto": {
       "website": "https://www.lixiang.com",
       "countries": {
+        "AZE": {
+          "name": "Azerbaijan",
+          "present": true,
+          "source": "https://www.liauto.com/news/9.html",
+          "sources": [
+            "https://www.liauto.com/news/9.html",
+            "https://efendiler.az/en/"
+          ],
+          "uncertain": false
+        },
         "CHN": {
           "name": "China",
           "present": true,
@@ -920,6 +930,29 @@
             "https://www.lixiang.com/",
             "https://www.lixiang.com/support/store/findus",
             "https://www.liauto.com/"
+          ],
+          "uncertain": false
+        },
+        "EGY": {
+          "name": "Egypt",
+          "present": true,
+          "source": "https://liauto-eg.com/find-us/",
+          "sources": [
+            "https://www.liauto.com/news/9.html",
+            "https://liauto-eg.com/",
+            "https://liauto-eg.com/find-us/",
+            "https://gb-corporation.com/gb-auto/"
+          ],
+          "uncertain": false
+        },
+        "KAZ": {
+          "name": "Kazakhstan",
+          "present": true,
+          "source": "https://www.liauto.com/support/aftersale",
+          "sources": [
+            "https://www.liauto.com/news/9.html",
+            "https://www.liauto.com/support/aftersale",
+            "https://doscar.kz/news/53"
           ],
           "uncertain": false
         }

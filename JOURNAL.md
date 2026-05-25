@@ -1699,3 +1699,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-25
 **Did**: Recomputed the major-region coverage gaps, picked DENZA's missing Africa footprint as the highest-impact uncovered tracked-brand slice, then re-checked DENZA's first-party country selector and likely Africa locale roots (`/za`, `/eg`, `/ma` plus their `language.html` variants), confirming the selector still stops at Europe plus Brazil and Mexico while every tested Africa route returns a first-party 404.
 **Result**: no-op
+## 2026-05-25
+**Did**: Coverage analysis showed Li Auto's zero-major-region overseas footprint was the highest-impact actionable gap, so I added Egypt, Kazakhstan, and Azerbaijan after confirming Li Auto's official global-expansion and aftersales pages plus GB Auto, DOSCAR, and Efendiler partner surfaces, and refreshed the Li Auto monitoring note to the new baseline.
+**Result**: pass
