@@ -1695,3 +1695,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-25
 **Did**: Added inline search-result badges beside the active coverage and brand-footprint searches so users can see filtered match counts immediately without scanning the rest of each panel, backed by regression coverage and browser verification at 1280px and 375px widths.
 **Result**: pass
+
+## 2026-05-25
+**Did**: Recomputed the major-region coverage gaps, picked DENZA's missing Africa footprint as the highest-impact uncovered tracked-brand slice, then re-checked DENZA's first-party country selector and likely Africa locale roots (`/za`, `/eg`, `/ma` plus their `language.html` variants), confirming the selector still stops at Europe plus Brazil and Mexico while every tested Africa route returns a first-party 404.
+**Result**: no-op
