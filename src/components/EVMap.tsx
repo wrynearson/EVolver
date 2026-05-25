@@ -195,6 +195,16 @@ function formatMarketCount(count: number) {
   return `${count} ${count === 1 ? "market" : "markets"}`;
 }
 
+function formatSearchMatchCountLabel(
+  visibleCount: number,
+  totalCount: number,
+  singularLabel: string,
+  pluralLabel: string,
+) {
+  const label = totalCount === 1 ? singularLabel : pluralLabel;
+  return `${visibleCount}/${totalCount} ${label}`;
+}
+
 function formatMajorRegionCoverageCount(count: number) {
   return `${count}/${TOTAL_MAJOR_EV_REGION_COUNT} major regions`;
 }
@@ -560,6 +570,31 @@ function formatDatasetSummaryList(options: {
     "Active view filters",
     ...options.activeViewFilters.map((filter) => `- ${filter}`),
   ];
+}
+
+function getCoverageSearchMatchCountLabel(
+  view: CoveragePanelView,
+  brandCount: number,
+  totalBrandCount: number,
+  countryCount: number,
+  totalCountryCount: number,
+  regionCount: number,
+  totalRegionCount: number,
+) {
+  if (view === "brands") {
+    return formatSearchMatchCountLabel(brandCount, totalBrandCount, "brand", "brands");
+  }
+
+  if (view === "countries") {
+    return formatSearchMatchCountLabel(
+      countryCount,
+      totalCountryCount,
+      "country",
+      "countries",
+    );
+  }
+
+  return formatSearchMatchCountLabel(regionCount, totalRegionCount, "region", "regions");
 }
 
 function formatMajorRegionGapList(summaries: BrandMajorRegionGapSummary[]) {
@@ -4263,14 +4298,27 @@ export default function EVMap() {
                 }}
               />
               {footprintSearchQuery ? (
-                <button
-                  type="button"
-                  className="shrink-0 rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                  onClick={clearFootprintSearch}
-                  aria-label="Clear footprint search"
-                >
-                  Clear
-                </button>
+                <>
+                  <button
+                    type="button"
+                    className="shrink-0 rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                    onClick={clearFootprintSearch}
+                    aria-label="Clear footprint search"
+                  >
+                    Clear
+                  </button>
+                  <span
+                    className="shrink-0 rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600"
+                    aria-live="polite"
+                  >
+                    {formatSearchMatchCountLabel(
+                      sortedSelectedBrandPresence.length,
+                      selectedBrandPresence.length,
+                      "market",
+                      "markets",
+                    )}
+                  </span>
+                </>
               ) : null}
             </div>
               <p className="mt-2 text-xs text-gray-500">
@@ -4739,14 +4787,30 @@ export default function EVMap() {
                     }}
                   />
                   {coverageSearchQuery ? (
-                    <button
-                      type="button"
-                      className="shrink-0 rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-                      onClick={clearCoverageSearch}
-                      aria-label="Clear coverage search"
-                    >
-                      Clear
-                    </button>
+                    <>
+                      <button
+                        type="button"
+                        className="shrink-0 rounded-md border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                        onClick={clearCoverageSearch}
+                        aria-label="Clear coverage search"
+                      >
+                        Clear
+                      </button>
+                      <span
+                        className="shrink-0 rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600"
+                        aria-live="polite"
+                      >
+                        {getCoverageSearchMatchCountLabel(
+                          coveragePanelView,
+                          sortedBrandCoverageSummaries.length,
+                          visibleBrandCoverageSummaries.length,
+                          sortedCountryCoverageSummaries.length,
+                          visibleUncertainCountryCoverageSummaries.length,
+                          sortedRegionCoverageSummaries.length,
+                          visibleUncertainRegionCoverageSummaries.length,
+                        )}
+                      </span>
+                    </>
                   ) : null}
                 </div>
                 <p className="mt-2 text-xs text-gray-500">

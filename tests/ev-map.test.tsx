@@ -1118,6 +1118,7 @@ describe("EVMap", () => {
     expect(
       within(coveragePanel!).getByText("Showing 1 of 2 brands"),
     ).toBeInTheDocument();
+    expect(within(coveragePanel!).getByText("1/2 brands")).toBeInTheDocument();
     expect(within(coveragePanel!).getByText("BYD")).toBeInTheDocument();
     expect(within(coveragePanel!).queryByText("XPeng")).not.toBeInTheDocument();
     expect(
@@ -1193,6 +1194,7 @@ describe("EVMap", () => {
     expect(
       within(bydFootprintPanel!).getByText("Showing 1 of 2 markets"),
     ).toBeInTheDocument();
+    expect(within(bydFootprintPanel!).getByText("1/2 markets")).toBeInTheDocument();
     expect(
       within(bydFootprintPanel!).getByRole("button", { name: /Norway/i }),
     ).toBeInTheDocument();

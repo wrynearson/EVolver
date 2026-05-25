@@ -1687,3 +1687,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Fixed the left overlay stack so the dataset summary panel now reserves desktop space above the always-visible legend instead of overlapping its export controls, backed by regression coverage plus browser verification at 1280px and 375px widths.
 **Result**: pass
 **TODO**: Verify Wuling / Baojun's first Americas market, prioritizing Mexico and Brazil through official SAIC-GM-Wuling export surfaces plus any sovereign local consumer, dealer, or test-drive sites.
+
+## 2026-05-25
+**Did**: Re-checked Wuling / Baojun's first Americas gap against SGMW's official export portal, its Brazil-market Baojun Yep Plus story, and the linked generic quote/dealer inquiry flows, then confirmed those surfaces still stop at export marketing while Mexico still lacks any first-party Wuling or Baojun sovereign consumer, dealer, or test-drive page.
+**Result**: no-op
+
+## 2026-05-25
+**Did**: Added inline search-result badges beside the active coverage and brand-footprint searches so users can see filtered match counts immediately without scanning the rest of each panel, backed by regression coverage and browser verification at 1280px and 375px widths.
+**Result**: pass
