@@ -46,6 +46,10 @@ type CopySourcesState = {
   key: string | null;
   status: CopyStatus;
 };
+type CopyToastState = {
+  tone: "success" | "error";
+  message: string;
+};
 type CoveragePanelView = "snapshot" | "brands" | "countries" | "regions";
 type CoverageSort = "coverage" | "name";
 type FootprintSort = "name" | "name-desc" | "region" | "region-desc";
@@ -1127,6 +1131,7 @@ export default function EVMap() {
     status: "idle",
   });
   const [copySummaryStatus, setCopySummaryStatus] = useState<CopyStatus>("idle");
+  const [copyToast, setCopyToast] = useState<CopyToastState | null>(null);
   const [coveragePanelView, setCoveragePanelView] = useState<CoveragePanelView>(
     () => initialSelectionState.coveragePanelView,
   );
@@ -1244,6 +1249,7 @@ export default function EVMap() {
     setCopyBrandWebsiteStatus("idle");
     setCopyBrandMarketsStatus("idle");
     setCopySourcesState({ key: null, status: "idle" });
+    setCopyToast(null);
   };
 
   const brandOptions = useMemo(
@@ -2046,34 +2052,43 @@ export default function EVMap() {
   const copySources = (targetKey: string, sources: string[]) => {
     if (!navigator.clipboard?.writeText) {
       setCopySourcesState({ key: targetKey, status: "failed" });
+      setCopyToast({ tone: "error", message: "Couldn't copy sources." });
       return;
     }
 
     setCopySourcesState({ key: targetKey, status: "copied" });
+    setCopyToast({ tone: "success", message: "Copied sources to clipboard." });
     void navigator.clipboard.writeText(serializeSourceUrlsToText(sources)).catch(() => {
       setCopySourcesState({ key: targetKey, status: "failed" });
+      setCopyToast({ tone: "error", message: "Couldn't copy sources." });
     });
   };
   const copyBrandWebsite = () => {
     if (!selectedBrandWebsite || !navigator.clipboard?.writeText) {
       setCopyBrandWebsiteStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy website URL." });
       return;
     }
 
     setCopyBrandWebsiteStatus("copied");
+    setCopyToast({ tone: "success", message: "Copied website URL to clipboard." });
     void navigator.clipboard.writeText(selectedBrandWebsite).catch(() => {
       setCopyBrandWebsiteStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy website URL." });
     });
   };
   const copyBrandMarkets = () => {
     if (selectedBrandMarketList.length === 0 || !navigator.clipboard?.writeText) {
       setCopyBrandMarketsStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy visible markets." });
       return;
     }
 
     setCopyBrandMarketsStatus("copied");
+    setCopyToast({ tone: "success", message: "Copied visible markets to clipboard." });
     void navigator.clipboard.writeText(selectedBrandMarketList.join("\n")).catch(() => {
       setCopyBrandMarketsStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy visible markets." });
     });
   };
   const copyGapCandidates = () => {
@@ -2082,14 +2097,17 @@ export default function EVMap() {
       !navigator.clipboard?.writeText
     ) {
       setCopyGapCandidatesStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy gap candidates." });
       return;
     }
 
     setCopyGapCandidatesStatus("copied");
+    setCopyToast({ tone: "success", message: "Copied gap candidates to clipboard." });
     void navigator.clipboard
       .writeText(selectedBrandMajorRegionGapCandidateList.join("\n"))
       .catch(() => {
         setCopyGapCandidatesStatus("failed");
+        setCopyToast({ tone: "error", message: "Couldn't copy gap candidates." });
       });
   };
   const copyCountryProfile = () => {
@@ -2097,23 +2115,28 @@ export default function EVMap() {
 
     if (!countryDetails || !navigator.clipboard?.writeText) {
       setCopyCountryProfileStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy country profile." });
       return;
     }
 
     setCopyCountryProfileStatus("copied");
+    setCopyToast({ tone: "success", message: "Copied country profile to clipboard." });
     void navigator.clipboard
       .writeText(serializeCountryPresenceDetailsToText(countryDetails))
       .catch(() => {
         setCopyCountryProfileStatus("failed");
+        setCopyToast({ tone: "error", message: "Couldn't copy country profile." });
       });
   };
   const copyVisibleCountryBrands = () => {
     if (!selectedCountryDetails || !navigator.clipboard?.writeText) {
       setCopyVisibleCountryBrandsStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy visible brands." });
       return;
     }
 
     setCopyVisibleCountryBrandsStatus("copied");
+    setCopyToast({ tone: "success", message: "Copied visible brands to clipboard." });
     void navigator.clipboard
       .writeText(
         formatVisibleCountryBrandList(
@@ -2124,72 +2147,91 @@ export default function EVMap() {
       )
       .catch(() => {
         setCopyVisibleCountryBrandsStatus("failed");
+        setCopyToast({ tone: "error", message: "Couldn't copy visible brands." });
       });
   };
   const copyVisibleCoverage = () => {
     if (coveragePanelCopyList.length === 0 || !navigator.clipboard?.writeText) {
       setCopyCoverageStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy coverage view." });
       return;
     }
 
     setCopyCoverageStatus("copied");
+    setCopyToast({ tone: "success", message: "Copied coverage view to clipboard." });
     void navigator.clipboard.writeText(coveragePanelCopyList.join("\n")).catch(() => {
       setCopyCoverageStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy coverage view." });
     });
   };
   const copyMajorRegionGaps = () => {
     if (majorRegionGapCopyList.length === 0 || !navigator.clipboard?.writeText) {
       setCopyMajorRegionGapsStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy gap priorities." });
       return;
     }
 
     setCopyMajorRegionGapsStatus("copied");
+    setCopyToast({ tone: "success", message: "Copied gap priorities to clipboard." });
     void navigator.clipboard.writeText(majorRegionGapCopyList.join("\n")).catch(() => {
       setCopyMajorRegionGapsStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy gap priorities." });
     });
   };
   const copyDatasetSummary = () => {
     if (!datasetSummaryCopyText || !navigator.clipboard?.writeText) {
       setCopySummaryStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy summary." });
       return;
     }
 
     setCopySummaryStatus("copied");
+    setCopyToast({ tone: "success", message: "Copied summary to clipboard." });
     void navigator.clipboard.writeText(datasetSummaryCopyText).catch(() => {
       setCopySummaryStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy summary." });
     });
   };
   const copyHoveredCountrySummary = () => {
     if (!hoveredCountrySummaryText || !navigator.clipboard?.writeText) {
       setCopyPreviewSummaryStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy preview summary." });
       return;
     }
 
     setCopyPreviewSummaryStatus("copied");
+    setCopyToast({ tone: "success", message: "Copied preview summary to clipboard." });
     void navigator.clipboard.writeText(hoveredCountrySummaryText).catch(() => {
       setCopyPreviewSummaryStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy preview summary." });
     });
   };
   const copyHoveredCountrySources = () => {
     if (!hoveredCountrySourcesText || !navigator.clipboard?.writeText) {
       setCopyHoveredSourcesStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy all sources." });
       return;
     }
 
     setCopyHoveredSourcesStatus("copied");
+    setCopyToast({ tone: "success", message: "Copied all sources to clipboard." });
     void navigator.clipboard.writeText(hoveredCountrySourcesText).catch(() => {
       setCopyHoveredSourcesStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy all sources." });
     });
   };
   const copyShareLink = () => {
     if (!shareUrl || !navigator.clipboard?.writeText) {
       setCopyLinkStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy share link." });
       return;
     }
 
     setCopyLinkStatus("copied");
+    setCopyToast({ tone: "success", message: "Copied share link to clipboard." });
     void navigator.clipboard.writeText(shareUrl).catch(() => {
       setCopyLinkStatus("failed");
+      setCopyToast({ tone: "error", message: "Couldn't copy share link." });
     });
   };
   const hasCustomView = Boolean(
@@ -2649,6 +2691,18 @@ export default function EVMap() {
 
     return () => window.clearTimeout(resetTimer);
   }, [copySummaryStatus]);
+
+  useEffect(() => {
+    if (!copyToast || typeof window === "undefined") {
+      return;
+    }
+
+    const resetTimer = window.setTimeout(() => {
+      setCopyToast(null);
+    }, 1500);
+
+    return () => window.clearTimeout(resetTimer);
+  }, [copyToast]);
 
   useEffect(() => {
     if (!hasInitializedCopySourcesReset.current) {
@@ -3731,16 +3785,25 @@ export default function EVMap() {
                 onClick={() => {
                   if (!navigator.clipboard?.writeText) {
                     setCopyCountryStatus("failed");
+                    setCopyToast({ tone: "error", message: "Couldn't copy country + ISO." });
                     return;
                   }
 
                   setCopyCountryStatus("copied");
+                  setCopyToast({
+                    tone: "success",
+                    message: "Copied country + ISO to clipboard.",
+                  });
                   void navigator.clipboard
                     .writeText(
                       `${selectedCountryDetails.countryName} (${selectedCountryDetails.isoCode})`,
                     )
                     .catch(() => {
                       setCopyCountryStatus("failed");
+                      setCopyToast({
+                        tone: "error",
+                        message: "Couldn't copy country + ISO.",
+                      });
                     });
                 }}
               >
@@ -5103,6 +5166,21 @@ export default function EVMap() {
           </div>
         ))}
       </div>
+      {copyToast ? (
+        <div className="pointer-events-none absolute top-4 right-4 z-30 max-w-xs">
+          <div
+            role="status"
+            aria-live="polite"
+            className={`rounded-md border px-3 py-2 text-sm shadow-lg ${
+              copyToast.tone === "success"
+                ? "border-emerald-200 bg-emerald-50 text-emerald-900"
+                : "border-rose-200 bg-rose-50 text-rose-900"
+            }`}
+          >
+            {copyToast.message}
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { type ReactNode } from "react";
 import {
+  act,
   cleanup,
   fireEvent,
   render,
@@ -1525,6 +1526,39 @@ describe("EVMap", () => {
     ).toBeInTheDocument();
   });
 
+  it("shows and clears a copy success toast", async () => {
+    vi.doUnmock("../src/components/MapCanvas");
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    vi.useFakeTimers();
+    try {
+      fireEvent.click(screen.getByRole("button", { name: "Copy summary" }));
+
+      expect(screen.getByText("Copied summary to clipboard.")).toBeInTheDocument();
+
+      act(() => {
+        vi.advanceTimersByTime(1500);
+      });
+
+      expect(screen.queryByText("Copied summary to clipboard.")).not.toBeInTheDocument();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it("copies all hovered country sources", async () => {
     vi.doUnmock("../src/components/MapCanvas");
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
@@ -1675,6 +1709,9 @@ describe("EVMap", () => {
     expect(
       await screen.findByRole("button", { name: "Share link copy failed" }),
     ).toBeInTheDocument();
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      "Couldn't copy share link.",
+    );
   });
 
   it("explains uncertain badges in the footprint and country details panels", async () => {

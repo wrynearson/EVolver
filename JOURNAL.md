@@ -1702,3 +1702,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-25
 **Did**: Coverage analysis showed Li Auto's zero-major-region overseas footprint was the highest-impact actionable gap, so I added Egypt, Kazakhstan, and Azerbaijan after confirming Li Auto's official global-expansion and aftersales pages plus GB Auto, DOSCAR, and Efendiler partner surfaces, and refreshed the Li Auto monitoring note to the new baseline.
 **Result**: pass
+## 2026-05-26
+**Did**: Closed the lingering Wuling / Baojun Americas follow-up as monitoring after the 2026-05-25 re-check still found only export-marketing surfaces, then added transient copy-to-clipboard toast feedback across the map UI with regression coverage for success and failure states.
+**Result**: pass
