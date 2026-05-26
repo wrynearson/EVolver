@@ -1720,3 +1720,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-26
 **Did**: Made the dataset-summary copy action context-aware so filtered views now say when users are copying a filtered summary instead of the full map snapshot, with EV map regression coverage.
 **Result**: pass
+
+## 2026-05-26
+**Did**: Expanded Bestune into Bahrain, Oman, Qatar, and Saudi Arabia after confirming each market's live official local Bestune site plus first-party showroom/contact and test-drive flows.
+**Result**: pass
+**TODO**: Verify the next official sovereign Bestune markets beyond Bahrain, China, Colombia, Ghana, Jordan, Oman, the Philippines, Qatar, Saudi Arabia, the United Arab Emirates, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.

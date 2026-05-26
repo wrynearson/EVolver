@@ -83,6 +83,50 @@
             "https://bestuneae.com/bestune-service-center-uae/"
           ],
           "uncertain": false
+        },
+        "BHR": {
+          "name": "Bahrain",
+          "present": true,
+          "source": "https://www.bestune.bh/contact-us.php",
+          "sources": [
+            "https://www.bestune.bh/",
+            "https://www.bestune.bh/contact-us.php",
+            "https://www.bestune.bh/book-a-test-drive.php"
+          ],
+          "uncertain": false
+        },
+        "OMN": {
+          "name": "Oman",
+          "present": true,
+          "source": "https://www.bestune-oman.com/en/showroom-service",
+          "sources": [
+            "https://www.bestune-oman.com/en",
+            "https://www.bestune-oman.com/en/showroom-service",
+            "https://www.bestune-oman.com/en/test-drive"
+          ],
+          "uncertain": false
+        },
+        "QAT": {
+          "name": "Qatar",
+          "present": true,
+          "source": "https://www.bestune-qatar.com/en/location",
+          "sources": [
+            "https://www.bestune-qatar.com/en",
+            "https://www.bestune-qatar.com/en/location",
+            "https://www.bestune-qatar.com/en/contact/2"
+          ],
+          "uncertain": false
+        },
+        "SAU": {
+          "name": "Saudi Arabia",
+          "present": true,
+          "source": "https://www.bestunesa.com/contact-us.php",
+          "sources": [
+            "https://www.bestunesa.com/",
+            "https://www.bestunesa.com/contact-us.php",
+            "https://www.bestunesa.com/book-a-test-drive.php"
+          ],
+          "uncertain": false
         }
       }
     },
