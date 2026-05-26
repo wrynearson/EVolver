@@ -1705,3 +1705,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-26
 **Did**: Closed the lingering Wuling / Baojun Americas follow-up as monitoring after the 2026-05-25 re-check still found only export-marketing surfaces, then added transient copy-to-clipboard toast feedback across the map UI with regression coverage for success and failure states.
 **Result**: pass
+## 2026-05-26
+**Did**: Coverage analysis showed Bestune was the highest-impact uncovered brand gap, so I added it as a tracked brand with confirmed official presence in China, Jordan, Ghana, Colombia, and Vietnam after verifying first-party FAW or sovereign local EV model, showroom, contact, and test-drive surfaces.
+**Result**: pass
+
+## 2026-05-26
+**Did**: Expanded Bestune into the Philippines after confirming QSJ Motors' local Bestune EV lineup plus its Philippine contact and authorized-dealer directory.
+**Result**: pass
+**TODO**: Verify the next official sovereign Bestune markets beyond China, Colombia, Ghana, Jordan, the Philippines, and Vietnam from first-party localized EV model plus showroom, contact, dealer, or test-drive flows.

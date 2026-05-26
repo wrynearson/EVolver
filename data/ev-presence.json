@@ -1,10 +1,79 @@
 {
   "metadata": {
-    "last_updated": "2026-05-24",
+    "last_updated": "2026-05-26",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
   "brands": {
+    "Bestune": {
+      "website": "https://benteng.faw.cn/",
+      "countries": {
+        "CHN": {
+          "name": "China",
+          "present": true,
+          "source": "https://benteng.faw.cn/dealer",
+          "sources": [
+            "https://benteng.faw.cn/",
+            "https://benteng.faw.cn/dealer"
+          ],
+          "uncertain": false
+        },
+        "JOR": {
+          "name": "Jordan",
+          "present": true,
+          "source": "https://bestune.jo/test-drive/",
+          "sources": [
+            "https://bestune.jo/",
+            "https://bestune.jo/e05/",
+            "https://bestune.jo/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "GHA": {
+          "name": "Ghana",
+          "present": true,
+          "source": "https://www.bestune.com.gh/",
+          "sources": [
+            "https://www.bestune.com.gh/",
+            "https://www.bestune.com.gh/models.php"
+          ],
+          "uncertain": false
+        },
+        "COL": {
+          "name": "Colombia",
+          "present": true,
+          "source": "https://www.bestune.com.co/copia-de-agende-su-cita",
+          "sources": [
+            "https://www.bestune.com.co/",
+            "https://www.bestune.com.co/copia-de-agende-su-cita",
+            "https://www.bestune.com.co/contact-5"
+          ],
+          "uncertain": false
+        },
+        "PHL": {
+          "name": "Philippines",
+          "present": true,
+          "source": "https://qsjmotors.com.ph/contact-us",
+          "sources": [
+            "https://qsjmotors.com.ph/bestune",
+            "https://qsjmotors.com.ph/contact-us"
+          ],
+          "uncertain": false
+        },
+        "VNM": {
+          "name": "Vietnam",
+          "present": true,
+          "source": "https://bestune.vn/en/test-drive",
+          "sources": [
+            "https://bestune.vn/en/",
+            "https://bestune.vn/en/san-pham/bestune-nat/",
+            "https://bestune.vn/en/test-drive",
+            "https://bestune.vn/en/bestune-enters-the-vietnamese-market-with-its-first-showroom-in-hanoi-pioneering-the-promising-electric-vehicle-market-in-vietnam/"
+          ],
+          "uncertain": false
+        }
+      }
+    },
     "BYD": {
       "website": "https://www.byd.com",
       "countries": {
