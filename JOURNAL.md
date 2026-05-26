@@ -1713,3 +1713,10 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Bestune into the Philippines after confirming QSJ Motors' local Bestune EV lineup plus its Philippine contact and authorized-dealer directory.
 **Result**: pass
 **TODO**: Verify the next official sovereign Bestune markets beyond China, Colombia, Ghana, Jordan, the Philippines, and Vietnam from first-party localized EV model plus showroom, contact, dealer, or test-drive flows.
+## 2026-05-26
+**Did**: Expanded Bestune into the United Arab Emirates after confirming Bestune UAE's official local site, showroom/contact surfaces, service-center page, and live sovereign test-drive flow under Al Khalid Auto.
+**Result**: pass
+
+## 2026-05-26
+**Did**: Made the dataset-summary copy action context-aware so filtered views now say when users are copying a filtered summary instead of the full map snapshot, with EV map regression coverage.
+**Result**: pass

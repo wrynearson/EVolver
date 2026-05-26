@@ -362,12 +362,42 @@ function getCopyCoverageButtonLabel(
       : idleLabel;
 }
 
-function getCopySummaryButtonLabel(status: CopyStatus) {
+function getCopySummaryButtonLabel(status: CopyStatus, idleLabel: string) {
   return status === "copied"
-    ? "Copied summary"
+    ? idleLabel.replace("Copy", "Copied")
     : status === "failed"
-      ? "Summary copy failed"
-      : "Copy summary";
+      ? `${idleLabel.replace("Copy", "").trim()} copy failed`
+      : idleLabel;
+}
+
+function getCopySummaryIdleLabel(options: {
+  selectedBrand: string;
+  selectedCountryLabel: string;
+  selectedRegion: string;
+}) {
+  const activeFilterCount = [
+    options.selectedBrand,
+    options.selectedCountryLabel,
+    options.selectedRegion,
+  ].filter(Boolean).length;
+
+  if (activeFilterCount > 1) {
+    return "Copy filtered summary";
+  }
+
+  if (options.selectedCountryLabel) {
+    return `Copy ${options.selectedCountryLabel} summary`;
+  }
+
+  if (options.selectedBrand) {
+    return `Copy ${options.selectedBrand} summary`;
+  }
+
+  if (options.selectedRegion) {
+    return `Copy ${options.selectedRegion} summary`;
+  }
+
+  return "Copy summary";
 }
 
 function getCopyPreviewSummaryButtonLabel(status: CopyStatus) {
@@ -2368,6 +2398,12 @@ export default function EVMap() {
       activeViewFilters: activeViewFilterLabels,
     }).join("\n");
   }, [activeViewFilterLabelSignature, selectedCoverageRegion, visibleSummary]);
+  const copySummaryIdleLabel = getCopySummaryIdleLabel({
+    selectedBrand: activeSelectedBrand,
+    selectedCountryLabel:
+      resolvedSelectedCountry?.countryName ?? resolvedSelectedCountry?.isoCode ?? "",
+    selectedRegion: selectedCoverageRegion,
+  });
   const [copyLinkStatus, setCopyLinkStatus] = useCopyStatus([shareUrl]);
   const [copyPreviewSummaryStatus, setCopyPreviewSummaryStatus] = useCopyStatus([
     hoveredCountrySummaryText,
@@ -3357,7 +3393,7 @@ export default function EVMap() {
               disabled={!visibleSummary}
               onClick={copyDatasetSummary}
             >
-              {getCopySummaryButtonLabel(copySummaryStatus)}
+              {getCopySummaryButtonLabel(copySummaryStatus, copySummaryIdleLabel)}
             </button>
             {shareUrl ? (
               <a

@@ -71,6 +71,18 @@
             "https://bestune.vn/en/bestune-enters-the-vietnamese-market-with-its-first-showroom-in-hanoi-pioneering-the-promising-electric-vehicle-market-in-vietnam/"
           ],
           "uncertain": false
+        },
+        "ARE": {
+          "name": "United Arab Emirates",
+          "present": true,
+          "source": "https://bestuneae.com/contact-us/",
+          "sources": [
+            "https://bestuneae.com/",
+            "https://bestuneae.com/contact-us/",
+            "https://bestuneae.com/book-your-test-drive-at-bestune/",
+            "https://bestuneae.com/bestune-service-center-uae/"
+          ],
+          "uncertain": false
         }
       }
     },

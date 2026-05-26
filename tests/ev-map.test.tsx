@@ -830,7 +830,7 @@ describe("EVMap", () => {
       .closest("div");
     expect(uncertainMarketsRow).toHaveTextContent("0");
     expect(window.location.search).toBe("?brand=XPeng&country=SWE");
-    fireEvent.click(screen.getByRole("button", { name: "Copy summary" }));
+    fireEvent.click(screen.getByRole("button", { name: "Copy filtered summary" }));
     expect(window.navigator.clipboard.writeText).toHaveBeenCalledWith(
       [
         "Dataset summary",
@@ -847,7 +847,7 @@ describe("EVMap", () => {
       ].join("\n"),
     );
     expect(
-      await screen.findByRole("button", { name: "Copied summary" }),
+      await screen.findByRole("button", { name: "Copied filtered summary" }),
     ).toBeInTheDocument();
 
     const initialDetailsPanel = screen
