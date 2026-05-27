@@ -525,6 +525,8 @@ describe("EVMap", () => {
       .closest("aside");
     expect(coveragePanel).not.toBeNull();
     expect(coveragePanel).toHaveClass("bottom-36", "sm:bottom-6");
+    expect(coveragePanel).toHaveClass("flex", "flex-col", "overflow-hidden");
+    expect(coveragePanel?.querySelector("div.min-h-0.overflow-y-auto.pr-1")).not.toBeNull();
 
     fireEvent.change(screen.getByLabelText("Brand filter"), {
       target: { value: "BYD" },
@@ -534,6 +536,8 @@ describe("EVMap", () => {
     const footprintAside = footprintPanel.closest("aside");
     expect(footprintAside).not.toBeNull();
     expect(footprintAside).toHaveClass("bottom-36", "sm:bottom-6");
+    expect(footprintAside).toHaveClass("flex", "flex-col", "overflow-hidden");
+    expect(footprintAside?.querySelector("div.min-h-0.overflow-y-auto.pr-1")).not.toBeNull();
 
     fireEvent.click(within(footprintAside!).getByRole("button", { name: "Collapse panel" }));
 
@@ -564,6 +568,41 @@ describe("EVMap", () => {
       "max-h-[calc(100vh-28rem)]",
       "sm:max-h-[calc(100vh-13rem)]",
     );
+  });
+
+  it("caps the selected-country panel to the viewport and scrolls its body", async () => {
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(await screen.findByTestId("map")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Select Norway" }));
+
+    const countryPanel = await screen.findByRole("heading", { name: "Norway" });
+    const countryAside = countryPanel.closest("aside");
+
+    expect(countryAside).not.toBeNull();
+    expect(countryAside).toHaveClass(
+      "left-6",
+      "flex",
+      "max-h-[calc(100vh-3rem)]",
+      "flex-col",
+      "overflow-hidden",
+      "sm:left-auto",
+      "sm:max-w-sm",
+    );
+    expect(countryAside?.querySelector("div.min-h-0.overflow-y-auto.pr-1")).not.toBeNull();
   });
 
   it("fits the map to a selected country", async () => {

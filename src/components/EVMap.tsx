@@ -91,6 +91,7 @@ const COVERAGE_PANEL_VIEWS: CoveragePanelView[] = [
 const DEFAULT_COVERAGE_SORT: CoverageSort = "coverage";
 const MOBILE_BOTTOM_OVERLAY_OFFSET_CLASS = "bottom-36 sm:bottom-6";
 const MOBILE_BOTTOM_PANEL_MAX_HEIGHT_CLASS = "max-h-[28vh] sm:max-h-80";
+const SIDE_PANEL_MAX_HEIGHT_CLASS = "max-h-[calc(100vh-3rem)]";
 const SUMMARY_PANEL_MAX_HEIGHT_CLASS =
   "max-h-[calc(100vh-28rem)] sm:max-h-[calc(100vh-13rem)]";
 const DEFAULT_FOOTPRINT_SORT: FootprintSort = "name";
@@ -3854,7 +3855,7 @@ export default function EVMap() {
 
       {selectedCountryDetails && !sidePanelCollapsed ? (
         <aside
-          className="absolute top-6 right-6 max-w-sm rounded-lg bg-white/95 px-4 py-3 shadow-md"
+          className={`absolute top-6 right-6 left-6 flex ${SIDE_PANEL_MAX_HEIGHT_CLASS} flex-col overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md sm:left-auto sm:max-w-sm`}
           aria-labelledby="selected-country-heading"
           tabIndex={-1}
           onKeyDown={(event) => {
@@ -3992,7 +3993,8 @@ export default function EVMap() {
             </div>
           </div>
 
-          <ul className="mt-3 space-y-3">
+          <div className="mt-3 min-h-0 overflow-y-auto pr-1">
+            <ul className="space-y-3">
             {visibleSelectedCountryBrands.length === 0 ? (
               <>
                 <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
@@ -4145,12 +4147,13 @@ export default function EVMap() {
               </button>
             </div>
           ) : null}
+          </div>
         </aside>
       ) : null}
 
       {activeSelectedBrand && !sidePanelCollapsed ? (
         <aside
-          className={`absolute right-6 left-6 ${MOBILE_BOTTOM_OVERLAY_OFFSET_CLASS} ${MOBILE_BOTTOM_PANEL_MAX_HEIGHT_CLASS} w-auto overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md sm:left-auto sm:w-80`}
+          className={`absolute right-6 left-6 ${MOBILE_BOTTOM_OVERLAY_OFFSET_CLASS} ${MOBILE_BOTTOM_PANEL_MAX_HEIGHT_CLASS} flex w-auto flex-col overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md sm:left-auto sm:w-80`}
           aria-labelledby="brand-footprint-heading"
           tabIndex={-1}
           onKeyDown={(event) => {
@@ -4315,7 +4318,8 @@ export default function EVMap() {
             </div>
           </div>
 
-          {selectedBrandRegionCoverageSummaries.length > 1 ? (
+          <div className="min-h-0 overflow-y-auto pr-1">
+            {selectedBrandRegionCoverageSummaries.length > 1 ? (
             <div className="mt-3">
               <p className="block text-xs font-medium uppercase tracking-wide text-gray-500">
                 Footprint regions
@@ -4572,11 +4576,11 @@ export default function EVMap() {
             </select>
           </div>
 
-          <ul
-            className={`mt-3 max-h-48 overflow-y-auto pr-1 ${
-              compactFootprintView ? "space-y-2" : "space-y-3"
-            }`}
-          >
+            <ul
+              className={`mt-3 max-h-48 overflow-y-auto pr-1 ${
+                compactFootprintView ? "space-y-2" : "space-y-3"
+              }`}
+            >
             {sortedSelectedBrandPresence.length === 0 ? (
               <li className="border-t border-gray-200 pt-3 text-sm text-gray-600">
                 {getFootprintEmptyStateMessage(
@@ -4665,11 +4669,12 @@ export default function EVMap() {
                 </li>
               ))
             )}
-          </ul>
+            </ul>
+          </div>
         </aside>
       ) : !sidePanelCollapsed && brandCoverageSummaries.length > 0 ? (
         <aside
-          className={`absolute right-6 left-6 ${MOBILE_BOTTOM_OVERLAY_OFFSET_CLASS} ${MOBILE_BOTTOM_PANEL_MAX_HEIGHT_CLASS} w-auto overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md sm:left-auto sm:w-80`}
+          className={`absolute right-6 left-6 ${MOBILE_BOTTOM_OVERLAY_OFFSET_CLASS} ${MOBILE_BOTTOM_PANEL_MAX_HEIGHT_CLASS} flex w-auto flex-col overflow-hidden rounded-lg bg-white/95 px-4 py-3 shadow-md sm:left-auto sm:w-80`}
         >
           <div className="flex items-start justify-between gap-4">
             <div>
@@ -4709,8 +4714,9 @@ export default function EVMap() {
             </button>
           </div>
 
-          <div
-            className="mt-3 inline-flex rounded-md border border-gray-200 bg-gray-50 p-1"
+          <div className="mt-3 min-h-0 overflow-y-auto pr-1">
+            <div
+              className="inline-flex rounded-md border border-gray-200 bg-gray-50 p-1"
             role="tablist"
             aria-label="Coverage ranking view"
           >
@@ -4756,9 +4762,9 @@ export default function EVMap() {
                 </button>
               );
             })}
-          </div>
+            </div>
 
-          {coveragePanelView === "snapshot" ? (
+            {coveragePanelView === "snapshot" ? (
             <div className="mt-3 max-h-48 space-y-3 overflow-y-auto pr-1">
               {coverageSnapshotTopBrands.length === 0 &&
               coverageSnapshotTopCountries.length === 0 &&
@@ -5246,6 +5252,7 @@ export default function EVMap() {
           )}
             </>
           )}
+          </div>
         </aside>
       ) : null}
 

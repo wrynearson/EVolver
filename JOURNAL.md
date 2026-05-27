@@ -1735,3 +1735,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-27
 **Did**: Added a shared-link warning toast so invalid brand, country, and region URL filters are explained before the app cleans them out of the address bar, with regression coverage plus desktop and mobile browser verification.
 **Result**: pass
+## 2026-05-27
+**Did**: Made the summary, brand-footprint, and selected-country overlays scroll internally within viewport-capped shells so dense panel content stays usable on mobile and desktop, and added regression tests for the new panel layout.
+**Result**: pass
