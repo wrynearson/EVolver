@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-26",
+    "last_updated": "2026-05-27",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -26,6 +26,17 @@
             "https://bestune.jo/",
             "https://bestune.jo/e05/",
             "https://bestune.jo/test-drive/"
+          ],
+          "uncertain": false
+        },
+        "IRQ": {
+          "name": "Iraq",
+          "present": true,
+          "source": "https://www.bestune-middle-east.com/contact",
+          "sources": [
+            "https://www.bestune-middle-east.com/",
+            "https://www.bestune-middle-east.com/cars/BESTUNE%20E05",
+            "https://www.bestune-middle-east.com/contact"
           ],
           "uncertain": false
         },

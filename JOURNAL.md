@@ -1725,3 +1725,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Bestune into Bahrain, Oman, Qatar, and Saudi Arabia after confirming each market's live official local Bestune site plus first-party showroom/contact and test-drive flows.
 **Result**: pass
 **TODO**: Verify the next official sovereign Bestune markets beyond Bahrain, China, Colombia, Ghana, Jordan, Oman, the Philippines, Qatar, Saudi Arabia, the United Arab Emirates, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.
+## 2026-05-27
+**Did**: Expanded Bestune into Iraq after confirming Bestune's official Middle East site lists Iraq-specific local contact details on its `contact` page and also exposes the `BESTUNE E05` EV model page on the same first-party domain.
+**Result**: pass
+**TODO**: Verify the next official sovereign Bestune markets beyond Bahrain, China, Colombia, Ghana, Iraq, Jordan, Oman, the Philippines, Qatar, Saudi Arabia, the United Arab Emirates, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.
