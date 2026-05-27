@@ -3650,6 +3650,9 @@ describe("EVMap", () => {
 
     expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Brand coverage" })).toBeInTheDocument();
+    expect(
+      await screen.findByText('Ignored invalid shared-link filter: brand "Unknown".'),
+    ).toBeInTheDocument();
     await waitFor(() => {
       expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("");
       expect(window.location.search).toBe("?country=NOR");
@@ -3676,6 +3679,9 @@ describe("EVMap", () => {
     render(<EVMap />);
 
     expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(
+      await screen.findByText('Ignored invalid shared-link filter: country "ZZZ".'),
+    ).toBeInTheDocument();
     await waitFor(() => {
       expect(screen.getByLabelText("Brand filter")).toHaveDisplayValue("BYD");
       expect(screen.getByLabelText("Country lookup")).toHaveDisplayValue("");
@@ -3700,6 +3706,9 @@ describe("EVMap", () => {
     render(<EVMap />);
 
     expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+    expect(
+      await screen.findByText('Ignored invalid shared-link filter: region "Atlantis".'),
+    ).toBeInTheDocument();
     await waitFor(() => {
       expect(screen.getByLabelText("Country lookup")).toHaveDisplayValue("Norway");
       expect(window.location.search).toBe("?country=NOR&view=countries");

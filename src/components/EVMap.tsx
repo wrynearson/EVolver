@@ -1004,6 +1004,43 @@ function getSelectionStateFromSearch(search: string): SelectionState {
   };
 }
 
+function getInvalidSharedLinkWarning(
+  search: string,
+  brandNames: string[],
+  validCountryIsoCodes: string[],
+  availableRegions: string[],
+) {
+  const searchParams = new URLSearchParams(search);
+  const invalidFilters: string[] = [];
+  const requestedBrand = searchParams.get("brand")?.trim() ?? "";
+  const requestedCountry = searchParams.get("country")?.trim() ?? "";
+  const requestedRegion = searchParams.get("region")?.trim() ?? "";
+
+  if (requestedBrand && brandNames.length > 0 && !brandNames.includes(requestedBrand)) {
+    invalidFilters.push(`brand "${requestedBrand}"`);
+  }
+
+  if (requestedCountry && validCountryIsoCodes.length > 0) {
+    const normalizedCountry = normalizeIsoCode(requestedCountry);
+
+    if (!normalizedCountry || !validCountryIsoCodes.includes(normalizedCountry)) {
+      invalidFilters.push(`country "${requestedCountry}"`);
+    }
+  }
+
+  if (requestedRegion && availableRegions.length > 0 && !availableRegions.includes(requestedRegion)) {
+    invalidFilters.push(`region "${requestedRegion}"`);
+  }
+
+  if (invalidFilters.length === 0) {
+    return null;
+  }
+
+  return `Ignored invalid shared-link filter${
+    invalidFilters.length === 1 ? "" : "s"
+  }: ${invalidFilters.join(", ")}.`;
+}
+
 function getInitialSelectionState(): SelectionState {
   if (typeof window === "undefined") {
     return {
@@ -1144,6 +1181,7 @@ export default function EVMap() {
   const hasInitializedCopySourcesReset = useRef(false);
   const hasInitializedCoverageSearchReset = useRef(false);
   const hasInitializedFootprintSearchReset = useRef(false);
+  const lastInvalidSharedLinkSearchRef = useRef("");
   const skipNextCoverageSearchReset = useRef(false);
   const skipNextFootprintSearchReset = useRef(false);
   const [countries, setCountries] = useState<FeatureCollection | null>(null);
@@ -1162,6 +1200,7 @@ export default function EVMap() {
   });
   const [copySummaryStatus, setCopySummaryStatus] = useState<CopyStatus>("idle");
   const [copyToast, setCopyToast] = useState<CopyToastState | null>(null);
+  const [sharedLinkWarning, setSharedLinkWarning] = useState<string | null>(null);
   const [coveragePanelView, setCoveragePanelView] = useState<CoveragePanelView>(
     () => initialSelectionState.coveragePanelView,
   );
@@ -1280,6 +1319,7 @@ export default function EVMap() {
     setCopyBrandMarketsStatus("idle");
     setCopySourcesState({ key: null, status: "idle" });
     setCopyToast(null);
+    setSharedLinkWarning(null);
   };
 
   const brandOptions = useMemo(
@@ -1295,6 +1335,10 @@ export default function EVMap() {
       Array.from(new Set(Object.values(countryRegionLookup))).sort((a, b) =>
         a.localeCompare(b),
       ),
+    [countryRegionLookup],
+  );
+  const validCountryIsoCodes = useMemo(
+    () => Object.keys(countryRegionLookup).sort((a, b) => a.localeCompare(b)),
     [countryRegionLookup],
   );
   const visibleCountries = useMemo(
@@ -2651,6 +2695,38 @@ export default function EVMap() {
       return;
     }
 
+    const nextWarning = getInvalidSharedLinkWarning(
+      window.location.search,
+      brandOptions,
+      validCountryIsoCodes,
+      availableRegions,
+    );
+
+    if (!nextWarning) {
+      lastInvalidSharedLinkSearchRef.current = "";
+      return;
+    }
+
+    if (lastInvalidSharedLinkSearchRef.current === window.location.search) {
+      return;
+    }
+
+    setSharedLinkWarning(nextWarning);
+    lastInvalidSharedLinkSearchRef.current = window.location.search;
+  }, [
+    activeSelectedBrand,
+    availableRegions,
+    brandOptions,
+    resolvedSelectedCountry?.isoCode,
+    selectedCoverageRegion,
+    validCountryIsoCodes,
+  ]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
     const url = new URL(window.location.href);
     const currentBrand = url.searchParams.get("brand")?.trim() ?? "";
     const currentCountry = normalizeIsoCode(url.searchParams.get("country"));
@@ -2739,6 +2815,18 @@ export default function EVMap() {
 
     return () => window.clearTimeout(resetTimer);
   }, [copyToast]);
+
+  useEffect(() => {
+    if (!sharedLinkWarning || typeof window === "undefined") {
+      return;
+    }
+
+    const resetTimer = window.setTimeout(() => {
+      setSharedLinkWarning(null);
+    }, 4000);
+
+    return () => window.clearTimeout(resetTimer);
+  }, [sharedLinkWarning]);
 
   useEffect(() => {
     if (!hasInitializedCopySourcesReset.current) {
@@ -5202,8 +5290,23 @@ export default function EVMap() {
           </div>
         ))}
       </div>
+      {sharedLinkWarning ? (
+        <div className="pointer-events-none absolute top-4 right-4 z-30 max-w-sm">
+          <div
+            role="status"
+            aria-live="polite"
+            className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900 shadow-lg"
+          >
+            {sharedLinkWarning}
+          </div>
+        </div>
+      ) : null}
       {copyToast ? (
-        <div className="pointer-events-none absolute top-4 right-4 z-30 max-w-xs">
+        <div
+          className={`pointer-events-none absolute right-4 z-30 max-w-xs ${
+            sharedLinkWarning ? "top-20" : "top-4"
+          }`}
+        >
           <div
             role="status"
             aria-live="polite"

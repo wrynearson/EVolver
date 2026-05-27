@@ -138,6 +138,51 @@
             "https://www.bestunesa.com/book-a-test-drive.php"
           ],
           "uncertain": false
+        },
+        "KWT": {
+          "name": "Kuwait",
+          "present": true,
+          "source": "https://www.bestune-middle-east.com/contact",
+          "sources": [
+            "https://www.bestune-middle-east.com/",
+            "https://www.bestune-middle-east.com/cars/BESTUNE%20E05",
+            "https://www.bestune-middle-east.com/contact"
+          ],
+          "uncertain": false
+        },
+        "EGY": {
+          "name": "Egypt",
+          "present": true,
+          "source": "https://www.bestune-middle-east.com/contact",
+          "sources": [
+            "https://www.bestune-middle-east.com/",
+            "https://www.bestune-middle-east.com/cars/BESTUNE%20E05",
+            "https://www.bestune-middle-east.com/contact"
+          ],
+          "uncertain": false
+        },
+        "LBY": {
+          "name": "Libya",
+          "present": true,
+          "source": "https://www.bestune-middle-east.com/contact",
+          "sources": [
+            "https://www.bestune-middle-east.com/",
+            "https://www.bestune-middle-east.com/cars/BESTUNE%20E05",
+            "https://www.bestune-middle-east.com/contact"
+          ],
+          "uncertain": false
+        },
+        "RUS": {
+          "name": "Russia",
+          "present": true,
+          "source": "https://bestune.ru/dealers/",
+          "sources": [
+            "https://bestune.ru/",
+            "https://bestune.ru/dealers/",
+            "https://bestune.ru/buy/test-drive/",
+            "https://bestune.ru/brand/news/novaya-era/"
+          ],
+          "uncertain": false
         }
       }
     },

@@ -1729,3 +1729,9 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Bestune into Iraq after confirming Bestune's official Middle East site lists Iraq-specific local contact details on its `contact` page and also exposes the `BESTUNE E05` EV model page on the same first-party domain.
 **Result**: pass
 **TODO**: Verify the next official sovereign Bestune markets beyond Bahrain, China, Colombia, Ghana, Iraq, Jordan, Oman, the Philippines, Qatar, Saudi Arabia, the United Arab Emirates, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.
+## 2026-05-27
+**Did**: Expanded Bestune into Egypt, Kuwait, Libya, and Russia after confirming Bestune's official Middle East contact stack lists Egypt-, Kuwait-, and Libya-specific distributor details alongside the `BESTUNE E05` model page, while `bestune.ru` exposes a localized official site, dealer network, test-drive flow, and Bestune NAT EV coverage for Russia.
+**Result**: pass
+## 2026-05-27
+**Did**: Added a shared-link warning toast so invalid brand, country, and region URL filters are explained before the app cleans them out of the address bar, with regression coverage plus desktop and mobile browser verification.
+**Result**: pass
