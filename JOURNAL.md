@@ -1738,3 +1738,6 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-27
 **Did**: Made the summary, brand-footprint, and selected-country overlays scroll internally within viewport-capped shells so dense panel content stays usable on mobile and desktop, and added regression tests for the new panel layout.
 **Result**: pass
+## 2026-05-27
+**Did**: Expanded Bestune into Belarus after confirming the live official `faw-bestune.by` market site exposes FAW Bestune's JoyEE 03, Xiaoma, and NAT EV lineup plus a nationwide Belarus dealer network, and that the Minsk dealer page identifies LLC FelOkt-Service as the official Belarus distributor and dealer.
+**Result**: pass
