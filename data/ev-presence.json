@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-27",
+    "last_updated": "2026-05-28",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -191,6 +191,18 @@
           "sources": [
             "https://faw-bestune.by/",
             "https://faw-bestune.by/dealers/minsk/"
+          ],
+          "uncertain": false
+        },
+        "URY": {
+          "name": "Uruguay",
+          "present": true,
+          "source": "https://bestune.uy/concesionarios.html",
+          "sources": [
+            "https://bestune.uy/",
+            "https://bestune.uy/ficha/FichaNAT.pdf",
+            "https://bestune.uy/concesionarios.html",
+            "https://bestune.uy/servicios_oficiales.html"
           ],
           "uncertain": false
         }

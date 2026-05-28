@@ -1744,3 +1744,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-28
 **Did**: Added official-website links to the coverage snapshot's leading-brand cards so users can jump straight from the top-ranked brands to first-party sites, backed by EV map regression coverage and desktop/mobile browser verification.
 **Result**: pass
+
+## 2026-05-28
+**Did**: Expanded Bestune into Uruguay after confirming the live sovereign `bestune.uy` site exposes Bestune NAT EV materials plus a nationwide official concessionaire and service network that explicitly covers electric vehicles.
+**Result**: pass
+**TODO**: Verify the next official sovereign Bestune markets beyond Bahrain, Belarus, China, Colombia, Egypt, Ghana, Iraq, Jordan, Kuwait, Libya, Oman, the Philippines, Qatar, Russia, Saudi Arabia, the United Arab Emirates, Uruguay, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.
