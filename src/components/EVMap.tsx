@@ -4786,13 +4786,13 @@ export default function EVMap() {
                       <ul className="mt-2 space-y-2">
                         {coverageSnapshotTopBrands.map((brand, index) => (
                           <li key={brand.brandName}>
-                            <button
-                              type="button"
-                              className="w-full rounded-md border border-transparent px-2 py-1 text-left hover:border-blue-100 hover:bg-white"
-                              onClick={() => applyBrandSelection(brand.brandName)}
-                            >
+                            <div className="rounded-md border border-transparent px-2 py-1 hover:border-blue-100 hover:bg-white">
                               <div className="flex items-start justify-between gap-3">
-                                <div>
+                                <button
+                                  type="button"
+                                  className="min-w-0 flex-1 text-left"
+                                  onClick={() => applyBrandSelection(brand.brandName)}
+                                >
                                   <p className="text-sm font-medium text-gray-800">
                                     {index + 1}. {brand.brandName}
                                   </p>
@@ -4803,10 +4803,27 @@ export default function EVMap() {
                                       ? ` · ${brand.uncertainCountryCount} uncertain`
                                       : ""}
                                   </p>
+                                </button>
+                                <div className="flex shrink-0 items-center gap-3 text-xs">
+                                  <button
+                                    type="button"
+                                    className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                                    onClick={() => applyBrandSelection(brand.brandName)}
+                                  >
+                                    View
+                                  </button>
+                                  <a
+                                    href={brand.website}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                                    aria-label={`Open official website for ${brand.brandName}`}
+                                  >
+                                    Website
+                                  </a>
                                 </div>
-                                <span className="text-xs font-medium text-blue-700">View</span>
                               </div>
-                            </button>
+                            </div>
                           </li>
                         ))}
                       </ul>

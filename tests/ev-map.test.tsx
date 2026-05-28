@@ -3148,6 +3148,11 @@ describe("EVMap", () => {
     expect(within(snapshotPanel!).getAllByText("1/6 regions")).toHaveLength(2);
     const leadingBrandsSection = within(snapshotPanel!).getByText("Leading brands").closest("section");
     expect(leadingBrandsSection).not.toBeNull();
+    expect(
+      within(leadingBrandsSection!).getByRole("link", {
+        name: "Open official website for BYD",
+      }),
+    ).toHaveAttribute("href", "https://www.byd.com");
     fireEvent.click(within(leadingBrandsSection!).getByRole("button", { name: /1\. BYD/i }));
     expect(screen.getByRole("heading", { name: "Brand footprint" })).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Clear brand filter" }));
