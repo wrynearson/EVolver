@@ -172,6 +172,17 @@
           ],
           "uncertain": false
         },
+        "SYR": {
+          "name": "Syria",
+          "present": true,
+          "source": "https://www.bestune-middle-east.com/contact",
+          "sources": [
+            "https://www.bestune-middle-east.com/",
+            "https://www.bestune-middle-east.com/cars/BESTUNE%20E05",
+            "https://www.bestune-middle-east.com/contact"
+          ],
+          "uncertain": false
+        },
         "RUS": {
           "name": "Russia",
           "present": true,
