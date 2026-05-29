@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import type { FeatureCollection } from "geojson";
 import {
   buildColorExpression,
+  getCountryName,
   getFocusBoundsOptions,
   getFeatureBounds,
   getLegendItems,
@@ -97,6 +98,24 @@ describe("getLegendItems", () => {
         variant: "outline-dashed",
       },
     ]);
+  });
+});
+
+describe("getCountryName", () => {
+  it("prefers the ADMIN property when it is present", () => {
+    expect(getCountryName({ ADMIN: "Norway", NAME: "Norge" })).toBe("Norway");
+  });
+
+  it("falls back to NAME when ADMIN is missing", () => {
+    expect(getCountryName({ NAME: "Sweden" })).toBe("Sweden");
+  });
+
+  it("trims whitespace and ignores empty labels", () => {
+    expect(getCountryName({ ADMIN: "   ", NAME: "  Spain  " })).toBe("Spain");
+  });
+
+  it("returns undefined when no usable country label exists", () => {
+    expect(getCountryName({ ADMIN: " ", NAME: "" })).toBeUndefined();
   });
 });
 

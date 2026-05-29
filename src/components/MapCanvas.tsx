@@ -3,7 +3,11 @@ import Map, { Layer, Source, type MapRef } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { FeatureCollection } from "geojson";
 import type { ExpressionSpecification } from "maplibre-gl";
-import { getFocusBoundsOptions, type MapBounds } from "../lib/mapUtils";
+import {
+  getCountryName,
+  getFocusBoundsOptions,
+  type MapBounds,
+} from "../lib/mapUtils";
 import type { MapCountrySelection } from "../types";
 
 interface MapCanvasProps {
@@ -19,7 +23,7 @@ interface MapCanvasProps {
 
 const DEFAULT_VIEW_STATE = { longitude: 20, latitude: 30, zoom: 1.5 };
 
-function getCountrySelection(
+export function getCountrySelection(
   properties: Record<string, unknown> | undefined,
 ): MapCountrySelection | null {
   const isoCode = typeof properties?.ISO_A3 === "string" ? properties.ISO_A3 : null;
@@ -28,14 +32,7 @@ function getCountrySelection(
     return null;
   }
 
-  const countryName =
-    typeof properties?.ADMIN === "string"
-      ? properties.ADMIN
-      : typeof properties?.NAME === "string"
-        ? properties.NAME
-        : undefined;
-
-  return { isoCode, countryName };
+  return { isoCode, countryName: getCountryName(properties) };
 }
 
 export default function MapCanvas({

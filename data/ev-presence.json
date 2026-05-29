@@ -228,6 +228,29 @@
             "https://bestune.uy/servicios_oficiales.html"
           ],
           "uncertain": false
+        },
+        "ESP": {
+          "name": "Spain",
+          "present": true,
+          "source": "https://kngloo.eu/puntos-de-venta/",
+          "sources": [
+            "https://kngloo.eu/",
+            "https://kngloo.eu/contact/",
+            "https://kngloo.eu/puntos-de-venta/",
+            "https://kngloo.eu/talleres-y-posventa/"
+          ],
+          "uncertain": false
+        },
+        "ITA": {
+          "name": "Italy",
+          "present": true,
+          "source": "https://kngloo.eu/it/punti-vendita/",
+          "sources": [
+            "https://kngloo.eu/it/",
+            "https://kngloo.eu/it/marche/bestune/t77/",
+            "https://kngloo.eu/it/punti-vendita/"
+          ],
+          "uncertain": false
         }
       }
     },

@@ -80,6 +80,21 @@ export interface FocusBoundsOptions {
   maxZoom: number;
 }
 
+export function getCountryName(
+  properties: Record<string, unknown> | undefined,
+): string | undefined {
+  const admin =
+    typeof properties?.ADMIN === "string" ? properties.ADMIN.trim() : undefined;
+
+  if (admin) {
+    return admin;
+  }
+
+  const name = typeof properties?.NAME === "string" ? properties.NAME.trim() : undefined;
+
+  return name || undefined;
+}
+
 interface GetLegendItemsOptions {
   hasUncertainEntries?: boolean;
 }
