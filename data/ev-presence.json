@@ -251,6 +251,59 @@
             "https://kngloo.eu/it/punti-vendita/"
           ],
           "uncertain": false
+        },
+        "ECU": {
+          "name": "Ecuador",
+          "present": true,
+          "source": "https://bestune.ec/talleres.php",
+          "sources": [
+            "https://bestune.ec/",
+            "https://bestune.ec/t77.php",
+            "https://bestune.ec/talleres.php"
+          ],
+          "uncertain": false
+        },
+        "PRY": {
+          "name": "Paraguay",
+          "present": true,
+          "source": "https://www.bestune.com.py/",
+          "sources": [
+            "https://www.bestune.com.py/",
+            "https://www.bestune.com.py/t77",
+            "https://www.bestune.com.py/nosotros"
+          ],
+          "uncertain": false
+        },
+        "DOM": {
+          "name": "Dominican Republic",
+          "present": true,
+          "source": "https://bestune.com.do/contacto",
+          "sources": [
+            "https://bestune.com.do/",
+            "https://bestune.com.do/contacto"
+          ],
+          "uncertain": false
+        },
+        "GTM": {
+          "name": "Guatemala",
+          "present": true,
+          "source": "https://bestune.com.gt/ubicaciones",
+          "sources": [
+            "https://bestune.com.gt/",
+            "https://bestune.com.gt/modelos/t77/",
+            "https://bestune.com.gt/ubicaciones"
+          ],
+          "uncertain": false
+        },
+        "KAZ": {
+          "name": "Kazakhstan",
+          "present": true,
+          "source": "https://bestune.kz/kz/contacts/",
+          "sources": [
+            "https://bestune.kz/",
+            "https://bestune.kz/kz/contacts/"
+          ],
+          "uncertain": false
         }
       }
     },

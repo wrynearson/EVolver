@@ -1768,3 +1768,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-29
 **Did**: Extracted shared country-name parsing for map selections and added direct MapCanvas regression coverage for missing ISO codes, `-99` placeholders, fallback labels, and whitespace-trimmed names.
 **Result**: pass
+
+## 2026-05-29
+**Did**: Expanded Bestune into Ecuador, Paraguay, the Dominican Republic, Guatemala, and Kazakhstan after confirming each sovereign domain exposes a live localized Bestune market with first-party model pages plus dealer, showroom, contact, or service/test-drive flows.
+**Result**: pass
+**TODO**: Verify the next official sovereign Bestune markets beyond Bahrain, Belarus, China, Colombia, the Dominican Republic, Ecuador, Egypt, Ghana, Guatemala, Iraq, Italy, Jordan, Kazakhstan, Kuwait, Libya, Mexico, Oman, Paraguay, the Philippines, Qatar, Russia, Saudi Arabia, Spain, Syria, the United Arab Emirates, Uruguay, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.
