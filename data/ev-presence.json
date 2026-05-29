@@ -304,6 +304,17 @@
             "https://bestune.kz/kz/contacts/"
           ],
           "uncertain": false
+        },
+        "POL": {
+          "name": "Poland",
+          "present": true,
+          "source": "https://bestune-auto.pl/umow-wizyte-w-serwisie",
+          "sources": [
+            "https://bestune-auto.pl/",
+            "https://bestune-auto.pl/o-marce",
+            "https://bestune-auto.pl/umow-wizyte-w-serwisie"
+          ],
+          "uncertain": false
         }
       }
     },
