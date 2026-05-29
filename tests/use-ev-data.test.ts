@@ -12,6 +12,7 @@ import {
   getCountryRegionLookup,
   getCountryCoverageSummaries,
   getRegionCoverageSummaries,
+  normalizeCoverageRegion,
 } from "../src/hooks/useEVData";
 import type { EVPresenceData } from "../src/types";
 
@@ -137,6 +138,85 @@ describe("useEVData helpers", () => {
         brandNames: ["BYD"],
       },
     ]);
+  });
+
+  it("normalizes region names before coverage grouping", () => {
+    expect(normalizeCoverageRegion("North America")).toBe("Americas");
+    expect(normalizeCoverageRegion("South America")).toBe("Americas");
+    expect(normalizeCoverageRegion("Europe")).toBe("Europe");
+    expect(normalizeCoverageRegion("Seven seas (open ocean)")).toBeNull();
+    expect(normalizeCoverageRegion("")).toBeNull();
+    expect(normalizeCoverageRegion("   ")).toBeNull();
+    expect(normalizeCoverageRegion(undefined)).toBeNull();
+  });
+
+  it("merges North and South America into a single Americas coverage region", () => {
+    const americasCountries = {
+      type: "FeatureCollection",
+      features: [
+        {
+          properties: {
+            ISO_A3: "USA",
+            REGION_UN: "North America",
+            CONTINENT: "North America",
+          },
+        },
+        {
+          properties: {
+            ISO_A3: "BRA",
+            REGION_UN: "South America",
+            CONTINENT: "South America",
+          },
+        },
+      ],
+    } as const;
+    const americasData: EVPresenceData = {
+      metadata: {
+        last_updated: "2026-05-29",
+        definition: "test",
+        schema_version: 2,
+      },
+      brands: {
+        BYD: {
+          website: "https://www.byd.com",
+          countries: {
+            USA: {
+              name: "United States",
+              present: true,
+              source: "https://www.byd.com/us",
+              uncertain: false,
+            },
+            BRA: {
+              name: "Brazil",
+              present: true,
+              source: "https://www.byd.com/br",
+              uncertain: true,
+            },
+          },
+        },
+      },
+    };
+
+    const countryRegionLookup = getCountryRegionLookup(americasCountries);
+
+    expect(countryRegionLookup).toMatchObject({
+      BRA: "Americas",
+      USA: "Americas",
+    });
+    expect(getRegionCoverageSummaries(americasData, countryRegionLookup)).toEqual([
+      {
+        regionName: "Americas",
+        confirmedCountryCount: 1,
+        uncertainCountryCount: 1,
+        brandNames: ["BYD"],
+      },
+    ]);
+    expect(
+      Object.keys(
+        filterPresenceDataToRegion(americasData, countryRegionLookup, "Americas")
+          .brands.BYD.countries,
+      ),
+    ).toEqual(["USA", "BRA"]);
   });
 
   it("builds per-brand region summaries for footprint navigation", () => {
