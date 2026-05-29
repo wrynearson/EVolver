@@ -1754,3 +1754,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Bestune into Syria after confirming the official Bestune Middle East stack still exposes the `BESTUNE E05` EV model page and lists Syria-specific local contact details on its first-party contact page.
 **Result**: pass
 **TODO**: Verify the next official sovereign Bestune markets beyond Bahrain, Belarus, China, Colombia, Egypt, Ghana, Iraq, Jordan, Kuwait, Libya, Oman, the Philippines, Qatar, Russia, Saudi Arabia, Syria, the United Arab Emirates, Uruguay, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.
+
+## 2026-05-29
+**Did**: Expanded Bestune into Mexico after confirming SAAG's official local Bestune catalogue, model-detail quote flow, contact form, and nationwide dealer locator on `saag.mx`.
+**Result**: pass
+**TODO**: Verify the next official sovereign Bestune markets beyond Bahrain, Belarus, China, Colombia, Egypt, Ghana, Iraq, Jordan, Kuwait, Libya, Mexico, Oman, the Philippines, Qatar, Russia, Saudi Arabia, Syria, the United Arab Emirates, Uruguay, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.
