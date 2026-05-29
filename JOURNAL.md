@@ -1778,3 +1778,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Bestune into Poland after confirming the official local `bestune-auto.pl` site, brand history page, and nationwide authorized service/dealer booking flow run by Asian Automotive Distribution Center.
 **Result**: pass
 **TODO**: Verify the next official sovereign Bestune markets beyond Bahrain, Belarus, China, Colombia, the Dominican Republic, Ecuador, Egypt, Ghana, Guatemala, Iraq, Italy, Jordan, Kazakhstan, Kuwait, Libya, Mexico, Oman, Paraguay, the Philippines, Poland, Qatar, Russia, Saudi Arabia, Spain, Syria, the United Arab Emirates, Uruguay, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.
+
+## 2026-05-29
+**Did**: Added regression coverage for coverage-region normalization so North and South America stay merged as `Americas` while ignored UN regions continue to drop out of summaries and region filtering.
+**Result**: pass
