@@ -1787,3 +1787,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Bestune into Uzbekistan after confirming `bestuneuzbekistan.uz` exposes a live sovereign Bestune market site with local branch details, Uzbekistan contact channels, and a localized B70 model page on the same first-party domain.
 **Result**: pass
 **TODO**: Verify the next official sovereign Bestune markets beyond Bahrain, Belarus, China, Colombia, the Dominican Republic, Ecuador, Egypt, Ghana, Guatemala, Iraq, Italy, Jordan, Kazakhstan, Kuwait, Libya, Mexico, Oman, Paraguay, the Philippines, Poland, Qatar, Russia, Saudi Arabia, Spain, Syria, the United Arab Emirates, Uruguay, Uzbekistan, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.
+
+## 2026-05-30
+**Did**: Expanded Bestune into Costa Rica after confirming the local `faw.co.cr` handoff to KAutos' live NAT EV page with a test-drive or quotation flow, plus KAutos' own Costa Rica about and contact pages naming the business as a local Bestune representative.
+**Result**: pass
+**TODO**: Verify the next official sovereign Bestune markets beyond Bahrain, Belarus, China, Colombia, Costa Rica, the Dominican Republic, Ecuador, Egypt, Ghana, Guatemala, Iraq, Italy, Jordan, Kazakhstan, Kuwait, Libya, Mexico, Oman, Paraguay, the Philippines, Poland, Qatar, Russia, Saudi Arabia, Spain, Syria, the United Arab Emirates, Uruguay, Uzbekistan, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.

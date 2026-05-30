@@ -284,6 +284,18 @@
           ],
           "uncertain": false
         },
+        "CRI": {
+          "name": "Costa Rica",
+          "present": true,
+          "source": "https://kautoscr.com/nat/",
+          "sources": [
+            "https://faw.co.cr/",
+            "https://kautoscr.com/nat/",
+            "https://kautoscr.com/contacto/",
+            "https://kautoscr.com/nosotros/"
+          ],
+          "uncertain": false
+        },
         "GTM": {
           "name": "Guatemala",
           "present": true,
