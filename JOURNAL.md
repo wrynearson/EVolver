@@ -1782,3 +1782,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-29
 **Did**: Added regression coverage for coverage-region normalization so North and South America stay merged as `Americas` while ignored UN regions continue to drop out of summaries and region filtering.
 **Result**: pass
+
+## 2026-05-30
+**Did**: Expanded Bestune into Uzbekistan after confirming `bestuneuzbekistan.uz` exposes a live sovereign Bestune market site with local branch details, Uzbekistan contact channels, and a localized B70 model page on the same first-party domain.
+**Result**: pass
+**TODO**: Verify the next official sovereign Bestune markets beyond Bahrain, Belarus, China, Colombia, the Dominican Republic, Ecuador, Egypt, Ghana, Guatemala, Iraq, Italy, Jordan, Kazakhstan, Kuwait, Libya, Mexico, Oman, Paraguay, the Philippines, Poland, Qatar, Russia, Saudi Arabia, Spain, Syria, the United Arab Emirates, Uruguay, Uzbekistan, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.

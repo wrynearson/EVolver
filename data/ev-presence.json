@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-29",
+    "last_updated": "2026-05-30",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -313,6 +313,16 @@
             "https://bestune-auto.pl/",
             "https://bestune-auto.pl/o-marce",
             "https://bestune-auto.pl/umow-wizyte-w-serwisie"
+          ],
+          "uncertain": false
+        },
+        "UZB": {
+          "name": "Uzbekistan",
+          "present": true,
+          "source": "https://www.bestuneuzbekistan.uz/",
+          "sources": [
+            "https://www.bestuneuzbekistan.uz/",
+            "https://www.bestuneuzbekistan.uz/model/?car=B70"
           ],
           "uncertain": false
         }
