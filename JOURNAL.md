@@ -1792,3 +1792,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Bestune into Costa Rica after confirming the local `faw.co.cr` handoff to KAutos' live NAT EV page with a test-drive or quotation flow, plus KAutos' own Costa Rica about and contact pages naming the business as a local Bestune representative.
 **Result**: pass
 **TODO**: Verify the next official sovereign Bestune markets beyond Bahrain, Belarus, China, Colombia, Costa Rica, the Dominican Republic, Ecuador, Egypt, Ghana, Guatemala, Iraq, Italy, Jordan, Kazakhstan, Kuwait, Libya, Mexico, Oman, Paraguay, the Philippines, Poland, Qatar, Russia, Saudi Arabia, Spain, Syria, the United Arab Emirates, Uruguay, Uzbekistan, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.
+
+## 2026-05-30
+**Did**: Expanded Bestune into Panama after confirming Avansmotor's official Panama distributor site links Bestune to local showrooms and service, while the live branded `testdrive.bestunelatam.com` page is titled `Bestune | Panamá` and exposes a Panama-specific showroom and test-drive flow.
+**Result**: pass
+**TODO**: Verify the next official sovereign Bestune markets beyond Bahrain, Belarus, China, Colombia, Costa Rica, the Dominican Republic, Ecuador, Egypt, Ghana, Guatemala, Iraq, Italy, Jordan, Kazakhstan, Kuwait, Libya, Mexico, Oman, Panama, Paraguay, the Philippines, Poland, Qatar, Russia, Saudi Arabia, Spain, Syria, the United Arab Emirates, Uruguay, Uzbekistan, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.

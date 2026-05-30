@@ -296,6 +296,16 @@
           ],
           "uncertain": false
         },
+        "PAN": {
+          "name": "Panama",
+          "present": true,
+          "source": "https://testdrive.bestunelatam.com/",
+          "sources": [
+            "https://www.avansmotor.com/",
+            "https://testdrive.bestunelatam.com/"
+          ],
+          "uncertain": false
+        },
         "GTM": {
           "name": "Guatemala",
           "present": true,
