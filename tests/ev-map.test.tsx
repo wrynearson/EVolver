@@ -1753,6 +1753,69 @@ describe("EVMap", () => {
     );
   });
 
+  it("falls back to document.execCommand when the Clipboard API is unavailable", async () => {
+    vi.doUnmock("../src/components/MapCanvas");
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+    Object.defineProperty(window.navigator, "clipboard", {
+      configurable: true,
+      value: undefined,
+    });
+    Object.defineProperty(document, "execCommand", {
+      configurable: true,
+      value: vi.fn().mockReturnValue(true),
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Copy summary" }));
+
+    expect(document.execCommand).toHaveBeenCalledWith("copy");
+    expect(await screen.findByRole("status")).toHaveTextContent("Copied summary to clipboard.");
+  });
+
+  it("shows a clearer message when no clipboard copy path is available", async () => {
+    vi.doUnmock("../src/components/MapCanvas");
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+      const payload = url.includes("ev-presence.json") ? mockData : mockGeoJson;
+
+      return new Response(JSON.stringify(payload), {
+        headers: { "Content-Type": "application/json" },
+      });
+    });
+    Object.defineProperty(window.navigator, "clipboard", {
+      configurable: true,
+      value: undefined,
+    });
+    Object.defineProperty(document, "execCommand", {
+      configurable: true,
+      value: undefined,
+    });
+
+    const { default: EVMap } = await import("../src/components/EVMap");
+
+    render(<EVMap />);
+
+    expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Copy share link" }));
+
+    expect(await screen.findByRole("status")).toHaveTextContent(
+      "Clipboard isn't available in this browser.",
+    );
+  });
+
   it("explains uncertain badges in the footprint and country details panels", async () => {
     vi.doUnmock("../src/components/MapCanvas");
     vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {

@@ -29,6 +29,7 @@ import {
   serializePresenceDataToJson,
   serializeSourceUrlsToText,
 } from "../lib/dataExport";
+import { ClipboardCopyError, copyTextToClipboard } from "../lib/clipboard";
 import { buildColorExpression, getFeatureBounds, getLegendItems } from "../lib/mapUtils";
 import type { FeatureCollection } from "geojson";
 import type {
@@ -126,6 +127,14 @@ const KEYBOARD_SHORTCUTS = [
 
 function getSourceCountLabel(sourceCount: number) {
   return `${sourceCount} ${sourceCount === 1 ? "source" : "sources"}`;
+}
+
+function getClipboardErrorMessage(defaultMessage: string, error: unknown) {
+  if (error instanceof ClipboardCopyError && error.reason === "unavailable") {
+    return "Clipboard isn't available in this browser.";
+  }
+
+  return defaultMessage;
 }
 
 function getDatasetFreshnessLabel(lastUpdated: string) {
@@ -2122,191 +2131,154 @@ export default function EVMap() {
       resolvedSelectedCountry,
       activeMajorRegionGap,
       selectedCoverageRegion,
-    ],
+      ],
   );
-  const copySources = (targetKey: string, sources: string[]) => {
-    if (!navigator.clipboard?.writeText) {
-      setCopySourcesState({ key: targetKey, status: "failed" });
-      setCopyToast({ tone: "error", message: "Couldn't copy sources." });
+  const copyTextWithFeedback = ({
+    text,
+    successMessage,
+    failureMessage,
+    onCopied,
+    onFailed,
+  }: {
+    text: string | null;
+    successMessage: string;
+    failureMessage: string;
+    onCopied: () => void;
+    onFailed: () => void;
+  }) => {
+    if (!text) {
+      onFailed();
+      setCopyToast({ tone: "error", message: failureMessage });
       return;
     }
 
-    setCopySourcesState({ key: targetKey, status: "copied" });
-    setCopyToast({ tone: "success", message: "Copied sources to clipboard." });
-    void navigator.clipboard.writeText(serializeSourceUrlsToText(sources)).catch(() => {
-      setCopySourcesState({ key: targetKey, status: "failed" });
-      setCopyToast({ tone: "error", message: "Couldn't copy sources." });
+    onCopied();
+    setCopyToast({ tone: "success", message: successMessage });
+    void copyTextToClipboard(text).catch((error) => {
+      onFailed();
+      setCopyToast({
+        tone: "error",
+        message: getClipboardErrorMessage(failureMessage, error),
+      });
+    });
+  };
+  const copySources = (targetKey: string, sources: string[]) => {
+    copyTextWithFeedback({
+      text: serializeSourceUrlsToText(sources),
+      successMessage: "Copied sources to clipboard.",
+      failureMessage: "Couldn't copy sources.",
+      onCopied: () => setCopySourcesState({ key: targetKey, status: "copied" }),
+      onFailed: () => setCopySourcesState({ key: targetKey, status: "failed" }),
     });
   };
   const copyBrandWebsite = () => {
-    if (!selectedBrandWebsite || !navigator.clipboard?.writeText) {
-      setCopyBrandWebsiteStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy website URL." });
-      return;
-    }
-
-    setCopyBrandWebsiteStatus("copied");
-    setCopyToast({ tone: "success", message: "Copied website URL to clipboard." });
-    void navigator.clipboard.writeText(selectedBrandWebsite).catch(() => {
-      setCopyBrandWebsiteStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy website URL." });
+    copyTextWithFeedback({
+      text: selectedBrandWebsite,
+      successMessage: "Copied website URL to clipboard.",
+      failureMessage: "Couldn't copy website URL.",
+      onCopied: () => setCopyBrandWebsiteStatus("copied"),
+      onFailed: () => setCopyBrandWebsiteStatus("failed"),
     });
   };
   const copyBrandMarkets = () => {
-    if (selectedBrandMarketList.length === 0 || !navigator.clipboard?.writeText) {
-      setCopyBrandMarketsStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy visible markets." });
-      return;
-    }
-
-    setCopyBrandMarketsStatus("copied");
-    setCopyToast({ tone: "success", message: "Copied visible markets to clipboard." });
-    void navigator.clipboard.writeText(selectedBrandMarketList.join("\n")).catch(() => {
-      setCopyBrandMarketsStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy visible markets." });
+    copyTextWithFeedback({
+      text: selectedBrandMarketList.length > 0 ? selectedBrandMarketList.join("\n") : null,
+      successMessage: "Copied visible markets to clipboard.",
+      failureMessage: "Couldn't copy visible markets.",
+      onCopied: () => setCopyBrandMarketsStatus("copied"),
+      onFailed: () => setCopyBrandMarketsStatus("failed"),
     });
   };
   const copyGapCandidates = () => {
-    if (
-      selectedBrandMajorRegionGapCandidateList.length === 0 ||
-      !navigator.clipboard?.writeText
-    ) {
-      setCopyGapCandidatesStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy gap candidates." });
-      return;
-    }
-
-    setCopyGapCandidatesStatus("copied");
-    setCopyToast({ tone: "success", message: "Copied gap candidates to clipboard." });
-    void navigator.clipboard
-      .writeText(selectedBrandMajorRegionGapCandidateList.join("\n"))
-      .catch(() => {
-        setCopyGapCandidatesStatus("failed");
-        setCopyToast({ tone: "error", message: "Couldn't copy gap candidates." });
-      });
+    copyTextWithFeedback({
+      text:
+        selectedBrandMajorRegionGapCandidateList.length > 0
+          ? selectedBrandMajorRegionGapCandidateList.join("\n")
+          : null,
+      successMessage: "Copied gap candidates to clipboard.",
+      failureMessage: "Couldn't copy gap candidates.",
+      onCopied: () => setCopyGapCandidatesStatus("copied"),
+      onFailed: () => setCopyGapCandidatesStatus("failed"),
+    });
   };
   const copyCountryProfile = () => {
     const countryDetails = allSelectedCountryDetails ?? selectedCountryDetails;
 
-    if (!countryDetails || !navigator.clipboard?.writeText) {
-      setCopyCountryProfileStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy country profile." });
-      return;
-    }
-
-    setCopyCountryProfileStatus("copied");
-    setCopyToast({ tone: "success", message: "Copied country profile to clipboard." });
-    void navigator.clipboard
-      .writeText(serializeCountryPresenceDetailsToText(countryDetails))
-      .catch(() => {
-        setCopyCountryProfileStatus("failed");
-        setCopyToast({ tone: "error", message: "Couldn't copy country profile." });
-      });
+    copyTextWithFeedback({
+      text: countryDetails ? serializeCountryPresenceDetailsToText(countryDetails) : null,
+      successMessage: "Copied country profile to clipboard.",
+      failureMessage: "Couldn't copy country profile.",
+      onCopied: () => setCopyCountryProfileStatus("copied"),
+      onFailed: () => setCopyCountryProfileStatus("failed"),
+    });
   };
   const copyVisibleCountryBrands = () => {
-    if (!selectedCountryDetails || !navigator.clipboard?.writeText) {
-      setCopyVisibleCountryBrandsStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy visible brands." });
-      return;
-    }
-
-    setCopyVisibleCountryBrandsStatus("copied");
-    setCopyToast({ tone: "success", message: "Copied visible brands to clipboard." });
-    void navigator.clipboard
-      .writeText(
-        formatVisibleCountryBrandList(
-          selectedCountryDetails.countryName,
-          selectedCountryDetails.isoCode,
-          visibleSelectedCountryBrands,
-        ),
-      )
-      .catch(() => {
-        setCopyVisibleCountryBrandsStatus("failed");
-        setCopyToast({ tone: "error", message: "Couldn't copy visible brands." });
-      });
+    copyTextWithFeedback({
+      text: selectedCountryDetails
+        ? formatVisibleCountryBrandList(
+            selectedCountryDetails.countryName,
+            selectedCountryDetails.isoCode,
+            visibleSelectedCountryBrands,
+          )
+        : null,
+      successMessage: "Copied visible brands to clipboard.",
+      failureMessage: "Couldn't copy visible brands.",
+      onCopied: () => setCopyVisibleCountryBrandsStatus("copied"),
+      onFailed: () => setCopyVisibleCountryBrandsStatus("failed"),
+    });
   };
   const copyVisibleCoverage = () => {
-    if (coveragePanelCopyList.length === 0 || !navigator.clipboard?.writeText) {
-      setCopyCoverageStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy coverage view." });
-      return;
-    }
-
-    setCopyCoverageStatus("copied");
-    setCopyToast({ tone: "success", message: "Copied coverage view to clipboard." });
-    void navigator.clipboard.writeText(coveragePanelCopyList.join("\n")).catch(() => {
-      setCopyCoverageStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy coverage view." });
+    copyTextWithFeedback({
+      text: coveragePanelCopyList.length > 0 ? coveragePanelCopyList.join("\n") : null,
+      successMessage: "Copied coverage view to clipboard.",
+      failureMessage: "Couldn't copy coverage view.",
+      onCopied: () => setCopyCoverageStatus("copied"),
+      onFailed: () => setCopyCoverageStatus("failed"),
     });
   };
   const copyMajorRegionGaps = () => {
-    if (majorRegionGapCopyList.length === 0 || !navigator.clipboard?.writeText) {
-      setCopyMajorRegionGapsStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy gap priorities." });
-      return;
-    }
-
-    setCopyMajorRegionGapsStatus("copied");
-    setCopyToast({ tone: "success", message: "Copied gap priorities to clipboard." });
-    void navigator.clipboard.writeText(majorRegionGapCopyList.join("\n")).catch(() => {
-      setCopyMajorRegionGapsStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy gap priorities." });
+    copyTextWithFeedback({
+      text: majorRegionGapCopyList.length > 0 ? majorRegionGapCopyList.join("\n") : null,
+      successMessage: "Copied gap priorities to clipboard.",
+      failureMessage: "Couldn't copy gap priorities.",
+      onCopied: () => setCopyMajorRegionGapsStatus("copied"),
+      onFailed: () => setCopyMajorRegionGapsStatus("failed"),
     });
   };
   const copyDatasetSummary = () => {
-    if (!datasetSummaryCopyText || !navigator.clipboard?.writeText) {
-      setCopySummaryStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy summary." });
-      return;
-    }
-
-    setCopySummaryStatus("copied");
-    setCopyToast({ tone: "success", message: "Copied summary to clipboard." });
-    void navigator.clipboard.writeText(datasetSummaryCopyText).catch(() => {
-      setCopySummaryStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy summary." });
+    copyTextWithFeedback({
+      text: datasetSummaryCopyText,
+      successMessage: "Copied summary to clipboard.",
+      failureMessage: "Couldn't copy summary.",
+      onCopied: () => setCopySummaryStatus("copied"),
+      onFailed: () => setCopySummaryStatus("failed"),
     });
   };
   const copyHoveredCountrySummary = () => {
-    if (!hoveredCountrySummaryText || !navigator.clipboard?.writeText) {
-      setCopyPreviewSummaryStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy preview summary." });
-      return;
-    }
-
-    setCopyPreviewSummaryStatus("copied");
-    setCopyToast({ tone: "success", message: "Copied preview summary to clipboard." });
-    void navigator.clipboard.writeText(hoveredCountrySummaryText).catch(() => {
-      setCopyPreviewSummaryStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy preview summary." });
+    copyTextWithFeedback({
+      text: hoveredCountrySummaryText,
+      successMessage: "Copied preview summary to clipboard.",
+      failureMessage: "Couldn't copy preview summary.",
+      onCopied: () => setCopyPreviewSummaryStatus("copied"),
+      onFailed: () => setCopyPreviewSummaryStatus("failed"),
     });
   };
   const copyHoveredCountrySources = () => {
-    if (!hoveredCountrySourcesText || !navigator.clipboard?.writeText) {
-      setCopyHoveredSourcesStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy all sources." });
-      return;
-    }
-
-    setCopyHoveredSourcesStatus("copied");
-    setCopyToast({ tone: "success", message: "Copied all sources to clipboard." });
-    void navigator.clipboard.writeText(hoveredCountrySourcesText).catch(() => {
-      setCopyHoveredSourcesStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy all sources." });
+    copyTextWithFeedback({
+      text: hoveredCountrySourcesText,
+      successMessage: "Copied all sources to clipboard.",
+      failureMessage: "Couldn't copy all sources.",
+      onCopied: () => setCopyHoveredSourcesStatus("copied"),
+      onFailed: () => setCopyHoveredSourcesStatus("failed"),
     });
   };
   const copyShareLink = () => {
-    if (!shareUrl || !navigator.clipboard?.writeText) {
-      setCopyLinkStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy share link." });
-      return;
-    }
-
-    setCopyLinkStatus("copied");
-    setCopyToast({ tone: "success", message: "Copied share link to clipboard." });
-    void navigator.clipboard.writeText(shareUrl).catch(() => {
-      setCopyLinkStatus("failed");
-      setCopyToast({ tone: "error", message: "Couldn't copy share link." });
+    copyTextWithFeedback({
+      text: shareUrl,
+      successMessage: "Copied share link to clipboard.",
+      failureMessage: "Couldn't copy share link.",
+      onCopied: () => setCopyLinkStatus("copied"),
+      onFailed: () => setCopyLinkStatus("failed"),
     });
   };
   const hasCustomView = Boolean(
@@ -3904,34 +3876,19 @@ export default function EVMap() {
                   {selectedCountryUncertainBrandCount === 1 ? "brand" : "brands"}
                 </button>
               ) : null}
-              <button
-                type="button"
-                className="mt-2 text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
-                onClick={() => {
-                  if (!navigator.clipboard?.writeText) {
-                    setCopyCountryStatus("failed");
-                    setCopyToast({ tone: "error", message: "Couldn't copy country + ISO." });
-                    return;
+                <button
+                  type="button"
+                  className="mt-2 text-xs font-medium text-blue-700 underline underline-offset-2 hover:text-blue-800"
+                  onClick={() =>
+                    copyTextWithFeedback({
+                      text: `${selectedCountryDetails.countryName} (${selectedCountryDetails.isoCode})`,
+                      successMessage: "Copied country + ISO to clipboard.",
+                      failureMessage: "Couldn't copy country + ISO.",
+                      onCopied: () => setCopyCountryStatus("copied"),
+                      onFailed: () => setCopyCountryStatus("failed"),
+                    })
                   }
-
-                  setCopyCountryStatus("copied");
-                  setCopyToast({
-                    tone: "success",
-                    message: "Copied country + ISO to clipboard.",
-                  });
-                  void navigator.clipboard
-                    .writeText(
-                      `${selectedCountryDetails.countryName} (${selectedCountryDetails.isoCode})`,
-                    )
-                    .catch(() => {
-                      setCopyCountryStatus("failed");
-                      setCopyToast({
-                        tone: "error",
-                        message: "Couldn't copy country + ISO.",
-                      });
-                    });
-                }}
-              >
+                >
                 {copyCountryStatus === "copied"
                   ? "Copied country + ISO"
                   : copyCountryStatus === "failed"
