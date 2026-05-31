@@ -2943,6 +2943,7 @@ export default function EVMap() {
                 title={mapStatus.title}
                 description={mapStatus.description}
                 onRetry={mapStatus.onRetry}
+                retryLabel={`Retry loading ${mapStatus.title.toLowerCase()}`}
               />
             }
           >
@@ -2964,6 +2965,7 @@ export default function EVMap() {
             title={mapStatus.title}
             description={mapStatus.description}
             onRetry={mapStatus.onRetry}
+            retryLabel={`Retry loading ${mapStatus.title.toLowerCase()}`}
           />
         )}
       </div>
@@ -3020,6 +3022,11 @@ export default function EVMap() {
                   className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 disabled:cursor-not-allowed disabled:opacity-60"
                   placeholder="Search by brand name"
                   disabled={brandOptions.length === 0}
+                  title={
+                    brandOptions.length === 0
+                      ? "No brands are available yet. Check that the data has loaded."
+                      : undefined
+                  }
                   value={brandLookupQuery}
                   onChange={(event) => {
                     const nextQuery = event.target.value;
@@ -3179,6 +3186,11 @@ export default function EVMap() {
                 id="region-filter"
                 className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 disabled:cursor-not-allowed disabled:opacity-60"
                 disabled={availableRegions.length === 0}
+                title={
+                  availableRegions.length === 0
+                    ? "No regions are available in the current dataset."
+                    : undefined
+                }
                 value={selectedCoverageRegion}
                 onChange={(event) => setSelectedCoverageRegion(event.target.value)}
               >
@@ -3233,6 +3245,11 @@ export default function EVMap() {
                   className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 disabled:cursor-not-allowed disabled:opacity-60"
                   placeholder="Search by country or ISO code"
                   disabled={countryOptions.length === 0}
+                  title={
+                    countryOptions.length === 0
+                      ? "No countries are available yet. Check that the data has loaded."
+                      : undefined
+                  }
                   value={countryLookupQuery}
                   onChange={(event) => {
                     const nextQuery = event.target.value;
@@ -5334,10 +5351,12 @@ function MapViewportStatus({
   title,
   description,
   onRetry,
+  retryLabel = "Retry loading the map",
 }: {
   title: string;
   description: string;
   onRetry?: () => void;
+  retryLabel?: string;
 }) {
   return (
     <div className="flex h-full w-full items-center justify-center bg-slate-100 px-6">
@@ -5356,6 +5375,7 @@ function MapViewportStatus({
             type="button"
             className="mt-6 rounded-full bg-sky-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-sky-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
             onClick={onRetry}
+            aria-label={retryLabel}
           >
             Retry
           </button>

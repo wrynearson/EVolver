@@ -458,6 +458,18 @@ describe("EVMap", () => {
     expect(brandFilter).toHaveClass("disabled:cursor-not-allowed", "disabled:opacity-60");
     expect(regionFilter).toHaveClass("disabled:cursor-not-allowed", "disabled:opacity-60");
     expect(countryLookup).toHaveClass("disabled:cursor-not-allowed", "disabled:opacity-60");
+    expect(brandFilter).toHaveAttribute(
+      "title",
+      "No brands are available yet. Check that the data has loaded.",
+    );
+    expect(regionFilter).toHaveAttribute(
+      "title",
+      "No regions are available in the current dataset.",
+    );
+    expect(countryLookup).toHaveAttribute(
+      "title",
+      "No countries are available yet. Check that the data has loaded.",
+    );
   });
 
   it("lets users collapse and restore the summary and side panels", async () => {
@@ -4025,8 +4037,13 @@ describe("EVMap", () => {
     render(<EVMap />);
 
     expect(await screen.findByText("Dataset load failed")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Retry loading dataset load failed" }),
+    ).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: "Retry" }));
+    fireEvent.click(
+      screen.getByRole("button", { name: "Retry loading dataset load failed" }),
+    );
 
     expect(await screen.findByText("Dataset summary")).toBeInTheDocument();
     expect(await screen.findByTestId("map")).toBeInTheDocument();
@@ -4066,8 +4083,17 @@ describe("EVMap", () => {
     render(<EVMap />);
 
     expect(await screen.findByText("Map boundaries unavailable")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", {
+        name: "Retry loading map boundaries unavailable",
+      }),
+    ).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: "Retry" }));
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: "Retry loading map boundaries unavailable",
+      }),
+    );
 
     expect(await screen.findByTestId("map")).toBeInTheDocument();
     expect(screen.queryByText("Map boundaries unavailable")).not.toBeInTheDocument();

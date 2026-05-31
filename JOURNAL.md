@@ -1816,3 +1816,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-31
 **Did**: Added a one-click `Clear all filters` action to the Active view panel so users can drop the current brand, country, region, search, and sort filters without doing a full reset, backed by EV map regression coverage and desktop/mobile browser verification.
 **Result**: pass
+
+## 2026-05-31
+**Did**: Re-checked a promising Bestune El Salvador lead but left the dataset unchanged because the live `bestune-sv.com` stack still mixes El Salvador branding with recycled Guatemala location content, then shipped an EV map accessibility pass that adds explanatory tooltips to disabled empty-state filters and descriptive retry labels for the dataset and boundary error states, backed by regression coverage.
+**Result**: pass
+**TODO**: Verify the next official sovereign Bestune markets beyond Algeria, Bahrain, Belarus, China, Colombia, Costa Rica, the Dominican Republic, Ecuador, Egypt, Ghana, Guatemala, Iraq, Italy, Jordan, Kazakhstan, Kuwait, Libya, Mexico, Mongolia, Oman, Panama, Paraguay, the Philippines, Poland, Qatar, Russia, Saudi Arabia, Spain, Syria, the United Arab Emirates, Uruguay, Uzbekistan, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.
