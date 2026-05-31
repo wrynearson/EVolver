@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-30",
+    "last_updated": "2026-05-31",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -180,6 +180,18 @@
             "https://www.bestune-middle-east.com/",
             "https://www.bestune-middle-east.com/cars/BESTUNE%20E05",
             "https://www.bestune-middle-east.com/contact"
+          ],
+          "uncertain": false
+        },
+        "DZA": {
+          "name": "Algeria",
+          "present": true,
+          "source": "https://bestune-algerie.com/contact",
+          "sources": [
+            "https://bestune-algerie.com/",
+            "https://bestune-algerie.com/E05",
+            "https://bestune-algerie.com/contact",
+            "https://bestune-algerie.com/commander"
           ],
           "uncertain": false
         },

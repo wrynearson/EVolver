@@ -1802,3 +1802,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-05-30
 **Did**: Added a shared clipboard fallback so copy actions can still succeed via `document.execCommand` when the Clipboard API is unavailable, plus regression coverage and desktop/mobile browser verification for the summary copy flow.
 **Result**: pass
+
+## 2026-05-31
+**Did**: Expanded Bestune into Algeria after confirming the live official `bestune-algerie.com` market site exposes local Bestune EV model pages plus Algeria-specific contact and order flows on the same first-party domain.
+**Result**: pass
+**TODO**: Verify the next official sovereign Bestune markets beyond Algeria, Bahrain, Belarus, China, Colombia, Costa Rica, the Dominican Republic, Ecuador, Egypt, Ghana, Guatemala, Iraq, Italy, Jordan, Kazakhstan, Kuwait, Libya, Mexico, Oman, Panama, Paraguay, the Philippines, Poland, Qatar, Russia, Saudi Arabia, Spain, Syria, the United Arab Emirates, Uruguay, Uzbekistan, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.
