@@ -1306,6 +1306,20 @@ export default function EVMap() {
   const clearMajorRegionGap = () => {
     setSelectedMajorRegionGap(null);
   };
+  const clearActiveViewFilters = () => {
+    clearBrandSelection();
+    clearSelectedCountry();
+    setCoveragePanelView("brands");
+    setSelectedCoverageRegion("");
+    setCoverageSort(DEFAULT_COVERAGE_SORT);
+    setShowOnlyUncertainCoverage(false);
+    setCoverageSearchQuery("");
+    setShowOnlyUncertainFootprint(false);
+    setShowOnlySingleSourceFootprint(false);
+    setFootprintSort(DEFAULT_FOOTPRINT_SORT);
+    setFootprintSearchQuery("");
+    setSelectedMajorRegionGap(null);
+  };
   const resetView = () => {
     clearBrandSelection();
     setHoveredCountry(null);
@@ -3367,13 +3381,24 @@ export default function EVMap() {
           </div>
           {activeViewFilters.length > 0 ? (
             <div className="mt-3 rounded-md border border-blue-200 bg-blue-50 px-3 py-3">
-              <h3 className="text-xs font-medium uppercase tracking-wide text-blue-900">
-                Active view
-              </h3>
-              <p className="mt-1 text-xs text-blue-900/80">
-                Clear the filters shaping the current map and exports without
-                resetting the whole view.
-              </p>
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h3 className="text-xs font-medium uppercase tracking-wide text-blue-900">
+                    Active view
+                  </h3>
+                  <p className="mt-1 text-xs text-blue-900/80">
+                    Clear the filters shaping the current map and exports without
+                    resetting the whole view.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  className="shrink-0 rounded-full border border-blue-200 bg-white px-3 py-1 text-xs font-medium text-blue-900 hover:border-blue-300 hover:text-blue-950"
+                  onClick={clearActiveViewFilters}
+                >
+                  Clear all filters
+                </button>
+              </div>
               <div className="mt-2 flex flex-wrap gap-2">
                 {activeViewFilters.map((filter) => (
                   <button

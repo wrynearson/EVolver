@@ -1812,3 +1812,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Bestune into Mongolia after confirming the live official `faw-mongolia.com` distributor site exposes Bestune T55 and T99 model pages plus direct Mongolia contact and inquiry flows on the same first-party stack.
 **Result**: pass
 **TODO**: Verify the next official sovereign Bestune markets beyond Algeria, Bahrain, Belarus, China, Colombia, Costa Rica, the Dominican Republic, Ecuador, Egypt, Ghana, Guatemala, Iraq, Italy, Jordan, Kazakhstan, Kuwait, Libya, Mexico, Mongolia, Oman, Panama, Paraguay, the Philippines, Poland, Qatar, Russia, Saudi Arabia, Spain, Syria, the United Arab Emirates, Uruguay, Uzbekistan, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.
+
+## 2026-05-31
+**Did**: Added a one-click `Clear all filters` action to the Active view panel so users can drop the current brand, country, region, search, and sort filters without doing a full reset, backed by EV map regression coverage and desktop/mobile browser verification.
+**Result**: pass
