@@ -1834,3 +1834,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-06-01
 **Did**: Made the keyboard shortcuts card dismissible with `Escape` so the global help overlay matches the rest of the map's panel-closing behavior, and added regression coverage for the new shortcut path.
 **Result**: pass
+
+## 2026-06-01
+**Did**: Coverage analysis showed the backlog had drifted to monitoring-only work again, so I promoted Hongqi's Africa gap and added Egypt after confirming the live official `hongqi-eg.com` market stack exposes a local EV model page, a consult-and-test-drive flow, and a matching first-party contact surface.
+**Result**: pass

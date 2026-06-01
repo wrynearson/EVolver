@@ -6037,6 +6037,18 @@
           ],
           "uncertain": false
         },
+        "EGY": {
+          "name": "Egypt",
+          "present": true,
+          "source": "https://hongqi-eg.com/index.php/e-hs9/",
+          "sources": [
+            "https://hongqi-eg.com/en/home/",
+            "https://hongqi-eg.com/en/contact-us/",
+            "https://hongqi-eg.com/en/store/",
+            "https://hongqi-eg.com/index.php/e-hs9/"
+          ],
+          "uncertain": false
+        },
         "ISL": {
           "name": "Iceland",
           "present": true,
