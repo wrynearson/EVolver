@@ -2923,6 +2923,16 @@ describe("EVMap", () => {
       "true",
     );
 
+    fireEvent.keyDown(window, { key: "Escape" });
+    expect(screen.queryByText("Ctrl/Cmd + K")).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Show keyboard shortcuts" })).toHaveAttribute(
+      "aria-expanded",
+      "false",
+    );
+
+    fireEvent.keyDown(window, { key: "?" });
+    expect(screen.getByText("Ctrl/Cmd + K")).toBeInTheDocument();
+
     fireEvent.keyDown(window, { key: "?" });
     expect(screen.queryByText("Ctrl/Cmd + K")).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Show keyboard shortcuts" })).toHaveAttribute(

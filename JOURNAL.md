@@ -1826,3 +1826,11 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Expanded Bestune into Tunisia after confirming TLM Motors' live official `fawtunisie.com` market site exposes a localized FAW Bestune lineup, a `Réserver un Essai` flow, and Tunisia showroom/contact coverage for Tunis, Sfax, and Monastir.
 **Result**: pass
 **TODO**: Verify the next official sovereign Bestune markets beyond Algeria, Bahrain, Belarus, China, Colombia, Costa Rica, the Dominican Republic, Ecuador, Egypt, Ghana, Guatemala, Iraq, Italy, Jordan, Kazakhstan, Kuwait, Libya, Mexico, Mongolia, Oman, Panama, Paraguay, the Philippines, Poland, Qatar, Russia, Saudi Arabia, Spain, Syria, Tunisia, the United Arab Emirates, Uruguay, Uzbekistan, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.
+
+## 2026-06-01
+**Did**: Closed the active Bestune expansion follow-up and demoted it to monitoring after re-checking the strongest remaining sovereign leads: `bestune-sv.com` still mixes El Salvador branding with recycled Guatemala location content, while likely Peru and Chile sovereign domains remain non-resolving instead of exposing live first-party consumer, dealer, or test-drive flows.
+**Result**: no-op
+
+## 2026-06-01
+**Did**: Made the keyboard shortcuts card dismissible with `Escape` so the global help overlay matches the rest of the map's panel-closing behavior, and added regression coverage for the new shortcut path.
+**Result**: pass

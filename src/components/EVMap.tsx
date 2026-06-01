@@ -117,7 +117,8 @@ const KEYBOARD_SHORTCUTS = [
   },
   {
     keys: "Escape",
-    description: "Clear the active brand or country search, or close an open detail panel.",
+    description:
+      "Clear the active brand or country search, or close an open detail panel or shortcuts card.",
   },
   {
     keys: "Arrow keys / Home / End",
@@ -2653,6 +2654,19 @@ export default function EVMap() {
       }
 
       if (
+        event.key === "Escape" &&
+        !event.ctrlKey &&
+        !event.metaKey &&
+        !event.altKey &&
+        showKeyboardShortcuts &&
+        !isEditableKeyboardTarget(event.target)
+      ) {
+        event.preventDefault();
+        setShowKeyboardShortcuts(false);
+        return;
+      }
+
+      if (
         event.key !== "?" ||
         event.ctrlKey ||
         event.metaKey ||
@@ -2675,7 +2689,7 @@ export default function EVMap() {
 
     window.addEventListener("keydown", handleGlobalKeyDown);
     return () => window.removeEventListener("keydown", handleGlobalKeyDown);
-  }, [summaryPanelCollapsed]);
+  }, [showKeyboardShortcuts, summaryPanelCollapsed]);
 
   useEffect(() => {
     if (typeof window === "undefined") {
