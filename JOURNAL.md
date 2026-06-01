@@ -1821,3 +1821,8 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 **Did**: Re-checked a promising Bestune El Salvador lead but left the dataset unchanged because the live `bestune-sv.com` stack still mixes El Salvador branding with recycled Guatemala location content, then shipped an EV map accessibility pass that adds explanatory tooltips to disabled empty-state filters and descriptive retry labels for the dataset and boundary error states, backed by regression coverage.
 **Result**: pass
 **TODO**: Verify the next official sovereign Bestune markets beyond Algeria, Bahrain, Belarus, China, Colombia, Costa Rica, the Dominican Republic, Ecuador, Egypt, Ghana, Guatemala, Iraq, Italy, Jordan, Kazakhstan, Kuwait, Libya, Mexico, Mongolia, Oman, Panama, Paraguay, the Philippines, Poland, Qatar, Russia, Saudi Arabia, Spain, Syria, the United Arab Emirates, Uruguay, Uzbekistan, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.
+
+## 2026-06-01
+**Did**: Expanded Bestune into Tunisia after confirming TLM Motors' live official `fawtunisie.com` market site exposes a localized FAW Bestune lineup, a `Réserver un Essai` flow, and Tunisia showroom/contact coverage for Tunis, Sfax, and Monastir.
+**Result**: pass
+**TODO**: Verify the next official sovereign Bestune markets beyond Algeria, Bahrain, Belarus, China, Colombia, Costa Rica, the Dominican Republic, Ecuador, Egypt, Ghana, Guatemala, Iraq, Italy, Jordan, Kazakhstan, Kuwait, Libya, Mexico, Mongolia, Oman, Panama, Paraguay, the Philippines, Poland, Qatar, Russia, Saudi Arabia, Spain, Syria, Tunisia, the United Arab Emirates, Uruguay, Uzbekistan, and Vietnam from first-party localized consumer or showroom, contact, dealer, or test-drive flows.
