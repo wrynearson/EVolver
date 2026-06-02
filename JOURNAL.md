@@ -1838,3 +1838,7 @@ This file is append-only. Each run of the evolver agent adds a dated entry below
 ## 2026-06-01
 **Did**: Coverage analysis showed the backlog had drifted to monitoring-only work again, so I promoted Hongqi's Africa gap and added Egypt after confirming the live official `hongqi-eg.com` market stack exposes a local EV model page, a consult-and-test-drive flow, and a matching first-party contact surface.
 **Result**: pass
+
+## 2026-06-02
+**Did**: Coverage analysis showed the backlog was still monitoring-only, so I promoted Skywell's Oceania gap and added Australia after confirming Skyworth Australia's live BE11 consumer site, launch post, local contact page, and EV Automotive distributor contact flow.
+**Result**: pass

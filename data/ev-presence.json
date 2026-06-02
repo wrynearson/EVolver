@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-06-01",
+    "last_updated": "2026-06-02",
     "definition": "See constitution/GOALS.md",
     "schema_version": 2
   },
@@ -7513,6 +7513,18 @@
             "https://www.skywell-uae.com/",
             "https://www.skywell-uae.com/contact-us",
             "https://www.skywell-uae.com/test-drive"
+          ],
+          "uncertain": false
+        },
+        "AUS": {
+          "name": "Australia",
+          "present": true,
+          "source": "https://www.skyworthaustralia.com.au/contact",
+          "sources": [
+            "https://www.skyworthaustralia.com.au/",
+            "https://www.skyworthaustralia.com.au/contact",
+            "https://www.skyworthaustralia.com.au/media-hub/skyworth-officially-launches-be11-passenger-ev-in-australia-expanding-its-global-footprint",
+            "https://ev-a.com.au/contact-us/"
           ],
           "uncertain": false
         }
