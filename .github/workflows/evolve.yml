@@ -1,8 +1,6 @@
 name: Daily evolution
 
 on:
-  schedule:
-    - cron: "20 */6 * * *"
   workflow_dispatch:
 
 jobs:
